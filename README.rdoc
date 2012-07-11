@@ -1,4 +1,4 @@
-= TTA - Test Trend Analysis
+= TTA - Test Trend Analyzer
 
 <b>TTA</b> is an independent product that provides a way to do Trend Analysis across your test suites.
 
