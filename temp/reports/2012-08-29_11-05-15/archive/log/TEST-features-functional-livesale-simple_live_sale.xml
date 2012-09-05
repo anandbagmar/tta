@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite errors="0" failures="0" name="A simple Live Sale" skipped="0" tests="1" time="321.922081">
+<testcase classname="A simple Live Sale" name="A simple Live Sale with an auctioneer and 2 buyers (outline example : | 4000 |)" time="321.922081">
+  <system-out/>
+  <system-err/>
+</testcase>
+  <system-out>
+    <![CDATA[]]>
+  </system-out>
+  <system-err>
+    <![CDATA[]]>
+  </system-err>
+</testsuite>

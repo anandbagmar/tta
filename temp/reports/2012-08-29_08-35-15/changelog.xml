@@ -1,0 +1,20 @@
+Changes in branch origin/release_1.100, between 6c087d2e1f892c6ce446fd2d13e039f711df421d and bf5876d8fb87d1fbc955a2592e005cfa9a117004
+commit bf5876d8fb87d1fbc955a2592e005cfa9a117004
+tree f0bc5b949eb0f6388b4a43170dea1bcbf65f35a7
+parent 2bb5958489c6677f1a0b072b195296559aff0fb5
+author tworker <tworker@onyx.ove.com> 1346243455 -0400
+committer tworker <tworker@onyx.ove.com> 1346243455 -0400
+
+    [Ritesh] modified create_live_sale feature file to create sale with multiple sellers
+
+:100644 100644 a1c2a3792fb44b7b3f24bf9f292ea828d5fe0f90 a6453104456523bbdc8574cf59901a191ed72b27 M	features/manual_tests/create_live_sale.feature
+
+commit 2bb5958489c6677f1a0b072b195296559aff0fb5
+tree 6cdeef8ca3ca843ad79017be483c391cb9128126
+parent 6c087d2e1f892c6ce446fd2d13e039f711df421d
+author tworker <tworker@onyx.ove.com> 1346243400 -0400
+committer tworker <tworker@onyx.ove.com> 1346243400 -0400
+
+    [Ritesh] Changed DB server from db01 to db02
+
+:100644 100644 779867c313dc41add3b72eace80f36790dec1a95 8b1f958123023c7662a82c4fd97db2e283989118 M	config/environments/qa2.rb

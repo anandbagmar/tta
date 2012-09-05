@@ -1,0 +1,13 @@
+Changes in branch origin/release_1.100, between 0e446cd3a94211e0b4c98d19e465b0ad4d87c099 and 6c087d2e1f892c6ce446fd2d13e039f711df421d
+commit 6c087d2e1f892c6ce446fd2d13e039f711df421d
+tree d26b1683c1c179275d83c6b216b56c42d070de05
+parent 0e446cd3a94211e0b4c98d19e465b0ad4d87c099
+author Harshad Wankhede <hwankhede@manheim.com> 1345806870 -0400
+committer Harshad Wankhede <hwankhede@manheim.com> 1345806870 -0400
+
+    [Harshad] Fixing failing tests and moving back
+
+:100644 100644 0b7fb2ea82e32a914a8538758124bed2ccb5a08a b63da981a97b5fc3aa8ffab9ce1cd0b26049d5f0 M	features/functional/livesale/filmstrip_listings.feature
+:100644 100644 56d5be9ba5b32bc1f5da4deb5b121ff1f1f62792 4c0098f338a13ef6e67b4d2d45827d0aab1e4663 M	features/functional/livesale/management/add_inventory.feature
+:100644 100644 61c08ea4581182446a4dc9200dd72272df3bfc7c e56f60a1486733962c867d194e190606cbd3e56a M	features/functional/livesale/management/pre_post_sale_summary.feature
+:100644 100644 17229adfb9696cc83eb7be149cdcb2045b36fbd1 8c76fa02d63c0f15303b30dfd5cafe4226a75e0d M	features/step_definitions/web_service_steps.rb

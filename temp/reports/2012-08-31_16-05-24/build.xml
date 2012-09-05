@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<build>
+  <actions>
+    <hudson.model.CauseAction>
+      <causes>
+        <hudson.model.Cause_-UpstreamCause>
+          <upstreamProject>V6-deploy_auto2-liberator</upstreamProject>
+          <upstreamUrl>job/V6-deploy_auto2-liberator/</upstreamUrl>
+          <upstreamBuild>39</upstreamBuild>
+          <upstreamCauses>
+            <hudson.model.Cause_-UpstreamCause>
+              <upstreamProject>se-deploy_auto2-buyers-datasource</upstreamProject>
+              <upstreamUrl>job/se-deploy_auto2-buyers-datasource/</upstreamUrl>
+              <upstreamBuild>36</upstreamBuild>
+              <upstreamCauses>
+                <hudson.model.Cause_-UpstreamCause>
+                  <upstreamProject>se-deploy_auto2-final-ask-datasource</upstreamProject>
+                  <upstreamUrl>job/se-deploy_auto2-final-ask-datasource/</upstreamUrl>
+                  <upstreamBuild>37</upstreamBuild>
+                  <upstreamCauses>
+                    <hudson.model.Cause_-UpstreamCause>
+                      <upstreamProject>V6-deploy_auto2-datasource</upstreamProject>
+                      <upstreamUrl>job/V6-deploy_auto2-datasource/</upstreamUrl>
+                      <upstreamBuild>39</upstreamBuild>
+                      <upstreamCauses>
+                        <hudson.model.Cause_-UpstreamCause>
+                          <upstreamProject>se-deploy_auto2-permissioning-datasource</upstreamProject>
+                          <upstreamUrl>job/se-deploy_auto2-permissioning-datasource/</upstreamUrl>
+                          <upstreamBuild>40</upstreamBuild>
+                          <upstreamCauses>
+                            <hudson.model.Cause_-UpstreamCause>
+                              <upstreamProject>V6-deploy_auto2-keymaster</upstreamProject>
+                              <upstreamUrl>job/V6-deploy_auto2-keymaster/</upstreamUrl>
+                              <upstreamBuild>41</upstreamBuild>
+                              <upstreamCauses>
+                                <hudson.model.Cause_-UpstreamCause>
+                                  <upstreamProject>oVe-deploy_auto2</upstreamProject>
+                                  <upstreamUrl>job/oVe-deploy_auto2/</upstreamUrl>
+                                  <upstreamBuild>75</upstreamBuild>
+                                  <upstreamCauses>
+                                    <hudson.model.Cause_-UserIdCause/>
+                                  </upstreamCauses>
+                                </hudson.model.Cause_-UpstreamCause>
+                              </upstreamCauses>
+                            </hudson.model.Cause_-UpstreamCause>
+                          </upstreamCauses>
+                        </hudson.model.Cause_-UpstreamCause>
+                      </upstreamCauses>
+                    </hudson.model.Cause_-UpstreamCause>
+                  </upstreamCauses>
+                </hudson.model.Cause_-UpstreamCause>
+              </upstreamCauses>
+            </hudson.model.Cause_-UpstreamCause>
+          </upstreamCauses>
+        </hudson.model.Cause_-UpstreamCause>
+      </causes>
+    </hudson.model.CauseAction>
+    <hudson.plugins.git.util.BuildData>
+      <buildsByBranchName>
+        <entry>
+          <string>origin/release_1.96</string>
+          <hudson.plugins.git.util.Build>
+            <revision>
+              <sha1>4cb5ae54b018695c87b919b2bd50383cafd3367d</sha1>
+              <branches class="list">
+                <hudson.plugins.git.Branch>
+                  <sha1 reference="../../../sha1"/>
+                  <name>origin/release_1.96</name>
+                </hudson.plugins.git.Branch>
+              </branches>
+            </revision>
+            <hudsonBuildNumber>25</hudsonBuildNumber>
+          </hudson.plugins.git.util.Build>
+        </entry>
+        <entry>
+          <string>origin/release_1.95</string>
+          <hudson.plugins.git.util.Build>
+            <revision>
+              <sha1>41c0dfae07a3e0a94fd67c147dbdc43ef7627cc8</sha1>
+              <branches class="list">
+                <hudson.plugins.git.Branch>
+                  <sha1 reference="../../../sha1"/>
+                  <name>origin/release_1.95</name>
+                </hudson.plugins.git.Branch>
+              </branches>
+            </revision>
+            <hudsonBuildNumber>2</hudsonBuildNumber>
+          </hudson.plugins.git.util.Build>
+        </entry>
+        <entry>
+          <string>origin/master</string>
+          <hudson.plugins.git.util.Build>
+            <revision>
+              <sha1>574c071d8b3f19c92438f60615b20e41a49f23e9</sha1>
+              <branches class="list">
+                <hudson.plugins.git.Branch>
+                  <sha1 reference="../../../sha1"/>
+                  <name>origin/master</name>
+                </hudson.plugins.git.Branch>
+              </branches>
+            </revision>
+            <hudsonBuildNumber>251</hudsonBuildNumber>
+          </hudson.plugins.git.util.Build>
+        </entry>
+        <entry>
+          <string>origin/release_1.99</string>
+          <hudson.plugins.git.util.Build>
+            <revision>
+              <sha1>720d2b434ebdd73a79d1b8369c73945a1f7841c7</sha1>
+              <branches class="list">
+                <hudson.plugins.git.Branch>
+                  <sha1 reference="../../../sha1"/>
+                  <name>origin/release_1.99</name>
+                </hudson.plugins.git.Branch>
+              </branches>
+            </revision>
+            <hudsonBuildNumber>107</hudsonBuildNumber>
+          </hudson.plugins.git.util.Build>
+        </entry>
+        <entry>
+          <string>origin/release_1.98</string>
+          <hudson.plugins.git.util.Build>
+            <revision>
+              <sha1>d56cb15a90fcbd99ba8b0d27c5c74ece645596d1</sha1>
+              <branches class="list">
+                <hudson.plugins.git.Branch>
+                  <sha1 reference="../../../sha1"/>
+                  <name>origin/release_1.98</name>
+                </hudson.plugins.git.Branch>
+              </branches>
+            </revision>
+            <hudsonBuildNumber>100</hudsonBuildNumber>
+          </hudson.plugins.git.util.Build>
+        </entry>
+        <entry>
+          <string>origin/release_1.97</string>
+          <hudson.plugins.git.util.Build>
+            <revision>
+              <sha1>07b14708dc2e46fd8dfb2a19fdb9734125d2f6d3</sha1>
+              <branches class="list">
+                <hudson.plugins.git.Branch>
+                  <sha1 reference="../../../sha1"/>
+                  <name>origin/release_1.97</name>
+                </hudson.plugins.git.Branch>
+              </branches>
+            </revision>
+            <hudsonBuildNumber>61</hudsonBuildNumber>
+          </hudson.plugins.git.util.Build>
+        </entry>
+        <entry>
+          <string>origin/release_1.100</string>
+          <hudson.plugins.git.util.Build>
+            <revision>
+              <sha1>1b8e6127f90a61becb7dfe291bd70eb67c5b951f</sha1>
+              <branches class="list">
+                <hudson.plugins.git.Branch>
+                  <sha1 reference="../../../sha1"/>
+                  <name>origin/release_1.100</name>
+                </hudson.plugins.git.Branch>
+              </branches>
+            </revision>
+            <hudsonBuildNumber>276</hudsonBuildNumber>
+          </hudson.plugins.git.util.Build>
+        </entry>
+      </buildsByBranchName>
+      <lastBuild reference="../buildsByBranchName/entry[7]/hudson.plugins.git.util.Build"/>
+      <scmName></scmName>
+    </hudson.plugins.git.util.BuildData>
+    <hudson.plugins.git.GitTagAction>
+      <build class="build" reference="../../.."/>
+      <tags class="hudson.util.CopyOnWriteMap$Tree">
+        <no-comparator/>
+        <entry>
+          <string>origin/release_1.100</string>
+          <list/>
+        </entry>
+      </tags>
+      <ws>/mnt/u02/jenkins/workspace/sv6-release-post_deploy-auto2</ws>
+    </hudson.plugins.git.GitTagAction>
+    <hudson.scm.SCMRevisionState_-None/>
+    <htmlpublisher.HtmlPublisherTarget_-HTMLBuildAction>
+      <actualHtmlPublisherTarget>
+        <reportName>Test Results</reportName>
+        <reportDir>log/reports</reportDir>
+        <reportFiles>cuke_report.html</reportFiles>
+        <keepAll>true</keepAll>
+        <wrapperName>htmlpublisher-wrapper.html</wrapperName>
+      </actualHtmlPublisherTarget>
+      <outer-class reference="../actualHtmlPublisherTarget"/>
+      <build class="build" reference="../../.."/>
+      <outer-class defined-in="htmlpublisher.HtmlPublisherTarget$HTMLBuildAction" reference="../actualHtmlPublisherTarget"/>
+    </htmlpublisher.HtmlPublisherTarget_-HTMLBuildAction>
+    <hudson.tasks.junit.TestResultAction>
+      <owner class="build" reference="../../.."/>
+      <descriptions class="java.util.concurrent.ConcurrentHashMap"/>
+      <failCount>0</failCount>
+      <skipCount>0</skipCount>
+      <totalCount>1</totalCount>
+      <testData/>
+    </hudson.tasks.junit.TestResultAction>
+    <hudson.plugins.disk__usage.BuildDiskUsageAction>
+      <diskUsage>
+        <buildUsage>376016</buildUsage>
+        <wsUsage>226255998</wsUsage>
+      </diskUsage>
+      <build class="build" reference="../../.."/>
+    </hudson.plugins.disk__usage.BuildDiskUsageAction>
+  </actions>
+  <number>276</number>
+  <result>SUCCESS</result>
+  <duration>425817</duration>
+  <charset>UTF-8</charset>
+  <keepLog>false</keepLog>
+  <builtOn>onx-dc4ci-autoswarm11.ove.local</builtOn>
+  <workspace>/mnt/u02/jenkins/workspace/sv6-release-post_deploy-auto2</workspace>
+  <hudsonVersion>1.472</hudsonVersion>
+  <scm class="hudson.plugins.git.GitChangeLogParser">
+    <authorOrCommitter>false</authorOrCommitter>
+  </scm>
+  <culprits class="com.google.common.collect.EmptyImmutableSortedSet"/>
+</build>

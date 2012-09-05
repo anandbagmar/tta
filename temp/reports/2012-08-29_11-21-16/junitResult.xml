@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<result>
+  <suites>
+    <suite>
+      <file>/mnt/u02/jenkins/workspace/sv6-release-post_deploy-auto2/log/TEST-features-functional-livesale-simple_live_sale.xml</file>
+      <name>A simple Live Sale</name>
+      <stdout>
+    
+  </stdout>
+      <stderr>
+    
+  </stderr>
+      <duration>286.44644</duration>
+      <cases>
+        <case>
+          <duration>286.44644</duration>
+          <className>A simple Live Sale</className>
+          <testName>A simple Live Sale with an auctioneer and 2 buyers (outline example : | 4000 |)</testName>
+          <skipped>false</skipped>
+          <errorStackTrace>
+    Scenario Outline: A simple Live Sale with an auctioneer and 2 buyers
+
+Example row: | 4000 |
+
+Message:
+
+    ** Scenario :: &quot;A simple Live Sale with an auctioneer and 2 buyers&quot; FAILED with 3 ERRORS
+Status NOT matched in filmstrip: Run List.
+&lt;&quot;Sold&quot;&gt; expected but was &lt;&quot;&quot;&gt;.
+
+Status NOT matched in filmstrip: Run List.
+&lt;&quot;Sold to SONORA NISSAN for $4,600&quot;&gt; expected but was &lt;&quot;&quot;&gt;.
+
+Error in bid_history_updated_for
+Unable to find xpath &quot;//div[@id=&apos;bid_items_window&apos;]/ul[@id=&apos;bid_items&apos;]//li[@index=0]/div&quot;.
+&lt;true&gt; expected but was &lt;false&gt;. (RuntimeError)
+/mnt/u02/jenkins/workspace/sv6-release-post_deploy-auto2/features/support/hook.rb:72:in `After&apos;
+  </errorStackTrace>
+          <errorDetails>failed A simple Live Sale with an auctioneer and 2 buyers (outline example : | 4000 |)</errorDetails>
+          <stdout></stdout>
+          <stderr></stderr>
+          <failedSince>272</failedSince>
+        </case>
+      </cases>
+    </suite>
+  </suites>
+  <duration>286.44644</duration>
+  <keepLongStdio>false</keepLongStdio>
+</result>

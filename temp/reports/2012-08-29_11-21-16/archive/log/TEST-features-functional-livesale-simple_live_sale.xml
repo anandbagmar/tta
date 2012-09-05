@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite errors="0" failures="1" name="A simple Live Sale" skipped="0" tests="1" time="286.446446">
+<testcase classname="A simple Live Sale" name="A simple Live Sale with an auctioneer and 2 buyers (outline example : | 4000 |)" time="286.446446">
+  <failure message="failed A simple Live Sale with an auctioneer and 2 buyers (outline example : | 4000 |)" type="failed">
+    <![CDATA[Scenario Outline: A simple Live Sale with an auctioneer and 2 buyers
+
+Example row: | 4000 |
+
+Message:
+]]>
+    <![CDATA[** Scenario :: "A simple Live Sale with an auctioneer and 2 buyers" FAILED with 3 ERRORS
+Status NOT matched in filmstrip: Run List.
+<"Sold"> expected but was <"">.
+
+Status NOT matched in filmstrip: Run List.
+<"Sold to SONORA NISSAN for $4,600"> expected but was <"">.
+
+Error in bid_history_updated_for
+Unable to find xpath "//div[@id='bid_items_window']/ul[@id='bid_items']//li[@index=0]/div".
+<true> expected but was <false>. (RuntimeError)
+/mnt/u02/jenkins/workspace/sv6-release-post_deploy-auto2/features/support/hook.rb:72:in `After']]>
+  </failure>
+  <system-out/>
+  <system-err/>
+</testcase>
+  <system-out>
+    <![CDATA[]]>
+  </system-out>
+  <system-err>
+    <![CDATA[]]>
+  </system-err>
+</testsuite>
