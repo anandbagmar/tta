@@ -1,0 +1,45 @@
+<%= form_for(@junit_xml_datum) do |f| %>
+  <% if @junit_xml_datum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@junit_xml_datum.errors.count, "error") %> prohibited this junit_xml_datum from being saved:</h2>
+
+      <ul>
+      <% @junit_xml_datum.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :classname %><br />
+    <%= f.text_field :classname %>
+  </div>
+  <div class="field">
+    <%= f.label :tests %><br />
+    <%= f.text_field :tests %>
+  </div>
+  <div class="field">
+    <%= f.label :failures %><br />
+    <%= f.text_field :failures %>
+  </div>
+  <div class="field">
+    <%= f.label :errors %><br />
+    <%= f.text_field :errors %>
+  </div>
+  <div class="field">
+    <%= f.label :hostname %><br />
+    <%= f.text_field :hostname %>
+  </div>
+  <div class="field">
+    <%= f.label :timetaken %><br />
+    <%= f.text_field :timetaken %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

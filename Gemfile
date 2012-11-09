@@ -36,3 +36,6 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+gem "therubyracer", :require => 'v8'
+
+gem 'pg', :require => 'pg'

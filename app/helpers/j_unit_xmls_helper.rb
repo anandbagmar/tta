@@ -1,0 +1,2 @@
+module JUnitXmlsHelper
+end

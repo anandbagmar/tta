@@ -1,0 +1,35 @@
+<h1>Listing junit_xml_data</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Classname</th>
+    <th>Tests</th>
+    <th>Failures</th>
+    <th>Errors</th>
+    <th>Hostname</th>
+    <th>Timetaken</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @junit_xml_data.each do |junit_xml_datum| %>
+  <tr>
+    <td><%= junit_xml_datum.name %></td>
+    <td><%= junit_xml_datum.classname %></td>
+    <td><%= junit_xml_datum.tests %></td>
+    <td><%= junit_xml_datum.failures %></td>
+    <td><%= junit_xml_datum.errors %></td>
+    <td><%= junit_xml_datum.hostname %></td>
+    <td><%= junit_xml_datum.timetaken %></td>
+    <td><%= link_to 'Show', junit_xml_datum %></td>
+    <td><%= link_to 'Edit', edit_junit_xml_datum_path(junit_xml_datum) %></td>
+    <td><%= link_to 'Destroy', junit_xml_datum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Junit xml datum', new_junit_xml_datum_path %>

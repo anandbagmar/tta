@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  classname: MyString
+  tests: MyString
+  failures: MyString
+  errors: MyString
+  hostname: MyString
+  timetaken: MyString
+
+two:
+  name: MyString
+  classname: MyString
+  tests: MyString
+  failures: MyString
+  errors: MyString
+  hostname: MyString
+  timetaken: MyString

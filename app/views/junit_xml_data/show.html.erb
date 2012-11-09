@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @junit_xml_datum.name %>
+</p>
+
+<p>
+  <b>Classname:</b>
+  <%= @junit_xml_datum.classname %>
+</p>
+
+<p>
+  <b>Tests:</b>
+  <%= @junit_xml_datum.tests %>
+</p>
+
+<p>
+  <b>Failures:</b>
+  <%= @junit_xml_datum.failures %>
+</p>
+
+<p>
+  <b>Errors:</b>
+  <%= @junit_xml_datum.errors %>
+</p>
+
+<p>
+  <b>Hostname:</b>
+  <%= @junit_xml_datum.hostname %>
+</p>
+
+<p>
+  <b>Timetaken:</b>
+  <%= @junit_xml_datum.timetaken %>
+</p>
+
+
+<%= link_to 'Edit', edit_junit_xml_datum_path(@junit_xml_datum) %> |
+<%= link_to 'Back', junit_xml_data_path %>
