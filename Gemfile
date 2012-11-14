@@ -39,3 +39,5 @@ gem 'jquery-rails'
 gem "therubyracer", :require => 'v8'
 
 gem 'pg', :require => 'pg'
+
+gem 'xml-simple', :require => 'xmlsimple'

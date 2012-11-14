@@ -5,7 +5,7 @@ class CreateJunitXmlData < ActiveRecord::Migration
       t.string :classname
       t.string :tests
       t.string :failures
-      t.string :errors
+      t.string :errorsintest
       t.string :hostname
       t.string :timetaken
 

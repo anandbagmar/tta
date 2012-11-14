@@ -25,11 +25,11 @@ ActiveRecord::Schema.define(:version => 20121109121915) do
     t.string   "classname"
     t.string   "tests"
     t.string   "failures"
-    t.string   "errors"
+    t.string   "errorsintest"
     t.string   "hostname"
     t.string   "timetaken"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
 end
