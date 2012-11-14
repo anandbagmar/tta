@@ -41,11 +41,6 @@ class JUnitXmlsController < ApplicationController
   # POST /j_unit_xmls.json
   def create
     @j_unit_xml = JUnitXml.new(params[:j_unit_xml])
-
-    puts "==========================================================================="
-    puts params[:j_unit_xml][:contentxml]
-    puts "==========================================================================="
-
     parser = XUnitParser.new
     parser.parse_xml(params[:j_unit_xml][:contentxml])
 
