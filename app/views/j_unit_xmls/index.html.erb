@@ -1,6 +1,6 @@
 <h1>Listing j_unit_xmls</h1>
 
-<table>
+<table border="1">
   <tr>
     <th>Name</th>
     <th>Contentxml</th>
@@ -17,9 +17,10 @@
     <td><%= link_to 'Edit', edit_j_unit_xml_path(j_unit_xml) %></td>
     <td><%= link_to 'Destroy', j_unit_xml, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
+  <br/>
 <% end %>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New J unit xml', new_j_unit_xml_path %>
