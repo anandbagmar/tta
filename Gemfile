@@ -5,7 +5,7 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'mysql2'
 
 
 # Gems used only for assets and not required
@@ -57,4 +57,5 @@ group :development, :test do
   gem 'json_spec'                                 # easier testing of JSON
   gem 'database_cleaner'                          # manage DB between tests
   gem 'autotest-rails'
-end
+  end
+gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'

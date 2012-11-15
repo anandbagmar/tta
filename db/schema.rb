@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121115132428) do
+ActiveRecord::Schema.define(:version => 20121115140257) do
 
   create_table "j_unit_xmls", :force => true do |t|
     t.string   "name"
@@ -32,13 +32,11 @@ ActiveRecord::Schema.define(:version => 20121115132428) do
     t.datetime "updated_at",   :null => false
   end
 
-  create_table "unit_test_xml_data", :force => true do |t|
-    t.string   "xml_file_name"
-    t.string   "xml_content_type"
-    t.string   "xml_file_size"
-    t.datetime "xml_updated_at"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+  create_table "project_details", :force => true do |t|
+    t.string   "Name"
+    t.string   "Log_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "unit_test_xmls", :force => true do |t|

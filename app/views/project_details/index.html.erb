@@ -1,0 +1,25 @@
+<h1>Listing project_details</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Log type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @project_details.each do |project_detail| %>
+  <tr>
+    <td><%= project_detail.Name %></td>
+    <td><%= project_detail.Log_type %></td>
+    <td><%= link_to 'Show', project_detail %></td>
+    <td><%= link_to 'Edit', edit_project_detail_path(project_detail) %></td>
+    <td><%= link_to 'Destroy', project_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Project detail', new_project_detail_path %>

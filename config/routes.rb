@@ -1,4 +1,6 @@
 Tta::Application.routes.draw do
+  resources :project_details
+
   get "unit_test_xml/index"
 
   get "unit_test_xml/new"
