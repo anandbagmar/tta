@@ -1,0 +1,4 @@
+<%= form_for(:unit_test_xml, :url => {:action => 'create'}, :html => {:multipart => true}) do |f| %>
+<%= f.file_field :xml %>
+<%= f.submit "Upload" %>
+<% end %>

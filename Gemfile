@@ -42,6 +42,8 @@ gem 'pg', :require => 'pg'
 
 gem 'xml-simple', :require => 'xmlsimple'
 
+gem 'paperclip'
+
 group :development, :test do
   gem 'factory_girl_rails'                        # use factories instead of fixtures
   gem 'faker'                                     # easily create fake data for tests
@@ -54,6 +56,5 @@ group :development, :test do
   gem 'simplecov'                                 # test coverage report
   gem 'json_spec'                                 # easier testing of JSON
   gem 'database_cleaner'                          # manage DB between tests
-  gem 'mongoid-rspec'                             # rspec matchers for mongoid
   gem 'autotest-rails'
 end

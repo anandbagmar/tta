@@ -43,6 +43,7 @@ GEM
       xpath (~> 1.0.0)
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
+    cocaine (0.4.2)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -92,19 +93,14 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.19)
-    mongoid (3.0.13)
-      activemodel (~> 3.1)
-      moped (~> 1.1)
-      origin (~> 1.0)
-      tzinfo (~> 0.3.22)
-    mongoid-rspec (1.5.4)
-      mongoid (>= 3.0.1)
-      rake
-      rspec (>= 2.9)
-    moped (1.2.9)
     multi_json (1.3.7)
     nokogiri (1.5.5)
-    origin (1.0.10)
+    paperclip (3.3.1)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.4.0)
+      mime-types
     pg (0.14.1)
     polyglot (0.3.3)
     rack (1.4.1)
@@ -194,7 +190,7 @@ DEPENDENCIES
   faker
   jquery-rails
   json_spec
-  mongoid-rspec
+  paperclip
   pg
   rails (= 3.2.8)
   rspec

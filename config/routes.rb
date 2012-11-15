@@ -1,7 +1,15 @@
 Tta::Application.routes.draw do
+  get "unit_test_xml/index"
+
+  get "unit_test_xml/new"
+
+  get "unit_test_xml/show"
+
   resources :junit_xml_data
 
   resources :j_unit_xmls
+
+  resources :unit_test_xml
 
   get "home/index"
 
