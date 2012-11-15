@@ -46,6 +46,10 @@ group :development, :test do
   gem 'factory_girl_rails'                        # use factories instead of fixtures
   gem 'faker'                                     # easily create fake data for tests
   gem 'rspec-rails'                               # test framework
+  gem 'rspec'
+  gem 'rspec-core'
+  gem 'rspec-expectations'
+  gem 'rspec-mocks'
   gem "cucumber-rails", "~> 1.0", require: false  # integration test framework
   gem 'simplecov'                                 # test coverage report
   gem 'json_spec'                                 # easier testing of JSON

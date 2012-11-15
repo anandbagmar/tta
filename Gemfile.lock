@@ -197,6 +197,10 @@ DEPENDENCIES
   mongoid-rspec
   pg
   rails (= 3.2.8)
+  rspec
+  rspec-core
+  rspec-expectations
+  rspec-mocks
   rspec-rails
   sass-rails (~> 3.2.3)
   simplecov
