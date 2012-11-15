@@ -2,8 +2,9 @@
 
 one:
   name: MyString
-  contentxml: MyText
+  contentxml: <?xml version='1.0' encoding='UTF-8'?><testsuite></testsuite>
+
 
 two:
   name: MyString
-  contentxml: MyText
+  contentxml: <?xml version='1.0' encoding='UTF-8'?><testsuite></testsuite>

@@ -18,7 +18,7 @@ class JunitXmlDataControllerTest < ActionController::TestCase
 
   test "should create junit_xml_datum" do
     assert_difference('JunitXmlDatum.count') do
-      post :create, junit_xml_datum: { classname: @junit_xml_datum.classname, errors: @junit_xml_datum.errors, failures: @junit_xml_datum.failures, hostname: @junit_xml_datum.hostname, name: @junit_xml_datum.name, tests: @junit_xml_datum.tests, timetaken: @junit_xml_datum.timetaken }
+      post :create, junit_xml_datum: { classname: @junit_xml_datum.classname, errorsintest: @junit_xml_datum.errorsintest, failures: @junit_xml_datum.failures, hostname: @junit_xml_datum.hostname, name: @junit_xml_datum.name, tests: @junit_xml_datum.tests, timetaken: @junit_xml_datum.timetaken }
     end
 
     assert_redirected_to junit_xml_datum_path(assigns(:junit_xml_datum))
@@ -35,7 +35,7 @@ class JunitXmlDataControllerTest < ActionController::TestCase
   end
 
   test "should update junit_xml_datum" do
-    put :update, id: @junit_xml_datum, junit_xml_datum: { classname: @junit_xml_datum.classname, errors: @junit_xml_datum.errors, failures: @junit_xml_datum.failures, hostname: @junit_xml_datum.hostname, name: @junit_xml_datum.name, tests: @junit_xml_datum.tests, timetaken: @junit_xml_datum.timetaken }
+    put :update, id: @junit_xml_datum, junit_xml_datum: { classname: @junit_xml_datum.classname, errorsintest: @junit_xml_datum.errorsintest, failures: @junit_xml_datum.failures, hostname: @junit_xml_datum.hostname, name: @junit_xml_datum.name, tests: @junit_xml_datum.tests, timetaken: @junit_xml_datum.timetaken }
     assert_redirected_to junit_xml_datum_path(assigns(:junit_xml_datum))
   end
 
