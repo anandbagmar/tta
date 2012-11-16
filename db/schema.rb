@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121115140257) do
+ActiveRecord::Schema.define(:version => 20121116063727) do
 
   create_table "j_unit_xmls", :force => true do |t|
     t.string   "name"
@@ -32,11 +32,35 @@ ActiveRecord::Schema.define(:version => 20121115140257) do
     t.datetime "updated_at",   :null => false
   end
 
-  create_table "project_details", :force => true do |t|
-    t.string   "Name"
-    t.string   "Log_type"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "project_metadata", :force => true do |t|
+    t.integer  "project_id"
+    t.string   "os_name"
+    t.string   "host_name"
+    t.string   "browser"
+    t.date     "date_of_execution"
+    t.string   "user_timezone"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "projects", :force => true do |t|
+    t.string   "name"
+    t.string   "type_of_report"
+    t.string   "authorization_level"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  create_table "unit_test_records", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "project_metadata_id"
+    t.string   "class_name"
+    t.integer  "number_of_tests"
+    t.integer  "number_of_errors"
+    t.integer  "number_of_failures"
+    t.string   "time_taken"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "unit_test_xmls", :force => true do |t|

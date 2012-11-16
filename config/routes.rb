@@ -1,5 +1,4 @@
 Tta::Application.routes.draw do
-  resources :project_details
 
   get "unit_test_xml/index"
 
@@ -7,13 +6,10 @@ Tta::Application.routes.draw do
 
   get "unit_test_xml/show"
 
-  resources :junit_xml_data
-
-  resources :j_unit_xmls
-
-  resources :unit_test_xml
-
   get "home/index"
+
+  resources :projects,:junit_xml_data,:j_unit_xmls,:unit_test_xml
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

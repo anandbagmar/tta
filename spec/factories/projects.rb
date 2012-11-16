@@ -2,10 +2,8 @@
 
 FactoryGirl.define do
   factory :project do
-    Name "MyString"
-    of "MyString"
-    project "MyString"
-    Log "MyString"
-    type ""
+    name "MyString"
+    type_of_report "MyString"
+    authorization_level "MyString"
   end
 end

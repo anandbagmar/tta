@@ -1,12 +1,10 @@
-<h1>Listing projects</h1>
+<h1>Listing project_details</h1>
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Of</th>
-    <th>Project</th>
-    <th>Log</th>
-    <th>Type</th>
+    <th>name</th>
+    <th>Type of report</th>
+    <th>Authorization level</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,11 +12,9 @@
 
 <% @projects.each do |project| %>
   <tr>
-    <td><%= project.Name %></td>
-    <td><%= project.of %></td>
-    <td><%= project.project %></td>
-    <td><%= project.Log %></td>
-    <td><%= project.type %></td>
+    <td><%= project.name %></td>
+    <td><%= project.type_of_report %></td>
+    <td><%= project.authorization_level %></td>
     <td><%= link_to 'Show', project %></td>
     <td><%= link_to 'Edit', edit_project_path(project) %></td>
     <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
