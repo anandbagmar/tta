@@ -8,8 +8,9 @@ Tta::Application.routes.draw do
 
   get "home/index"
 
-  resources :projects,:junit_xml_data,:j_unit_xmls,:unit_test_xml
 
+  resources :projects,:junit_xml_data,:j_unit_xmls,:unit_test_xml
+  match '/comparative_analysis/create' => 'comparative_analysis#create'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

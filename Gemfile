@@ -44,6 +44,8 @@ gem 'xml-simple', :require => 'xmlsimple'
 
 gem 'paperclip'
 
+gem 'flot-rails'
+
 group :development, :test do
   gem 'factory_girl_rails'                        # use factories instead of fixtures
   gem 'faker'                                     # easily create fake data for tests
