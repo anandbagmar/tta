@@ -1,41 +1,24 @@
 <h1>Comparative Analysis View</h1>
-<div id="comparative_analysis" style="width:600px;height:300px"></div>
-<div id="default" style="width:500px;height:200px"></div>
+<div id="comparative_analysis" style="width:600px;height:300px" data-source="junit_xml_data_path">
 
 <script>
-    $.plot($("#comparative_analysis"),[ {
-      label: "Series 1",
-      data: [ [0, 0], [1, 1], [2, 1], [3, 2] ],
-        lines: {show: true},
-       bars:{show: true},
-      points: {show: true},
-        clickable: true,
-        hoverable: true
-    },
-    {
-      label: "Series 2",
-      data: [ [0, 3], [1, 5], [2, 8], [3, 13] ],
-        lines: {show: true},
-        bars:{show: true},
-      points: {show: true},
-        clickable: true,
-        hoverable: true
-    }])
-    var data123 = [
-        { label: "IE",  data: 19.5},
-        { label: "Safari",  data: 4.5},
-        { label: "Firefox",  data: 36.6},
-        { label: "Opera",  data: 2.3},
-        { label: "Chrome",  data: 36.3},
-        { label: "Other",  data: 0.8}
-    ];
-    $.plot($("#default"), data123,
-            {
-               series: {
-                    pie: {
-                        show: true
-                    }
-                }
-            });
+
+  
+          $.plot($("#comparative_analysis"),[ {
+      label: "No. of tests passing",
+      data: <%= @result_set %>,
+      lines: {show: true},
+      points: {show: true}
+    }
+//              ,
+//    {
+//      label: "Series 2",
+//      data: [ [0, 3], [1, 5], [2, 8], [3, 13] ],
+//      lines: {show: true},
+//      points: {show: true}
+//    }
+          ]);
+
 </script>
+</div>
 

@@ -5,8 +5,8 @@ class ComparativeAnalysisController < ApplicationController
 
   def create
     @comparative_analysis = ComparativeAnalysis.new
-    render :action => 'create'
-
+    @result_set = ComparativeAnalysis.getProjectData params[:number_of_tests]
+    p @result_set
   end
 
   def show
@@ -16,4 +16,6 @@ class ComparativeAnalysisController < ApplicationController
   def index
 
   end
+
+
 end
