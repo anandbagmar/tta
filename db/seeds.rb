@@ -11,6 +11,7 @@ puts "Seed data goes here!!"
   #Project.delete_all
   #ProjectMetaDatum.delete_all
   #TestRecord.delete_all
+
   1.upto(2) do |i|
     project = Project.create(:name => "PROJECT #{i}",
                    :type_of_report => "Junit",
