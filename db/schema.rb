@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20121116063727) do
 
-  create_table "project_metadata", :force => true do |t|
+  create_table "project_meta_data", :force => true do |t|
     t.integer  "project_id"
     t.string   "os_name"
     t.string   "host_name"

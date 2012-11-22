@@ -1,6 +1,6 @@
 class CreateProjectMetaData < ActiveRecord::Migration
   def change
-    create_table :project_metadata do |t|
+    create_table :project_meta_data do |t|
       t.integer :project_id
       t.string :os_name
       t.string :host_name
