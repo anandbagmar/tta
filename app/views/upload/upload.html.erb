@@ -12,9 +12,22 @@
   <%= text_field_tag ( :type_of_report) %> <br>
   Authorization level:
   <%= text_field_tag (:authorization_level) %>
-</p>
+<br>
+      Sub-Project name:
+      <%= text_field_tag (:sub_project_name) %> <br>
+      OS Tested On:
+      <%= text_field_tag ( :os_name) %> <br>
+      Host-Machine Name:
+      <%= text_field_tag (:host_name) %><br>
+        Browser Tested On
+      <%= text_field_tag (:browser) %>      <br>
+        Date Of Execution
+      <%= text_field_tag (:date_of_execution) %>  <br>
+        User-Time Zone
+      <%= text_field_tag (:user_timezone) %>
+    </p>
 
-<p>
+    <p>
   <%= submit_tag 'create' %>
 </p>
 <% end %>
