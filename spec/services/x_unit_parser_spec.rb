@@ -20,7 +20,7 @@ describe XUnitParser do
       eos
 
       xml_data = double("xml_data")
-      JunitXmlDatum.should_receive(:new).and_return(xml_data)
+      TestRecord.should_receive(:new).and_return(xml_data)
       xml_data.should_receive(:save)
 
       @parser.parse_xml(xml)

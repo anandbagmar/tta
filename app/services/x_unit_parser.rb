@@ -6,7 +6,7 @@ class XUnitParser
 
     config = XmlSimple.xml_in(config_xml, {'KeyAttr' => 'name'})
 
-    xml_data = JunitXmlDatum.new(:classname => config['name'],
+    xml_data = TestRecord.new(:classname => config['name'],
                                  :errorsintest => config['errors'],
                                  :failures => config['failures'],
                                  :hostname => config['hostname'],

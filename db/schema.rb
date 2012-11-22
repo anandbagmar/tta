@@ -13,26 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20121116063727) do
 
-  create_table "j_unit_xmls", :force => true do |t|
-    t.string   "name"
-    t.text     "contentxml"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "junit_xml_data", :force => true do |t|
-    t.string   "name"
-    t.string   "classname"
-    t.string   "tests"
-    t.string   "failures"
-    t.string   "errorsintest"
-    t.string   "hostname"
-    t.string   "timetaken"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  create_table "project_meta_data", :force => true do |t|
+  create_table "project_metadata", :force => true do |t|
     t.integer  "project_id"
     t.string   "os_name"
     t.string   "host_name"
@@ -51,25 +32,16 @@ ActiveRecord::Schema.define(:version => 20121116063727) do
     t.datetime "updated_at",          :null => false
   end
 
-  create_table "unit_test_records", :force => true do |t|
+  create_table "test_records", :force => true do |t|
     t.integer  "project_id"
-    t.integer  "project_meta_data_id"
+    t.integer  "project_metadata_id"
     t.string   "class_name"
     t.integer  "number_of_tests"
     t.integer  "number_of_errors"
     t.integer  "number_of_failures"
     t.string   "time_taken"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
-  end
-
-  create_table "unit_test_xmls", :force => true do |t|
-    t.string   "xml_file_name"
-    t.string   "xml_content_type"
-    t.string   "xml_file_size"
-    t.datetime "xml_updated_at"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
 end
