@@ -9,6 +9,6 @@
 
 puts "Seed data goes here!!"
   5.upto(20) do |i|
-    TestRecord.create(:name => "services.gateways.BenefitsServiceGatewayTest" , :classname => "services.gateways.BenefitsServiceGatewayTest" , :tests=> "#{i+2}" , :failures => "#{i}" , :errorsintest => "#{i}" , :hostname => "test-machine" , :timetaken => "10")
+    TestRecord.create(:classname => "services.gateways.BenefitsServiceGatewayTest" , :number_of_tests=> "#{i+2}" , :number_of_failures => "#{i}" , :number_of_errors => "#{i}" , :time_taken => "10")
     puts "Seed data done!!"
   end
