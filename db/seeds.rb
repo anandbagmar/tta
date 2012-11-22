@@ -8,3 +8,7 @@
 
 
 puts "Seed data goes here!!"
+  5.upto(20) do |i|
+    JunitXmlDatum.create(:name => "services.gateways.BenefitsServiceGatewayTest" , :classname => "services.gateways.BenefitsServiceGatewayTest" , :tests=> "#{i+2}" , :failures => "#{i}" , :errorsintest => "#{i}" , :hostname => "test-machine" , :timetaken => "10")
+    puts "Seed data done!!"
+  end
