@@ -1,0 +1,20 @@
+
+<h1>Upload</h1>
+
+
+
+
+<%= form_tag(:action => 'create',:multipart => true)  do %>
+<p>
+  Project Name:
+  <%= text_field_tag (:name) %> <br>
+   Type of reports:
+  <%= text_field_tag ( :type_of_report) %> <br>
+  Authorization level:
+  <%= text_field_tag (:authorization_level) %>
+</p>
+
+<p>
+  <%= submit_tag 'create' %>
+</p>
+<% end %>

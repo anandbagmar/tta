@@ -1,5 +1,9 @@
 Tta::Application.routes.draw do
 
+  get "upload/upload"
+
+  get "upload_controller/upload"
+
   get "unit_test_xml/index"
 
   get "unit_test_xml/new"
@@ -11,6 +15,9 @@ Tta::Application.routes.draw do
 
   resources :projects,:junit_xml_data,:j_unit_xmls,:unit_test_xml
   match '/comparative_analysis/create' => 'comparative_analysis#create'
+  match '/upload/upload'=>'upload#create'
+  match '/upload/create'=>'upload#create'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
