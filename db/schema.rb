@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20121116063727) do
 
-  create_table "project_meta_data", :force => true do |t|
+  create_table "project_metadata", :force => true do |t|
     t.integer  "project_id"
     t.string   "os_name"
     t.string   "host_name"
@@ -33,15 +33,14 @@ ActiveRecord::Schema.define(:version => 20121116063727) do
   end
 
   create_table "test_records", :force => true do |t|
-    t.integer  "project_id"
-    t.integer  "project_metadata_id"
+    t.integer  "project_metadatum_id"
     t.string   "class_name"
     t.integer  "number_of_tests"
     t.integer  "number_of_errors"
     t.integer  "number_of_failures"
     t.string   "time_taken"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
 end
