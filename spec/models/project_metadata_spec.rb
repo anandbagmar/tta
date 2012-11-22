@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe ProjectMetadata do
+describe ProjectMetaDatum do
   pending "add some examples to (or delete) #{__FILE__}"
 end
