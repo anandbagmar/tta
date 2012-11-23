@@ -5,25 +5,26 @@
 
 $.plot($("#comparative_analysis"),[
      {
-        label: "No. of tests passing",
+        label: "Project BLAh",
         data: <%= @result_set %>,
         lines: {show: true},
         points: {show: true}
      }
      ],
      {   xaxis: {    tickLength: 5,
-                    axisLabel: 'Duration',
+                    axisLabel: 'Total No. of tests',
                     axisLabelUseCanvas: true,
                     axisLabelFontSizePixels: 12,
                     axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
                     axisLabelPadding: 5
                 },
          yaxis: {    tickLength: 5,
-                    axisLabel: 'Percentage',
+                    axisLabel: 'No. of failures',
                     axisLabelUseCanvas: true,
                     axisLabelFontSizePixels: 12,
                     axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-                    axisLabelPadding: 5
+                    axisLabelPadding: 5,
+
                 }  ,
          grid:  {
              borderWidth: 0,
