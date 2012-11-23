@@ -1,6 +1,47 @@
 <p id="notice"><%= notice %></p>
+<h2 style="color: green;">Project was successfully created</h2>
+<p>
+  <b>Name:</b>
+  <%= @project.name %>
 
+</p>
+<p>
+  <b>Sub Project name:</b>
+  <%= @project_meta.sub_project_name %>
+
+</p>
+
+<p>
+<b>Type of reports:</b>
+<%= @project.type_of_report %>
+
+<p>
+  <b>OS Tested On:</b>
+  <%= @project_meta.os_name %>
+
+</p>
+<p>
+  <b>Host-Machine Name:</b>
+  <%= @project_meta.host_name %>
+
+</p>
+<p>
+  <b>Browser Tested On:</b>
+  <%= @project_meta.browser %>
+
+</p>
+<p>
+  <b>Enviornment Run on:</b>
+  <%= @project_meta.type_of_enviornment %>
+
+</p>
+<p>
+  <b>Date Of Execution:</b>
+  <%= @project_meta.date_of_execution %>
+
+</p>
 <a href='/home/index'><button style="height: 30px; width: 100px; marin-left: 30px; margin-top: 60px;" type="button">HOME</button></a>
+
 
 
 

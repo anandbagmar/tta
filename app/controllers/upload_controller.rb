@@ -32,19 +32,28 @@ class UploadController < ApplicationController
     puts @project_meta.inspect
     @project.save!
     @project_meta.save!
+=begin
     respond_to do |format|
     format.html { redirect_to '/upload/show', notice: 'Project was successfully created.' }
 
     end
+=end
+  redirect_to :action => :show , :project_id => @project.id , :project_meta_id => @project_meta.id
 
   end
 
   def show
-    @project = Project.find_by_name(params[:name])
+    @project = Project.find(params[:project_id])
+    @project_meta = ProjectMetadatum.find(params[:project_meta_id])
 
-    respond_to do |format|
-      format.html #show.html.erb
-      format.json { render json: @project }
+
+    #@project = Project.first
+    #render "show" ,:locals => { :project => @project}
+    begin
+        respond_to do |format|
+          format.html #show.html.erb
+          format.json { render json: @project }
+        end
     end
   end
-  end
+end
