@@ -19,10 +19,11 @@ ActiveRecord::Schema.define(:version => 20121116063727) do
     t.string   "os_name"
     t.string   "host_name"
     t.string   "browser"
+    t.string   "type_of_enviornment"
     t.date     "date_of_execution"
     t.string   "user_timezone"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "projects", :force => true do |t|

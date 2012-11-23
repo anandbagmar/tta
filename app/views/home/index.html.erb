@@ -1,7 +1,17 @@
 
-<h1>Welcome to Test Log Analyser</h1>
+<link rel="stylesheet" href="/stylesheet/upload_form.css"> </link>
+<body>
 
-<%= link_to "JUnit xmls", j_unit_xmls_path %>
-<%= link_to "Projects", projects_path %>
-<%= link_to "Generate View", '/comparative_analysis/create' %>
-<%= link_to "Upload", '/upload/upload' %>
+<div id="header">
+<h1 style="text-align: center; font-family: Tahoma;">Welcome to Test Log Analyser</h1>
+</div>
+<div id="links">
+
+  <form style="text-align: center;">
+    <a href='/upload/upload'><button style="height: 40px; width: 150px; marin-left: 30px; margin-top: 60px;" type="button">UPLOAD TEST DATA</button></a>
+
+    <a href='/comparative_analysis/create' style="text-decoration: none;"><button style="height: 40px;width: 150px; margin-top: 60px; " type="button">VIEWS</button> </a>
+  </form>
+
+</div>
+</body>

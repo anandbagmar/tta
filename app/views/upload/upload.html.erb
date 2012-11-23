@@ -1,33 +1,66 @@
+<head xmlns="http://www.w3.org/1999/html">
+  <link rel="stylesheet" href="/stylesheet/upload_form.css"> </link>
+</head>
 
-<h1>Upload</h1>
+<body>
+<div class="heading">
+<h1 style="text-align: center; font-family: tahoma;">Upload Test Data</h1>
 
-
-
-
+</div>
+<div class="form" >
 <%= form_tag(:action => 'create',:multipart => true)  do %>
-<p>
-  Project Name:
-  <%= text_field_tag (:name) %> <br>
-   Type of reports:
-  <%= text_field_tag ( :type_of_report) %> <br>
-  Authorization level:
-  <%= text_field_tag (:authorization_level) %>
-<br>
-      Sub-Project name:
-      <%= text_field_tag (:sub_project_name) %> <br>
-      OS Tested On:
-      <%= text_field_tag ( :os_name) %> <br>
-      Host-Machine Name:
-      <%= text_field_tag (:host_name) %><br>
-        Browser Tested On
-      <%= text_field_tag (:browser) %>      <br>
-        Date Of Execution
-      <%= text_field_tag (:date_of_execution) %>  <br>
-        User-Time Zone
-      <%= text_field_tag (:user_timezone) %>
-    </p>
 
-    <p>
-  <%= submit_tag 'create' %>
-</p>
+       <div class="fields" style="padding-top:20px ;">
+        <label for="name"> Project Name </label>
+        <%= text_field_tag (:name) %> <br>
+       </div>
+
+      <div class="fields" >
+        <label for="sub_project_name">Sub-Project name</label>
+        <%= text_field_tag (:sub_project_name) %> <br>
+      </div>
+
+      <div class="fields">
+        <label for="type_of_report"> Type of reports</label>
+        <%= text_field_tag ( :type_of_report) %> <br>
+      </div>
+
+      <div class="fields" >
+        <label for="os_name"> OS Tested On</label>
+        <%= text_field_tag ( :os_name) %> <br>
+      </div>
+
+      <div class="fields">
+         <label for="host_name">Host-Machine Name </label>
+         <%= text_field_tag (:host_name) %><br>
+      </div>
+
+      <div class="fields">
+        <label for="browser"> Browser Tested On</label>
+        <%= text_field_tag (:browser) %>      <br>
+      </div>
+
+      <div class="fields">
+        <label for="type_of_enviornment"> Enviornment Run on</label>
+        <%= text_field_tag (:type_of_enviornment) %>      <br>
+      </div>
+
+      <div class="fields">
+        <label for="date_of_execution"> Date Of Execution </label>
+        <%= text_field_tag (:date_of_execution) %>  <br>
+        (date format: yyyy-mm-dd)
+      </div>
+
+
+
+      <div class="fields">
+        <label for="dir_path"> Project logs Dir path</label>
+        <%= text_field_tag (:dir_path) %>
+      </div>
+
+       <div class="submit_button">
+         <%= submit_tag 'SUBMIT' %>
+       </div>
 <% end %>
+</div>
+</body>

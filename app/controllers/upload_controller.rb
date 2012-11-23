@@ -15,15 +15,16 @@ class UploadController < ApplicationController
     @project_meta.project = @project
     @project.name = params[:name]
     @project.type_of_report = params[:type_of_report]
-    @project.authorization_level = params[:authorization_level]
+
     end
 
     @project_meta.sub_project_name= params[:sub_project_name]
     @project_meta.os_name= params[:os_name]
     @project_meta.host_name= params[:host_name]
     @project_meta.browser= params[:browser]
+    @project_meta.browser=params[:type_of_enviornment]
     @project_meta.date_of_execution= params[:date_of_execution]
-    @project_meta.user_timezone= params[:user_timezone]
+
 
 
     puts "*"*50
@@ -32,10 +33,18 @@ class UploadController < ApplicationController
     @project.save!
     @project_meta.save!
     respond_to do |format|
-    format.html { redirect_to @project, notice: 'project was successfully created.' }
+    format.html { redirect_to '/upload/show', notice: 'Project was successfully created.' }
 
     end
 
   end
 
+  def show
+    @project = Project.find_by_name(params[:name])
+
+    respond_to do |format|
+      format.html #show.html.erb
+      format.json { render json: @project }
+    end
+  end
   end

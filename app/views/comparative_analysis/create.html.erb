@@ -1,5 +1,5 @@
 <h1>Comparative Analysis View</h1>
-<div id="comparative_analysis" style="width:600px;height:300px">
+<div id="comparative_analysis" style="width:900px;height:600px">
 
 <script>
 
@@ -11,23 +11,31 @@ $.plot($("#comparative_analysis"),[
         points: {show: true}
      }
      ],
-     {   xaxis: {
+     {   xaxis: {    tickLength: 5,
                     axisLabel: 'Duration',
                     axisLabelUseCanvas: true,
                     axisLabelFontSizePixels: 12,
                     axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
                     axisLabelPadding: 5
                 },
-         yaxis: {
+         yaxis: {    tickLength: 5,
                     axisLabel: 'Percentage',
                     axisLabelUseCanvas: true,
                     axisLabelFontSizePixels: 12,
                     axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
                     axisLabelPadding: 5
-                }
+                }  ,
+         grid:  {
+             borderWidth: 0,
+             hoverable: true,
+             clickable: true,
+             labelMargin: 20
+         }
      }
 );
 
 </script>
+
 </div>
 
+<a href='/home/index'><button style="height: 30px; width: 100px; marin-left: 30px; margin-top: 60px;" type="button">HOME</button></a>

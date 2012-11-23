@@ -1,0 +1,32 @@
+.fields input{
+
+   margin-left: 50px;
+}
+
+
+.fields label{
+    display: inline-block;
+    width: 150px;
+}
+
+.fields{
+    height: 50px;
+}
+
+.submit_button{
+   margin-left: 150px;
+    padding-bottom: 20px;
+    height: 30px;
+    width: 50px;
+}
+
+.form{
+   margin-left: 550px ;
+    margin-right: 500px;
+    padding-left: 150px; background-color:#f5f5f5;
+    border-radius: 15px;
+}
+
+#links a:hover{
+  text-decoration: none;
+}
