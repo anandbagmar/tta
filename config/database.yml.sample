@@ -1,23 +1,37 @@
+
+
+
+
+
 development:
-  adapter: postgresql
-  encoding: unicode
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
   database: tta
   pool: 5
-  username: postgres
-  password: p@ssw0rd
+  username: root
+  password:
+  host: localhost
+
 
 test:
-  adapter: postgresql
-  encoding: unicode
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
   database: tta_test
   pool: 5
-  username: postgres
-  password: p@ssw0rd
+  username: root
+  password:
+  host: localhost
 
 production:
-  adapter: postgresql
-  encoding: unicode
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
   database: tta_prod
   pool: 5
-  username: postgres
-  password: p@ssw0rd
+  username: root
+  password:
+  host: localhost
+
+
