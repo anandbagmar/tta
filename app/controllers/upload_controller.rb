@@ -5,12 +5,18 @@ class UploadController < ApplicationController
     #@project_meta_datum = Project_meta_datum.new(params[:project_meta_datum])
   end
   def create
-    @project = Project.new()
     @project_meta = ProjectMetadatum.new()
+   if @project = Project.find_by_name(params[:name])
+      @project_meta.project=@project
+   else
+
+    @project = Project.new()
+
     @project_meta.project = @project
     @project.name = params[:name]
     @project.type_of_report = params[:type_of_report]
     @project.authorization_level = params[:authorization_level]
+    end
 
     @project_meta.sub_project_name= params[:sub_project_name]
     @project_meta.os_name= params[:os_name]
