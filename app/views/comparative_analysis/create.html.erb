@@ -5,13 +5,22 @@
 
 $.plot($("#comparative_analysis"),[
      {
-        label: "Project BLAh",
-        data: <%= @result_set %>,
+        label: "Project 1",
+        data: <%= @result_set1 %>,
         lines: {show: true},
-        points: {show: true}
-     }
+        points: {show: true},
+        color: "maroon"
+     },
+    {
+        label: "Project 2",
+        data: <%= @result_set2 %>,
+        lines: {show: true},
+        points: {show: true},
+        color: "blue"
+    }
      ],
-     {   xaxis: {    tickLength: 5,
+     {   xaxis: {
+                    tickLength: 5,
                     axisLabel: 'Total No. of tests',
                     axisLabelUseCanvas: true,
                     axisLabelFontSizePixels: 12,
@@ -25,13 +34,14 @@ $.plot($("#comparative_analysis"),[
                     axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
                     axisLabelPadding: 5,
 
-                }  ,
+                },
          grid:  {
-             borderWidth: 0,
-             hoverable: true,
-             clickable: true,
-             labelMargin: 20
-         }
+                     borderWidth: 0,
+                     hoverable: true,
+                     clickable: true,
+                     labelMargin: 20
+                }
+
      }
 );
 

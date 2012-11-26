@@ -5,8 +5,11 @@ class ComparativeAnalysisController < ApplicationController
 
   def create
     @comparative_analysis = ComparativeAnalysis.new
-    @result_set = ComparativeAnalysis.getProjectData params[:number_of_tests]
-    p @result_set
+
+    @result_set1 = ComparativeAnalysis.getProjectData1
+    @result_set2 = ComparativeAnalysis.getProjectData2
+    p @result_set1
+    p @result_set2
   end
 
   def show

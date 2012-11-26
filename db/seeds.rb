@@ -13,11 +13,10 @@
   project.save
 end
 
-os_arr_data = ["Mac Os", "Windows 7", "Cent OS", "Ubuntu", "Vista"]
-host_name_arr_data = ["Ritu ", "Khushal", "Khushboo", "Pooja", "Anand"]
-browser_arr_data = ["Firefox ", "chrome", "IE", "Safari", "Google Chrome" ]
-
-os_arr_data.each do |os_arr_data , host_name_arr_data , browser_arr_data |
+  os_arr_data = ["Mac Os", "Windows 7", "Cent OS", "Ubuntu", "Vista"]
+  host_name_arr_data = ["Ritu ", "Khushal", "Khushboo", "Pooja", "Anand"]
+  browser_arr_data = ["Firefox ", "chrome", "IE", "Safari", "Google Chrome" ]
+  os_arr_data.each do |os_arr_data , host_name_arr_data , browser_arr_data |
   project_metadata = ProjectMetadatum.create(:os_name => os_arr_data,
                                              :host_name => host_name_arr_data,
                                              :browser => browser_arr_data ,
@@ -49,6 +48,22 @@ end
                                   :number_of_errors => "10" ,
                                   :time_taken => "10")
   test_record.project_metadatum = ProjectMetadatum.find(1)
+  test_record.save
+
+end
+
+
+@test_arr_data2 =[30 , 50 , 60 , 70 , 90, 100, 110]
+@failure_arr_data2 =[30 , 40 , 35, 22 ,64, 85,110]
+
+@test_arr_data2.zip @failure_arr_data2
+@test_arr_data2.zip(@failure_arr_data2) do |test_arr_data2, failure_arr_data2|
+  test_record = TestRecord.create(:class_name => "services.gateways.BenefitsServiceGatewayTest" ,
+                                  :number_of_tests=> test_arr_data2 ,
+                                  :number_of_failures => failure_arr_data2,
+                                  :number_of_errors => "10" ,
+                                  :time_taken => "10")
+  test_record.project_metadatum = ProjectMetadatum.find(2)
   test_record.save
 
 end
