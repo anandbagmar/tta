@@ -24,20 +24,19 @@ class UploadController < ApplicationController
     @project_meta.browser= params[:browser]
     @project_meta.type_of_enviornment=params[:type_of_enviornment]
     @project_meta.date_of_execution= params[:date_of_execution]
-
-
-
-    puts "*"*50
-    puts @project.inspect
-    puts @project_meta.inspect
     @project.save!
     @project_meta.save!
-=begin
-    respond_to do |format|
-    format.html { redirect_to '/upload/show', notice: 'Project was successfully created.' }
 
-    end
-=end
+
+
+    #code to upload file
+    tmp = params[:myFile].tempfile
+
+    require 'ftools'
+    file = File.join("public", params[:myFile].original_filename)
+    FileUtils.cp tmp.path, file
+
+
   redirect_to :action => :show , :project_id => @project.id , :project_meta_id => @project_meta.id
 
   end
@@ -56,4 +55,6 @@ class UploadController < ApplicationController
         end
     end
   end
+
+
 end

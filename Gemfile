@@ -45,6 +45,7 @@ gem 'xml-simple', :require => 'xmlsimple'
 gem 'paperclip'
 
 gem 'flot-rails'
+gem 'ftools'
 
 group :development, :test do
   gem 'factory_girl_rails'                        # use factories instead of fixtures

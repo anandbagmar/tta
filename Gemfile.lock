@@ -83,6 +83,7 @@ GEM
     ffi (1.1.5)
     flot-rails (0.0.2)
       jquery-rails
+    ftools (0.0.0)
     gherkin (2.11.5)
       json (>= 1.4.6)
     hike (1.2.1)
@@ -198,6 +199,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   flot-rails
+  ftools
   jquery-rails
   json_spec
   mysql2

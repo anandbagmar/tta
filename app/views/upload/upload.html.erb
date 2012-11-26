@@ -8,7 +8,7 @@
 
 </div>
 <div class="form" >
-<%= form_tag(:action => 'create',:multipart => true)  do %>
+<%= form_tag({:action => 'create'},{:multipart => true})  do %>
 
        <div class="fields" style="padding-top:20px ;">
         <label for="name"> Project Name </label>
@@ -58,6 +58,8 @@
         <label for="dir_path"> Project logs Dir path</label>
         <%= text_field_tag (:dir_path) %>
       </div>
+
+      <%= file_field_tag :myFile ,{:multiple =>true} %>
 
        <div class="submit_button">
          <%= submit_tag 'SUBMIT' %>
