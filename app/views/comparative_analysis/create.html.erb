@@ -19,7 +19,9 @@ $.plot($("#comparative_analysis"),[
         color: "blue"
     }
      ],
+
      {   xaxis: {
+                    mode: "time",
                     tickLength: 5,
                     axisLabel: 'Total No. of tests',
                     axisLabelUseCanvas: true,
@@ -39,8 +41,13 @@ $.plot($("#comparative_analysis"),[
                      borderWidth: 0,
                      hoverable: true,
                      clickable: true,
-                     labelMargin: 20
-                }
+                     labelMargin: 20,
+                     backgroundColor: { colors: ["#fff", "#eee"] }
+
+                },
+         legend: {
+                     position: "ne"
+                 }
 
      }
 );
