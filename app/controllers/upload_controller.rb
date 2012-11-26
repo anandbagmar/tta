@@ -22,7 +22,7 @@ class UploadController < ApplicationController
     @project_meta.os_name= params[:os_name]
     @project_meta.host_name= params[:host_name]
     @project_meta.browser= params[:browser]
-    @project_meta.browser=params[:type_of_enviornment]
+    @project_meta.type_of_enviornment=params[:type_of_enviornment]
     @project_meta.date_of_execution= params[:date_of_execution]
 
 
