@@ -46,6 +46,7 @@ gem 'paperclip'
 
 gem 'flot-rails'
 gem 'ftools'
+gem 'rubyzip'
 
 group :development, :test do
   gem 'factory_girl_rails'                        # use factories instead of fixtures

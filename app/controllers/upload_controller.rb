@@ -39,6 +39,14 @@ class UploadController < ApplicationController
 
   redirect_to :action => :show , :project_id => @project.id , :project_meta_id => @project_meta.id
 
+    require 'zip/zipfilesystem'
+
+    Zip::ZipFile.open(file) do |zipfile|
+      zipfile.each do |entry|
+           puts zipfile.read(entry)
+
+      end
+    end
   end
 
   def show
