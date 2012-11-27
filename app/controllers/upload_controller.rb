@@ -15,16 +15,16 @@ class UploadController < ApplicationController
       @project = Project.new()
 
       @project_meta.project = @project
-      @project.name = params[:name]
-      @project.type_of_report = params[:type_of_report]
+      @project.name = params[:name].upcase
+      @project.type_of_report = params[:type_of_report].upcase
 
     end
 
-    @project_meta.sub_project_name= params[:sub_project_name]
-    @project_meta.os_name= params[:os_name]
-    @project_meta.host_name= params[:host_name]
-    @project_meta.browser= params[:browser]
-    @project_meta.type_of_enviornment=params[:type_of_enviornment]
+    @project_meta.sub_project_name= params[:sub_project_name].upcase
+    @project_meta.os_name= params[:os_name].upcase
+    @project_meta.host_name= params[:host_name].upcase
+    @project_meta.browser= params[:browser].upcase
+    @project_meta.type_of_enviornment=params[:type_of_enviornment].upcase
     @project_meta.date_of_execution= params[:date_of_execution]
     @project.save!
     @project_meta.save!
