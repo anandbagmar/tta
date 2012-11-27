@@ -6,6 +6,16 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+## Delete data from all tables
+Project.destroy_all
+Project.reset_primary_key
+ProjectMetadatum.destroy_all
+ProjectMetadatum.reset_primary_key
+TestRecord.destroy_all
+TestRecord.reset_primary_key
+
+
+##Create seed data
 1.upto(2) do |i|
   project = Project.create(:name => "PROJECT #{i}",
                            :type_of_report => "Junit",
@@ -20,9 +30,9 @@ end
   project_metadata = ProjectMetadatum.create(:os_name => os_arr_data,
                                              :host_name => host_name_arr_data,
                                              :browser => browser_arr_data ,
-                                             :date_of_execution => Date.current ,
+                                             :date_of_execution => Time.at(rand * Time.now.to_i) ,
                                              :user_timezone => Time.zone)
-  project_metadata.project = Project.find(1)
+  project_metadata.project = Project.first
   project_metadata.save
 end
 
@@ -30,9 +40,9 @@ os_arr_data.each do |os_arr_data , host_name_arr_data , browser_arr_data |
   project_metadata = ProjectMetadatum.create(:os_name => os_arr_data,
                                              :host_name => host_name_arr_data,
                                              :browser => browser_arr_data ,
-                                             :date_of_execution => Date.current ,
+                                             :date_of_execution => Time.at(rand * Time.now.to_i) ,
                                              :user_timezone => Time.zone)
-  project_metadata.project = Project.find(2)
+  project_metadata.project = Project.find_by_name("PROJECT 2")
   project_metadata.save
 
 end
@@ -47,7 +57,7 @@ end
                                   :number_of_failures => failure_arr_data,
                                   :number_of_errors => "10" ,
                                   :time_taken => "10")
-  test_record.project_metadatum = ProjectMetadatum.find(1)
+  test_record.project_metadatum = ProjectMetadatum.first
   test_record.save
 
 end

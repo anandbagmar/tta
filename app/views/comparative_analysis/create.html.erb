@@ -10,31 +10,27 @@ $.plot($("#comparative_analysis"),[
         lines: {show: true},
         points: {show: true},
         color: "maroon"
-     },
-    {
-        label: "Project 2",
-        data: <%= @result_set2 %>,
-        lines: {show: true},
-        points: {show: true},
-        color: "blue"
-    }
-     ],
+
+     }],
 
      {   xaxis: {
                     mode: "time",
+                    timeformat: "%y,%m,%d",
                     tickLength: 5,
-                    axisLabel: 'Total No. of tests',
+                    minTickSize: [1, "year"],
+                    axisLabel: 'Date',
                     axisLabelUseCanvas: true,
                     axisLabelFontSizePixels: 12,
                     axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
                     axisLabelPadding: 5
                 },
-         yaxis: {    tickLength: 5,
-                    axisLabel: 'No. of failures',
+         yaxis: {
+                    tickLength: 5,
+                    axisLabel: 'Percentage of Passing Tests',
                     axisLabelUseCanvas: true,
                     axisLabelFontSizePixels: 12,
                     axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-                    axisLabelPadding: 5,
+                    axisLabelPadding: 5
 
                 },
          grid:  {

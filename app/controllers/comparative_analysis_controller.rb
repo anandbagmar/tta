@@ -6,10 +6,13 @@ class ComparativeAnalysisController < ApplicationController
   def create
     @comparative_analysis = ComparativeAnalysis.new
 
-    @result_set1 = ComparativeAnalysis.getProjectData1
-    @result_set2 = ComparativeAnalysis.getProjectData2
+    @result_set1 = ComparativeAnalysis.getPercentageOfPassingTests
+    p "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+    p "++++++++++++++++++++++RESULT SET+++++++++++++++++++++++++++++++++++++++++"
     p @result_set1
-    p @result_set2
+    #@result_set2 = ComparativeAnalysis.getProjectData2
+    #p @result_set1
+    #p @result_set2
   end
 
   def show
