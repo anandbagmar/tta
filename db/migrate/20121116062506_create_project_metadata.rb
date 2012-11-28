@@ -3,6 +3,7 @@ class CreateProjectMetadata < ActiveRecord::Migration
     create_table :project_metadata do |t|
       t.integer :project_id
       t.string :sub_project_name
+      t.string :ci_job_name
       t.string :os_name
       t.string :host_name
       t.string :browser

@@ -7,6 +7,7 @@ body{
    margin: 0 auto;
 }
 
+
 .fields label{
     display: inline-block;
     width: 150px;
@@ -20,8 +21,8 @@ body{
 
 button{
     display: inline-block;
-    margin:10 auto;
-    padding-bottom:20px;
+    margin:0 auto;
+    padding-bottom: 20px;
     height: 30px;
     width: 50px;
 }

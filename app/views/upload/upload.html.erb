@@ -22,8 +22,13 @@
       </div>
 
       <div class="fields">
-        <label for="type_of_report"> Type of reports</label>
-        <%= text_field_tag ( :type_of_report) %> <br>
+        <label for="ci_job_name"> CI Job Name</label>
+        <%= text_field_tag ( :ci_job_name) %> <br>
+        </div>
+
+      <div class="fields">
+        <label for="type_of_test"> Type of test</label>
+        <%= text_field_tag ( :type_of_test) %> <br>
       </div>
 
       <div class="fields" >
@@ -52,25 +57,19 @@
         (date format: yyyy-mm-dd)
       </div>
 
-      <!---remove this from db and UI--->
-
       <div class="fields">
-        <label for="dir_path"> Project logs Dir path</label>
-        <%= text_field_tag (:dir_path) %>
+      <label for="dir_path">Select File (zip only)</label>
+      <%= file_field_tag :myFile ,{:multiple =>true} %>
       </div>
-      <!-- -->
-
-      <div class="fields">
-        <label for="myFile">Select File(Zip only)</label>
-        <%= file_field_tag :myFile ,{:multiple =>true} %>
-      </div>
-
 
        <div class="button">
          <%= submit_tag 'SUBMIT' %>
          <%= submit_tag("Clear All", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
        </div>
 
+     <!-- <div class="button">
+        <%= submit_tag("Clear All", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
+      </div>-->
 
 <% end %>
 </div>

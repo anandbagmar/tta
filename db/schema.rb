@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20121116063727) do
   create_table "project_metadata", :force => true do |t|
     t.integer  "project_id"
     t.string   "sub_project_name"
+    t.string   "ci_job_name"
     t.string   "os_name"
     t.string   "host_name"
     t.string   "browser"
@@ -28,7 +29,7 @@ ActiveRecord::Schema.define(:version => 20121116063727) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.string   "type_of_report"
+    t.string   "type_of_test"
     t.string   "authorization_level"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
