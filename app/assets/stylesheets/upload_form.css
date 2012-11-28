@@ -1,29 +1,35 @@
-.fields input{
-
-   margin-left: 50px;
+body{
+    width:100%;
+    margin:0 auto;
+    text-align:center;
 }
-
+.fields input{
+   margin: 0 auto;
+}
 
 .fields label{
     display: inline-block;
     width: 150px;
+    margin: 0 auto;;
 }
 
 .fields{
+    margin: 0 auto;
     height: 50px;
 }
 
-.submit_button{
-   margin-left: 150px;
-    padding-bottom: 20px;
+button{
+    display: inline-block;
+    margin:10 auto;
+    padding-bottom:20px;
     height: 30px;
     width: 50px;
 }
 
 .form{
-   margin-left: 550px ;
-    margin-right: 500px;
-    padding-left: 150px; background-color:#f5f5f5;
+    margin:0 auto;
+    width:50%;
+    background-color:#f5f5f5;
     border-radius: 15px;
 }
 

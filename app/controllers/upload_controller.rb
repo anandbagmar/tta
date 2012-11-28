@@ -8,12 +8,11 @@ class UploadController < ApplicationController
 
   def create
     @project_meta = ProjectMetadatum.new()
+
     if @project = Project.find_by_name(params[:name])
       @project_meta.project=@project
     else
-
       @project = Project.new()
-
       @project_meta.project = @project
       @project.name = params[:name].upcase
       @project.type_of_report = params[:type_of_report].upcase

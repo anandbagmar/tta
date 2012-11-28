@@ -3,6 +3,7 @@
 </head>
 
 <body>
+
 <div class="heading">
 <h1 style="text-align: center; font-family: tahoma;">Upload Test Data</h1>
 
@@ -13,7 +14,6 @@
        <div class="fields" style="padding-top:20px ;">
         <label for="name"> Project Name </label>
         <%= text_field_tag (:name) %> <br>
-
        </div>
 
       <div class="fields" >
@@ -52,22 +52,25 @@
         (date format: yyyy-mm-dd)
       </div>
 
-
+      <!---remove this from db and UI--->
 
       <div class="fields">
         <label for="dir_path"> Project logs Dir path</label>
         <%= text_field_tag (:dir_path) %>
       </div>
+      <!-- -->
 
-      <%= file_field_tag :myFile ,{:multiple =>true} %>
+      <div class="fields">
+        <label for="myFile">Select File(Zip only)</label>
+        <%= file_field_tag :myFile ,{:multiple =>true} %>
+      </div>
 
-       <div class="submit_button">
+
+       <div class="button">
          <%= submit_tag 'SUBMIT' %>
+         <%= submit_tag("Clear All", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
        </div>
 
-      <div class="clear_button">
-        <%= submit_tag("Clear All", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
-      </div>
 
 <% end %>
 </div>
