@@ -24,4 +24,6 @@ class ComparativeAnalysis
     @percentage_of_passing_tests
   end
 
+
+
 end

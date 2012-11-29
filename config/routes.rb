@@ -19,6 +19,7 @@ Tta::Application.routes.draw do
   match '/upload/create'=>'upload#create'
   match'/upload/show'=> 'upload#show'
   match'/upload/'=> 'upload#show'
+  match '/comparative_analysis/date_filter' => 'comparative_analysis#date_filter'
 
 
   # The priority is based upon order of creation:

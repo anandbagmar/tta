@@ -2,8 +2,15 @@
 <div id="comparative_analysis" style="width:900px;height:600px">
 
 <script>
+    /*
+    var data = <%= @data %>;
+    var ticks = [];
+    for (var i = 0; i < data[0].length; i++) {
+        ticks.push(data[0][i][0]); //corrected the missing closing bracket here..
+    }*/
 
 $.plot($("#comparative_analysis"),[
+
      {
         label: "Project 1",
         data: <%= @result_set1 %>,
@@ -12,25 +19,44 @@ $.plot($("#comparative_analysis"),[
         color: "maroon"
 
      }],
+        /*data,*/
 
-     {   xaxis: {
-                    mode: "time",
-                    timeformat: "%y,%m,%d",
-                    tickLength: 5,
-                    minTickSize: [1, "year"],
-                    axisLabel: 'Date',
-                    axisLabelUseCanvas: true,
-                    axisLabelFontSizePixels: 12,
-                    axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-                    axisLabelPadding: 5
-                },
+     {
+         xaxis: {
+
+             mode: "time",
+             timeformat: "%y,%m,%d",
+             tickLength: 5,
+             minTickSize: [1, "year"],
+             axisLabel: 'Date',
+             axisLabelUseCanvas: true,
+             axisLabelFontSizePixels: 12,
+             axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+             axisLabelPadding: 5
+
+            /* mode: "time",
+             ticks: ticks,
+             ticks:,
+             timeformat: "%y/%m/%d",
+             tickLength: 5,
+             minTickSize: [1, "year"],
+             axisLabel: 'Date',
+             axisLabelUseCanvas: true,
+             axisLabelFontSizePixels: 12,
+             axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+             axisLabelPadding: 5 ,
+             min: (new Date(2011, 2, 31)).getTime(),
+             max: (new Date(2011, 4, 31)).getTime()*/
+         },
          yaxis: {
                     tickLength: 5,
                     axisLabel: 'Percentage of Passing Tests',
                     axisLabelUseCanvas: true,
                     axisLabelFontSizePixels: 12,
                     axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-                    axisLabelPadding: 5
+                    axisLabelPadding: 5  ,
+                    min:0,
+                    max: 1000
 
                 },
          grid:  {
@@ -48,8 +74,27 @@ $.plot($("#comparative_analysis"),[
      }
 );
 
+
+
+
 </script>
 
 </div>
+
+<h1>Enter Date Range</h1>
+<%= form_tag ({:action => 'date_filter'}) do %>
+    <div class="fields" >
+      <label for="start_date">Start Date:</label>
+      <%= text_field_tag (:start_date) %> <br>
+    </div>
+    <div class="fields" >
+      <label for="end_date">End Date:</label>
+      <%= text_field_tag (:end_date) %> <br>
+    </div>
+    <!--   <%= text_field_tag :start_date %>
+    <%= text_field_tag :end_date %> -->
+
+    <%= submit_tag "Regenerate View" %>
+<% end %>
 
 <a href='/home/index'><button style="height: 30px; width: 100px; marin-left: 30px; margin-top: 60px;" type="button">HOME</button></a>
