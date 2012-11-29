@@ -21,12 +21,9 @@ class ComparativeAnalysisController < ApplicationController
   end
 
   def date_filter
-    start_date= params[:start_date]
-    end_date= params[:end_date]
-    p start_date
-    p end_date
-
-    render :create
+    @start_date= params[:start_date]
+    @end_date= params[:end_date]
+     render :create
   end
 
 end

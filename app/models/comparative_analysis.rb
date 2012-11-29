@@ -4,7 +4,7 @@ class ComparativeAnalysis
 
 
   def self.getPercentageOfPassingTests(project_id)
-
+   
 
     @percentage_of_passing_tests = ProjectMetadatum.find_all_by_project_id(project_id).inject([]) {|result, record|
         total_num_of_tests = 0
