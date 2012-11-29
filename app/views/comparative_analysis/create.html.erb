@@ -1,5 +1,7 @@
 <h1>Comparative Analysis View</h1>
+
 <div id="comparative_analysis" style="width:900px;height:600px">
+
 
 <script>
     st_date = new Date('<%= @start_date %>');
@@ -37,11 +39,12 @@ $.plot($("#comparative_analysis"),[
 
      {
          xaxis: {
-
+             rotateTicks:135,
              mode: "time",
-            ticks: ticks,
-             timeformat: "%y/%m/%d",
+             ticks: ticks,
+             timeformat: "%d-%b",
              tickLength: 5,
+             tickSize:5,
              minTickSize: [1, "year"],
              axisLabel: 'Date',
              axisLabelUseCanvas: true,
