@@ -1,7 +1,5 @@
 <h1>Comparative Analysis View</h1>
-
 <div id="comparative_analysis" style="width:900px;height:600px">
-
 
 <script>
     st_date = new Date('<%= @start_date %>');
@@ -21,7 +19,7 @@ $.plot($("#comparative_analysis"),[
 
      {
         label: "Project 1",
-        data: [(0 , 10) , (10 , 60)],
+        data: <%= @result_set1 %>,
         lines: {show: true},
         points: {show: true},
         color: "maroon"
@@ -29,7 +27,7 @@ $.plot($("#comparative_analysis"),[
      },
     {
             label: "Project 2",
-            data: [(0,10) ,(10,45)],
+            data: <%= @result_set2 %>,
             lines: {show: true},
             points: {show: true},
             color: "blue"
@@ -39,8 +37,9 @@ $.plot($("#comparative_analysis"),[
 
      {
          xaxis: {
+
              mode: "time",
-             ticks: ticks,
+            ticks: ticks,
              timeformat: "%y/%m/%d",
              tickLength: 5,
              minTickSize: [1, "year"],
@@ -85,7 +84,7 @@ $.plot($("#comparative_analysis"),[
 
 </div>
 
-<h1>Enter Date Range </h1>
+<h1>Enter Date Range</h1>
 <%= form_tag ({:action => 'date_filter'}) do %>
     <div class="fields" >
       <label for="start_date">Start Date:</label>

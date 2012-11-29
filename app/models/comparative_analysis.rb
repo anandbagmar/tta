@@ -3,10 +3,12 @@
 class ComparativeAnalysis
 
 
-  def self.getPercentageOfPassingTests(project_id)
-   
+  
 
-    @percentage_of_passing_tests = ProjectMetadatum.find_all_by_project_id(project_id).inject([]) {|result, record|
+  def self.getPercentageOfPassingTests(project_id,start_date="1900-01-01",end_date="2200-12-31")
+
+
+    @percentage_of_passing_tests = ProjectMetadatum.where(:project_id => project_id,:date_of_execution => start_date..end_date).inject([]) {|result, record|
         total_num_of_tests = 0
         number_of_failures = 0
         TestRecord.find_all_by_project_metadatum_id(record.id).each do |test|

@@ -23,6 +23,10 @@ class ComparativeAnalysisController < ApplicationController
   def date_filter
     @start_date= params[:start_date]
     @end_date= params[:end_date]
+    @result_set1 = ComparativeAnalysis.getPercentageOfPassingTests(1,@start_date,@end_date)
+
+        @result_set2=ComparativeAnalysis.getPercentageOfPassingTests(2,@start_date,@end_date)
+
      render :create
   end
 
