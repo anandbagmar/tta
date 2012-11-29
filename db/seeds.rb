@@ -73,7 +73,7 @@ end
                                   :number_of_failures => failure_arr_data2,
                                   :number_of_errors => "10" ,
                                   :time_taken => "10")
-  test_record.project_metadatum = ProjectMetadatum.find(2)
+  test_record.project_metadatum = ProjectMetadatum.find(3)
   test_record.save
 
 end

@@ -18,7 +18,15 @@ $.plot($("#comparative_analysis"),[
         points: {show: true},
         color: "maroon"
 
-     }],
+     },
+    {
+            label: "Project 2",
+            data: <%= @result_set2 %>,
+            lines: {show: true},
+            points: {show: true},
+            color: "blue"
+
+         }],
         /*data,*/
 
      {
@@ -56,7 +64,7 @@ $.plot($("#comparative_analysis"),[
                     axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
                     axisLabelPadding: 5  ,
                     min:0,
-                    max: 1000
+                    max: 100
 
                 },
          grid:  {
