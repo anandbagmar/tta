@@ -2,10 +2,22 @@
   <link rel="stylesheet" href="/stylesheet/upload_form.css"> </link>
 </head>
 
+<div id="menu-bar">
+  <h1> Testing Trend Analysis</h1>
+  <a href='/home/index' style="height: 20px; width: 50px; color: #ffffff; margin-right: 10px;">HOME</a>
+</div>
+
+
 <body>
 
+
+<div id="page_title">
+  <h1>Comparative Analysis View </h1>
+
+</div>
+
 <div id="Date-Range-Input">
-  <h1>Enter Date Range</h1>
+  <h2>Enter Date Range</h2>
   <%= form_tag ({:action => 'date_filter'}) do %>
       <div class="fields" >
         <label for="start_date">Start Date:</label>
@@ -15,16 +27,19 @@
         <label for="end_date">End Date:</label>
         <%= text_field_tag (:end_date),nil, :placeholder => 'yyyy-mm-dd' %> <br>
       </div>
-      <%= submit_tag "Regenerate View" %>
+      <div id="submit-plot-button">
+      <%= submit_tag "Plot" %>
+      </div>
   <% end %>
-  <a href='/home/index'><button style="height: 30px; width: 100px; marin-left: 30px; margin-top: 60px;" type="button">HOME</button></a>
+
 </div>
 
- <div id="graph_title">
-<h1>Comparative Analysis View </h1>
-<h3>Graph Plotted For:</h3>
-<h3>From <%= @start_date %> to <%= @end_date %></h3>
- </div>
+
+<div id="date-range-title">
+  <h3>Graph Plotted For Date Range:</h3>
+  <h3>From <%= @start_date %> to <%= @end_date %></h3>
+</div>
+
 <div id="comparative_analysis" style="width:900px;height:600px">
   <script>
       st_date = new Date('<%= @start_date %>');
