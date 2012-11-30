@@ -4,12 +4,6 @@ class ComparativeAnalysisController < ApplicationController
   end
 
   def create
-    @comparative_analysis = ComparativeAnalysis.new
-
-    @result_set1 = ComparativeAnalysis.getPercentageOfPassingTests(1)
-    p @result_set1
-    @result_set2=ComparativeAnalysis.getPercentageOfPassingTests(2)
-    p @result_set2
   end
 
   def show
@@ -24,8 +18,10 @@ class ComparativeAnalysisController < ApplicationController
     @start_date= params[:start_date]
     @end_date= params[:end_date]
     @result_set1 = ComparativeAnalysis.getPercentageOfPassingTests(1,@start_date,@end_date)
+    @project1_name = ComparativeAnalysis.getProjectName(1)
 
-        @result_set2=ComparativeAnalysis.getPercentageOfPassingTests(2,@start_date,@end_date)
+    @result_set2=ComparativeAnalysis.getPercentageOfPassingTests(2,@start_date,@end_date)
+    @project2_name = ComparativeAnalysis.getProjectName(2)
 
      render :create
   end

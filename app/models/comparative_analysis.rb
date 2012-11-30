@@ -22,6 +22,13 @@ class ComparativeAnalysis
     @percentage_of_passing_tests
   end
 
+  def self.getProjectName(project_id)
+    project_id=project_id.to_i
+    @project_name = Project.where(:id => project_id).inject([]){|result,record|
+    result << record.name
+    }
+    @project_name
+  end
 
 
 end
