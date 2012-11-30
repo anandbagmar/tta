@@ -1,106 +1,111 @@
-<h1>Comparative Analysis View</h1>
+<head xmlns="http://www.w3.org/1999/html">
+  <link rel="stylesheet" href="/stylesheet/upload_form.css"> </link>
+</head>
 
-<div id="comparative_analysis" style="width:900px;height:600px">
+<body>
 
-
-<script>
-    st_date = new Date('<%= @start_date %>');
-    start_time= st_date.getTime()
-    ed_date = new Date('<%= @end_date %>');
-    end_time= ed_date.getTime()
-    var data = [];
-    for(var i = start_time; i<=end_time; i+=((end_time-start_time)/10)){
-        data.push(i);
-    }
-    var ticks = [];
-    for (var i = 0; i < data.length; i++) {
-        ticks.push(data[i]); //corrected the missing closing bracket here..
-    }
-
-$.plot($("#comparative_analysis"),[
-
-     {
-        label: "Project 1",
-        data: <%= @result_set1 %>,
-        lines: {show: true},
-        points: {show: true},
-        color: "maroon"
-
-     },
-    {
-            label: "Project 2",
-            data: <%= @result_set2 %>,
-            lines: {show: true},
-            points: {show: true},
-            color: "blue"
-
-         }],
-        /*data,*/
-
-     {
-         xaxis: {
-             rotateTicks:135,
-             mode: "time",
-             ticks: ticks,
-             timeformat: "%d-%b",
-             tickLength: 5,
-             tickSize:5,
-             minTickSize: [1, "year"],
-             axisLabel: 'Date',
-             axisLabelUseCanvas: true,
-             axisLabelFontSizePixels: 12,
-             axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-             axisLabelPadding: 5 ,
-             min: start_time,
-             max: end_time
-         },
-         yaxis: {
-                    tickLength: 5,
-                    axisLabel: 'Percentage of Passing Tests',
-                    axisLabelUseCanvas: true,
-                    axisLabelFontSizePixels: 12,
-                    axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-                    axisLabelPadding: 5  ,
-                    min:0,
-                    max: 100
-
-                },
-         grid:  {
-                     borderWidth: 0,
-                     hoverable: true,
-                     clickable: true,
-                     labelMargin: 1,
-                     backgroundColor: { colors: ["#fff", "#eee"] }
-
-                },
-         legend: {
-                     position: "ne"
-                 }
-
-     }
-);
-
-
-
-
-</script>
-
+<div id="Date-Range-Input">
+  <h1>Enter Date Range</h1>
+  <%= form_tag ({:action => 'date_filter'}) do %>
+      <div class="fields" >
+        <label for="start_date">Start Date:</label>
+        <%= text_field_tag (:start_date),nil, :placeholder => 'yyyy-mm-dd' %> <br>
+      </div>
+      <div class="fields" >
+        <label for="end_date">End Date:</label>
+        <%= text_field_tag (:end_date),nil, :placeholder => 'yyyy-mm-dd' %> <br>
+      </div>
+      <%= submit_tag "Regenerate View" %>
+  <% end %>
+  <a href='/home/index'><button style="height: 30px; width: 100px; marin-left: 30px; margin-top: 60px;" type="button">HOME</button></a>
 </div>
 
-<h1>Enter Date Range</h1>
-<%= form_tag ({:action => 'date_filter'}) do %>
-    <div class="fields" >
-      <label for="start_date">Start Date:</label>
-      <%= text_field_tag (:start_date) %> <br>
-    </div>
-    <div class="fields" >
-      <label for="end_date">End Date:</label>
-      <%= text_field_tag (:end_date) %> <br>
-    </div>
-    <!--   <%= text_field_tag :start_date %>
-    <%= text_field_tag :end_date %> -->
+ <div id="graph_title">
+<h1>Comparative Analysis View </h1>
+<h3>Graph Plotted For:</h3>
+<h3>From <%= @start_date %> to <%= @end_date %></h3>
+ </div>
+<div id="comparative_analysis" style="width:900px;height:600px">
+  <script>
+      st_date = new Date('<%= @start_date %>');
+      start_time= st_date.getTime()
+      ed_date = new Date('<%= @end_date %>');
+      end_time= ed_date.getTime()
+      var data = [];
+      for(var i = start_time; i<=end_time; i+=((end_time-start_time)/10)){
+          data.push(i);
+      }
+      var ticks = [];
+      for (var i = 0; i < data.length; i++) {
+          ticks.push(data[i]); //corrected the missing closing bracket here..
+      }
 
-    <%= submit_tag "Regenerate View" %>
-<% end %>
+      $.plot($("#comparative_analysis"),[
 
-<a href='/home/index'><button style="height: 30px; width: 100px; marin-left: 30px; margin-top: 60px;" type="button">HOME</button></a>
+          {
+              label: "Project 1",
+              data: <%= @result_set1 %>,
+              lines: {show: true},
+              points: {show: true},
+              color: "maroon"
+
+          },
+          {
+              label: "Project 2",
+              data: <%= @result_set2 %>,
+              lines: {show: true},
+              points: {show: true},
+              color: "blue"
+
+          }],
+              /*data,*/
+
+              {
+                  xaxis: {
+                      rotateTicks:135,
+                      mode: "time",
+                      ticks: ticks,
+                      timeformat: "%d-%b , %y",
+                      tickLength: 5,
+                      tickSize:5,
+                      minTickSize: [1, "year"],
+                      axisLabel: 'Date-Range',
+                      axisLabelUseCanvas: true,
+                      axisLabelFontSizePixels: 12,
+                      axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+                      axisLabelPadding: 5 ,
+                      min: start_time,
+                      max: end_time
+                  },
+                  yaxis: {
+                      tickLength: 5,
+                      axisLabel: 'Percentage of Passing Tests',
+                      axisLabelUseCanvas: true,
+                      axisLabelFontSizePixels: 12,
+                      axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+                      axisLabelPadding: 5  ,
+                      min:0,
+                      max: 100
+
+                  },
+                  grid:  {
+                      borderWidth: 0,
+                      hoverable: true,
+                      clickable: true,
+                      labelMargin: 1,
+                      backgroundColor: { colors: ["#fff", "#eee"] }
+
+                  },
+                  legend: {
+                      position: "ne"
+                  }
+
+              }
+      );
+
+  </script>
+</div>
+</body>
+
+
+

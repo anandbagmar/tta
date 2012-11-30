@@ -37,3 +37,32 @@ button{
 #links a:hover{
   text-decoration: none;
 }
+
+#Date-Range-Input{
+    width: 50%;
+    margin: 0 auto;
+    padding-bottom: 30px;
+    padding-top: 10px;
+    background-color: #eeeeee;
+}
+
+#Date-Range-Input h1{
+  padding-bottom: 15px;
+}
+
+
+
+#graph_title{
+    padding-top: 40px;
+    padding-bottom: 20px;
+
+}
+
+#graph_title h3{
+    color: #339999;
+}
+
+#comparative_analysis{
+    margin: 0 auto;
+
+}
