@@ -1,0 +1,20 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: tta
+  pool: 5
+  username: root
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  database: tta_test
+  pool: 5
+  username: root
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  database: tta_prod
+  pool: 5
+  username: root
