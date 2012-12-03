@@ -63,5 +63,6 @@ group :development, :test do
   gem 'json_spec'                                 # easier testing of JSON
   gem 'database_cleaner'                          # manage DB between tests
   gem 'autotest-rails'
+  gem 'shoulda'
   end
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
