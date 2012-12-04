@@ -18,7 +18,7 @@ TestRecord.reset_primary_key
 ##Create seed data
 1.upto(2) do |i|
   project = Project.create(:name => "PROJECT #{i}",
-                           :type_of_report => "Junit",
+                           :type_of_test => "Junit",
                            :authorization_level => "ALL")
   project.save
 end
