@@ -11,7 +11,7 @@ class UploadController < ApplicationController
     project = Project.find_or_create_by_name(params[:project_name])
     sub_project = project.sub_projects.find_or_create_by_name(params[:sub_project_name])
 
-    meta_datum = sub_project.project_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_type_of_test(params[:ci_job_name],
+    meta_datum = sub_project.test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_type_of_test(params[:ci_job_name],
                   params[:browser],params[:type_of_environment],params[:host_name],params[:os_name],params[:type_of_test])
 
     meta_datum.date_of_execution= params[:date_of_execution]
@@ -40,7 +40,7 @@ class UploadController < ApplicationController
   def show
     @project = Project.find(params[:project_id])
     @sub_project= @project.sub_projects.find(params[:sub_project_id])
-    @project_meta = @sub_project.project_metadatum.find(params[:project_meta_id])
+    @project_meta = @sub_project.test_metadatum.find(params[:project_meta_id])
     begin
       respond_to do |format|
         format.html #show.html.erb
@@ -52,7 +52,7 @@ class UploadController < ApplicationController
   def parse_xml(config_xml, meta_id)
     config = XmlSimple.xml_in(config_xml, {'KeyAttr' => 'name'})
     @xml_data = TestRecord.new()
-    @xml_data.project_metadatum_id=meta_id
+    @xml_data.test_metadatum_id=meta_id
     @xml_data.class_name= config['name']
     @xml_data.number_of_errors= config['errors']
     @xml_data.number_of_failures= config['failures']

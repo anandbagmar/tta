@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ProjectMetadatum do
+describe TestMetadatum do
   describe "create" do
 
     it "validate s presence of browser name" do

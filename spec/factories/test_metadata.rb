@@ -1,7 +1,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :project_metadatum, :class => 'ProjectMetadata' do
+  factory :test_metadatum, :class => 'TestMetadatum' do
     project_id 1
     os_name "MyString"
     host_name "MyString"

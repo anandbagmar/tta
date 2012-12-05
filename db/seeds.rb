@@ -9,8 +9,8 @@
 ## Delete data from all tables
 Project.destroy_all
 Project.reset_primary_key
-ProjectMetadatum.destroy_all
-ProjectMetadatum.reset_primary_key
+TestMetadatum.destroy_all
+TestMetadatum.reset_primary_key
 TestRecord.destroy_all
 TestRecord.reset_primary_key
 
@@ -27,7 +27,7 @@ end
   host_name_arr_data = ["Ritu ", "Khushal", "Khushboo", "Pooja", "Anand"]
   browser_arr_data = ["Firefox ", "chrome", "IE", "Safari", "Google Chrome" ]
   os_arr_data.each do |os_arr_data , host_name_arr_data , browser_arr_data |
-  project_metadata = ProjectMetadatum.create(:os_name => os_arr_data,
+  project_metadata = TestMetadatum.create(:os_name => os_arr_data,
                                              :host_name => host_name_arr_data,
                                              :browser => browser_arr_data ,
                                              :date_of_execution => Time.at(rand * Time.now.to_i) ,
@@ -37,7 +37,7 @@ end
 end
 
 os_arr_data.each do |os_arr_data , host_name_arr_data , browser_arr_data |
-  project_metadata = ProjectMetadatum.create(:os_name => os_arr_data,
+  project_metadata = TestMetadatum.create(:os_name => os_arr_data,
                                              :host_name => host_name_arr_data,
                                              :browser => browser_arr_data ,
                                              :date_of_execution => Time.at(rand * Time.now.to_i) ,
@@ -57,7 +57,7 @@ end
                                   :number_of_failures => failure_arr_data,
                                   :number_of_errors => "10" ,
                                   :time_taken => "10")
-  test_record.project_metadatum = ProjectMetadatum.first
+  test_record.test_metadatum = TestMetadatum.first
   test_record.save
 
 end
@@ -73,7 +73,7 @@ end
                                   :number_of_failures => failure_arr_data2,
                                   :number_of_errors => "10" ,
                                   :time_taken => "10")
-  test_record.project_metadatum = ProjectMetadatum.find(3)
+  test_record.test_metadatum = TestMetadatum.find(3)
   test_record.save
 
 end

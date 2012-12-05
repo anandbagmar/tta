@@ -13,20 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20121205061611) do
 
-  create_table "project_metadata", :force => true do |t|
-    t.integer  "sub_project_id"
-    t.string   "ci_job_name"
-    t.string   "os_name"
-    t.string   "host_name"
-    t.string   "browser"
-    t.string   "type_of_test"
-    t.string   "type_of_environment"
-    t.date     "date_of_execution"
-    t.string   "user_timezone"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.string   "authorization_level"
@@ -41,15 +27,29 @@ ActiveRecord::Schema.define(:version => 20121205061611) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "test_metadata", :force => true do |t|
+    t.integer  "sub_project_id"
+    t.string   "ci_job_name"
+    t.string   "os_name"
+    t.string   "host_name"
+    t.string   "browser"
+    t.string   "type_of_test"
+    t.string   "type_of_environment"
+    t.date     "date_of_execution"
+    t.string   "user_timezone"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
   create_table "test_records", :force => true do |t|
-    t.integer  "project_metadatum_id"
+    t.integer  "test_metadatum_id"
     t.string   "class_name"
     t.integer  "number_of_tests"
     t.integer  "number_of_errors"
     t.integer  "number_of_failures"
     t.string   "time_taken"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
 end

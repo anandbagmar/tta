@@ -1,6 +1,6 @@
-class CreateProjectMetadata < ActiveRecord::Migration
+class CreateTestMetadata < ActiveRecord::Migration
   def change
-    create_table :project_metadata do |t|
+    create_table :test_metadata do |t|
       t.integer :sub_project_id
       t.string :ci_job_name
       t.string :os_name

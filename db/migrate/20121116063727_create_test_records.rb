@@ -1,7 +1,7 @@
 class CreateTestRecords < ActiveRecord::Migration
   def change
     create_table :test_records do |t|
-      t.integer :project_metadatum_id
+      t.integer :test_metadatum_id
       t.string  :class_name
       t.integer :number_of_tests
       t.integer :number_of_errors
