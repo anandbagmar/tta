@@ -49,6 +49,7 @@ gem 'ftools'
 gem 'rubyzip'
 gem 'globalize3', '~> 0.2.0'
 gem 'batch_translations', '~> 0.1.2'
+gem 'simple_form'
 
 group :development, :test do
   gem 'factory_girl_rails'                        # use factories instead of fixtures
@@ -64,5 +65,4 @@ group :development, :test do
   gem 'database_cleaner'                          # manage DB between tests
   gem 'autotest-rails'
   gem 'shoulda'
-  end
-gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
+end

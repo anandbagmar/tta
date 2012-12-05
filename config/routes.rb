@@ -1,5 +1,7 @@
 Tta::Application.routes.draw do
 
+  get "visualization/pyramid"
+
   get "upload/upload"
 
   get "upload_controller/upload"

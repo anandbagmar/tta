@@ -1,0 +1,34 @@
+<div id="menu-bar">
+  <h1>Testing Trend Analysis</h1>
+  <a href='/home/index' style="height: 20px; width: 50px; color: #ffffff; margin-right: 10px;">HOME</a>
+</div>
+
+
+<body>
+    <div id="page_title">
+      <h1>Pyramid View</h1>
+
+    </div>
+
+    <div id="comparative_analysis">
+      <script type="text/javascript">
+
+          var dataset = <%= raw(@pyramid.to_s) %>;
+
+
+          var w = h = 500;
+          var svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+          var poly = svg.selectAll("polygon")
+                  .data(dataset)
+                  .enter()
+                  .append("polygon");
+          poly.attr("points", String)
+                  .attr("fill", "red")
+                  .attr("stroke", "black");
+      </script>
+    </div>
+</body>
+
