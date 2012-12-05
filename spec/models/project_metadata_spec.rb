@@ -2,25 +2,28 @@ require 'spec_helper'
 
 describe ProjectMetadatum do
   describe "create" do
-    it "creates project meta data" do
+    it "validates presence of sub_project_name" do
+      should validate_presence_of(:sub_project_name).with_message("cannot be blank, Task not saved")
+    end
 
-      project = Project.create(:authorization_level => "all",
-                               :name => "VSP",
-                               :type_of_report => "JUnit"
-      )
-      project.save
+    it "validate s presence of browser name" do
+      should validate_presence_of(:browser).with_message("cannot be blank, Task not saved")
+    end
 
-      project_metadata = ProjectMetadatum.create(
-                                       :browser => "Firefox" ,
-                                       :host_name=> "avinash-PC" ,
-                                       :os_name => "Ubuntu" ,
-                                       :user_timezone => "UTC"
-                                       )
-      project_metadata.project = project
+    it "validates presence of type of enviornment" do
+      should validate_presence_of(:type_of_enviornment).with_message("cannot be blank, Task not saved")
+    end
 
-      project_metadata.save
+    it "validates presence of host_name" do
+      should validate_presence_of(:host_name).with_message("cannot be blank, Task not saved")
+    end
 
-      expect(ProjectMetadatum.last).to eq(project_metadata)
+    it "validates presence of os_name" do
+      should validate_presence_of(:os_name).with_message("cannot be blank, Task not saved")
+    end
+
+    it "validates presence of date_of_execution" do
+      should validate_presence_of(:date_of_execution).with_message("cannot be blank, Task not saved")
     end
   end
 end

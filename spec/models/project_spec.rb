@@ -2,12 +2,9 @@ require 'spec_helper'
 
 describe Project do
   describe "create" do
-    it "creates projects" do
-      project = Project.create!(:authorization_level => "all",
-                                       :name => "VSP",
-                                       :type_of_report => "JUnit"
-                                       )
-      expect(Project.last).to eq(project)
+    it "active record validations" do
+      should validate_uniqueness_of :name
+      should validate_presence_of :name
     end
   end
 end
