@@ -4,4 +4,6 @@
 
 require File.expand_path('../config/application', __FILE__)
 
+task :default => :spec
+
 Tta::Application.load_tasks
