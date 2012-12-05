@@ -1,4 +1,4 @@
-  require 'xmlsimple'
+require 'xmlsimple'
 require 'zip/zipfilesystem'
 require 'ftools'
 
@@ -7,30 +7,17 @@ class UploadController < ApplicationController
 
 
   def create
-    @project_meta = ProjectMetadatum.new()
-    if @project = Project.find_by_name(params[:name])
-      @project_meta.project=@project
-    else
 
-      @project = Project.new()
+    project = Project.find_or_create_by_name(params[:project_name])
+    sub_project = project.sub_projects.find_or_create_by_name(params[:sub_project_name])
 
-      @project_meta.project = @project
-      @project.name = params[:name].upcase
-      @project.type_of_test = params[:type_of_test].upcase
+    meta_datum = sub_project.project_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_type_of_test(params[:ci_job_name],
+                  params[:browser],params[:type_of_environment],params[:host_name],params[:os_name],params[:type_of_test])
 
-    end
+    meta_datum.date_of_execution= params[:date_of_execution]
 
-    @project_meta.ci_job_name= params[:ci_job_name].upcase
-    @project_meta.sub_project_name= params[:sub_project_name].upcase
-    @project_meta.os_name= params[:os_name].upcase
-    @project_meta.host_name= params[:host_name].upcase
-    @project_meta.browser= params[:browser].upcase
-    @project_meta.type_of_enviornment=params[:type_of_enviornment].upcase
-    @project_meta.date_of_execution= params[:date_of_execution]
-    @project.save!
-    @project_meta.save!
+    meta_datum.save!
 
-    #code to upload file
     tmp = params[:myFile].tempfile
     file = File.join("public", params[:myFile].original_filename)
     FileUtils.cp tmp.path, file
@@ -41,18 +28,19 @@ class UploadController < ApplicationController
         contents_string= contents.to_s
         if tempp =~ /\.xml$/
           if contents_string.start_with? ("<?xml")
-            parse_xml(contents, @project_meta.id)
+            parse_xml(contents, meta_datum.id)
           end
         end
       end
     end
 
-    redirect_to :action => :show, :project_id => @project.id, :project_meta_id => @project_meta.id
+    redirect_to :action => :show, :project_id => project.id, :sub_project_id => sub_project.id, :project_meta_id => meta_datum.id
   end
 
   def show
     @project = Project.find(params[:project_id])
-    @project_meta = ProjectMetadatum.find(params[:project_meta_id])
+    @sub_project= @project.sub_projects.find(params[:sub_project_id])
+    @project_meta = @sub_project.project_metadatum.find(params[:project_meta_id])
     begin
       respond_to do |format|
         format.html #show.html.erb

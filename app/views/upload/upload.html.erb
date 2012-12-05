@@ -18,7 +18,7 @@
 
        <div class="fields" style="padding-top:20px ;">
         <label for="name"> Project Name </label>
-        <%= text_field_tag (:name) %> <br>
+        <%= text_field_tag (:project_name) %> <br>
        </div>
 
       <div class="fields" >
@@ -33,7 +33,7 @@
 
       <div class="fields">
         <label for="type_of_test"> Type of test</label>
-        <%= text_field_tag ( :type_of_test) %> <br>
+        <%= select_tag "type_of_test", "<option>JUnit</option><option>NUnit</option><option>RSpec</option><option>Cucumber</option>".html_safe %> <br>
       </div>
 
       <div class="fields" >
@@ -52,8 +52,8 @@
       </div>
 
       <div class="fields">
-        <label for="type_of_enviornment"> Environment Run on</label>
-        <%= text_field_tag (:type_of_enviornment) %>      <br>
+        <label for="type_of_environment"> Environment Run on</label>
+        <%= text_field_tag (:type_of_environment) %>      <br>
       </div>
 
       <div class="fields">

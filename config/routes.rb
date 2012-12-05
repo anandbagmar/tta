@@ -16,9 +16,11 @@ Tta::Application.routes.draw do
 
 
   resources :projects,:junit_xml_data,:j_unit_xmls,:unit_test_xml
-  match '/upload/upload'=>'upload#create'
-  match'/upload/show'=> 'upload#show'
   match '/comparative_analysis/create' => 'comparative_analysis#create'
+  match '/upload/upload'=>'upload#create'
+  match '/upload/create'=>'upload#create'
+  match'/upload/show'=> 'upload#show'
+  match'/upload/'=> 'upload#show'
   match '/comparative_analysis/date_filter' => 'comparative_analysis#date_filter'
 
 

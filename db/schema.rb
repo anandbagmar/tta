@@ -11,16 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121116063727) do
+ActiveRecord::Schema.define(:version => 20121205061611) do
 
   create_table "project_metadata", :force => true do |t|
-    t.integer  "project_id"
-    t.string   "sub_project_name"
+    t.integer  "sub_project_id"
     t.string   "ci_job_name"
     t.string   "os_name"
     t.string   "host_name"
     t.string   "browser"
-    t.string   "type_of_enviornment"
+    t.string   "type_of_test"
+    t.string   "type_of_environment"
     t.date     "date_of_execution"
     t.string   "user_timezone"
     t.datetime "created_at",          :null => false
@@ -29,10 +29,16 @@ ActiveRecord::Schema.define(:version => 20121116063727) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.string   "type_of_test"
     t.string   "authorization_level"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+  end
+
+  create_table "sub_projects", :force => true do |t|
+    t.integer  "project_id"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "test_records", :force => true do |t|
