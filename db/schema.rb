@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205061611) do
+ActiveRecord::Schema.define(:version => 20121206055650) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
@@ -33,12 +33,12 @@ ActiveRecord::Schema.define(:version => 20121205061611) do
     t.string   "os_name"
     t.string   "host_name"
     t.string   "browser"
-    t.string   "type_of_test"
     t.string   "type_of_environment"
     t.date     "date_of_execution"
-    t.string   "user_timezone"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.string   "test_category"
+    t.string   "test_report_type"
   end
 
   create_table "test_records", :force => true do |t|

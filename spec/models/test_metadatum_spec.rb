@@ -23,8 +23,12 @@ describe TestMetadatum do
       should validate_presence_of(:date_of_execution).with_message("cannot be blank, Task not saved")
     end
 
-    it "validates presence of type_of_test" do
-      should validate_presence_of(:type_of_test).with_message("cannot be blank, Task not saved")
+    it "validates presence of test_category" do
+      should validate_presence_of(:test_category).with_message("cannot be blank, Task not saved")
+    end
+
+    it "validates presence of test_report_type" do
+      should validate_presence_of(:test_report_type).with_message("cannot be blank, Task not saved")
     end
   end
 end

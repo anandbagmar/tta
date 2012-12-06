@@ -29,11 +29,16 @@
       <div class="fields">
         <label for="ci_job_name"> CI Job Name</label>
         <%= text_field_tag ( :ci_job_name) %> <br>
-        </div>
+      </div>
 
       <div class="fields">
-        <label for="type_of_test"> Type of test</label>
-        <%= select_tag "type_of_test", "<option>JUnit</option><option>NUnit</option><option>RSpec</option><option>Cucumber</option>".html_safe %> <br>
+        <label for="test_category"> Test Category</label>
+        <%= select_tag "test_category", "<option>Unit Test</option><option>Integration Test</option><option>Functional Test</option>".html_safe %> <br>
+      </div>
+
+      <div class="fields">
+        <label for="test_report_type"> Test Report Type</label>
+        <%= select_tag "test_report_type", "<option>JUnit</option><option>NUnit</option><option>RSpec</option><option>Cucumber</option>".html_safe %> <br>
       </div>
 
       <div class="fields" >
