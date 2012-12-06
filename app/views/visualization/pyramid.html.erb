@@ -5,30 +5,50 @@
 
 
 <body>
-    <div id="page_title">
-      <h1>Pyramid View</h1>
+<div id="page_title">
+  <h1>Pyramid View</h1>
 
-    </div>
+</div>
 
-    <div id="comparative_analysis">
-      <script type="text/javascript">
+<div id="comparative_analysis">
+  <script type="text/javascript">
 
-          var dataset = <%= raw(@pyramid.to_s) %>;
+      var pyramidData = <%= raw(@jsonData) %>;
 
+      function pointToString(point) {
+          return point.join(',');
+      }
 
-          var w = h = 500;
-          var svg = d3.select("body")
-                  .append("svg")
-                  .attr("width", w)
-                  .attr("height", h);
-          var poly = svg.selectAll("polygon")
-                  .data(dataset)
-                  .enter()
-                  .append("polygon");
-          poly.attr("points", String)
-                  .attr("fill", "red")
-                  .attr("stroke", "black");
-      </script>
-    </div>
+      function triangleToString(triangleData) {
+          var points = [triangleData.top, triangleData.left, triangleData.right];
+          return _.chain(points).map(pointToString).value().join(',');
+      }
+
+      function pyramidToString(pyramidData) {
+          return _.chain(pyramidData.triangles.reverse()).map(triangleToString).value();
+      }
+
+      var dataset = pyramidToString(pyramidData);
+
+      var colors = ['green', 'blue', 'orange', 'red'];
+
+      var w = h = 500;
+      var svg = d3.select("body")
+              .append("svg")
+              .attr("width", w)
+              .attr("height", h);
+
+      var pyramid = svg.selectAll("polygon")
+              .data(dataset)
+              .enter()
+              .append("polygon");
+
+      pyramid.attr("points", String)
+              .attr("fill", function (d, i) {
+                  return colors[i]
+              })
+
+  </script>
+</div>
 </body>
 

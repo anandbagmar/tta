@@ -1,7 +1,7 @@
 class VisualizationController < ApplicationController
 
   def pyramid
-    @pyramid = Pyramid.new(500, [1, 2, 1])
+    @jsonData = Pyramid.new(500, [1, 2, 1]).to_json
   end
 
 end

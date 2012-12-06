@@ -1,7 +1,7 @@
 class Pyramid
 
   def initialize(height, proportions)
-
+    @height = height;
     @top = Point.new(height/2, 0)
     left = Point.new(0, height)
     right = Point.new(height, height)
@@ -23,20 +23,19 @@ class Pyramid
     end
   end
 
+  def to_json
+    temp_json = triangles.map do |t|
+      t.to_json
+    end
+    triangles_to_json = '[' + temp_json.join(',') + ']'
+    "{height: #{@height}, triangles:#{triangles_to_json}}"
+  end
+
   private
 
   def triangles
-    left_points = get_points(@triangle.left_line)
-    right_points = get_points(@triangle.right_line)
-    bottom_points = left_points.zip(right_points)
-    bottom_points.map do |ps|
-      Triangle.new(*ps.unshift(@top))
-    end
-  end
-
-  def get_points(line)
     @heights_of_children.map do |y|
-      line.get_point_at(y)
+      @triangle.sub_triangle_at(y)
     end
   end
 
