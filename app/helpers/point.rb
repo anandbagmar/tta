@@ -8,4 +8,8 @@ class Point
   def to_s
     [@x, @y].join(',')
   end
+
+  def to_json
+    "[#{@x}, #{@y}]"
+  end
 end

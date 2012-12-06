@@ -1,5 +1,4 @@
 class Triangle
-  attr_reader :left_line, :right_line
 
   def initialize(top, left, right)
     @top = top
@@ -10,8 +9,16 @@ class Triangle
     @right_line = Line.new(@top, @right)
   end
 
+  def sub_triangle_at(height)
+    Triangle.new(@top, @left_line.get_point_at(height), @right_line.get_point_at(height))
+  end
+
   def to_s
     [@top, @left, @right].join(',')
+  end
+
+  def to_json
+    "{ top : #{@top.to_json}, left: #{@left.to_json}, right: #{@right.to_json}}"
   end
 
 end
