@@ -27,6 +27,10 @@
         <label for="end_date">End Date:</label>
         <%= text_field_tag (:end_date),nil, :placeholder => 'yyyy-mm-dd' %> <br>
       </div>
+      <div class="fields" >
+        <label for="project">Project:</label>
+        <%= select("project", "id", Project.all.collect {|p| [ p.name, p.id ] }, { :include_blank => true }) %><br>
+      </div>
       <div id="submit-plot-button">
       <%= submit_tag "Plot" %>
       </div>
@@ -39,7 +43,6 @@
   <h3>Graph Plotted For Date Range:</h3>
   <h3>From <%= @start_date %> to <%= @end_date %></h3>
 </div>
-    <%end  %>
 
 <div id="comparative_analysis" style="width:900px;height:600px">
   <script>
@@ -56,31 +59,31 @@
           ticks.push(data[i]); //corrected the missing closing bracket here..
       }
 
-      $.plot($("#comparative_analysis"),[
-
-          {
-              label: '<%= @project1_name %>',
-              data: <%= @result_set1 %>,
+      var getdata = function(){
+          var data = [];
+          <%for sub_project in @result_set %>
+          data.push({
+              label: '<%= sub_project[0]%>',
+              data: <%= sub_project[1]%>,
               lines: {show: true},
               points: {show: true},
-              color: "maroon"
+              color: "#"+((1<<24)*Math.random()|0).toString(16)
+          });
+          <%end %>
 
-          },
-          {
-              label: '<%= @project2_name %>',
-              data: <%= @result_set2 %>,
-              lines: {show: true},
-              points: {show: true},
-              color: "blue"
+          return data;
+      };
 
-          }],
+
+      $.plot($("#comparative_analysis"),
+             getdata(),
               /*data,*/
 
               {
                   xaxis: {
                       rotateTicks:135,
                       mode: "time",
-                      ticks: ticks,
+                       ticks: ticks,
                       timeformat: "%d-%b , %y",
                       tickLength: 5,
                       tickSize:5,
@@ -118,9 +121,10 @@
 
               }
       );
-
   </script>
 </div>
+<% end  %>
+
 </body>
 
 

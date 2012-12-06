@@ -17,13 +17,17 @@ class ComparativeAnalysisController < ApplicationController
   def date_filter
     @start_date= params[:start_date]
     @end_date= params[:end_date]
-    @result_set1 = ComparativeAnalysis.getPercentageOfPassingTests(1,@start_date,@end_date)
-    @project1_name = ComparativeAnalysis.getSubProjectName(1)
+    project=Project.find(params[:project][:id])
+    sub_projects_list = project.sub_projects
 
-    @result_set2=ComparativeAnalysis.getPercentageOfPassingTests(2,@start_date,@end_date)
-    @project2_name = ComparativeAnalysis.getSubProjectName(2)
+    @result_set = Hash.new
+    sub_projects_list.each{ |sub_project|
+      aggregate_value = ComparativeAnalysis.getPercentageOfPassingTests(sub_project.id, @start_date, @end_date)
+      sub_project_name = sub_project.name
+      @result_set[sub_project_name] = aggregate_value
+    }
 
-     render :create
+    render :create
   end
 
 end
