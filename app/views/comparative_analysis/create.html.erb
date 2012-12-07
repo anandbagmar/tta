@@ -21,11 +21,11 @@
   <%= form_tag ({:action => 'date_filter'}) do %>
       <div class="fields" >
         <label for="start_date">Start Date:</label>
-        <%= text_field_tag (:start_date),nil, :placeholder => 'yyyy-mm-dd' %> <br>
+        <%= datepicker_input 'comparative_analysis', 'start_date',:dateFormat => "yy-mm-dd" %>
       </div>
       <div class="fields" >
         <label for="end_date">End Date:</label>
-        <%= text_field_tag (:end_date),nil, :placeholder => 'yyyy-mm-dd' %> <br>
+        <%= datepicker_input 'comparative_analysis', 'end_date',:dateFormat => "yy-mm-dd" %>
       </div>
       <div class="fields" >
         <label for="project">Project:</label>

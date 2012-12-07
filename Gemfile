@@ -43,7 +43,9 @@ gem "therubyracer", :require => 'v8'
 gem 'xml-simple', :require => 'xmlsimple'
 
 gem 'paperclip'
-
+gem 'jquery-ui-rails'
+gem 'jquery-rails'
+gem 'jquery_datepicker'
 gem 'flot-rails'
 gem 'ftools'
 gem 'rubyzip'

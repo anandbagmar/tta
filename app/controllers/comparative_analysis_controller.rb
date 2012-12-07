@@ -15,8 +15,8 @@ class ComparativeAnalysisController < ApplicationController
   end
 
   def date_filter
-    @start_date= params[:start_date]
-    @end_date= params[:end_date]
+    @start_date= params[:comparative_analysis][:start_date]
+    @end_date= params[:comparative_analysis][:end_date]
     project=Project.find(params[:project][:id])
     sub_projects_list = project.sub_projects
 

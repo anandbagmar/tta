@@ -14,7 +14,7 @@ class UploadController < ApplicationController
     meta_datum = sub_project.test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type(params[:ci_job_name],
                   params[:browser],params[:type_of_environment],params[:host_name],params[:os_name],params[:test_category],params[:test_report_type])
 
-    meta_datum.date_of_execution= params[:date_of_execution]
+    meta_datum.date_of_execution= params[:test_metadatum][:date_of_execution]
 
     meta_datum.save!
 
