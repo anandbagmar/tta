@@ -1,5 +1,4 @@
 require 'xmlsimple'
-require 'zip/zipfilesystem'
 require 'ftools'
 
 
@@ -18,7 +17,7 @@ class UploadController < ApplicationController
 
     meta_datum.save!
 
-    path = Dir.glob(params[:logDirectory]+"/*.xml")
+    path = Dir.glob(params[:logDirectory]+"/**/"+params[:filePattern])
     path.each do |file|
       parse_xml(file,meta_datum.id)
     end
@@ -32,7 +31,7 @@ class UploadController < ApplicationController
     @project_meta = @sub_project.test_metadatum.find(params[:project_meta_id])
     begin
       respond_to do |format|
-        format.html #show.html.erb
+        format.html
         format.json { render json: @project }
       end
     end

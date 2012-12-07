@@ -63,12 +63,17 @@
 
       <div class="fields">
         <label for="date_of_execution"> Date Of Execution </label>
-        <%= datepicker_input 'test_metadatum','date_of_execution' ,:dateFormat => "yy-mm-dd"%><br>
+        <%=	 datepicker_input 'test_metadatum','date_of_execution' ,:dateFormat => "yy-mm-dd"%><br>
       </div>
 
       <div class="fields">
         <label for="dir_path">Directory name</label>
         <%= text_field_tag :logDirectory%>
+      </div>
+
+      <div class="fields">
+        <label for="dir_path">File Name Pattern</label>
+        <%= text_field_tag :filePattern,nil, :placeholder =>'(eg. TEST*.xml)' %> <br>
       </div>
 
        <div class="button">
