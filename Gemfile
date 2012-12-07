@@ -43,11 +43,8 @@ gem "therubyracer", :require => 'v8'
 gem 'xml-simple', :require => 'xmlsimple'
 
 gem 'paperclip'
-  gem 'jquery-ui-rails'
 
-  gem 'jquery-rails'
 gem 'flot-rails'
-gem 'jquery_datepicker'
 gem 'ftools'
 gem 'rubyzip'
 gem 'globalize3', '~> 0.2.0'

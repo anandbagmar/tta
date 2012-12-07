@@ -63,9 +63,7 @@
 
       <div class="fields">
         <label for="date_of_execution"> Date Of Execution </label>
-        <%=	 datepicker_input 'test_metadatum','date_of_execution' ,:dateFormat => "yy-mm-dd"%><br>
-
-
+        <%= text_field_tag (:date_of_execution),nil, :placeholder => 'yyyy-mm-dd' %>  <br>
       </div>
 
       <div class="fields">
@@ -82,4 +80,3 @@
 </div>
 
 </body>
-
