@@ -17,20 +17,9 @@ class UploadController < ApplicationController
 
     meta_datum.save!
 
-    tmp = params[:myFile].tempfile
-    file = File.join("public", params[:myFile].original_filename)
-    FileUtils.cp tmp.path, file
-    Zip::ZipFile.open(file) do |zipfile|
-        zipfile.each do |entry|
-        p tempp=entry.to_s
-        contents = zipfile.read(entry)
-        contents_string= contents.to_s
-        if tempp =~ /\.xml$/
-          if contents_string.start_with? ("<?xml")
-            parse_xml(contents, meta_datum.id)
-          end
-        end
-      end
+    path = Dir.glob(params[:logDirectory]+"/*.xml")
+    path.each do |file|
+      parse_xml(file,meta_datum.id)
     end
 
     redirect_to :action => :show, :project_id => project.id, :sub_project_id => sub_project.id, :project_meta_id => meta_datum.id

@@ -69,18 +69,14 @@
       </div>
 
       <div class="fields">
-      <label for="dir_path">Select File (zip only)</label>
-      <%= file_field_tag :myFile ,{:multiple =>true} %>
+        <label for="dir_path">Directory name</label>
+        <%= text_field_tag :logDirectory%>
       </div>
 
        <div class="button">
          <%= submit_tag 'SUBMIT' %>
          <%= submit_tag("Clear All", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
        </div>
-
-     <!-- <div class="button">
-        <%= submit_tag("Clear All", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
-      </div>-->
 
 <% end %>
 </div>
