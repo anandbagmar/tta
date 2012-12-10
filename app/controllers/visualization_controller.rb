@@ -25,20 +25,38 @@ class VisualizationController < ApplicationController
       @no_of_unit_test = result_set2[0][0]
       @no_of_Integration_test = result_set3[0][0]
       @no_of_functional_test = result_set1[0][0]
-      @jsonData = Pyramid.new(500, [[:unit,@no_of_unit_test],[:integration , @no_of_Integration_test],[:functional, @no_of_functional_test]]).to_json
+      @jsonData = Pyramid.new(500, [[:unit ,@no_of_unit_test],[:integration , @no_of_Integration_test],[:functional, @no_of_functional_test]]).to_json
+
       @sub_project_name = SubProject.find(sub_project_id).name
       calculate_percentage_of_tests
-      p @percent_unit_test
+      @duration_functional=calculate_duration_in_hours(result_set1)
+      @duration_unit=calculate_duration_in_hours(result_set2)
+      @duration_integration=calculate_duration_in_hours(result_set3)
+      #calculate_label_positions
       render :pyramid
 
 
   end
 
+  def calculate_duration_in_hours(result_set)
+    time = "%0.4f" % (result_set[0][1].to_f/60000)
+    return time
+  end
+
   def calculate_percentage_of_tests
     @total = @no_of_unit_test.to_f + @no_of_functional_test.to_f + @no_of_Integration_test.to_f
     @percent_unit_test = "%0.2f" % ((@no_of_unit_test/@total) *100)
-    @percent_functional_test = "%0.2f" % ((@no_of_functional_test/@total) *100).to_i
-    @percent_integration_test = "%0.2f" % ((@no_of_Integration_test/@total) *100).to_i
+    @percent_functional_test = "%0.2f" % ((@no_of_functional_test/@total) *100)
+    @percent_integration_test = "%0.2f" % ((@no_of_Integration_test/@total) *100)
 
   end
+  def calculate_label_positions
+    @unit_position= ((500/@total)* @no_of_unit_test.to_f)
+    @functional_position=  ((500/@total)* @no_of_funtionl_test.to_f)
+    @integration_position=  ((500/@total)* @no_of_Integration_test.to_f)
+  end
+ 
+
+
+
 end

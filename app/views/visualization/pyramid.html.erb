@@ -29,9 +29,7 @@
  <%	 if @jsonData %>
 <div id="graph_title">
   <h4>Test Pyramid for Project: <%= @sub_project_name %></h4><br><br>
-  <%= @percent_unit_test %>
-  <%= @percent_functional_test %>
-  <%= @percent_integration_test %>
+
 
 </div>
 <div id="comparative_analysis">
@@ -65,7 +63,7 @@
  
       var colors = ['green', 'blue', 'yellow'];
       var testTypes = pyramidToLabels(pyramidData);
-      var labelsPosition = [450, 300, 100];
+      var labelsPosition = [450,300,100];
 
       var w = h = pyramidData.height;
       var svg = d3.select("body")
@@ -91,9 +89,24 @@
 
       labels.attr('x', 210).attr('y', function(d, i){
           return labelsPosition[i];
+
+
       });
   </script>
 </div>
+
+    <div id="percent_label">
+      <p style="position: absolute; left:330px ; top:900px"> <%= @percent_unit_test %>%</p>
+      <p style="position: absolute; left:400px ; top:730px"> <%= @percent_integration_test %>%</p>
+      <p style="position: absolute; left:520px ; top:515px"> <%= @percent_functional_test %>%</p>
+    </div>
+    <div id="durationLabel">
+      <p style="position: absolute; left:900px ; top:900px"> <%= @duration_unit %>Mins</p>
+      <p style="position: absolute; left:800px ; top:730px"> <%= @duration_integration %>Mins</p>
+      <p style="position: absolute; left:700px ; top:515px"> <%= @duration_functional %>Mins</p>
+
+    </div>
  <%	 end %>
+
 </body>
 
