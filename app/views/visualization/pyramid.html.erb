@@ -10,6 +10,30 @@
 
 </div>
 
+<div id="sub_project_picker">
+  <h2>Select Project to get Test-Pyramid</h2>
+  <%= form_tag ({:action => 'sub_project_filter'}) do %>
+      <div class="fields" >
+        <label for="sub_project">Project:</label>
+        <%= select("sub_project", "id", SubProject.all.collect {|p| [ p.name, p.id ] } ,{:include_blank => true}) %>
+        <br>
+      </div>
+      <div id="submit-project-button">
+        <%= submit_tag "Plot" %>
+      </div>
+  <% end %>
+
+</div>
+
+
+ <%	 if @jsonData %>
+<div id="graph_title">
+  <h4>Test Pyramid for Project: <%= @sub_project_name %></h4><br><br>
+  <%= @percent_unit_test %>
+  <%= @percent_functional_test %>
+  <%= @percent_integration_test %>
+
+</div>
 <div id="comparative_analysis">
   <script type="text/javascript">
 
@@ -38,7 +62,8 @@
 
       var dataset = pyramidToString(pyramidData);
 
-      var colors = ['green', 'blue', 'orange'];
+ 
+      var colors = ['green', 'blue', 'yellow'];
       var testTypes = pyramidToLabels(pyramidData);
       var labelsPosition = [450, 300, 100];
 
@@ -69,5 +94,6 @@
       });
   </script>
 </div>
+ <%	 end %>
 </body>
 
