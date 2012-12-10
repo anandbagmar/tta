@@ -1,6 +1,14 @@
 class Pyramid
 
-  def initialize(height, proportions)
+  def initialize(height, test_coverage)
+    proportions = test_coverage.map do |tc|
+      tc[1]
+    end
+
+    @test_types = test_coverage.map do |tc|
+      tc[0]
+    end
+
     @height = height;
     @top = Point.new(height/2, 0)
     left = Point.new(0, height)
@@ -24,8 +32,8 @@ class Pyramid
   end
 
   def to_json
-    temp_json = triangles.map do |t|
-      t.to_json
+    temp_json = triangles.zip(@test_types).map do |triangle, test_type|
+     triangle.to_json(test_type)
     end
     triangles_to_json = '[' + temp_json.join(',') + ']'
     "{height: #{@height}, triangles:#{triangles_to_json}}"

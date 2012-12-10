@@ -24,17 +24,25 @@
           return _.chain(points).map(pointToString).value().join(',');
       }
 
+      function triangleToLabel(triangleData) {
+          return triangleData.testType;
+      }
+
       function pyramidToString(pyramidData) {
           return _.chain(pyramidData.triangles.reverse()).map(triangleToString).value();
+      }
+
+      function pyramidToLabels(pyramidData) {
+          return _.chain(pyramidData.triangles.reverse()).map(triangleToLabel).value();
       }
 
       var dataset = pyramidToString(pyramidData);
 
       var colors = ['green', 'blue', 'orange'];
-      var testTypes = ['Unit', 'Integration', 'Functional'];
+      var testTypes = pyramidToLabels(pyramidData);
       var labelsPosition = [450, 300, 100];
 
-      var w = h = 500;
+      var w = h = pyramidData.height;
       var svg = d3.select("body")
               .append("svg")
               .attr("width", w)

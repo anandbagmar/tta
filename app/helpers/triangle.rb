@@ -17,8 +17,8 @@ class Triangle
     [@top, @left, @right].join(',')
   end
 
-  def to_json
-    "{ top : #{@top.to_json}, left: #{@left.to_json}, right: #{@right.to_json}}"
+  def to_json(test_type)
+    "{ testType: '#{test_type}', top : #{@top.to_json}, left: #{@left.to_json}, right: #{@right.to_json}}"
   end
 
 end
