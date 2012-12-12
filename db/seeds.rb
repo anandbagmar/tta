@@ -9,6 +9,8 @@
 ## Delete data from all tables
 Project.destroy_all
 Project.reset_primary_key
+SubProject.destroy_all
+SubProject.reset_primary_key
 TestMetadatum.destroy_all
 TestMetadatum.reset_primary_key
 TestRecord.destroy_all
@@ -16,64 +18,49 @@ TestRecord.reset_primary_key
 
 
 ##Create seed data
-1.upto(2) do |i|
+browser_arr= %w( chrome firefox IE opera safari seamonkey k-meleon conqueror maxthon galleon avant netscape iCab camino flock )
+
+os_arr= ["Mac","Unix","Ubuntu","BeOS","IRIX","NeXTSTEP","MS-DOS","iOS", "Windows7", "kondara linux", "OSF","QNX","SCO", "sunSolaris","SuSELinux"]
+
+hostname_arr= %w(garima pooja ashwin nikita nikitha tushar matty lava priti sailee sanchari shilpa pranjali akshay aasawaree)
+
+ci_arr= %w(smoke master regression runtest testomania enternet titanic kanha kaziranga stress opensaysme gir test4treasure quovadis nihao)
+env_arr = %w(dev qa production uat)
+test_cat_arr = [ "Unit test", "Integration test", "Functional test "]
+test_rep_arr = %w(Junit Nunit Rspec Cucumber)
+count = 0
+
+
+1.upto(10) do |i|
   project = Project.create(:name => "PROJECT #{i}",
-                           :type_of_test => "Junit",
                            :authorization_level => "ALL")
   project.save
-end
 
-  os_arr_data = ["Mac Os", "Windows 7", "Cent OS", "Ubuntu", "Vista"]
-  host_name_arr_data = ["Ritu ", "Khushal", "Khushboo", "Pooja", "Anand"]
-  browser_arr_data = ["Firefox ", "chrome", "IE", "Safari", "Google Chrome" ]
-  os_arr_data.each do |os_arr_data , host_name_arr_data , browser_arr_data |
-  project_metadata = TestMetadatum.create(:os_name => os_arr_data,
-                                             :host_name => host_name_arr_data,
-                                             :browser => browser_arr_data ,
-                                             :date_of_execution => Time.at(rand * Time.now.to_i) ,
-                                             :user_timezone => Time.zone)
-  project_metadata.project = Project.first
-  project_metadata.save
-end
+  1.upto(10) do |j|
+    sub_project= SubProject.create(:name => "Sub_project #{i}.#{j}")
+    sub_project.project_id= i
+    sub_project.save
 
-os_arr_data.each do |os_arr_data , host_name_arr_data , browser_arr_data |
-  project_metadata = TestMetadatum.create(:os_name => os_arr_data,
-                                             :host_name => host_name_arr_data,
-                                             :browser => browser_arr_data ,
-                                             :date_of_execution => Time.at(rand * Time.now.to_i) ,
-                                             :user_timezone => Time.zone)
-  project_metadata.project = Project.find_by_name("PROJECT 2")
-  project_metadata.save
+    1.upto(10) do  |k|
+      if count >= 3
+        count=0
+      end
+      meta_data = TestMetadatum.create(:id => k ,:ci_job_name => ci_arr[rand(ci_arr.length)] ,:os_name => os_arr[rand(os_arr.length)] , :host_name => hostname_arr[rand(hostname_arr.length)],:browser => browser_arr[rand(browser_arr.length)], :type_of_environment => env_arr[rand(env_arr.length)], :date_of_execution => Time.at(rand * Time.now.to_i) , :test_category => test_cat_arr[count], :test_report_type => test_rep_arr[rand(test_rep_arr.length)]  )
+      meta_data.sub_project_id= (i*10)-10+j
+      count = count + 1
+      meta_data.save
 
-end
+      1.upto(10) do |l|
 
-@test_arr_data =[10 , 30 , 40 , 50 , 60, 70, 90]
-@failure_arr_data =[10 , 20 , 15, 2 ,44, 35,90]
-
-@test_arr_data.zip @failure_arr_data
-@test_arr_data.zip(@failure_arr_data) do |test_arr_data, failure_arr_data|
-  test_record = TestRecord.create(:class_name => "services.gateways.BenefitsServiceGatewayTest" ,
-                                  :number_of_tests=> test_arr_data ,
-                                  :number_of_failures => failure_arr_data,
-                                  :number_of_errors => "10" ,
-                                  :time_taken => "10")
-  test_record.test_metadatum = TestMetadatum.first
-  test_record.save
-
-end
+        test_record = TestRecord.create(:class_name => "Class #{i}.#{j}.#{k}.#{l}",:number_of_tests => rand(25..50),:number_of_errors =>rand(12) , :number_of_failures => rand(12),:time_taken => rand(1..5).to_s)
+        test_record.test_metadatum_id= (i*100)-100+(j*10)-10+k
+        test_record.save
 
 
-@test_arr_data2 =[30 , 50 , 60 , 70 , 90, 100, 110]
-@failure_arr_data2 =[30 , 40 , 35, 22 ,64, 85,110]
 
-@test_arr_data2.zip @failure_arr_data2
-@test_arr_data2.zip(@failure_arr_data2) do |test_arr_data2, failure_arr_data2|
-  test_record = TestRecord.create(:class_name => "services.gateways.BenefitsServiceGatewayTest" ,
-                                  :number_of_tests=> test_arr_data2 ,
-                                  :number_of_failures => failure_arr_data2,
-                                  :number_of_errors => "10" ,
-                                  :time_taken => "10")
-  test_record.test_metadatum = TestMetadatum.find(3)
-  test_record.save
+      end
+
+    end
+  end
 
 end
