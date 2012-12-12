@@ -26,86 +26,83 @@
 </div>
 
 
- <%	 if @jsonData %>
-<div id="graph_title">
-  <h4>Test Pyramid for Project: <%= @sub_project_name %></h4><br><br>
+<% if @sub_project_name %>
+    <div id="graph">
+      <h4>Test Pyramid for Project: <%= @sub_project_name %></h4><br><br>
+      <div id="legend">
+        <div id="unit">
+          <div id="unit_rect">
+          </div>
+          <p>Unit Tests</p>
+        </div>
+        <div id="integration">
+          <div id="integration_rect">
+          </div>
+          <p>Integration Tests</p>
+        </div>
+        <div id="functional">
+          <div id="functional_rect">
+          </div>
+          <p>Functional Tests</p>
+        </div>
+      </div>
+
+      <div id="unit_region">
+        <p id="unit_percent"> <%= @percent_unit_test %>%</p>
+        <p id="unit_duration"> <%= @duration_unit %>Mins</p>
+        <div id="unit_test">
+            <div id="integration_region">
+              <p id="integration_percent"> <%= @percent_integration_test %>%</p>
+              <p id="integration_duration"> <%= @duration_integration %>Mins</p>
+              <div id="integration_test">
+                 <div id="functional_region">
+                   <p id="functional_percent"> <%= @percent_functional_test %>%</p>
+                   <p id="functional_duration"> <%= @duration_functional %>Mins</p>
+                    <div id="functional_test">
+
+                    </div>
+                 </div>
+              </div>
+            </div>
+        </div>
+      </div>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var bodyHeight = $('body').css('height'),
+                    bodyWidth = $('body').css('width'),
+                    unitTriangleHeight = parseInt(bodyHeight)*parseInt("<%= "%0.0f" % @percent_unit_test %>")/100,
+                    integrationTriangleHeight = parseInt(unitTriangleHeight)*(parseInt("<%= "%0.0f" % @percent_integration_test %>")+parseInt("<%= "%0.0f" % @percent_functional_test %>"))/100,
+                    functionalTriangleHeight = parseInt(unitTriangleHeight)*parseInt("<%= "%0.0f" % @percent_functional_test %>")/100;
+
+            $("#unit_test").css({
+                "border-bottom-width": unitTriangleHeight+"px",
+                "border-left-width":unitTriangleHeight+"px",
+                "border-right-width":unitTriangleHeight+"px"
+            });
+            $("#integration_test").css({
+                "border-bottom-width": integrationTriangleHeight+"px",
+                "border-left-width":integrationTriangleHeight+"px",
+                "border-right-width":integrationTriangleHeight+"px",
+                "margin-left": -1*integrationTriangleHeight+"px"
+
+            });
+            $("#functional_test").css({
+                "border-bottom-width": functionalTriangleHeight+"px",
+                "border-left-width":functionalTriangleHeight+"px",
+                "border-right-width":functionalTriangleHeight+"px",
+                "margin-left": -1 *functionalTriangleHeight+"px"
+            });
+            $("#unit_region").css({
+                "width":unitTriangleHeight*2+"px"
+            } );
+
+        });
 
 
-</div>
-<div id="comparative_analysis">
-  <script type="text/javascript">
+    </script>
 
-      var pyramidData = <%= raw(@jsonData) %>;
-
-      function pointToString(point) {
-          return point.join(',');
-      }
-
-      function triangleToString(triangleData) {
-          var points = [triangleData.top, triangleData.left, triangleData.right];
-          return _.chain(points).map(pointToString).value().join(',');
-      }
-
-      function triangleToLabel(triangleData) {
-          return triangleData.testType;
-      }
-
-      function pyramidToString(pyramidData) {
-          return _.chain(pyramidData.triangles.reverse()).map(triangleToString).value();
-      }
-
-      function pyramidToLabels(pyramidData) {
-          return _.chain(pyramidData.triangles.reverse()).map(triangleToLabel).value();
-      }
-
-      var dataset = pyramidToString(pyramidData);
-
- 
-      var colors = ['green', 'blue', 'yellow'];
-      var testTypes = pyramidToLabels(pyramidData);
-      var labelsPosition = [450,300,100];
-
-      var w = h = pyramidData.height;
-      var svg = d3.select("body")
-              .append("svg")
-              .attr("width", w)
-              .attr("height", h);
-
-      var pyramid = svg.selectAll("polygon")
-              .data(dataset)
-              .enter()
-              .append("polygon");
-
-      pyramid.attr("points", String)
-              .attr("fill", function (d, i) {
-                  return colors[i]
-              });
-
-      var labels = svg.selectAll("text")
-              .data(testTypes)
-              .enter()
-              .append("text")
-              .text(String);
-
-      labels.attr('x', 210).attr('y', function(d, i){
-          return labelsPosition[i];
-
-
-      });
-  </script>
-</div>
-
-    <div id="percent_label">
-      <p style="position: absolute; left:330px ; top:900px"> <%= @percent_unit_test %>%</p>
-      <p style="position: absolute; left:400px ; top:730px"> <%= @percent_integration_test %>%</p>
-      <p style="position: absolute; left:520px ; top:515px"> <%= @percent_functional_test %>%</p>
-    </div>
-    <div id="durationLabel">
-      <p style="position: absolute; left:900px ; top:900px"> <%= @duration_unit %>Mins</p>
-      <p style="position: absolute; left:800px ; top:730px"> <%= @duration_integration %>Mins</p>
-      <p style="position: absolute; left:700px ; top:515px"> <%= @duration_functional %>Mins</p>
-
-    </div>
+  </div>
  <%	 end %>
 
 </body>

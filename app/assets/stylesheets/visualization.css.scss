@@ -1,3 +1,133 @@
 // Place all the styles related to the visualization controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+body,html{
+  height: 100%;
+  background-image:url('texture1.jpg');
+}
+
+#sub_project_picker{
+  background-color: #CCC;
+  padding: 10px;
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+#graph{
+  position:relative;
+  margin: 45px 0px;
+
+}
+
+#unit_test{
+
+  border-style:solid;
+  border-color:transparent transparent #48D482;
+  height: 0px;
+  width: 0px;
+  border-bottom-width: 200px;
+  border-left-width: 100px;
+  border-right-width: 100px;
+  border-top-width: 0;
+  margin: 0 auto;
+}
+
+#integration_test{
+  height: 0px;
+  width: 0px;
+  border-style: solid;
+  border-color: transparent transparent #C2A9F5;
+  border-bottom-width: 100px;
+  border-left-width: 50px;
+  border-right-width: 50px;
+  border-top-width: 0;
+  margin-left: -50px;
+}
+
+#functional_test{
+  height: 0px;
+  width: 0px;
+  border-style: solid;
+  border-color: transparent transparent #F5D96C;
+  border-bottom-width: 50px;
+  border-left-width: 25px;
+  border-right-width: 25px;
+  border-top-width: 0;
+  margin-left: -25px;
+}
+
+#unit_region{
+  position: relative;
+  padding: 20px 0px;
+  width: 26%;
+  margin: 0 auto;
+}
+
+#unit_percent,#unit_duration,#integration_percent,
+#integration_duration,#functional_percent,#functional_duration{
+ position:absolute;
+}
+#unit_percent{
+  bottom:15%;
+  left:-20px;
+}
+#unit_duration{
+  right: -42px;
+  bottom: 15%;
+}
+
+#integration_percent{
+  bottom: 43%;
+  left: 8%;
+}
+
+#integration_duration{
+  bottom: 43%;
+  right: 5%;
+
+}
+
+#functional_percent{
+  top:10%;
+  left: 25%;
+}
+
+#functional_duration{
+  top:10%;
+  right: 21%;
+}
+#legend{
+  text-align:right;
+  widht:40%;
+margin-left: 60%;
+}
+#unit,#functional,#integration{
+  display:block;
+  text-align: left;
+  height:10%;
+  width:30%;
+  padding-left:20%
+}
+#unit p,#functional p,#integration p{
+  display:inline;
+}
+
+#unit_rect{
+  display: inline-block;
+  width: 10%;
+  height:20px;
+  background-color: #48D482;
+}
+#integration_rect{
+  display: inline-block;
+  width: 10%;
+  height:20px;
+  background-color: #C2A9F5;
+}
+#functional_rect{
+  display: inline-block;
+  width: 10%;
+  height:20px;
+  background-color: #F5D96C;
+}

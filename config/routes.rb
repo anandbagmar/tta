@@ -14,6 +14,8 @@ Tta::Application.routes.draw do
 
   get "home/index"
 
+  get "visualization/test_pyramid"
+
 
   resources :projects,:junit_xml_data,:j_unit_xmls,:unit_test_xml
   match '/comparative_analysis/create' => 'comparative_analysis#create'
