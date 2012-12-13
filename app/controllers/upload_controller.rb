@@ -6,7 +6,6 @@ class UploadController < ApplicationController
 
 
   def create
-
     project = Project.find_or_create_by_name(params[:project_name])
     sub_project = project.sub_projects.find_or_create_by_name(params[:sub_project_name])
 

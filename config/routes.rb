@@ -1,31 +1,28 @@
 Tta::Application.routes.draw do
-
-  get "visualization/pyramid"
+  get "home/index"
 
   get "upload/upload"
 
   get "upload_controller/upload"
 
-  get "unit_test_xml/index"
+  get "visualization/pyramid"
 
-  get "unit_test_xml/new"
+  #get "unit_test_xml/index"
 
-  get "unit_test_xml/show"
+  #get "unit_test_xml/new"
 
-  get "home/index"
+  #get "unit_test_xml/show"
 
-  get "visualization/test_pyramid"
+  get '/comparative_analysis/create'
 
+  get '/upload/create'
+
+  get '/upload/show'
 
   resources :projects,:junit_xml_data,:j_unit_xmls,:unit_test_xml
-  match '/comparative_analysis/create' => 'comparative_analysis#create'
-  match '/upload/upload'=>'upload#create'
-  match '/upload/create'=>'upload#create'
-  match'/upload/show'=> 'upload#show'
-  match'/upload/'=> 'upload#show'
-  match '/comparative_analysis/date_filter' => 'comparative_analysis#date_filter'
-  match '/visualization/sub_project_filter' => 'visualization#sub_project_filter'
-
+  post '/comparative_analysis/date_filter'
+  post '/visualization/sub_project_filter'
+  match "*path" => 'error#handle404'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -82,4 +79,6 @@ Tta::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
+
 end
