@@ -12,9 +12,9 @@ task :default => :unit_test
 $project_name='TTA'
 $sub_project_name='TTA'
 $test_report_type= 'JUnit'
-$os_name=`curl uname -s`
-$host_name=`curl whoami`
-$date_of_execution=`curl date +%Y-%m-%d`
+$os_name='Linux'
+$host_name='Go-Server'
+$date_of_execution='2012-12-14'
 $commit= "SUBMIT"
 
 task :db_setup do
