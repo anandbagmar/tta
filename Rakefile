@@ -8,15 +8,6 @@ Tta::Application.load_tasks
 
 task :default => :unit_test
 
-
-$project_name='TTA'
-$sub_project_name='TTA'
-$test_report_type= 'JUnit'
-$os_name='Linux'
-$host_name='Go-Server'
-$date_of_execution='2012-12-14'
-$commit= "SUBMIT"
-
 task :db_setup do
   Rake::Task['db:drop'].execute
   Rake::Task['db:create'].execute
@@ -31,7 +22,15 @@ task :unit_test do
 end
 
 task :upload_to_tta ,[:ci_job_name, :test_category, :browser, :type_of_environment, :logDirectory, :filePattern]  do |t,args|
-    args.with_defaults(:ci_job_name => "xyz", :test_category => "xyz", :browser => "xyz", :type_of_environment => "xyz", :logDirectory => "asdw" , :filePattern => "*.xml")
+
+  $project_name='TTA'
+  $sub_project_name='TTA'
+  $test_report_type= 'JUnit'
+  $os_name='Linux'
+  $host_name='Go-Server'
+  $date_of_execution='2012-12-14'
+  $commit= "SUBMIT"
+  args.with_defaults(:ci_job_name => "xyz", :test_category => "xyz", :browser => "xyz", :type_of_environment => "xyz", :logDirectory => "asdw" , :filePattern => "*.xml")
 
     `curl --request GET '10.12.6.92:3000/upload/create?utf8=%E2%9C%93&project_name=#{$project_name}&sub_project_name=#{$sub_project_name}&ci_job_name=#{args.ci_job_name}&test_category=#{args.test_category}&test_report_type=#{$test_report_type}&os_name=#{$os_name}&host_name=#{$host_name}&browser=#{args.browser}&type_of_environment=#{args.type_of_environment}&test_metadatum%5Bdate_of_execution%5D=#{$date_of_execution}&logDirectory=#{args.logDirectory}&filePattern=#{args.filePattern}&commit=#{$commit}'`
 
