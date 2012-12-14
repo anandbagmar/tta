@@ -22,7 +22,7 @@ Tta::Application.routes.draw do
   resources :projects,:junit_xml_data,:j_unit_xmls,:unit_test_xml
   post '/comparative_analysis/date_filter'
   post '/visualization/sub_project_filter'
-  match "*path" => 'error#handle404'
+  match '*path' => 'error#handle404'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

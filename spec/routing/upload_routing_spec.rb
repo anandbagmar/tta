@@ -4,7 +4,7 @@ require "spec_helper"
 describe UploadController do
   describe "routing" do
     it " routes to upload/upload" do
-      assert_generates '/upload/upload', :controller => 'upload', :action => 'create'
+      assert_generates '/upload/create', :controller => 'upload', :action => 'create'
     end
 
     it " routes to upload/show" do
