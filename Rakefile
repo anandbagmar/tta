@@ -32,8 +32,8 @@ $file_pattern=""
 $commit=""
 
 task :db_setup do
- # Rake::Task['db:drop'].execute
-  #Rake::Task['db:create'].execute
+  Rake::Task['db:drop'].execute
+  Rake::Task['db:create'].execute
   Rake::Task['db:migrate'].execute
   Rails.env="test"
   Rake::Task['db:drop'].execute
@@ -46,7 +46,7 @@ task :unit_test do
 
   Rake::Task['db_setup'].execute
   Rake::Task['spec'].execute
-  Rake::Task['upload_to_tta'].invoke("TTA_Project_last1","TTA_subproject","Build","UnitTest","JUnit","Ubuntu","Pooja-pc","Chrome","Prod","2012-12-15","/Users/pooja/Documents/tta/logs/proj4","*.xml")
+  Rake::Task['upload_to_tta'].invoke("TTA_Project_try1","TTA_subproject","Build1","UnitTest","JUnit","Ubuntu","Pooja-pc","Chrome","Prod","","/Users/pooja/Documents/tta/logs/proj4","*.xml")
 
 end
 
@@ -57,11 +57,11 @@ task :upload_to_tta ,[:project_name, :sub_project_name, :ci_job_name, :test_cate
   $ci_job_name = args.ci_job_name
   $test_category=args.test_category
   $test_report_type=args.test_report_type
-  $os_name=args.os_name
-  $host_name=args.host_name
+  $os_name=RUBY_PLATFORM
+  $host_name=`hostname`.strip
   $browser=args.browser
   $type_of_environment=args.type_of_environment
-  $date_of_execution=args.date_of_execution
+  $date_of_execution=(Date.today << 1).to_s
   $log_directory=args.logDirectory
   $file_pattern=args.filePattern
   $commit=args.commit
