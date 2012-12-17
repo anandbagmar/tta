@@ -44,7 +44,7 @@ end
 
 task :unit_test do
 
-  #Rake::Task['db_setup'].execute
+  Rake::Task['db_setup'].execute
   Rake::Task['spec'].execute
   Rake::Task['upload_to_tta'].invoke("TTA_ON_GO","TTA_subproject","Build1","UnitTest","JUnit","Ubuntu","Pooja-pc","Chrome","Prod","","/Users/pooja/Documents/tta/logs/proj4","*.xml")
 
