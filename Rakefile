@@ -44,9 +44,9 @@ end
 
 task :unit_test do
 
-  Rake::Task['db_setup'].execute
+  #Rake::Task['db_setup'].execute
   Rake::Task['spec'].execute
-  Rake::Task['upload_to_tta'].invoke("TTA_Project_try1","TTA_subproject","Build1","UnitTest","JUnit","Ubuntu","Pooja-pc","Chrome","Prod","","/Users/pooja/Documents/tta/logs/proj4","*.xml")
+  Rake::Task['upload_to_tta'].invoke("TTA_ON_GO","TTA_subproject","Build1","UnitTest","JUnit","Ubuntu","Pooja-pc","Chrome","Prod","","/Users/pooja/Documents/tta/logs/proj4","*.xml")
 
 end
 
@@ -54,7 +54,7 @@ task :upload_to_tta ,[:project_name, :sub_project_name, :ci_job_name, :test_cate
   args.with_defaults(:project_name => "xyz112", :sub_project_name =>   "xyz", :ci_job_name => "xyz", :test_category => "xyz", :test_report_type => "xyz", :os_name => "xyz", :host_name => "xyz", :browser => "xyz", :type_of_environment => "xyz", :date_of_execution => "1900-12-12" , :logDirectory => "asdw" , :filePattern => "*.xml", :commit => "SUBMIT")
   $project_name = args.project_name
   $sub_project_name = args.sub_project_name
-  $ci_job_name = args.ci_job_name
+  $ci_job_name = ENV['GO_JOB_NAME']
   $test_category=args.test_category
   $test_report_type=args.test_report_type
   $os_name=RUBY_PLATFORM
