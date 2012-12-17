@@ -1,6 +1,6 @@
 require 'xmlsimple'
 require 'ftools'
-
+require 'net/scp'
 
 class UploadController < ApplicationController
 
@@ -17,8 +17,14 @@ class UploadController < ApplicationController
     meta_datum.save!
 
     path = Dir.glob(params[:logDirectory]+"/**/"+params[:filePattern])
-    path.each do |file|
-      parse_xml(file,meta_datum.id)
+
+    #All files are copied in the same folder "tta"
+    #For adding files to a new folder , create the folder and change the path here
+    Net::SCP::start("10.12.6.142","tta", :password => "ttas") do |scp|
+      path.each do |files|
+        scp.upload!(files, "/home/tta/tta/")
+        parse_xml(files,meta_datum.id)
+      end
     end
 
     redirect_to :action => :show, :project_id => project.id, :sub_project_id => sub_project.id, :project_meta_id => meta_datum.id
