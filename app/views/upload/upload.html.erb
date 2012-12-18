@@ -16,19 +16,28 @@
 <div class="form" >
 <%= form_tag({:action => 'create'},{ :method => 'get'})  do %>
 
+
        <div class="fields" style="padding-top:20px ;">
         <label for="name"> Project Name </label>
-        <%= text_field_tag (:project_name) %> <br>
+        <%= text_field_tag (:project_name) %>
+         <% if flash[:project_error] %>
+         <p class="error"><%= flash[:project_error][:name] %></p>
+         <% end %>
+         <br>
        </div>
 
       <div class="fields" >
         <label for="sub_project_name">Sub-Project name</label>
-        <%= text_field_tag (:sub_project_name) %> <br>
+        <%= text_field_tag (:sub_project_name) %>
+        <% if flash[:sub_project_error] %>
+        <p class="error"><%= flash[:sub_project_error][:name] %></p>
+        <% end %>
+        <br>
       </div>
 
       <div class="fields">
         <label for="ci_job_name"> CI Job Name</label>
-        <%= text_field_tag ( :ci_job_name) %> <br>
+        <%= text_field_tag ( :ci_job_name) %><br>
       </div>
 
       <div class="fields">
@@ -43,27 +52,47 @@
 
       <div class="fields" >
         <label for="os_name"> OS Tested On</label>
-        <%= text_field_tag ( :os_name) %> <br>
+        <%= text_field_tag ( :os_name) %>
+        <% if flash[:meta_data_error] %>
+      <p class="error"><%= flash[:meta_data_error][:os_name] %></p>
+            <% end %>
+            <br>
       </div>
 
       <div class="fields">
          <label for="host_name">Host-Machine Name </label>
-         <%= text_field_tag (:host_name) %><br>
+         <%= text_field_tag (:host_name) %>
+        <% if flash[:meta_data_error] %>
+      <p class="error"><%= flash[:meta_data_error][:host_name] %></p>
+        <% end %>
+        <br>
       </div>
 
       <div class="fields">
         <label for="browser"> Browser Tested On</label>
-        <%= text_field_tag (:browser) %>      <br>
+        <%= text_field_tag (:browser) %>
+        <% if flash[:meta_data_error] %>
+      <p class="error"><%= flash[:meta_data_error][:browser] %></p>
+        <% end %>
+        <br>
       </div>
 
       <div class="fields">
         <label for="type_of_environment"> Environment Run on</label>
-        <%= text_field_tag (:type_of_environment) %>      <br>
+        <%= text_field_tag (:type_of_environment) %>
+        <% if flash[:meta_data_error] %>
+      <p class="error"><%= flash[:meta_data_error][:type_of_environment] %></p>
+        <% end %>
+        <br>
       </div>
 
       <div class="fields">
         <label for="date_of_execution"> Date Of Execution </label>
-        <%=	 datepicker_input 'test_metadatum','date_of_execution' ,:dateFormat => "yy-mm-dd"%><br>
+        <%=	 datepicker_input 'test_metadatum','date_of_execution' ,:dateFormat => "yy-mm-dd"%>
+        <% if flash[:meta_data_error] %>
+      <p class="error"><%= flash[:meta_data_error][:date_of_execution] %></p>
+        <% end %>
+        <br>
       </div>
 
       <div class="fields">

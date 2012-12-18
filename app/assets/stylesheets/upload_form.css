@@ -1,3 +1,4 @@
+
 #menu-bar{
     background-color:#29B;;
 }
@@ -86,4 +87,8 @@ button{
 #comparative_analysis{
     margin: 0 auto;
 
+}
+.error{
+    color: red;
+    font-size:10px;
 }

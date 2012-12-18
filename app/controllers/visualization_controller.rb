@@ -5,25 +5,15 @@ class VisualizationController < ApplicationController
 
   def sub_project_filter
       sub_project_id=params[:sub_project][:id]
-      p "start time:"
-      p Time.now
       result_set1 = Visualization.getNoOfTests(sub_project_id,"Functional Test")
-      p result_set1
-      p Time.now
       result_set2 = Visualization.getNoOfTests(sub_project_id,"Unit Test")
-      p result_set2
-      p Time.now
       result_set3 = Visualization.getNoOfTests(sub_project_id,"Integration Test")
-      p result_set3
-      p Time.now
-      p ("*")*100
-      p "end time:"
-      p Time.now
       @no_of_unit_test = calculate_number_of_test(result_set2)
       @no_of_functional_test = calculate_number_of_test(result_set1)
       @no_of_Integration_test = calculate_number_of_test(result_set3)
 
       @sub_project_name = SubProject.find(sub_project_id).name
+
       calculate_percentage_of_tests
       @duration_functional=calculate_duration_in_hours(result_set1)
       @duration_unit=calculate_duration_in_hours(result_set2)
