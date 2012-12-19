@@ -15,7 +15,7 @@ Tta::Application.routes.draw do
 
   get '/comparative_analysis/create'
 
-  match '/upload/create' => 'upload#create'
+  get '/upload/create'
 
   get '/upload/show'
 
