@@ -16,6 +16,7 @@
       <div class="fields" >
         <label for="sub_project">Project:</label>
         <%= select("sub_project", "id", SubProject.all.collect {|p| [ p.name, p.id ] } ,{:include_blank => true}) %>
+        <p class="error"><%= flash[:no_id_error] if flash[:no_id_error] %></p>
         <br>
       </div>
       <div id="submit-project-button">

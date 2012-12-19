@@ -2,6 +2,7 @@ require 'xmlsimple'
 require 'ftools'
 require 'net/scp'
 
+
 class UploadController < ApplicationController
 
 
@@ -13,8 +14,8 @@ class UploadController < ApplicationController
                   params[:browser],params[:type_of_environment],params[:host_name],params[:os_name],params[:test_category],params[:test_report_type])
 
     meta_datum.date_of_execution= params[:test_metadatum][:date_of_execution]
-
-    meta_datum.save!
+    if meta_datum.save
+    
 
     path = params[:logDirectory]+"/asd.xml"
     #We need file pattern , but right now it has not been used
@@ -32,6 +33,12 @@ class UploadController < ApplicationController
      end
 
     redirect_to :action => :show, :project_id => project.id, :sub_project_id => sub_project.id, :project_meta_id => meta_datum.id
+    else
+      flash[:project_error] = project.errors.messages
+      flash[:sub_project_error] = sub_project.errors.messages
+      flash[:meta_data_error] = meta_datum.errors.messages
+      render 'upload/upload'
+    end
   end
 
   def show

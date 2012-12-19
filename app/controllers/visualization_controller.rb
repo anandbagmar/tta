@@ -5,6 +5,10 @@ class VisualizationController < ApplicationController
 
   def sub_project_filter
       sub_project_id=params[:sub_project][:id]
+      if sub_project_id.blank?
+        flash[:no_id_error] = "No Project Selected"
+        render 'visualization/pyramid'
+     else
       result_set1 = Visualization.getNoOfTests(sub_project_id,"Functional Test")
       result_set2 = Visualization.getNoOfTests(sub_project_id,"Unit Test")
       result_set3 = Visualization.getNoOfTests(sub_project_id,"Integration Test")
@@ -18,8 +22,9 @@ class VisualizationController < ApplicationController
       @duration_functional=calculate_duration_in_hours(result_set1)
       @duration_unit=calculate_duration_in_hours(result_set2)
       @duration_integration=calculate_duration_in_hours(result_set3)
+      flash[:no_id_error]=""
       render :pyramid
-
+      end
 
   end
 
