@@ -2,7 +2,6 @@ require 'xmlsimple'
 require 'ftools'
 require 'net/scp'
 
-
 class UploadController < ApplicationController
 
 
@@ -14,26 +13,23 @@ class UploadController < ApplicationController
                   params[:browser],params[:type_of_environment],params[:host_name],params[:os_name],params[:test_category],params[:test_report_type])
 
     meta_datum.date_of_execution= params[:test_metadatum][:date_of_execution]
-    p "*"*100
-    if meta_datum.save
-      path = Dir.glob(params[:logDirectory]+"/**/"+params[:filePattern])
 
-      #All files are copied in the same folder "tta"
-      #For adding files to a new folder , create the folder and change the path here
-      Net::SCP::start("10.12.6.142","tta", :password => "ttas") do |scp|
-        path.each do |files|
-          scp.upload!(files, "/home/tta/tta/")
-          parse_xml(files,meta_datum.id)
-        end
-      end
+    meta_datum.save!
 
-      redirect_to :action => :show, :project_id => project.id, :sub_project_id => sub_project.id, :project_meta_id => meta_datum.id
-    else
-      flash[:project_error] = project.errors.messages
-      flash[:sub_project_error] = sub_project.errors.messages
-      flash[:meta_data_error] = meta_datum.errors.messages
-      render 'upload/upload'
-    end
+    path = params[:logDirectory]+"/asd.xml"
+    #We need file pattern , but right now it has not been used
+    #+params[:filePattern]
+    puts ("*")*100
+    puts path
+
+
+    #All files are copied in the same folder "tta"
+    #For adding files to a new folder , create the folder and change the path here
+
+    Net::SCP::start("10.12.6.142","tta", :password => "ttas") do |scp|
+        scp.download!(path, "/home/aasawaree/testFiles/")
+        parse_xml("/home/aasawaree/testFiles/asd.xml",meta_datum.id)
+     end
 
     redirect_to :action => :show, :project_id => project.id, :sub_project_id => sub_project.id, :project_meta_id => meta_datum.id
   end
