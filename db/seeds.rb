@@ -17,17 +17,8 @@ TestRecord.destroy_all
 TestRecord.reset_primary_key
 
 
-##Create seed data
-browser_arr= %w( chrome firefox IE opera safari seamonkey k-meleon conqueror maxthon galleon avant netscape iCab camino flock )
+require_relative 'common_params'
 
-os_arr= ["Mac","Unix","Ubuntu","BeOS","IRIX","NeXTSTEP","MS-DOS","iOS", "Windows7", "kondara linux", "OSF","QNX","SCO", "sunSolaris","SuSELinux"]
-
-hostname_arr= %w(garima pooja ashwin nikita nikitha tushar matty lava priti sailee sanchari shilpa pranjali akshay aasawaree)
-
-ci_arr= %w(smoke master regression runtest testomania enternet titanic kanha kaziranga stress opensaysme gir test4treasure quovadis nihao)
-env_arr = %w(dev qa production uat)
-test_cat_arr = [ "Unit test", "Integration test", "Functional test "]
-test_rep_arr = %w(Junit Nunit Rspec Cucumber)
 count = 0
 
 
@@ -45,7 +36,15 @@ count = 0
       if count >= 3
         count=0
       end
-      meta_data = TestMetadatum.create(:id => k ,:ci_job_name => ci_arr[rand(ci_arr.length)] ,:os_name => os_arr[rand(os_arr.length)] , :host_name => hostname_arr[rand(hostname_arr.length)],:browser => browser_arr[rand(browser_arr.length)], :type_of_environment => env_arr[rand(env_arr.length)], :date_of_execution => Time.at(rand * Time.now.to_i) , :test_category => test_cat_arr[count], :test_report_type => test_rep_arr[rand(test_rep_arr.length)]  )
+      meta_data = TestMetadatum.create(
+          :id => k ,:ci_job_name => SAMPLE_CI_JOB_NAMES[rand(SAMPLE_CI_JOB_NAMES.length)] ,
+          :os_name => SAMPLE_OS_TYPES[rand(SAMPLE_OS_TYPES.length)] ,
+          :host_name => SAMPLE_HOST_NAMES[rand(SAMPLE_HOST_NAMES.length)],
+          :browser => SAMPLE_BROWSER_TYPES[rand(SAMPLE_BROWSER_TYPES.length)],
+          :type_of_environment => SAMPLE_TEST_ENVIRONMENTS[rand(SAMPLE_TEST_ENVIRONMENTS.length)],
+          :date_of_execution => Time.at(rand * Time.now.to_i) ,
+          :test_category => SAMPLE_TEST_CATEGORIES[count],
+          :test_report_type => SAMPLE_TEST_REPORT_TYPES[rand(SAMPLE_TEST_REPORT_TYPES.length)]  )
       meta_data.sub_project_id= (i*2)-2+j
       count = count + 1
       meta_data.save
