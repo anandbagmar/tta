@@ -105,6 +105,21 @@
         <%= text_field_tag :filePattern,nil, :placeholder =>'(eg. TEST*.xml)' %> <br>
       </div>
 
+      <div class="fields">
+        <label for="host_ip">Machine Ip</label>
+        <%= text_field_tag :host_ip ,nil, :placeholder =>'your ip address' %> <br>
+      </div>
+
+      <div class="fields">
+        <label for="username">Username</label>
+        <%= text_field_tag :username%> <br>
+      </div>
+
+      <div class="fields">
+        <label for="password">Password</label>
+        <%= password_field_tag :password %> <br>
+      </div>
+
        <div class="button">
          <%= submit_tag 'SUBMIT' %>
          <%= submit_tag("Clear All", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
