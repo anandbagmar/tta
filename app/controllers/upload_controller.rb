@@ -29,7 +29,7 @@ class UploadController < ApplicationController
           p file
           parse_xml(file,meta_datum.id)
         end
-      #end
+      end
       redirect_to :action => :show, :project_id => project.id, :sub_project_id => sub_project.id, :project_meta_id => meta_datum.id
     else
       flash[:project_error] = project.errors.messages
