@@ -17,7 +17,7 @@ TestRecord.destroy_all
 TestRecord.reset_primary_key
 
 
-require_relative 'common_seed_data_values'
+require_relative 'common_seed_data'
 
 count = 0
 
