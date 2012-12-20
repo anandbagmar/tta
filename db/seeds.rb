@@ -31,29 +31,29 @@ test_rep_arr = %w(Junit Nunit Rspec Cucumber)
 count = 0
 
 
-1.upto(10) do |i|
+1.upto(2) do |i|
   project = Project.create(:name => "PROJECT #{i}",
                            :authorization_level => "ALL")
   project.save
 
-  1.upto(10) do |j|
+  1.upto(2) do |j|
     sub_project= SubProject.create(:name => "Sub_project #{i}.#{j}")
     sub_project.project_id= i
     sub_project.save
 
-    1.upto(10) do  |k|
+    1.upto(2) do  |k|
       if count >= 3
         count=0
       end
       meta_data = TestMetadatum.create(:id => k ,:ci_job_name => ci_arr[rand(ci_arr.length)] ,:os_name => os_arr[rand(os_arr.length)] , :host_name => hostname_arr[rand(hostname_arr.length)],:browser => browser_arr[rand(browser_arr.length)], :type_of_environment => env_arr[rand(env_arr.length)], :date_of_execution => Time.at(rand * Time.now.to_i) , :test_category => test_cat_arr[count], :test_report_type => test_rep_arr[rand(test_rep_arr.length)]  )
-      meta_data.sub_project_id= (i*10)-10+j
+      meta_data.sub_project_id= (i*2)-2+j
       count = count + 1
       meta_data.save
 
-      1.upto(10) do |l|
+      1.upto(2) do |l|
 
         test_record = TestRecord.create(:class_name => "Class #{i}.#{j}.#{k}.#{l}",:number_of_tests => rand(25..50),:number_of_errors =>rand(12) , :number_of_failures => rand(12),:time_taken => rand(1..5).to_s)
-        test_record.test_metadatum_id= (i*100)-100+(j*10)-10+k
+        test_record.test_metadatum_id= (i*4)-4+(j*2)-2+k
         test_record.save
 
 
