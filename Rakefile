@@ -54,7 +54,7 @@ namespace :tta do
   desc "Run unit_tests"
   task :unit_tests do
     Rake::Task['db:recreate'].execute
-    Rake::Task['spec'].execute
+    Rake::Task['rspec'].execute
     Rake::Task['tta:upload_to_tta'].invoke("TTA_ON_GO", "TTA_subproject", "Build1", "UnitTest", "JUnit", "Ubuntu", "Pooja-pc", "Chrome", "Prod", "", "/Users/pooja/Documents/tta/logs/proj4", "*.xml")
   end
 
@@ -74,6 +74,6 @@ namespace :tta do
     $file_pattern=args.filePattern
     $commit=args.commit
 
-    `curl --request GET '10.12.6.135:3000/upload/create?utf8=%E2%9C%93&project_name=#{$project_name}&sub_project_name=#{$sub_project_name}&ci_job_name=#{$ci_job_name}&test_category=#{$test_category}&test_report_type=#{$test_report_type}&os_name=#{$os_name}&host_name=#{$host_name}&browser=#{$browser}&type_of_environment=#{$type_of_environment}&test_metadatum%5Bdate_of_execution%5D=#{$date_of_execution}&logDirectory=#{$log_directory}&filePattern=#{$file_pattern}&commit=SUBMIT'`
+    #`curl --request GET '10.12.6.154:3000/upload/create?utf8=%E2%9C%93&project_name=#{$project_name}&sub_project_name=#{$sub_project_name}&ci_job_name=#{$ci_job_name}&test_category=#{$test_category}&test_report_type=#{$test_report_type}&os_name=#{$os_name}&host_name=#{$host_name}&browser=#{$browser}&type_of_environment=#{$type_of_environment}&test_metadatum%5Bdate_of_execution%5D=#{$date_of_execution}&logDirectory=#{$log_directory}&filePattern=#{$file_pattern}&commit=SUBMIT'`
   end
 end
