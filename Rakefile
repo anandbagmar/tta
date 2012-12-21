@@ -37,9 +37,11 @@ namespace :db do
 
   desc "setup the database by drop & create & migrate"
   task :recreate do
-    Rake::Task['db:drop'].execute
+    puts "recreate development env"
+    Rake::Task['db:drop'].invoke
     Rake::Task['db:create'].execute
     Rake::Task['db:migrate'].execute
+    puts "recreate test env"
     Rails.env="test"
     Rake::Task['db:drop'].execute
     Rake::Task['db:create'].execute
