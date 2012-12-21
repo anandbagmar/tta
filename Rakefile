@@ -27,6 +27,10 @@ $log_directory=""
 $file_pattern=""
 $commit=""
 
+# Set the RAILS_ENV
+$RAILS_ENV = ENV['RAILS_ENV']  ||= "development"
+puts "RAILS_ENV: #{$RAILS_ENV}"
+
 task :default => 'tta:unit_tests'
 
 namespace :db do
@@ -37,13 +41,8 @@ namespace :db do
 
   desc "setup the database by drop & create & migrate"
   task :recreate do
-    puts "recreate development env"
+    puts "recreate #{ENV['RAILS_ENV']} env"
     Rake::Task['db:drop'].invoke
-    Rake::Task['db:create'].execute
-    Rake::Task['db:migrate'].execute
-    puts "recreate test env"
-    Rails.env="test"
-    Rake::Task['db:drop'].execute
     Rake::Task['db:create'].execute
     Rake::Task['db:migrate'].execute
     Rake::Task['db:seed'].execute
