@@ -37,6 +37,7 @@ namespace :db do
   desc "Seed large data in DB"
   task :large_data => ['db:recreate'] do
     puts "creating a large database"
+    load($PROJECT_ROOT+"/db/large_data.rb")
   end
 
   desc "setup the database by drop & create & migrate"
@@ -53,7 +54,7 @@ namespace :tta do
   desc "Run unit_tests"
   task :unit_tests do
     Rake::Task['db:recreate'].execute
-    Rake::Task['rspec'].execute
+    Rake::Task['spec'].execute
     Rake::Task['tta:upload_to_tta'].invoke("TTA_ON_GO", "TTA_subproject", "Build1", "UnitTest", "JUnit", "Ubuntu", "Pooja-pc", "Chrome", "Prod", "", "/Users/pooja/Documents/tta/logs/proj4", "*.xml")
   end
 
