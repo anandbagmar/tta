@@ -1,3 +1,5 @@
 --color
 --require spec_helper
 --format JUnit
+-o log/tta_spec_results.xml
+--format progress
