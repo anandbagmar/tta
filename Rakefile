@@ -28,7 +28,7 @@ $file_pattern=""
 $commit=""
 
 # Set the RAILS_ENV
-$RAILS_ENV = ENV['RAILS_ENV']  ||= "test"
+$RAILS_ENV = ENV['RAILS_ENV']  ||= "development"
 puts "RAILS_ENV: #{$RAILS_ENV}"
 
 task :default => 'tta:unit_tests'
