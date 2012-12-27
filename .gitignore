@@ -15,4 +15,7 @@
 /log/*.*
 /tmp
 Gemfile.lock
-/public/VspLogs.zip
+/public/*
+/**/.DS_Store
+
+
