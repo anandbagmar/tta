@@ -7,35 +7,40 @@ class UploadController < ApplicationController
 
 
   def create
-    project = Project.find_or_create_by_name(params[:project_name])
-    sub_project = project.sub_projects.find_or_create_by_name(params[:sub_project_name])
-
-    meta_datum = sub_project.test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type(params[:ci_job_name],
-                  params[:browser],params[:type_of_environment],params[:host_name],params[:os_name],params[:test_category],params[:test_report_type])
-
-    meta_datum.date_of_execution= params[:test_metadatum][:date_of_execution]
-    username = params[:username].to_s
-    password = params[:password].to_s
-    host_ip  = params[:host_ip].to_s
+    meta_datum, project, sub_project = create_or_update_meta_datum_and_dependency
     if meta_datum.save
-
-      Net::SCP::start(host_ip ,username , :password => password) do |scp|
-        path = params[:logDirectory]
-        p path
-        scp.download!(path, "/Users/pooja/Documents/tta/test" , :recursive =>true)
-        local_path = Dir.glob("/Users/pooja/Documents/tta/test"+"/**/"+params[:filePattern])
-        local_path.each do |file|
-          p "*"*100
-          p file
-          parse_xml(file,meta_datum.id)
-        end
-      end
+      download_and_parse(params[:host_ip], meta_datum, params[:password], params[:username])
       redirect_to :action => :show, :project_id => project.id, :sub_project_id => sub_project.id, :project_meta_id => meta_datum.id
     else
       flash[:project_error] = project.errors.messages
       flash[:sub_project_error] = sub_project.errors.messages
       flash[:meta_data_error] = meta_datum.errors.messages
       render 'upload/upload'
+    end
+  end
+
+  def create_or_update_meta_datum_and_dependency
+    project = Project.find_or_create_by_name(params[:project_name])
+    sub_project = project.sub_projects.find_or_create_by_name(params[:sub_project_name])
+
+    meta_datum = sub_project.test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type(params[:ci_job_name],
+                                                                                                                                                                               params[:browser], params[:type_of_environment], params[:host_name], params[:os_name], params[:test_category], params[:test_report_type])
+
+    meta_datum.date_of_execution= params[:test_metadatum][:date_of_execution]
+    return meta_datum, project, sub_project
+  end
+
+  def download_and_parse(host_ip, meta_datum, password, username)
+    Net::SCP::start(host_ip, username, :password => password) do |scp|
+      path = params[:logDirectory]
+      p path
+      scp.download!(path, "/Users/pooja/Documents/tta/test", :recursive => true)
+      local_path = Dir.glob("/Users/pooja/Documents/tta/test"+"/**/"+params[:filePattern])
+      local_path.each do |file|
+        p "*"*100
+        p file
+        parse_xml(file, meta_datum.id)
+      end
     end
   end
 
