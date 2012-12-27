@@ -19,7 +19,7 @@ class UploadController < ApplicationController
     host_ip  = params[:host_ip].to_s
     if meta_datum.save
 
-      Net::SCP::start(host_ip,username , :password => password) do |scp|
+      Net::SCP::start(host_ip ,username , :password => password) do |scp|
         path = params[:logDirectory]
         p path
         scp.download!(path, "/Users/pooja/Documents/tta/test" , :recursive =>true)
