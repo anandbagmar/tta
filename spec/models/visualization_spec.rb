@@ -7,7 +7,7 @@ describe Visualization do
   end
 
   it "should not return nil result set if test type is nil" do
-    result = Visualization.getNoOfTests(100,nil)
+    result = Visualization.getNoOfTests(1,nil)
     result.should eq([])
   end
 end
