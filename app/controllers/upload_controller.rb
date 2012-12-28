@@ -18,7 +18,19 @@ class UploadController < ApplicationController
       render 'upload/upload'
     end
   end
-
+  def show
+    @project = Project.find(params[:project_id])
+    @sub_project= @project.sub_projects.find(params[:sub_project_id])
+    @project_meta = @sub_project.test_metadatum.find(params[:project_meta_id])
+    begin
+      respond_to do |format|
+        flash[:notice] = "Project Successfully Saved!!"
+        format.html
+        format.json { render json: @project }
+      end
+    end
+  end
+  private
   def create_or_update_meta_datum_and_dependency
     project = Project.find_or_create_by_name(params[:project_name])
     sub_project = project.sub_projects.find_or_create_by_name(params[:sub_project_name])
@@ -44,18 +56,7 @@ class UploadController < ApplicationController
     end
   end
 
-  def show
-    @project = Project.find(params[:project_id])
-    @sub_project= @project.sub_projects.find(params[:sub_project_id])
-    @project_meta = @sub_project.test_metadatum.find(params[:project_meta_id])
-    begin
-      respond_to do |format|
-        flash[:notice] = "Project Successfully Saved!!"
-        format.html
-        format.json { render json: @project }
-      end
-    end
-  end
+
 
   def parse_xml(config_xml, meta_id)
     config = XmlSimple.xml_in(config_xml, {'KeyAttr' => 'name'})
