@@ -9,7 +9,7 @@ class UploadController < ApplicationController
   def create
     meta_datum, project, sub_project = create_or_update_meta_datum_and_dependency
     if meta_datum.save
-      download_and_parse(params[:host_ip], meta_datum, params[:password], params[:username])
+      download_and_parse(params[:host_ip].to_s, meta_datum, params[:password].to_s, params[:username].to_s)
       redirect_to :action => :show, :project_id => project.id, :sub_project_id => sub_project.id, :project_meta_id => meta_datum.id
     else
       flash[:project_error] = project.errors.messages
