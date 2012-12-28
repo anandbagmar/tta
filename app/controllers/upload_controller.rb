@@ -30,6 +30,7 @@ class UploadController < ApplicationController
       end
     end
   end
+
   private
   def create_or_update_meta_datum_and_dependency
     project = Project.find_or_create_by_name(params[:project_name])
