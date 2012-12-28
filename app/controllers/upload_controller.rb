@@ -47,8 +47,8 @@ class UploadController < ApplicationController
     Net::SCP::start(host_ip, username, :password => password) do |scp|
       path = params[:logDirectory]
       p path
-      scp.download!(path, "/Users/pooja/Documents/tta/test", :recursive => true)
-      local_path = Dir.glob("/Users/pooja/Documents/tta/test"+"/**/"+params[:filePattern])
+      scp.download!(path, "/home/tta/Desktop/tta_logs", :recursive => true)
+      local_path = Dir.glob("/home/tta/Desktop/tta_logs"+"/**/"+params[:filePattern])
       local_path.each do |file|
         p "*"*100
         p file

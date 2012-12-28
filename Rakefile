@@ -74,6 +74,6 @@ namespace :tta do
     $file_pattern=args.filePattern
     $commit=args.commit
 
-    #`curl --request GET '10.12.6.154:3000/upload/create?utf8=%E2%9C%93&project_name=#{$project_name}&sub_project_name=#{$sub_project_name}&ci_job_name=#{$ci_job_name}&test_category=#{$test_category}&test_report_type=#{$test_report_type}&os_name=#{$os_name}&host_name=#{$host_name}&browser=#{$browser}&type_of_environment=#{$type_of_environment}&test_metadatum%5Bdate_of_execution%5D=#{$date_of_execution}&logDirectory=#{$log_directory}&filePattern=#{$file_pattern}&commit=SUBMIT'`
+    `curl --request GET '10.12.6.:3000/upload/create?utf8=%E2%9C%93&project_name=#{$project_name}&sub_project_name=#{$sub_project_name}&ci_job_name=#{$ci_job_name}&test_category=#{$test_category}&test_report_type=#{$test_report_type}&os_name=#{$os_name}&host_name=#{$host_name}&browser=#{$browser}&type_of_environment=#{$type_of_environment}&test_metadatum%5Bdate_of_execution%5D=#{$date_of_execution}&logDirectory=#{$log_directory}&filePattern=#{$file_pattern}&commit=SUBMIT'`
   end
 end
