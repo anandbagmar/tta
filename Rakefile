@@ -25,6 +25,9 @@ $type_of_environment=""
 $date_of_execution=""
 $log_directory=""
 $file_pattern=""
+$host_ip=""
+$username=""
+$password=""
 $commit=""
 
 # Set the RAILS_ENV
@@ -55,10 +58,10 @@ namespace :tta do
   task :unit_tests do
     Rake::Task['db:recreate'].execute
     Rake::Task['spec'].execute
-    Rake::Task['tta:upload_to_tta'].invoke("TTA_ON_GO", "TTA_subproject", "Build1", "UnitTest", "JUnit", "Ubuntu", "Pooja-pc", "Chrome", "Prod", "", "/Users/pooja/Documents/tta/logs/proj4", "*.xml")
+    Rake::Task['tta:upload_to_tta'].invoke("TTA_Project", "TTA_subproject", "Build1", "UnitTest", "JUnit", "Ubuntu", "Pooja-pc", "Chrome", "Prod", "", "/home/tta/Downloads/proj3", "*.xml","10.12.6.220","tta","ttas")
   end
 
-  task :upload_to_tta, [:project_name, :sub_project_name, :ci_job_name, :test_category, :test_report_type, :os_name, :host_name, :browser, :type_of_environment, :date_of_execution, :logDirectory, :filePattern, :commit] do |t, args|
+  task :upload_to_tta, [:project_name, :sub_project_name, :ci_job_name, :test_category, :test_report_type, :os_name, :host_name, :browser, :type_of_environment, :date_of_execution, :logDirectory, :filePattern, :host_ip, :username, :password, :commit] do |t, args|
     args.with_defaults(:project_name => "xyz112", :sub_project_name => "xyz", :ci_job_name => "xyz", :test_category => "xyz", :test_report_type => "xyz", :os_name => "xyz", :host_name => "xyz", :browser => "xyz", :type_of_environment => "xyz", :date_of_execution => "1900-12-12", :logDirectory => "asdw", :filePattern => "*.xml", :commit => "SUBMIT")
     $project_name = args.project_name
     $sub_project_name = args.sub_project_name
@@ -72,8 +75,11 @@ namespace :tta do
     $date_of_execution=(Date.today << 1).to_s
     $log_directory=args.logDirectory
     $file_pattern=args.filePattern
+    $host_ip=args.host_ip
+    $username=args.username
+    $password=args.password
     $commit=args.commit
 
-    `curl --request GET '10.12.6.:3000/upload/create?utf8=%E2%9C%93&project_name=#{$project_name}&sub_project_name=#{$sub_project_name}&ci_job_name=#{$ci_job_name}&test_category=#{$test_category}&test_report_type=#{$test_report_type}&os_name=#{$os_name}&host_name=#{$host_name}&browser=#{$browser}&type_of_environment=#{$type_of_environment}&test_metadatum%5Bdate_of_execution%5D=#{$date_of_execution}&logDirectory=#{$log_directory}&filePattern=#{$file_pattern}&commit=SUBMIT'`
+    `curl --request GET '172.18.6.1:3000/upload/create?utf8=%E2%9C%93&project_name=#{$project_name}&sub_project_name=#{$sub_project_name}&ci_job_name=#{$ci_job_name}&test_category=#{$test_category}&test_report_type=#{$test_report_type}&os_name=#{$os_name}&host_name=#{$host_name}&browser=#{$browser}&type_of_environment=#{$type_of_environment}&test_metadatum%5Bdate_of_execution%5D=#{$date_of_execution}&logDirectory=#{$log_directory}&filePattern=#{$file_pattern}&host_ip=#{$host_ip}&username=#{$username}&password=#{$password}&commit=SUBMIT'`
   end
 end
