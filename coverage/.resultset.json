@@ -1,26 +1,26 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/khushal/RubymineProjects/tta/spec/controllers/error_controller_spec.rb": [
+      "/Users/pooja/Projects/tta/spec/controllers/error_controller_spec.rb": [
         1,
         null,
         1,
         null,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/app/controllers/error_controller.rb": [
+      "/Users/pooja/Projects/tta/app/controllers/error_controller.rb": [
         1,
         1,
         0,
         null,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/app/controllers/application_controller.rb": [
+      "/Users/pooja/Projects/tta/app/controllers/application_controller.rb": [
         1,
         1,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/spec/controllers/upload_controller_spec.rb": [
+      "/Users/pooja/Projects/tta/spec/controllers/upload_controller_spec.rb": [
         1,
         null,
         1,
@@ -33,101 +33,12 @@
         null,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/app/controllers/upload_controller.rb": [
-        1,
-        1,
-        1,
-        null,
-        null,
-        1,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null,
-        1,
-        1,
-        0,
-        0,
-        null,
-        0,
-        null,
-        null,
-        0,
-        0,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/Users/khushal/RubymineProjects/tta/spec/controllers/visualization_controller_spec.rb": [
-        1,
-        null,
-        1,
-        null,
+      "/Users/pooja/Projects/tta/app/controllers/upload_controller.rb": [
         1,
         1,
         1,
         1,
         null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/Users/khushal/RubymineProjects/tta/app/controllers/visualization_controller.rb": [
-        1,
         null,
         1,
         null,
@@ -142,13 +53,13 @@
         0,
         0,
         0,
+        null,
+        null,
+        1,
+        0,
         0,
         0,
         null,
-        0,
-        null,
-        0,
-        0,
         0,
         0,
         0,
@@ -158,12 +69,33 @@
         null,
         null,
         1,
+        1,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        0,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
         0,
         0,
         0,
         0,
         null,
         0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
         null,
         null,
         null,
@@ -173,21 +105,94 @@
         0,
         0,
         0,
-        null,
-        null,
-        null,
-        1,
         0,
         0,
         0,
-        null,
+        0,
         0,
         null,
         null,
         null,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/app/models/visualization.rb": [
+      "/Users/pooja/Projects/tta/spec/controllers/visualization_controller_spec.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/pooja/Projects/tta/app/controllers/visualization_controller.rb": [
+        1,
+        null,
+        1,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/pooja/Projects/tta/app/models/visualization.rb": [
         1,
         null,
         1,
@@ -214,7 +219,7 @@
         null,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/spec/models/comaprative_analysis_spec.rb": [
+      "/Users/pooja/Projects/tta/spec/models/comaprative_analysis_spec.rb": [
         1,
         null,
         1,
@@ -230,7 +235,7 @@
         null,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/app/models/comparative_analysis.rb": [
+      "/Users/pooja/Projects/tta/app/models/comparative_analysis.rb": [
         null,
         null,
         1,
@@ -268,7 +273,7 @@
         null,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/spec/models/project_spec.rb": [
+      "/Users/pooja/Projects/tta/spec/models/project_spec.rb": [
         1,
         null,
         1,
@@ -280,7 +285,7 @@
         null,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/app/models/project.rb": [
+      "/Users/pooja/Projects/tta/app/models/project.rb": [
         1,
         1,
         1,
@@ -288,7 +293,7 @@
         1,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/spec/models/sub_project_spec.rb": [
+      "/Users/pooja/Projects/tta/spec/models/sub_project_spec.rb": [
         1,
         null,
         1,
@@ -299,7 +304,7 @@
         null,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/app/models/sub_project.rb": [
+      "/Users/pooja/Projects/tta/app/models/sub_project.rb": [
         1,
         1,
         1,
@@ -307,7 +312,7 @@
         1,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/spec/models/test_metadatum_spec.rb": [
+      "/Users/pooja/Projects/tta/spec/models/test_metadatum_spec.rb": [
         1,
         null,
         1,
@@ -343,7 +348,7 @@
         null,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/app/models/test_metadatum.rb": [
+      "/Users/pooja/Projects/tta/app/models/test_metadatum.rb": [
         1,
         null,
         1,
@@ -360,7 +365,7 @@
         1,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/spec/models/test_record_spec.rb": [
+      "/Users/pooja/Projects/tta/spec/models/test_record_spec.rb": [
         1,
         null,
         1,
@@ -371,26 +376,26 @@
         null,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/app/models/test_record.rb": [
+      "/Users/pooja/Projects/tta/app/models/test_record.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/spec/models/unit_test_xml_spec.rb": [
+      "/Users/pooja/Projects/tta/spec/models/unit_test_xml_spec.rb": [
         1,
         null,
         1,
         null,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/app/models/unit_test_xml.rb": [
+      "/Users/pooja/Projects/tta/app/models/unit_test_xml.rb": [
         1,
         null,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/spec/models/visualization_spec.rb": [
+      "/Users/pooja/Projects/tta/spec/models/visualization_spec.rb": [
         1,
         null,
         1,
@@ -405,7 +410,7 @@
         null,
         null
       ],
-      "/Users/khushal/RubymineProjects/tta/spec/routing/upload_routing_spec.rb": [
+      "/Users/pooja/Projects/tta/spec/routing/upload_routing_spec.rb": [
         1,
         null,
         null,
@@ -422,6 +427,6 @@
         null
       ]
     },
-    "timestamp": 1356700671
+    "timestamp": 1356945175
   }
 }

@@ -1,6 +1,7 @@
 require 'xmlsimple'
 require 'ftools'
 require 'net/scp'
+require 'net/sftp'
 
 
 class UploadController < ApplicationController
@@ -44,14 +45,16 @@ class UploadController < ApplicationController
   end
 
   def download_and_parse(host_ip, meta_datum, password, username)
-    Net::SCP::start(host_ip, username, :password => password) do |scp|
+    Net::SFTP::start(host_ip, username, :password => password) do |sftp|
       path = params[:logDirectory]
-      p path
-      scp.download!(path, "/home/administrator/Desktop/tta_logs", :recursive => true)
-      local_path = Dir.glob("/home/administrator/Desktop/tta_logs"+"/**/"+params[:filePattern])
+      p "*"*100
+      dir_path = "/home/tta/Desktop/"+params[:project_name]+Time.now.strftime("%d-%m-%y:%I:%M:%S")
+      p dir_path
+      #sftp.download!(path, "/home/administrator/Desktop/tta_logs", :recursive => true)
+      sftp.mkdir( dir_path, :permissions => 0755)
+      sftp.download!(path,dir_path, :recursive => true)
+      local_path = Dir.glob(dir_path+"/**/"+params[:filePattern])
       local_path.each do |file|
-        p "*"*100
-        p file
         parse_xml(file, meta_datum.id)
       end
     end
