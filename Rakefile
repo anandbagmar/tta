@@ -58,11 +58,17 @@ namespace :tta do
   task :unit_tests do
     Rake::Task['db:recreate'].execute
     Rake::Task['spec'].execute
-    Rake::Task['tta:upload_to_tta'].invoke("TTA_Project_try", "TTA_subproject", "Build1", "UnitTest", "JUnit", "Ubuntu", "Pooja-pc", "Chrome", "Prod", "", "/home/tta/Downloads/proj3", "*.xml","10.12.6.220","tta","ttas")
+    Rake::Task['tta:upload_to_tta'].invoke("TTA_Project_Abc", "TTA_subproject_bug", "Build1", "Unit+Test", "JUnit", "Ubuntu", "Pooja-pc", "Chrome", "Prod", "", "/home/tta/Downloads/proj3", "*.xml","10.12.6.220","tta","ttas")
   end
 
   task :upload_to_tta, [:project_name, :sub_project_name, :ci_job_name, :test_category, :test_report_type, :os_name, :host_name, :browser, :type_of_environment, :date_of_execution, :logDirectory, :filePattern, :host_ip, :username, :password, :commit] do |t, args|
     args.with_defaults(:project_name => "xyz112", :sub_project_name => "xyz", :ci_job_name => "xyz", :test_category => "xyz", :test_report_type => "xyz", :os_name => "xyz", :host_name => "xyz", :browser => "xyz", :type_of_environment => "xyz", :date_of_execution => "1900-12-12", :logDirectory => "asdw", :filePattern => "*.xml", :commit => "SUBMIT")
+
+
+    p "--"*100
+    p args.test_category
+    p "--"*100
+
     $project_name = args.project_name
     $sub_project_name = args.sub_project_name
     $ci_job_name = ENV['GO_JOB_NAME']

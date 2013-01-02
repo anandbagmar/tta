@@ -5,8 +5,6 @@ require 'net/sftp'
 
 
 class UploadController < ApplicationController
-
-
   def create
     meta_datum, project, sub_project = create_or_update_meta_datum_and_dependency
     if meta_datum.save
@@ -19,6 +17,7 @@ class UploadController < ApplicationController
       render 'upload/upload'
     end
   end
+
   def show
     @project = Project.find(params[:project_id])
     @sub_project= @project.sub_projects.find(params[:sub_project_id])
@@ -34,12 +33,10 @@ class UploadController < ApplicationController
 
   private
   def create_or_update_meta_datum_and_dependency
-    project = Project.find_or_create_by_name(params[:project_name])
-    sub_project = project.sub_projects.find_or_create_by_name(params[:sub_project_name])
-
-    meta_datum = sub_project.test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type(params[:ci_job_name],
-                                                                                                                                                                               params[:browser], params[:type_of_environment], params[:host_name], params[:os_name], params[:test_category], params[:test_report_type])
-
+    project = Project.find_or_create_by_name(params[:project_name].upcase)
+    sub_project = project.sub_projects.find_or_create_by_name(params[:sub_project_name].upcase)
+    meta_datum = sub_project.test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type(params[:ci_job_name].upcase,
+                                                                                                                                                                               params[:browser].upcase, params[:type_of_environment].upcase, params[:host_name].upcase, params[:os_name].upcase, params[:test_category].upcase, params[:test_report_type].upcase)
     meta_datum.date_of_execution= params[:test_metadatum][:date_of_execution]
     return meta_datum, project, sub_project
   end
@@ -47,10 +44,7 @@ class UploadController < ApplicationController
   def download_and_parse(host_ip, meta_datum, password, username)
     Net::SFTP::start(host_ip, username, :password => password) do |sftp|
       path = params[:logDirectory]
-      p "*"*100
-      dir_path = "/home/tta/Desktop/"+params[:project_name]+Time.now.strftime("%d-%m-%y:%I:%M:%S")
-      p dir_path
-      #sftp.download!(path, "/home/administrator/Desktop/tta_logs", :recursive => true)
+      dir_path = "/Users/administrator/Desktop/tta_logs"+params[:project_name]+Time.now.strftime("%d-%m-%y:%I:%M:%S")
       sftp.mkdir( dir_path, :permissions => 0755)
       sftp.download!(path,dir_path, :recursive => true)
       local_path = Dir.glob(dir_path+"/**/"+params[:filePattern])
@@ -59,6 +53,7 @@ class UploadController < ApplicationController
       end
     end
   end
+
 
 
 

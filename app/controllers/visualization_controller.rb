@@ -9,13 +9,12 @@ class VisualizationController < ApplicationController
         flash[:no_id_error] = "No Project Selected"
         render 'visualization/pyramid'
      else
-      result_set1 = Visualization.getNoOfTests(sub_project_id,"Functional Test")
+      result_set1 = Visualization.getNoOfTests(sub_project_id,"Functional test")
       result_set2 = Visualization.getNoOfTests(sub_project_id,"Unit Test")
-      result_set3 = Visualization.getNoOfTests(sub_project_id,"Integration Test")
+      result_set3 = Visualization.getNoOfTests(sub_project_id,"Integration test")
       @no_of_unit_test = calculate_number_of_test(result_set2)
       @no_of_functional_test = calculate_number_of_test(result_set1)
       @no_of_Integration_test = calculate_number_of_test(result_set3)
-
       @sub_project_name = SubProject.find(sub_project_id).name
 
       calculate_percentage_of_tests
