@@ -69,4 +69,6 @@ group :development, :test do
   gem 'database_cleaner'                          # manage DB between tests
   gem 'autotest-rails'
   gem 'shoulda'
+  gem 'pry'
+  gem 'pry-nav'
 end
