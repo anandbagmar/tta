@@ -31,7 +31,7 @@ module Seed
           :browser => SAMPLE_BROWSER_TYPES[rand(SAMPLE_BROWSER_TYPES.length)],
           :type_of_environment => SAMPLE_TEST_ENVIRONMENTS[rand(SAMPLE_TEST_ENVIRONMENTS.length)],
           :date_of_execution => Time.at(rand * Time.now.to_i),
-          :test_category => SAMPLE_TEST_CATEGORIES[Time.now.to_i%(SAMPLE_TEST_CATEGORIES.length)],
+          :test_category => SAMPLE_TEST_CATEGORIES[rand(SAMPLE_TEST_CATEGORIES.length)],
           :test_report_type => SAMPLE_TEST_REPORT_TYPES[rand(SAMPLE_TEST_REPORT_TYPES.length)])
       test_meta_data.sub_project_id= sub_project_id
       test_meta_data.save
@@ -39,7 +39,7 @@ module Seed
     end
 
     def self.create_project(project_number)
-      #puts "creating project #{project_number}"
+      #puts "\t creating project #{project_number}"
       project_name = "PROJECT #{project_number}"
       project = Project.create(:name => project_name,
                                :authorization_level => "ALL",)
@@ -48,7 +48,7 @@ module Seed
     end
 
     def self.create_sub_project(project_id, sub_project_number)
-      #puts "\tcreating sub_project #{sub_project_number}"
+      #puts "\t creating sub_project #{sub_project_number}"
       sub_project_name = "Sub_project #{project_id}.#{sub_project_number}"
       sub_project= SubProject.create(:name => sub_project_name)
       sub_project.project_id= project_id
