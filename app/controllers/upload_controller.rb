@@ -1,14 +1,12 @@
 require 'xmlsimple'
 require 'ftools'
-require 'net/scp'
-require 'net/sftp'
-
+require 'zip/zipfilesystem'
 
 class UploadController < ApplicationController
   def create
     meta_datum, project, sub_project = create_or_update_meta_datum_and_dependency
     if meta_datum.save
-      download_and_parse(params[:host_ip].to_s, meta_datum, params[:password].to_s, params[:username].to_s)
+      download_and_parse(meta_datum)
       redirect_to :action => :show, :project_id => project.id, :sub_project_id => sub_project.id, :project_meta_id => meta_datum.id
     else
       flash[:project_error] = project.errors.messages
@@ -36,26 +34,25 @@ class UploadController < ApplicationController
     project = Project.find_or_create_by_name(params[:project_name].upcase)
     sub_project = project.sub_projects.find_or_create_by_name(params[:sub_project_name].upcase)
     meta_datum = sub_project.test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type(params[:ci_job_name].upcase,
-                                                                                                                                                                               params[:browser].upcase, params[:type_of_environment].upcase, params[:host_name].upcase, params[:os_name].upcase, params[:test_category].upcase, params[:test_report_type].upcase)
     meta_datum.date_of_execution= params[:test_metadatum][:date_of_execution]
     return meta_datum, project, sub_project
   end
 
-  def download_and_parse(host_ip, meta_datum, password, username)
-    Net::SFTP::start(host_ip, username, :password => password) do |sftp|
-      path = params[:logDirectory]
-      dir_path = "/Users/administrator/Desktop/tta_logs"+params[:project_name]+Time.now.strftime("%d-%m-%y:%I:%M:%S")
-      sftp.mkdir( dir_path, :permissions => 0755)
-      sftp.download!(path,dir_path, :recursive => true)
-      local_path = Dir.glob(dir_path+"/**/"+params[:filePattern])
-      local_path.each do |file|
-        parse_xml(file, meta_datum.id)
+  def download_and_parse(meta_datum)
+    p params[:logDirectory].class
+    p params[:logDirectory]
+    tmp = params[:logDirectory].tempfile
+    dir_path = "/home/tta/Desktop/"+params[:project_name]+Time.now.strftime("%d-%m-%y:%I:%M:%S")
+    Dir.mkdir(dir_path,0777)
+    file = File.join(dir_path, params[:logDirectory].original_filename)
+    FileUtils.cp tmp.path, file
+    Zip::ZipFile.open(file) do |zipFile|
+      zipFile.each do |entry|
+        contents = zipFile.read(entry)
+        parse_xml(contents, meta_datum.id)
       end
     end
   end
-
-
-
 
   def parse_xml(config_xml, meta_id)
     config = XmlSimple.xml_in(config_xml, {'KeyAttr' => 'name'})

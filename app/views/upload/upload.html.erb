@@ -14,8 +14,8 @@
 
 </div>
 <div class="form" >
-<%= form_tag({:action => 'create'},{ :method => 'get'})  do %>
 
+<%= form_tag({:action => 'create'},{ :multipart => true})  do %>
 
        <div class="fields" style="padding-top:20px ;">
         <label for="name"> Project Name </label>
@@ -97,33 +97,13 @@
 
       <div class="fields">
         <label for="logDirectory">Directory name</label>
-        <%= text_field_tag :logDirectory%>
+        <%= file_field_tag :logDirectory, {:multiple=>true}%>
       </div>
 
-      <div class="fields">
-        <label for="filePattern">File Name Pattern</label>
-        <%= text_field_tag :filePattern,nil, :placeholder =>'(eg. TEST*.xml)' %> <br>
-      </div>
-
-      <div class="fields">
-        <label for="host_ip">Machine Ip</label>
-        <%= text_field_tag :host_ip ,nil, :placeholder =>'your ip address' %> <br>
-      </div>
-
-      <div class="fields">
-        <label for="username">Username</label>
-        <%= text_field_tag :username%> <br>
-      </div>
-
-      <div class="fields">
-        <label for="password">Password</label>
-        <%= password_field_tag :password %> <br>
-      </div>
-
-       <div class="button">
+      <div class="button">
          <%= submit_tag 'SUBMIT' %>
          <%= submit_tag("Clear All", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
-       </div>
+      </div>
 
 <% end %>
 </div>
