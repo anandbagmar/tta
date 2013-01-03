@@ -13,8 +13,8 @@ SubProject.destroy_all
 SubProject.reset_primary_key
 TestMetadatum.destroy_all
 TestMetadatum.reset_primary_key
-TestRecord.destroy_all
-TestRecord.reset_primary_key
+TestSuiteRecord.destroy_all
+TestSuiteRecord.reset_primary_key
 
 require_relative 'common_seed_data'
 require_relative 'seed_helper'

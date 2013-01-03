@@ -1,6 +1,6 @@
 class TestMetadatum < ActiveRecord::Base
 
-  has_many :test_records
+  has_many :test_suite_records
   attr_accessible :ci_job_name, :browser,:type_of_environment , :date_of_execution, :host_name, :os_name, :user_timezone, :test_category, :test_report_type
 
 

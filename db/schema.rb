@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121206055650) do
+ActiveRecord::Schema.define(:version => 20130103092740) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(:version => 20121206055650) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "test_case_records", :force => true do |t|
+    t.string   "class_name"
+    t.string   "time_taken"
+    t.integer  "test_suite_record_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "test_case_records", ["test_suite_record_id"], :name => "index_test_case_records_on_test_suite_record_id"
+
   create_table "test_metadata", :force => true do |t|
     t.integer  "sub_project_id"
     t.string   "ci_job_name"
@@ -41,7 +51,7 @@ ActiveRecord::Schema.define(:version => 20121206055650) do
     t.string   "test_report_type"
   end
 
-  create_table "test_records", :force => true do |t|
+  create_table "test_suite_records", :force => true do |t|
     t.integer  "test_metadatum_id"
     t.string   "class_name"
     t.integer  "number_of_tests"

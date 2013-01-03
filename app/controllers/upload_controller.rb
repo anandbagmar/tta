@@ -59,7 +59,7 @@ class UploadController < ApplicationController
 
   def parse_xml(config_xml, meta_id)
     config = XmlSimple.xml_in(config_xml, {'KeyAttr' => 'name'})
-    @xml_data = TestRecord.new()
+    @xml_data = TestSuiteRecord.new()
     @xml_data.test_metadatum_id=meta_id
     @xml_data.class_name= config['name']
     @xml_data.number_of_errors= config['errors']

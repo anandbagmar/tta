@@ -57,7 +57,7 @@ module Seed
     end
 
     def self.create_test_record(test_meta_data_id, project_id, sub_project_id,test_record_number)
-      test_record = TestRecord.create(:class_name => "Class #{project_id}.#{sub_project_id}.#{test_meta_data_id}.#{test_record_number}", :number_of_tests => rand(25..50), :number_of_errors => rand(12), :number_of_failures => rand(12), :time_taken => rand(1..5).to_s)
+      test_record = TestSuiteRecord.create(:class_name => "Class #{project_id}.#{sub_project_id}.#{test_meta_data_id}.#{test_record_number}", :number_of_tests => rand(25..50), :number_of_errors => rand(12), :number_of_failures => rand(12), :time_taken => rand(1..5).to_s)
       test_record.test_metadatum_id= test_meta_data_id
       test_record.save
     end
