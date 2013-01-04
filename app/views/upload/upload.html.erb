@@ -14,8 +14,8 @@
 
 </div>
 <div class="form" >
-
 <%= form_tag({:action => 'create'},{ :multipart => true})  do %>
+
 
        <div class="fields" style="padding-top:20px ;">
         <label for="name"> Project Name </label>
@@ -88,7 +88,7 @@
 
       <div class="fields">
         <label for="date_of_execution"> Date Of Execution </label>
-        <%=	 datepicker_input 'test_metadatum','date_of_execution' ,:dateFormat => "yy-mm-dd"%>
+        <%= text_field_tag (:date_of_execution) %>
         <% if flash[:meta_data_error] %>
       <p class="error"><%= flash[:meta_data_error][:date_of_execution] %></p>
         <% end %>
@@ -100,7 +100,7 @@
         <%= file_field_tag :logDirectory, {:multiple=>true}%>
       </div>
 
-      <div class="button">
+       <div class="button">
          <%= submit_tag 'SUBMIT' %>
          <%= submit_tag("Clear All", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
       </div>
