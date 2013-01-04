@@ -59,7 +59,7 @@ namespace :tta do
   task :unit_tests do
     Rake::Task['db:recreate'].execute
     Rake::Task['spec'].execute
-    Rake::Task['tta:upload_to_tta'].invoke("TTA", "TTA_sub", "Build", "Unit+Test", "JUnit", "Ubuntu", "Pooja-pc", "none", "Prod", "", "/home/tta/Downloads/proj4.zip", "*.xml")
+    Rake::Task['tta:upload_to_tta'].invoke("TTA", "TTA_sub", "Build", "Unit+Test", "JUnit", "Ubuntu", "Pooja-pc", "none", "Prod", "", "/var/lib/go-agent/pipelines/Development/tta_spec_results.zip", "*.xml")
   end
 
   task :upload_to_tta, [:project_name, :sub_project_name, :ci_job_name, :test_category, :test_report_type, :os_name, :host_name, :browser, :type_of_environment, :date_of_execution, :logDirectory, :filePattern, :commit] do |t, args|
@@ -77,6 +77,7 @@ namespace :tta do
     $log_directory=args.logDirectory
     $file_pattern=args.filePattern
     $commit=args.commit
+    #"/home/tta/Downloads/proj4.zip"
     `curl -F 'authenticity_token=KBc5IruWAILeOOIVKoqozwSYx3eSatES/fklIGf/Cn4=' -F 'project_name=#{$project_name}' -F 'sub_project_name=#{$sub_project_name}' -F 'ci_job_name=#{$ci_job_name}' -F 'test_category=#{$test_category}' -F 'test_report_type=#{$test_report_type}' -F 'os_name=#{$os_name}' -F 'host_name=#{$host_name}' -F 'browser=#{$browser}' -F 'type_of_environment=#{$type_of_environment}' -F 'date_of_execution=#{$date_of_execution}' -F 'logDirectory=@#{$log_directory}' -F 'commit=SUBMIT' '172.18.6.1:3000/upload/create'`
   end
 end
