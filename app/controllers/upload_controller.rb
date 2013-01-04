@@ -3,6 +3,7 @@ require 'ftools'
 require 'zip/zipfilesystem'
 require 'nokogiri'
 
+
 class UploadController < ApplicationController
   def create
     meta_datum, project, sub_project = create_or_update_meta_datum_and_dependency
@@ -63,6 +64,8 @@ class UploadController < ApplicationController
     dir_path
   end
 
+
+
   def parse_xml(config_xml, meta_id)
     config = XmlSimple.xml_in(config_xml, {'KeyAttr' => 'name'})
     @xml_data = TestSuiteRecord.new()
@@ -93,4 +96,3 @@ class UploadController < ApplicationController
   #  end
   #end
 end
-

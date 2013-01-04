@@ -78,7 +78,10 @@
         $(document).ready(function(){
             var bodyHeight = $('body').css('height'),
                     bodyWidth = $('body').css('width'),
-                    unitTriangleHeight = parseInt(bodyHeight)*parseInt("<%= "%0.0f" % @percent_unit_test %>")/200,
+                    unitTriangleHeight = parseInt(bodyHeight)*parseInt("<%= "%0.0f" % @percent_unit_test %>")/200;
+            if (unitTriangleHeight==0)
+                unitTriangleHeight = bodyHeight
+            var
                     integrationTriangleHeight = parseInt(unitTriangleHeight)*(parseInt("<%= "%0.0f" % @percent_integration_test %>")+parseInt("<%= "%0.0f" % @percent_functional_test %>"))/200,
                     functionalTriangleHeight = parseInt(unitTriangleHeight)*parseInt("<%= "%0.0f" % @percent_functional_test %>")/200;
 
