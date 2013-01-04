@@ -42,7 +42,6 @@ class UploadController < ApplicationController
   end
 
   def save_log_files(meta_datum)
-    #tmp = params[:logDirectory].tempfile
     dir_path = create_directory_structure()
     file = File.join(dir_path, params[:logDirectory].original_filename)
     FileUtils.cp params[:logDirectory].tempfile.path, file
