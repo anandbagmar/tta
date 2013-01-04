@@ -76,8 +76,6 @@ class UploadController < ApplicationController
 
   end
 
-end
-
   #def drill_down_parsing(config_xml)
   #  doc = Nokogiri::XML(config_xml)
   #
