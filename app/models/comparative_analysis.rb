@@ -6,7 +6,6 @@ class ComparativeAnalysis
   def self.get_result_set(project_id, start_date="1900-01-01", end_date="2200-12-31")
     project=Project.find(project_id)
     sub_projects_list = project.sub_projects
-
     result_set = Hash.new
     sub_projects_list.each{ |sub_project|
       aggregate_value = get_percentage_of_passing_tests(sub_project.id, start_date, end_date)

@@ -30,6 +30,9 @@
       <div class="fields" >
         <label for="project">Project:</label>
         <%= select("project", "id", Project.all.collect {|p| [ p.name, p.id ] }, { :include_blank => true }) %><br>
+        <% if flash[:no_id_error] %>
+            <p class="error"><%= flash[:no_id_error] %></p>
+        <% end %>
       </div>
       <div id="submit-plot-button">
       <%= submit_tag "Plot" %>
@@ -38,7 +41,7 @@
 
 </div>
 
- <% if @start_date%>
+ <% if @result_set%>
 <div id="date-range-title">
   <h3>Graph Plotted For Date Range:</h3>
   <h3>From <%= @start_date %> to <%= @end_date %></h3>
