@@ -25,9 +25,9 @@ class ComparativeAnalysis
     meta_data.inject([]){ |result, metadata_record|
       total_num_of_tests = 0
       number_of_failures = 0
-      metadata_record.test_records.each do |test_record|
-        total_num_of_tests += test_record.number_of_tests.to_i
-        number_of_failures += test_record.number_of_failures.to_i
+      metadata_record.test_suite_records.each do |test_suite_record|
+        total_num_of_tests += test_suite_record.number_of_tests.to_i
+        number_of_failures += test_suite_record.number_of_failures.to_i
       end
       result << [(metadata_record.date_of_execution.to_time.to_f * 1000), (total_num_of_tests.to_f - number_of_failures.to_f) / total_num_of_tests.to_f  * 100]
     }

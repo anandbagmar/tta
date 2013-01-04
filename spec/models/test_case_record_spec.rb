@@ -1,5 +1,10 @@
 require 'spec_helper'
 
 describe TestCaseRecord do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
+
+    describe "belongs to" do
+      it "test_suite_record" do
+        should belong_to :test_suite_record
+      end
+    end
+  end

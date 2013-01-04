@@ -1,6 +1,7 @@
 require 'xmlsimple'
 require 'ftools'
 require 'zip/zipfilesystem'
+require 'nokogiri'
 
 class UploadController < ApplicationController
   def create
@@ -33,7 +34,7 @@ class UploadController < ApplicationController
   def create_or_update_meta_datum_and_dependency
     project = Project.find_or_create_by_name(params[:project_name].upcase)
     sub_project = project.sub_projects.find_or_create_by_name(params[:sub_project_name].upcase)
-    meta_datum = sub_project.test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type(params[:ci_job_name].upcase,
+    meta_datum = sub_project.test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type(params[:ci_job_name].upcase,params[:browser].upcase, params[:type_of_environment].upcase, params[:host_name].upcase, params[:os_name].upcase, params[:test_category].upcase, params[:test_report_type].upcase)
     meta_datum.date_of_execution= params[:test_metadatum][:date_of_execution]
     return meta_datum, project, sub_project
   end
@@ -42,7 +43,7 @@ class UploadController < ApplicationController
     p params[:logDirectory].class
     p params[:logDirectory]
     tmp = params[:logDirectory].tempfile
-    dir_path = "/home/tta/Desktop/"+params[:project_name]+Time.now.strftime("%d-%m-%y:%I:%M:%S")
+    dir_path = "/Users/khushal/Uploaded_logs/"+params[:project_name]+Time.now.strftime("%d-%m-%y:%I:%M:%S")
     Dir.mkdir(dir_path,0777)
     file = File.join(dir_path, params[:logDirectory].original_filename)
     FileUtils.cp tmp.path, file
@@ -50,6 +51,7 @@ class UploadController < ApplicationController
       zipFile.each do |entry|
         contents = zipFile.read(entry)
         parse_xml(contents, meta_datum.id)
+
       end
     end
   end
@@ -65,6 +67,28 @@ class UploadController < ApplicationController
     @xml_data.time_taken= config['time']
     @xml_data.save
 
-  end
+
+
+
+
 
 end
+
+  #def drill_down_parsing(config_xml)
+  #  doc = Nokogiri::XML(config_xml)
+  #
+  #  @testsuite = doc.xpath('//testsuite//testcase').map do |i|
+  #    {'name' => i.xpath('name').inner_text, 'time' => i.xpath('time').inner_text
+  #
+  #    }
+  #    puts name
+  #    puts time
+  #  end
+  #
+  #  @testsuite.each do |l|
+  #    puts l['name']
+  #    puts l['time']
+  #  end
+  #end
+end
+

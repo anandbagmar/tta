@@ -7,9 +7,9 @@ class Visualization
     meta_data.inject([]){ |result, metadata_record|
       total_num_of_tests = 0
       total_run_time = 0
-      metadata_record.test_records.each do |test_record|
-        total_num_of_tests += test_record.number_of_tests.to_i
-        total_run_time += test_record.time_taken.to_i
+      metadata_record.test_suite_records.each do |test_suite_record|
+        total_num_of_tests += test_suite_record.number_of_tests.to_i
+        total_run_time += test_suite_record.time_taken.to_i
       end
 
       result << [total_num_of_tests,total_run_time]
