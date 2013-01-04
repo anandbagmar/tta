@@ -54,12 +54,12 @@ class UploadController < ApplicationController
   end
 
   def create_directory_structure
-    dir_path = "/home/administrator/Documents/tta/log_files/"+params[:project_name]
-    Dir.mkdir(dir_path, 0777)
+    dir_path = "/home/aasawaree/Desktop/"+params[:project_name]
+    Dir.mkdir(dir_path, 0777) unless File.exists?(dir_path)
     dir_path = dir_path+"/"+params[:sub_project_name]
-    Dir.mkdir(dir_path, 0777)
+    Dir.mkdir(dir_path, 0777) unless File.exists?(dir_path)
     dir_path = dir_path+"/"+Time.now.strftime("%d-%m-%y-%I:%M:%S")
-    Dir.mkdir(dir_path, 0777)
+    Dir.mkdir(dir_path, 0777) unless File.exists?(dir_path)
     dir_path
   end
 
