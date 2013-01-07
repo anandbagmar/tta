@@ -46,14 +46,20 @@ class UploadController < ApplicationController
     FileUtils.cp params[:logDirectory].tempfile.path, file
     Zip::ZipFile.open(file) do |zipFile|
       zipFile.each do |entry|
+        filename=entry.to_s
         contents = zipFile.read(entry)
-        parse_xml(contents, meta_datum.id)
+        contents_string= contents.to_s
+        if filename =~ /\.xml$/
+          if contents_string.start_with? ("<?xml")
+            parse_xml(contents, meta_datum.id)
+          end
+        end
       end
     end
   end
 
   def create_directory_structure
-    dir_path = "/home/administrator/Documents/tta/log_files/"+params[:project_name]
+    dir_path = "/Users/khushal/Uploaded_logs/"+params[:project_name]
     Dir.mkdir(dir_path, 0777) unless File.exists?(dir_path)
     dir_path = dir_path+"/"+params[:sub_project_name]
     Dir.mkdir(dir_path, 0777) unless File.exists?(dir_path)
@@ -96,5 +102,8 @@ class UploadController < ApplicationController
     File.delete("temp_log.xml")
   end
 
-  
+
 end
+
+
+

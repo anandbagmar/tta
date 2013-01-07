@@ -42,7 +42,7 @@ gem "therubyracer", :require => 'v8'
 #gem 'pg', :require => 'pg'
 
 gem 'yarjuf'
-gem 'xml-simple', :require => 'xmlsimple'
+
 gem 'net-scp'
 gem 'paperclip'
 gem 'jquery-ui-rails'
