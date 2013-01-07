@@ -6,7 +6,7 @@ class VisualizationController < ApplicationController
   def sub_project_filter
       sub_project_id=params[:sub_project][:id]
       if sub_project_id.blank?
-        flash[:no_id_error] = "No Project Selected"
+        flash[:no_id_error] = "No Sub-Project Selected"
         render 'visualization/pyramid'
      else
       result_set1 = Visualization.getNoOfTests(sub_project_id,"FUNCTIONAL TEST")

@@ -55,6 +55,7 @@ gem 'globalize3', '~> 0.2.0'
 gem 'batch_translations', '~> 0.1.2'
 gem 'simple_form'
 gem 'net-sftp', '~> 2.0.5'
+  gem 'thin', '~> 1.5.0'
 
 group :development, :test do
   gem 'factory_girl_rails'                        # use factories instead of fixtures

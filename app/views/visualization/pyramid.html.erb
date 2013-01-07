@@ -11,10 +11,10 @@
 </div>
 
 <div id="sub_project_picker">
-  <h2>Select Project to get Test-Pyramid</h2>
+  <h2>Select Sub-Project to get Test-Pyramid</h2>
   <%= form_tag ({:action => 'sub_project_filter'}) do %>
       <div class="fields" >
-        <label for="sub_project">Project:</label>
+        <label for="sub_project">Sub-Project:</label>
         <%= select("sub_project", "id", SubProject.all.collect {|p| [ p.name, p.id ] } ,{:include_blank => true}) %>
         <p class="error"><%= flash[:no_id_error] if flash[:no_id_error] %></p>
         <br>
@@ -29,7 +29,7 @@
 
 <% if @sub_project_name %>
     <div id="graph">
-      <h4>Test Pyramid for Project: <%= @sub_project_name %></h4><br><br>
+      <h4>Test Pyramid for: <%= @sub_project_name %></h4><br><br>
       <div id="legend">
         <div id="unit">
           <div id="unit_rect">
@@ -47,7 +47,7 @@
           <p>Functional Tests</p>
         </div>
       </div>
-
+      <div id="pyramid">
       <div id="unit_region">
         <% if @percent_unit_test!="0.00" %>
         <p id="unit_percent"> <%= @percent_unit_test %>%</p>
@@ -73,17 +73,21 @@
             </div>
         </div>
       </div>
+      </div>
+
 
     <script type="text/javascript">
         $(document).ready(function(){
             var bodyHeight = $('body').css('height'),
                     bodyWidth = $('body').css('width'),
-                    unitTriangleHeight = parseInt(bodyHeight)*parseInt("<%= "%0.0f" % @percent_unit_test %>")/200;
-            if (unitTriangleHeight==0)
-                unitTriangleHeight = bodyHeight
+                    unitTriangleHeight = parseInt(bodyHeight)*parseInt("<%= "%0.0f" % @percent_unit_test %>")/100;
+                    var baseTriangleHeight = parseInt(bodyHeight)/2;
+
+            if (unitTriangleHeight!=0)
+                unitTriangleHeight=baseTriangleHeight;
             var
-                    integrationTriangleHeight = parseInt(unitTriangleHeight)*(parseInt("<%= "%0.0f" % @percent_integration_test %>")+parseInt("<%= "%0.0f" % @percent_functional_test %>"))/200,
-                    functionalTriangleHeight = parseInt(unitTriangleHeight)*parseInt("<%= "%0.0f" % @percent_functional_test %>")/200;
+                    integrationTriangleHeight = parseInt(baseTriangleHeight)*(parseInt("<%= "%0.0f" % @percent_integration_test %>")+parseInt("<%= "%0.0f" % @percent_functional_test %>"))/100,
+                    functionalTriangleHeight = parseInt(baseTriangleHeight)*parseInt("<%= "%0.0f" % @percent_functional_test %>")/100;
 
             $("#unit_test").css({
                 "border-bottom-width": unitTriangleHeight+"px",
@@ -105,6 +109,35 @@
             });
             $("#unit_region").css({
                 "width":unitTriangleHeight*2+"px"
+            } );
+            console.log($("#pyramid").css("width"))
+            $("#functional_percent,#functional_duration").css({
+                "top":parseInt("<%= "%0.0f" % @percent_functional_test %>")/2+"%"
+            } );
+            $("#functional_percent").css({
+                "left":((parseInt($("#pyramid").css("width"))/2)-functionalTriangleHeight)+"px"
+            } );
+            $("#functional_duration").css({
+                "right":((parseInt($("#pyramid").css("width"))/2)-functionalTriangleHeight)-30+"px"
+            } );
+            $("#integration_percent,#integration_duration").css({
+                "top":(parseInt("<%= "%0.0f" % @percent_integration_test %>")+parseInt("<%= "%0.0f" % @percent_functional_test %>"))/2+"%",
+                "left":($("#pyramid").css("width")-integrationTriangleHeight/2)+"%"
+            } );
+            $("#integration_percent").css({
+                "left":((parseInt($("#pyramid").css("width"))/2)-integrationTriangleHeight)+"px"
+            } );
+            $("#integration_duration").css({
+                "right":((parseInt($("#pyramid").css("width"))/2)-integrationTriangleHeight)-20+"px"
+            } );
+            $("#unit_percent,#unit_duration").css({
+                "bottom":parseInt("<%= "%0.0f" % @percent_unit_test %>")+"%"
+            } );
+            $("#unit_percent").css({
+                "left":((parseInt($("#pyramid").css("width"))/2)-unitTriangleHeight)-20+"px"
+            } );
+            $("#unit_duration").css({
+                "right":((parseInt($("#pyramid").css("width"))/2)-unitTriangleHeight)-40+"px"
             } );
 
         });

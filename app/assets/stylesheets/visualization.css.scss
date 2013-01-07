@@ -15,6 +15,7 @@ body,html{
 }
 
 #graph{
+  display:inline;
   position:relative;
   margin: 45px 0px;
 
@@ -56,11 +57,16 @@ body,html{
   border-top-width: 0;
   margin-left: -25px;
 }
-
-#unit_region{
+#pyramid{
+  height: 75%;
   position: relative;
+
+}
+
+#unit_region,#pyramid{
+
   padding: 20px 0px;
-  width: 26%;
+  width: 65%;
   margin: 0 auto;
 }
 
@@ -70,32 +76,32 @@ body,html{
 }
 #unit_percent{
   bottom:15%;
-  left:-20px;
+  left:-20px
 }
 #unit_duration{
-  right: -42px;
+  right: -30px;
   bottom: 15%;
 }
 
 #integration_percent{
   bottom: 43%;
-  left: 8%;
+  left: 15%;
 }
 
 #integration_duration{
   bottom: 43%;
-  right: 5%;
+  right: 15%;
 
 }
 
 #functional_percent{
   top:10%;
-  left: 25%;
+  left: 28%;
 }
 
 #functional_duration{
   top:10%;
-  right: 21%;
+  right: 27%;
 }
 #legend{
   text-align:right;
