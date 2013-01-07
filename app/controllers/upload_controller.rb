@@ -1,4 +1,3 @@
-require 'xmlsimple'
 require 'ftools'
 require 'zip/zipfilesystem'
 require 'nokogiri'
@@ -64,34 +63,38 @@ class UploadController < ApplicationController
   end
 
 
-
   def parse_xml(config_xml, meta_id)
-    config = XmlSimple.xml_in(config_xml, {'KeyAttr' => 'name'})
-    @xml_data = TestSuiteRecord.new()
-    @xml_data.test_metadatum_id=meta_id
-    @xml_data.class_name= config['name']
-    @xml_data.number_of_errors= config['errors']
-    @xml_data.number_of_failures= config['failures']
-    @xml_data.number_of_tests= config['tests']
-    @xml_data.time_taken= config['time']
-    @xml_data.save
-
+    myfile=File.new("temp_log.xml", "w")
+    myfile.puts config_xml
+    myfile.close
+    @doc = Nokogiri::Slop(File.open("temp_log.xml"))
+    @doc.xpath("//testsuite").each do |p|
+      time = 0
+      @xml_data = TestSuiteRecord.new()
+      @xml_data.test_metadatum_id=meta_id
+      @xml_data.class_name= p.attr("name")
+      @xml_data.number_of_tests= p.attr("tests")
+      @xml_data.number_of_errors= p.attr("errors")
+      @xml_data.number_of_failures= p.attr("failures")
+      @doc.xpath("//testsuite/testcase").each do |q|
+        if q.attr("name").start_with? (p.attr("name")+" ")
+          time += q.attr("time").to_f
+        end
+      end
+      @xml_data.time_taken = time.to_s
+      @xml_data.save
+      @doc.xpath("//testsuite/testcase").each do |q|
+        if q.attr("name").start_with? (p.attr("name")+" ")
+          @xml_test_case = TestCaseRecord.new()
+          @xml_test_case.test_suite_record_id= @xml_data.id
+          @xml_test_case.class_name = q.attr("name")
+          @xml_test_case.time_taken = q.attr("time")
+          @xml_test_case.save
+        end
+      end
+    end
+    File.delete("temp_log.xml")
   end
 
-  #def drill_down_parsing(config_xml)
-  #  doc = Nokogiri::XML(config_xml)
-  #
-  #  @testsuite = doc.xpath('//testsuite//testcase').map do |i|
-  #    {'name' => i.xpath('name').inner_text, 'time' => i.xpath('time').inner_text
-  #
-  #    }
-  #    puts name
-  #    puts time
-  #  end
-  #
-  #  @testsuite.each do |l|
-  #    puts l['name']
-  #    puts l['time']
-  #  end
-  #end
+  
 end
