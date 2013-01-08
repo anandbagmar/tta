@@ -1,7 +1,7 @@
 require 'ftools'
 require 'zip/zipfilesystem'
 require 'nokogiri'
-require "rexml/document"
+
 
 
 class UploadController < ApplicationController
@@ -30,7 +30,8 @@ class UploadController < ApplicationController
         sub_project = project.sub_projects.find_or_create_by_name(params[:sub_project_name].upcase)
               meta_datum = sub_project.test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type(params[:ci_job_name].upcase,
                                                                                                                                                                                          params[:browser].upcase, params[:type_of_environment].upcase, params[:host_name].upcase, params[:os_name].upcase, params[:test_category].upcase, params[:test_report_type].upcase)
-              meta_datum.date_of_execution= params[:date_of_execution]
+    meta_datum.date_of_execution= params[:date_of_execution]
+    meta_datum.save
     return meta_datum, project, sub_project
   end
 
@@ -53,7 +54,7 @@ class UploadController < ApplicationController
   end
 
   def create_directory_structure
-    dir_path = "/Users/khushal/Documents/Uploaded_logs"+params[:project_name]
+    dir_path = "/Users/pooja/Documents/tta/logs/"+params[:project_name]
     Dir.mkdir(dir_path, 0777) unless File.exists?(dir_path)
     dir_path = dir_path+"/"+params[:sub_project_name]
     Dir.mkdir(dir_path, 0777) unless File.exists?(dir_path)
