@@ -6,15 +6,8 @@ require 'nokogiri'
 class UploadController < ApplicationController
   def create
     meta_datum, project, sub_project = create_or_update_meta_datum_and_dependency
-    if !(project.save) or !(sub_project.save) or !(meta_datum.save)
-      flash[:project_error] = project.errors.messages
-      flash[:sub_project_error] = sub_project.errors.messages
-      flash[:meta_data_error] = meta_datum.errors.messages
-      render 'upload/upload'
-    else
       save_log_files(meta_datum)
       redirect_to :action => :show, :project_id => project.id, :sub_project_id => sub_project.id, :project_meta_id => meta_datum.id
-    end
   end
 
   def show

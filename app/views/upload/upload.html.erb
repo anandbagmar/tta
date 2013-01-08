@@ -1,5 +1,12 @@
 <head xmlns="http://www.w3.org/1999/html">
   <link rel="stylesheet" href="/stylesheet/upload_form.css"> </link>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+  <script>
+      $(document).ready(function(){
+          $("#uploadForm").validate();
+      });
+  </script>
 </head>
 
 <div id="menu-bar">
@@ -13,25 +20,19 @@
 <h1 style="text-align: center; font-family: tahoma;">Upload Test Data</h1>
 
 </div>
-<div class="form" >
-<%= form_tag({:action => 'create'},{ :multipart => true})  do %>
+<div class="form">
+<%= form_tag({:action => 'create' },{ :multipart => true,:id => "uploadForm"}) do %>
 
 
        <div class="fields" style="padding-top:20px ;">
         <label for="name"> Project Name </label>
-        <%= text_field_tag (:project_name) %>
-         <% if flash[:project_error] %>
-         <p class="error"><%= flash[:project_error][:name] %></p>
-         <% end %>
+        <%= text_field_tag (:project_name) ,nil, :class => 'required' ,:maxlength=>"100" %>
          <br>
        </div>
 
       <div class="fields" >
         <label for="sub_project_name">Sub-Project name</label>
-        <%= text_field_tag (:sub_project_name) %>
-        <% if flash[:sub_project_error] %>
-        <p class="error"><%= flash[:sub_project_error][:name] %></p>
-        <% end %>
+        <%= text_field_tag (:sub_project_name),nil, :class => 'required',:maxlength=>"100" %>
         <br>
       </div>
 
@@ -52,56 +53,41 @@
 
       <div class="fields" >
         <label for="os_name"> OS Tested On</label>
-        <%= text_field_tag ( :os_name) %>
-        <% if flash[:meta_data_error] %>
-      <p class="error"><%= flash[:meta_data_error][:os_name] %></p>
-            <% end %>
-            <br>
+        <%= text_field_tag ( :os_name) ,nil, :class => 'required'%>
+         <br>
       </div>
 
       <div class="fields">
          <label for="host_name">Host-Machine Name </label>
-         <%= text_field_tag (:host_name) %>
-        <% if flash[:meta_data_error] %>
-      <p class="error"><%= flash[:meta_data_error][:host_name] %></p>
-        <% end %>
+         <%= text_field_tag (:host_name),nil, :class => 'required' %>
         <br>
       </div>
 
       <div class="fields">
         <label for="browser"> Browser Tested On</label>
-        <%= text_field_tag (:browser) %>
-        <% if flash[:meta_data_error] %>
-      <p class="error"><%= flash[:meta_data_error][:browser] %></p>
-        <% end %>
+        <%= text_field_tag (:browser),nil, :class => 'required' %>
         <br>
       </div>
 
       <div class="fields">
         <label for="type_of_environment"> Environment Run on</label>
-        <%= text_field_tag (:type_of_environment) %>
-        <% if flash[:meta_data_error] %>
-      <p class="error"><%= flash[:meta_data_error][:type_of_environment] %></p>
-        <% end %>
+        <%= text_field_tag (:type_of_environment),nil, :class => 'required' %>
         <br>
       </div>
 
       <div class="fields">
         <label for="date_of_execution"> Date Of Execution </label>
-        <%= text_field_tag (:date_of_execution) %>
-        <% if flash[:meta_data_error] %>
-      <p class="error"><%= flash[:meta_data_error][:date_of_execution] %></p>
-        <% end %>
+        <%= text_field_tag (:date_of_execution),nil,:placeholder => 'yyyy-mm-dd', :class => 'date' %>
         <br>
       </div>
 
       <div class="fields">
         <label for="logDirectory">Directory name</label>
-        <%= file_field_tag :logDirectory, {:multiple=>true}%>
+        <%= file_field_tag :logDirectory, {:multiple=>true, :accept => 'application/zip'}%>
       </div>
 
        <div class="button">
-         <%= submit_tag 'SUBMIT' %>
+         <%= submit_tag 'SUBMIT',:class=> 'submit'%>
          <%= submit_tag("Clear All", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
       </div>
 
