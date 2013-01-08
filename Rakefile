@@ -25,9 +25,6 @@ $type_of_environment=""
 $date_of_execution=""
 $log_directory=""
 $file_pattern=""
-$TTA_ip="10.12.6.107"
-$TTA_username="aasawaree"
-$TTA_password="ritu210"
 $commit=""
 $file_uploaded=""
 
@@ -57,6 +54,7 @@ end
 namespace :tta do
   desc "Run unit_tests"
   task :unit_tests do
+    p "Project root:#{$PROJECT_ROOT}"
     Rake::Task['db:recreate'].execute
     Rake::Task['spec'].execute
     Rake::Task['tta:create_zip'].execute
@@ -64,7 +62,7 @@ namespace :tta do
   end
 
   task :create_zip do
-    exec 'zip tta_spec_results.zip log/tta_spec_results.xml'
+    `zip tta_spec_results.zip log/tta_spec_results.xml`
   end
 
   task :upload_to_tta, [:project_name, :sub_project_name, :ci_job_name, :test_category, :test_report_type, :os_name, :host_name, :browser, :type_of_environment, :date_of_execution, :logDirectory, :filePattern, :commit] do |t, args|
