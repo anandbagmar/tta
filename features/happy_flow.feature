@@ -1,7 +1,7 @@
 Feature: Upload data to view test pyramid
 
   Scenario: Hitting homepage through URL
-    Given That the user enters "http://localhost:3000"
+    Given That the user enters "http://172.18.6.1:3000"
     Then  "Testing Trend Analysis" homepage should be open
 
     Given The user navigates to "UPLOAD TEST DATA" page

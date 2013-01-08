@@ -82,7 +82,6 @@ namespace :tta do
     $log_directory=args.logDirectory
     $file_pattern=args.filePattern
     $commit=args.commit
-    #"/home/tta/Downloads/proj4.zip"
     `curl -F 'authenticity_token=KBc5IruWAILeOOIVKoqozwSYx3eSatES/fklIGf/Cn4=' -F 'project_name=#{$project_name}' -F 'sub_project_name=#{$sub_project_name}' -F 'ci_job_name=#{$ci_job_name}' -F 'test_category=#{$test_category}' -F 'test_report_type=#{$test_report_type}' -F 'os_name=#{$os_name}' -F 'host_name=#{$host_name}' -F 'browser=#{$browser}' -F 'type_of_environment=#{$type_of_environment}' -F 'date_of_execution=#{$date_of_execution}' -F 'logDirectory=@#{$log_directory}' -F 'commit=SUBMIT' '172.18.6.1:3000/upload/create'`
   end
 end
