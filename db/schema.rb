@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130103092740) do
+ActiveRecord::Schema.define(:version => 20130108054451) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20130103092740) do
     t.integer  "test_suite_record_id"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.string   "error_msg"
   end
 
   add_index "test_case_records", ["test_suite_record_id"], :name => "index_test_case_records_on_test_suite_record_id"

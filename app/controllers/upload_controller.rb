@@ -1,6 +1,7 @@
 require 'ftools'
 require 'zip/zipfilesystem'
 require 'nokogiri'
+require "rexml/document"
 
 
 class UploadController < ApplicationController
@@ -52,7 +53,7 @@ class UploadController < ApplicationController
   end
 
   def create_directory_structure
-    dir_path = "/home/administrator/Documents/tta/log_files/"+params[:project_name]
+    dir_path = "/Users/khushal/Documents/Uploaded_logs"+params[:project_name]
     Dir.mkdir(dir_path, 0777) unless File.exists?(dir_path)
     dir_path = dir_path+"/"+params[:sub_project_name]
     Dir.mkdir(dir_path, 0777) unless File.exists?(dir_path)
@@ -87,8 +88,19 @@ class UploadController < ApplicationController
           @xml_test_case = TestCaseRecord.new()
           @xml_test_case.test_suite_record_id= @xml_data.id
           @xml_test_case.class_name = q.attr("name")
+          testcase_name=q.attr("name")
           @xml_test_case.time_taken = q.attr("time")
+          if @xml_data.number_of_failures.to_i > 0
+             @doc.xpath("//testsuite/testcase/failure").each do |w|
+               node = Nokogiri::XML config_xml
+               cdata = node.search("//testsuite/testcase[@name='#{testcase_name}']/failure").children.find{|e| e.cdata?}
+               str = cdata.to_s
+               str1=str.scan(/\[CDATA\[((.|\s)*)\]\]/m).first
+               @xml_test_case.error_msg = str1
+            end
+          end
           @xml_test_case.save
+
         end
       end
     end
