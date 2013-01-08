@@ -9,7 +9,7 @@ module Definitions
       fill_in 'browser', :with => "IE"
       fill_in 'type_of_environment', :with => "DEV"
       fill_in 'date_of_execution', :with => "2011-12-12"
-      attach_file 'logDirectory', "/Users/khushal/tta_spec_results.zip"
+      attach_file 'logDirectory', "/var/lib/go-agent/pipelines/Development/tta_spec_results.zip"
       select test_type, :from => "test_category"
       click_button("SUBMIT")
 
