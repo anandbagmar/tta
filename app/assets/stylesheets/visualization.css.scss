@@ -24,7 +24,7 @@ body,html{
 #unit_test{
 
   border-style:solid;
-  border-color:transparent transparent #48D482;
+  border-color:transparent transparent #003366;
   height: 0px;
   width: 0px;
   border-bottom-width: 200px;
@@ -38,7 +38,7 @@ body,html{
   height: 0px;
   width: 0px;
   border-style: solid;
-  border-color: transparent transparent #C2A9F5;
+  border-color: transparent transparent #996699;
   border-bottom-width: 100px;
   border-left-width: 50px;
   border-right-width: 50px;
@@ -50,7 +50,7 @@ body,html{
   height: 0px;
   width: 0px;
   border-style: solid;
-  border-color: transparent transparent #F5D96C;
+  border-color: transparent transparent #009966;
   border-bottom-width: 50px;
   border-left-width: 25px;
   border-right-width: 25px;
@@ -58,7 +58,6 @@ body,html{
   margin-left: -25px;
 }
 #pyramid{
-  height: 75%;
   position: relative;
 
 }
@@ -66,7 +65,7 @@ body,html{
 #unit_region,#pyramid{
 
   padding: 20px 0px;
-  width: 65%;
+  width:1000px;
   margin: 0 auto;
 }
 
@@ -75,12 +74,12 @@ body,html{
  position:absolute;
 }
 #unit_percent{
-  bottom:15%;
+  top:80%;
   left:-20px
 }
 #unit_duration{
   right: -30px;
-  bottom: 15%;
+  top: 80%;
 }
 
 #integration_percent{
@@ -106,8 +105,14 @@ body,html{
 #legend{
   text-align:right;
   widht:40%;
-margin-left: 60%;
+  margin-left: 60%;
+  border:2px , solid;
 }
+#legend p{
+  text-align: left;
+  margin-left:20%
+}
+
 #unit,#functional,#integration{
   display:block;
   text-align: left;
@@ -123,17 +128,17 @@ margin-left: 60%;
   display: inline-block;
   width: 10%;
   height:20px;
-  background-color: #48D482;
+  background-color: #003366;
 }
 #integration_rect{
   display: inline-block;
   width: 10%;
   height:20px;
-  background-color: #C2A9F5;
+  background-color: #996699;
 }
 #functional_rect{
   display: inline-block;
   width: 10%;
   height:20px;
-  background-color: #F5D96C;
+  background-color: #009966;
 }
