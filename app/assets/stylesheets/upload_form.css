@@ -3,14 +3,22 @@
     background-color:#29B;;
 }
 
-#menu-bar h1{
+#menu-bar #title{
     display: inline-block;
     padding-top: 10px;
     padding-bottom: 10px;
+    text-align: center;
 }
-
-#menu-bar a{
-    float: right;
+#menu-bar #title h1{
+    margin-bottom: 10px;
+}
+#menu-bar .menu-options{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+#menu-bar #title span{
+    color: #C5C0C0;
 }
 
 
