@@ -3,6 +3,10 @@ require 'capybara'
 require 'capybara/dsl'
 require 'rspec'
 
+
+require 'test/unit/assertions'
+World(Test::Unit::Assertions)
+
 Capybara.run_server = false
 Capybara.default_driver = :selenium
 Capybara.default_selector = :css
