@@ -23,8 +23,6 @@ end
 gem 'jquery-rails'
 gem 'thin'
 gem 'xml-simple'
-gem 'selenium-webdriver'
-gem 'capybara'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
