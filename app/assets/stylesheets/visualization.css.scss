@@ -21,6 +21,20 @@ body,html{
 
 }
 
+#x-axisLabel p{
+  position: relative;
+  padding-bottom: 2%;
+}
+
+#y-axisLabel p{
+  position: relative;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  text-align: left;
+  left: -34%;
+  top: -1000px;
+}
+
 #unit_test{
 
   border-style:solid;

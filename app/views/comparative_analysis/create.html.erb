@@ -43,7 +43,10 @@
 </div>
 
 <div id="comparative_analysis" style="width:900px;height:600px">
-  <script>
+
+
+
+<script>
       st_date = new Date('<%= @start_date %>');
       start_time= st_date.getTime()
       ed_date = new Date('<%= @end_date %>');
@@ -52,9 +55,9 @@
       for(var i = start_time; i<=end_time; i+=((end_time-start_time)/10)){
           data.push(i);
       }
-      var ticks = [];
+      var tick_set = [];
       for (var i = 0; i < data.length; i++) {
-          ticks.push(data[i]); //corrected the missing closing bracket here..
+          tick_set.push(data[i]); //corrected the missing closing bracket here..
       }
 
       var getdata = function(){
@@ -72,7 +75,6 @@
           return data;
       };
 
-
       $.plot($("#comparative_analysis"),
              getdata(),
               /*data,*/
@@ -81,28 +83,20 @@
                   xaxis: {
                       rotateTicks:135,
                       mode: "time",
-                       ticks: ticks,
+                      ticks: tick_set,
                       timeformat: "%d-%b , %y",
                       tickLength: 5,
                       tickSize:5,
                       minTickSize: [1, "year"],
-                      axisLabel: 'Date-Range',
-                      axisLabelUseCanvas: true,
-                      axisLabelFontSizePixels: 12,
-                      axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-                      axisLabelPadding: 5 ,
                       min: start_time,
-                      max: end_time
+                      max: end_time,
+                      labelMargin: 50
                   },
                   yaxis: {
                       tickLength: 5,
-                      axisLabel: 'Percentage of Passing Tests',
-                      axisLabelUseCanvas: true,
-                      axisLabelFontSizePixels: 12,
-                      axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-                      axisLabelPadding: 5  ,
                       min:0,
-                      max: 100
+                      max: 100,
+                      labelMargin: 30
 
                   },
                   grid:  {
@@ -110,8 +104,8 @@
                       hoverable: true,
                       clickable: true,
                       labelMargin: 1,
-                      backgroundColor: { colors: ["#fff", "#eee"] }
-
+                      backgroundColor: { colors: ["#fff", "#eee"] },
+                      minBorderMargin:40
                   },
                   legend: {
                       position: "ne"
@@ -121,7 +115,18 @@
       );
   </script>
 </div>
+    <div id="y-axisLabel">
+      <p>Percentage Of Test Passing</p>
+    </div>
+
+    <div id="x-axisLabel">
+      <p> Date-Range</p>
+    </div>
+
 <% end  %>
+
+
+
 
 </body>
 
