@@ -2,7 +2,7 @@ Feature: Upload data to view test pyramid and Comparative analysis graph
 
   Scenario: Test Pyramid Flow
   Scenario Outline: Uploading Data
-    Given That the user visits the url "http://172.18.6.1:3000"
+    Given That the user visits the url "http://10.12.6.74:3000"
     When The user navigates to "UPLOAD TEST DATA" page
     And The user submits project details with "<proj>","<sub_proj>","<ci_job>","<osName>","<hostName>","<browser>","<environment>","<dateOfExecution>","<logDir>","<test_type>"
     Then The project is uploaded
@@ -19,7 +19,7 @@ Feature: Upload data to view test pyramid and Comparative analysis graph
    @wip
   Scenario: Comparative Analysis Flow
   Scenario Outline: Uploading Data
-    Given That the user visits the url "http://172.18.6.1:3000"
+    Given That the user visits the url "http://10.12.6.74:3000"
     When The user navigates to "UPLOAD TEST DATA" page
     And The user submits project details with "<proj>","<sub_proj>","<ci_job>","<osName>","<hostName>","<browser>","<environment>","<dateOfExecution>","<logDir>","<test_type>"
     Then The project is uploaded
