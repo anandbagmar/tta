@@ -1,15 +1,16 @@
-<div id="menu-bar" xmlns="http://www.w3.org/1999/html">
+<div id="menu-bar" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
   <h1>Testing Trend Analysis</h1>
   <a href='/home/index' style="height: 20px; width: 50px; color: #ffffff; margin-right: 10px;">HOME</a>
 </div>
-
 
 <body>
 <div id="page_title">
   <h1>Pyramid View</h1>
 
 </div>
-
+<% if flash[:no_test_error]!=nil %>
+    <p class="error"><%= flash[:no_test_error] %><br></p>
+<% end %>
 <div id="sub_project_picker">
   <h2>Select Sub-Project to get Test-Pyramid</h2>
   <%= form_tag ({:action => 'sub_project_filter'}) do %>
@@ -23,11 +24,9 @@
         <%= submit_tag "Plot" %>
       </div>
   <% end %>
-
 </div>
 
-
-<% if @sub_project_name %>
+<% if @sub_project_name and flash[:no_test_error]==nil %>
     <div id="graph">
       <h4>Test Pyramid for: <%= @sub_project_name %></h4><br><br>
       <div id="legend">

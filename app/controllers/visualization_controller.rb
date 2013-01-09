@@ -7,6 +7,7 @@ class VisualizationController < ApplicationController
       sub_project_id=params[:sub_project][:id]
       if sub_project_id.blank?
         flash[:no_id_error] = "No Sub-Project Selected"
+        flash[:no_test_error]=nil
         render 'visualization/pyramid'
      else
       result_set1 = Visualization.getNoOfTests(sub_project_id,"FUNCTIONAL TEST")
@@ -29,9 +30,8 @@ class VisualizationController < ApplicationController
 
   def calculate_duration_in_hours(result_set)
     if(result_set != [])
-      p "time is not nil"
-    time = "%0.4f" % (result_set[0][1].to_f/60000)
-    return time
+      time = "%0.4f" % (result_set[0][1].to_f/60000)
+      return time
     else
       return 0
     end
@@ -39,7 +39,11 @@ class VisualizationController < ApplicationController
   end
 
   def calculate_percentage_of_tests
+    flash[:no_test_error]=nil
     @total = @no_of_unit_test.to_f + @no_of_functional_test.to_f + @no_of_Integration_test.to_f
+    if (@total==0)
+      flash[:no_test_error]="No test in your project"
+    end
     @percent_unit_test = "%0.2f" % ((@no_of_unit_test/@total) *100)
     @percent_functional_test = "%0.2f" % ((@no_of_functional_test/@total) *100)
     @percent_integration_test = "%0.2f" % ((@no_of_Integration_test/@total) *100)
@@ -48,7 +52,6 @@ class VisualizationController < ApplicationController
 
   def calculate_number_of_test(result_set)
     if(result_set != [])
-      p "set is not nil"
       return result_set[0][0]
     else
       return 0
