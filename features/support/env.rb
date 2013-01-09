@@ -2,6 +2,7 @@ require 'rubygems'
 require 'capybara'
 require 'capybara/dsl'
 require 'rspec'
+require 'selenium-webdriver'
 
 
 require 'test/unit/assertions'

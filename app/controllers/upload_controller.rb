@@ -1,8 +1,7 @@
 require 'ftools'
 require 'zip/zipfilesystem'
 require 'nokogiri'
-
-
+require 'fileutils'
 
 class UploadController < ApplicationController
   def create
@@ -19,7 +18,7 @@ class UploadController < ApplicationController
       respond_to do |format|
         flash[:notice] = "Project Successfully Saved!!"
         format.html
-        format.json { render json: @project }
+        format.json { render :json => @project }
       end
     end
   end
@@ -54,13 +53,7 @@ class UploadController < ApplicationController
   end
 
   def create_directory_structure
-    dir_path = "/Users/sailee/Desktop/"+params[:project_name]
-    Dir.mkdir(dir_path, 0777) unless File.exists?(dir_path)
-    dir_path = dir_path+"/"+params[:sub_project_name]
-    Dir.mkdir(dir_path, 0777) unless File.exists?(dir_path)
-    dir_path = dir_path+"/"+Time.now.strftime("%d-%m-%y-%I:%M:%S")
-    Dir.mkdir(dir_path, 0777) unless File.exists?(dir_path)
-    dir_path
+    FileUtils.mkdir_p(Dir.home+"/Documents/"+params[:project_name]+"/"+params[:sub_project_name]+"/"+Time.now.strftime("%d-%m-%y-%I:%M:%S")).first
   end
 
 
