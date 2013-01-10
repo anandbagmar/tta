@@ -1,4 +1,4 @@
-<head xmlns="http://www.w3.org/1999/html">
+<head xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
   <link rel="stylesheet" href="/stylesheet/upload_form.css"> </link>
   <script src="http://code.jquery.com/jquery-latest.js"></script>
   <script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
@@ -20,15 +20,15 @@
 <div class="form">
 <%= form_tag({:action => 'create' },{ :multipart => true,:id => "uploadForm"}) do %>
 
-
+       <span><em>Fields marked with (<span class="required-fields">*</span>) are compulsory</em></span>
        <div class="fields" style="padding-top:20px ;">
-        <label for="name"> Project Name </label>
+        <label for="name"> Project Name <span class="required-fields">*</span></label>
         <%= text_field_tag (:project_name) ,nil, :class => 'required' ,:maxlength=>"100" %>
          <br>
        </div>
 
       <div class="fields" >
-        <label for="sub_project_name">Sub-Project name</label>
+        <label for="sub_project_name">Sub-Project name <span class="required-fields">*</span></label>
         <%= text_field_tag (:sub_project_name),nil, :class => 'required',:maxlength=>"100" %>
         <br>
       </div>
@@ -49,31 +49,31 @@
       </div>
 
       <div class="fields" >
-        <label for="os_name"> OS Tested On</label>
+        <label for="os_name"> OS Tested On <span class="required-fields">*</span></label>
         <%= text_field_tag ( :os_name) ,nil, :class => 'required'%>
          <br>
       </div>
 
       <div class="fields">
-         <label for="host_name">Host-Machine Name </label>
+         <label for="host_name">Host-Machine Name <span class="required-fields">*</span></label>
          <%= text_field_tag (:host_name),nil, :class => 'required' %>
         <br>
       </div>
 
       <div class="fields">
-        <label for="browser"> Browser Tested On</label>
+        <label for="browser"> Browser Tested On <span class="required-fields">*</span></label>
         <%= text_field_tag (:browser),nil, :class => 'required' %>
         <br>
       </div>
 
       <div class="fields">
-        <label for="type_of_environment"> Environment Run on</label>
+        <label for="type_of_environment"> Environment Run on <span class="required-fields">*</span></label>
         <%= text_field_tag (:type_of_environment),nil, :class => 'required' %>
         <br>
       </div>
 
       <div class="fields">
-        <label for="date_of_execution"> Date Of Execution </label>
+        <label for="date_of_execution"> Date Of Execution <span class="required-fields">*</span></label>
         <%= text_field_tag (:date_of_execution),nil,:placeholder => 'yyyy-mm-dd', :class => 'required dateISO' %>
         <br>
       </div>

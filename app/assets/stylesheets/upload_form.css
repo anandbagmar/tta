@@ -57,7 +57,9 @@ button{
     background-color:#f5f5f5;
     border-radius: 15px;
 }
-
+.form .required-fields{
+  color: #ff0000;
+}
 #links a:hover{
   text-decoration: none;
 }
