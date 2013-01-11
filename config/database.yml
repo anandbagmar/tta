@@ -5,7 +5,7 @@ development:
   pool: 5
   username: root
 
-test:
+test: &test
   adapter: mysql2
   encoding: utf8
   database: tta_test
@@ -18,3 +18,6 @@ production:
   database: tta_prod
   pool: 5
   username: root
+
+cucumber:
+  <<: *test
