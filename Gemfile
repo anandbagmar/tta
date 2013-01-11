@@ -64,7 +64,8 @@ group :development, :test do
   gem 'rspec-core'
   gem 'rspec-expectations'
   gem 'rspec-mocks'
-  gem "cucumber-rails", "~> 1.0", :require => false  # integration test framework
+  gem "cucumber-rails","~>1.0", :require => false  # integration test framework
+  gem 'webrat'
   gem 'simplecov'                                 # test coverage report
   gem 'json_spec'                                 # easier testing of JSON
   gem 'database_cleaner'                          # manage DB between tests
@@ -72,4 +73,9 @@ group :development, :test do
   gem 'shoulda'
   gem 'pry'
   gem 'pry-nav'
+  gem "capybara","~>1.1.2"
+  gem 'mechanize'
 end
+  group :cucumber do
+    gem 'headless'
+  end
