@@ -1,6 +1,11 @@
+a,a:visited,a:hover{
+  text-decoration: none;
+  color: #000000;
+  background: none;
+}
 
 #menu-bar{
-    background-color:#29B;;
+    background-color: #517994;
 }
 
 #menu-bar #title{
@@ -10,7 +15,7 @@
     text-align: center;
 }
 #menu-bar #title h1{
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 #menu-bar .menu-options{
     position: absolute;
@@ -18,7 +23,7 @@
     top: 0;
 }
 #menu-bar #title span{
-    color: #C5C0C0;
+    color: #D8D8D8;
 }
 
 
@@ -30,12 +35,17 @@ body{
 .fields input{
    margin: 0 auto;
 }
-
+.home_logo{
+  display: block;
+  height: 64px;
+  width: 64px;
+  background-image: url("../../assets/home.png");
+}
 
 .fields label{
-    display: inline-block;
-    width: 150px;
-    margin: 0 auto;;
+  display: inline-block;
+  min-width: 165px;
+  text-align: right;
 }
 
 .fields{
@@ -44,18 +54,19 @@ body{
 }
 
 button{
-    display: inline-block;
-    margin:0 auto;
-    padding-bottom: 20px;
-    height: 30px;
-    width: 50px;
+  margin-top: 0px;
+  height: 40px;
+  width: 200px;
+  border-radius: 5px;
+  font-size: 14px;
 }
 
 .form{
-    margin:0 auto;
-    width:50%;
-    background-color:#f5f5f5;
-    border-radius: 15px;
+  margin:0 auto;
+  width:50%;
+  background-color: #DDD;
+  border-radius: 15px;
+  padding: 10px;
 }
 .form .required-fields{
   color: #ff0000;
@@ -65,13 +76,17 @@ button{
 }
 
 #Date-Range-Input{
-    width: 50%;
-    margin: 0 auto;
-    padding-bottom: 30px;
-    padding-top: 10px;
-    background-color: #eeeeee;
+  box-shadow: 2px 2px 3px grey;
+  width: 50%;
+  margin: 0 auto;
+  padding-bottom: 20px;
+  padding-top: 15px;
+  background-color: #DDD;
+  border-radius: 15px;
 }
-
+#Date-Range-Input label{
+  min-width: 85px;
+}
 #Date-Range-Input h1{
   padding-bottom: 15px;
 }
@@ -82,12 +97,9 @@ button{
     margin: 0 auto;
 }
 
-
-
-#page_title{
-    padding-top: 40px;
+#page_title,.main-menu{
+    padding-top: 20px;
     padding-bottom: 20px;
-
 }
 
 #date-range-title h3{
@@ -99,6 +111,16 @@ button{
 
 }
 .error{
-    color: red;
-    font-size:10px;
+  color: #DB1818;
+  font-size:12px;
+  margin: 0;
+}
+#submit-project-button input{
+  font-size: 14px;
+  height: 25px;
+  width: 60px;
+  background: white;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px #6D6868;
 }
