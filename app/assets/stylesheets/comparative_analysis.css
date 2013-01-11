@@ -1,0 +1,12 @@
+.error-msg{
+  display: none;
+  color: #ff0000;
+  position: absolute;
+  left: 0;
+}
+.required-field{
+  display: inline-block;
+  position: relative;
+  min-width: 170px;
+  text-align: left;
+}

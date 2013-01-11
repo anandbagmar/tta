@@ -3,7 +3,7 @@
 class ComparativeAnalysis
 
 
-  def self.get_result_set(project_id, start_date="1900-01-01", end_date="2200-12-31")
+  def self.get_result_set(project_id, start_date, end_date)
     project=Project.find(project_id)
     sub_projects_list = project.sub_projects
     result_set = Hash.new

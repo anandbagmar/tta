@@ -1,8 +1,8 @@
+<html>
 <head xmlns="http://www.w3.org/1999/html">
-  <link rel="stylesheet" href="/stylesheet/upload_form.css"> </link>
+  <link rel="stylesheet" href="../../assets/stylesheets/upload_form.css"> </link>
+  <link rel="stylesheet" href="../../assets//stylesheets/comparative_analysis.css"> </link>
 </head>
-
-
 <body>
 <%= render :file=> '/home/header.html.erb' %>
 
@@ -13,24 +13,33 @@
 
 <div id="Date-Range-Input">
   <h2>Enter Date Range</h2>
-  <%= form_tag ({:action => 'date_filter'}) do %>
+  <%= form_tag({:action => 'date_filter' },{:id => "comparative-analysis-form"}) do %>
       <div class="fields" >
         <label for="start_date">Start Date:</label>
-        <%= datepicker_input 'comparative_analysis', 'start_date',:dateFormat => "yy-mm-dd" %>
+        <div class="required-field">
+          <%= datepicker_input 'comparative_analysis', 'start_date',:dateFormat => "yy-mm-dd" %>
+          <span class='error-msg'>Please Enter Start date</span>
+        </div>
       </div>
+
       <div class="fields" >
         <label for="end_date">End Date:</label>
-        <%= datepicker_input 'comparative_analysis', 'end_date',:dateFormat => "yy-mm-dd" %>
+        <div class="required-field">
+          <%= datepicker_input 'comparative_analysis', 'end_date',:dateFormat => "yy-mm-dd" %>
+          <span class='error-msg'>Please Enter End date</span>
+        </div>
       </div>
+
       <div class="fields" >
         <label for="project">Project:</label>
-        <%= select("project", "id", Project.all.collect {|p| [ p.name, p.id ] }, { :include_blank => true }) %><br>
-        <% if flash[:no_id_error] %>
-            <p class="error"><%= flash[:no_id_error] %></p>
-        <% end %>
+        <div class="required-field">
+          <%= select("project", "id", Project.all.collect {|p| [ p.name, p.id ]}, {:include_blank => true }) %><br>
+          <span class='error-msg'>Please select a Project</span>
+        </div>
       </div>
       <div id="submit-plot-button">
-      <%= submit_tag "Plot" %>
+        <button id="submit-btn">Plot</button>
+        <%= submit_tag nil,{:class => "hidden",:id=>"form-submit"}%>
       </div>
   <% end %>
 
@@ -125,10 +134,5 @@
 
 <% end  %>
 
-
-
-
 </body>
-
-
-
+</html>
