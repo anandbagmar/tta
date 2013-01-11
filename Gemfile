@@ -73,7 +73,7 @@ group :development, :test do
   gem 'shoulda'
   gem 'pry'
   gem 'pry-nav'
-  gem "capybara","~>1.1.2"
+  gem 'capybara'
   gem 'mechanize'
 end
   group :cucumber do
