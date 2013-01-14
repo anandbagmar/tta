@@ -17,11 +17,18 @@ a,a:visited,a:hover{
 #menu-bar #title h1{
     margin-bottom: 8px;
 }
+#menu-bar .menu-options a:hover >span{
+  border: 0px solid #7AC2FA;
+  padding: 0;
+  margin: 0;
+  box-shadow: 1px 1px 1px #7AC2FA;
+}
 #menu-bar .menu-options{
     position: absolute;
     right: 0;
     top: 0;
 }
+
 #menu-bar #title span{
     color: #D8D8D8;
 }
@@ -97,7 +104,7 @@ button{
     margin: 0 auto;
 }
 
-#page_title,.main-menu{
+.page_title,.main-menu{
     padding-top: 20px;
     padding-bottom: 20px;
 }
