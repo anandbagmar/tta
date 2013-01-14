@@ -1,0 +1,3 @@
+class DefectAnalysis
+
+end

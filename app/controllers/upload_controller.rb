@@ -95,7 +95,6 @@ class UploadController < ApplicationController
             end
           end
           @xml_test_case.save
-
         end
       end
     end
