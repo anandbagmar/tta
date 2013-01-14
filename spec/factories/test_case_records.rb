@@ -2,8 +2,7 @@
 
 FactoryGirl.define do
   factory :test_case_record do
-    class_name "MyString"
-    time_taken "MyString"
-    test_suite_record nil
+    class_name "Class_01"
+    time_taken "5"
   end
 end

@@ -40,7 +40,7 @@
 
       <div class="fields">
         <label for="test_category"> Test Category</label>
-        <%= select_tag "test_category", "<option>Unit Test</option><option>Integration Test</option><option>Functional Test</option>".html_safe %> <br>
+        <%= text_field_tag ( :test_category) ,nil,:placeholder => '(eg.Unit Test)', :class => 'required'%><br>
       </div>
 
       <div class="fields">

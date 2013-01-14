@@ -17,6 +17,7 @@
 Gemfile.lock
 /public/*
 /**/.DS_Store
-coverage/*.*
+coverage/*.html
+coverage/*.json
 
 
