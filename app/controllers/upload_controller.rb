@@ -39,7 +39,11 @@ class UploadController < ApplicationController
     file = File.join(dir_path, params[:logDirectory].original_filename)
     FileUtils.cp params[:logDirectory].tempfile.path, file
     Zip::ZipFile.open(file) do |zipFile|
+      puts "@class!"*50
+      puts file.class
+      puts zipFile.class
       zipFile.each do |entry|
+        puts entry.class
         filename=entry.to_s
         contents = zipFile.read(entry)
         contents_string= contents.to_s
@@ -58,10 +62,7 @@ class UploadController < ApplicationController
 
 
   def parse_xml(config_xml, meta_id)
-    myfile=File.new("temp_log.xml", "w")
-    myfile.puts config_xml
-    myfile.close
-    @doc = Nokogiri::Slop(File.open("temp_log.xml"))
+    @doc = Nokogiri::XML config_xml
     @doc.xpath("//testsuite").each do |p|
       time = 0
       @xml_data = TestSuiteRecord.new()
@@ -98,10 +99,7 @@ class UploadController < ApplicationController
         end
       end
     end
-    File.delete("temp_log.xml")
   end
-
-
 end
 
 
