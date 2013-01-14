@@ -1,0 +1,33 @@
+<head xmlns="http://www.w3.org/1999/html">
+  <link rel="stylesheet" href="/stylesheet/upload_form.css"> </link>
+</head>
+
+<body>
+<%= render :file=> '/home/header.html.erb' %>
+
+<div id="page_title">
+  <h1>Defect Analysis</h1>
+
+</div>
+<div id="sub_project_picker">
+  <h2>Select Sub-Project for defect analysis</h2>
+  <%= form_tag ({:action => 'sub_project_filter',:id => "defect_analysis"}) do %>
+      <div class="fields" >
+        <label for="sub_project">Sub-Project:</label>
+        <div class="required-field">
+        <%= select("sub_project", "id", SubProject.all.collect {|p| [ p.name, p.id ] } ,{:include_blank => true}) %>
+         </div>
+        <br>
+      </div>
+      <div class="fields" >
+        <label for="start_date">Analysis Date:</label>
+        <div class="required-field">
+          <%= datepicker_input 'comparative_analysis', 'analysis_date',:dateFormat => "yy-mm-dd" %>
+          <span class='error-msg'>Please Enter Start date</span>
+        </div>
+      </div>
+      <div id="submit-project-button">
+        <%= submit_tag "Plot" %>
+      </div>
+  <% end %>
+</div>

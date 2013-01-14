@@ -7,6 +7,8 @@ Tta::Application.routes.draw do
 
   get "visualization/pyramid"
 
+  get "defect_analysis/new"
+
   #get "unit_test_xml/index"
 
   #get "unit_test_xml/new"
@@ -22,6 +24,7 @@ Tta::Application.routes.draw do
   resources :projects,:junit_xml_data,:j_unit_xmls,:unit_test_xml
   post '/comparative_analysis/date_filter'
   post '/visualization/sub_project_filter'
+  post '/defect_analysis/sub_project_filter'
   match '*path' => 'error#handle404'
   # The priority is based upon order of creation:
   # first created -> highest priority.
