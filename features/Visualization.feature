@@ -10,10 +10,10 @@ Feature: Upload data to view test pyramid and Comparative analysis graph
     And The user submits project details with "<proj>","<sub_proj>","<ci_job>","<osName>","<hostName>","<browser>","<environment>","<dateOfExecution>","<logDir>","<test_type>"
     Then The project is uploaded
   Examples:
-    |proj    |sub_proj|ci_job       |osName |hostName |browser|environment|dateOfExecution  |logDir                              |test_type       |
-    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-01-01       |/Users/khushal/tta_spec_results.zip |Unit Test       |
-    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-02-20       |/Users/khushal/tta_spec_results.zip |Integration Test|
-    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-03-15       |/Users/khushal/tta_spec_results.zip |Functional Test |
+    |proj    |sub_proj|ci_job       |osName |hostName |browser|environment|dateOfExecution  |logDir                                                       |test_type       |
+    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-01-01       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Unit Test       |
+    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-02-20       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Integration Test|
+    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-03-15       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Functional Test |
 
 
 
@@ -36,12 +36,12 @@ Feature: Upload data to view test pyramid and Comparative analysis graph
     And The user submits project details with "<proj>","<sub_proj>","<ci_job>","<osName>","<hostName>","<browser>","<environment>","<dateOfExecution>","<logDir>","<test_type>"
     Then The project is uploaded
   Examples:
-    |proj    |sub_proj|ci_job       |osName |hostName |browser|environment|dateOfExecution  |logDir                              |test_type       |
-    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-01-01       |/Users/khushal/tta_spec_results.zip |Unit Test       |
-    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-02-20       |/Users/khushal/tta_spec_results.zip |Integration Test|
-    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-03-15       |/Users/khushal/tta_spec_results.zip |Functional Test |
-    |Project1|SubProj2|Run unit test|Mac    |Sanchar  |IE     |DEV        |2012-01-01       |/Users/khushal/tta_spec_results.zip |Unit Test       |
-    |Project1|SubProj2|Run unit test|Mac    |Sanchar  |IE     |DEV        |2012-03-31       |/Users/khushal/tta_spec_results.zip |Integration Test|
+    |proj    |sub_proj|ci_job       |osName |hostName |browser|environment|dateOfExecution  |logDir                                                       |test_type       |
+    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-01-01       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Unit Test       |
+    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-02-20       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Integration Test|
+    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-03-15       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Functional Test |
+    |Project1|SubProj2|Run unit test|Mac    |Sanchar  |IE     |DEV        |2012-01-01       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Unit Test       |
+    |Project1|SubProj2|Run unit test|Mac    |Sanchar  |IE     |DEV        |2012-03-31       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Integration Test|
 
 
 
