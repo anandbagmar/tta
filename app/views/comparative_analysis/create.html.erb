@@ -2,6 +2,7 @@
 <head xmlns="http://www.w3.org/1999/html">
   <link rel="stylesheet" href="../../assets/stylesheets/upload_form.css"> </link>
   <link rel="stylesheet" href="../../assets//stylesheets/comparative_analysis.css"> </link>
+
 </head>
 <body>
 <%= render :file=> '/home/header.html.erb' %>
@@ -39,7 +40,7 @@
       </div>
       <div id="submit-plot-button">
         <button id="submit-btn">Plot</button>
-        <%= submit_tag nil,{:class => "hidden",:id=>"form-submit"}%>
+        <%= submit_tag nil, {:class=>:"hidden", :id =>"form-submit"}%>
       </div>
   <% end %>
 
@@ -52,8 +53,6 @@
 </div>
 
 <div id="comparative_analysis" style="width:900px;height:600px">
-
-
 
 <script>
       st_date = new Date('<%= @start_date %>');
@@ -84,10 +83,8 @@
           return data;
       };
 
-      $.plot($("#comparative_analysis"),
+     $.plot($("#comparative_analysis"),
              getdata(),
-              /*data,*/
-
               {
                   xaxis: {
                       rotateTicks:135,
@@ -135,4 +132,5 @@
 <% end  %>
 
 </body>
+<script type="text/JavaScript" src="comparitive_analysis.js"></script>
 </html>
