@@ -1,4 +1,5 @@
 class Visualization
+
   def self.getResultJson(sub_project_id)
 
 

@@ -6,7 +6,6 @@
 <body>
 <%= render :file=> '/home/header.html.erb' %>
 
-<body>
 <div id="page_title">
   <h1>Pyramid View</h1>
 
@@ -28,7 +27,8 @@
       </div>
   <% end %>
 </div>
-<% if @sub_project_name and flash[:no_test_error]==nil %>
+<% if @json and flash[:no_test_error]==nil %>
+
     <div id="graph">
       <h4>Test Pyramid for: <%= @sub_project_name %></h4><br><br>
       <div id="legend">
@@ -76,74 +76,20 @@
       </div>
       </div>
 
+      <script type="text/javascript">
+          $(document).ready(function(){
+              var regExp = new RegExp("&quot;",'g');
+              $("#submit-btn").on('click',function(e){
+                  $("#form-submit").trigger('click');
+                  var jsonR = ("<%= @json %>");
+                  var $j = jsonR;
+                  console.log($j);
+                  debugger;
+                  return false;
+              });
+          });
+      </script>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
-            var bodyHeight = $('body').css('height'),
-                    bodyWidth = $('body').css('width'),
-                    unitTriangleHeight = parseInt(bodyHeight)*parseInt("<%= "%0.0f" % @percent_unit_test %>")/100;
-                    var baseTriangleHeight = parseInt(bodyHeight)/2;
-
-            if (unitTriangleHeight!=0)
-                unitTriangleHeight=baseTriangleHeight;
-            var
-                    integrationTriangleHeight = parseInt(baseTriangleHeight)*(parseInt("<%= "%0.0f" % @percent_integration_test %>")+parseInt("<%= "%0.0f" % @percent_functional_test %>"))/100,
-                    functionalTriangleHeight = parseInt(baseTriangleHeight)*parseInt("<%= "%0.0f" % @percent_functional_test %>")/100;
-            $("#pyramidn").css({
-                "width":baseTriangleHeight,
-                "height":baseTriangleHeight
-            } );
-            $("#unit_test").css({
-                "border-bottom-width": unitTriangleHeight+"px",
-                "border-left-width":unitTriangleHeight+"px",
-                "border-right-width":unitTriangleHeight+"px"
-            });
-            $("#integration_test").css({
-                "border-bottom-width": integrationTriangleHeight+"px",
-                "border-left-width":integrationTriangleHeight+"px",
-                "border-right-width":integrationTriangleHeight+"px",
-                "margin-left": -1*integrationTriangleHeight+"px"
-
-            });
-            $("#functional_test").css({
-                "border-bottom-width": functionalTriangleHeight+"px",
-                "border-left-width":functionalTriangleHeight+"px",
-                "border-right-width":functionalTriangleHeight+"px",
-                "margin-left": -1 *functionalTriangleHeight+"px"
-            });
-            $("#unit_region").css({
-                "width":unitTriangleHeight*2+"px"
-            } );
-            console.log($("#pyramid").css("width"))
-            $("#functional_percent,#functional_duration").css({
-                "top":parseInt("<%= "%0.0f" % @percent_functional_test %>")/2+"%"
-            } );
-            $("#functional_percent").css({
-                "left":((parseInt($("#pyramid").css("width"))/3)-functionalTriangleHeight)+"px"
-            } );
-            $("#functional_duration").css({
-                "right":((parseInt($("#pyramid").css("width"))/3)-functionalTriangleHeight)+"px"
-            } );
-            $("#integration_percent,#integration_duration").css({
-                "top":(parseInt("<%= "%0.0f" % @percent_integration_test %>")+parseInt("<%= "%0.0f" % @percent_functional_test %>"))/2+"%"
-            } );
-            $("#integration_percent").css({
-                "left":((parseInt($("#pyramid").css("width"))/3)-integrationTriangleHeight)+"px"
-            } );
-            $("#integration_duration").css({
-                "right":((parseInt($("#pyramid").css("width"))/3)-integrationTriangleHeight)+"px"
-            } );
-            $("#unit_percent").css({
-                "left":((parseInt($("#pyramid").css("width"))/3)-unitTriangleHeight)-20+"px"
-            } );
-            $("#unit_duration").css({
-                "right":((parseInt($("#pyramid").css("width"))/3)-unitTriangleHeight)-40+"px"
-            } );
-
-        });
-
-
-    </script>
 
   </div>
  <%	 end %>
