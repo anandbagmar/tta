@@ -6,8 +6,8 @@ require 'fileutils'
 class UploadController < ApplicationController
   def create
     meta_datum, project, sub_project = create_or_update_meta_datum_and_dependency
-      save_log_files(meta_datum)
-      redirect_to :action => :show, :project_id => project.id, :sub_project_id => sub_project.id, :project_meta_id => meta_datum.id
+    save_log_files(meta_datum)
+    redirect_to :action => :show, :project_id => project.id, :sub_project_id => sub_project.id, :project_meta_id => meta_datum.id
   end
 
   def show
@@ -26,11 +26,12 @@ class UploadController < ApplicationController
   private
   def create_or_update_meta_datum_and_dependency
     project = Project.find_or_create_by_name(params[:project_name].upcase)
-        sub_project = project.sub_projects.find_or_create_by_name(params[:sub_project_name].upcase)
-              meta_datum = sub_project.test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type(params[:ci_job_name].upcase,
-                                                                                                                                                                                         params[:browser].upcase, params[:type_of_environment].upcase, params[:host_name].upcase, params[:os_name].upcase, params[:test_category].upcase, params[:test_report_type].upcase)
+    sub_project = project.sub_projects.find_or_create_by_name(params[:sub_project_name].upcase)
+    meta_datum = sub_project.test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type(params[:ci_job_name].upcase,
+                                                                                                                                                                               params[:browser].upcase, params[:type_of_environment].upcase, params[:host_name].upcase, params[:os_name].upcase, params[:test_category].upcase, params[:test_report_type].upcase)
     meta_datum.date_of_execution= params[:date_of_execution]
     meta_datum.save
+
     return meta_datum, project, sub_project
   end
 
@@ -39,11 +40,7 @@ class UploadController < ApplicationController
     file = File.join(dir_path, params[:logDirectory].original_filename)
     FileUtils.cp params[:logDirectory].tempfile.path, file
     Zip::ZipFile.open(file) do |zipFile|
-      puts "@class!"*50
-      puts file.class
-      puts zipFile.class
       zipFile.each do |entry|
-        puts entry.class
         filename=entry.to_s
         contents = zipFile.read(entry)
         contents_string= contents.to_s
@@ -86,12 +83,12 @@ class UploadController < ApplicationController
           testcase_name=q.attr("name")
           @xml_test_case.time_taken = q.attr("time")
           if @xml_data.number_of_failures.to_i > 0
-             @doc.xpath("//testsuite/testcase/failure").each do |w|
-               node = Nokogiri::XML config_xml
-               cdata = node.search("//testsuite/testcase[@name='#{testcase_name}']/failure").children.find{|e| e.cdata?}
-               str = cdata.to_s
-               str1=str.scan(/\[CDATA\[((.|\s)*)\]\]/m).first
-               @xml_test_case.error_msg = str1
+            @doc.xpath("//testsuite/testcase/failure").each do |w|
+              node = Nokogiri::XML config_xml
+              cdata = node.search("//testsuite/testcase[@name='#{testcase_name}']/failure").children.find{|e| e.cdata?}
+              str = cdata.to_s
+              str1=str.scan(/\[CDATA\[((.|\s)*)\]\]/m).first
+              @xml_test_case.error_msg = str1
             end
           end
           @xml_test_case.save
@@ -100,6 +97,3 @@ class UploadController < ApplicationController
     end
   end
 end
-
-
-
