@@ -73,12 +73,9 @@ body,html{
 }
 #pyramid{
   position: relative;
-
 }
 
 #unit_region,#pyramid{
-
-  padding: 20px 0px;
   width:1000px;
   margin: 0 auto;
 }
@@ -127,36 +124,41 @@ body,html{
   margin-left:20%
 }
 
-#unit,#functional,#integration{
+.test-legend{
   display:block;
   text-align: left;
   height:10%;
-  width:30%;
   padding-left:20%
 }
-#unit p,#functional p,#integration p{
-  display:inline;
-}
-
-#unit_rect{
+.rect{
   display: inline-block;
-  width: 10%;
-  height:20px;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+}
+#unit_rect{
   background-color: #003366;
 }
 #integration_rect{
-  display: inline-block;
-  width: 10%;
-  height:20px;
   background-color: #996699;
 }
 #functional_rect{
-  display: inline-block;
-  width: 10%;
-  height:20px;
   background-color: #009966;
 }
-
 .hidden{
   display: none;
+}
+#pyramid .test-triangle{
+  margin: 0 auto;
+}
+#pyramid .test-region{
+  position: absolute;
+  width: 100%;
+  min-height: 300px;
+}
+
+.clearfix:after,.clearfix:before{
+  content: " ";
+  clear: both;
+  display: block;
 }

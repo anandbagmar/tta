@@ -41,13 +41,12 @@
           legendTemplate = templates.getLegendItem(),
           legendData="",
           pyramidItemTemplate = templates.getPyramidItem(),
-          pyramidItems=[];
+          pyramidData="";
         for(var index = 0, len = typeOfTests.length;index<len;index++){
           if(typeOfTests[index].percent == 0.0)
             continue;
-          var testName = typeOfTests[index].test_name,
-            pyramidItemTemplate=templates.getPyramidItem();
-          pyramidItemTemplate = templates.render(pyramidItemTemplate,{
+          var testName = typeOfTests[index].test_name;
+          pyramidData += templates.render(pyramidItemTemplate,{
             "TestTypeRegion": testName.split(' ')[0].toLowerCase()+"_region",
             "TestTypePercent": testName.split(' ')[0].toLowerCase()+"_percent",
             "PercentValue": typeOfTests[index].percent,
@@ -55,8 +54,6 @@
             "DurationValue": typeOfTests[index].duration,
             "TestTypeTest": testName.split(' ')[0].toLowerCase()+"_test"
           });
-          pyramidItems.push({"testName":testName.split(' ')[0].toLowerCase(),
-            "testPyramidTriangle":$(pyramidItemTemplate)});
 
           legendData+=templates.render(legendTemplate,{
             "TestType": (testName).split(' ')[0].toLowerCase(),
@@ -66,15 +63,7 @@
 
         }
         $('#legend').html(legendData);
-        console.log(pyramidItems);
-        var parentTriangle = pyramidItems[0].testPyramidTriangle;
-        console.log(parentTriangle.find("#"+pyramidItems[0].testName + "_test"));
-        temp = parentTriangle;
-        for(var index= 1,len = pyramidItems.length;index<len;index++){
-          temp = temp.find("#"+pyramidItems[index-1].testName + "_test").html(pyramidItems[index].testPyramidTriangle);
-        }
-        console.log(parentTriangle);
-        $("#pyramid").html(parentTriangle);
+        $("#pyramid").html(pyramidData);
         debugger;
 
         var bodyHeight = $('body').css('height'),
@@ -90,7 +79,7 @@
         $("#pyramidn").css({
           "width":baseTriangleHeight,
           "height":baseTriangleHeight
-        } );
+        });
         $("#unit_test").css({
           "border-bottom-width": unitTriangleHeight+"px",
           "border-left-width":unitTriangleHeight+"px",
@@ -100,18 +89,14 @@
           "border-bottom-width": integrationTriangleHeight+"px",
           "border-left-width":integrationTriangleHeight+"px",
           "border-right-width":integrationTriangleHeight+"px",
-          "margin-left": -1*integrationTriangleHeight+"px"
 
         });
         $("#functional_test").css({
           "border-bottom-width": functionalTriangleHeight+"px",
           "border-left-width":functionalTriangleHeight+"px",
           "border-right-width":functionalTriangleHeight+"px",
-          "margin-left": -1 *functionalTriangleHeight+"px"
         });
-        $("#unit_region").css({
-          "width":unitTriangleHeight*2+"px"
-        } );
+
         console.log($("#pyramid").css("width"))
         $("#functional_percent,#functional_duration").css({
           "top":parseInt(obj.test_types[0].percent)/2+"%"
@@ -141,7 +126,6 @@
       }
       var jsonR="";
       $("#submit-btn").off('click').on('click',function(e){
-        debugger;
         $("form-submit").click();
         var regExp = new RegExp("&quot;",'g');
         jsonR=("<%= @json.to_json %>");
