@@ -1,22 +1,20 @@
 <head xmlns="http://www.w3.org/1999/html">
-  <link rel="stylesheet" href="/stylesheet/upload_form.css"> </link>
 </head>
 
 
 <body>
-<%= render :file=> '/home/header.html.erb' %>
+<div id="title">
+  <%= render :file=> '/home/header.html.erb' %>
+  <div class="page_title">
+    <h1>Pyramid View</h1>
 
-<body>
-<div class="page_title">
-  <h1>Pyramid View</h1>
-
-</div>
-<% if flash[:no_test_error]!=nil %>
+  </div>
+  <% if flash[:no_test_error]!=nil %>
     <p class="error"><%= flash[:no_test_error] %><br></p>
-<% end %>
-<div id="sub_project_picker">
-  <h2>Select Sub-Project to get Test-Pyramid</h2>
-  <%= form_tag ({:action => 'sub_project_filter'}) do %>
+  <% end %>
+  <div id="sub_project_picker">
+    <h2>Select Sub-Project to get Test-Pyramid</h2>
+    <%= form_tag ({:action => 'sub_project_filter'}) do %>
       <div class="fields" >
         <label for="sub_project">Sub-Project:</label>
         <%= select("sub_project", "id", SubProject.all.collect {|p| [ p.name, p.id ] } ,{:include_blank => true}) %>
@@ -24,129 +22,141 @@
         <br>
       </div>
       <div id="submit-project-button">
-        <%= submit_tag "Plot" %>
+        <button id="submit-btn">Plot</button>
+        <%= submit_tag nil,{:class => "hidden",:id=>"form-submit"}%>
       </div>
+    <% end %>
+  </div>
+  <% if @json and flash[:no_test_error]==nil %>
+
+    <%= render 'layouts/pyramid_partial' %>
   <% end %>
-</div>
-<% if @sub_project_name and flash[:no_test_error]==nil %>
-    <div id="graph">
-      <h4>Test Pyramid for: <%= @sub_project_name %></h4><br><br>
-      <div id="legend">
-        <p><b>Legend:</b></p>
-        <div id="functional">
-          <div id="functional_rect">
-          </div>
-          <p>Functional Tests</p>
-        </div>
-        <div id="integration">
-          <div id="integration_rect">
-          </div>
-          <p>Integration Tests</p>
-        </div>
-        <div id="unit">
-          <div id="unit_rect">
-          </div>
-          <p>Unit Tests</p>
-        </div>
-      </div>
-      <div id="pyramid">
-      <div id="unit_region">
-        <% if @percent_unit_test!="0.00" %>
-        <p id="unit_percent"> <%= @percent_unit_test %>%</p>
-        <p id="unit_duration"> <%= @duration_unit %>Mins</p>
-        <% end %>
-        <div id="unit_test">
-            <div id="integration_region">
-              <% if @percent_integration_test!="0.00" %>
-              <p id="integration_percent"> <%= @percent_integration_test %>%</p>
-              <p id="integration_duration"> <%= @duration_integration %>Mins</p>
-              <% end %>
-              <div id="integration_test">
-                 <div id="functional_region">
-                   <% if @percent_functional_test!="0.00" %>
-                   <p id="functional_percent"> <%= @percent_functional_test %>%</p>
-                   <p id="functional_duration"> <%= @duration_functional %>Mins</p>
-                   <% end %>
-                   <div id="functional_test">
-                    </div>
-                 </div>
-              </div>
-            </div>
-        </div>
-      </div>
-      </div>
 
+  <script type="text/javascript">
+    $(document).ready(function(){
 
-    <script type="text/javascript">
-        $(document).ready(function(){
-            var bodyHeight = $('body').css('height'),
-                    bodyWidth = $('body').css('width'),
-                    unitTriangleHeight = parseInt(bodyHeight)*parseInt("<%= "%0.0f" % @percent_unit_test %>")/100;
-                    var baseTriangleHeight = parseInt(bodyHeight)/2;
+      var plotPyramid = function(obj){
+        var typeOfTests = obj.test_types,
+          templates = new Template(),
+          legendTemplate = templates.getLegendItem(),
+          legendData="",
+          pyramidItemTemplate = templates.getPyramidItem(),
+          pyramidItems=[];
+        for(var index = 0, len = typeOfTests.length;index<len;index++){
+          if(typeOfTests[index].percent == 0.0)
+            continue;
+          var testName = typeOfTests[index].test_name,
+            pyramidItemTemplate=templates.getPyramidItem();
+          pyramidItemTemplate = templates.render(pyramidItemTemplate,{
+            "TestTypeRegion": testName.split(' ')[0].toLowerCase()+"_region",
+            "TestTypePercent": testName.split(' ')[0].toLowerCase()+"_percent",
+            "PercentValue": typeOfTests[index].percent,
+            "TestTypeDuration": testName.split(' ')[0].toLowerCase()+"_duration",
+            "DurationValue": typeOfTests[index].duration,
+            "TestTypeTest": testName.split(' ')[0].toLowerCase()+"_test"
+          });
+          pyramidItems.push({"testName":testName.split(' ')[0].toLowerCase(),
+            "testPyramidTriangle":$(pyramidItemTemplate)});
 
-            if (unitTriangleHeight!=0)
-                unitTriangleHeight=baseTriangleHeight;
-            var
-                    integrationTriangleHeight = parseInt(baseTriangleHeight)*(parseInt("<%= "%0.0f" % @percent_integration_test %>")+parseInt("<%= "%0.0f" % @percent_functional_test %>"))/100,
-                    functionalTriangleHeight = parseInt(baseTriangleHeight)*parseInt("<%= "%0.0f" % @percent_functional_test %>")/100;
-            $("#pyramidn").css({
-                "width":baseTriangleHeight,
-                "height":baseTriangleHeight
-            } );
-            $("#unit_test").css({
-                "border-bottom-width": unitTriangleHeight+"px",
-                "border-left-width":unitTriangleHeight+"px",
-                "border-right-width":unitTriangleHeight+"px"
-            });
-            $("#integration_test").css({
-                "border-bottom-width": integrationTriangleHeight+"px",
-                "border-left-width":integrationTriangleHeight+"px",
-                "border-right-width":integrationTriangleHeight+"px",
-                "margin-left": -1*integrationTriangleHeight+"px"
+          legendData+=templates.render(legendTemplate,{
+            "TestType": (testName).split(' ')[0].toLowerCase(),
+            "TestTypeRect": (testName).split(' ')[0].toLowerCase()+"_rect",
+            "TestTypeTitle": testName.toLowerCase()
+          });
 
-            });
-            $("#functional_test").css({
-                "border-bottom-width": functionalTriangleHeight+"px",
-                "border-left-width":functionalTriangleHeight+"px",
-                "border-right-width":functionalTriangleHeight+"px",
-                "margin-left": -1 *functionalTriangleHeight+"px"
-            });
-            $("#unit_region").css({
-                "width":unitTriangleHeight*2+"px"
-            } );
-            console.log($("#pyramid").css("width"))
-            $("#functional_percent,#functional_duration").css({
-                "top":parseInt("<%= "%0.0f" % @percent_functional_test %>")/2+"%"
-            } );
-            $("#functional_percent").css({
-                "left":((parseInt($("#pyramid").css("width"))/3)-functionalTriangleHeight)+"px"
-            } );
-            $("#functional_duration").css({
-                "right":((parseInt($("#pyramid").css("width"))/3)-functionalTriangleHeight)+"px"
-            } );
-            $("#integration_percent,#integration_duration").css({
-                "top":(parseInt("<%= "%0.0f" % @percent_integration_test %>")+parseInt("<%= "%0.0f" % @percent_functional_test %>"))/2+"%"
-            } );
-            $("#integration_percent").css({
-                "left":((parseInt($("#pyramid").css("width"))/3)-integrationTriangleHeight)+"px"
-            } );
-            $("#integration_duration").css({
-                "right":((parseInt($("#pyramid").css("width"))/3)-integrationTriangleHeight)+"px"
-            } );
-            $("#unit_percent").css({
-                "left":((parseInt($("#pyramid").css("width"))/3)-unitTriangleHeight)-20+"px"
-            } );
-            $("#unit_duration").css({
-                "right":((parseInt($("#pyramid").css("width"))/3)-unitTriangleHeight)-40+"px"
-            } );
+        }
+        $('#legend').html(legendData);
+        console.log(pyramidItems);
+        var parentTriangle = pyramidItems[0].testPyramidTriangle;
+        console.log(parentTriangle.find("#"+pyramidItems[0].testName + "_test"));
+        temp = parentTriangle;
+        for(var index= 1,len = pyramidItems.length;index<len;index++){
+          temp = temp.find("#"+pyramidItems[index-1].testName + "_test").html(pyramidItems[index].testPyramidTriangle);
+        }
+        console.log(parentTriangle);
+        $("#pyramid").html(parentTriangle);
+        debugger;
+
+        var bodyHeight = $('body').css('height'),
+          bodyWidth = $('body').css('width'),
+          unitTriangleHeight = parseInt(bodyHeight)*parseInt(obj.test_types[1].percent)/100;
+        var baseTriangleHeight = parseInt(bodyHeight)/2;
+
+        if (unitTriangleHeight!=0)
+          unitTriangleHeight=baseTriangleHeight;
+        var
+          integrationTriangleHeight = parseInt(baseTriangleHeight)*(parseInt(obj.test_types[0].percent)+parseInt(obj.test_types[2].percent))/100,
+          functionalTriangleHeight = parseInt(baseTriangleHeight)*parseInt(obj.test_types[0].percent)/100;
+        $("#pyramidn").css({
+          "width":baseTriangleHeight,
+          "height":baseTriangleHeight
+        } );
+        $("#unit_test").css({
+          "border-bottom-width": unitTriangleHeight+"px",
+          "border-left-width":unitTriangleHeight+"px",
+          "border-right-width":unitTriangleHeight+"px"
+        });
+        $("#integration_test").css({
+          "border-bottom-width": integrationTriangleHeight+"px",
+          "border-left-width":integrationTriangleHeight+"px",
+          "border-right-width":integrationTriangleHeight+"px",
+          "margin-left": -1*integrationTriangleHeight+"px"
 
         });
+        $("#functional_test").css({
+          "border-bottom-width": functionalTriangleHeight+"px",
+          "border-left-width":functionalTriangleHeight+"px",
+          "border-right-width":functionalTriangleHeight+"px",
+          "margin-left": -1 *functionalTriangleHeight+"px"
+        });
+        $("#unit_region").css({
+          "width":unitTriangleHeight*2+"px"
+        } );
+        console.log($("#pyramid").css("width"))
+        $("#functional_percent,#functional_duration").css({
+          "top":parseInt(obj.test_types[0].percent)/2+"%"
+        } );
+        $("#functional_percent").css({
+          "left":((parseInt($("#pyramid").css("width"))/3)-functionalTriangleHeight)+"px"
+        } );
+        $("#functional_duration").css({
+          "right":((parseInt($("#pyramid").css("width"))/3)-functionalTriangleHeight)+"px"
+        } );
+        $("#integration_percent,#integration_duration").css({
+          "top":(parseInt(obj.test_types[2].percent)+parseInt(obj.test_types[0].percent))/2+"%"
+        } );
+        $("#integration_percent").css({
+          "left":((parseInt($("#pyramid").css("width"))/3)-integrationTriangleHeight)+"px"
+        } );
+        $("#integration_duration").css({
+          "right":((parseInt($("#pyramid").css("width"))/3)-integrationTriangleHeight)+"px"
+        } );
+        $("#unit_percent").css({
+          "left":((parseInt($("#pyramid").css("width"))/3)-unitTriangleHeight)-20+"px"
+        } );
+        $("#unit_duration").css({
+          "right":((parseInt($("#pyramid").css("width"))/3)-unitTriangleHeight)-40+"px"
+        } );
+        return false;
+      }
+      var jsonR="";
+      $("#submit-btn").off('click').on('click',function(e){
+        debugger;
+        $("form-submit").click();
+        var regExp = new RegExp("&quot;",'g');
+        jsonR=("<%= @json.to_json %>");
+        jsonR = jsonR.replace(regExp,"\"");
+        jsonR=JSON.parse(jsonR);
+        plotPyramid(jsonR);
+        console.log("********** NExt project **********");
+        console.log(jsonR);
 
+        return false;
+      });
+    });
+  </script>
 
-    </script>
-
-  </div>
- <%	 end %>
-
+</div>
 </body>
 
+<script type="text/javascript" src="../javascripts/util/templates.js"></script>

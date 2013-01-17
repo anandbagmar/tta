@@ -1,5 +1,4 @@
 class Visualization
-
   def self.getResultJson(sub_project_id)
 
 
@@ -16,8 +15,9 @@ class Visualization
     @json = {
         :sub_project_name => SubProject.find(sub_project_id, :select => "name").name,
         :test_types => test_types
-    }.to_json
+    }
 
+    p "************************", @json.to_json, "******************************"
     return @json
   end
 
