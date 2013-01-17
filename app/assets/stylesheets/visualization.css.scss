@@ -35,54 +35,14 @@ body,html{
   top: -1000px;
 }
 
-#unit_test{
 
-  border-style:solid;
-  border-color:transparent transparent #003366;
-  height: 0px;
-  width: 0px;
-  border-bottom-width: 200px;
-  border-left-width: 100px;
-  border-right-width: 100px;
-  border-top-width: 0;
-  margin: 0 auto;
-}
-
-#integration_test{
-  height: 0px;
-  width: 0px;
-  border-style: solid;
-  border-color: transparent transparent #996699;
-  border-bottom-width: 100px;
-  border-left-width: 50px;
-  border-right-width: 50px;
-  border-top-width: 0;
-  margin-left: -50px;
-}
-
-#functional_test{
-  height: 0px;
-  width: 0px;
-  border-style: solid;
-  border-color: transparent transparent #009966;
-  border-bottom-width: 50px;
-  border-left-width: 25px;
-  border-right-width: 25px;
-  border-top-width: 0;
-  margin-left: -25px;
-}
 #pyramid{
   position: relative;
 }
 
-#unit_region,#pyramid{
+#pyramid{
   width:1000px;
   margin: 0 auto;
-}
-
-#unit_percent,#unit_duration,#integration_percent,
-#integration_duration,#functional_percent,#functional_duration{
- position:absolute;
 }
 
 #legend{
@@ -91,9 +51,9 @@ body,html{
   margin-left: 60%;
   border:2px , solid;
 }
-#legend p{
+#legend span{
   text-align: left;
-  margin-left:20%
+  margin-left: 5px;
 }
 
 .test-legend{
@@ -108,19 +68,14 @@ body,html{
   height: 20px;
   margin: 0 5px;
 }
-#unit_rect{
-  background-color: #003366;
-}
-#integration_rect{
-  background-color: #996699;
-}
-#functional_rect{
-  background-color: #009966;
-}
 .hidden{
   display: none;
 }
 #pyramid .test-triangle{
+  margin: 0 auto;
+  border-style:solid;
+  height: 0px;
+  width: 0px;
   margin: 0 auto;
 }
 #pyramid .test-region{

@@ -4,6 +4,7 @@
 <% end %>
 
 <script type="text/javascript" src="../javascripts/util/templates.js"></script>
+<script type="text/javascript" src="../javascripts/util/utils.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
     var plotPyramid = function(obj){
@@ -61,13 +62,20 @@
 
       previousHeight = 0;
       for(index = 0,len=typeOfTests.length;index<len;index++){
-        var testName = typeOfTests[index].test_name.split(' ')[0].toLowerCase();
+        var testName = typeOfTests[index].test_name.split(' ')[0].toLowerCase(),
+          color=Utils.getRandomColor();
 
+
+        $("#"+testName+"_rect").css({
+          "background-color":"transparent transparent" + color
+        });
 
         $("#"+testName+"_test").css({
           "border-bottom-width": triangleHeights[index]+"px",
           "border-left-width":triangleHeights[index]+"px",
-          "border-right-width":triangleHeights[index]+"px"
+          "border-right-width":triangleHeights[index]+"px",
+          "border-top-width":"0px",
+          "border-color":"transparent transparent" + color
         });
 
 
@@ -78,10 +86,12 @@
         var currentHeight = (parseInt(baseTriangleHeight)*parseInt(typeOfTests[index].percent)/100)/2 + previousHeight;
         previousHeight = triangleHeights[index];
         $("#"+testName+"_percent").css({
+          "position":"absolute",
           "top":currentHeight + "px",
           "left":((parseInt($("#pyramid").css("width"))/3)-triangleHeights[index])+"px"
         });
         $("#"+testName+"_duration").css({
+          "position":"absolute",
           "top":currentHeight + "px",
           "right":((parseInt($("#pyramid").css("width"))/3)-triangleHeights[index])+"px"
         });
