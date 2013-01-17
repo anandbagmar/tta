@@ -1,0 +1,100 @@
+<%= render :file=> '/visualization/pyramid.html.erb' %>
+<% if @json and flash[:no_test_error]==nil %>
+  <%= render 'layouts/pyramid_partial' %>
+<% end %>
+
+<script type="text/javascript" src="../javascripts/util/templates.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var plotPyramid = function(obj){
+      var typeOfTests = obj.test_types,
+        templates = new Template(),
+        legendTemplate = templates.getLegendItem(),
+        legendData="",
+        pyramidItemTemplate = templates.getPyramidItem(),
+        pyramidData="";
+
+      for(var index = 0, len = typeOfTests.length;index<len;index++){
+        if(typeOfTests[index].percent == 0.0)
+          continue;
+        var testName = typeOfTests[index].test_name;
+        pyramidData += templates.render(pyramidItemTemplate,{
+          "TestTypeRegion": testName.split(' ')[0].toLowerCase()+"_region",
+          "TestTypePercent": testName.split(' ')[0].toLowerCase()+"_percent",
+          "PercentValue": typeOfTests[index].percent,
+          "TestTypeDuration": testName.split(' ')[0].toLowerCase()+"_duration",
+          "DurationValue": typeOfTests[index].duration,
+          "TestTypeTest": testName.split(' ')[0].toLowerCase()+"_test"
+        });
+
+        legendData+=templates.render(legendTemplate,{
+          "TestType": (testName).split(' ')[0].toLowerCase(),
+          "TestTypeRect": (testName).split(' ')[0].toLowerCase()+"_rect",
+          "TestTypeTitle": testName.toLowerCase()
+        });
+
+      }
+      $('#legend').html(legendData);
+      $("#pyramid").html(pyramidData);
+      debugger;
+
+
+
+
+      var bodyHeight = $('body').css('height'),
+        bodyWidth = $('body').css('width'),
+        baseTriangleHeight = parseInt(bodyHeight)/ 2,
+        triangleHeights = [],
+        zIndex = 100;
+
+      var previousHeight = 0;
+      for(index = 0,len=typeOfTests.length;index<len;index++){
+        var percentBasedHeight = parseInt(baseTriangleHeight)*parseInt(typeOfTests[index].percent)/100;
+        previousHeight = percentBasedHeight+previousHeight;
+        triangleHeights.push(previousHeight);
+      }
+
+      $("#pyramidn").css({
+        "width":baseTriangleHeight,
+        "height":baseTriangleHeight
+      });
+
+      previousHeight = 0;
+      for(index = 0,len=typeOfTests.length;index<len;index++){
+        var testName = typeOfTests[index].test_name.split(' ')[0].toLowerCase();
+
+
+        $("#"+testName+"_test").css({
+          "border-bottom-width": triangleHeights[index]+"px",
+          "border-left-width":triangleHeights[index]+"px",
+          "border-right-width":triangleHeights[index]+"px"
+        });
+
+
+        $("#"+testName+"_region").css({
+          "z-index": zIndex.toString()
+        });
+        zIndex--;
+        var currentHeight = (parseInt(baseTriangleHeight)*parseInt(typeOfTests[index].percent)/100)/2 + previousHeight;
+        previousHeight = triangleHeights[index];
+        $("#"+testName+"_percent").css({
+          "top":currentHeight + "px",
+          "left":((parseInt($("#pyramid").css("width"))/3)-triangleHeights[index])+"px"
+        });
+        $("#"+testName+"_duration").css({
+          "top":currentHeight + "px",
+          "right":((parseInt($("#pyramid").css("width"))/3)-triangleHeights[index])+"px"
+        });
+      }
+
+      return false;
+    }
+    var jsonR="";
+    var regExp = new RegExp("&quot;",'g');
+    jsonR=("<%= @json.to_json %>");
+    jsonR = jsonR.replace(regExp,"\"");
+    jsonR=JSON.parse(jsonR);
+    plotPyramid(jsonR);
+    return false;
+  });
+</script>

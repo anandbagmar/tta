@@ -8,12 +8,10 @@ class VisualizationController < ApplicationController
       if sub_project_id.blank?
         flash[:no_id_error] = "No Sub-Project Selected"
         flash[:no_test_error]=nil
-        render 'visualization/pyramid'
      else
       @json = Visualization.getResultJson(sub_project_id)
       @json.to_json.html_safe
       flash[:no_id_error]=""
-      render :pyramid
       end
   end
 end
