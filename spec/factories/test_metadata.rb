@@ -1,7 +1,8 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :test_metadatum, :class => 'TestMetadatum' do
+  factory :test_metadatum, :class => TestMetadatum do
+    association :sub_project_id, :factory => :sub_project, :strategy => :build
     ci_job_name "Build"
     os_name "MacOSX"
     host_name "host_pc"
