@@ -5,6 +5,7 @@
 
 <script type="text/javascript" src="../javascripts/util/templates.js"></script>
 <script type="text/javascript" src="../javascripts/util/utils.js"></script>
+
 <script type="text/javascript">
   $(document).ready(function(){
     var plotPyramid = function(obj){
@@ -96,15 +97,17 @@
           "right":((parseInt($("#pyramid").css("width"))/3)-triangleHeights[index])+"px"
         });
       }
-
-      return false;
     }
-    var jsonR="";
+    var jsonR;
     var regExp = new RegExp("&quot;",'g');
-    jsonR=("<%= @json.to_json %>");
+    debugger;
+    jsonR="<%= @json %>";
+    debugger;
     jsonR = jsonR.replace(regExp,"\"");
     jsonR=JSON.parse(jsonR);
-    plotPyramid(jsonR);
-    return false;
+    if(jsonR!=""){
+      console.log(jsonR);
+      plotPyramid(jsonR);
+    }
   });
 </script>
