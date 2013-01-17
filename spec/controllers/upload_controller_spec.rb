@@ -43,12 +43,8 @@ describe UploadController do
 
     def create_or_load_project_if_not_present
       @project = Project.find_or_create_by_name("tta")
-      p "*"*20
-      p @project
       @sub_project = @project.sub_projects.find_or_create_by_name("tta_sub")
-      p @sub_project
       @meta_data = TestMetadatum.find_or_create_by_sub_project_id(@sub_project.id)
-      p @meta_data
     end
 
 

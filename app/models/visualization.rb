@@ -1,4 +1,5 @@
 class Visualization
+
   def self.getResultJson(sub_project_id)
 
 
@@ -6,18 +7,17 @@ class Visualization
     test_types=[]
     @test_types.zip(@percent_of_tests, @duration_of_tests).each do |test_type, percent_of_test, duration_of_test|
       test_types <<
-          {
-              :test_name => test_type.test_category,
-              :percent => percent_of_test,
-              :duration => duration_of_test
-          }
+        {
+          :test_name => test_type.test_category,
+          :percent => percent_of_test,
+          :duration => duration_of_test
+        }
     end
     @json = {
-        :sub_project_name => SubProject.find(sub_project_id, :select => "name").name,
-        :test_types => test_types
-    }
+      :sub_project_name => SubProject.find(sub_project_id, :select => "name").name,
+      :test_types => test_types
+    }.to_json
 
-    p "************************", @json.to_json, "******************************"
     return @json
   end
 
