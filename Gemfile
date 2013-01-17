@@ -75,6 +75,7 @@ group :development, :test do
   gem 'pry-nav'
   gem 'capybara'
   gem 'mechanize'
+  gem 'fabrication'
 end
   group :cucumber do
     gem 'headless'

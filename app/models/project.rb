@@ -4,4 +4,13 @@ class Project < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_presence_of :name
 
+
+  def add_sub_project(params)
+    sub_project = sub_projects.find_or_create_by_name(params[:sub_project_name].upcase)
+    meta_data = sub_project.create_dependency params
+    return sub_project,meta_data
+  end
+
+
+
 end
