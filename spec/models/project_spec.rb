@@ -11,14 +11,14 @@ describe Project do
   describe "add_sub_project" do
     before(:each) do
       @attr = { :sub_project_name => "tta_sub", :ci_job_name =>"build",:test_category => "Unit test" , :test_report_type => "JUnit",:date_of_execution => "2012-12-12",
-                :browser => "firefox",:host_name=> "host_pc", :os_name=>"mac-osx",:type_of_environment => "dev",:logDirectory=> mock(:original_filename => "abc.zip", :tempfile => mock(:path => "/Users/pooja/Documents/tta/logs/" ))}
+                :browser => "firefox",:host_name=> "host_pc", :os_name=>"mac-osx",:type_of_environment => "dev",:logDirectory=> mock(:original_filename => "abc.zip", :path => "/Users/pooja/Documents/tta/logs/" )}
     end
 
     it "adds sub_project to under the project" do
       project = Fabricate(:project)
       project.sub_projects.should be_empty
       XmlParser.stub(:parse)
-      sub_proj = project.add_sub_project(@attr)
+      sub_proj,meta_data = project.add_sub_project(@attr)
       project.sub_projects.count.should == 1
       project.sub_projects.should include(sub_proj)
     end
