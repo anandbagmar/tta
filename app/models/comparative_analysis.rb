@@ -29,6 +29,7 @@ class ComparativeAnalysis
         number_of_failures += test_suite_record.number_of_failures.to_i
       end
       result << [(metadata_record.date_of_execution.to_time.to_f * 1000), (total_num_of_tests.to_f - number_of_failures.to_f) / total_num_of_tests.to_f  * 100]
+      p result
     }
   end
 
