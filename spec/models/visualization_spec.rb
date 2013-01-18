@@ -27,7 +27,7 @@ describe Visualization do
     test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id, :class_name => "Class1.1",:number_of_tests => 30 , :number_of_errors=>2 ,:number_of_failures =>2,:time_taken=>5)
     test_case_record = FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id,:time_taken=>1,:class_name=>"class1.1.1",:error_msg=>"")
     json= Visualization.getResultJson(sub_project.id)
-    json.should eq("{\"sub_project_name\":\"SubProject1.1\",\"test_types\":[{\"test_name\":\"UNIT TEST\",\"percent\":100.0,\"duration\":\"0.0001\"}]}")
+    json.should eq("{\"sub_project_name\":\"SubProject1.1\",\"test_types\":[{\"test_name\":\"UNIT TEST\",\"percent\":\"100.00\",\"duration\":\"0.005000\"}]}")
   end
 
   it "should return json with proper sub_project_name" do
@@ -52,7 +52,7 @@ describe Visualization do
     test_case_record_functional = FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_functional.id,:time_taken=>1,:class_name=>"class1.1.1",:error_msg=>"")
     json= Visualization.getResultJson(sub_project.id)
     parsed_json = ActiveSupport::JSON.decode(json)
-    parsed_json["test_types"][0]["percent"].should eq(50.0)
+    parsed_json["test_types"][0]["percent"].should eq("50.00")
   end
 
   it "should return json with proper duration" do
@@ -63,7 +63,7 @@ describe Visualization do
     test_case_record = FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id,:time_taken=>1,:class_name=>"class1.1.1",:error_msg=>"")
     json= Visualization.getResultJson(sub_project.id)
     parsed_json = ActiveSupport::JSON.decode(json)
-    parsed_json["test_types"][0]["duration"].should eq("0.0001")
+    parsed_json["test_types"][0]["duration"].should eq("0.005000")
   end
 
 
