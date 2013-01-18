@@ -14,7 +14,7 @@
         legendTemplate = templates.getLegendItem(),
         legendData="",
         pyramidItemTemplate = templates.getPyramidItem(),
-        pyramidData="";
+        pyramidData="<h3>Test-Pyramid for:"+ obj.sub_project_name +"</h3><br>";
 
       for(var index = 0, len = typeOfTests.length;index<len;index++){
         if(typeOfTests[index].percent == 0.0)
@@ -66,9 +66,9 @@
         var testName = typeOfTests[index].test_name.split(' ')[0].toLowerCase(),
           color=Utils.getRandomColor();
 
-
+        debugger;
         $("#"+testName+"_rect").css({
-          "background-color":"transparent transparent" + color
+          "background-color": color
         });
 
         $("#"+testName+"_test").css({
