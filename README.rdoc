@@ -2,10 +2,10 @@
 
 <b>TTA</b> is an independent product that provides a way to do Trend Analysis across your test suites.
 
-On the consumer front, TTA consumes xUnit based results and other raw data from across your projects and test frameworks and archives it.
+On the consumer front, TTA consumes xUnit/* based results and other raw data from across your projects and test frameworks and archives it.
 On the view front, TTA provides some simple reports, and a way to create custom reports that displays Test Trends for you.
 
-
+To know more about TTA and how to use it <a href="https://github.com/anandbagmar/tta/wiki">click here</a>
 
 == Copyright
 
