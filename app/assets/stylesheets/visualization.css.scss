@@ -46,14 +46,14 @@ body,html{
 }
 
 #legend{
-  text-align:right;
-  widht:40%;
-  margin-left: 60%;
-  border:2px , solid;
+  text-align:center;
+  float: right;
+  margin-right: 100px;
+  width: 300px;
 }
-#legend span{
-  text-align: left;
-  margin-left: 5px;
+#legend>span{
+  display: inline-block;
+  margin: 10px;
 }
 
 .test-legend{

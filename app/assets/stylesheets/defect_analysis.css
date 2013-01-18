@@ -1,0 +1,40 @@
+#defect-analysis-table{
+  margin: 30px;
+}
+#defect-analysis-table li{
+  list-style: none;
+}
+.error_list{
+  padding: 0;
+  margin: 5px;
+}
+
+.error_list li{
+  font-weight: bold;
+  background: rgba(177, 0, 11, 0.60);
+  padding: 0;
+  position: relative;
+  margin: 9px 0;
+}
+.error_list li span{
+  line-height: 50px;
+}
+.error_messages{
+  /*display: none;*/
+  width: 100%;
+  box-shadow: 2px 2px 2px black inset;
+  padding-top: 1px;
+  margin-left: -1px;
+  float: left;
+}
+
+.error_messages ul{
+  background: #ff5046;
+  padding: 0;
+  width: 100%;
+  margin: 0;
+}
+.error_messages ul li{
+  background: #ff5046;
+  padding: 0;
+}

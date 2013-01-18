@@ -12,9 +12,9 @@
       var typeOfTests = obj.test_types,
         templates = new Template(),
         legendTemplate = templates.getLegendItem(),
-        legendData="",
+        legendData="<span><b>Legend: </b></span>",
         pyramidItemTemplate = templates.getPyramidItem(),
-        pyramidData="<h3>Test-Pyramid for:"+ obj.sub_project_name +"</h3><br>";
+        pyramidData="<h3>Test-Pyramid for: "+ obj.sub_project_name.toUpperCase() +"</h3><br>";
 
       for(var index = 0, len = typeOfTests.length;index<len;index++){
         if(typeOfTests[index].percent == 0.0)
@@ -38,10 +38,6 @@
       }
       $('#legend').html(legendData);
       $("#pyramid").html(pyramidData);
-      debugger;
-
-
-
 
       var bodyHeight = $('body').css('height'),
         bodyWidth = $('body').css('width'),
@@ -66,7 +62,6 @@
         var testName = typeOfTests[index].test_name.split(' ')[0].toLowerCase(),
           color=Utils.getRandomColor();
 
-        debugger;
         $("#"+testName+"_rect").css({
           "background-color": color
         });
@@ -100,9 +95,7 @@
     }
     var jsonR;
     var regExp = new RegExp("&quot;",'g');
-    debugger;
     jsonR="<%= @json %>";
-    debugger;
     jsonR = jsonR.replace(regExp,"\"");
     jsonR=JSON.parse(jsonR);
     if(jsonR!=""){

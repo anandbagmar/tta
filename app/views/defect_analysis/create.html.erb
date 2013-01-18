@@ -1,8 +1,20 @@
 <head xmlns="http://www.w3.org/1999/html">
   <link rel="stylesheet" href="/stylesheet/upload_form.css"> </link>
+  <link rel="stylesheet" href="/stylesheet/defect_analysis.css"> </link>
+
+
+  <script type="text/javascript" src="../javascripts/util/templates.js"></script>
+  <script type="text/javascript" src="../../assets/javascripts/defect_analysis.js"></script>
+
 </head>
 
 <body>
 <%= render :file=> 'defect_analysis/new.html.erb' %>
-<%= @defect_analysis_json %>
+
+
+<div id="defect-analysis-table">
+</div>
+<div id="defect-analysis-data" style="display:none;">
+  <%= @defect_analysis_json %>
+</div>
 </body>
