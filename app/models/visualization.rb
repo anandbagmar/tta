@@ -30,16 +30,16 @@ class Visualization
       duration_of_test_of_test_type =0.0
       test_type_result.each do |test_type|
         no_of_test_of_test_type += test_type[0]
-        duration_of_test_of_test_type += test_type[1].to_f/60000
+        duration_of_test_of_test_type += (test_type[1].to_f)/1000
       end
-      duration_of_tests<<"%0.4f" %(duration_of_test_of_test_type)
+      duration_of_tests<<"%0.6f" %(duration_of_test_of_test_type)
       no_of_tests << no_of_test_of_test_type
     end
     no_of_tests.each do |entry|
       total += entry
     end
     no_of_tests.each do |entry|
-      percentOfTests << (entry.to_f/total)*100
+      percentOfTests << "%0.2f" %((entry.to_f/total)*100)
     end
     return percentOfTests, duration_of_tests
   end
