@@ -27,9 +27,7 @@ class ComparativeAnalysisController < ApplicationController
         flash[:date_error]="select end date greater than start date"
       else
         @result_set = ComparativeAnalysis.get_result_set(params[:project][:id],@start_date,@end_date)
-        if @result_set[0].nil?
-          flash[:no_data_error] ="No test runs for selected date range"
-        end
+
         flash[:no_id_error]=""
       end
       render :create

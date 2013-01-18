@@ -13,13 +13,11 @@ class ComparativeAnalysis
       result_set[sub_project_name] = aggregate_value
     }
     return result_set
-
   end
 
   private
 
   def self.get_percentage_of_passing_tests(sub_project_id, start_date,end_date)
-
     meta_data = SubProject.find(sub_project_id).test_metadatum.find_all_by_date_of_execution(start_date..end_date)
     meta_data.inject([]){ |result, metadata_record|
       total_num_of_tests = 0
@@ -29,8 +27,6 @@ class ComparativeAnalysis
         number_of_failures += test_suite_record.number_of_failures.to_i
       end
       result << [(metadata_record.date_of_execution.to_time.to_f * 1000), (total_num_of_tests.to_f - number_of_failures.to_f) / total_num_of_tests.to_f  * 100]
-      p result
     }
   end
-
 end
