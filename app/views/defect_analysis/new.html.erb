@@ -10,6 +10,12 @@
 
 </div>
 <div id="sub_project_picker">
+  <% if flash[:no_id_error]!=nil %>
+      <p class="error"><%= flash[:no_id_error] %><br></p>
+  <% end %>
+  <% if flash[:no_date_error]!=nil %>
+      <p class="error"><%= flash[:no_date_error] %><br></p>
+  <% end %>
   <h2>Select Sub-Project for defect analysis</h2>
   <%= form_tag ({:action => 'sub_project_filter',:id => "defect_analysis"}) do %>
       <div class="fields" >
@@ -22,7 +28,7 @@
       <div class="fields" >
         <label for="start_date">Analysis Date:</label>
         <div class="required-field">
-          <%= datepicker_input 'comparative_analysis', 'analysis_date',:dateFormat => "yy-mm-dd" %>
+          <%= datepicker_input 'defect_analysis', 'analysis_date',:dateFormat => "yy-mm-dd" %>
           <span class='error-msg'>Please Enter Analysis date</span>
         </div>
       </div>
