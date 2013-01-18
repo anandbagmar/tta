@@ -17,6 +17,13 @@ class VisualizationController < ApplicationController
       flash[:no_test_error]=nil
     else
       @json = Visualization.getResultJson(sub_project_id)
+      json_obj = JSON.parse!(@json)
+      p "json obj:"
+      json_obj["test_types"].each do |test_type|
+         if test_type["percent"]
+           flash[:no_test_error]="No test in your project!!"
+         end
+      end
       flash[:no_id_error]=nil
     end
   end
