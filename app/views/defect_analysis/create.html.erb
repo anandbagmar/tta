@@ -10,11 +10,15 @@
 
 <body>
 <%= render :file=> 'defect_analysis/new.html.erb' %>
-
-
-<div id="defect-analysis-table">
-</div>
-<div id="defect-analysis-data" style="display:none;">
-  <%= @defect_analysis_json %>
+<div id="container">
+  <div id="defect-analysis-table">
+    <div class="color_codes">
+      <div class="legend_item" id="type1"><span class="rect"></span><span class="legend_text">Failure Message</span></div>
+      <div class="legend_item" id="type2"><span class="rect"></span><span class="legend_text">Failing Tests</span></div>
+    </div>
+  </div>
+  <div id="defect-analysis-data" style="display:none;">
+    <%= @defect_analysis_json %>
+  </div>
 </div>
 </body>

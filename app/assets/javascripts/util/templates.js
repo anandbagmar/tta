@@ -14,7 +14,7 @@ var Template = function(){
             var regExp;
             for(var temp in data){
                 regExp = new RegExp("[{][{]" + temp + "[}][}]",'g');
-                template = template.replace(regExp,"'"+ data[temp] +"'");
+                template = template.replace(regExp,data[temp]);
             }
             return template;
         },
