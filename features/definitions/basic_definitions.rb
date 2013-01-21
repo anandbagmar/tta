@@ -10,9 +10,8 @@ module Definitions
       fill_in 'type_of_environment', :with => type_of_env
       fill_in 'date_of_execution', :with => date_of_exec
       attach_file 'logDirectory',logDir
-      select test_type, :from => "test_category"
+      fill_in 'test_category', :with => test_type
       click_button("SUBMIT")
-
     end
   end
 end
