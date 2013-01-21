@@ -50,4 +50,4 @@ Feature: Upload data to view test pyramid and Comparative analysis graph
   Scenario: Plotting graph
     Given That the user visits the url "http://172.18.6.1:3000/"
     When The user navigates to "COMPARATIVE ANALYSIS" page
-    Then The user enters Date Range between "2012-01-01" and "2012-04-04" for "PROJECT1" and the graph is plotted
+    Then The user enters Date Range between "2012-01-01" and "2012-04-04" for "PROJECT 1" and the graph is plotted
