@@ -5,4 +5,5 @@ std_opts = "--format #{ENV['CUCUMBER_FORMAT'] || 'pretty'} --strict --tags ~@wip
 %>
 default: <%= std_opts %> features
 wip: --tags @wip:3 --wip features
+xml_report: -t ~@wip --format junit --out ./feature_report.xml
 rerun: <%= rerun_opts %> --format rerun --out rerun.txt --strict --tags ~@wip
