@@ -35,7 +35,7 @@ Then /^the test Pyramid for "([^"]*)" is generated with layers of pyramid equal 
   click_button("Plot")
   sleep(10)
   assert page.has_css?("#pyramid")
-  assert page.has_content?("Test-Pyramid for:"+sub_proj)
+  assert page.has_content?("Test-Pyramid for: "+sub_proj)
   no_of_legend = page.all(:xpath,"//div[@id='legend']/div").length
   sleep(5)
   no_of_pyramid_divisions =  page.all(:xpath,"//div[@id='pyramid']/div").length
