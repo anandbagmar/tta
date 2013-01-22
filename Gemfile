@@ -12,7 +12,6 @@ gem 'mysql2'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -37,7 +36,6 @@ gem 'xml-simple'
 
 # To use debugger
 # gem 'debugger'
-gem "therubyracer", :require => 'v8'
 
 #gem 'pg', :require => 'pg'
 
@@ -64,7 +62,7 @@ group :development, :test do
   gem 'rspec-core'
   gem 'rspec-expectations'
   gem 'rspec-mocks'
-  gem "cucumber-rails","~>1.0", :require => false  # integration test framework
+  gem "cucumber-rails", :require => false  # integration test framework
   gem 'webrat'
   gem 'simplecov'                                 # test coverage report
   gem 'json_spec'                                 # easier testing of JSON

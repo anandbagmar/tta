@@ -14,11 +14,10 @@
 # Ignore all logfiles and tempfiles.
 /log/*.*
 /tmp
-Gemfile.lock
+
 /public/*
 *.DS_Store
 *.patch
-coverage/*.html
-coverage/*.json
+/coverage/
 *.zip
 
