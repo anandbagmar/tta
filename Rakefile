@@ -56,7 +56,10 @@ namespace :tta do
   task :unit_tests => ['db:recreate', 'spec']
 
   desc "Upload all artifacts"
-  task :upload_artifacts => ['tta:create_zip', 'tta:upload_to_tta']
+  task :upload_artifacts do
+    Rake::Task['tta:create_zip'].execute
+    Rake::Task['tta:upload_to_tta'].invoke("TTA", "TTA_sub", "Build", "Unit Test", "JUnit", "Ubuntu", "Pooja-pc", "none", "Dev", "", "/var/lib/go-agent/pipelines/Development/tta_spec_results.zip", "*.xml")
+  end
 
     #Rake::Task['tta:create_zip'].execute
     #Rake::Task['tta:upload_to_tta'].invoke("TTA", "TTA_SUB", "Build", "Unit Test", "JUnit", "Ubuntu", "Pooja-pc", "none", "Dev", "", "/var/lib/go-agent/pipelines/Development/tta_spec_results.zip", "*.xml")
@@ -83,3 +86,6 @@ namespace :tta do
     `curl -F 'authenticity_token=KBc5IruWAILeOOIVKoqozwSYx3eSatES/fklIGf/Cn4=' -F 'project_name=#{$project_name}' -F 'sub_project_name=#{$sub_project_name}' -F 'ci_job_name=#{$ci_job_name}' -F 'test_category=#{$test_category}' -F 'test_report_type=#{$test_report_type}' -F 'os_name=#{$os_name}' -F 'host_name=#{$host_name}' -F 'browser=#{$browser}' -F 'type_of_environment=#{$type_of_environment}' -F 'date_of_execution=#{$date_of_execution}' -F 'logDirectory=@#{$log_directory}' -F 'commit=SUBMIT' 'tta.thoughtworks.com:3000/upload/create'`
   end
 end
+
+
+
