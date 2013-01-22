@@ -35,7 +35,7 @@ Feature: Upload data to view test pyramid ,Comparative analysis graph and Defect
     Then error message for defect analysis should be displayed
 
 
-
+   @wip
   Scenario: Error-Message Checking On UPLOAD PAGE
     Given That the user visits the url "http://localhost:3000"
     And The user navigates to "UPLOAD TEST DATA" page
