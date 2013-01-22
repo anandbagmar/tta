@@ -29,7 +29,6 @@ $("document").ready(function () {
             "ErrorList":errorListData
         });
 
-//        $("#defect-analysis-table").html(subProjectName + errorListData);
         $("#defect-analysis-table").prepend(subProjectName);
         $("#defect-analysis-table").append(errorListData);
     }

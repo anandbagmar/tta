@@ -2,11 +2,6 @@
   <link rel="stylesheet" href="/stylesheet/upload_form.css"> </link>
   <script src="http://code.jquery.com/jquery-latest.js"></script>
   <script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
-  <script>
-      $(document).ready(function(){
-          $("#uploadForm").validate();
-      });
-  </script>
 </head>
 
 <%= render :file=> '/home/header.html.erb' %>
@@ -74,7 +69,10 @@
 
       <div class="fields">
         <label for="date_of_execution"> Date Of Execution <span class="required-fields">*</span></label>
-        <%= text_field_tag (:date_of_execution),nil,:placeholder => 'yyyy-mm-dd', :class => 'required dateISO' %>
+        <div class="required-field date-field">
+          <%= text_field_tag (:date_of_execution), nil, :placeholder => 'yyyy-mm-dd', :class => 'required dateISO' %>
+          <span class='error-msg'>Please enter a valid Date</span>
+        </div>
         <br>
       </div>
 
@@ -84,7 +82,9 @@
       </div>
 
        <div class="button">
-         <%= submit_tag 'SUBMIT',:class=> 'submit'%>
+         <button id="submit_button">Submit</button>
+         <%= submit_tag nil, {:class=>:"hidden", :id =>"form-submit"}%>
+         <!--<%= submit_tag 'SUBMIT',:class=> 'submit', :hidden=>'hidden' %>-->
          <%= submit_tag("Clear All", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
       </div>
 
@@ -92,3 +92,47 @@
 </div>
 
 </body>
+<script>
+  $(document).ready(function(){
+
+    var validateDate = function($form){
+      var valid = true;
+      if(!$form)
+        valid = false;
+      var dates = $form.find(".date-field input");
+      for(index=0,len=dates.length;index<len;index++){
+        var dateFields = (dates[index].value).split('-'),
+            today = new Date();
+        if(dateFields.length != 3 ){
+          valid = false;
+        }
+        if(!parseInt(dateFields[0])||!parseInt(dateFields[1])||!parseInt(dateFields[2])){
+          valid=false;
+        }
+        if(parseInt(dateFields[0]) > parseInt(today.getFullYear()) || parseInt(dateFields[0]) < 1900){
+          valid = false;
+        }
+        if(parseInt(dateFields[1]) > 12 || parseInt(dateFields[1]) < 1){
+          valid=false;
+        }
+        if(parseInt(dateFields[2]) > 31 || parseInt(dateFields[2]) < 1){
+          valid = false;
+        }
+        debugger;
+        if(valid === false){
+          dates.siblings('.error-msg').show();
+          return valid;
+        }
+      }
+      return valid;
+    };
+
+    $("#submit_button").on('click',function(){
+      if(!validateDate($("#uploadForm"))){         //TODO: Avoid hacks and use a date picker for proper format
+        return false;
+      }
+      $("#form-submit").click();
+      return false;
+    });
+  });
+</script>

@@ -3,6 +3,8 @@
   color: #ff0000;
   position: absolute;
   left: 0;
+  top: 20px;
+  font-size: 10px;
 }
 .required-field{
   display: inline-block;

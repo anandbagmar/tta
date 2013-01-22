@@ -24,7 +24,7 @@
       <div class="fields" >
         <label for="start_date">Start Date:</label>
         <div class="required-field">
-          <%= datepicker_input 'comparative_analysis', 'start_date',:dateFormat => "yy-mm-dd" %>
+          <%= datepicker_input 'comparative_analysis', 'start_date',:dateFormat => "yy-mm-dd", :readonly => "readonly" %>
           <span class='error-msg'>Please Enter Start date</span>
         </div>
       </div>
@@ -32,7 +32,7 @@
       <div class="fields" >
         <label for="end_date">End Date:</label>
         <div class="required-field">
-          <%= datepicker_input 'comparative_analysis', 'end_date',:dateFormat => "yy-mm-dd" %>
+          <%= datepicker_input 'comparative_analysis', 'end_date',:dateFormat => "yy-mm-dd", :readonly => "readonly" %>
           <span class='error-msg'>Please Enter End date</span>
         </div>
       </div>
@@ -62,7 +62,7 @@
 
 <div id="comparative_analysis" style="width:900px;height:600px">
 
-<script>
+  <script>
       st_date = new Date('<%= @start_date %>');
       start_time= st_date.getTime()
       ed_date = new Date('<%= @end_date %>');
@@ -111,7 +111,6 @@
                       min:0,
                       max: 100,
                       labelMargin: 30
-
                   },
                   grid:  {
                       borderWidth: 0,
