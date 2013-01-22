@@ -53,20 +53,13 @@ end
 
 namespace :tta do
   desc "Run unit_tests"
-  task :unit_tests do
-    p "Project root:#{$PROJECT_ROOT}"
-    Rake::Task['db:recreate'].execute
-    Rake::Task['tta:run_test'].execute
-    Rake::Task['tta:create_zip'].execute
-    Rake::Task['tta:upload_to_tta'].invoke("TTA", "TTA_SUB", "Build", "Unit Test", "JUnit", "Ubuntu", "Pooja-pc", "none", "Dev", "", "/var/lib/go-agent/pipelines/Development/tta_spec_results.zip", "*.xml")
-  end
+  task :unit_tests => ['db:recreate', 'spec']
 
-  task :run_test do
-    begin
-      Rake::Task['spec'].execute
-    rescue
-    end
-  end
+  desc "Upload all artifacts"
+  task :upload_artifacts => ['tta:create_zip', 'tta:upload_to_tta']
+
+    #Rake::Task['tta:create_zip'].execute
+    #Rake::Task['tta:upload_to_tta'].invoke("TTA", "TTA_SUB", "Build", "Unit Test", "JUnit", "Ubuntu", "Pooja-pc", "none", "Dev", "", "/var/lib/go-agent/pipelines/Development/tta_spec_results.zip", "*.xml")
 
   task :create_zip do
     `zip tta_spec_results.zip log/tta_spec_results.xml`
