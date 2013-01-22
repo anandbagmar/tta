@@ -19,7 +19,7 @@ describe Project do
       project.sub_projects.should be_empty
       XmlParser.stub(:parse)
       sub_proj,meta_data = project.add_sub_project(@attr)
-      project.sub_projects.count.should == 5
+      project.sub_projects.count.should == 1
       project.sub_projects.should include(sub_proj)
     end
   end
