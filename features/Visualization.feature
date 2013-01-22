@@ -40,7 +40,7 @@ Feature: Upload data to view test pyramid ,Comparative analysis graph and Defect
     Given That the user visits the url "http://localhost:3000"
     And The user navigates to "UPLOAD TEST DATA" page
     When The user submits project details with "proj1","sub_proj1","ci_job1","osName1","hostName1","browser1","environment1","dateOfExecution1","/var/lib/go-agent/pipelines/Development/tta_spec_results.zip","test_type1"
-    And The User clicks on the "reset_button" button
+    And The User clicks on the "Clear All" button
     And The User clicks on the "SUBMIT" button
     Then Appropriate Error Messages are displayed
 
