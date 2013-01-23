@@ -59,6 +59,7 @@ Feature: Upload data to view test pyramid ,Comparative analysis graph and Defect
     |Project1|SubProj2|Run unit test|Mac    |Sanchar  |IE     |DEV        |2012-01-01       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Unit Test       |
     |Project1|SubProj2|Run unit test|Mac    |Sanchar  |IE     |DEV        |2012-03-31       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Integration Test|
 
+  @wip
   @javascript
   Scenario: Plotting graph
     Given That the user visits the url "http://localhost:3000/"

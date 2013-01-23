@@ -44,6 +44,7 @@ Then /^the test Pyramid for "([^"]*)" is generated with layers of pyramid equal 
 end
 
 When /^The user enters Date Range between "([^"]*)" and "([^"]*)" for "([^"]*)"$/ do |sdate, edate, pid|
+
   fill_in "comparative_analysis_start_date" ,:with => sdate
   fill_in "comparative_analysis_end_date" , :with => edate
   select pid, :from => "project_id"
