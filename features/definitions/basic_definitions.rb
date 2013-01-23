@@ -11,7 +11,7 @@ module Definitions
       fill_in 'date_of_execution', :with => date_of_exec
       attach_file 'logDirectory',logDir
       fill_in 'test_category', :with => test_type
-      click_button("SUBMIT")
+      click_button("submit_button")
     end
   end
 end
