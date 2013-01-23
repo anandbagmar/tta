@@ -56,9 +56,9 @@ namespace :tta do
   task :unit_tests => ['db:recreate', 'spec']
 
   desc "Upload all artifacts"
-  task :upload_artifacts
+  task :upload_artifacts do
     Rake::Task['tta:create_zip'].execute
-    Rake::Task['tta:upload_to_tta'].invoke("TTA", "TTA_sub", "Build", "test_category", "JUnit", "Ubuntu", "host-pc", "none", "Dev", "", ($PROJECT_ROOT)+"/tta_spec_results.zip", "*.xml")
+    Rake::Task['tta:upload_to_tta'].invoke("TTA", "TTA_sub", "Build", "Unit Test", "JUnit", "Ubuntu", "host-pc", "none", "Dev", "", ($PROJECT_ROOT)+"/tta_spec_results.zip", "*.xml")
   end
 
   task :create_zip do
