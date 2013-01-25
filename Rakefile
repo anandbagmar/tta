@@ -61,7 +61,7 @@ namespace :tta do
     Rake::Task['tta:upload_to_tta'].invoke("TTA", "TTA_sub", "Build", args.test_type, "JUnit", "Ubuntu", "host-pc", "none", "Dev", "", args.file_path, "*.xml")
   end
   task :create_cucumber_zip do
-    `zip cucumber_results.zip feature_report.xml/*.xml`
+    `zip cucumber_results.zip feature_report.xml/TEST-features-Visualization.xml`
   end
   task :create_zip do
     `zip tta_spec_results.zip log/tta_spec_results.xml`
