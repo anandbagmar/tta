@@ -8,7 +8,7 @@ Feature: Upload data to view test pyramid ,Comparative analysis graph and Defect
     And The user submits project details with "<proj>","<sub_proj>","<ci_job>","<osName>","<hostName>","<browser>","<environment>","<dateOfExecution>","<logDir>","<test_type>"
     Then The project is uploaded
   Examples:
-    |proj    |sub_proj|ci_job       |osName |hostName |browser|environment|dateOfExecution  |logDir                                                       |test_type       |
+    |proj    |sub_proj|ci_job       |osName |hostName |browser|environment|dateOfExecution  |logDir                                             |test_type       |
     |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-01-01       |/var/lib/go-agent/pipelines/Development/sample.zip |Unit Test       |
     |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-02-20       |/var/lib/go-agent/pipelines/Development/sample.zip |Integration Test|
     |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-03-15       |/var/lib/go-agent/pipelines/Development/sample.zip |Functional Test |
@@ -52,7 +52,7 @@ Feature: Upload data to view test pyramid ,Comparative analysis graph and Defect
     And The user submits project details with "<proj>","<sub_proj>","<ci_job>","<osName>","<hostName>","<browser>","<environment>","<dateOfExecution>","<logDir>","<test_type>"
     Then The project is uploaded
   Examples:
-    |proj    |sub_proj|ci_job       |osName |hostName |browser|environment|dateOfExecution  |logDir                                                       |test_type       |
+    |proj    |sub_proj|ci_job       |osName |hostName |browser|environment|dateOfExecution  |logDir                                             |test_type       |
     |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-01-01       |/var/lib/go-agent/pipelines/Development/sample.zip |Unit Test       |
     |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-02-20       |/var/lib/go-agent/pipelines/Development/sample.zip |Integration Test|
     |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-03-15       |/var/lib/go-agent/pipelines/Development/sample.zip |Functional Test |
