@@ -15,9 +15,8 @@ class SubProject < ActiveRecord::Base
   private
 
   def create_test_metadatum params
-    meta_datum = test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type(params[:ci_job_name].upcase,
-    params[:browser].upcase, params[:type_of_environment].upcase, params[:host_name].upcase, params[:os_name].upcase, params[:test_category].upcase, params[:test_report_type].upcase)
-    meta_datum.date_of_execution= params[:date_of_execution]
+    meta_datum = test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type_and_date_of_execution(params[:ci_job_name].upcase,
+    params[:browser].upcase, params[:type_of_environment].upcase, params[:host_name].upcase, params[:os_name].upcase, params[:test_category].upcase, params[:test_report_type].upcase,params[:date_of_execution])
     meta_datum.save
     return meta_datum
   end
