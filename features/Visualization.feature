@@ -9,9 +9,9 @@ Feature: Upload data to view test pyramid ,Comparative analysis graph and Defect
     Then The project is uploaded
   Examples:
     |proj    |sub_proj|ci_job       |osName |hostName |browser|environment|dateOfExecution  |logDir                                                       |test_type       |
-    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-01-01       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Unit Test       |
-    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-02-20       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Integration Test|
-    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-03-15       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Functional Test |
+    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-01-01       |/var/lib/go-agent/pipelines/Development/sample.zip |Unit Test       |
+    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-02-20       |/var/lib/go-agent/pipelines/Development/sample.zip |Integration Test|
+    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-03-15       |/var/lib/go-agent/pipelines/Development/sample.zip |Functional Test |
 
   @javascript
   Scenario: Generating graph
@@ -39,7 +39,7 @@ Feature: Upload data to view test pyramid ,Comparative analysis graph and Defect
   Scenario: Error-Message Checking On UPLOAD PAGE
     Given That the user visits the url "http://localhost:3000"
     And The user navigates to "UPLOAD TEST DATA" page
-    When The user submits project details with "proj1","sub_proj1","ci_job1","osName1","hostName1","browser1","environment1","dateOfExecution1","/var/lib/go-agent/pipelines/Development/tta_spec_results.zip","test_type1"
+    When The user submits project details with "proj1","sub_proj1","ci_job1","osName1","hostName1","browser1","environment1","dateOfExecution1","/var/lib/go-agent/pipelines/Development/sample.zip","test_type1"
     And The User clicks on the "Clear All" button
     And The User clicks on the "submit_button" button
     Then Appropriate Error Messages are displayed
@@ -53,11 +53,11 @@ Feature: Upload data to view test pyramid ,Comparative analysis graph and Defect
     Then The project is uploaded
   Examples:
     |proj    |sub_proj|ci_job       |osName |hostName |browser|environment|dateOfExecution  |logDir                                                       |test_type       |
-    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-01-01       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Unit Test       |
-    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-02-20       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Integration Test|
-    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-03-15       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Functional Test |
-    |Project1|SubProj2|Run unit test|Mac    |Sanchar  |IE     |DEV        |2012-01-01       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Unit Test       |
-    |Project1|SubProj2|Run unit test|Mac    |Sanchar  |IE     |DEV        |2012-03-31       |/var/lib/go-agent/pipelines/Development/tta_spec_results.zip |Integration Test|
+    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-01-01       |/var/lib/go-agent/pipelines/Development/sample.zip |Unit Test       |
+    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-02-20       |/var/lib/go-agent/pipelines/Development/sample.zip |Integration Test|
+    |Project1|SubProj1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012-03-15       |/var/lib/go-agent/pipelines/Development/sample.zip |Functional Test |
+    |Project1|SubProj2|Run unit test|Mac    |Sanchar  |IE     |DEV        |2012-01-01       |/var/lib/go-agent/pipelines/Development/sample.zip |Unit Test       |
+    |Project1|SubProj2|Run unit test|Mac    |Sanchar  |IE     |DEV        |2012-03-31       |/var/lib/go-agent/pipelines/Development/sample.zip |Integration Test|
 
   @wip
   @javascript

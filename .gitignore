@@ -19,5 +19,4 @@
 *.DS_Store
 *.patch
 /coverage/
-*.zip
 
