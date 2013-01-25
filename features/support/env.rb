@@ -45,14 +45,14 @@ if(ENV["HEADLESS"])
   @headless.start
 end
 
-#at_exit do
-#  @headless.destroy if ENV[HEADLESS] && !@headless.nil?
-#end
 at_exit do
-  if @headless
-    @headless.destroy
-  end
+  @headless.destroy if ENV[HEADLESS] && !@headless.nil?
 end
+#at_exit do
+#  if @headless
+#    @headless.destroy
+#  end
+#end
 
 #Before("@selenium,@javascript", "~@no-headless") do
 #  headless.start if Capybara.current_driver == :selenium
