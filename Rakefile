@@ -70,7 +70,7 @@ namespace :tta do
     $project_name = args.project_name
     $sub_project_name = args.sub_project_name
     $ci_job_name = ENV['GO_JOB_NAME']
-    $test_category=ENV['GO_STAGE_NAME']
+    $test_category=args.test_category
     $test_report_type=args.test_report_type
     $os_name=RUBY_PLATFORM
     $host_name=`hostname`.strip
