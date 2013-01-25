@@ -3,6 +3,7 @@
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
 require File.expand_path('../config/application', __FILE__)
+require 'date'
 
 Tta::Application.load_tasks
 namespace :db do
@@ -76,7 +77,7 @@ namespace :tta do
     $host_name=`hostname`.strip
     $browser=args.browser
     $type_of_environment=args.type_of_environment
-    $date_of_execution=(Date.today << 1).to_s
+    $date_of_execution=Date.today.to_s
     $log_directory=args.logDirectory
     $file_pattern=args.filePattern
     $commit=args.commit
