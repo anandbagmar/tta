@@ -25,6 +25,7 @@ module Page
 
 
     def verify_defect_graph(subproject_name)
+      puts "**************** sub project name:"+subproject_name+ "*****************"
      assert page_has_content?("Sub Project:"+subproject_name)
      assert page_has_css?(DEFECT_GRAPH_ID)
     end

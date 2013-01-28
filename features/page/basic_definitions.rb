@@ -82,7 +82,8 @@ module Definitions
 
 
     def page_has_content?(content)
-        assert page.has_content?(content),"No Display"
+        puts content
+        assert page.has_content?(content),"************ No Display ***************"
     end
 
   end
