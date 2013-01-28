@@ -5,7 +5,7 @@
 #    upload_data(row)
 #  end
 #end
-When /^the user checks Pyramimd View of "([^"]*)"$/ do |sub_proj|
+When /^the user checks Pyramid View of "([^"]*)"$/ do |sub_proj|
   view_pyramid_view(sub_proj)
 end
 

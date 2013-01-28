@@ -27,11 +27,11 @@ module Page
 
 
     def verify_if_pyramid_is_displayed()
-      page_has_css?(PYRAMID_ID)
+      assert page_has_css?(PYRAMID_ID),"Pyramid is displayed"
     end
 
     def verify_if_title_is_displayed(title)
-      page_has_content?("Test-Pyramid for: "+title)
+      assert page_has_content?("Test-Pyramid for: "+title),"Title not displayed"
     end
 
     def verify_if_legends_is_equal_to_divisions

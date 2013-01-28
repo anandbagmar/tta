@@ -58,7 +58,7 @@ module Definitions
 
 
     def page_has_css?(element_css)
-      assert page.has_css?(element_css)
+      assert page.has_css?(element_css),"Nothing displayed"
     end
 
     def verify_error_is_displayed(page_name)
@@ -82,7 +82,7 @@ module Definitions
 
 
     def page_has_content?(content)
-        assert page.has_content?(content)
+        assert page.has_content?(content),"No Display"
     end
 
   end

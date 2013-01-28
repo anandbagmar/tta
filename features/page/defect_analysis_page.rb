@@ -8,7 +8,10 @@ module Page
 
     def fill_details(subproject_name, date)
       select_the_option(subproject_name,DEFECT_SUBPROJECT_DROPDOWN)
-      fill_in_data(DEFECT_FORM_DATE,date)
+      page.execute_script %Q{ $("#defect_analysis_analysis_date").val("2012-12-12");}
+      #fill_in_data(DEFECT_FORM_DATE,date)
+      sleep(10)
+
     end
 
 
@@ -22,8 +25,8 @@ module Page
 
 
     def verify_defect_graph(subproject_name)
-      page_has_content?("Sub Project:"+subproject_name)
-      page_has_css?(DEFECT_GRAPH_ID)
+     assert page_has_content?("Sub Project:"+subproject_name)
+     assert page_has_css?(DEFECT_GRAPH_ID)
     end
   end
 end
