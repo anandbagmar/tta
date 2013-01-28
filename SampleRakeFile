@@ -1,0 +1,69 @@
+$project_name=""
+$sub_project_name=""
+$ci_job_name=""
+$test_category=""
+$test_report_type=""
+$os_name=""
+$host_name=""
+$browser=""
+$type_of_environment=""
+$date_of_execution=""
+$log_directory=""
+$file_pattern=""
+$commit=""
+$file_uploaded=""
+
+# Set the RAILS_ENV
+$RAILS_ENV = ENV['RAILS_ENV']  ||= "development"
+puts "RAILS_ENV: #{$RAILS_ENV}"
+
+namespace :tta do
+
+  desc "Run unit_tests"
+  task :unit_tests => ['db:recreate', 'spec']
+
+  desc "Upload all artifacts"
+  #test_type in args will be type of test you are uploading logs for (eg Unit test, functional test, Integration test,etc)
+  #filepath in args will be path of zip of your logs in CI
+  task :upload_artifacts,[:test_type,:file_path] do |t,args|
+    your_project = "Project" #add your project name here
+    your_sub_project = "SubProject" #add your sub_proj name here
+    your_ci_job_name =  "CI_JOB" #add ci job name here
+    your_test_type = "TEST_TYPE(EG:JUNIT)" #add test_type here
+    your_os_name = "os name" #add os name here
+    your_host_name = "host name" #add host name here
+    your_browser = "browser"  #add browser here, could be blank
+    your_environment = "environment" #add environment here
+
+    #we support only .xml files as of now. So the value of filePattern is hard-coded
+    Rake::Task['tta:upload_to_tta'].invoke(your_project, your_sub_project, your_ci_job_name, args.test_type,your_test_type, your_os_name, your_host_name, your_browser, your_environment, "", args.file_path, "*.xml")
+
+  end
+
+    task :create_cucumber_zip do
+      `zip cucumber_results.zip feature_report.xml/*.xml`
+      #zip your cucumber log report into cucumber_results.zip
+    end
+
+    task :create_zip do
+      `zip results.zip <path of your xml logs>`
+    end
+
+    task :upload_to_tta, [:project_name, :sub_project_name, :ci_job_name, :test_category, :test_report_type, :os_name, :host_name, :browser, :type_of_environment, :date_of_execution, :logDirectory, :filePattern, :commit] do |t, args|
+      args.with_defaults(:project_name => "xyz112", :sub_project_name => "xyz", :ci_job_name => "xyz", :test_category => "xyz", :test_report_type => "xyz", :os_name => "xyz", :host_name => "xyz", :browser => "xyz", :type_of_environment => "xyz", :date_of_execution => "1900-12-12", :logDirectory => "asdw", :filePattern => "*.xml", :commit => "SUBMIT")
+      $project_name = args.project_name
+      $sub_project_name = args.sub_project_name
+      $ci_job_name = ENV['GO_JOB_NAME']
+      $test_category=args.test_category
+      $test_report_type=args.test_report_type
+      $os_name=RUBY_PLATFORM
+      $host_name=`hostname`.strip
+      $browser=args.browser
+      $type_of_environment=args.type_of_environment
+      $date_of_execution=Date.today.to_s
+      $log_directory=args.logDirectory
+      $file_pattern=args.filePattern
+      $commit=args.commit
+      `curl -F 'authenticity_token=KBc5IruWAILeOOIVKoqozwSYx3eSatES/fklIGf/Cn4=' -F 'project_name=#{$project_name}' -F 'sub_project_name=#{$sub_project_name}' -F 'ci_job_name=#{$ci_job_name}' -F 'test_category=#{$test_category}' -F 'test_report_type=#{$test_report_type}' -F 'os_name=#{$os_name}' -F 'host_name=#{$host_name}' -F 'browser=#{$browser}' -F 'type_of_environment=#{$type_of_environment}' -F 'date_of_execution=#{$date_of_execution}' -F 'logDirectory=@#{$log_directory}' -F 'commit=SUBMIT' 'tta.thoughtworks.com:3000/upload/create'`
+    end
+  end
