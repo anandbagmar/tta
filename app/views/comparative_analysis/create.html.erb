@@ -23,7 +23,7 @@
       <% end %>
       <div class="fields" >
         <label for="start_date">Start Date:</label>
-        <div class="required-field">
+        <div class="required-field date-field">
           <%= datepicker_input 'comparative_analysis', 'start_date',:dateFormat => "yy-mm-dd", :readonly => "readonly" %>
           <span class='error-msg'>Please Enter Start date</span>
         </div>
@@ -31,7 +31,7 @@
 
       <div class="fields" >
         <label for="end_date">End Date:</label>
-        <div class="required-field">
+        <div class="required-field date-field">
           <%= datepicker_input 'comparative_analysis', 'end_date',:dateFormat => "yy-mm-dd", :readonly => "readonly" %>
           <span class='error-msg'>Please Enter End date</span>
         </div>
@@ -40,13 +40,12 @@
       <div class="fields" >
         <label for="project">Project:</label>
         <div class="required-field">
-          <%= select("project", "id", Project.all.collect {|p| [ p.name, p.id ]}, {:include_blank => true }) %><br>
+          <%= select("project", "id", Project.all.collect {|p| [ p.name, p.id ]}) %><br>
           <span class='error-msg'>Please select a Project</span>
         </div>
       </div>
       <div id="submit-plot-button">
-        <button id="submit-btn">Plot</button>
-        <%= submit_tag nil, {:class=>:"hidden", :id =>"form-submit"}%>
+        <%= submit_tag nil, { :id =>"form-submit"}%>
       </div>
 
   <% end %>
@@ -139,5 +138,12 @@
 <% end  %>
 
 </body>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#comparative-analysis-form").submit(function(){
+            return Utils.validateDate($("#comparative-analysis-form"));
+        });
+    });
+</script>
 <script type="text/JavaScript" src="comparitive_analysis.js"></script>
 </html>

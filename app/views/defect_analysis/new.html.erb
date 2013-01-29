@@ -21,7 +21,7 @@
       <div class="fields" >
         <label for="sub_project">Sub-Project:</label>
         <div class="required-field">
-            <%= select("sub_project", "id", SubProject.all.collect {|p| [ p.name, p.id ] } ,{:class => 'required'}) %>
+            <%= select("sub_project", "id", SubProject.all.collect {|p| [ p.name, p.id ] } ) %>
          </div>
         <br>
       </div>
@@ -41,9 +41,8 @@
 </body>
 <script type="text/javascript">
     $(document).ready(function(){
-        var valid = $("#defect_analysis").validate();
         $("#defect_analysis").submit(function(){
-            return valid && Utils.validateDate($("#defect_analysis"));
+            return Utils.validateDate($("#defect_analysis"));
         });
     });
 </script>
