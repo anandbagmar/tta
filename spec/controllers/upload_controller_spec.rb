@@ -6,7 +6,7 @@ describe UploadController do
   context "GET 'upload'" do
 
     it "returns http success" do
-      get 'upload'
+      get 'new'
       response.should be_success
     end
   end

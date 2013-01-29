@@ -1,19 +1,11 @@
 Tta::Application.routes.draw do
   get "home/index"
 
-  get "upload/upload"
-
-  get "upload_controller/upload"
+  get '/upload'=> 'upload#new'
 
   get "visualization/pyramid"
 
   get "defect_analysis/new"
-
-  #get "unit_test_xml/index"
-
-  #get "unit_test_xml/new"
-
-  #get "unit_test_xml/show"
 
   get '/comparative_analysis/create'
 

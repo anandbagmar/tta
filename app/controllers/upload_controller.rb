@@ -22,6 +22,10 @@ class UploadController < ApplicationController
     end
   end
 
+  def new
+
+  end
+
   private
   def create_project_with_dependency
     project = Project.find_or_create_by_name(params[:project_name].upcase)
