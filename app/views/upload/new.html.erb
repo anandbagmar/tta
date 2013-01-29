@@ -82,9 +82,7 @@
       </div>
 
        <div class="button">
-         <button id="submit_button">Submit</button>
-         <%= submit_tag nil, {:class=>:"hidden", :id =>"form-submit"}%>
-         <!--<%= submit_tag 'SUBMIT',:class=> 'submit', :hidden=>'hidden' %>-->
+         <%= submit_tag 'SUBMIT',:class=> 'submit' %>
          <%= submit_tag("Clear All", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
       </div>
 
@@ -94,7 +92,7 @@
 </body>
 <script>
   $(document).ready(function(){
-
+     $("#uploadForm").validate();
     var validateDate = function($form){
       var valid = true;
       if(!$form)
@@ -127,12 +125,9 @@
       return valid;
     };
 
-    $("#submit_button").on('click',function(){
-      if(!validateDate($("#uploadForm"))){         //TODO: Avoid hacks and use a date picker for proper format
-        return false;
-      }
-      $("#form-submit").click();
-      return false;
-    });
+      $("#uploadForm").submit(function(){
+          return validateDate($("#uploadForm"));
+      });
+
   });
 </script>
