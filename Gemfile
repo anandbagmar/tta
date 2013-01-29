@@ -74,6 +74,7 @@ group :development, :test do
   gem 'capybara'
   gem 'mechanize'
   gem 'fabrication'
+  gem 'jasmine'
 end
   group :cucumber do
     gem 'headless'
