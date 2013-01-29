@@ -17,7 +17,7 @@
     <%= form_tag ({:action => 'sub_project_filter'}) do %>
       <div class="fields" >
         <label for="sub_project">Sub-Project:</label>
-        <%= select("sub_project", "id", SubProject.all.collect {|subproj| [ subproj.name, subproj.id ] } ,{:include_blank => true}) %>
+        <%= select("sub_project", "id", SubProject.all.collect {|subproj| [ subproj.name, subproj.id ] } ) %>
         <p class="error"><%= flash[:no_id_error] if flash[:no_id_error] %></p>
         <br>
       </div>
