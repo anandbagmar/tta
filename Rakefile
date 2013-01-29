@@ -57,8 +57,8 @@ namespace :tta do
   task :unit_tests => ['db:recreate', 'spec']
 
   desc "Upload all artifacts"
-  task :upload_artifacts,[:test_type,:file_path] do |t,args|
-    Rake::Task['tta:upload_to_tta'].invoke("TTA", "TTA_sub", "Build", args.test_type, "JUnit", "Ubuntu", "host-pc", "none", "Dev", "", args.file_path, "*.xml")
+  task :upload_artifacts,[:test_type,:file_path,:test_report_type] do |t,args|
+    Rake::Task['tta:upload_to_tta'].invoke("TTA", "TTA_sub", "Build", args.test_type, args.test_report_type, "Ubuntu", "host-pc", "none", "Dev", "", args.file_path, "*.xml")
   end
   task :create_cucumber_zip do
     `zip cucumber_results.zip feature_report.xml/TEST-features-Visualization.xml`

@@ -26,7 +26,7 @@ class SubProject < ActiveRecord::Base
     output_file_path = File.join(log_dir, input_file_name)
     input_file_path = params[:logDirectory].path
 
-    XmlParser.parse input_file_path, output_file_path, meta_datum.id
+    XmlParser.parse input_file_path, output_file_path, meta_datum.id,params
 
   end
 
