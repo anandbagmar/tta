@@ -1,7 +1,7 @@
 <head xmlns="http://www.w3.org/1999/html">
   <link rel="stylesheet" href="/stylesheet/upload_form.css"> </link>
 </head>
-
+<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 <body>
 <%= render :file=> '/home/header.html.erb' %>
 
@@ -17,17 +17,17 @@
       <p class="error"><%= flash[:no_date_error] %><br></p>
   <% end %>
   <h2>Select Sub-Project for defect analysis</h2>
-  <%= form_tag ({:action => 'sub_project_filter',:id => "defect_analysis"}) do %>
+  <%= form_tag({:action => 'sub_project_filter' },{ :multipart => false,:id => "defect_analysis"}) do %>
       <div class="fields" >
         <label for="sub_project">Sub-Project:</label>
         <div class="required-field">
-        <%= select("sub_project", "id", SubProject.all.collect {|p| [ p.name, p.id ] } ,{:include_blank => true}) %>
+            <%= select("sub_project", "id", SubProject.all.collect {|p| [ p.name, p.id ] } ,{:class => 'required'}) %>
          </div>
         <br>
       </div>
       <div class="fields" >
         <label for="start_date">Analysis Date:</label>
-        <div class="required-field">
+        <div class="required-field date-field">
           <%= datepicker_input 'defect_analysis', 'analysis_date',:dateFormat => "yy-mm-dd" , :readonly => "readonly"%>
           <span class='error-msg'>Please Enter Analysis date</span>
         </div>
@@ -37,4 +37,14 @@
       </div>
   <% end %>
 </div>
+
 </body>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var valid = $("#defect_analysis").validate();
+        $("#defect_analysis").submit(function(){
+            return valid && Utils.validateDate($("#defect_analysis"));
+        });
+    });
+</script>
+

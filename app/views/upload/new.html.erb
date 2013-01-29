@@ -70,7 +70,7 @@
       <div class="fields">
         <label for="date_of_execution"> Date Of Execution <span class="required-fields">*</span></label>
         <div class="required-field date-field">
-          <%= text_field_tag (:date_of_execution), nil, :placeholder => 'yyyy-mm-dd', :class => 'required dateISO' %>
+          <%= text_field_tag (:date_of_execution), nil, :placeholder => 'yyyy-mm-dd' %>
           <span class='error-msg'>Please enter a valid Date</span>
         </div>
         <br>
@@ -93,41 +93,8 @@
 <script>
   $(document).ready(function(){
      $("#uploadForm").validate();
-    var validateDate = function($form){
-      var valid = true;
-      if(!$form)
-        valid = false;
-      var dates = $form.find(".date-field input");
-      for(index=0,len=dates.length;index<len;index++){
-        var dateFields = (dates[index].value).split('-'),
-            today = new Date();
-        if(dateFields.length != 3 ){
-          valid = false;
-        }
-        if(!parseInt(dateFields[0])||!parseInt(dateFields[1])||!parseInt(dateFields[2])){
-          valid=false;
-        }
-        if(parseInt(dateFields[0]) > parseInt(today.getFullYear()) || parseInt(dateFields[0]) < 1900){
-          valid = false;
-        }
-        if(parseInt(dateFields[1]) > 12 || parseInt(dateFields[1]) < 1){
-          valid=false;
-        }
-        if(parseInt(dateFields[2]) > 31 || parseInt(dateFields[2]) < 1){
-          valid = false;
-        }
-        debugger;
-        if(valid === false){
-          dates.siblings('.error-msg').show();
-          return valid;
-        }
-      }
-      return valid;
-    };
-
       $("#uploadForm").submit(function(){
-          return validateDate($("#uploadForm"));
+          return Utils.validateDate($("#uploadForm"));
       });
-
   });
 </script>
