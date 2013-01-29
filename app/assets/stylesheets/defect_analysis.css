@@ -57,6 +57,7 @@
   background: #FF7F77;
 }
 .error_messages ul li{
+  border-bottom: 1px solid;
   padding: 15px;
   margin: 0;
 }

@@ -7,7 +7,7 @@ var Template = function(){
           '<div class="test-triangle" id={{TestTypeTest}}></div>' +
         '</div>',
       errorListTemplate:'<ul class="error_list">{{ErrorList}}</ul>',
-      defectErrorMessagesTemplate:'<span>{{ErrorName}}</span><div class="error_messages"><ul>{{ErrorMessageList}}<ul></div>'
+      defectErrorMessagesTemplate:'<span>{{ErrorName}}</span><div class="error_messages"><ul>{{ErrorMessageList}}</ul></div>'
     };
     return {
         render: function(template,data){
