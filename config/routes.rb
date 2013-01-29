@@ -1,22 +1,22 @@
 Tta::Application.routes.draw do
-  get "home/index"
+  get '/home'=> "home#index"
 
-  get '/upload'=> 'upload#new'
+  get '/upload'=> "upload#new"
 
-  get "visualization/pyramid"
+  get '/pyramid'=> "visualization#pyramid"
 
-  get "defect_analysis/new"
+  get '/defect_analysis'=> "defect_analysis#new"
 
-  get '/comparative_analysis/create'
+  get '/comparative_analysis'=> "comparative_analysis#create"
 
   post '/upload/create'
 
   get '/upload/show'
 
   resources :projects,:junit_xml_data,:j_unit_xmls,:unit_test_xml
-  post '/comparative_analysis/date_filter'
-  post '/visualization/sub_project_filter'
-  post '/defect_analysis/sub_project_filter'
+  post '/comparative_analysis/result' => "comparative_analysis#date_filter"
+  post '/pyramid/result' => "visualization#sub_project_filter"
+  post '/defect_analysis/result' => "defect_analysis#sub_project_filter"
   match '*path' => 'error#handle404'
   # The priority is based upon order of creation:
   # first created -> highest priority.
