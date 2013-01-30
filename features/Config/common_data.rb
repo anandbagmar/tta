@@ -45,3 +45,6 @@ TEST_PYRAMID__PROJECT_DROPDOWN="sub_project_id"
 PYRAMID_ID="#pyramid"
 
 
+#ERROR_SCREENSHOT_PATH
+SCREENSHOT_FILE_PATH=$PROJECT_ROOT +"/features/screenshots/"
+
