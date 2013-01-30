@@ -77,8 +77,8 @@
       </div>
 
       <div class="fields">
-        <label for="logDirectory">Directory name</label>
-        <%= file_field_tag :logDirectory, {:multiple=>true, :accept => 'application/zip'}%>
+        <label for="logDirectory">Directory name<span class="required-fields">*</span></label>
+        <%= file_field_tag :logDirectory, {:multiple=>true, :accept => 'application/zip',:class => 'required'}%>
       </div>
 
        <div class="button">
