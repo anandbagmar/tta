@@ -36,8 +36,10 @@ describe TestMetadatum do
     it "should return records of metadata with unique test types given valid sub_proj id" do
       meta_unit = FactoryGirl.create(:test_metadatum)
       meta_functional = FactoryGirl.create(:test_metadatum, :test_category => "Functional Test")
+      meta_integration = FactoryGirl.create(:test_metadatum, :test_category => "Integration Test")
       result = TestMetadatum.get_distinct_test_category(meta_unit.sub_project_id)
-      result.count.should == 2
+      binding.pry
+      result.count.should == 3
     end
 
     #TODO
