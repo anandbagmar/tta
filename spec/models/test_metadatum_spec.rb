@@ -38,7 +38,7 @@ describe TestMetadatum do
       meta_functional = FactoryGirl.create(:test_metadatum, :test_category => "Functional Test")
       meta_integration = FactoryGirl.create(:test_metadatum, :test_category => "Integration Test")
       result = TestMetadatum.get_distinct_test_category(meta_unit.sub_project_id)
-      binding.pry
+      #binding.pry
       result.count.should == 3
     end
 
