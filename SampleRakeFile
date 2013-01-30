@@ -25,7 +25,8 @@ namespace :tta do
   desc "Upload all artifacts"
   #test_type in args will be type of test you are uploading logs for (eg Unit test, functional test, Integration test,etc)
   #filepath in args will be path of zip of your logs in CI
-  task :upload_artifacts,[:test_type,:file_path] do |t,args|
+  #test_report_type will be type of logs your test are generating, i.e RSPEC JUnit , or Cucumber JUnit
+  task :upload_artifacts,[:test_type,:file_path,:test_report_type] do |t,args|
     your_project = "Project" #add your project name here
     your_sub_project = "SubProject" #add your sub_proj name here
     your_ci_job_name =  "CI_JOB" #add ci job name here
