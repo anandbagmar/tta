@@ -1,1 +1,0 @@
-/mnt/u02/jenkins/jobs/sv6-release-post_deploy-auto2
