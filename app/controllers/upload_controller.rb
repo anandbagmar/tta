@@ -33,11 +33,6 @@ class UploadController < ApplicationController
     return project,sub_project,meta_data
   end
 
-
-  def create_directory_structure
-    FileUtils.mkdir_p(Dir.home+"/Documents/"+params[:project_name]+"/"+params[:sub_project_name]+"/"+Time.now.strftime("%d-%m-%y-%I:%M:%S")).first
-  end
-
 end
 
 

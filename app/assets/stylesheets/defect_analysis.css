@@ -1,63 +1,92 @@
+
 #container{
-  width: 800px;
-  margin: 0 auto;
+    width: 800px;
+    margin: 0 auto;
 }
 
 #defect-analysis-table >.color_codes >.legend_item{
-  display: inline-block;
-  margin: 10px 0;
+    display: inline-block;
+    margin: 10px 0;
 }
 
 .color_codes > .legend_item > .legend_text {
-  float: right;
-  height: 20px;
-  line-height: 20px;
+    float: right;
+    height: 20px;
+    line-height: 20px;
 }
 
 #defect-analysis-table li{
-  list-style: none;
+    list-style: none;
 }
 #defect-analysis-table li span{
-  padding: 10px;
+    padding: 10px;
 }
 .error_list{
-  padding: 0;
-  overflow: hidden;
-  border: 1px solid #E20000;
-  border-radius: 5px;
-  margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #E20000;
+    border-radius: 5px;
+    margin: 0;
 }
 #type1 > .rect, .error_list li{
-  background: rgba(218, 40, 51, 0.27);
+    background: rgba(218, 40, 51, 0.27);
 }
 .error_list li{
-  font-weight: bold;
-  padding: 0;
-  position: relative;
-  margin: 9px 0;
+    font-weight: bold;
+    padding: 0;
+    position: relative;
+    margin: 9px 0;
 }
 .error_list li span{
-  line-height: 40px;
+    line-height: 40px;
 }
 .error_messages{
-  /*display: none;*/
-  width: 100%;
-  box-shadow: 2px 2px 2px black inset;
-  padding-top: 1px;
-  float: left;
+    /*display: none;*/
+    width: 100%;
+    box-shadow: 2px 2px 2px black inset;
+    padding-top: 1px;
+    float: left;
 }
 
 .error_messages ul{
-  background: #ff5046;
-  padding: 0;
-  width: 100%;
-  margin: 0;
+    background: #ff5046;
+    padding: 0;
+    width: 100%;
+    margin: 0;
 }
 #type2>.rect, .error_messages ul li{
-  background: #FF7F77;
+    background: #FF7F77;
 }
 .error_messages ul li{
-  border-bottom: 1px solid;
-  padding: 15px;
-  margin: 0;
+    border-bottom: 1px solid;
+    padding: 15px;
+    margin: 0;
 }
+
+
+.legend_text{
+    display:block;
+    text-align: left;
+    height:10%;
+    padding-left:20%
+}
+.rect{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+}
+.hidden{
+    display: none;
+}
+
+#submit-project-button input{
+    font-size: 14px;
+    height: 25px;
+    width: 60px;
+    background: white;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px #6D6868;
+}
+

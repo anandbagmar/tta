@@ -6,9 +6,89 @@
   top: 20px;
   font-size: 10px;
 }
+
+.error{
+    color: #DB1818;
+    font-size:12px;
+    margin: 0;
+}
+
+.fields input{
+    margin: 0 auto;
+}
+
+.fields label{
+    display: inline-block;
+    min-width: 165px;
+    text-align: right;
+}
+
+.fields{
+    margin: 0 auto;
+    height: 50px;
+}
+
+
+.form{
+    margin:0 auto;
+    width:50%;
+    background-color: #DDD;
+    border-radius: 15px;
+    padding: 10px;
+}
+.form .required-fields{
+    color: #ff0000;
+}
+
 .required-field{
   display: inline-block;
   position: relative;
   min-width: 170px;
   text-align: left;
+}
+
+#submit-plot-button input{
+    height: 25px;
+    width: 55px;
+    margin: 0 auto;
+}
+
+#Date-Range-Input{
+    box-shadow: 2px 2px 3px grey;
+    width: 50%;
+    margin: 0 auto;
+    padding-bottom: 20px;
+    padding-top: 15px;
+    background-color: #DDD;
+    border-radius: 15px;
+}
+#Date-Range-Input label{
+    min-width: 85px;
+}
+#Date-Range-Input h1{
+    padding-bottom: 15px;
+}
+
+
+#date-range-title h3{
+    color: #339999;
+}
+
+#comparative_analysis{
+    margin: 0 auto;
+
+}
+
+#x-axisLabel p{
+    position: relative;
+    padding-bottom: 2%;
+}
+
+#y-axisLabel p{
+    position: relative;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    text-align: left;
+    left: -37%;
+    top: -900px;
 }

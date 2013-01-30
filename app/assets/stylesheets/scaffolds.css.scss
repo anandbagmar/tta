@@ -1,11 +1,8 @@
-body {
-  background-color: #fff;
-  color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-}
 
+
+select{
+  border: 1px solid #aaa;
+}
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
@@ -22,10 +19,15 @@ a {
   color: #000;
   &:visited {
     color: #666;
+    text-decoration: none;
   }
   &:hover {
     color: #fff;
-    background-color: #000;
+    text-decoration: none;
+  }
+  &:-webkit-any-link {
+    cursor: auto;
+    text-decoration: none;
   }
 }
 
@@ -67,3 +69,4 @@ div {
     list-style: square;
   }
 }
+

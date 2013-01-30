@@ -1,18 +1,18 @@
-
-<link rel="stylesheet" href="/stylesheet/upload_form.css"> </link>
+<%= render :file=> '/home/header.html.erb' %>
+<link rel="stylesheet" href="../../assets/stylesheets/home.css"/>
 <body>
 
-<%= render :file=> '/home/header.html.erb' %>
 
 
   <div class="main-menu">
     <a href='/pyramid'><button type="button">TEST PYRAMID VIEW</button></a>
-    <a href='/comparative_analysis' style="text-decoration: none;"><button type="button">COMPARATIVE ANALYSIS</button> </a>
-    <a href='/defect_analysis' style="text-decoration: none;"><button type="button">DEFECT ANALYSIS</button> </a>
+    <a href='/comparative_analysis'><button type="button">COMPARATIVE ANALYSIS</button> </a>
+    <a href='/defect_analysis'><button type="button">DEFECT ANALYSIS</button> </a>
     <a href='/upload'><button type="button">UPLOAD TEST DATA</button></a>
 
   </div>
 
 </div>
-<%= render :file=> '/home/footer.html.erb' %>
+
 </body>
+<%= render :file=> '/home/footer.html.erb' %>
