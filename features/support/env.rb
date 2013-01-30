@@ -46,7 +46,7 @@ if(ENV["HEADLESS"])
 end
 
 at_exit do
-  @headless.destroy if ENV[HEADLESS] && !@headless.nil?
+  @headless.destroy if ENV["HEADLESS"] && !@headless.nil?
 end
 #at_exit do
 #  if @headless

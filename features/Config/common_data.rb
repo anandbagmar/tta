@@ -1,5 +1,5 @@
 #Button_name for different pages
-UPLOAD_PAGE_BUTTON="submit_button"
+UPLOAD_PAGE_BUTTON="SUBMIT"
 COMPARATIVE_PAGE_BUTTON="Plot"
 DEFECT_PAGE_BUTTON="Plot"
 TEST_PYRAMID_PAGE_BUTTON="Plot"
@@ -31,7 +31,7 @@ UPLOAD_SUCCESS="Project Successfully Saved!!"
 COMPARATIVE_PROJECT_DROPDOWN = "project_id"
 COMPARATIVE_START_DATE =  "comparative_analysis_start_date"
 COMPARATIVE_END_DATE =  "comparative_analysis_end_date"
-COMPARATIVE_PLOT_BUTTON = "submit-btn"
+COMPARATIVE_PLOT_BUTTON = "form-submit"
 
 COMPARATIVE_GRAPH_ID = "#comparative_analysis"
 
