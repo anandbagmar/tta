@@ -128,7 +128,7 @@ button{
 .error{
   color: #DB1818;
   font-size:12px;
-  margin: 0;
+  margin: 0 auto;
 }
 #submit-project-button input{
   font-size: 14px;

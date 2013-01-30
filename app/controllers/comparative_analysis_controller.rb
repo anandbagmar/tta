@@ -22,14 +22,13 @@ class ComparativeAnalysisController < ApplicationController
     flash[:no_data_error]=nil
     if(@start_date=="" or @end_date=="" or params[:project][:id]=="")
       flash[:required_field] = "This Field is required."
-      render 'comparative_analysis'
+      render :create
     else
       if(@start_date >= @end_date)
         flash[:date_error]="select end date greater than start date"
       else
         @result_set = ComparativeAnalysis.get_result_set(params[:project][:id],@start_date,@end_date)
-
-        flash[:no_id_error]=""
+        flash[:required_field]=""
       end
       render :create
     end

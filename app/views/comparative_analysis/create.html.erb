@@ -41,9 +41,10 @@
       <div class="fields" >
         <label for="project">Project:</label>
         <div class="required-field">
-          <%= select("project", "id", Project.all.collect {|p| [ p.name, p.id ]}) %><br>
+          <%= select("project", "id", Project.all.collect {|p| [ p.name, p.id ]},{:include_blank => '--Select--'}) %><br>
           <span class='error-msg'>Please select a Project</span>
         </div>
+        <br><span class ='error'><%= flash[:required_field] %></span>
       </div>
       <div id="submit-plot-button">
         <%= submit_tag nil, { :id =>"form-submit"}%>

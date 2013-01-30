@@ -22,7 +22,7 @@
       <div class="fields" >
         <label for="sub_project">Sub-Project:</label>
         <div class="required-field">
-            <%= select("sub_project", "id", SubProject.all.collect {|p| [ p.name, p.id ] } ) %>
+            <%= select("sub_project", "id", SubProject.all.collect {|p| [ p.name, p.id ] },{:include_blank => '--Select--'} ) %>
          </div>
         <br>
       </div>
