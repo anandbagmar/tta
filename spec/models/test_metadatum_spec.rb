@@ -31,4 +31,19 @@ describe TestMetadatum do
       should validate_presence_of(:test_report_type).with_message("cannot be blank, Task not saved")
     end
   end
+
+  describe "get_distinct_test_category" do
+    it "should return records of metadata with unique test types given valid sub_proj id" do
+      meta_unit = FactoryGirl.create(:test_metadatum)
+      meta_functional = FactoryGirl.create(:test_metadatum, :test_category => "Functional Test")
+      result = TestMetadatum.get_distinct_test_category(meta_unit.sub_project_id)
+      result.count.should == 2
+    end
+
+    #TODO
+    #it "should throw an exception if no sub_proj_id given" do
+    #  expect {TestMetadatum.get_distinct_test_category(nil)}.to raise_error
+    #
+    #end
+  end
 end

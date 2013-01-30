@@ -12,6 +12,12 @@ class SubProject < ActiveRecord::Base
   end
 
 
+  def self.get_data_for_test_category(sub_project_id,test_type)
+    meta_data = find(sub_project_id).test_metadatum.find_all_by_test_category(test_type)
+    result = TestMetadatum.find_no_and_duration_of_test(meta_data)
+    result
+  end
+
   private
 
   def create_test_metadatum params
