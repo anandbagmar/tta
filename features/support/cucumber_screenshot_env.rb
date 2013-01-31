@@ -13,12 +13,12 @@ module Cucumber_Screenshot
   end
 
 
-  After do |scenario|
-    if scenario.failed?
-       file_name = SCREENSHOT_FILE_PATH+"screenshot_"+random_password+".png"
-       save_error_screenshot(file_name)
-    end
-  end
+  #After do |scenario|
+  #  if scenario.failed?
+  #     file_name = SCREENSHOT_FILE_PATH+"screenshot_"+random_password+".png"
+  #     save_error_screenshot(file_name)
+  #  end
+  #end
 
 
 #  AfterStep('@screenshot') do |scenario|
