@@ -4,7 +4,7 @@ Given /^That the User is on the "([^"]*)"$/ do |page_name|
 end
 
 When /^The User clicks on the "([^"]*)"$/ do |button_name|
-  #clickButton(page_name+"_BUTTON")
+
   clickButton(button_name)
 end
 

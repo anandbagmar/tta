@@ -12,17 +12,10 @@ module Definitions
       fill_in UPLOAD_EXEC_DATE, :with => date_of_exec
       attach_file UPLOAD_FILENAME,logFile
       fill_in UPLOAD_TEST_TYPE, :with => test_type
-      #click_button("SUBMIT")
     end
 
 
     def select_the_option(field, dropdown)
-      #if element=="sub_proj"
-      #  select option,:from => "sub_project_id"
-      #end
-      #if element=="proj"
-      #  select option,:from => "project_id"
-      #end
       select field,:from => dropdown
     end
 
@@ -53,30 +46,8 @@ module Definitions
     end
 
 
-
-
-
-
     def page_has_css?(element_css)
       assert page.has_css?(element_css),"Nothing displayed"
-    end
-
-    def verify_error_is_displayed(page_name)
-    #  if page_name == "UPLOAD TEST DATA"
-    #    assert page.has_content?('This field is required.')
-    #  end
-    #  if page_name =="COMPARATIVE ANALYSIS"
-    #    assert page.has_content?('Please Enter Start date')
-    #    assert page.has_content?('Please Enter End date')
-    #    assert page.has_content?('Please select a Project')
-    #  end
-    #  if page_name =="DEFECT ANALYSIS"
-    #    assert page.has_content?("No Sub-Project Selected")
-    #    assert page.has_content?("No Date Selected")
-    #  end
-    #  if page_name =="TEST PYRAMID VIEW"
-    #    assert page.has_content?("No Sub-Project Selected")
-    #  end
     end
 
 

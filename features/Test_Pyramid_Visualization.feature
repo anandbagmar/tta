@@ -13,9 +13,3 @@ Scenario: Test Pyramid Flow
 
 
 
-#  @wip
-#Scenario: Data prep
-#  Given user is on the home page
-#  When user uploads data with the following attributes
-#  |table|
-#  Then the user can see the test pyramid for sub-project

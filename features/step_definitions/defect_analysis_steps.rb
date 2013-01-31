@@ -1,5 +1,4 @@
 
-
 When /^User checks Defect Analysis Graph of "([^"]*)" with Date as "([^"]*)"$/ do |subproject_name, date|
   view_defect_analysis_graph(subproject_name,date)
 end
