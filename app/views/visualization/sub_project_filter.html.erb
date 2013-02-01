@@ -26,14 +26,14 @@
           "TestTypePercent": testName.split(' ')[0].toLowerCase()+"_percent",
           "PercentValue": typeOfTests[index].percent,
           "TestTypeDuration": testName.split(' ')[0].toLowerCase()+"_duration",
-          "DurationValue": typeOfTests[index].duration,
+          "DurationValue": noOfTest+ " Tests run in "+ typeOfTests[index].duration  ,
           "TestTypeTest": testName.split(' ')[0].toLowerCase()+"_test"
         });
 
         legendData+=templates.render(legendTemplate,{
           "TestType": (testName).split(' ')[0].toLowerCase(),
           "TestTypeRect": (testName).split(' ')[0].toLowerCase()+"_rect",
-          "TestTypeTitle": noOfTest + " " +testName.toLowerCase()
+          "TestTypeTitle": testName.toLowerCase()
         });
 
       }
@@ -85,12 +85,12 @@
         $("#"+testName+"_percent").css({
           "position":"absolute",
           "top":currentHeight + "px",
-          "left":((parseInt($("#pyramid").css("width"))/3)-triangleHeights[index])+"px"
+          "left":((parseInt($("#pyramid").css("width"))/2.5)-triangleHeights[index])+"px"
         });
         $("#"+testName+"_duration").css({
           "position":"absolute",
           "top":currentHeight + "px",
-          "right":((parseInt($("#pyramid").css("width"))/3)-triangleHeights[index])+"px"
+          "right":((parseInt($("#pyramid").css("width"))/4)-triangleHeights[index])+"px"
         });
       }
     }
