@@ -21,7 +21,8 @@ class Visualization
 
   private
   def self.getAllFields(sub_project_id)
-    @test_types = TestMetadatum.get_distinct_test_category(sub_project_id)
+    @test_types = TestMetadatum.find_all_by_sub_project_id(sub_project_id, :select => ("DISTINCT test_category,updated_at"))
+    puts @test_types
     result =[]
     @test_types.each do |test_type|
       result << getNoOfTests(sub_project_id, test_type.test_category)
