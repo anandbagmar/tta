@@ -25,13 +25,13 @@
        <span><em>Fields marked with (<span class="required-fields">*</span>) are compulsory</em></span>
        <div class="fields" style="padding-top:20px ;">
         <label for="name"> Project Name <span class="required-fields">*</span></label>
-        <%= text_field_tag (:project_name) ,nil, :class => 'required' ,:maxlength=>"100" %>
+        <%= text_field_tag (:project_name) ,nil, :class => 'required' ,:maxlength=>"100" , :style=> "text-transform: uppercase"%>
          <br>
        </div>
 
       <div class="fields" >
         <label for="sub_project_name">Sub-Project name <span class="required-fields">*</span></label>
-        <%= text_field_tag (:sub_project_name),nil, :class => 'required',:maxlength=>"100" %>
+        <%= text_field_tag (:sub_project_name),nil, :class => 'required',:maxlength=>"100", :style=> "text-transform: uppercase" %>
         <br>
       </div>
 

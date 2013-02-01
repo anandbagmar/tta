@@ -90,3 +90,38 @@ button{
     text-shadow: none;
     text-decoration: none;
 }
+
+
+.fields input{
+    margin: 0 auto;
+}
+
+.fields label{
+    display: inline-block;
+    min-width: 165px;
+    text-align: right;
+}
+
+.fields{
+    margin: 0 auto;
+    height: 50px;
+}
+
+
+.form{
+    margin:0 auto;
+    width:50%;
+    background-color: #DDD;
+    border-radius: 15px;
+    padding: 10px;
+}
+.form .required-fields{
+    color: #ff0000;
+
+}
+.required-field{
+    display: inline-block;
+    position: relative;
+    min-width: 170px;
+    text-align: left;
+}
