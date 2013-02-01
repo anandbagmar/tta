@@ -18,6 +18,7 @@ class ComparativeAnalysisController < ApplicationController
   def date_filter
     @start_date= params[:comparative_analysis][:start_date]
     @end_date= params[:comparative_analysis][:end_date]
+    @project_name = Project.find_by_id(params[:project][:id]).name
     flash[:date_error]=nil
     flash[:no_data_error]=nil
     if(@start_date=="" or @end_date=="" or params[:project][:id]=="")
