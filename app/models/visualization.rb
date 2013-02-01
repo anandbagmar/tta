@@ -1,14 +1,18 @@
 class Visualization
 
   def self.getResultJson(sub_project_id)
-    getAllFields(sub_project_id)
+    get_latest_metadata_record(sub_project_id)
     test_types=[]
-    @test_types.zip(@percent_of_tests, @duration_of_tests).each do |test_type, percent_of_test, duration_of_test|
+    puts @test_category
+    puts @percent_of_tests
+    puts @duration_of_tests
+    @test_category.zip(@percent_of_tests, @duration_of_tests, @no_of_test_in_test_category).each do |test_category, percent_of_test, duration_of_test, no_of_test|
       test_types <<
         {
-          :test_name => test_type.test_category,
+          :test_name => test_category,
           :percent => percent_of_test,
-          :duration => duration_of_test
+          :duration => duration_of_test,
+          :test_no => no_of_test
         }
     end
 
@@ -19,41 +23,47 @@ class Visualization
     return @json
   end
 
+
   private
-  def self.getAllFields(sub_project_id)
-    @test_types = TestMetadatum.find_all_by_sub_project_id(sub_project_id, :select => ("DISTINCT test_category,updated_at"))
-    puts @test_types
-    result =[]
-    @test_types.each do |test_type|
-      result << getNoOfTests(sub_project_id, test_type.test_category)
+  def self.get_latest_metadata_record(sub_project_id)
+    @test_metadata_records_for_latest_run = []
+    @no_of_test_in_test_category =[]
+    @duration_of_test_in_Test_category=[]
+    @total=0
+    get_record_with_distinct_test_category(sub_project_id)
+
+    @test_category.each do |test_category|
+      @test_metadata_records_for_latest_run << TestMetadatum.get_latest_record(sub_project_id,test_category)
     end
-    @percent_of_tests, @duration_of_tests=calculatePercentageAndDuration(result)
+
+    @test_metadata_records_for_latest_run.each do |record|
+      no_of_tests,duration_of_test = TestMetadatum.find_no_and_duration_of_test(record)
+      @total+=no_of_tests
+      @no_of_test_in_test_category << no_of_tests
+      @duration_of_test_in_Test_category << duration_of_test
+    end
+      @percent_of_tests, @duration_of_tests = calculatePercentageAndDuration(@no_of_test_in_test_category,@duration_of_test_in_Test_category,@total)
   end
 
-  def self.getNoOfTests(sub_project_id, test_type)
-    result = SubProject.get_data_for_test_category(sub_project_id,test_type)
-    result
+
+  def self.get_record_with_distinct_test_category(sub_project_id)
+    metadata_with_distinct_test_category = TestMetadatum.get_distinct_test_category(sub_project_id)
+    @test_category=[]
+    metadata_with_distinct_test_category.each do |test_type|
+      @test_category << test_type.test_category
+    end
   end
 
-  def self.calculatePercentageAndDuration(result)
-    no_of_tests=[]; duration_of_tests=[]; percentOfTests=[];
-    total=0.0
-    result.each do |test_type_result|
-      no_of_test_of_test_type = 0
-      duration_of_test_of_test_type =0.0
-      test_type_result.each do |test_type|
-        no_of_test_of_test_type += test_type[0]
-        duration_of_test_of_test_type += (test_type[1].to_f)/1000
-      end
-      duration_of_tests<<"%0.6f" %(duration_of_test_of_test_type)
-      no_of_tests << no_of_test_of_test_type
+  def self.calculatePercentageAndDuration(no_of_test_in_test_category,duration_of_test_in_test_category,total_no_of_tests)
+    percent = []
+    duration = []
+    no_of_test_in_test_category.zip(duration_of_test_in_test_category).each do |no_of_test , duration_of_test|
+      duration_of_tests="%0.6f" %((duration_of_test.to_f)/1000)
+      percentOfTests = "%0.2f" %((no_of_test.to_f/total_no_of_tests)*100)
+      percent << percentOfTests
+      duration << duration_of_tests
     end
-    no_of_tests.each do |entry|
-      total += entry
-    end
-    no_of_tests.each do |entry|
-      percentOfTests << "%0.2f" %((entry.to_f/total)*100)
-    end
-    return percentOfTests, duration_of_tests
+    return percent , duration
   end
+
 end

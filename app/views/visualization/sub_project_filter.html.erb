@@ -20,6 +20,7 @@
         if(typeOfTests[index].percent == 0.0)
           continue;
         var testName = typeOfTests[index].test_name;
+          var noOfTest = typeOfTests[index].test_no;
         pyramidData += templates.render(pyramidItemTemplate,{
           "TestTypeRegion": testName.split(' ')[0].toLowerCase()+"_region",
           "TestTypePercent": testName.split(' ')[0].toLowerCase()+"_percent",
@@ -32,7 +33,7 @@
         legendData+=templates.render(legendTemplate,{
           "TestType": (testName).split(' ')[0].toLowerCase(),
           "TestTypeRect": (testName).split(' ')[0].toLowerCase()+"_rect",
-          "TestTypeTitle": testName.toLowerCase()
+          "TestTypeTitle": noOfTest + " " +testName.toLowerCase()
         });
 
       }
