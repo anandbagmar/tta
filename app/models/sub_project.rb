@@ -21,10 +21,19 @@ class SubProject < ActiveRecord::Base
   private
 
   def create_test_metadatum params
+    date_of_execution = get_date_and_timestamp(params[:date])
     meta_datum = test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type_and_date_of_execution(params[:ci_job_name].upcase,
-    params[:browser].upcase, params[:type_of_environment].upcase, params[:host_name].upcase, params[:os_name].upcase, params[:test_category].upcase, params[:test_report_type].upcase,params[:date_of_execution])
+    params[:browser].upcase, params[:type_of_environment].upcase, params[:host_name].upcase, params[:os_name].upcase, params[:test_category].upcase, params[:test_report_type].upcase,date_of_execution)
     meta_datum.save
     return meta_datum
+  end
+
+  #TODO
+  def get_date_and_timestamp(date_input)
+    date_object = DateTime.strptime(date_input[:day]+' '+date_input[:month]+' '+date_input[:year]+' '+date_input[:hour]+' '+date_input[:minute], '%d %m %Y %I %M ')
+    date_of_execution = date_object.to_time.strftime("%Y-%m-%d %I:%M:%S")
+    date_of_execution
+
   end
 
   def save_log_files(meta_datum,params)

@@ -77,7 +77,7 @@
       <div class="fields">
         <label for="date_of_execution"> Date Of Execution <span class="required-fields">*</span></label>
         <div class="required-field date-field">
-          <%= text_field_tag (:date_of_execution), nil, :placeholder => 'yyyy-mm-dd' %>
+          <%= select_datetime() %>
           <span class='error-msg'>Please enter a valid Date</span>
         </div>
         <br>
@@ -87,7 +87,6 @@
         <label for="logDirectory">Directory name<span class="required-fields">*</span></label>
         <%= file_field_tag :logDirectory, {:multiple=>true, :accept => 'application/zip',:class => 'required'}%>
       </div>
-
        <div class="button">
          <%= submit_tag 'SUBMIT',:class=> 'submit' %>
          <%= submit_tag("Clear All", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
