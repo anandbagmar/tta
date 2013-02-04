@@ -9,14 +9,17 @@ class DefectAnalysis
   end
 
   def self.getMetadataIds(sub_project_id, analysis_date)
-    meta_data = SubProject.find(sub_project_id).test_metadatum.find_all_by_date_of_execution(analysis_date)
-    final_result = meta_data.inject([]) { |result, metadata_record|
-      metadata_record.test_suite_records.each do |test_suite_record|
-        result<< [test_suite_record.id]
-      end
-      result
-    }
-    return get_test_cases(final_result)
+    analysis_date_morning =analysis_date + " 00:00:00"
+    analysis_date_night = analysis_date + " 23:59:59"
+    meta_data = SubProject.find(sub_project_id).test_metadatum.find_all_by_date_of_execution(analysis_date_morning..analysis_date_night)
+    meta_data.sort_by &:date_of_execution
+    meta_data1 = meta_data.last
+    test_suite_ids=[]
+    meta_data1.test_suite_records.each do |test_suite_record|
+     test_suite_ids << test_suite_record.id
+    end
+
+    return get_test_cases(test_suite_ids)
   end
 
   def self.get_test_cases(result)
