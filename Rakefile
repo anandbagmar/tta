@@ -23,7 +23,7 @@ $os_name=""
 $host_name=""
 $browser=""
 $type_of_environment=""
-$date_of_execution=""
+$date=""
 $log_directory=""
 $file_pattern=""
 $commit=""
@@ -78,11 +78,10 @@ namespace :tta do
     $host_name=`hostname`.strip
     $browser=args.browser
     $type_of_environment=args.type_of_environment
-    $date_of_execution=Date.today.to_s
     $log_directory=args.logDirectory
     $file_pattern=args.filePattern
     $commit=args.commit
-    `curl -F 'authenticity_token=KBc5IruWAILeOOIVKoqozwSYx3eSatES/fklIGf/Cn4=' -F 'project_name=#{$project_name}' -F 'sub_project_name=#{$sub_project_name}' -F 'ci_job_name=#{$ci_job_name}' -F 'test_category=#{$test_category}' -F 'test_report_type=#{$test_report_type}' -F 'os_name=#{$os_name}' -F 'host_name=#{$host_name}' -F 'browser=#{$browser}' -F 'type_of_environment=#{$type_of_environment}' -F 'date_of_execution=#{$date_of_execution}' -F 'logDirectory=@#{$log_directory}' -F 'commit=SUBMIT' 'tta.thoughtworks.com:3000/upload/create'`
+    `curl -F 'authenticity_token=KBc5IruWAILeOOIVKoqozwSYx3eSatES/fklIGf/Cn4=' -F 'project_name=#{$project_name}' -F 'sub_project_name=#{$sub_project_name}' -F 'ci_job_name=#{$ci_job_name}' -F 'test_category=#{$test_category}' -F 'test_report_type=#{$test_report_type}' -F 'os_name=#{$os_name}' -F 'host_name=#{$host_name}' -F 'browser=#{$browser}' -F 'type_of_environment=#{$type_of_environment}' -F 'date="" ' -F 'logDirectory=@#{$log_directory}' -F 'commit=SUBMIT' 'localhost:3000/upload/automatic'`
   end
 end
 

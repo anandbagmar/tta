@@ -11,6 +11,8 @@ Tta::Application.routes.draw do
 
   post '/upload/create'
 
+  post '/upload/automatic'=> "upload#automatic"
+
   get '/upload/show'
 
   resources :projects,:junit_xml_data,:j_unit_xmls,:unit_test_xml

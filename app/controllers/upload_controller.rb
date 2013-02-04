@@ -9,7 +9,18 @@ class UploadController < ApplicationController
     redirect_to :action => :show, :project_id => project.id, :sub_project_id => sub_project.id, :project_meta_id => meta_data.id
   end
 
-
+ def automatic
+   time=Time.now.to_s
+   date ={
+           "year" =>DateTime.parse(time).strftime("%Y"),
+           "month" =>DateTime.parse(time).strftime("%m"),
+           "day" =>DateTime.parse(time).strftime("%d"),
+           "hour" =>DateTime.parse(time).strftime("%I"),
+           "minute" =>DateTime.parse(time).strftime("%M")
+         }
+   params[:date] = date
+   create
+ end
 
   def show
     @project = Project.find(params[:project_id])
@@ -34,8 +45,6 @@ class UploadController < ApplicationController
     sub_project,meta_data = project.add_sub_project(params)
     return project,sub_project,meta_data
   end
-
-
 
 end
 
