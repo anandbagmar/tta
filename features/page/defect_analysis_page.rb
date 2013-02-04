@@ -8,7 +8,7 @@ module Page
 
     def fill_details(subproject_name, date)
       select_the_option(subproject_name,DEFECT_SUBPROJECT_DROPDOWN)
-      page.execute_script %Q{ $("#defect_analysis_analysis_date").val("2012-12-12");}
+      page.execute_script %Q{ $("#defect_analysis_analysis_date").val("2012-01-01");}
       sleep(10)
 
     end
