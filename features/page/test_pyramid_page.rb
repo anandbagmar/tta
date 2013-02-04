@@ -3,22 +3,14 @@ module Page
 
 
     def fill_pyramid_data(sub_proj)
-       select_data(sub_proj)
-       plot_pyramid()
+       select_the_option(sub_proj,TEST_PYRAMID__PROJECT_DROPDOWN)
+       clickButton(TEST_PYRAMID_PAGE_BUTTON)
     end
 
     def verify_display (subproject)
       verify_if_pyramid_is_displayed()
       verify_if_title_is_displayed(subproject)
       verify_if_legends_is_equal_to_divisions()
-    end
-
-    def plot_pyramid
-      clickButton(TEST_PYRAMID_PAGE_BUTTON)
-    end
-
-    def select_data(sub_proj)
-      select_the_option(sub_proj,TEST_PYRAMID__PROJECT_DROPDOWN)
     end
 
     def go_to_url(button)

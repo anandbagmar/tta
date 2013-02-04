@@ -5,3 +5,5 @@ module Page
     end
   end
 end
+
+World(Page::ErrorPage)

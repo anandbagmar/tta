@@ -20,7 +20,11 @@ UPLOAD_OS_NAME='os_name'
 UPLOAD_HOST_NAME='host_name'
 UPLOAD_BROWSER='browser'
 UPLOAD_ENV='type_of_environment'
-UPLOAD_EXEC_DATE='date_of_execution'
+UPLOAD_EXEC_DAY='date_day'
+UPLOAD_EXEC_MONTH="date_month"
+UPLOAD_EXEC_YEAR= "date_year"
+UPLOAD_EXEC_HOUR= "date_hour"
+UPLOAD_EXEC_MIN="date_minute"
 UPLOAD_FILENAME='logDirectory'
 UPLOAD_TEST_TYPE='test_category'
 
