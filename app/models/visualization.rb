@@ -3,9 +3,6 @@ class Visualization
   def self.getResultJson(sub_project_id)
     get_latest_metadata_record(sub_project_id)
     test_types=[]
-    puts @test_category
-    puts @percent_of_tests
-    puts @duration_of_tests
     @test_category.zip(@percent_of_tests, @duration_of_tests, @no_of_test_in_test_category).each do |test_category, percent_of_test, duration_of_test, no_of_test|
       test_types <<
         {

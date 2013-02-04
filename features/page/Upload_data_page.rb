@@ -19,10 +19,7 @@ module Page
     def verify_data_uploaded(proj_succ)
       assert page_has_content?(proj_succ),"No Project uploaded"
     end
-
-
-
-
-
   end
 end
+
+World(Page::Upload_dataPage)
