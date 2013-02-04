@@ -36,3 +36,6 @@ class ComparativeAnalysisController < ApplicationController
   end
 
 end
+
+
+
