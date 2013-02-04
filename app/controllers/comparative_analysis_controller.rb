@@ -28,7 +28,6 @@ class ComparativeAnalysisController < ApplicationController
       if(@start_date >= @end_date)
         flash[:date_error]="select end date greater than start date"
       else
-        binding.pry
         @result_set = ComparativeAnalysis.get_result_set(params[:project][:id],@start_date,@end_date)
         flash[:required_field]=""
       end
