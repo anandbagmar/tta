@@ -27,9 +27,10 @@
     border: 1px solid #E20000;
     border-radius: 5px;
     margin: 0;
+    text-align:left;
 }
 #type1 > .rect, .error_list li{
-    background: rgba(218, 40, 51, 0.27);
+    background: #FF7F77;
 }
 .error_list li{
     font-weight: bold;
@@ -49,20 +50,18 @@
 }
 
 .error_messages ul{
-    background: #ff5046;
     padding: 0;
     width: 100%;
     margin: 0;
 }
-#type2>.rect, .error_messages ul li{
-    background: #FF7F77;
+#type2>.rect,.error_messages ul li{
+    background: #FFA7A5;
 }
 .error_messages ul li{
     border-bottom: 1px solid;
     padding: 15px;
     margin: 0;
 }
-
 
 .legend_text{
     display:block;
