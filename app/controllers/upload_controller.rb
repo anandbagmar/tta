@@ -15,7 +15,7 @@ class UploadController < ApplicationController
            "year" =>DateTime.parse(time).strftime("%Y"),
            "month" =>DateTime.parse(time).strftime("%m"),
            "day" =>DateTime.parse(time).strftime("%d"),
-           "hour" =>DateTime.parse(time).strftime("%I"),
+           "hour" =>DateTime.parse(time).strftime("%H"),
            "minute" =>DateTime.parse(time).strftime("%M")
          }
    params[:date] = date
