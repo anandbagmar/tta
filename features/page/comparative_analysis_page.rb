@@ -20,7 +20,6 @@ module Page
     end
 
     def verify_graph_plotted(start_date,end_date,project)
-      verify_if_date_range_is_displayed(start_date,end_date)
       verify_if_visualization_is_displayed(COMPARATIVE_GRAPH_ID)
     end
 

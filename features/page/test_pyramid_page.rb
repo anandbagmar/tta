@@ -8,22 +8,13 @@ module Page
     end
 
     def verify_display (subproject)
-      verify_if_pyramid_is_displayed()
-      verify_if_title_is_displayed(subproject)
+      assert page_has_css?(PYRAMID_ID),"Pyramid is displayed"
+      assert page_has_content?("Test-Pyramid for: "+subproject),"Title not displayed"
       verify_if_legends_is_equal_to_divisions()
     end
 
     def go_to_url(button)
       clickButton(button)
-    end
-
-
-    def verify_if_pyramid_is_displayed()
-      assert page_has_css?(PYRAMID_ID),"Pyramid is displayed"
-    end
-
-    def verify_if_title_is_displayed(title)
-      assert page_has_content?("Test-Pyramid for: "+title),"Title not displayed"
     end
 
     def verify_if_legends_is_equal_to_divisions

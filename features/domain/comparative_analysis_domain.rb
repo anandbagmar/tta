@@ -9,13 +9,9 @@ module Domain
      clickButton(button)
     end
 
-    def navigate_to_comparative_page
-       go_to_url(COMPARATIVE_PAGE)
-    end
-
     def view_comparative_graph(project, start_date, end_date)
       navigate_to_homepage()
-      navigate_to_comparative_page
+      go_to_url(COMPARATIVE_PAGE)
       view_graph(project,start_date,end_date)
     end
 
