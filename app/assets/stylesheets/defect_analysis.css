@@ -2,6 +2,7 @@
 #container{
     width: 800px;
     margin: 0 auto;
+    padding-top: 20px;
 }
 
 #defect-analysis-table >.color_codes >.legend_item{
@@ -87,5 +88,12 @@
     border: 0;
     border-radius: 5px;
     box-shadow: 1px 1px 2px #6D6868;
+}
+
+.display-message{
+    font-size: 20px;
+    color: green;
+    margin: 0 auto;
+
 }
 

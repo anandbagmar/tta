@@ -13,24 +13,14 @@ class DefectAnalysisController < ApplicationController
 
   end
   def sub_project_filter
-    flash[:no_id_error]=nil
-    flash[:no_date_error]=nil
-    error_flag=0;
+    flash[:no_errors]=nil
     sub_project_id=params[:sub_project][:id]
     analysis_date=params[:defect_analysis][:analysis_date]
-    if sub_project_id.blank?
-      flash[:no_id_error] = "No Sub-Project Selected"
-      error_flag=1
+    @defect_analysis_json = DefectAnalysis.getResultJson(sub_project_id,analysis_date)
+    parsed_json = ActiveSupport::JSON.decode(@defect_analysis_json)
+    if parsed_json["errors"].nil?
+      flash[:no_errors]="No Errors found on "+ analysis_date
     end
-    if analysis_date==""
-      flash[:no_date_error]="No Date Selected"
-      error_flag=1
-    end
-    if error_flag ==1
-      render 'defect_analysis/new'
-    else
-      @defect_analysis_json = DefectAnalysis.getResultJson(sub_project_id,analysis_date)
-      render :create
-    end
+    render :create
   end
 end

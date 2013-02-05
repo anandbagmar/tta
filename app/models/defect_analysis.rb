@@ -14,6 +14,9 @@ class DefectAnalysis
     meta_data = SubProject.find(sub_project_id).test_metadatum.find_all_by_date_of_execution(analysis_date_morning..analysis_date_night)
     meta_data.sort_by &:date_of_execution
     meta_data1 = meta_data.last
+    if meta_data1.nil?
+      return
+    end
     test_suite_ids=[]
     meta_data1.test_suite_records.each do |test_suite_record|
      test_suite_ids << test_suite_record.id

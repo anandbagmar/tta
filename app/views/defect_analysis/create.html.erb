@@ -14,6 +14,9 @@
 <%= render :file=> 'defect_analysis/new.html.erb' %>
 <body>
 <div id="container">
+  <% if flash[:no_errors]!=nil %>
+      <span class="display-message"><%= flash[:no_errors] %><br></span>
+      <% end %>
   <div id="defect-analysis-table">
     <div class="color_codes">
       <div class="legend_item" id="type1"><span class="rect"></span><span class="legend_text">Failure Message</span></div>

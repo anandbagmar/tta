@@ -3,6 +3,7 @@
 </head>
 <script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+<script src="../../assets/javascripts/jquery-latest.js"></script>
 <%= render :file=> '/home/header.html.erb' %>
 <body>
 
@@ -22,7 +23,7 @@
       <div class="fields" >
         <label for="sub_project">Sub-Project:</label>
         <div class="required-field">
-            <%= select("sub_project", "id", SubProject.all.collect {|p| [ p.name, p.id ] },{:include_blank => '--Select--'} ) %>
+            <%= select("sub_project", "id", SubProject.all.collect {|p| [ p.name, p.id ] },{:include_blank => ''},:class=> 'required' ) %>
          </div>
         <br>
       </div>
@@ -43,6 +44,7 @@
 <%= render :file=> '/home/footer.html.erb' %>
 <script type="text/javascript">
     $(document).ready(function(){
+        $("#defect_analysis").validate()
         $("#defect_analysis").submit(function(){
             return Utils.validateDate($("#defect_analysis"));
         });
