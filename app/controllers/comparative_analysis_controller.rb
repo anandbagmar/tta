@@ -22,6 +22,7 @@ class ComparativeAnalysisController < ApplicationController
     flash[:date_error]=nil
     flash[:no_data_error]=nil
     if(@start_date=="" or @end_date=="" or params[:project][:id]=="")
+      binding.pry
       flash[:required_field] = "This Field is required."
       render :create
     else

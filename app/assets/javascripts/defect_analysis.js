@@ -1,4 +1,5 @@
 $("document").ready(function () {
+    $("#defect-analysis-table").html("");
     var jsonData = $("#defect-analysis-data").text(),
         subProjectName = "";
     if (jsonData != "") {
