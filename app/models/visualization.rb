@@ -1,22 +1,25 @@
 class Visualization
 
   def self.getResultJson(sub_project_id)
+    @HIGH_PRIORITY_SEQUENCE = 1000
     get_latest_metadata_record(sub_project_id)
+
     test_types=[]
     @test_category.zip(@percent_of_tests, @duration_of_tests, @no_of_test_in_test_category).each do |test_category, percent_of_test, duration_of_test, no_of_test|
       test_types <<
         {
-          :test_name => test_category,
+          :test_name =>test_category ,
+          :seq_no => TESTTYPE[test_category].nil? ? @HIGH_PRIORITY_SEQUENCE : TESTTYPE[test_category],
           :percent => percent_of_test,
           :duration => duration_of_test,
           :test_no => no_of_test
         }
     end
-
     @json = {
       :sub_project_name => SubProject.find(sub_project_id, :select => "name").name,
-      :test_types => test_types.sort_by{|test_type|test_type[:percent]}
+      :test_types => test_types.sort_by{|test_type|test_type[:seq_no]}.reverse
     }.to_json
+
     return @json
   end
 
