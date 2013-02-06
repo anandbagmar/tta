@@ -5,5 +5,5 @@ SAMPLE_OS_TYPES= ["Mac","Unix","Ubuntu","BeOS","IRIX","NeXTSTEP","MS-DOS","iOS",
 SAMPLE_HOST_NAMES= %w(garima pooja ashwin nikita nikitha tushar matty lava priti sailee sanchari shilpa pranjali akshay aasawaree)
 SAMPLE_CI_JOB_NAMES= %w(smoke master regression runtest testomania enternet titanic kanha kaziranga stress opensaysme gir test4treasure quovadis nihao)
 SAMPLE_TEST_ENVIRONMENTS = %w(dev qa production uat)
-SAMPLE_TEST_CATEGORIES = [ "UNIT TEST", "INTEGRATION TEST", "FUNCTIONAL TEST "]
+SAMPLE_TEST_CATEGORIES = [ "UNIT TEST", "INTEGRATION TEST", "FUNCTIONAL TEST"]
 SAMPLE_TEST_REPORT_TYPES = %w(Junit Nunit Rspec Cucumber)
