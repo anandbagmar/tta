@@ -9,19 +9,23 @@ class DefectAnalysis
   end
 
   def self.getMetadataIds(sub_project_id, analysis_date)
+    test_category = get_record_with_distinct_test_category(sub_project_id)
     analysis_date_morning =analysis_date + " 00:00:00"
     analysis_date_night = analysis_date + " 23:59:59"
-    meta_data = SubProject.find(sub_project_id).test_metadatum.find_all_by_date_of_execution(analysis_date_morning..analysis_date_night)
-    meta_data.sort_by &:date_of_execution
-    meta_data1 = meta_data.last
-    if meta_data1.nil?
-      return
-    end
     test_suite_ids=[]
-    meta_data1.test_suite_records.each do |test_suite_record|
+    test_category.each do |test_type|
+    meta_data = SubProject.find(sub_project_id).test_metadatum.find_all_by_date_of_execution(analysis_date_morning..analysis_date_night, :conditions => ["test_category = ?",test_type])
+    meta_data.sort_by &:date_of_execution
+    @meta_data1 = meta_data.last
+    if !(@meta_data1.nil?)
+    @meta_data1.test_suite_records.each do |test_suite_record|
      test_suite_ids << test_suite_record.id
     end
-
+    end
+    end
+    if test_suite_ids.empty?
+      return
+    end
     return get_test_cases(test_suite_ids)
   end
 
@@ -39,6 +43,18 @@ class DefectAnalysis
       end
     end
     return result_hash
+  end
+
+
+
+
+  def self.get_record_with_distinct_test_category(sub_project_id)
+    metadata_with_distinct_test_category = TestMetadatum.get_distinct_test_category(sub_project_id)
+    @test_category=[]
+    metadata_with_distinct_test_category.each do |test_type|
+      @test_category << test_type.test_category
+    end
+    return @test_category
   end
 end
 
