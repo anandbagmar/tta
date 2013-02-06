@@ -16,10 +16,6 @@ module Page
 
       select_the_option(project,COMPARATIVE_PROJECT_DROPDOWN)
       clickButton(COMPARATIVE_PLOT_BUTTON)
-      verify_graph_plotted(start_date,end_date,project)
-    end
-
-    def verify_graph_plotted(start_date,end_date,project)
       verify_if_visualization_is_displayed(COMPARATIVE_GRAPH_ID)
     end
 
