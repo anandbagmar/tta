@@ -8,7 +8,11 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
+    $("#display_message").css({
+    "display": "none"
+    })
     var plotPyramid = function(obj){
+      var unknownTestTypes = obj.unknown_test_types;
       var typeOfTests = obj.test_types,
         templates = new Template(),
         legendTemplate = templates.getLegendItem(),
@@ -37,6 +41,17 @@
         });
 
       }
+       if(unknownTestTypes) {
+       message = "The following Test Types are not being supported currently. <br>"
+       for(var count =0;count<unknownTestTypes.length;count++){
+           message+=unknownTestTypes[count]+"<br>"
+       }
+       message+='Please drop a mail stating the order to <a href="mailto:tta@thoughtworks.com">tta@thoughtworks.com</a>'
+           $("#display_message").css({
+               "display": "block"
+           })
+       $("#display_message").html(message);
+       }
       $('#legend').html(legendData);
       $("#pyramid").html(pyramidData);
 
