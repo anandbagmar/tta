@@ -23,8 +23,10 @@
       <div class="legend_item" id="type2"><span class="rect"></span><span class="legend_text">Failing Tests</span></div>
     </div>
   </div>
+  <% if flash[:no_errors] == nil %>
   <div id="defect-analysis-data" style="display:none;">
     <%= @defect_analysis_json %>
   </div>
+      <% end  %>
 </div>
 </body>
