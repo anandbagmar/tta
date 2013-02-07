@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(:version => 20130201061214) do
     t.integer  "test_suite_record_id"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
-    t.string   "error_msg"
+    t.text     "error_msg"
   end
 
   add_index "test_case_records", ["test_suite_record_id"], :name => "index_test_case_records_on_test_suite_record_id"
