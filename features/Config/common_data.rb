@@ -1,3 +1,6 @@
+#Site Url
+HOMEPAGE="http://localhost:3000"
+
 #Button_name for different pages
 UPLOAD_PAGE_BUTTON="SUBMIT"
 COMPARATIVE_PAGE_BUTTON="Plot"
@@ -50,5 +53,5 @@ PYRAMID_ID="#pyramid"
 
 
 #ERROR_SCREENSHOT_PATH
-SCREENSHOT_FILE_PATH=$PROJECT_ROOT +"/features/screenshots/"
+SCREENSHOT_FILE_PATH=$PROJECT_ROOT +"/log/feature/screenshots/"
 
