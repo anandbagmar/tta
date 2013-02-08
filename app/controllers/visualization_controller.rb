@@ -1,5 +1,4 @@
 class VisualizationController < ApplicationController
-
   def pyramid
     begin
       respond_to do |format|

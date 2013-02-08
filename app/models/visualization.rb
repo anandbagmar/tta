@@ -1,5 +1,5 @@
 class Visualization
-
+  TESTTYPE = YAML.load(File.open("#{Rails.root}/config/test_types.yml","r"))
   def self.getResultJson(sub_project_id)
     @HIGH_PRIORITY_SEQUENCE = 1000
     get_latest_metadata_record(sub_project_id)
@@ -26,6 +26,7 @@ class Visualization
       :unknown_test_types => (unknown_test_types if unknown_test_types!=[])
     }.to_json
     return @json
+
   end
 
 
