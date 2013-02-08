@@ -18,7 +18,6 @@ class Visualization
 
       else
           unknown_test_types.push(test_category)
-
       end
     end
     @json = {

@@ -24,7 +24,7 @@ module Definitions
     end
 
     def navigate_to_homepage()
-      visit "http://localhost:3000"
+      visit HOMEPAGE
     end
 
     def navigate_to_page(page_name)
