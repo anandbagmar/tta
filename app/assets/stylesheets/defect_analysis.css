@@ -10,8 +10,12 @@
     margin: 10px 0;
 }
 
-.color_codes > .legend_item > .legend_text {
+.color_codes {
+    text-align: left;
     float: right;
+    padding-right: 15px;
+}
+.color_codes > .legend_item > .legend_text {
     height: 20px;
     line-height: 20px;
 }
@@ -65,10 +69,8 @@
 }
 
 .legend_text{
-    display:block;
     text-align: left;
     height:10%;
-    padding-left:20%
 }
 .rect{
     display: inline-block;
