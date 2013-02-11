@@ -17,7 +17,7 @@ describe Project do
     it "adds sub_project to under the project" do
       project = Fabricate(:project)
       project.sub_projects.should be_empty
-      XmlParser.stub(:parse)
+      Parser.stub(:unzip)
       sub_proj,meta_data = project.add_sub_project(@attr)
       project.sub_projects.count.should == 1
       project.sub_projects.should include(sub_proj)
