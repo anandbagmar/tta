@@ -27,22 +27,23 @@ class Parser
       @xml_data.number_of_tests= test_suite.attr("tests")
       @xml_data.number_of_errors= test_suite.attr("errors")
       @xml_data.number_of_failures= test_suite.attr("failures")
+      test_report_type = params[:test_report_type]
       @doc.xpath("//testsuite/testcase").each do |test_case|
-        if test_case.attr("name").start_with? (test_suite.attr("name")+" ")
-          time += test_case.attr("time").to_f
+        if test_report_type == "Rspec JUnit" || test_report_type == "Cucumber JUnit"
+          time = XmlParser.get_time(test_case, test_suite)
+        elsif test_report_type == "Nunit Test"
+          time = NunitParser.get_time(test_case, test_suite)
         end
-      end
-      @xml_data.time_taken = time.to_s
-      @xml_data.save
-      test_report_type= params[:test_report_type]
-      if test_report_type == "Rspec JUnit" || test_report_type == "Cucumber JUnit"
-        XmlParser.saving_junit_test_cases(config_xml, test_suite,@xml_data,test_report_type)
-      elsif test_report_type == "Nunit Test"
-        saving_nunit_test_cases(config_xml, test_suite)
+        @xml_data.time_taken = time.to_s
+        @xml_data.save
+        test_report_type= params[:test_report_type]
+        if test_report_type == "Rspec JUnit" || test_report_type == "Cucumber JUnit"
+          XmlParser.saving_junit_test_cases(config_xml, test_suite, @xml_data, test_report_type)
+        elsif test_report_type == "Nunit Test"
+          NunitParser.saving_nunit_test_cases(config_xml, test_suite, @xml_data, test_report_type)
+        end
       end
     end
   end
-
-
-
 end
+
