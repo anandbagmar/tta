@@ -45,7 +45,7 @@ COMPARATIVE_GRAPH_ID = "#comparative_analysis"
 #Defect Analysis Graph ELEMENTS
 DEFECT_SUBPROJECT_DROPDOWN="sub_project_id"
 DEFECT_FORM_DATE="defect_analysis_analysis_date"
-DEFECT_GRAPH_ID="#defect-analysis-table"
+DEFECT_GRAPH_ID="#defect-analysis"
 
 #PYRAMID ELEMENT
 TEST_PYRAMID__PROJECT_DROPDOWN="sub_project_id"
