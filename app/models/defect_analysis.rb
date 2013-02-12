@@ -1,11 +1,32 @@
 class DefectAnalysis
   def self.getResultJson(sub_project_id, analysis_date)
-    test_case_hash = getMetadataIds(sub_project_id, analysis_date)
-    defect_analysis_json = {
-        :sub_project_name => SubProject.find(sub_project_id, :select => "name").name,
-        :errors => test_case_hash
-    }.to_json
+    test_case_hash,no_of_test = getMetadataIds(sub_project_id, analysis_date)
+    if !(no_of_test.nil?)
+      percentage = get_defect_percentage(no_of_test)
+
+     defect_analysis_json = {
+         :sub_project_name => SubProject.find(sub_project_id, :select => "name").name,
+          :errors => test_case_hash,
+          :percentage => percentage
+      }.to_json
+
+    else
+      defect_analysis_json ={
+          :errors => test_case_hash
+      }
+    end
+
     return defect_analysis_json
+  end
+
+  private
+  def self.get_defect_percentage(no_of_test)
+    sum=no_of_test.inject { |sum, x| sum + x }
+    percentage=[]
+    no_of_test.each do |test|
+      percentage<< "%0.2f" %(test.to_f / sum.to_f * 100)
+    end
+    percentage
   end
 
   def self.getMetadataIds(sub_project_id, analysis_date)
@@ -31,6 +52,7 @@ class DefectAnalysis
 
   def self.get_test_cases(result)
     test_cases=[]
+    no_of_test_for_particular_error=[]
     result.each do |test_suite_id|
       test_cases << TestCaseRecord.find_by_test_suite_record_id(test_suite_id, :select => "class_name , error_msg", :conditions => "error_msg IS NOT NULL")
     end
@@ -42,7 +64,10 @@ class DefectAnalysis
         result_hash[error_message] << test_case.class_name unless test_case.nil?
       end
     end
-    return result_hash
+    result_hash.each_key do |key|
+      no_of_test_for_particular_error << result_hash[key].count
+    end
+      return result_hash,no_of_test_for_particular_error
   end
 
 

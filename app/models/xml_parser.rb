@@ -34,6 +34,14 @@ class XmlParser
     end
     @xml_test_case.save
   end
+
+  def self.get_time(test_case,test_suite)
+    time=0.0
+    if test_case.attr("name").start_with? (test_suite.attr("name")+" ")
+      time+= test_case.attr("time").to_f
+    end
+    time
+  end
 end
 
 
