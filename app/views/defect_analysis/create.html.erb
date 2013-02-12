@@ -25,9 +25,15 @@
       <span class="display-message"><%= flash[:no_errors] %><br></span>
   <% end %>
 
-
-  <div id="defect-analysis-table">
+  <div id="defect-analysis">
+    <table id="defect_analysis_table" class="table-bordered" >
+      <tr>
+        <th>FAILURE MESSAGE -> FAILING TESTS</th>
+        <th>PERCENTAGE</th>
+      </tr>
+    </table>
   </div>
+
 
   <% if flash[:no_errors] == nil %>
       <div id="defect-analysis-data" style="display:none;">

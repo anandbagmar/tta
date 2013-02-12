@@ -19,54 +19,65 @@
     height: 20px;
     line-height: 20px;
 }
+.table-bordered {
+    border: 2px solid #dddddd;
+    border-left: 0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 10px;
+    padding: 0px;
+}
+.table-bordered th {
+    /*border: 1.5px solid rgb(3, 3, 3);*/
+    padding-top: .5em;
+    padding-bottom: .5em;
+    text-align: left;
+    padding-left: 1em;
+    padding-right: 1em;
+}
 
-#defect-analysis-table li{
-    list-style: none;
+.table-bordered th:first-child {
+    border-right: 1px solid #dddddd;
 }
-#defect-analysis-table li span{
-    padding: 10px;
+
+.table-bordered td span{
+    border-bottom : 3px solid #eda7a0
+
 }
-.error_list{
-    padding: 0;
-    overflow: hidden;
-    border: 1px solid #E20000;
-    border-radius: 5px;
-    margin: 0;
-    text-align:left;
+.table-bordered td span:last-child{
+    border: none;
 }
+
+
+.table-bordered td {
+    padding-top: .5em;
+    padding-bottom: .5em;
+    text-align: left;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.table-message{
+  border-spacing: 10px;
+  background: #b90e14;
+  border: 1px solid #b90e14;
+  padding-top: 1em;
+}
+
+.table-list{
+  background: #eda7a0;
+  border: 1px solid #eda7a0;
+  padding-bottom: 1em;
+}
+
 #type1 > .rect, .error_list li{
-    background: #FF7F77;
-}
-.error_list li{
-    font-weight: bold;
-    padding: 0;
-    position: relative;
-    margin: 9px 0;
-}
-.error_list li span{
-    line-height: 40px;
-}
-.error_messages{
-    /*display: none;*/
-    width: 100%;
-    box-shadow: 2px 2px 2px black inset;
-    padding-top: 1px;
-    float: left;
+    background: #b90e14;
 }
 
-.error_messages ul{
-    padding: 0;
-    width: 100%;
-    margin: 0;
-}
 #type2>.rect,.error_messages ul li{
-    background: #FFA7A5;
+    background: #eda7a0;
 }
-.error_messages ul li{
-    border-bottom: 1px solid;
-    padding: 15px;
-    margin: 0;
-}
+
 
 .legend_text{
     text-align: left;

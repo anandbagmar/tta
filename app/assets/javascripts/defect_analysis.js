@@ -1,37 +1,41 @@
 $("document").ready(function () {
-    $("#defect-analysis-table").html("");
+    $("#defect-analysis").css("display","none");
+    $(".color_codes").css("display","none");
     var jsonData = $("#defect-analysis-data").text(),
         subProjectName = "";
-    if (jsonData != "") {
+    if (jsonData != "")
+    {
         jsonData = JSON.parse(jsonData);
         subProjectName = "<h1>" + "Sub Project:" + jsonData.sub_project_name.toUpperCase() + "</h1>";
+        percentage =""
+        percentage =jsonData.percentage;
+        var tableResponse = jsonData.errors;
+        var errorListData = "";
+        var errorMessageData= "";
+        var errorList;
+        var errorPer = 0;
 
-        var errors = jsonData.errors,
-            templates = new Template(),
-            errorListData = "",
-            errorMessageData = "",
-            defectErrorMessageTemplate = templates.getDefectErrorMessagesTemplate(),
-            errorListTemplate = templates.getErrorListTemplate();
-        for (var errorName in errors) {
-            if (errorName == "")
-                continue;
-            var errorMessages = errors[errorName];
-            errorMessageData = "";
-            for (index = 0, len = errorMessages.length; index < len; index++) {
-              errorMessageData += "<li>"+errorMessages[index]+"</li>";
-            }
-            errorMessageData = templates.render(defectErrorMessageTemplate, {
-                "ErrorName":errorName,
-                "ErrorMessageList":errorMessageData.replace("'", " ")
-            });
-          errorListData += "<li class='clearfix'>"+errorMessageData+"</li>";
+        for (var message in tableResponse)
+        {
+            errorMessageData+="<td>"+message+"</td>"
+            errorList=tableResponse[message];
+            errorListData="<td colspan='2'>";
+            for(var index= 0,len= errorList.length;index<len; index++ ){
+                errorListData+="<span>"+errorList[index]+"</br></span>";
         }
-        errorListData = templates.render(errorListTemplate, {
-            "ErrorList":errorListData
-        });
+            errorListData+="</td>"
+            errorMessageData+="<td>"+percentage[errorPer]+"% </td>"
+            errorPer++;
+            $("#defect_analysis_table").append("<tr class='table-message'>"+errorMessageData+"</tr>");
+            $("#defect_analysis_table").append("<tr class='table-list' >"+errorListData+"</tr>");
+            errorMessageData ="";
+            errorListData="" ;
+        }
+        $("#defect-analysis").css("display","block");
+        $(".color_codes").css("display","block");
+        $("#defect-analysis").prepend(subProjectName);
 
-        $("#defect-analysis-table").prepend(subProjectName);
-        $("#defect-analysis-table").append(errorListData);
     }
     return false;
 });
+
