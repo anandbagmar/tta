@@ -13,8 +13,6 @@
     margin: 0;
 }
 
-
-
 #submit-plot-button input{
     height: 25px;
     width: 55px;
@@ -59,4 +57,13 @@
     text-align: left;
     left: -37%;
     top: -900px;
+}
+#comparative_analysis div.xAxis div.tickLabel{
+    transform: rotate(-40deg);
+    -ms-transform:rotate(-40deg); /* IE 9 */
+    -moz-transform:rotate(-40deg); /* Firefox */
+    -webkit-transform:rotate(-40deg); /* Safari and Chrome */
+    -o-transform:rotate(-40deg); /* Opera */
+    /*rotation-point:50% 50%;*/ /* CSS3 */
+    /*rotation:270deg;*/ /* CSS3 */
 }

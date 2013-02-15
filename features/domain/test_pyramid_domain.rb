@@ -11,7 +11,12 @@ module Domain
       verify_display(sub_proj)
     end
 
+    def verify_error_msg(sub_proj)
+      verify_error_msg(sub_proj )
+    end
+
   end
 end
 
 World(Domain::Test_Pyramid_Domain)
+
