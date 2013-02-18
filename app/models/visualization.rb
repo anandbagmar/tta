@@ -64,7 +64,7 @@ class Visualization
     percent = []
     duration = []
     no_of_test_in_test_category.zip(duration_of_test_in_test_category).each do |no_of_test , duration_of_test|
-      duration_of_tests="%0.6f" %((duration_of_test.to_f)/1000)
+      duration_of_tests="%0.3f" %((duration_of_test.to_f))
       percentOfTests = "%0.2f" %((no_of_test.to_f/total_no_of_tests)*100)
       percent << percentOfTests
       duration << duration_of_tests
