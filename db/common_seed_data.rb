@@ -6,4 +6,4 @@ SAMPLE_HOST_NAMES= %w(garima pooja ashwin nikita nikitha tushar matty lava priti
 SAMPLE_CI_JOB_NAMES= %w(smoke master regression runtest testomania enternet titanic kanha kaziranga stress opensaysme gir test4treasure quovadis nihao)
 SAMPLE_TEST_ENVIRONMENTS = %w(dev qa production uat)
 SAMPLE_TEST_CATEGORIES = [ "UNIT TEST", "INTEGRATION TEST", "FUNCTIONAL TEST"]
-SAMPLE_TEST_REPORT_TYPES = %w(Junit Nunit Rspec Cucumber)
+SAMPLE_TEST_REPORT_TYPES = ["Rspec JUnit","Cucumber JUnit","Unit NUnit","Groovy NUnit"]
