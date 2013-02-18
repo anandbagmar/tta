@@ -19,28 +19,33 @@ class Parser
   #job: parsing
   def self.parse_test_record(config_xml, meta_id, params)
     @doc = Nokogiri::XML config_xml
-    @doc.xpath("//testsuite").each do |test_suite|
+    test_report_type = params[:test_report_type]
+
+    if test_report_type == "Unit NUnit"
+      return UnitNunitParser.parse(config_xml, meta_id)
+    else
+      test_suites = @doc.xpath("//testsuite")
+    end
+
+    test_suites.each do |test_suite|
       time = test_suite.attr("time").to_f
       @xml_data = TestSuiteRecord.new()
+      @xml_data.time_taken = 0.0
       @xml_data.test_metadatum_id = meta_id
       @xml_data.class_name= test_suite.attr("name")
       @xml_data.number_of_tests= test_suite.attr("tests")
       @xml_data.number_of_errors= test_suite.attr("errors")
       @xml_data.number_of_failures= test_suite.attr("failures")
-      test_report_type = params[:test_report_type]
       @doc.xpath("//testsuite/testcase").each do |test_case|
         if test_report_type == "Rspec JUnit" || test_report_type == "Cucumber JUnit"
-          time = XmlParser.get_time(test_case, test_suite)
-        elsif test_report_type == "Nunit Test"
-          time = NunitParser.get_time(test_case, test_suite)
+          time = XmlParser.get_time(test_case, test_suite, test_report_type)
         end
-        @xml_data.time_taken = time.to_s
+        @xml_data.time_taken += time.to_f
         @xml_data.save
-        test_report_type= params[:test_report_type]
         if test_report_type == "Rspec JUnit" || test_report_type == "Cucumber JUnit"
-          XmlParser.saving_junit_test_cases(config_xml, test_suite, @xml_data, test_report_type)
-        elsif test_report_type == "Nunit Test"
-          NunitParser.saving_nunit_test_cases(config_xml, test_suite, @xml_data, test_report_type)
+          XmlParser.saving_junit_test_cases(config_xml, test_case, @xml_data, test_report_type, test_suite)
+        elsif test_report_type == "Groovy NUnit"
+          GroovyNunitParser.parse(config_xml, @xml_data,test_case)
         end
       end
     end
