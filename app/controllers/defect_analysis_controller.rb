@@ -18,7 +18,6 @@ class DefectAnalysisController < ApplicationController
     analysis_date=params[:defect_analysis][:analysis_date]
     @defect_analysis_json = DefectAnalysis.getResultJson(sub_project_id,analysis_date)
 
-    #parsed_json = ActiveSupport::JSON.decode(@defect_analysis_json)
     if @defect_analysis_json["errors"].nil?  then
       flash[:no_errors]="No built runs on "+ analysis_date +" for the selected Sub Project"
     elsif @defect_analysis_json["errors"].blank?

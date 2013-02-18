@@ -3,7 +3,7 @@ require 'spec_helper'
 describe TestMetadatum do
   describe "create" do
 
-    it "validate s presence of browser name" do
+    it "validates presence of browser name" do
       should validate_presence_of(:browser).with_message("cannot be blank, Task not saved")
     end
 
