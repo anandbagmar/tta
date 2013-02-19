@@ -21,7 +21,6 @@
 }
 .table-bordered {
     border: 2px solid #dddddd;
-    border-left: 0;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 10px;
@@ -58,20 +57,26 @@
 }
 
 .table-message{
-  border-spacing: 10px;
-  background: #b90e14;
-  border: 1px solid #b90e14;
-  padding-top: 1em;
+    border-spacing: 10px;
+    background: #b90e14;
+    border: 1px solid #b90e14;
+    padding-top: 1em;
+    color: #f5f5f5;
 }
 
 .table-list{
-  background: #eda7a0;
-  border: 1px solid #eda7a0;
-  padding-bottom: 1em;
+    background: #eda7a0;
+    border: 1px solid #eda7a0;
+    padding-bottom: 1em;
+}
+
+.first{
+    background: #FFE4E1;
 }
 
 #type1 > .rect, .error_list li{
     background: #b90e14;
+
 }
 
 #type2>.rect,.error_messages ul li{

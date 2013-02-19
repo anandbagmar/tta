@@ -10,27 +10,38 @@ $("document").ready(function () {
         percentage =""
         percentage =jsonData.percentage;
         var tableResponse = jsonData.errors;
+        var test_category = "";
         var errorListData = "";
         var errorMessageData= "";
         var errorList;
         var errorPer = 0;
-
-        for (var message in tableResponse)
+        for (var test_type in tableResponse)
         {
-            errorMessageData+="<td>"+message+"</td>"
-            errorList=tableResponse[message];
-            errorListData="<td colspan='2'>";
-            for(var index= 0,len= errorList.length;index<len; index++ ){
-                errorListData+="<span>"+errorList[index]+"</br></span>";
+            test_category += "<td colspan='2'>"+test_type+"</td>"
+            for(var index= 0,len=tableResponse[test_type].length;index<len;index++)
+            {
+                for(var message in tableResponse[test_type][index])
+                {
+                    errorMessageData+="<td>"+message+"</td>"
+                    errorList=(tableResponse[test_type][index][message])
+                    errorListData="<td colspan='2'>";
+                    for(var count= 0,len= errorList.length;count<len; count++ )
+                    {
+                        errorListData+="<span>"+errorList[count]+"</br></span>";
+                    }
+                    errorListData+="</td>"
+                    errorMessageData+="<td>"+percentage[errorPer]+"% </td>"
+                    errorPer++;
+                    $("#defect_analysis_table").append("<tr class='first'>"+test_category+"</tr>");
+                    $("#defect_analysis_table").append("<tr class='table-message'>"+errorMessageData+"</tr>");
+                    $("#defect_analysis_table").append("<tr class='table-list' >"+errorListData+"</tr>");
+                    errorMessageData ="";
+                    errorListData="" ;
+                    test_category="";
+                }
+            }
         }
-            errorListData+="</td>"
-            errorMessageData+="<td>"+percentage[errorPer]+"% </td>"
-            errorPer++;
-            $("#defect_analysis_table").append("<tr class='table-message'>"+errorMessageData+"</tr>");
-            $("#defect_analysis_table").append("<tr class='table-list' >"+errorListData+"</tr>");
-            errorMessageData ="";
-            errorListData="" ;
-        }
+
         $("#defect-analysis").css("display","block");
         $(".color_codes").css("display","block");
         $("#defect-analysis").prepend(subProjectName);
