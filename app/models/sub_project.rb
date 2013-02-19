@@ -45,7 +45,7 @@ class SubProject < ActiveRecord::Base
   end
 
   def log_dir
-    FileUtils.mkdir_p(Dir.home+"/Documents/"+ project.name + "/"+ name + "/" +Time.now.strftime("%d-%m-%y-%H:%M:%S"))
+    FileUtils.mkdir_p($PROJECT_ROOT+"/../PROJECT_LOGS/"+project.name+ "/"+ name + "/" +Time.now.strftime("%d-%m-%y-%H:%M:%S"))
   end
 
 end
