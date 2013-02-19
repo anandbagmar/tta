@@ -51,7 +51,7 @@ namespace :tta do
     end
 
     task :upload_to_tta, [:project_name, :sub_project_name, :ci_job_name, :test_category, :test_report_type, :os_name, :host_name, :browser, :type_of_environment, :date_of_execution, :logDirectory, :filePattern, :commit] do |t, args|
-      args.with_defaults(:project_name => "xyz112", :sub_project_name => "xyz", :ci_job_name => "xyz", :test_category => "xyz", :test_report_type => "xyz", :os_name => "xyz", :host_name => "xyz", :browser => "xyz", :type_of_environment => "xyz", :date_of_execution => "1900-12-12", :logDirectory => "asdw", :filePattern => "*.xml", :commit => "SUBMIT")
+      args.with_defaults(:project_name => "demoProject", :sub_project_name => "demoSubProject", :ci_job_name => "demoCIJob", :test_category => "Unit Test", :test_report_type => "RSpec Junit", :os_name => "MAc", :host_name => "xyz", :browser => "Chrome", :type_of_environment => "Dev", :date_of_execution => "1900-12-12", :logDirectory => "asdw", :filePattern => "*.xml", :commit => "SUBMIT")
       $project_name = args.project_name
       $sub_project_name = args.sub_project_name
       $ci_job_name = ENV['GO_JOB_NAME']
@@ -61,7 +61,6 @@ namespace :tta do
       $host_name=`hostname`.strip
       $browser=args.browser
       $type_of_environment=args.type_of_environment
-      $date_of_execution=Date.today.to_s
       $log_directory=args.logDirectory
       $file_pattern=args.filePattern
       $commit=args.commit

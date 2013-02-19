@@ -19,7 +19,7 @@ Tta::Application.routes.draw do
   post '/comparative_analysis/result' => "comparative_analysis#date_filter"
   post '/pyramid/result' => "visualization#sub_project_filter"
   post '/defect_analysis/result' => "defect_analysis#sub_project_filter"
-  match '*path' => 'error#handle404'
+  get '*path' => 'error#handle404'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
