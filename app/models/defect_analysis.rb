@@ -43,17 +43,16 @@ class DefectAnalysis
       @meta_data1 = meta_data.last
       if !(@meta_data1.nil?)
         @meta_data1.test_suite_records.each do |test_suite_record|
-          test_suite_ids << test_suite_record.id
+          test_suite_ids << test_suite_record.id unless test_suite_record.number_of_failures == 0
         end
       end
-      if test_suite_ids.empty?
-        return
+      if !(test_suite_ids.empty?)
+        result_hash,no_of_test_for_particular_error = get_test_cases(test_suite_ids)
+        final_result_hash[test_type] = [] unless result_hash.keys.include?(test_type)
+        final_result_hash[test_type] << result_hash  unless result_hash.nil?
+        final_test_for_particular_error[index]=no_of_test_for_particular_error
+        index+=1
       end
-      result_hash,no_of_test_for_particular_error = get_test_cases(test_suite_ids)
-      final_result_hash[test_type] = [] unless result_hash.keys.include?(test_type)
-      final_result_hash[test_type] << result_hash  unless result_hash.nil?
-      final_test_for_particular_error[index]=no_of_test_for_particular_error
-      index+=1
     end
     return final_result_hash,final_test_for_particular_error
   end
