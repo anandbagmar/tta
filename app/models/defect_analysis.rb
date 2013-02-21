@@ -1,5 +1,5 @@
 class DefectAnalysis
-  def self.getResultJson(sub_project_id, analysis_date)
+  def self.get_result_json(sub_project_id, analysis_date)
     test_case_hash, no_of_test = getMetadataIds(sub_project_id, analysis_date)
     if !(no_of_test.nil?)
       percentage = get_defect_percentage(no_of_test.flatten)
