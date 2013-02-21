@@ -18,7 +18,6 @@ module Definitions
       fill_in UPLOAD_TEST_TYPE, :with => proj_params[:test_type]
     end
 
-
     def select_the_option(field, dropdown)
       select field,:from => dropdown
     end
@@ -28,16 +27,13 @@ module Definitions
     end
 
     def navigate_to_page(page_name)
-      sleep(10)
-      click_button(page_name)
+    click_button(page_name)
+      #add wait until element here n then proceed
     end
 
     def clickButton(button)
       click_button(button)
     end
-
-
-
 
     def enter_date(sdate, edate)
       fill_in "comparative_analysis_start_date" ,:with => sdate
@@ -50,15 +46,15 @@ module Definitions
 
 
     def page_has_css?(element_css)
-      assert page.has_css?(element_css),"Nothing displayed"
+      #add wait until element here n then proceed
+    page.has_css?(element_css)
     end
 
 
 
     def page_has_content?(content)
-      sleep(10)
-      puts content
-        assert page.has_content?(content),"************ No Display ***************"
+        #add wait until element here n then proceed
+        page.has_content?(content)
     end
 
   end

@@ -1,5 +1,5 @@
 
-When /^the user checks Pyramid View of "([^"]*)"$/ do |sub_proj|
+When /^a team member checks Pyramid View of "([^"]*)"$/ do |sub_proj|
   view_pyramid_view(sub_proj)
 end
 

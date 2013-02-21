@@ -7,11 +7,9 @@ module Page
     end
     def verify_if_legends_is_equal_to_divisions
       no_of_legend = page.all(:xpath,"//div[@id='legend']/div").length
-
-      sleep(5)
       no_of_pyramid_divisions =  page.all(:xpath,"//div[@id='pyramid']/div").length
-      sleep(5)
-      assert(no_of_legend == no_of_pyramid_divisions,"label and divisions not equal")
+      verify_data = no_of_legend == no_of_pyramid_divisions
+      verify_data
     end
 
   end

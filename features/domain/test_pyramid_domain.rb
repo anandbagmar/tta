@@ -10,7 +10,7 @@ module Domain
     def verify_pyramid_display(subproject)
       assert page_has_css?(PYRAMID_ID),"Pyramid is displayed"
       assert page_has_content?("Test-Pyramid for: "+subproject),"Title is displayed"
-      verify_if_legends_is_equal_to_divisions
+      assert verify_if_legends_is_equal_to_divisions, "Legend is not displayed correctly"
     end
   end
 end
