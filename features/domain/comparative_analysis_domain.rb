@@ -1,18 +1,18 @@
 module Domain
   module ComparativeDomain
 
-    def navigate_to_upload_page
-        go_to_url(UPLOAD_PAGE)
-    end
-
-    def go_to_url(button)
-     clickButton(button)
-    end
-
     def view_comparative_graph(project, start_date, end_date)
       navigate_to_homepage()
       go_to_url(COMPARATIVE_PAGE)
       view_graph(project,start_date,end_date)
+    end
+
+    def verify_if_visualization_is_displayed(element)
+      assert page_has_css?(element),"Nil"
+    end
+
+    def verify_if_date_range_is_displayed(sdate, edate)
+      assert page_has_content?('From '+sdate+' to '+edate),"No Date Displayed"
     end
 
   end

@@ -8,15 +8,6 @@ module Page
       clickButton(DEFECT_PAGE_BUTTON)
 
     end
-
-    def go_to_url(button)
-      clickButton(button)
-    end
-
-    def verify_defect_graph(subproject_name)
-     assert page_has_content?("Sub Project:"+subproject_name)
-     assert page_has_css?(DEFECT_GRAPH_ID)
-    end
   end
 end
 

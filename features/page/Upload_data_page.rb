@@ -2,23 +2,21 @@
 module Page
   module Upload_dataPage
 
-    def fill_the_form(table)
-      table.hashes.each do |row|
-        navigate_to_homepage
-        navigate_to_upload_page
-        upload_data(row)
-        submit_form()
-      end
+    def navigate_to_upload_page
+      go_to_url(UPLOAD_PAGE)
     end
 
-    def submit_form()
+    def upload_data_and_submit(proj_params)
+      proj_params[:logFile]=$PROJECT_ROOT+"/"+proj_params[:logFile]
+      form_filling(proj_params[:proj],proj_params[:sub_proj],proj_params[:ci_job],proj_params[:osName],proj_params[:hostName],proj_params[:browser],proj_params[:environment],proj_params[:date_year],proj_params[:date_month],proj_params[:date_day],proj_params[:date_hour],proj_params[:date_minute],proj_params[:logFile],proj_params[:test_type])
       clickButton(UPLOAD_PAGE_BUTTON)
-      verify_data_uploaded(UPLOAD_SUCCESS)
     end
 
-    def verify_data_uploaded(proj_succ)
-      assert page_has_content?(proj_succ),"No Project uploaded"
+    def go_to_url(button)
+      clickButton(button)
     end
+
+
   end
 end
 

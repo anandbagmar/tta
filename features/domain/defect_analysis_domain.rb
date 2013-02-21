@@ -8,7 +8,8 @@ module Domain
     end
 
     def verify_defect_graph_plotted(subproject_name)
-      verify_defect_graph(subproject_name)
+      assert page_has_content?("Sub Project:"+subproject_name)
+      assert page_has_css?(DEFECT_GRAPH_ID)
     end
 
   end

@@ -7,14 +7,11 @@ module Domain
       fill_pyramid_data(sub_proj)
     end
 
-    def verify_pyramid_display(sub_proj)
-      verify_display(sub_proj)
+    def verify_pyramid_display(subproject)
+      assert page_has_css?(PYRAMID_ID),"Pyramid is displayed"
+      assert page_has_content?("Test-Pyramid for: "+subproject),"Title is displayed"
+      verify_if_legends_is_equal_to_divisions
     end
-
-    def verify_error_msg(sub_proj)
-      verify_error_msg(sub_proj )
-    end
-
   end
 end
 
