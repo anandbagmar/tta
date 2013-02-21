@@ -6,5 +6,7 @@ FactoryGirl.define do
     number_of_errors "2"
     number_of_failures "4"
     time_taken "2"
+    number_of_tests_not_run "0"
+    number_of_tests_ignored "0"
   end
 end

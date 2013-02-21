@@ -8,7 +8,7 @@ FactoryGirl.define do
     host_name "host_pc"
     browser "firefox"
     type_of_environment "Dev"
-    date_of_execution "2012-11-16"
+    date_of_execution "2013-02-20 00:00:00"
     test_category "Unit Test"
     test_report_type "JUnit"
   end
