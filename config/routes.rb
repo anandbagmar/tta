@@ -15,6 +15,8 @@ Tta::Application.routes.draw do
 
   get '/upload/show'
 
+  get '/admin/' => 'admin#view'
+
   resources :projects,:junit_xml_data,:j_unit_xmls,:unit_test_xml
   post '/comparative_analysis/result' => "comparative_analysis#date_filter"
   post '/pyramid/result' => "visualization#sub_project_filter"

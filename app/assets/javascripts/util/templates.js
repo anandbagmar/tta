@@ -7,7 +7,8 @@ var Template = function(){
           '<div class="test-triangle" id={{TestTypeTest}}></div>' +
         '</div>',
       errorListTemplate:'<ul class="error_list">{{ErrorList}}</ul>',
-      defectErrorMessagesTemplate:'<span>{{ErrorName}}</span><div class="error_messages"><ul>{{ErrorMessageList}}</ul></div>'
+      defectErrorMessagesTemplate:'<span>{{ErrorName}}</span><div class="error_messages"><ul>{{ErrorMessageList}}</ul></div>',
+      adminPageTemplate:'<tr><td>{{Index}}</td><td>{{ProjectName}}</td><td>{{SubProjectName}}</td></tr>'
     };
     return {
         render: function(template,data){
@@ -29,6 +30,9 @@ var Template = function(){
         },
         getErrorListTemplate: function(){
           return templates.errorListTemplate;
+        },
+        getAdminPageTemplate: function(){
+            return templates.adminPageTemplate;
         }
     };
 };

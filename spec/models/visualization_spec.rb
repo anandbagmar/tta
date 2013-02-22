@@ -4,7 +4,8 @@ describe Visualization do
   TESTTYPE = YAML.load(File.open("#{Rails.root}/config/test_types.yml","r"))
 
   it "should return json if sub_project_id passed" do
-    json=Visualization.getResultJson("1");
+    sub_project = FactoryGirl.create(:sub_project)
+    json=Visualization.getResultJson(sub_project.id);
     json.should_not be_nil
   end
 
