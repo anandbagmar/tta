@@ -3,7 +3,8 @@ require "rspec"
 describe DefectAnalysis do
 
   it "should return json if sub_project_id passed" do
-    json=DefectAnalysis.get_result_json("1","2013-02-19");
+    sub_project = FactoryGirl.create(:sub_project)
+    json=DefectAnalysis.get_result_json(sub_project.id,"2013-02-19")
     json.should_not be_nil
   end
 

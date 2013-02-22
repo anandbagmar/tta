@@ -1,6 +1,6 @@
 class Parser
   #job  - unzipping
-  def self.unzip (input_file_path, output_file_path, meta_datum_id, params)
+  def self.unzip_files (input_file_path, output_file_path, meta_datum_id, params)
     FileUtils.cp input_file_path, output_file_path
     Zip::ZipFile.open(output_file_path) do |zipFile|
       zipFile.each do |entry|

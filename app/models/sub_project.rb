@@ -40,7 +40,7 @@ class SubProject < ActiveRecord::Base
     output_file_path = File.join(log_dir, input_file_name)
     input_file_path = params[:logDirectory].path
 
-    Parser.unzip input_file_path, output_file_path, meta_datum.id,params
+    Parser.unzip_files input_file_path, output_file_path, meta_datum.id,params
 
   end
 

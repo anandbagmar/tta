@@ -12,7 +12,8 @@ describe ComparativeAnalysisController do
   end
 
   it "should return result set" do
-    result = ComparativeAnalysis.get_result_set(1,"2012-01-01","2012-12-12")
+    project = FactoryGirl.create(:project)
+    result = ComparativeAnalysis.get_result_set(project.id,"2012-01-01","2012-12-12")
     result.should_not be_nil
   end
 
