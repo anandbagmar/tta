@@ -9,7 +9,7 @@ FactoryGirl.define do
     browser "firefox"
     type_of_environment "Dev"
     date_of_execution "2013-02-20 00:00:00"
-    test_category "Unit Test"
+    test_category "UNIT TEST"
     test_report_type "JUnit"
   end
 end

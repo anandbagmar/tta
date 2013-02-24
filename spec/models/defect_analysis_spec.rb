@@ -24,7 +24,7 @@ describe DefectAnalysis do
     test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id)
     test_case_record = FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id)
     json= DefectAnalysis.get_result_json(sub_project.id,"2013-02-20")
-    json.should eq("{\"sub_project_name\":\"TTA_subProject\",\"errors\":{\"Unit Test\":[{\"ERROR_MSG\":[\"Class_01\"]}]},\"percentage\":[\"100.00\"]}")
+    json.should eq("{\"sub_project_name\":\"TTA_subProject\",\"errors\":{\"UNIT TEST\":[{\"ERROR_MSG\":[\"Class_01\"]}]},\"percentage\":[\"100.00\"]}")
   end
 
    it "should not repeat the error message on uploading test cases with same error message" do
@@ -37,7 +37,7 @@ describe DefectAnalysis do
      test_case_record = FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id,:time_taken=>1,:class_name=>"class1.1.3")
      json= DefectAnalysis.get_result_json(sub_project.id,"2013-02-20")
      parsed_json = ActiveSupport::JSON.decode(json)
-     parsed_json["errors"]["Unit Test"].should eq([{"ERROR_MSG"=>["class1.1.1", "class1.1.2", "class1.1.3"]}])
+     parsed_json["errors"]["UNIT TEST"].should eq([{"ERROR_MSG"=>["class1.1.1", "class1.1.2", "class1.1.3"]}])
    end
 
   it "should give appropriate percentages for the tests uploaded" do
@@ -73,7 +73,7 @@ describe DefectAnalysis do
     test_case_record_3 = FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_3.id)
     json= DefectAnalysis.get_result_json(sub_project.id,"2013-02-20")
     parsed_json = ActiveSupport::JSON.decode(json)
-    parsed_json["errors"].should eq({"Unit Test"=>[{"ERROR_MSG"=>["Class_01"]}],"FUNCTIONAL TEST"=>[{"ERROR_MSG"=>["Class_01"]}],"INTEGRATION TEST"=>[{"ERROR_MSG"=>["Class_01"]}]})
+    parsed_json["errors"].should eq({"UNIT TEST"=>[{"ERROR_MSG"=>["Class_01"]}], "FUNCTIONAL TEST"=>[{"ERROR_MSG"=>["Class_01"]}], "INTEGRATION TEST"=>[{"ERROR_MSG"=>["Class_01"]}]})
   end
 
   it "should not display errors of a particular type in some other test category" do
