@@ -97,5 +97,10 @@
 <script>
   $(document).ready(function(){
      $("#uploadForm").validate();
+      $("#uploadForm").submit(function(){
+          return validateDate.checkForValidDate($("#uploadForm"));
+      });
+
+
  });
 </script>

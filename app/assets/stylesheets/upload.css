@@ -2,8 +2,11 @@
     padding-top: 20px;
     padding-bottom: 20px;
 }
-
-.error{
+.error-msg{
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 20px;
     color: #DB1818;
     font-size:12px;
     margin: 0 auto;
