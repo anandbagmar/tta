@@ -62,12 +62,18 @@ describe ComparativeAnalysisController do
 
   it "should throw error if there is no data within the date range " do
     project = FactoryGirl.create(:project)
+    sub_project = FactoryGirl.create(:sub_project,:project_id => project.id)
+    test_metadata = FactoryGirl.create(:test_metadatum,:sub_project_id => sub_project.id)
+    test_suite = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id)
+
     start_date = '2013-01-01'
     end_date = '2013-01-31'
+
     post :date_filter , :project => {:id => project.id},:comparative_analysis => {:start_date => start_date,:end_date => end_date}
     assert_response :success
     @controller.expects(:create)
     assert_not_nil assigns(@json)
+
     assert_not_nil flash[:no_data_error]
     assert_equal flash[:no_data_error],"No Data between the Date Range "+start_date+" To "+end_date
   end
