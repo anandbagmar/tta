@@ -8,12 +8,14 @@ describe SubProject do
 
   describe "add_dependency" do
     before(:each) do
+      #binding.pry
       @attr = { :sub_project_name => "tta_sub", :ci_job_name =>"build",:test_category => "Unit test" , :test_report_type => "JUnit",:date => {:year=>"2012", :month=>"5", :day=>"26", :hour=>"07", :minute=>"46"},
-                :browser => "firefox",:host_name=> "host_pc", :os_name=>"mac-osx",:type_of_environment => "dev",:logDirectory=> mock(:original_filename => "abc.zip", :path => $PROJECT_ROOT+"/Err_test.zip" )}
+                :browser => "firefox",:host_name=> "host_pc", :os_name=>"mac-osx",:type_of_environment => "dev",:logDirectory=> mock(:original_filename => "abc.zip", :path => "/Users/priti/projects/TTA/" )}
     end
 
     it "creates and saves test metadata" do
-      sub_project = FactoryGirl.create(:sub_project)
+      project = FactoryGirl.create(:project)
+      sub_project = FactoryGirl.create(:sub_project, :project_id => project.id)
       Parser.stub(:unzip_files)
       sub_project.test_metadatum.count.should == 0
       meta_data  = sub_project.create_dependency(@attr)
