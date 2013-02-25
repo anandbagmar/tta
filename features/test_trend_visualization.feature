@@ -13,8 +13,8 @@ Scenario: Complete Visualization Flow
   When a team member checks Defect Analysis Graph of "SERRORS1" with Date as "2012-01-01"
   Then the Defect Analysis table for "SERRORS1" is plotted
 
-  When a QA Manager checks the Comparative Analysis of "PROJECT1" with Date-Range between "1990-12-12" and "2012-12-12"
-  Then the comparative analysis graph for "PROJECT1" is generated with Date Range between "1990-12-12" and "2012-12-12"
+  When a QA Manager checks the Comparative Analysis of "PROJECT1" with Date-Range between "2011-12-12" and "2012-12-12"
+  Then the comparative analysis graph for "PROJECT1" is generated with Date Range between "2011-12-12" and "2012-12-12"
 
 
 

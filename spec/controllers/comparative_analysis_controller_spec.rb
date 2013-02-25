@@ -64,7 +64,7 @@ describe ComparativeAnalysisController do
     project = FactoryGirl.create(:project)
     sub_project = FactoryGirl.create(:sub_project,:project_id => project.id)
     test_metadata = FactoryGirl.create(:test_metadatum,:sub_project_id => sub_project.id)
-    test_suite = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id)
+    FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id)
 
     start_date = '2013-01-01'
     end_date = '2013-01-31'
@@ -73,7 +73,6 @@ describe ComparativeAnalysisController do
     assert_response :success
     @controller.expects(:create)
     assert_not_nil assigns(@json)
-
     assert_not_nil flash[:no_data_error]
     assert_equal flash[:no_data_error],"No Data between the Date Range "+start_date+" To "+end_date
   end

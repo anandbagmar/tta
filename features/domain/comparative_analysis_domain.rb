@@ -8,7 +8,7 @@ module Domain
     end
 
     def verify_if_date_range_is_displayed(sdate, edate)
-      assert page_has_content?('From '+sdate+' to '+edate),"No Date Displayed"
+      assert page_has_content?('From '+sdate+' to '+edate)
     end
 
     def verify_if_visualization_is_displayed(element)
