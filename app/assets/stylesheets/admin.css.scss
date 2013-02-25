@@ -13,6 +13,12 @@
   border-radius: 4px;
 }
 
+td {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+
+
 .table-bordered th,.table-bordered td {
   border-left: 1px solid #dddddd;
 }
@@ -20,16 +26,11 @@
 .table-bordered th {
   border-bottom: 1px solid #dddddd;
 }
-//.table-bordered tbody,.table-bordered {
-//  border: 1px solid #ff0000;
-//}
-.table-bordered tr.bottom td{
-  border: 1px solid #ff0000;
+
+.tr_border {
+  border-bottom: 1px solid #dddddd;
 }
 
-//.table-bordered td:last-of-type{
-//  border-bottom: 1px solid #ff0000;
-//}
 
 
 
