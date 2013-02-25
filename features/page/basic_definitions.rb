@@ -22,19 +22,6 @@ module Definitions
       select field,:from => dropdown
     end
 
-    def navigate_to_homepage()
-      visit HOMEPAGE
-    end
-
-    def navigate_to_page(page_name)
-    click_button(page_name)
-      #add wait until element here n then proceed
-    end
-
-    def clickButton(button)
-      click_button(button)
-    end
-
     def enter_date(sdate, edate)
       fill_in "comparative_analysis_start_date" ,:with => sdate
       fill_in "comparative_analysis_end_date" , :with => edate

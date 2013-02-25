@@ -7,13 +7,14 @@ module Domain
       view_graph(project,start_date,end_date)
     end
 
+    def verify_if_date_range_is_displayed(sdate, edate)
+      assert page_has_content?('From '+sdate+' to '+edate),"No Date Displayed"
+    end
+
     def verify_if_visualization_is_displayed(element)
       assert page_has_css?(element),"Nil"
     end
 
-    def verify_if_date_range_is_displayed(sdate, edate)
-      assert page_has_content?('From '+sdate+' to '+edate),"No Date Displayed"
-    end
 
   end
 end

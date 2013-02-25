@@ -8,7 +8,7 @@ module Page
     end
 
     def go_to_url(button)
-      clickButton(button)
+      click_button(button)
     end
   end
 end

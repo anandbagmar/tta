@@ -9,7 +9,7 @@ module Page
 
 
       select_the_option(project,COMPARATIVE_PROJECT_DROPDOWN)
-      clickButton(COMPARATIVE_PLOT_BUTTON)
+      click_button(COMPARATIVE_PLOT_BUTTON)
     end
 
    end

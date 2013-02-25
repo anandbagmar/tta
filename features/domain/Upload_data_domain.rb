@@ -17,7 +17,7 @@
      def upload_data_and_submit(proj_params)
        proj_params[:logFile]=$PROJECT_ROOT+"/"+proj_params[:logFile]
        form_filling(proj_params)
-       clickButton(UPLOAD_PAGE_BUTTON)
+       click_button(UPLOAD_PAGE_BUTTON)
      end
 
      def verify_data_uploaded(proj_succ)
