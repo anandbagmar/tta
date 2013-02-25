@@ -1,5 +1,6 @@
 class DefectAnalysis
   def self.get_result_json(sub_project_id, analysis_date)
+
     test_case_hash, no_of_test = getMetadataIds(sub_project_id, analysis_date)
     if !(no_of_test.nil?)
       percentage = get_defect_percentage(no_of_test.flatten)
@@ -31,30 +32,33 @@ class DefectAnalysis
     final_result_hash = {}
     final_test_for_particular_error=[]
     index=0
+
     test_category = get_record_with_distinct_test_category(sub_project_id)
     analysis_date_morning =analysis_date + " 00:00:00"
     analysis_date_night = analysis_date + " 23:59:59"
     test_category.each do |test_type|
       no_of_test_for_particular_error=[]
       result_hash = {}
-      test_suite_ids=[]
       meta_data = SubProject.find(sub_project_id).test_metadatum.find_all_by_date_of_execution(analysis_date_morning..analysis_date_night, :conditions => ["test_category = ?", test_type])
       meta_data.sort_by &:date_of_execution
       @meta_data1 = meta_data.last
+
+
       if !(@meta_data1.nil?)
-        @meta_data1.test_suite_records.each do |test_suite_record|
-          test_suite_ids << test_suite_record.id unless test_suite_record.number_of_failures == 0
-        end
+        test_report_type = @meta_data1.test_report_type
+        nunit_flag = (test_report_type=="Unit NUnit"||test_report_type =="Groovy NUnit") ? 1 : 0
+        test_suite_ids=(nunit_flag == 1 ? NunitParser.get_test_suite_records(@meta_data1) : XmlParser.get_test_suite_records(@meta_data1))
       end
-      if !(test_suite_ids.empty?)
-        result_hash,no_of_test_for_particular_error = get_test_cases(test_suite_ids)
+      if !(test_suite_ids.nil?)
+        result_hash, no_of_test_for_particular_error = get_test_cases(test_suite_ids)
         final_result_hash[test_type] = [] unless result_hash.keys.include?(test_type)
-        final_result_hash[test_type] << result_hash  unless result_hash.nil?
+        final_result_hash[test_type] << result_hash unless result_hash.nil?
         final_test_for_particular_error[index]=no_of_test_for_particular_error
         index+=1
       end
     end
-    return final_result_hash,final_test_for_particular_error
+
+    return final_result_hash, final_test_for_particular_error
   end
 
   def self.get_test_cases(result)
@@ -87,4 +91,8 @@ class DefectAnalysis
     end
     return @test_category
   end
+
+
 end
+
+

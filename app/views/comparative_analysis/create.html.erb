@@ -8,18 +8,14 @@
 
 <div class="page_title">
   <h1>Comparative Analysis View </h1>
-
 </div>
-
 <div id="Date-Range-Input">
   <h2>Enter Date Range</h2>
   <%= form_tag({:action => 'date_filter' },{:id => "comparative-analysis-form"}) do %>
       <% if flash[:date_error]!=nil %>
           <p class="error"><%= flash[:date_error] %><br></p>
       <% end %>
-      <% if flash[:no_data_error]!=nil %>
-          <p class="error"><%= flash[:no_data_error] %><br></p>
-      <% end %>
+
       <div class="fields" >
         <label for="start_date">Start Date:</label>
         <div class="required-field date-field">
@@ -51,10 +47,14 @@
   <% end %>
 
 
-</div>
+</div> <br><br>
+<% if flash[:no_data_error]!=nil %>
+    <span class="display-message"><%= flash[:no_data_error] %><br></span>
+<% end %>
 
- <% if @result_set and flash[:no_data_error]==nil and flash[:date_error]==nil%>
-<div id="date-range-title">
+
+<% if @result_set and flash[:no_data_error]==nil and flash[:date_error]==nil%>
+ <div id="date-range-title">
   <h3>Graph Plotted For <%= @project_name %></h3>
   <h3>Date Range :From <%= @start_date %> to <%= @end_date %></h3>
 </div>
