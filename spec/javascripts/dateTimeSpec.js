@@ -31,4 +31,16 @@ describe("ValidateDate",function(){
         var valid = validateDate.checkForValidDate($("#uploadForm"));
         expect(valid).toBe(false);
     });
+    it("returns false for entering future date", function(){
+        loadFixtures("future_date.html");
+        var valid = validateDate.checkForFutureDate($("#uploadForm"));
+        expect(valid).toBe(false);
+    });
+    it("returns true for entering future date", function(){
+        loadFixtures("valid_date_check.html");
+        var valid = validateDate.checkForFutureDate($("#uploadForm"));
+        expect(valid).toBe(true);
+    });
+
 });
+
