@@ -18,8 +18,11 @@ describe Admin do
     project2 = FactoryGirl.create(:project , :name => "TTA2")
     sub_project21 = FactoryGirl.create(:sub_project, :project_id => project2.id,:name => "TTA_subProject2")
     test_metadata_2 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project21.id, :date_of_execution => date_of_execution)
-
-    json = Admin.get_result_json
+    project=Array.new
+    project.push(project1)
+    project.push(project2)
+    binding.pry
+    json = Admin.get_result_json(project)
     json.should_not be_nil
   end
 
@@ -41,14 +44,18 @@ describe Admin do
   test_metadata_23 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project22.id, :date_of_execution => date_of_execution)
   test_metadata_24 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project22.id, :date_of_execution => "2013-02-02")
 
-  expect_json= {"PROJECT_1" =>[{"project_name" => "#{project1.name}"},
+  expect_json= {"#{project1.id}" =>[{"project_name" => "#{project1.name}"},
                                 {"sub_projects" => ["#{sub_project11.name}","#{sub_project12.name}"]},
                                 {"test_count"   => [1,3]}],
-                "PROJECT_2" =>[{"project_name" => "#{project2.name}"},
+                "#{project2.id}" =>[{"project_name" => "#{project2.name}"},
                                {"sub_projects" => ["#{sub_project21.name}","#{sub_project22.name}"]},
                                {"test_count"   => [2,2]}]
                }
-  actual_json = Admin.get_result_json
+
+  project=Array.new
+  project.push(project1)
+  project.push(project2)
+  actual_json = Admin.get_result_json(project)
   parse_json = ActiveSupport::JSON.decode(actual_json)
 
   parse_json.should eq(expect_json)

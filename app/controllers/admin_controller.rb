@@ -1,7 +1,8 @@
 class AdminController < ApplicationController
 
   def view
-    @json = Admin.get_result_json()
+    projects=Project.all
+    @json = Admin.get_result_json(projects)
   end
 
 
