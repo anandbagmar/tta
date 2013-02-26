@@ -22,17 +22,13 @@
   <%= form_tag({:action => 'sub_project_filter' },{ :multipart => false,:id => "defect_analysis"}) do %>
       <div class="fields" >
         <label for="sub_project">Sub-Project:</label>
-        <div class="required-field">
             <%= select("sub_project", "id", SubProject.all.collect {|p| [ p.name, p.id ] },{:include_blank => '--Select--'},:class=> 'required' ) %>
-         </div>
         <br>
       </div>
-      <div class="fields" >
+      <div class="required-field-date-field" >
         <label for="start_date">Analysis Date:</label>
-        <div class="required-field date-field">
           <%= datepicker_input 'defect_analysis', 'analysis_date',:dateFormat => "yy-mm-dd" , :maxDate => 0, :readonly => "readonly",:placeholder => 'YYYY-MM-DD',:class=> 'required'%>
           <span class='error-msg'>Please Enter Analysis date</span>
-        </div>
       </div>
       <div id="submit-project-button">
         <%= submit_tag "Plot" %>

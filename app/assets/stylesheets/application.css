@@ -91,23 +91,19 @@ button{
     text-shadow: none;
     text-decoration: none;
 }
-
-
 .fields input{
+    display: inline-block;
     margin: 0 auto;
 }
 
 .fields label{
-    display: inline-block;
     min-width: 165px;
-    text-align: right;
 }
 
 .fields{
     margin: 0 auto;
     height: 50px;
 }
-
 
 .form{
     margin:0 auto;
@@ -125,4 +121,17 @@ button{
     position: relative;
     min-width: 170px;
     text-align: left;
+}
+.required-field-date-field{
+    margin: 0 auto;
+    height: 50px;
+}
+
+.required-field-date-field input{
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.required-field-date-field label{
+    min-width: 165px;
 }

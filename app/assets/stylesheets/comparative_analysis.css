@@ -61,3 +61,7 @@
     /*rotation-point:50% 50%;*/ /* CSS3 */
     /*rotation:270deg;*/ /* CSS3 */
 }
+
+#project_id{
+    display: inline-block;
+}

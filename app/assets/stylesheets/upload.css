@@ -21,3 +21,11 @@
     margin: 0 auto;
 }
 
+.error{
+    display: block;
+}
+
+#test_report_type{
+    display: inline-block;
+
+}

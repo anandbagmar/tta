@@ -14,25 +14,17 @@
   <%= form_tag({:action => 'date_filter' },{:id => "comparative-analysis-form"}) do %>
       <span class="errormsg">Select End Date Greater Than Start Date</span>
       <br>
-      <div class="fields" >
+      <div class="required-field-date-field" >
         <label for="start_date">Start Date:</label>
-        <div class="required-field date-field">
           <%= datepicker_input 'comparative_analysis', 'start_date',:dateFormat => "yy-mm-dd", :readonly => "readonly", :maxDate => 0,:placeholder => 'YYYY-MM-DD',:class=> 'required' %>
-        </div>
       </div>
-
-      <div class="fields" >
+      <div class="required-field-date-field" >
         <label for="end_date">End Date:</label>
-        <div class="required-field date-field">
           <%= datepicker_input 'comparative_analysis', 'end_date',:dateFormat => "yy-mm-dd", :readonly => "readonly",:maxDate => 0,:placeholder => 'YYYY-MM-DD',:class=> 'required' %>
-        </div>
       </div>
-
       <div class="fields" >
         <label for="project">Project:</label>
-        <div class="required-field">
           <%= select("project", "id", Project.all.collect {|project| [ project.name, project.id ]},{:include_blank => '--Select--'}, :class => 'required') %><br>
-        </div>
         <br>
       </div>
       <div id="submit-plot-button">
