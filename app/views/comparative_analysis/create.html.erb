@@ -12,33 +12,28 @@
 <div id="Date-Range-Input">
   <h2>Enter Date Range</h2>
   <%= form_tag({:action => 'date_filter' },{:id => "comparative-analysis-form"}) do %>
-      <% if flash[:date_error]!=nil %>
-          <p class="error"><%= flash[:date_error] %><br></p>
-      <% end %>
-
+      <span class="errormsg">Select End Date Greater Than Start Date</span>
+      <br>
       <div class="fields" >
         <label for="start_date">Start Date:</label>
         <div class="required-field date-field">
-          <%= datepicker_input 'comparative_analysis', 'start_date',:dateFormat => "yy-mm-dd", :readonly => "readonly" %>
-          <span class='error-msg'>Please Enter Start date</span>
+          <%= datepicker_input 'comparative_analysis', 'start_date',:dateFormat => "yy-mm-dd", :readonly => "readonly",:placeholder => 'YYYY-MM-DD',:class=> 'required' %>
         </div>
       </div>
 
       <div class="fields" >
         <label for="end_date">End Date:</label>
         <div class="required-field date-field">
-          <%= datepicker_input 'comparative_analysis', 'end_date',:dateFormat => "yy-mm-dd", :readonly => "readonly" %>
-          <span class='error-msg'>Please Enter End date</span>
+          <%= datepicker_input 'comparative_analysis', 'end_date',:dateFormat => "yy-mm-dd", :readonly => "readonly",:placeholder => 'YYYY-MM-DD',:class=> 'required' %>
         </div>
       </div>
 
       <div class="fields" >
         <label for="project">Project:</label>
         <div class="required-field">
-          <%= select("project", "id", Project.all.collect {|project| [ project.name, project.id ]},{:include_blank => ''}, :class => 'required') %><br>
-          <span class='error-msg'>Please select a Project</span>
+          <%= select("project", "id", Project.all.collect {|project| [ project.name, project.id ]},{:include_blank => '--Select--'}, :class => 'required') %><br>
         </div>
-        <br><span class ='error'><%= flash[:required_field] %></span>
+        <br>
       </div>
       <div id="submit-plot-button">
         <%= submit_tag nil, { :id =>"form-submit"}%>
@@ -138,7 +133,9 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $("#comparative-analysis-form").validate();
+        $("#comparative-analysis-form").submit(function(){
+            return ValidateStartDateIsLessThanEndDate.checkForDates($("#comparative-analysis-form"));
+        });
     });
 </script>
-<script type="text/JavaScript" src="comparitive_analysis.js"></script>
 </html>

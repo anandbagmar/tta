@@ -1,17 +1,11 @@
-.error-msg{
+.errormsg{
   display: none;
-  color: #ff0000;
+  color: #DB1818;
   position: absolute;
-  left: 0;
-  top: 20px;
-  font-size: 10px;
+  left: 42%;
+  font-size: 12px;
 }
 
-.error{
-    color: #DB1818;
-    font-size:12px;
-    margin: 0;
-}
 
 #submit-plot-button input{
     height: 25px;
