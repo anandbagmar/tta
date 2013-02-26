@@ -32,17 +32,13 @@ module Definitions
     end
 
 
-    def page_has_css?(element_css)
-      #add wait until element here n then proceed
-    page.has_css?(element_css)
+
+    def wait_until_for
+      wait_until {yield}
     end
 
 
 
-    def page_has_content?(content)
-        #add wait until element here n then proceed
-        page.has_content?(content)
-    end
 
   end
 end

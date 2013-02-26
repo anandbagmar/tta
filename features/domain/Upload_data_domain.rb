@@ -21,7 +21,8 @@
      end
 
      def verify_data_uploaded(proj_succ)
-       assert page_has_content?(proj_succ),"No Project uploaded"
+       wait_until_for { page.has_content?(proj_succ) }
+       assert page.has_content?(proj_succ),"No Project uploaded"
      end
 
 
