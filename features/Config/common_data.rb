@@ -30,6 +30,7 @@ UPLOAD_EXEC_HOUR= "date_hour"
 UPLOAD_EXEC_MIN="date_minute"
 UPLOAD_FILENAME='logDirectory'
 UPLOAD_TEST_TYPE='test_category'
+UPLOAD_TEST_REPORT_TYPE ="test_report_type"
 
 UPLOAD_SUCCESS="Project Successfully Saved!!"
 
