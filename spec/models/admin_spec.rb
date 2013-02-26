@@ -21,7 +21,6 @@ describe Admin do
     project=Array.new
     project.push(project1)
     project.push(project2)
-    binding.pry
     json = Admin.get_result_json(project)
     json.should_not be_nil
   end
