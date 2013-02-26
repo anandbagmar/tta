@@ -54,15 +54,17 @@
       ed_date = new Date('<%= @end_date %>');
       end_time= ed_date.getTime()
       var data = [];
-      for(var i = start_time; i<=end_time; i+=((end_time-start_time)/10)){
-          data.push(i);
-      }
+      var milli_second_per_day = 86400000;
+      var multiple= ((end_time-start_time)/milli_second_per_day)/10;
+      if(multiple>1)
+        milli_second_per_day=milli_second_per_day*multiple;
+      for(var index=start_time;index<=end_time;index+=milli_second_per_day)
+          data.push(index);
       var tick_set = [];
       for (var i = 0; i < data.length; i++) {
-          tick_set.push(data[i]); //corrected the missing closing bracket here..
+          tick_set.push(data[i]);
       }
-
-      var getdata = function(){
+      var getData = function(){
           var data = [];
           <%for sub_project in @result_set %>
           data.push({
@@ -78,7 +80,7 @@
       };
 
      $.plot($("#comparative_analysis"),
-             getdata(),
+             getData(),
               {
                   xaxis: {
                       mode: "time",
