@@ -8,7 +8,8 @@ var Template = function(){
         '</div>',
       errorListTemplate:'<ul class="error_list">{{ErrorList}}</ul>',
       defectErrorMessagesTemplate:'<span>{{ErrorName}}</span><div class="error_messages"><ul>{{ErrorMessageList}}</ul></div>',
-      adminTableDataTemplate: '<tr><td>{{Index}}</td><td>{{ProjectName}}</td><td>{{SubProjectName}}</td></tr>'
+      adminTableProjectTemplate: '<tr class="tr_border"><td>{{Index}}</td><td>{{ProjectName}}</td><td>{{SubProjectName}}</td><td>{{TestCount}}</td></tr>',
+      adminTableSubprojectTemplate: '<tr><td>{{Index}}</td><td>{{ProjectName}}</td><td>{{SubProjectName}}</td><td>{{TestCount}}</td></tr>'
     };
     return {
         render: function(template,data){
@@ -31,8 +32,12 @@ var Template = function(){
         getErrorListTemplate: function(){
           return templates.errorListTemplate;
         },
-        getAdminTableDataTemplate: function(){
-            return templates.adminTableDataTemplate;
+        getAdminTableProjectTemplate: function(){
+            return templates.adminTableProjectTemplate;
+        },
+        getAdminTableSubProjectTemplate: function(){
+            return templates.adminTableSubprojectTemplate;
         }
+
     };
 };
