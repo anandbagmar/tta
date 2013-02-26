@@ -30,7 +30,7 @@
       <div class="fields" >
         <label for="start_date">Analysis Date:</label>
         <div class="required-field date-field">
-          <%= datepicker_input 'defect_analysis', 'analysis_date',:dateFormat => "yy-mm-dd" , :readonly => "readonly",:placeholder => 'YYYY-MM-DD',:class=> 'required'%>
+          <%= datepicker_input 'defect_analysis', 'analysis_date',:dateFormat => "yy-mm-dd" , :maxDate => 0, :readonly => "readonly",:placeholder => 'YYYY-MM-DD',:class=> 'required'%>
           <span class='error-msg'>Please Enter Analysis date</span>
         </div>
       </div>

@@ -75,6 +75,8 @@
         <div class="required-field date-field">
           <%= select_datetime() %>
           <span class='error-msg'>Please enter a valid Date</span>
+          <br>
+          <span class='future-date-error-msg'>  Future Date and Time not allowed</span>
         </div>
         <br>
       </div>
@@ -100,7 +102,8 @@
       $("#uploadForm").submit(function(){
           return validateDate.checkForValidDate($("#uploadForm"));
       });
-
-
- });
+      $("#uploadForm").submit(function(){
+          return validateDate.checkForFutureDate($("#uploadForm"));
+      });
+  });
 </script>

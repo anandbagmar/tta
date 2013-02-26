@@ -17,14 +17,14 @@
       <div class="fields" >
         <label for="start_date">Start Date:</label>
         <div class="required-field date-field">
-          <%= datepicker_input 'comparative_analysis', 'start_date',:dateFormat => "yy-mm-dd", :readonly => "readonly",:placeholder => 'YYYY-MM-DD',:class=> 'required' %>
+          <%= datepicker_input 'comparative_analysis', 'start_date',:dateFormat => "yy-mm-dd", :readonly => "readonly", :maxDate => 0,:placeholder => 'YYYY-MM-DD',:class=> 'required' %>
         </div>
       </div>
 
       <div class="fields" >
         <label for="end_date">End Date:</label>
         <div class="required-field date-field">
-          <%= datepicker_input 'comparative_analysis', 'end_date',:dateFormat => "yy-mm-dd", :readonly => "readonly",:placeholder => 'YYYY-MM-DD',:class=> 'required' %>
+          <%= datepicker_input 'comparative_analysis', 'end_date',:dateFormat => "yy-mm-dd", :readonly => "readonly",:maxDate => 0,:placeholder => 'YYYY-MM-DD',:class=> 'required' %>
         </div>
       </div>
 

@@ -11,4 +11,13 @@
     font-size:12px;
     margin: 0 auto;
 }
+.future-date-error-msg{
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 32px;
+    color: #DB1818;
+    font-size:12px;
+    margin: 0 auto;
+}
 
