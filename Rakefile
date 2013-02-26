@@ -49,7 +49,7 @@ namespace :db do
     Rake::Task['db:drop'].invoke
     Rake::Task['db:create'].execute
     Rake::Task['db:migrate'].execute
-    Rake::Task['db:seed'].execute
+    #Rake::Task['db:seed'].execute
   end
 end
 

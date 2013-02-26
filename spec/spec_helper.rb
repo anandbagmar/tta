@@ -25,6 +25,28 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
 
+
+  #    ##############################################################
+  #      used to clean database after running specs instead of using rake commands
+  #      now, we use rake db:recreate , instead of that we can use this
+  #    ##############################################################
+
+
+  #config.before(:suite) do
+  #  DatabaseCleaner.strategy = :transaction
+  #  DatabaseCleaner.clean_with(:transaction)
+  #end
+  #
+  #config.before(:each) do
+  #  DatabaseCleaner.start
+  #  DatabaseCleaner.strategy =:truncation
+  #end
+  #
+  #config.after(:each) do
+  #  DatabaseCleaner.clean
+  #end
+  #    ##############################################################
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
