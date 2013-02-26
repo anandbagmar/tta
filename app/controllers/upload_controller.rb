@@ -41,7 +41,7 @@ class UploadController < ApplicationController
 
   private
   def create_project_with_dependency
-    project = Project.find_or_create_by_name(params[:project_name].upcase)
+    project = Project.find_or_create_by_name((params[:project_name].split.join(" ")).upcase)
     sub_project,meta_data = project.add_sub_project(params)
     return project,sub_project,meta_data
   end

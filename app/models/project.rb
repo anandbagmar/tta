@@ -6,7 +6,7 @@ class Project < ActiveRecord::Base
 
 
   def add_sub_project(params)
-    sub_project = sub_projects.find_or_create_by_name(params[:sub_project_name].upcase)
+    sub_project = sub_projects.find_or_create_by_name((params[:sub_project_name]).split.join(" ").upcase)
     meta_data = sub_project.create_dependency params
     return sub_project,meta_data
   end
