@@ -1,7 +1,8 @@
 <html>
 <head xmlns="http://www.w3.org/1999/html">
   <link rel="stylesheet" href="../../assets/stylesheets/admin.css.scss"/>
-
+  <title>Admin
+    <Data></Data></title>
 </head>
 <%= render :file=> '/home/header.html.erb' %>
 <body>
@@ -15,42 +16,45 @@
 </body>
 <script type="text/javascript">
   $(document).ready(function(){
- var renderTable = function(tableData){
-      var templates = new Template();
-      var adminTemplate=templates.getAdminTableDataTemplate();
-      var renderTableData= "<tr><th>No</th><th>PROJECT NAME </th><th>SUB PROJECT NAME </th></tr>";
-      console.log(adminTemplate);
-      var index =1;
+ var renderTable = function (tableData) {
+     var templates = new Template();
+     var projectTemplate=templates.getAdminTableProjectTemplate();
+     var subProjectTemplate=templates.getAdminTableSubProjectTemplate();
+     var renderTableData= "<tr><th>No</th><th>PROJECT NAME </th><th>SUB PROJECT NAME </th> <th> TEST UPLOAD COUNT</th></tr>";
+     var index=1;
 
+     jQuery.each(tableData,function(key,projectData){
+         project_name=projectData[0]['project_name'];
+         sub_projects= projectData[1]['sub_projects']
+         count= projectData[2]['test_count'];
 
-      jQuery.each(tableData,function(projectName, subProjectData){
-          console.log("Project Name :" + projectName);
+         renderTableData+=templates.render(projectTemplate,{
+             "Index": index,
+             "ProjectName":project_name,
+             "SubProjectName":"",
+             "TestCount":""
+         });
 
-          renderTableData+=templates.render(adminTemplate,{
-              "Index": index,
-              "ProjectName":projectName,
-              "SubProjectName":""
-          });
-
-          jQuery.each(subProjectData,function(index,subProject){
-            console.log("SubProject :"+subProject);
-              renderTableData+=templates.render(adminTemplate,{
+         for(var i=0;i<sub_projects.length;i++)
+         {
+             renderTableData+=templates.render(subProjectTemplate,{
                   "Index": "",
                   "ProjectName":"",
-                  "SubProjectName":subProject
+                  "SubProjectName":sub_projects[i],
+                  "TestCount":count[i]
               });
-          });
-      });
+         }
+        index++;
+     })
      $('#project_data').html(renderTableData);
-
  }
+
   var jsonR;
   var regExp = new RegExp("&quot;",'g');
   jsonR="<%= @json %>";
   jsonR = jsonR.replace(regExp,"\"");
   jsonR=JSON.parse(jsonR);
   if(jsonR!=""){
-      console.log(jsonR);
       if('message' in jsonR)
       {
         var message ="<h3>"+jsonR["message"] +"</h3>";
@@ -66,4 +70,3 @@
   });
 </script>
 </html>
-<!--adminPageTemplate: '<tr><td>{{Index}}</td><td>{{ProjectName}}</td><td>{{SubProjectName}}</td></tr>'-->
