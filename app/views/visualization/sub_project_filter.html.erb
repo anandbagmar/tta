@@ -17,34 +17,54 @@
         templates = new Template(),
         legendTemplate = templates.getLegendItem(),
         legendData="<span><b>Legend: </b></span>",
-        pyramidItemTemplate = templates.getPyramidItem(),
-        pyramidData="<h3>Test-Pyramid for: "+ obj.sub_project_name.toUpperCase() +"</h3><br>";
+//        pyramidData="<h3>Test-Pyramid for: "+ obj.sub_project_name.toUpperCase() +"</h3><br>",
+        pyramidPercent=templates.getPyramidPercent(),
+        pyramidDuration=templates.getPyramidDuration(),
+        width = 800,
+        height=700,
+        renderString="<h3>Test-Pyramid for: "+ obj.sub_project_name.toUpperCase() +"</h3><br>",
+        color=[];
+
+      var pyramidItems = [];
 
       for(var index = 0, len = typeOfTests.length;index<len;index++){
-        if(typeOfTests[index].percent == 0.0)
-          continue;
-        var testName = typeOfTests[index].test_name;
+          if(typeOfTests[index].percent == 0.0)
+            continue;
+          currentItem = {};
+          currentItem.testName = typeOfTests[index].test_name.split(' ')[0].toLowerCase();
           var noOfTest = typeOfTests[index].test_no;
-        pyramidData += templates.render(pyramidItemTemplate,{
-          "TestTypeRegion": testName.split(' ')[0].toLowerCase()+"_region",
-          "TestTypePercent": testName.split(' ')[0].toLowerCase()+"_percent",
-          "PercentValue": typeOfTests[index].percent,
-          "TestTypeDuration": testName.split(' ')[0].toLowerCase()+"_duration",
-          "DurationValue": noOfTest+ " Tests run in "+ typeOfTests[index].duration  ,
-          "TestTypeTest": testName.split(' ')[0].toLowerCase()+"_test"
-        });
+          currentItem.percent = typeOfTests[index].percent;
+          currentItem.triangleWidth = currentItem.percent/100*width;
+          currentItem.triangleHeight = height/len;
 
-        legendData+=templates.render(legendTemplate,{
-          "TestType": (testName).split(' ')[0].toLowerCase(),
-          "TestTypeRect": (testName).split(' ')[0].toLowerCase()+"_rect",
-          "TestTypeTitle": testName.toLowerCase()
-        });
+          currentItem.color = Utils.getRandomColor();
 
+          renderString += "<div class='pyramidItem'>" + templates.render(pyramidPercent,{
+            "TestTypePercent": currentItem.testName+"_percent",
+            "PercentValue": typeOfTests[index].percent
+          });
+          renderString+="<div id=\'"+currentItem.testName+"_div\' class='trapezoid' style='width:"+currentItem.triangleWidth+"px; border-bottom-width:"+currentItem.triangleHeight+"px; border-bottom-color:"+currentItem.color+";'></div>";
+          renderString += templates.render(pyramidDuration,{
+            "TestTypeDuration": currentItem.testName.split(' ')[0].toLowerCase()+"_duration",
+            "DurationValue": noOfTest+ " Tests run in "+ typeOfTests[index].duration
+          });
+          renderString+="</div>";
+
+
+          legendData+=templates.render(legendTemplate,{
+            "TestType": currentItem.testName,
+            "TestTypeRect": currentItem.testName+"_rect",
+            "TestTypeTitle": typeOfTests[index].test_name.toLowerCase()
+          });
+          pyramidItems.push(currentItem);
       }
-       if(unknownTestTypes) {
-       message = "The following Test Types are not being supported currently. <br>"
-       for(var count =0;count<unknownTestTypes.length;count++){
-           message+=unknownTestTypes[count]+"<br>"
+
+
+       if(unknownTestTypes)
+       {
+        message = "The following Test Types are not being supported currently. <br>"
+            for(var count =0;count<unknownTestTypes.length;count++){
+                message+=unknownTestTypes[count]+"<br>"
        }
        message+='Please drop a mail stating the order to <a href="mailto:tta@thoughtworks.com">tta@thoughtworks.com</a>'
            $("#display_message").css({
@@ -52,63 +72,31 @@
            })
        $("#display_message").html(message);
        }
-      $('#legend').html(legendData);
-      $("#pyramid").html(pyramidData);
 
-      var bodyHeight = $('body').css('height'),
-        bodyWidth = $('body').css('width'),
-        baseTriangleHeight = parseInt(bodyHeight)/ 2,
-        triangleHeights = [],
-        zIndex = 100;
+        $('#legend').html(legendData);
+        $('#pyramid').append(renderString);
 
-      var previousHeight = 0;
-      for(index = 0,len=typeOfTests.length;index<len;index++){
-        var percentBasedHeight = parseInt(baseTriangleHeight)*parseInt(typeOfTests[index].percent)/100;
-        previousHeight = percentBasedHeight+previousHeight;
-        triangleHeights.push(previousHeight);
-      }
+        var bodyHeight = $('body').css('height'),
+                baseTriangleHeight = parseInt(bodyHeight)/ 2;
 
-      $("#pyramidn").css({
-        "width":baseTriangleHeight,
-        "height":baseTriangleHeight
-      });
+        for(var index = 0, len = pyramidItems.length;index<len;index++){
+            var currentTest = typeOfTests[index].test_name.split(' ')[0].toLowerCase();
 
-      previousHeight = 0;
-      for(index = 0,len=typeOfTests.length;index<len;index++){
-        var testName = typeOfTests[index].test_name.split(' ')[0].toLowerCase(),
-          color=Utils.getRandomColor();
+            $("#"+pyramidItems[index].testName+"_rect").css({
+                "background-color": pyramidItems[index].color
+            });
 
-        $("#"+testName+"_rect").css({
-          "background-color": color
-        });
+            $("#"+pyramidItems[index].testName+"_percent").css({
+                "left": - (pyramidItems[index].triangleWidth/2 + 300) + "px"
+            });
 
-        $("#"+testName+"_test").css({
-          "border-bottom-width": triangleHeights[index]+"px",
-          "border-left-width":triangleHeights[index]+"px",
-          "border-right-width":triangleHeights[index]+"px",
-          "border-top-width":"0px",
-          "border-color":"transparent transparent" + color
-        });
+            $("#"+pyramidItems[index].testName+"_duration").css({
+                "left": (pyramidItems[index].triangleWidth/2 + 200) + "px"
+            });
 
-
-        $("#"+testName+"_region").css({
-          "z-index": zIndex.toString()
-        });
-        zIndex--;
-        var currentHeight = (parseInt(baseTriangleHeight)*parseInt(typeOfTests[index].percent)/100)/2 + previousHeight;
-        previousHeight = triangleHeights[index];
-        $("#"+testName+"_percent").css({
-          "position":"absolute",
-          "top":currentHeight + "px",
-          "left":((parseInt($("#pyramid").css("width"))/2.5)-triangleHeights[index])+"px"
-        });
-        $("#"+testName+"_duration").css({
-          "position":"absolute",
-          "top":currentHeight + "px",
-          "right":((parseInt($("#pyramid").css("width"))/4)-triangleHeights[index])+"px"
-        });
-      }
+        }
     }
+
     var jsonR;
     var regExp = new RegExp("&quot;",'g');
     jsonR="<%= @json %>";
@@ -120,3 +108,5 @@
     }
   });
 </script>
+
+

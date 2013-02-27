@@ -15,14 +15,15 @@
 
 }
 
-#pyramid{
-  position: relative;
-  width:1000px;
-  margin: 0 auto;
-}
+//
+//#pyramid{
+//  position: relative;
+//  width:1000px;
+//  margin: 0 auto;
+//}
 
 #pyramid h3{
-  padding-left: 150px;
+  padding-left: 400px;
 }
 
 #legend{
@@ -37,18 +38,18 @@
   margin: 10px;
 }
 
-#pyramid .test-triangle{
-  margin: 0 auto;
-  border-style:solid;
-  height: 0px;
-  width: 0px;
-  margin: 0 auto;
-}
-#pyramid .test-region{
-  position: absolute;
-  width: 100%;
-  min-height: 300px;
-}
+//#pyramid .test-triangle{
+//  margin: 0 auto;
+//  border-style:solid;
+//  height: 0px;
+//  width: 0px;
+//  margin: 0 auto;
+//}
+//#pyramid .test-region{
+//  position: absolute;
+//  width: 100%;
+//  min-height: 300px;
+//}
 
 .error{
   color: #DB1818;
@@ -72,11 +73,51 @@
 #display_message{
   position: absolute;
   bottom: 20px;
-  color: #750D0D;
   width: 500px;
   margin-left: 50%;
   left: -250px;
   background-color: #DDD;
   padding: 10px;
   border-radius: 8px;
+}
+
+.trapezoid
+{
+  color: #750D0D;
+  border-bottom-color : red;
+  border-bottom-width: 100px;
+  border-bottom-style : solid;
+  //border-left: 100px solid transparent;
+  //border-right: 100px solid transparent;
+  height: 0;
+  position: relative;
+  margin: 0 auto;
+}
+#pyramid-overlay
+{
+  border-bottom-color : rgba(0,0,0,0.1);
+  border-bottom-width: 700px;
+  border-bottom-style : solid;
+  border-left: 400px solid transparent;
+  border-right: 400px solid transparent;
+  height: 0;
+  width:0;
+  position: relative;
+  margin: 0 auto;
+  margin-top:-700px;
+}
+
+#pyramid{
+  position: relative;
+  margin: 0 auto;
+
+}
+
+.pyramidDetail{
+  position: absolute;
+  top: 50%;
+  margin-left: 50%;
+}
+.pyramidItem{
+  position: relative;
 }
