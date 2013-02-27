@@ -4,7 +4,9 @@
 
 require File.expand_path('../config/application', __FILE__)
 require 'date'
+require "cucumber/cli/main"
 
+begin; require 'parallel_tests/tasks'; rescue LoadError; end
 Tta::Application.load_tasks
 namespace :db do
   namespace :test do
@@ -62,7 +64,7 @@ namespace :tta do
     Rake::Task['tta:upload_to_tta'].invoke("TTA", "TTA_sub", "Build", args.test_type, args.test_report_type, "Ubuntu", "host-pc", "none", "Dev", "", args.file_path, "*.xml")
   end
   task :create_cucumber_zip do
-    `zip cucumber_results.zip feature_report.xml/*.xml`
+    `zip cucumber_results.zip log/tta_cukes_result/*.xml`
   end
   task :create_zip do
     `zip tta_spec_results.zip log/tta_spec_results.xml`
