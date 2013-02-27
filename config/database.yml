@@ -15,9 +15,10 @@ test: &test
 production:
   adapter: mysql2
   encoding: utf8
-  database: tta_prod
+  database: tta
   pool: 5
-  username: root
+  username: ENV["PROD_USER"],
+  password: ENV["PROD_PWD"]
 
 cucumber:
   <<: *test

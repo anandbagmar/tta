@@ -32,7 +32,7 @@ $commit=""
 $file_uploaded=""
 
 # Set the RAILS_ENV
-$RAILS_ENV = ENV['RAILS_ENV']  ||= "development"
+$RAILS_ENV = ENV['RAILS_ENV']
 puts "RAILS_ENV: #{$RAILS_ENV}"
 
 task(:default).clear
