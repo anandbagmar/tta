@@ -8,22 +8,33 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    $("#display_message").css({
-    "display": "none"
-    })
-    var plotPyramid = function(obj){
-      var unknownTestTypes = obj.unknown_test_types;
-      var typeOfTests = obj.test_types,
-        templates = new Template(),
-        legendTemplate = templates.getLegendItem(),
-        legendData="<span><b>Legend: </b></span>",
-//        pyramidData="<h3>Test-Pyramid for: "+ obj.sub_project_name.toUpperCase() +"</h3><br>",
-        pyramidPercent=templates.getPyramidPercent(),
-        pyramidDuration=templates.getPyramidDuration(),
-        width = 800,
-        height=700,
-        renderString="<h3>Test-Pyramid for: "+ obj.sub_project_name.toUpperCase() +"</h3><br>",
-        color=[];
+      $("#display_message").css("display","none");
+
+      var plotPyramid = function(obj){
+          var renderString="";
+          var unknownTestTypes = obj.unknown_test_types;
+          if(unknownTestTypes)
+        {
+            message = "The following Test Types are not being supported currently. <br>"
+            for(var count =0;count<unknownTestTypes.length;count++){
+                message+=unknownTestTypes[count]+"<br>"
+            }
+            message+='Please drop a mail stating the order to <a href="mailto:tta@thoughtworks.com">tta@thoughtworks.com</a>'
+            $("#display_message").css("display","block");
+            $("#display_message").html(message);
+        }
+        else
+       {
+           $('#pyramid-overlay').css("display","block");
+           var typeOfTests = obj.test_types,
+            templates = new Template(),
+            legendTemplate = templates.getLegendItem(),
+            legendData="<span><b>Legend: </b></span>",
+            pyramidPercent=templates.getPyramidPercent(),
+            pyramidDuration=templates.getPyramidDuration(),
+            width = 400,
+            height=400;
+           renderString="<h3>Test-Pyramid for: "+ obj.sub_project_name.toUpperCase() +"</h3><br>";
 
       var pyramidItems = [];
 
@@ -60,19 +71,6 @@
       }
 
 
-       if(unknownTestTypes)
-       {
-        message = "The following Test Types are not being supported currently. <br>"
-            for(var count =0;count<unknownTestTypes.length;count++){
-                message+=unknownTestTypes[count]+"<br>"
-       }
-       message+='Please drop a mail stating the order to <a href="mailto:tta@thoughtworks.com">tta@thoughtworks.com</a>'
-           $("#display_message").css({
-               "display": "block"
-           })
-       $("#display_message").html(message);
-       }
-
         $('#legend').html(legendData);
         $('#pyramid').append(renderString);
 
@@ -87,14 +85,14 @@
             });
 
             $("#"+pyramidItems[index].testName+"_percent").css({
-                "left": - (pyramidItems[index].triangleWidth/2 + 300) + "px"
+                "left": - (pyramidItems[index].triangleWidth/2 + 200) + "px"
             });
 
             $("#"+pyramidItems[index].testName+"_duration").css({
-                "left": (pyramidItems[index].triangleWidth/2 + 200) + "px"
+                "left": (pyramidItems[index].triangleWidth/2 + 150) + "px"
             });
-
         }
+       }
     }
 
     var jsonR;
@@ -103,7 +101,6 @@
     jsonR = jsonR.replace(regExp,"\"");
     jsonR=JSON.parse(jsonR);
     if(jsonR!=""){
-      console.log(jsonR);
       plotPyramid(jsonR);
     }
   });
