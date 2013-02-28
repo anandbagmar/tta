@@ -8,6 +8,7 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
+      var color =["","#DB7093","#008080","#DAA520","#CD853F","#808000","#191970","#4B0082","#A0522D"];
       $("#display_message").css("display","none");
 
       var plotPyramid = function(obj){
@@ -46,9 +47,9 @@
           var noOfTest = typeOfTests[index].test_no;
           currentItem.percent = typeOfTests[index].percent;
           currentItem.triangleWidth = currentItem.percent/100*width;
-          currentItem.triangleHeight = height/len;
-
-          currentItem.color = Utils.getRandomColor();
+          currentItem.triangleHeight = currentItem.percent/100*height;
+          var seq_no= typeOfTests[index].seq_no;
+          currentItem.color =color[parseInt(seq_no/100)];
 
           renderString += "<div class='pyramidItem'>" + templates.render(pyramidPercent,{
             "TestTypePercent": currentItem.testName+"_percent",
@@ -85,11 +86,11 @@
             });
 
             $("#"+pyramidItems[index].testName+"_percent").css({
-                "left": - (pyramidItems[index].triangleWidth/2 + 200) + "px"
+                "left": - (pyramidItems[index].triangleWidth/2 + 250) + "px"
             });
 
             $("#"+pyramidItems[index].testName+"_duration").css({
-                "left": (pyramidItems[index].triangleWidth/2 + 150) + "px"
+                "left": (pyramidItems[index].triangleWidth/2 + 200) + "px"
             });
         }
        }
@@ -101,6 +102,7 @@
     jsonR = jsonR.replace(regExp,"\"");
     jsonR=JSON.parse(jsonR);
     if(jsonR!=""){
+      console.log(jsonR);
       plotPyramid(jsonR);
     }
   });
