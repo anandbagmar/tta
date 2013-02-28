@@ -36,7 +36,7 @@ describe("ValidateDate",function(){
         var valid = validateDate.checkForFutureDate($("#uploadForm"));
         expect(valid).toBe(false);
     });
-    it("returns true for entering future date", function(){
+    it("returns true     for entering future date", function(){
         loadFixtures("valid_date_check.html");
         var valid = validateDate.checkForFutureDate($("#uploadForm"));
         expect(valid).toBe(true);
@@ -44,3 +44,40 @@ describe("ValidateDate",function(){
 
 });
 
+describe("validateFile",function(){
+
+    it("returns false for invalid file type upload",function(){
+       loadFixtures("invalid_file_type.html");
+        var valid = validateFile.checkForValidFileType($("#uploadForm"));
+        expect(valid).toBe(false);
+    });
+//
+//    it("returns true for valid file type upload",function(){
+//        loadFixtures("valid_file_type.html");
+//        var valid = validateFile.checkForValidFileType($("#uploadForm"));
+//        console.log(valid);
+//        expect(valid).toBe(true);
+//    });
+});
+
+describe("ValidateStartDateIsLessThanEndDate",function(){
+    it("returns true if start date is less than end date",function(){
+        loadFixtures("start_date_less_than_end_date.html");
+        var valid = ValidateStartDateIsLessThanEndDate.checkForDates($("#comparative-analysis-form"));
+        expect(valid).toBe(true);
+    });
+
+    it("returns false if end date is less than start date",function(){
+        loadFixtures("end_date_less_than_start_date.html");
+        var valid = ValidateStartDateIsLessThanEndDate.checkForDates($("#comparative-analysis-form"));
+        expect(valid).toBe(false);
+    });
+
+
+    it("returns false if end date is equal to start date",function(){
+        loadFixtures("end_date_equal_to_start_date.html");
+        var valid = ValidateStartDateIsLessThanEndDate.checkForDates($("#comparative-analysis-form"));
+        expect(valid).toBe(false);
+    });
+
+});

@@ -84,6 +84,7 @@
       <div class="fields">
         <label for="logDirectory">Directory name<span class="required-fields">*</span></label>
         <%= file_field_tag :logDirectory, {:multiple=>true, :accept => 'application/zip',:class => 'required'}%>
+        <span class = "invalid-file-type">Invalid File Type Uploaded.Please upload a zip file </span><br>
       </div>
        <div class="button">
          <%= submit_tag 'SUBMIT',:class=> 'submit' %>
@@ -104,6 +105,9 @@
       });
       $("#uploadForm").submit(function(){
           return validateDate.checkForFutureDate($("#uploadForm"));
+      });
+      $("#uploadForm").submit(function(){
+         return validateFile.checkForValidFileType($("#uploadForm"));
       });
   });
 </script>

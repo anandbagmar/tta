@@ -84,4 +84,22 @@ var validateDate={
     }
 };
 
+var validateFile = {
+    checkForValidFileType:function($form){
+     var valid = true;
+        var err_file = $form.find(".invalid-file-type");
+        var file_path = $form.find("#logDirectory").val();
+        var extension = file_path.split(".").pop();
+
+        if(extension!="zip")
+            valid = false;
+
+        if(valid == false)
+            $(err_file).show();
+        else
+            $(err_file).hide();
+        return valid;
+    }
+};
+
 

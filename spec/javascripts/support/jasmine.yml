@@ -12,6 +12,7 @@
 #
 src_files:
   - app/assets/javascripts/upload_controller.js
+  - app/assets/javascripts/comparitive_analysis.js
 
 # stylesheets
 #

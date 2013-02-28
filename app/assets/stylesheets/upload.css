@@ -29,3 +29,12 @@
     display: inline-block;
 
 }
+.invalid-file-type{
+    display: none;
+    position: absolute;
+    left: 40%;
+    top: 86%;
+    color: #DB1818;
+    font-size:12px;
+    margin: 0 auto;
+}
