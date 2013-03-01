@@ -17,8 +17,6 @@ module Definitions
       select proj_params[:date_minute],:from =>  UPLOAD_EXEC_MIN
       attach_file UPLOAD_FILENAME,proj_params[:logFile]
       fill_in UPLOAD_TEST_TYPE, :with => proj_params[:test_type]
-      puts "*"*100
-      puts "Check"
     end
 
     def select_the_option(field, dropdown)
