@@ -23,7 +23,7 @@ class DefectAnalysisController < ApplicationController
       flash[:no_errors]="No built runs on "+ analysis_date +" for the selected Sub Project"
     elsif !(parsed_json["errors"].nil?)  then
       if parsed_json["errors"].values[0][0].blank?
-        flash[:no_errors]="No failing tests on "+ analysis_date +" for the selected Sub Project"
+        flash[:no_errors]="No failing tests for the latest build run on "+ analysis_date +" for the selected Sub Project"
       end
     end
     render :create
