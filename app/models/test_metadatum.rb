@@ -23,11 +23,13 @@ class TestMetadatum < ActiveRecord::Base
   def self.find_no_and_duration_of_test meta_data
      total_num_of_tests = 0
       total_run_time = 0
+     total_num_of_failures=0
      meta_data.test_suite_records.each do |test_suite_record|
         total_num_of_tests += test_suite_record.number_of_tests.to_i
            total_run_time += test_suite_record.time_taken.to_f
+           total_num_of_failures+= test_suite_record.number_of_failures.to_i
      end
-    return total_num_of_tests, total_run_time
+    return total_num_of_tests, total_run_time,total_num_of_failures
 
   end
 
