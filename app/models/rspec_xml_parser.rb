@@ -10,6 +10,10 @@ class RspecXmlParser
     cdata = node.search("//testsuite/testcase[@name='#{testcase_name}']/failure").children.find { |e| e.cdata? }
     cdata_msg = cdata.to_s
     @error_msg=cdata_msg.scan(/\[CDATA\[((.|\s)*)\]\]/m).first
+    if !(@error_msg.nil?)
+      return @error_msg[0]
+    end
+    @error_msg
   end
 
   def self.get_time(test_case, test_suite)

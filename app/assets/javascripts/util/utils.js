@@ -8,3 +8,11 @@ var Utils={
         return color;
     }
 };
+
+var removeQuotsFromJSON = {
+    removeQuots : function(jsonData){
+        var regExp = new RegExp("&quot;", 'g');
+        jsonData = jsonData.replace(regExp, "\"");
+        return jsonData;
+    }
+};

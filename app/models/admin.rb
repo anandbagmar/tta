@@ -3,12 +3,8 @@ class Admin < ActiveRecord::Base
   def self.create_result_json(projects)
     json=Hash.new
     if(projects.none?)
-    json["message"]="No Projects Using TTA"
+      json["message"]="No Projects Using TTA"
     else
-      sub_project_name= []
-      sub_project_data= []
-      test_count = []
-      key=""
       projects.each do |project|
         key=project.id
         json[key]=[]
@@ -17,14 +13,14 @@ class Admin < ActiveRecord::Base
         sub_project_name=[]
         test_count=[]
 
-          sub_project_data.each do|data|
-              sub_project_name.push(data.name)
-              test_count.push(data.test_metadatum.length)
-          end
+        sub_project_data.each do|data|
+          sub_project_name.push(data.name)
+          test_count.push(data.test_metadatum.length)
+        end
 
-      json[key].push("sub_projects" => sub_project_name)
-      json[key].push("test_count" => test_count)
-    end
+        json[key].push("sub_projects" => sub_project_name)
+        json[key].push("test_count" => test_count)
+      end
     end
     return json
   end
@@ -33,8 +29,8 @@ class Admin < ActiveRecord::Base
 
 
   def self.get_result_json(projects= {})
-     @json=create_result_json(projects)
-     @json = @json.to_json
-     @json
+    @json=create_result_json(projects)
+    @json = @json.to_json
+    @json
   end
 end
