@@ -13,7 +13,7 @@ class NunitParserSpec
       test_case_record_4 = FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id)
 
       result_visualization = Visualization.getResultJson(sub_project.id)
-      result_visualization.should eq("{\"sub_project_name\":\"TTA_subProject\",\"test_types\":[{\"test_name\":\"UNIT TEST\",\"seq_no\":101,\"percent\":\"100.00\",\"duration\":\"2.000\",\"test_no\":10}],\"unknown_test_types\":null}")
+      result_visualization.should eq("{\"sub_project_name\":\"TTA_subProject\",\"test_types\":[{\"test_name\":\"UNIT TEST\",\"seq_no\":101,\"percent\":\"100.00\",\"duration\":\"2.000\",\"test_no\":10,\"percentage_passing\":\"60.00\"}],\"unknown_test_types\":null}")
 
       result_comparative = ComparativeAnalysis.get_result_set(project.id,"2013-01-01","2013-03-30")
       result_comparative.should eq({"TTA_subProject"=>[[1361318400000.0, 50.0]]})
@@ -27,3 +27,16 @@ class NunitParserSpec
   end
 
 end
+
+
+
+
+
+
+
+
+
+
+
+
+

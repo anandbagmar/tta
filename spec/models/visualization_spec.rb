@@ -20,7 +20,7 @@ describe Visualization do
     test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id, :class_name => "Class1.1",:number_of_tests => 30 , :number_of_errors=>2 ,:number_of_failures =>2,:time_taken=>5)
     test_case_record = FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id,:time_taken=>1,:class_name=>"class1.1.1",:error_msg=>"")
     json= Visualization.getResultJson(sub_project.id)
-    json.should eq("{\"sub_project_name\":\"SubProject1.1\",\"test_types\":[{\"test_name\":\"UNIT TEST\",\"seq_no\":101,\"percent\":\"100.00\",\"duration\":\"5.000\",\"test_no\":30}],\"unknown_test_types\":null}")
+    json.should eq("{\"sub_project_name\":\"SubProject1.1\",\"test_types\":[{\"test_name\":\"UNIT TEST\",\"seq_no\":101,\"percent\":\"100.00\",\"duration\":\"5.000\",\"test_no\":30,\"percentage_passing\":\"93.33\"}],\"unknown_test_types\":null}")
   end
 
   it "should return json with test_types sorted by sequence number" do
