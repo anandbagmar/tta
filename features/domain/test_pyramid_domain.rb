@@ -12,7 +12,6 @@ module Domain
       assert page.has_css?(PYRAMID_ID),"Pyramid is displayed"
       wait_until_for { page.has_content?("Test-Pyramid for: "+subproject) }
       assert page.has_content?("Test-Pyramid for: "+subproject),"Title is displayed"
-      assert verify_if_legends_is_equal_to_divisions, "Legend is not displayed correctly"
     end
   end
 end

@@ -14,7 +14,7 @@ class Visualization
           :seq_no => TESTTYPE[test_category],
           :percent => percent_of_test,
           :duration => duration_of_test,
-          :test_no => no_of_test,
+          :no_of_test => no_of_test,
           :percentage_passing => passing_percentage
         }
 
@@ -27,8 +27,6 @@ class Visualization
       :test_types => test_types.sort_by{|test_type|test_type[:seq_no]}.reverse,
       :unknown_test_types => (unknown_test_types if unknown_test_types!=[])
     }.to_json
-    puts "@"*10
-    puts @json
     return @json
 
   end

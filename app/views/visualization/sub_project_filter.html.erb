@@ -11,9 +11,12 @@
       var color =["","#DB7093","#008080","#DAA520","#CD853F","#808000","#191970","#4B0082","#A0522D"];
       $("#display_message").css("display","none");
 
-      var plotPyramid = function(obj){
+      var plotPyramid = function(projectJson){
           var renderString="";
-          var unknownTestTypes = obj.unknown_test_types;
+          var proj_title="";
+          var table_header="";
+          var table_content ="";
+          var unknownTestTypes = projectJson.unknown_test_types;
           if(unknownTestTypes)
         {
             message = "The following Test Types are not being supported currently. <br>"
@@ -26,73 +29,43 @@
         }
         else
        {
-           $('#pyramid-overlay').css("display","block");
-           var typeOfTests = obj.test_types,
-            templates = new Template(),
-            legendTemplate = templates.getLegendItem(),
-            legendData="<span><b>Legend: </b></span>",
-            pyramidPercent=templates.getPyramidPercent(),
-            pyramidDuration=templates.getPyramidDuration(),
+           table_header ="<tr class='table_header'> <th>TEST TYPES</th> <th>NUMBER OF TESTS</th> <th>TOTAL RUN TIME</th> <th>TEST TYPE %</th> <th>PASSING %</th> </tr>";
+           var typeOfTests = projectJson.test_types,
             width = 400,
             height=400;
-           renderString="<h3>Test-Pyramid for: "+ obj.sub_project_name.toUpperCase() +"</h3><br>";
+            proj_title="<h3>Test-Pyramid for: "+ projectJson.sub_project_name.toUpperCase() +"</h3><br>";
+            var pyramidItems = [];
+            for(var index = 0, len = typeOfTests.length;index<len;index++){
+                if(typeOfTests[index].percent == 0.0) {
+                   continue;
+               }
 
-      var pyramidItems = [];
-
-      for(var index = 0, len = typeOfTests.length;index<len;index++){
-          if(typeOfTests[index].percent == 0.0)
-            continue;
-          currentItem = {};
-          currentItem.testName = typeOfTests[index].test_name.split(' ')[0].toLowerCase();
-          var noOfTest = typeOfTests[index].test_no;
-          currentItem.percent = typeOfTests[index].percent;
-          currentItem.triangleWidth = currentItem.percent/100*width;
-          currentItem.triangleHeight = currentItem.percent/100*height;
-          var seq_no= typeOfTests[index].seq_no;
-          currentItem.color =color[parseInt(seq_no/100)];
-
-          renderString += "<div class='pyramidItem'>" + templates.render(pyramidPercent,{
-            "TestTypePercent": currentItem.testName+"_percent",
-            "PercentValue": typeOfTests[index].percent
-          });
-          renderString+="<div id=\'"+currentItem.testName+"_div\' class='trapezoid' style='width:"+currentItem.triangleWidth+"px; border-bottom-width:"+currentItem.triangleHeight+"px; border-bottom-color:"+currentItem.color+";'></div>";
-          renderString += templates.render(pyramidDuration,{
-            "TestTypeDuration": currentItem.testName.split(' ')[0].toLowerCase()+"_duration",
-            "DurationValue": noOfTest+ " Tests run in "+ typeOfTests[index].duration
-          });
-          renderString+="</div>";
-
-
-          legendData+=templates.render(legendTemplate,{
-            "TestType": currentItem.testName,
-            "TestTypeRect": currentItem.testName+"_rect",
-            "TestTypeTitle": typeOfTests[index].test_name.toLowerCase()
-          });
-          pyramidItems.push(currentItem);
-      }
-
-
-        $('#legend').html(legendData);
-        $('#pyramid').append(renderString);
+               currentItem = {};
+               currentItem.testName = typeOfTests[index].test_name.split(' ')[0];
+               currentItem.percent = typeOfTests[index].percent;
+               currentItem.triangleWidth = currentItem.percent/100*width;
+               currentItem.triangleHeight = currentItem.percent/100*height;
+               var seq_no= typeOfTests[index].seq_no;
+               currentItem.color =color[parseInt(seq_no/100)];
+                currentItem.no_of_test = typeOfTests[index].no_of_test;
+                currentItem.total_run_time =typeOfTests[index].duration;
+                currentItem.pass_percent= typeOfTests[index].percentage_passing;
+                table_content+="<tr> <td"+" style='background:"+currentItem.color+"'>"+currentItem.testName+"</td> <td>"+currentItem.no_of_test+"</td>";
+                table_content+="<td>"+currentItem.total_run_time+" secs</td><td>"+currentItem.percent+" %</td> <td>"+currentItem.pass_percent+" %</td> </tr>";
+                renderString += "<div class='pyramidItem'>";
+               renderString+="<div id=\'"+currentItem.testName+"_div\' class='trapezoid' style='width:"+currentItem.triangleWidth+"px; border-bottom-width:"+currentItem.triangleHeight+"px; border-bottom-color:"+currentItem.color+";'></div>";
+               renderString+="</div>";
+               pyramidItems.push(currentItem);
+           }
+           renderString+="<div id='pyramid-overlay' style='display:block;'></div> " ;
+           $('#proj_title').append(proj_title);
+           $('#pyramid').append(renderString);
+           $('#pyramidTable').append(table_header);
+           $('#pyramidTable').append(table_content);
 
         var bodyHeight = $('body').css('height'),
                 baseTriangleHeight = parseInt(bodyHeight)/ 2;
 
-        for(var index = 0, len = pyramidItems.length;index<len;index++){
-            var currentTest = typeOfTests[index].test_name.split(' ')[0].toLowerCase();
-
-            $("#"+pyramidItems[index].testName+"_rect").css({
-                "background-color": pyramidItems[index].color
-            });
-
-            $("#"+pyramidItems[index].testName+"_percent").css({
-                "left": - (pyramidItems[index].triangleWidth/2 + 250) + "px"
-            });
-
-            $("#"+pyramidItems[index].testName+"_duration").css({
-                "left": (pyramidItems[index].triangleWidth/2 + 200) + "px"
-            });
-        }
        }
     }
 
@@ -102,7 +75,6 @@
     jsonR = jsonR.replace(regExp,"\"");
     jsonR=JSON.parse(jsonR);
     if(jsonR!=""){
-      console.log(jsonR);
       plotPyramid(jsonR);
     }
   });

@@ -15,24 +15,23 @@
 
 }
 
-
-#pyramid h3{
-  padding-left: 400px;
-}
-
-#legend{
-  text-align:center;
+#pyramidTable{
+  border: solid;
   float: right;
-  margin-right: 40px;
-  width: 300px;
+  margin: 8% 8%;
+  border-collapse: collapse;
 
 }
-#legend span{
-  display: inline-block;
-  margin: 10px;
+
+#pyramidTable tr,th,td{
+border: 1px solid;
+  padding: 10px;
 }
 
-
+.table_header{
+  background: rgb(163, 172, 171);
+  color: rgb(6, 7, 14);
+}
 
 .error{
   color: #DB1818;
@@ -46,12 +45,6 @@
   display: block;
 }
 
-.test-legend{
-  display:block;
-  text-align: left;
-  height:10%;
-  padding-left:38%
-}
 
 #display_message{
   position: absolute;
@@ -71,8 +64,6 @@
   border-bottom-color : red;
   border-bottom-width: 100px;
   border-bottom-style : solid;
-  //border-left: 75px solid transparent;
-  //border-right: 75px solid transparent;
   height: 0;
   position: relative;
   margin: 0 auto;
@@ -93,7 +84,9 @@
 
 #pyramid{
   position: relative;
-  margin: 0 auto;
+  margin-bottom: 8%;
+  float: left;
+  padding-left: 8%;
 
 }
 
