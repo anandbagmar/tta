@@ -89,15 +89,17 @@ var validateFile = {
      var valid = true;
         var err_file = $form.find(".invalid-file-type");
         var file_path = $form.find("#logDirectory").val();
-        var extension = file_path.split(".").pop();
+        if (file_path!="")
+        {
+            var extension = file_path.split(".").pop();
+            if(extension!="zip")
+                valid = false;
+        }
 
-        if(extension!="zip")
-            valid = false;
-
-        if(valid == false)
-            $(err_file).show();
-        else
-            $(err_file).hide();
+            if(valid == false)
+                $(err_file).show();
+            else
+                $(err_file).hide();
         return valid;
     }
 };
