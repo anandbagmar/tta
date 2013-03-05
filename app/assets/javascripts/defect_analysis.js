@@ -2,8 +2,6 @@ var renderDefectTable = {
 
     renderTable:function (jsonData) {
         $("#defect-analysis").css("display", "none");
-
-        $(".color_codes").css("display", "none");
         var subProjectName = "";
         var percentage = "";
         if (jsonData != "") {
