@@ -12,6 +12,14 @@ class Parser
             parse_test_record(contents, meta_datum_id, params)
           end
         end
+        if filename =~ /\.xml$/ or filename =~ /\.html$/
+          if contents_string.start_with? ("<?xml")
+            parse_test_record(contents, meta_datum_id, params)
+          end
+          if contents_string.start_with? ("<!DOCTYPE html")
+            parse_test_record_html(contents, meta_datum_id, params)
+          end
+        end
       end
     end
   end
