@@ -7,9 +7,12 @@ class Parser
         filename=entry.to_s
         contents = zipFile.read(entry)
         contents_string= contents.to_s
-        if filename =~ /\.xml$/
+        if filename =~ /\.xml$/ or filename =~ /\.html$/
           if contents_string.start_with? ("<?xml")
             parse_test_record(contents, meta_datum_id, params)
+          end
+          if contents_string.start_with? ("<!DOCTYPE html")
+           parse_test_record_html(contents, meta_datum_id, params)
           end
         end
       end
@@ -49,6 +52,13 @@ class Parser
         end
       end
     end
+  end
+  def self.parse_test_record_html(config_html, meta_id, params)
+     @doc_html = Nokogiri::HTML config_html
+     test_report_type = params[:test_report_type]
+     if test_report_type == "Cucumber HTML"
+       CucumberHtmlParser.parse(config_html,meta_id)
+     end
   end
 end
 
