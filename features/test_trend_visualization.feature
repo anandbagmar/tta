@@ -8,7 +8,8 @@ Scenario: Pyramid Flow
   |Project1|SERRORS1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012     |February  |20      |12       |    12       |Err_test.zip |Integration Test|Rspec JUnit     |
   |Project1|SERRORS1|Run unit test|Mac    |Sailee   |IE     |DEV        |2012     |March     |15      |12       |    12       |Err_test.zip |Functional Test |Rspec JUnit     |
   When a team member checks Pyramid View of "SERRORS1"
-  Then the test Pyramid for "SERRORS1" is generated with layers of pyramid equal to legends displayed
+  Then the test Pyramid for "SERRORS1" is generated
+  Then the Pyramid table for "SERRORS1" is generated
 
   Scenario: Comparative analysis Flow
     Given The User uploads data with following attributes

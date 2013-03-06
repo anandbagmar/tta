@@ -51,7 +51,7 @@ DEFECT_GRAPH_ID="#defect-analysis"
 #PYRAMID ELEMENT
 TEST_PYRAMID__PROJECT_DROPDOWN="sub_project_id"
 PYRAMID_ID="#pyramid"
-
+PYRAMID_TABLE_ID="#pyramidTable"
 
 #ERROR_SCREENSHOT_PATH
 SCREENSHOT_FILE_PATH=$PROJECT_ROOT +"/log/feature/screenshots/"

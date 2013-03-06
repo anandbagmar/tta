@@ -36,13 +36,14 @@ class DefectAnalysis
     test_category = get_record_with_distinct_test_category(sub_project_id)
     analysis_date_morning =analysis_date + " 00:00:00"
     analysis_date_night = analysis_date + " 23:59:59"
+    
     test_category.each do |test_type|
       no_of_test_for_particular_error=[]
       result_hash = {}
       meta_data = SubProject.find(sub_project_id).test_metadatum.find_all_by_date_of_execution(analysis_date_morning..analysis_date_night, :conditions => ["test_category = ?", test_type])
       meta_data.sort_by &:date_of_execution
       @meta_data1 = meta_data.last
-
+      
 
       if !(@meta_data1.nil?)
         test_report_type = @meta_data1.test_report_type
@@ -70,7 +71,7 @@ class DefectAnalysis
     error_hash = {}
     test_cases.each do |test_case|
       test_case.each do |test|
-        if !(test.error_msg.nil?)
+        if !(test.error_msg.blank?||test.error_msg.nil?)
           error_message = test.error_msg
           error_hash[error_message] = [] unless error_hash.keys.include?(error_message)
           error_hash[error_message] << test.class_name unless test.nil?
