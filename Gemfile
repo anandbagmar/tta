@@ -76,6 +76,9 @@ group :development, :test do
   gem 'fabrication'
   gem 'jasmine'
   gem 'jasmine-headless-webkit'
+
+  gem 'cukeforker'
+  gem 'cukeforker-webdriver'
 end
   group :cucumber do
     gem 'headless'

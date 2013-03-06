@@ -7,23 +7,24 @@ Capybara.default_driver = :selenium
 
 ActionController::Base.allow_rescue = false
 
-begin
-  DatabaseCleaner.strategy = :transaction
-rescue NameError
-  raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
-end
+#begin
+#  DatabaseCleaner.strategy = :transaction
+#rescue NameError
+#  raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
+#end
 
 if(ENV["HEADLESS"])
   puts "in headless"
   require 'headless'
-  @headless = Headless.new
+  @headless = Headless.new(:destroy_at_exit=>false)
   @headless.start
 end
 
 at_exit do
-  @headless.destroy if ENV["HEADLESS"] && !@headless.nil?
+  #this is creating problems while running parallel headless tests. find a better solution
+  #@headless.destroy if ENV["HEADLESS"] && !@headless.nil?
 end
-Cucumber::Rails::Database.javascript_strategy = :truncation
+#Cucumber::Rails::Database.javascript_strategy = :truncation
 
 After do |scenario|
   if scenario.failed?

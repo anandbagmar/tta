@@ -5,6 +5,9 @@
 require File.expand_path('../config/application', __FILE__)
 require 'date'
 require "cucumber/cli/main"
+require 'cukeforker'
+require 'cukeforker-webdriver'
+require 'selenium-webdriver'
 
 begin; require 'parallel_tests/tasks'; rescue LoadError; end
 Tta::Application.load_tasks
@@ -14,6 +17,16 @@ namespace :db do
       Rake::Task["db:seed"].invoke
     end
   end
+end
+
+task :parallel_run_ttv do
+  CukeForker::WebDriver::Runner.run(
+      CukeForker::Scenarios.tagged(%W[@ttv]),
+      :max=>4,
+      :out => "log/tta_cukes_result/html",
+      :extra_args => %w[--format CukeForker::Formatters::JunitScenarioFormatter --out  log/tta_cukes_result]
+
+  )
 end
 
 $project_name=""
