@@ -58,5 +58,12 @@ class Parser
       end
     end
   end
+  def self.parse_test_record_html(config_html, meta_id, params)
+    @doc_html = Nokogiri::HTML config_html
+    test_report_type = params[:test_report_type]
+    if test_report_type == "Cucumber HTML"
+      CucumberHtmlParser.parse(config_html,meta_id)
+    end
+  end
 end
 
