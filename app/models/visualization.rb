@@ -5,7 +5,6 @@ class Visualization
     get_latest_metadata_record(sub_project_id)
     unknown_test_types=[]
     test_types=[]
-
     @test_category.zip(@percent_of_tests, @duration_of_tests, @no_of_test_in_test_category,@passing_test_percentage).each do |test_category, percent_of_test, duration_of_test, no_of_test, passing_percentage|
       if !(TESTTYPE[test_category].nil?)
       test_types <<

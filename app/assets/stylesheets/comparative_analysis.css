@@ -65,3 +65,14 @@
 #project_id{
     display: inline-block;
 }
+
+.legendColorBox{
+border: 0px;
+padding: 0px;
+}
+
+
+.legendLabel{
+    border: 0px;
+    padding: 0px;
+}
