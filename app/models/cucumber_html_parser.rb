@@ -10,7 +10,7 @@ def self.save_test_suite(meta_id)
   puts link.children[0]
   test_suite_name=link.children[0].to_s.split('Feature:')
   script_div = @doc_html.xpath("//script")
-  total_test,total_failure=find_test_count(script_div)
+  total_test,total_failure=find_count_summary(script_div)
   total_run_time=find_test_duration(script_div)
   @html_test_suite.test_metadatum_id=meta_id
   @html_test_suite.class_name=test_suite_name[1]
@@ -20,36 +20,46 @@ def self.save_test_suite(meta_id)
   @html_test_suite.save
   return @html_test_suite.id
 end
-  def self.find_test_count(script_div)
+
+  def self.find_count_summary(script_div)
     script_div.each do |script_div_link|
       if script_div_link.to_s.index("document.getElementById('totals')")
         totals_contents = script_div_link.inner_html
-        starting_position = totals_contents.index("(", totals_contents.rindex("=")+1)+1
-        if totals_contents.to_s.include?("failed")
-          end_position = totals_contents.index("failed")-1
-          failed_tests_count = totals_contents[starting_position..end_position].strip
-        end
-        if totals_contents.to_s.include?("scenario")
-          starting_position = totals_contents.index("=")+3
-          end_position = totals_contents.index("scenario")-1
-        else
-          starting_position = totals_contents.index("=")+3
-          end_position = totals_contents.index("scenarios")-1
-        end
-        total_tests_count = totals_contents[starting_position..end_position].strip
+        failed_tests_count = find_failure_count(totals_contents)
+        total_tests_count = find_total_test_count(totals_contents)
         return failed_tests_count.to_i,total_tests_count.to_i
       end
     end
   end
+
+  def self.find_total_test_count(totals_contents)
+    if totals_contents.to_s.include?("scenario")
+      starting_position = totals_contents.index("=")+3
+      end_position = totals_contents.index("scenario")-1
+    else
+      starting_position = totals_contents.index("=")+3
+      end_position = totals_contents.index("scenarios")-1
+    end
+    total_tests_count = totals_contents[starting_position..end_position].strip
+  end
+
+  def self.find_failure_count(totals_contents)
+    starting_position = totals_contents.index("(", totals_contents.rindex("=")+1)+1
+    if totals_contents.to_s.include?("failed")
+      end_position = totals_contents.index("failed")-1
+      failed_tests_count = totals_contents[starting_position..end_position].strip
+    end
+    failed_tests_count
+  end
+
   def self.find_test_duration(script_div)
     script_div.each do |script_div_link|
       if script_div_link.to_s.index("document.getElementById('duration')")
         duration_contents = script_div_link.inner_html
         starting_position = duration_contents.index("<strong>")+8
         end_position = duration_contents.index("seconds")-1
-        test_run_time = duration_contents[starting_position..end_position].strip
-        run_time_split=test_run_time.split('m')
-        test_run_time= run_time_split[1].to_f+((run_time_split[0].to_f)*60)
+        test_run_time = duration_contents[starting_position..end_position].strip.split('m')
+        test_run_time= test_run_time[1].to_f+((test_run_time[0].to_f)*60)
         return test_run_time
       end
     end

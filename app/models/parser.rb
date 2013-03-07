@@ -1,30 +1,20 @@
 class Parser
-  #job  - unzipping
-  def self.unzip_files (input_file_path, output_file_path, meta_datum_id, params)
-    FileUtils.cp input_file_path, output_file_path
-    Zip::ZipFile.open(output_file_path) do |zipFile|
-      zipFile.each do |entry|
-        filename=entry.to_s
-        contents = zipFile.read(entry)
-        contents_string= contents.to_s
-        if filename =~ /\.xml$/
-          if contents_string.start_with? ("<?xml")
-            parse_test_record(contents, meta_datum_id, params)
-          end
-        end
+  def self.map_file_type_to_parser (input_file_path, output_file_path, meta_datum_id, params)
+      file_hash =Unzip.unzip_files(input_file_path,output_file_path)
+      file_hash.keys.each do |filename|
+        contents = file_hash[filename]
         if filename =~ /\.xml$/ or filename =~ /\.html$/
-          if contents_string.start_with? ("<?xml")
+          if contents.to_s.start_with? ("<?xml")
             parse_test_record(contents, meta_datum_id, params)
-          end
-          if contents_string.start_with? ("<!DOCTYPE html")
+          elsif contents.to_s.start_with? ("<!DOCTYPE html")
             parse_test_record_html(contents, meta_datum_id, params)
           end
+        elsif filename =~ /\.txt$/
+          JasmineParser.parse(contents, meta_datum_id, params)
         end
       end
-    end
-  end
+      end
 
-  #job: parsing
   def self.parse_test_record(config_xml, meta_id, params)
     @doc = Nokogiri::XML config_xml
     test_report_type = params[:test_report_type]
