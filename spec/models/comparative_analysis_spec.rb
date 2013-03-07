@@ -17,7 +17,7 @@ describe ComparativeAnalysis do
     sub_project = FactoryGirl.create(:sub_project, :project_id => project.id)
     test_metadata = FactoryGirl.create(:test_metadatum,:sub_project_id => sub_project.id)
     test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id)
-    test_case_record = FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id)
+     FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id)
 
     result = ComparativeAnalysis.get_result_set(project.id,"2013-01-01","2013-03-30")
     result["TTA_subProject"].count.should eq(1)
@@ -34,9 +34,9 @@ describe ComparativeAnalysis do
     test_suite_record_2 = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata_2.id)
     test_suite_record_3 = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata_3.id)
 
-    test_case_record = FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_1.id)
-    test_case_record = FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_2.id)
-    test_case_record = FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_3.id)
+     FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_1.id)
+     FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_2.id)
+     FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_3.id)
 
     test_metadata_list = [test_metadata_1,test_metadata_2,test_metadata_3]
     final_result=test_metadata_list.inject([]){ |result1, metadata_record|
@@ -59,8 +59,8 @@ describe ComparativeAnalysis do
     test_metadata_1 = FactoryGirl.create(:test_metadatum,:sub_project_id => sub_project.id,:test_category => "Functional Test")
     test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id,:number_of_tests=>"20",:number_of_errors=>"10")
     test_suite_record_1 = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata_1.id)
-    test_case_record = FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id)
-    test_case_record_1 = FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_1.id)
+     FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id)
+   FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_1.id)
 
     result = ComparativeAnalysis.get_result_set(project.id,"2013-01-01","2013-03-30")
     result[sub_project.name].count.should eq(2)
@@ -75,9 +75,9 @@ describe ComparativeAnalysis do
     test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id)
     test_suite_record_1 = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata_1.id)
     test_suite_record_2 = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata_2.id)
-    test_case_record = FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id)
-    test_case_record_1 = FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_1.id)
-    test_case_record_2 = FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_2.id)
+      FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id)
+     FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_1.id)
+     FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_2.id)
 
     result = ComparativeAnalysis.get_result_set(project.id,"2013-01-01","2013-03-30")
     result[sub_project.name].count.should eq(3)

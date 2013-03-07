@@ -24,3 +24,4 @@ class CucumberXmlParser
     time
   end
 end
+

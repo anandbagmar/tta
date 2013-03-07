@@ -24,7 +24,6 @@ end
     script_div.each do |script_div_link|
       if script_div_link.to_s.index("document.getElementById('totals')")
         totals_contents = script_div_link.inner_html
-
         starting_position = totals_contents.index("(", totals_contents.rindex("=")+1)+1
         if totals_contents.to_s.include?("failed")
           end_position = totals_contents.index("failed")-1
