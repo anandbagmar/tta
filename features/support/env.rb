@@ -16,7 +16,7 @@ ActionController::Base.allow_rescue = false
 if(ENV["HEADLESS"])
   puts "in headless"
   require 'headless'
-  @headless = Headless.new(:destroy_at_exit=>false)
+  @headless = Headless.new(display: 100, reuse: true,:destroy_at_exit=>false)
   @headless.start
 end
 
