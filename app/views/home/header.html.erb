@@ -1,15 +1,25 @@
 
-<link rel="stylesheet" href="../../assets/stylesheets/application.css"/>
+<link rel="stylesheet" href="../../assets/stylesheets/lib/bootstrap.min.css"/>
+<link rel="stylesheet" href="../../assets/stylesheets/custome_header.css"/>
 <body>
 <div id="menu-bar">
-  <div id="title">
-    <a href="/home">
-      <h1>Test Trend Analyzer</h1>
-      <span>Version 0.3.4 (28/02/2013)</span>
-    </a>
-  </div>
-  <div class="menu-options">
-    <a href='/home'><span class='home_logo'></span></a>
+  <div class="container">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <a class="brand" href="/home">
+          <h1>Test Trend Analyzer</h1>
+          <span>Version 0.3.4 (28/02/2013)</span>
+        </a>
+        <ul class="nav">
+          <!--<li><a href='/home'><span class='home_logo'></span></a></li>-->
+          <li><a href='/home'>HOME</a></li>
+          <li><a href='/pyramid'>TEST PYRAMID VIEW</a></li>
+          <li><a href='/comparative_analysis'>COMPARATIVE ANALYSIS</a></li>
+          <li><a href='/defect_analysis'>DEFECT ANALYSIS</a></li>
+          <li><a href='/upload'>UPLOAD TEST DATA</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
 </body>

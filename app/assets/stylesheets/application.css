@@ -15,38 +15,6 @@
 
 
 
-#menu-bar{
-    background-color: #517994;
-}
-
-#menu-bar #title{
-    display: inline-block;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-align: center;
-}
-#menu-bar #title h1{
-    text-decoration: none;
-    margin-bottom: 8px;
-    color: #000000;
-}
-#menu-bar .menu-options a:hover span{
-    border: 0px solid #7AC2FA;
-    padding: 0;
-    margin: 0;
-    box-shadow: 0px 1px 0px #7AC2FA;
-}
-#menu-bar .menu-options{
-    position: absolute;
-    left: 10px;
-    top: 10px;
-}
-
-#menu-bar #title span{
-    color: #D8D8D8;
-    text-decoration: none;
-}
-
 #footer-bar{
     background-color: #517994;
     position: fixed;

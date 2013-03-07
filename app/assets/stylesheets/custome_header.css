@@ -1,0 +1,44 @@
+#menu-bar{
+  background-color: #517994;
+}
+#menu-bar .container{
+  height: 64px;
+}
+
+#menu-bar h1{
+  color: black;
+  font-size: 18px;
+  margin: 0;
+  line-height: 20px;
+}
+#menu-bar .navbar .brand span{
+  font-size: 12px;
+  color: black;
+}
+#menu-bar .nav{
+  position: absolute;
+  margin-left: 50%;
+  display: block;
+  width: 800px;
+  left: -400px;
+  margin-top: 12px;
+}
+#menu-bar .navbar .navbar-inner{
+  padding-left: 10px;
+}
+
+#menu-bar .menu-options a:hover span{
+  border: 0px solid #7AC2FA;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0px 1px 0px #7AC2FA;
+}
+#menu-bar .menu-options li{
+  float: left;
+  list-style: none;
+}
+
+#menu-bar #title span{
+  color: #D8D8D8;
+  text-decoration: none;
+}
