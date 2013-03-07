@@ -1,8 +1,17 @@
 
 #container{
-    width: 800px;
+    width: 100%;
     margin: 0 auto;
     padding-top: 20px;
+}
+
+#defect-analysis{
+  display: block;
+  padding: 25px 290px;
+}
+
+#defect-analysis h1{
+  padding-bottom: 15px;
 }
 
 #defect-analysis-table >.color_codes >.legend_item{

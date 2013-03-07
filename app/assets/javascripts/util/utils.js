@@ -9,10 +9,14 @@ var Utils={
     }
 };
 
-var removeQuotsFromJSON = {
-    removeQuots : function(jsonData){
-        var regExp = new RegExp("&quot;", 'g');
-        jsonData = jsonData.replace(regExp, "\"");
-        return jsonData;
+var makeValidJSON = {
+    validate : function(jsonData){
+        var regExpQuote = new RegExp("&quot;", 'g'),
+            regExpBackSlash = new RegExp("[\\\\]", 'g');
+        jsonData = jsonData.replace(regExpQuote, "\"");
+        jsonData = jsonData.replace(regExpBackSlash, "\\\\");
+        jsonData = jsonData.replace(/[\n \t\r]+/g, ' ');
+      return jsonData;
     }
+
 };
