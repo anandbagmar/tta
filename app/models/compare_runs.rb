@@ -26,7 +26,6 @@ class CompareRuns
     test_case_records_1 = []
     test_case_records_2 = []
 
-    binding.pry
       metadata_record[0].test_suite_records.each do |suite_record|
           suite_record.test_case_records.each do |case_records|
             test_case_records_1 << case_records

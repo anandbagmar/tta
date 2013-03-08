@@ -32,7 +32,6 @@ class CompareRunsController < ApplicationController
     puts "**************************************"
     puts params
     puts "**************************************"
-    binding.pry
     CompareRuns.getCompareResult(params)
     render :index
   end
