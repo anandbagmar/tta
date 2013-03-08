@@ -43,7 +43,7 @@
 <% if @result_set and flash[:no_data_error]==nil and flash[:date_error]==nil%>
  <div id="date-range-title">
   <h3>Graph Plotted For <%= @project_name %></h3>
-  <h3>Date Range :From <%= @start_date %> to <%= @end_date %></h3>
+  <h3>Date Range :From <%= @start_date.split(" ")[0] %> to <%= @end_date.split(" ")[0] %></h3>
 </div>
 
 <div id="comparative_analysis" style="width:900px;height:600px">

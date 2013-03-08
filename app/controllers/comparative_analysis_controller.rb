@@ -16,8 +16,8 @@ class ComparativeAnalysisController < ApplicationController
   end
 
   def date_filter
-    @start_date= params[:comparative_analysis][:start_date]
-    @end_date= params[:comparative_analysis][:end_date]
+    @start_date= params[:comparative_analysis][:start_date]+" 00:00:00"
+    @end_date= params[:comparative_analysis][:end_date]+" 23:59:59"
     @project_name = Project.find_by_id(params[:project][:id]).name
     flash[:no_data_error]=nil
     @result_set = ComparativeAnalysis.get_result_set(params[:project][:id], @start_date, @end_date)

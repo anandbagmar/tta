@@ -44,6 +44,6 @@ describe ComparativeAnalysisController do
     @controller.expects(:create)
     assert_not_nil assigns(@json)
     assert_not_nil flash[:no_data_error]
-    assert_equal flash[:no_data_error],"No Data between the Date Range "+start_date+" To "+end_date
+    assert_equal flash[:no_data_error],"No Data between the Date Range "+start_date+" 00:00:00"+" To "+end_date+" 23:59:59"
   end
 end
