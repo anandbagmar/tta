@@ -38,4 +38,27 @@ class TestMetadatum < ActiveRecord::Base
     latest_test_metadata_record = @test_metadata_for_specific_test_category.sort_by &:date_of_execution
      latest_test_metadata_record.last
   end
+
+  def self.get_latest_record_for_specific_date(sub_project_id,test_category,date)
+    date_morning = date + " 00:00:00"
+    date_night = date + " 23:59:59"
+    metadata_record = TestMetadatum.find_all_by_date_of_execution_and_sub_project_id_and_test_category((date_morning..date_night),sub_project_id,test_category)
+    if(!(metadata_record.nil?))
+    metadata_record.sort_by &:date_of_execution
+    @meta_data = metadata_record.last
+    end
+  end
+  #
+  #def self.get_test_cases(metadata_record)
+  #  test_case_records = []
+  #  metadata_record.each do |metadata|
+  #      metadata.test_suite_records.each do |suite_record|
+  #      suite_record.test_case_records.each do |case_records|
+  #        test_case_records << case_records
+  #      end
+  #    end
+  #  end
+  #  test_case_records
+  #end
 end
+

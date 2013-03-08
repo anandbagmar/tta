@@ -1,4 +1,4 @@
-#compare_runs_form{
+#compare_runs_model{
   box-shadow: 2px 2px 3px grey;
   width: 50%;
   margin: 0 auto;
@@ -26,3 +26,12 @@
   height: 50px;
 }
 
+#do-compare input{
+  font-size: 14px;
+  height: 25px;
+  width: 100px;
+  background: white;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px #6D6868;
+}
