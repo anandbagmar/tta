@@ -17,10 +17,12 @@ Tta::Application.routes.draw do
 
   get '/admin/' => 'admin#view'
 
-  get '/compare_runs/' => 'compare_runs#index'
+  match '/compare_runs/' => 'compare_runs#index'
+
 
   match '/get_sub_project_data' => 'compare_runs#getSubProjects'
   match '/get_test_types' => 'compare_runs#getTestTypes'
+  match '/get_compare_json' => 'compare_runs#getCompareJson'
 
   resources :projects,:junit_xml_data,:j_unit_xmls,:unit_test_xml
   post '/comparative_analysis/result' => "comparative_analysis#date_filter"
