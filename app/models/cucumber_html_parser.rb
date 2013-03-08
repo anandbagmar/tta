@@ -7,7 +7,6 @@ end
 def self.save_test_suite(meta_id)
   @html_test_suite=TestSuiteRecord.new()
   link= @doc_html.css('.feature .val')
-  puts link.children[0]
   test_suite_name=link.children[0].to_s.split('Feature:')
   script_div = @doc_html.xpath("//script")
   total_test,total_failure=find_count_summary(script_div)
@@ -40,7 +39,7 @@ end
       starting_position = totals_contents.index("=")+3
       end_position = totals_contents.index("scenarios")-1
     end
-    total_tests_count = totals_contents[starting_position..end_position].strip
+    totals_contents[starting_position..end_position].strip
   end
 
   def self.find_failure_count(totals_contents)

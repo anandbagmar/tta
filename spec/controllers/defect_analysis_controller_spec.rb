@@ -33,7 +33,7 @@ describe DefectAnalysisController do
     @controller.expects(:create)
     assert_not_nil assigns(@json)
     assert_not_nil flash[:no_errors]
-    assert_equal flash[:no_errors], "No built runs on #{analysis_date} for the selected Sub Project"
+    assert_equal flash[:no_errors], "No built runs on #{analysis_date} for Sub Project TTA_subProject"
   end
 
   it "expects an appropriate flash message if no failing tests" do
@@ -46,7 +46,7 @@ describe DefectAnalysisController do
     @controller.expects(:create)
     assert_not_nil assigns(@json)
     assert_not_nil flash[:no_errors]
-    assert_equal flash[:no_errors], "No failing tests for the latest build run on #{analysis_date} for the selected Sub Project"
+    assert_equal flash[:no_errors], "No failing tests for the latest build run on #{analysis_date} for Sub Project TTA_subProject"
   end
 
 end

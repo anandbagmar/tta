@@ -20,17 +20,16 @@ class JasmineParser
     @jasmine_test_suite_data.number_of_tests_not_run=0
     @jasmine_test_suite_data.save
   end
-end
 
 def self.save_jasmine_test_cases(each_entry)
-  report_data.each do |each_entry|
+  each_entry.each do |entry|
 
     @jasmine_test_case_data = TestCaseRecord.new()
     @jasmine_test_case_data.test_suite_record_id = @jasmine_test_suite_data.id
-    @jasmine_test_case_data.class_name = each_entry[1]+each_entry[2]
+    @jasmine_test_case_data.class_name = entry[1]+entry[2]
     @jasmine_test_case_data.time_taken = 0.0
-    if (each_entry[0]=="FAIL")
-      @jasmine_test_case_data.error_msg = each_entry[3]
+    if (entry[0]=="FAIL")
+      @jasmine_test_case_data.error_msg = entry[3]
     end
     @jasmine_test_case_data.save
   end
@@ -43,4 +42,5 @@ def self.create_jasmine_data_array(config_txt)
     report_data<< data.split("||");
   end
   report_data
+end
 end
