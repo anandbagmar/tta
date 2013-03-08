@@ -71,6 +71,7 @@ end
       @html_test_case.test_suite_record_id=test_suite_id
       @html_test_case.class_name = link.css('.val').children[0].to_s
       @html_test_case.error_msg= link.css('.message').children.children.to_s + link.css('.backtrace').children.children.to_s
+      @html_test_case.error_msg= @html_test_case.error_msg.gsub("\"","'")
       @html_test_case.save
     end
   end
