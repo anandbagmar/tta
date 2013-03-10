@@ -7,7 +7,7 @@ class XmlParser
 
   def self.saving_junit_test_cases(config_xml, test_case, xml_data, test_report_type, test_suite)
     if test_report_type.eql?("Rspec JUnit")
-      RspecXmlParser.parse(config_xml, test_suite, xml_data, test_case, test_report_type)
+      RspecXmlParser.new.parse(config_xml, test_suite, xml_data, test_case, test_report_type)
     elsif test_report_type.eql?("Cucumber JUnit")
       CucumberXmlParser.parse(config_xml, test_suite, xml_data, test_case, test_report_type)
     end
@@ -23,7 +23,7 @@ class XmlParser
     if xml_data.number_of_failures.to_i > 0
       @doc.xpath("//testsuite/testcase/failure").each do |failure|
         if test_report_type.eql?("Rspec JUnit")
-          @error_msg = RspecXmlParser.get_error_message(config_xml, testcase_name)
+          @error_msg = RspecXmlParser.new.get_error_message(config_xml, testcase_name)
         elsif test_report_type.eql?("Cucumber JUnit")
           @error_msg = CucumberXmlParser.get_error_message(config_xml, testcase_name)
         end
@@ -35,7 +35,7 @@ class XmlParser
 
   def self.get_time(test_case, test_suite, test_report_type)
     if test_report_type == "Rspec JUnit"
-      time = RspecXmlParser.get_time(test_case, test_suite)
+      time = RspecXmlParser.new.get_time(test_case, test_suite)
     elsif test_report_type == "Cucumber JUnit"
       time = CucumberXmlParser.get_time(test_case, test_suite)
     end
