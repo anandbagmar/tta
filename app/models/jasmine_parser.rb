@@ -19,14 +19,14 @@ class JasmineParser
 
 def save_jasmine_test_cases(each_entry)
   each_entry.each do |entry|
-    @jasmine_test_case_data = TestCaseRecord.new()
-    @jasmine_test_case_data.test_suite_record_id = @jasmine_test_suite_data.id
-    @jasmine_test_case_data.class_name = entry[1]+entry[2]
-    @jasmine_test_case_data.time_taken = 0.0
+    jasmine_test_case_data = TestCaseRecord.new()
+    jasmine_test_case_data.test_suite_record_id = @jasmine_test_suite_data.id
+    jasmine_test_case_data.class_name = entry[1]+entry[2]
+    jasmine_test_case_data.time_taken = 0.0
     if (entry[0]=="FAIL")
-      @jasmine_test_case_data.error_msg = entry[3]
+      jasmine_test_case_data.error_msg = entry[3]
     end
-    @jasmine_test_case_data.save
+    jasmine_test_case_data.save
   end
 end
 
