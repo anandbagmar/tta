@@ -5,19 +5,14 @@ class CucumberHtmlParser
     save_test_case_record(test_suite_id)
 end
 def self.save_test_suite(meta_id)
-  @html_test_suite=TestSuiteRecord.new()
   link= @doc_html.css('.feature .val')
   test_suite_name=link.children[0].to_s.split('Feature:')
   script_div = @doc_html.xpath("//script")
   total_test,total_failure=find_count_summary(script_div)
   total_run_time=find_test_duration(script_div)
-  @html_test_suite.test_metadatum_id=meta_id
-  @html_test_suite.class_name=test_suite_name[1]
-  @html_test_suite.number_of_tests= total_test
-  @html_test_suite.number_of_failures= total_failure
-  @html_test_suite.time_taken=total_run_time.to_s
-  @html_test_suite.save
-  return @html_test_suite.id
+  hash = {:test_metadatum_id => meta_id,:class_name => test_suite_name[1],
+          :number_of_tests => total_test, :number_of_failures => total_failure,:time_taken => total_run_time.to_s}
+  return TestSuiteRecord.create_and_save(hash).id
 end
 
   def self.find_count_summary(script_div)
