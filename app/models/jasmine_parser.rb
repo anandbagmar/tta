@@ -1,5 +1,5 @@
 class JasmineParser
-  def self.parse(config_txt, meta_id, params)
+  def parse(config_txt, meta_id, params)
 
     report_data = create_jasmine_data_array(config_txt)
     test_suite_summary =report_data.pop()
@@ -8,14 +8,16 @@ class JasmineParser
     save_jasmine_test_cases(each_entry)
   end
 
-  def self.save_jasmine_test_suite(meta_id, test_suite_summary)
+  private
+
+  def save_jasmine_test_suite(meta_id, test_suite_summary)
     hash={:test_metadatum_id=> meta_id,:class_name => "JasmineReports #{meta_id}",:number_of_tests=> test_suite_summary[1],
           :number_of_errors=> 0,:number_of_failures=> test_suite_summary[2],:time_taken =>test_suite_summary[3],:number_of_tests_ignored=> 0,
           :number_of_tests_not_run=> 0}
     TestSuiteRecord.create_and_save(hash)
   end
 
-def self.save_jasmine_test_cases(each_entry)
+def save_jasmine_test_cases(each_entry)
   each_entry.each do |entry|
     @jasmine_test_case_data = TestCaseRecord.new()
     @jasmine_test_case_data.test_suite_record_id = @jasmine_test_suite_data.id
@@ -28,7 +30,7 @@ def self.save_jasmine_test_cases(each_entry)
   end
 end
 
-def self.create_jasmine_data_array(config_txt)
+def create_jasmine_data_array(config_txt)
   report = config_txt.split("\n");
   report_data=[]
   report.each do |data|

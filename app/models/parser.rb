@@ -10,7 +10,7 @@ class Parser
             parse_test_record_html(contents, meta_datum_id, params)
           end
         elsif filename =~ /\.txt$/
-          JasmineParser.parse(contents, meta_datum_id, params)
+          JasmineParser.new.parse(contents, meta_datum_id, params)
         end
       end
       end
