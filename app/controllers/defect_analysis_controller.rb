@@ -18,7 +18,7 @@ class DefectAnalysisController < ApplicationController
     sub_project_name = SubProject.find(sub_project_id, :select => "name").name
     analysis_date=params[:defect_analysis][:analysis_date]
 
-    @defect_analysis_json = DefectAnalysis.get_result_json(sub_project_id,analysis_date)
+    @defect_analysis_json = DefectAnalysis.get_result_json(sub_project_id,analysis_date.to_date)
     parsed_json = ActiveSupport::JSON.decode(@defect_analysis_json)
 
     if parsed_json["errors"].blank?

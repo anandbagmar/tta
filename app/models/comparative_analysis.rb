@@ -18,7 +18,7 @@ class ComparativeAnalysis
   private
 
   def self.get_percentage_of_passing_tests(sub_project_id, st_date,en_date)
-    meta_data = SubProject.find(sub_project_id).test_metadatum.order("date_of_execution").find_all_by_date_of_execution(st_date..en_date)
+    meta_data = SubProject.find(sub_project_id).test_metadatum.order("date_of_execution").find_all_by_date_of_execution(st_date.beginning_of_day..en_date.end_of_day)
     final_result = meta_data.inject([]){ |result, metadata_record|
 
       test_report_type = metadata_record.test_report_type
