@@ -8,13 +8,17 @@ class JasmineParser
     save_jasmine_test_cases(each_entry)
   end
 
-  private
-
-  def save_jasmine_test_suite(meta_id, test_suite_summary)
-    hash={:test_metadatum_id=> meta_id,:class_name => "JasmineReports #{meta_id}",:number_of_tests=> test_suite_summary[1],
-          :number_of_errors=> 0,:number_of_failures=> test_suite_summary[2],:time_taken =>test_suite_summary[3],:number_of_tests_ignored=> 0,
-          :number_of_tests_not_run=> 0}
-    TestSuiteRecord.create_and_save(hash)
+  def self.save_jasmine_test_suite(meta_id, test_suite_summary)
+    @jasmine_test_suite_data = TestSuiteRecord.new()
+    @jasmine_test_suite_data.test_metadatum_id=meta_id
+    @jasmine_test_suite_data.class_name="JasmineReports #{meta_id}"
+    @jasmine_test_suite_data.number_of_tests=test_suite_summary[1]
+    @jasmine_test_suite_data.number_of_errors=0
+    @jasmine_test_suite_data.number_of_failures=test_suite_summary[2]
+    @jasmine_test_suite_data.time_taken=test_suite_summary[3]
+    @jasmine_test_suite_data.number_of_tests_ignored=0
+    @jasmine_test_suite_data.number_of_tests_not_run=0
+    @jasmine_test_suite_data.save
   end
 
 def save_jasmine_test_cases(each_entry)
@@ -23,6 +27,7 @@ def save_jasmine_test_cases(each_entry)
     jasmine_test_case_data.test_suite_record_id = @jasmine_test_suite_data.id
     jasmine_test_case_data.class_name = entry[1]+entry[2]
     jasmine_test_case_data.time_taken = 0.0
+
     if (entry[0]=="FAIL")
       jasmine_test_case_data.error_msg = entry[3]
     end

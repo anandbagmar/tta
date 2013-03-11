@@ -27,18 +27,23 @@ class Parser
 
     test_suites.each do |test_suite|
       time = test_suite.attr("time").to_f
-      hash = {:time_taken => 0.0,:test_metadatum_id => meta_id,:class_name => test_suite.attr("name"),:number_of_tests=> test_suite.attr("tests"),
-              :number_of_errors=> test_suite.attr("errors"),:number_of_failures=> test_suite.attr("failures")}
+      @xml_data = TestSuiteRecord.new()
+      @xml_data.time_taken = 0.0
+      @xml_data.test_metadatum_id = meta_id
+      @xml_data.class_name= test_suite.attr("name")
+      @xml_data.number_of_tests= test_suite.attr("tests")
+      @xml_data.number_of_errors= test_suite.attr("errors")
+      @xml_data.number_of_failures= test_suite.attr("failures")
       @doc.xpath("//testsuite/testcase").each do |test_case|
         if test_report_type == "Rspec JUnit" || test_report_type == "Cucumber JUnit"
           time = XmlParser.get_time(test_case, test_suite, test_report_type)
         end
-        hash[:time_taken] += time.to_f
-        xml_data = TestSuiteRecord.create_and_save(hash)
+        @xml_data.time_taken += time.to_f
+        @xml_data.save
         if test_report_type == "Rspec JUnit" || test_report_type == "Cucumber JUnit"
-          XmlParser.saving_junit_test_cases(config_xml, test_case, xml_data, test_report_type, test_suite)
+          XmlParser.saving_junit_test_cases(config_xml, test_case, @xml_data, test_report_type, test_suite)
         elsif test_report_type == "Groovy NUnit"
-          GroovyNunitParser.parse(config_xml, xml_data,test_case)
+          GroovyNunitParser.parse(config_xml, @xml_data,test_case)
         end
       end
     end
