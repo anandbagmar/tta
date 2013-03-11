@@ -1,5 +1,5 @@
 class Parser
-  def self.map_file_type_to_parser (input_file_path, output_file_path, meta_datum_id, params)
+  def map_file_type_to_parser (input_file_path, output_file_path, meta_datum_id, params)
       file_hash =Unzip.unzip_files(input_file_path,output_file_path)
       file_hash.keys.each do |filename|
         contents = file_hash[filename]
@@ -13,9 +13,9 @@ class Parser
           JasmineParser.new.parse(contents, meta_datum_id, params)
         end
       end
-      end
+  end
 
-  def self.parse_test_record(config_xml, meta_id, params)
+  def parse_test_record(config_xml, meta_id, params)
     @doc = Nokogiri::XML config_xml
     test_report_type = params[:test_report_type]
 
@@ -43,7 +43,7 @@ class Parser
       end
     end
   end
-  def self.parse_test_record_html(config_html, meta_id, params)
+  def parse_test_record_html(config_html, meta_id, params)
     test_report_type = params[:test_report_type]
     if test_report_type == "Cucumber HTML"
       CucumberHtmlParser.parse(config_html,meta_id)

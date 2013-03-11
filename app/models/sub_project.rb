@@ -39,7 +39,7 @@ class SubProject < ActiveRecord::Base
     input_file_name = params[:logDirectory].original_filename
     output_file_path = File.join(log_dir, input_file_name)
     input_file_path = params[:logDirectory].path
-    Parser.map_file_type_to_parser input_file_path, output_file_path, meta_datum.id,params
+    Parser.new.map_file_type_to_parser input_file_path, output_file_path, meta_datum.id,params
 
   end
 
