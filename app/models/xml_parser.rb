@@ -1,11 +1,10 @@
 class XmlParser
 
-  private
-  def self.parse_xml_testsuite(config_xml, meta_id, params)
+  def parse_xml_testsuite(config_xml, meta_id, params)
     parse_test_record(config_xml, meta_id, params)
   end
 
-  def self.saving_junit_test_cases(config_xml, test_case, xml_data, test_report_type, test_suite)
+  def saving_junit_test_cases(config_xml, test_case, xml_data, test_report_type, test_suite)
     if test_report_type.eql?("Rspec JUnit")
       RspecXmlParser.new.parse(config_xml, test_suite, xml_data, test_case, test_report_type)
     elsif test_report_type.eql?("Cucumber JUnit")
@@ -13,7 +12,7 @@ class XmlParser
     end
   end
 
-  def self.parse_test_case(test_case, xml_data, config_xml, test_report_type)
+  def parse_test_case(test_case, xml_data, config_xml, test_report_type)
     @doc = Nokogiri::XML config_xml
     @xml_test_case = TestCaseRecord.new()
     @xml_test_case.test_suite_record_id= xml_data.id
@@ -33,7 +32,7 @@ class XmlParser
     @xml_test_case.save
   end
 
-  def self.get_time(test_case, test_suite, test_report_type)
+  def get_time(test_case, test_suite, test_report_type)
     if test_report_type == "Rspec JUnit"
       time = RspecXmlParser.new.get_time(test_case, test_suite)
     elsif test_report_type == "Cucumber JUnit"
@@ -42,7 +41,7 @@ class XmlParser
     time
   end
 
-  def self.get_test_suite_records(meta_data)
+  def get_test_suite_records(meta_data)
     test_suite_ids=[]
     meta_data.test_suite_records.each do |test_suite_record|
       test_suite_ids << test_suite_record.id unless test_suite_record.number_of_failures == 0
@@ -50,7 +49,7 @@ class XmlParser
     test_suite_ids
   end
 
-  def self.get_total_test_n_total_failure(metadata_record)
+  def get_total_test_n_total_failure(metadata_record)
     total_num_of_tests = 0
     number_of_failures = 0
     metadata_record.test_suite_records.each do |test_suite_record|

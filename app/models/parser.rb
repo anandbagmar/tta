@@ -31,12 +31,12 @@ class Parser
               :number_of_errors=> test_suite.attr("errors"),:number_of_failures=> test_suite.attr("failures")}
       @doc.xpath("//testsuite/testcase").each do |test_case|
         if test_report_type == "Rspec JUnit" || test_report_type == "Cucumber JUnit"
-          time = XmlParser.get_time(test_case, test_suite, test_report_type)
+          time = XmlParser.new.get_time(test_case, test_suite, test_report_type)
         end
         hash[:time_taken] += time.to_f
         xml_data = TestSuiteRecord.create_and_save(hash)
         if test_report_type == "Rspec JUnit" || test_report_type == "Cucumber JUnit"
-          XmlParser.saving_junit_test_cases(config_xml, test_case, xml_data, test_report_type, test_suite)
+          XmlParser.new.saving_junit_test_cases(config_xml, test_case, xml_data, test_report_type, test_suite)
         elsif test_report_type == "Groovy NUnit"
           GroovyNunitParser.parse(config_xml, xml_data,test_case)
         end

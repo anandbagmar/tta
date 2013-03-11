@@ -23,7 +23,7 @@ class ComparativeAnalysis
 
       test_report_type = metadata_record.test_report_type
       nunit_flag = (test_report_type=="Unit NUnit"||test_report_type =="Groovy NUnit") ? 1 : 0
-      number_of_failures, total_num_of_tests = (nunit_flag == 1 ? NunitParser.get_total_test_n_total_failure(metadata_record) : XmlParser.get_total_test_n_total_failure(metadata_record))
+      number_of_failures, total_num_of_tests = (nunit_flag == 1 ? NunitParser.get_total_test_n_total_failure(metadata_record) : XmlParser.new.get_total_test_n_total_failure(metadata_record))
 
       result << [(metadata_record.date_of_execution.to_time.to_f * 1000), (total_num_of_tests.to_f - number_of_failures.to_f) / total_num_of_tests.to_f  * 100]
     }
