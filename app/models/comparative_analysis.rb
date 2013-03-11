@@ -3,7 +3,7 @@
 class ComparativeAnalysis
 
 
-  def self.get_result_set(project_id, start_date, end_date)
+  def get_result_set(project_id, start_date, end_date)
     project=Project.find(project_id)
     sub_projects_list = project.sub_projects
     result_set = Hash.new
@@ -17,7 +17,7 @@ class ComparativeAnalysis
 
   private
 
-  def self.get_percentage_of_passing_tests(sub_project_id, st_date,en_date)
+  def get_percentage_of_passing_tests(sub_project_id, st_date,en_date)
     meta_data = SubProject.find(sub_project_id).test_metadatum.order("date_of_execution").find_all_by_date_of_execution(st_date.beginning_of_day..en_date.end_of_day)
     final_result = meta_data.inject([]){ |result, metadata_record|
 

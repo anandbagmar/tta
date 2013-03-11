@@ -16,17 +16,17 @@ describe ComparativeAnalysisController do
     sub_project = FactoryGirl.create(:sub_project, :project_id => project.id)
     test_metadata = FactoryGirl.create(:test_metadatum,:sub_project_id => sub_project.id)
     FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id)
-    result = ComparativeAnalysis.get_result_set(project.id,"2013-01-01".to_date,"2013-02-28".to_date)
+    result = ComparativeAnalysis.new.get_result_set(project.id,"2013-01-01".to_date,"2013-02-28".to_date)
     result.should_not be_empty
     assert_equal result,{"TTA_subProject"=>[[1361318400000.0, 60.0]]}
   end
 
   it "should throw error if project id not given" do
-  expect{ComparativeAnalysis.get_result_set(nil,"2012-1-1".to_date,"2012-12-12".to_date)}.to raise_error
+  expect{ComparativeAnalysis.new.get_result_set(nil,"2012-1-1".to_date,"2012-12-12".to_date)}.to raise_error
   end
 
   it"should throw error if start_date not given" do
-    expect{ComparativeAnalysis.get_result_set(1,nil,"2012-12-12".to_date)}.to raise_error
+    expect{ComparativeAnalysis.new.get_result_set(1,nil,"2012-12-12".to_date)}.to raise_error
   end
 
 

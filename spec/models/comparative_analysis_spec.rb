@@ -4,12 +4,12 @@ describe ComparativeAnalysis do
 
   it "should return result set" do
     project = FactoryGirl.create(:project)
-    result = ComparativeAnalysis.get_result_set(project.id,"1990-1-1","2012-12-12")
+    result = ComparativeAnalysis.new.get_result_set(project.id,"1990-1-1","2012-12-12")
     result.should_not be_nil
   end
 
   it "should throw error if sub_project id not given" do
-    expect{ComparativeAnalysis.get_result_set(nil,nil,nil)}.to raise_error
+    expect{ComparativeAnalysis.new.get_result_set(nil,nil,nil)}.to raise_error
   end
 
   it "should return result set with a single point if project has only one build between the date range" do
@@ -19,7 +19,7 @@ describe ComparativeAnalysis do
     test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id)
      FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id)
 
-    result = ComparativeAnalysis.get_result_set(project.id,"2013-01-01".to_date,"2013-03-30".to_date)
+    result = ComparativeAnalysis.new.get_result_set(project.id,"2013-01-01".to_date,"2013-03-30".to_date)
     result["TTA_subProject"].count.should eq(1)
   end
 
@@ -48,7 +48,7 @@ describe ComparativeAnalysis do
       end
       result1 << [(metadata_record.date_of_execution.to_time.to_f * 1000), (total_num_of_tests.to_f - number_of_failures.to_f) / total_num_of_tests.to_f  * 100]
     }
-    result = ComparativeAnalysis.get_result_set(project.id,"2013-01-01".to_date,"2013-03-30".to_date)
+    result = ComparativeAnalysis.new.get_result_set(project.id,"2013-01-01".to_date,"2013-03-30".to_date)
     final_result.reverse.should eq(result[sub_project.name])
   end
 
@@ -62,7 +62,7 @@ describe ComparativeAnalysis do
      FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id)
    FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_1.id)
 
-    result = ComparativeAnalysis.get_result_set(project.id,"2013-01-01".to_date,"2013-03-30".to_date)
+    result = ComparativeAnalysis.new.get_result_set(project.id,"2013-01-01".to_date,"2013-03-30".to_date)
     result[sub_project.name].count.should eq(2)
   end
 
@@ -79,7 +79,7 @@ describe ComparativeAnalysis do
      FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_1.id)
      FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_2.id)
 
-    result = ComparativeAnalysis.get_result_set(project.id,"2013-01-01".to_date,"2013-03-30".to_date  )
+    result = ComparativeAnalysis.new.get_result_set(project.id,"2013-01-01".to_date,"2013-03-30".to_date  )
     result[sub_project.name].count.should eq(3)
   end
 
