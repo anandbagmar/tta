@@ -3,6 +3,9 @@ var Template = function(){
       legendItem:'<div class="test-legend" id={{TestType}}><div class="rect" id={{TestTypeRect}}></div><span>{{TestTypeTitle}}</span></div>',
       pyramidPercent: '<span class="pyramidDetail" id={{TestTypePercent}}>{{PercentValue}} %</span>',
       pyramidDuration:'<span class="pyramidDetail" id={{TestTypeDuration}}>{{DurationValue}} Seconds</span>' ,
+        pyramidItem:'<div class="test-region" id={{TestTypeRegion}}>' +
+            '<div class="test-triangle" id={{TestTypeTest}}></div>' +
+            '</div>',
       errorListTemplate:'<ul class="error_list">{{ErrorList}}</ul>',
       defectErrorMessagesTemplate:'<span>{{ErrorName}}</span><div class="error_messages"><ul>{{ErrorMessageList}}</ul></div>',
       adminTableProjectTemplate: '<tr class="tr_border"><td>{{Index}}</td><td>{{ProjectName}}</td><td>{{SubProjectName}}</td><td>{{TestCount}}</td></tr>',
@@ -26,6 +29,9 @@ var Template = function(){
         },
         getPyramidDuration: function(){
             return templates.pyramidDuration;
+        },
+        getPyramidItem: function(){
+            return templates.pyramidItem;
         },
 
         getDefectErrorMessagesTemplate:function(){

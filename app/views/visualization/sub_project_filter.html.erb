@@ -8,10 +8,10 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        var color = ["", "#DB7093", "#008080", "#DAA520", "#CD853F", "#808000", "#191970", "#4B0082", "#A0522D"];
         $("#display_message").css("display", "none");
 
-        var plotPyramid = function (projectJson) {
+
+        var plotBlockPyramid = function (projectJson) {
             var unknownTestTypes = projectJson.unknown_test_types;
             var test_category = projectJson.test_types;
             if ((unknownTestTypes!= null) && (test_category.length == 0)) {
@@ -53,6 +53,7 @@
                 if (typeOfTests[index].percent == 0.0) {
                     continue;
                 }
+                var color = ["", "#DB7093", "#008080", "#DAA520", "#CD853F", "#808000", "#191970", "#4B0082", "#A0522D"];
 
                 currentItem = {};
                 currentItem.testName = typeOfTests[index].test_name.split(' ')[0];
@@ -72,8 +73,9 @@
                 pyramidItems.push(currentItem);
             }
             renderString += "<div id='pyramid-overlay' style='display:block;'></div> ";
+            console.log(renderString)
             $('#proj_title').append(proj_title);
-            $('#pyramid').append(renderString);
+            $('#block_pyramid').append(renderString);
             $('#pyramidTable').append(table_header);
             $('#pyramidTable').append(table_content);
 
@@ -82,13 +84,86 @@
 
         }
 
+
+
+        var plotIdealPyramid = function (jsonData) {
+            var typeOfTests = jsonData.test_types,
+                    templates = new Template(),
+                    pyramidItemTemplate = templates.getPyramidItem(),
+                    pyramidData = "";
+
+            for (var index = 0, len = typeOfTests.length; index < len; index++) {
+                if (typeOfTests[index].percent == 0.0)
+                    continue;
+                var testName = typeOfTests[index].test_name;
+                pyramidData += templates.render(pyramidItemTemplate, {
+                    "TestTypeRegion":testName.split(' ')[0].toLowerCase() + "_region",
+                    "TestTypeTest":testName.split(' ')[0].toLowerCase() + "_test"
+                });
+            }
+
+            $("#ideal_pyramid").html(pyramidData);
+
+            var bodyHeight = 500,
+                    bodyWidth = 500,
+                    baseTriangleHeight = parseInt(bodyHeight) / 2,
+                    triangleHeights = [],
+                    zIndex = 100;
+
+
+            var previousHeight = 0;
+            for (index = 0, len = typeOfTests.length; index < len; index++) {
+                var percentBasedHeight = parseInt(baseTriangleHeight) * parseInt(typeOfTests[index].percent) / 100;
+                previousHeight = percentBasedHeight + previousHeight;
+                triangleHeights.push(previousHeight);
+            }
+
+            $("#ideal_pyramid").css({
+                "width":baseTriangleHeight,
+                "height":baseTriangleHeight
+            });
+
+            previousHeight = 0;
+            for (index = 0, len = typeOfTests.length; index < len; index++) {
+                var testName = typeOfTests[index].test_name.split(' ')[0].toLowerCase();
+                var seq_no = typeOfTests[index].seq_no;
+                var color = ["", "#DB7093", "#008080", "#DAA520", "#CD853F", "#808000", "#191970", "#4B0082", "#A0522D"];
+
+                color = color[parseInt(seq_no / 100)];
+                console.log(seq_no);
+                console.log(color);
+
+
+                $("#" + testName + "_test").css({
+                    "border-bottom-width":triangleHeights[index] + "px",
+                    "border-left-width":triangleHeights[index] + "px",
+                    "border-right-width":triangleHeights[index] + "px",
+                    "border-top-width":"0px",
+                    "border-color":"transparent transparent " + color,
+                    "border-style":"solid"
+                });
+
+
+                $("#" + testName + "_region").css({
+                    "z-index":zIndex.toString()
+                });
+                zIndex--;
+            }
+
+
+        }
+
+
         var jsonR;
         var regExp = new RegExp("&quot;", 'g');
         jsonR = "<%= @json %>";
         jsonR = jsonR.replace(regExp, "\"");
         jsonR = JSON.parse(jsonR);
         if (jsonR != "") {
-            plotPyramid(jsonR);
+            plotBlockPyramid(jsonR);
+           if (false){
+               plotIdealPyramid(jsonR);
+           }
         }
     });
 </script>
