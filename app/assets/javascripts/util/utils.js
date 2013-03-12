@@ -6,6 +6,16 @@ var Utils={
             color += letters[Math.round(Math.random() * 15)];
         }
         return color;
+    },
+    ajaxRequest: function(options){
+        $.ajax({
+            url:options.url,
+            data:options.data||{},
+            type:options.type || "GET",
+            dataType: options.type || 'json',
+            success: options.successCallback||function(){},
+            failure: options.failureCallback||function(){}
+        });
     }
 };
 
