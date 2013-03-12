@@ -37,8 +37,7 @@ class CompareRuns
     #   test_case_record_1,test_case_record_2=get_test_cases(metadata,class_name)
 
     #   compare_test_cases(test_case_record_1,test_case_record_2)
-  end
-end
+
 
 def self.compare_test_cases(case_record_1, case_record_2)
   test_case_record1=TestCaseRecord.find_all_by_test_suite_record_id(result_hash["Project"][0])
@@ -103,3 +102,4 @@ end
 #  end
 #
 #end
+end
