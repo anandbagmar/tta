@@ -51,8 +51,10 @@
   <script>
       st_date = new Date('<%= @start_date %>');
       start_time= st_date.getTime()
+      console.log("START TIME "+start_time);
       ed_date = new Date('<%= @end_date %>');
       end_time= ed_date.getTime()
+      console.log("END TIME "+end_time);
       var data = [];
       var milli_second_per_day = 86400000;
       var multiple= ((end_time-start_time)/milli_second_per_day)/10;
@@ -70,7 +72,7 @@
           data.push({
               label: '<%= sub_project[0]%>',
               data: <%= sub_project[1]%>,
-              lines: {show: true},
+              lines: {show: true },
               points: {show: true},
               color: "#"+((1<<24)*Math.random()|0).toString(16)
           });
@@ -79,7 +81,7 @@
           return data;
       };
 
-     $.plot($("#comparative_analysis"),
+      $.plot($("#comparative_analysis"),
              getData(),
               {
                   xaxis: {
@@ -88,8 +90,9 @@
                       timeformat: "%d-%b , %y",
                       minTickSize: [1, "year"],
                       min: start_time,
-                      max: end_time,
-                      labelMargin: 50
+                      max: end_time + milli_second_per_day,
+                      labelMargin: 50,
+                      timeZoneOffset: (new Date()).getTimezoneOffset()
                   },
                   yaxis: {
                       min:0,
@@ -110,6 +113,7 @@
 
               }
       );
+
   </script>
 </div>
     <div id="y-axisLabel">
@@ -130,6 +134,11 @@
         $("#comparative-analysis-form").submit(function(){
             return ValidateStartDateIsLessThanEndDate.checkForDates($("#comparative-analysis-form"));
         });
+//        console.log(<%= @result_set%>);
+         var d=new Date();
+         var offset = d.getTimezoneOffset();
+         console.log("OFFSET :"+offset);
+
     });
 </script>
 </html>
