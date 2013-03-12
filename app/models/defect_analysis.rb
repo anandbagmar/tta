@@ -1,5 +1,5 @@
 class DefectAnalysis
-  def self.get_result_json(sub_project_id, analysis_date)
+  def get_result_json(sub_project_id, analysis_date)
 
     test_case_hash, no_of_test = getMetadataIds(sub_project_id, analysis_date)
     if !(no_of_test.nil?)
@@ -18,8 +18,7 @@ class DefectAnalysis
     return defect_analysis_json
   end
 
-  private
-  def self.get_defect_percentage(no_of_test)
+  def get_defect_percentage(no_of_test)
     sum=no_of_test.inject { |sum, x| sum + x }
     percentage=[]
     no_of_test.each do |test|
@@ -28,7 +27,7 @@ class DefectAnalysis
     percentage
   end
 
-  def self.getMetadataIds(sub_project_id, analysis_date)
+  def getMetadataIds(sub_project_id, analysis_date)
     final_result_hash = {}
     final_test_for_particular_error=[]
     index=0
@@ -60,7 +59,7 @@ class DefectAnalysis
     return final_result_hash, final_test_for_particular_error
   end
 
-  def self.get_test_cases(result)
+  def get_test_cases(result)
     test_cases=[]
     no_of_test_for_particular_error=[]
     result.each do |test_suite_id|
@@ -82,7 +81,7 @@ class DefectAnalysis
     return error_hash, no_of_test_for_particular_error
   end
 
-  def self.get_record_with_distinct_test_category(sub_project_id)
+  def get_record_with_distinct_test_category(sub_project_id)
     metadata_with_distinct_test_category = TestMetadatum.get_distinct_test_category(sub_project_id)
     @test_category=[]
     metadata_with_distinct_test_category.each do |test_type|

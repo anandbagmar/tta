@@ -13,16 +13,16 @@ describe DefectAnalysisController do
 
 
   it"should throw error if sub_project id and date not given" do
-    expect{DefectAnalysis.get_result_json(nil,nil)}.to raise_error
+    expect{DefectAnalysis.new.get_result_json(nil,nil)}.to raise_error
   end
 
   it"should throw error if sub_project id not given" do
-    expect{DefectAnalysis.get_result_json(nil,'2012-02-17'.to_date)}.to raise_error
+    expect{DefectAnalysis.new.get_result_json(nil,'2012-02-17'.to_date)}.to raise_error
   end
 
   it"should throw error if date not given" do
     sub_project = FactoryGirl.create(:sub_project)
-    expect{DefectAnalysis.get_result_json(sub_project.id,null)}.to raise_error
+    expect{DefectAnalysis.new.get_result_json(sub_project.id,null)}.to raise_error
   end
 
   it "expects an appropriate flash message if no built run on that particular date" do
