@@ -1,6 +1,7 @@
 
 <link rel="stylesheet" href="../../assets/stylesheets/lib/bootstrap.min.css"/>
 <link rel="stylesheet" href="../../assets/stylesheets/custome_header.css"/>
+<link rel="stylesheet" href="../../assets/stylesheets/bootstrap_override.css"/>
 <body>
 <div id="menu-bar">
   <div class="container">
@@ -12,11 +13,11 @@
         </a>
         <ul class="nav">
           <!--<li><a href='/home'><span class='home_logo'></span></a></li>-->
-          <li><a href='/home'>HOME</a></li>
-          <li><a href='/pyramid'>TEST PYRAMID VIEW</a></li>
-          <li><a href='/comparative_analysis'>COMPARATIVE ANALYSIS</a></li>
-          <li><a href='/defect_analysis'>DEFECT ANALYSIS</a></li>
-          <li><a href='/upload'>UPLOAD TEST DATA</a></li>
+          <li class = "<%= 'active' if(params[:controller] =~ /home/i) %>"><a href='/home'>HOME</a></li>
+          <li class = "<%= 'active' if(params[:controller] =~ /visualization/i) %>"><a href='/pyramid'>TEST PYRAMID VIEW</a></li>
+          <li class = "<%= 'active' if(params[:controller] =~ /comparative_analysis/i) %>"><a href='/comparative_analysis'>COMPARATIVE ANALYSIS</a></li>
+          <li class = "<%= 'active' if(params[:controller] =~ /defect_analysis/i) %>"><a href='/defect_analysis'>DEFECT ANALYSIS</a></li>
+          <li class = "<%= 'active' if(params[:controller] =~ /upload/i) %>"><a href='/upload'>UPLOAD TEST DATA</a></li>
         </ul>
       </div>
     </div>

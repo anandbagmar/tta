@@ -65,7 +65,7 @@ button{
 }
 
 .fields label{
-    min-width: 165px;
+  min-width: 165px;
 }
 
 .fields{
@@ -102,4 +102,11 @@ button{
 
 .required-field-date-field label{
     min-width: 165px;
+}
+
+label{
+  display: inline-block !important;
+}
+select{
+  width: inherit !important;
 }
