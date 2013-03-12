@@ -41,11 +41,11 @@ class Visualization
     get_record_with_distinct_test_category(sub_project_id)
 
     @test_category.each do |test_category|
-      @test_metadata_records_for_latest_run << TestMetadatum.get_latest_record(sub_project_id,test_category)
+      @test_metadata_records_for_latest_run << TestMetadatum.new.get_latest_record(sub_project_id,test_category)
     end
 
     @test_metadata_records_for_latest_run.each do |record|
-      no_of_tests,duration_of_test,failure_count = TestMetadatum.find_no_and_duration_of_test(record)
+      no_of_tests,duration_of_test,failure_count = TestMetadatum.new.find_no_and_duration_of_test(record)
       @total+=no_of_tests
       @no_of_test_in_test_category << no_of_tests
       @duration_of_test_in_Test_category << duration_of_test
@@ -56,7 +56,7 @@ class Visualization
 
 
   def get_record_with_distinct_test_category(sub_project_id)
-    metadata_with_distinct_test_category = TestMetadatum.get_distinct_test_category(sub_project_id)
+    metadata_with_distinct_test_category = TestMetadatum.new.get_distinct_test_category(sub_project_id)
     @test_category=[]
     metadata_with_distinct_test_category.each do |test_type|
       @test_category << test_type.test_category
