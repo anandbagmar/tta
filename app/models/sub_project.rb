@@ -14,7 +14,7 @@ class SubProject < ActiveRecord::Base
 
   def self.get_data_for_test_category(sub_project_id,test_type)
     meta_data = find(sub_project_id).test_metadatum.find_all_by_test_category(test_type)
-    result = TestMetadatum.find_no_and_duration_of_test(meta_data)
+    result = TestMetadatum.new.find_no_and_duration_of_test(meta_data)
     result
   end
 
@@ -39,8 +39,7 @@ class SubProject < ActiveRecord::Base
     input_file_name = params[:logDirectory].original_filename
     output_file_path = File.join(log_dir, input_file_name)
     input_file_path = params[:logDirectory].path
-
-    Parser.unzip_files input_file_path, output_file_path, meta_datum.id,params
+    Parser.new.map_file_type_to_parser input_file_path, output_file_path, meta_datum.id,params
 
   end
 

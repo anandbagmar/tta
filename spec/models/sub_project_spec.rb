@@ -15,7 +15,7 @@ describe SubProject do
     it "creates and saves test metadata" do
       project = FactoryGirl.create(:project)
       sub_project = FactoryGirl.create(:sub_project, :project_id => project.id)
-      Parser.stub(:unzip_files)
+      Parser.any_instance.stub(:map_file_type_to_parser)
       sub_project.test_metadatum.count.should == 0
       meta_data  = sub_project.create_dependency(@attr)
       sub_project.test_metadatum.count.should == 1

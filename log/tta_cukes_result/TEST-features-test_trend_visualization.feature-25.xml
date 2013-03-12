@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite errors="0" failures="0" name="Test Trend Visualization Flow" skipped="0" tests="1" time="105.594216">
-<testcase classname="Test Trend Visualization Flow" name="Defect analysis Flow" time="105.594216">
-  <system-out/>
-  <system-err/>
-</testcase>
-</testsuite>

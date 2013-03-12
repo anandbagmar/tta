@@ -6,9 +6,9 @@ var renderDefectTable = {
         var percentage = "";
         if (jsonData != "") {
             $("#defect_analysis_table").css("display","block");
-            jsonData = removeQuotsFromJSON.removeQuots(jsonData);
-            jsonData = jsonData.replace(/[\n \t\r]+/g, ' ');
+            jsonData = makeValidJSON.validate(jsonData);
             jsonData = JSON.parse(jsonData);
+
             subProjectName = "<h1>" + "Sub Project:" + jsonData.sub_project_name.toUpperCase() + "</h1>";
             percentage = jsonData.percentage;
             var tableResponse = jsonData.errors;

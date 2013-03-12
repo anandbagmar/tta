@@ -62,10 +62,9 @@ module Seed
 
     def self.create_test_suite_record(test_meta_data_id, project_id, sub_project_id,test_suite_record_number)
       test_suite_record_name = "Class #{project_id}.#{sub_project_id}.#{test_meta_data_id}.#{test_suite_record_number}"
-      test_suite_record = TestSuiteRecord.create(:class_name => test_suite_record_name, :number_of_tests => rand(25..50), :number_of_errors => rand(12), :number_of_failures => rand(12), :time_taken => rand(1..5).to_s)
-      test_suite_record.test_metadatum_id= test_meta_data_id
-      test_suite_record.save
-      TestSuiteRecord.find_by_class_name(test_suite_record_name).id
+
+      test_suite_record = TestSuiteRecord.create_and_save(:test_metadatum_id=> test_meta_data_id,:class_name => test_suite_record_name, :number_of_tests => rand(25..50), :number_of_errors => rand(12), :number_of_failures => rand(12), :time_taken => rand(1..5).to_s)
+      test_suite_record.id
     end
 
     def self.create_test_case_record(test_suite_record_id, project_id, sub_project_id,test_case_record_number)

@@ -17,12 +17,16 @@
 
 #pyramidTable{
   border: solid;
-  float: right;
+  float: left;
   margin: 8% 8%;
   border-collapse: collapse;
-
 }
 
+#block_pyramid{
+  float:left;
+  padding-left: 220px;
+
+}
 #pyramidTable tr,th,td{
 border: 1px solid;
   padding: 10px;
@@ -82,12 +86,13 @@ border: 1px solid;
   margin-top:-400px;
 }
 
-#pyramid{
-  position: relative;
-  margin-bottom: 8%;
-  float: left;
-  padding-left: 8%;
-
+#ideal_pyramid{
+  //position: relative;
+  //margin-bottom: 8%;
+  //float: left;
+  padding-right: 20%;
+  width:1000px;
+  margin: 0 auto;
 }
 
 .pyramidDetail{
@@ -97,4 +102,16 @@ border: 1px solid;
 }
 .pyramidItem{
   position: relative;
+}
+#ideal_pyramid .test-triangle{
+  margin: 0 auto;
+  border-style:solid;
+  height: 0px;
+  width: 0px;
+  margin: 0 auto;
+}
+#ideal_pyramid .test-region{
+  position: absolute;
+  width: 100%;
+  min-height: 300px;
 }

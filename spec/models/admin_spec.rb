@@ -14,10 +14,10 @@ describe Admin do
     date_of_execution = "2013-02-02"
     project1 = FactoryGirl.create(:project,:name => "TTA1")
     sub_project11 = FactoryGirl.create(:sub_project, :project_id => project1.id,:name => "TTA_subProject1")
-    test_metadata_1 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project11.id, :date_of_execution => date_of_execution)
+    FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project11.id, :date_of_execution => date_of_execution)
     project2 = FactoryGirl.create(:project , :name => "TTA2")
     sub_project21 = FactoryGirl.create(:sub_project, :project_id => project2.id,:name => "TTA_subProject2")
-    test_metadata_2 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project21.id, :date_of_execution => date_of_execution)
+     FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project21.id, :date_of_execution => date_of_execution)
     project=Array.new
     project.push(project1)
     project.push(project2)
@@ -29,19 +29,19 @@ describe Admin do
   date_of_execution = "2013-02-02"
   project1 = FactoryGirl.create(:project, :name => "TTA11")
   sub_project11 = FactoryGirl.create(:sub_project, :project_id => project1.id,:name => "TTA_subProject11")
-  test_metadata_11 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project11.id, :date_of_execution => date_of_execution)
+   FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project11.id, :date_of_execution => date_of_execution)
   sub_project12 = FactoryGirl.create(:sub_project, :project_id => project1.id,:name => "TTA_subProject12")
-  test_metadata_12 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project12.id, :date_of_execution => date_of_execution)
-  test_metadata_13 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project12.id, :date_of_execution => date_of_execution)
-  test_metadata_14 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project12.id, :date_of_execution => date_of_execution)
+   FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project12.id, :date_of_execution => date_of_execution)
+ FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project12.id, :date_of_execution => date_of_execution)
+   FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project12.id, :date_of_execution => date_of_execution)
 
   project2 = FactoryGirl.create(:project , :name => "TTA12")
   sub_project21 = FactoryGirl.create(:sub_project, :project_id => project2.id,:name => "TTA_subProject21")
-  test_metadata_21 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project21.id, :date_of_execution => date_of_execution)
-  test_metadata_22 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project21.id, :date_of_execution => date_of_execution)
+    FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project21.id, :date_of_execution => date_of_execution)
+   FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project21.id, :date_of_execution => date_of_execution)
   sub_project22 = FactoryGirl.create(:sub_project, :project_id => project2.id,:name => "TTA_subProject22")
-  test_metadata_23 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project22.id, :date_of_execution => date_of_execution)
-  test_metadata_24 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project22.id, :date_of_execution => "2013-02-02")
+   FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project22.id, :date_of_execution => date_of_execution)
+   FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project22.id, :date_of_execution => "2013-02-02")
 
   expect_json= {"#{project1.id}" =>[{"project_name" => "#{project1.name}"},
                                 {"sub_projects" => ["#{sub_project11.name}","#{sub_project12.name}"]},
