@@ -1,6 +1,6 @@
 class Visualization
   TESTTYPE = YAML.load(File.open("#{Rails.root}/config/test_types.yml","r"))
-  def self.getResultJson(sub_project_id)
+  def getResultJson(sub_project_id)
     @HIGH_PRIORITY_SEQUENCE = 1000
     get_latest_metadata_record(sub_project_id)
     unknown_test_types=[]
@@ -31,8 +31,7 @@ class Visualization
   end
 
 
-  private
-  def self.get_latest_metadata_record(sub_project_id)
+  def get_latest_metadata_record(sub_project_id)
     @test_metadata_records_for_latest_run = []
     @no_of_test_in_test_category =[]
     @no_of_failure_in_test_category=[]
@@ -56,7 +55,7 @@ class Visualization
   end
 
 
-  def self.get_record_with_distinct_test_category(sub_project_id)
+  def get_record_with_distinct_test_category(sub_project_id)
     metadata_with_distinct_test_category = TestMetadatum.get_distinct_test_category(sub_project_id)
     @test_category=[]
     metadata_with_distinct_test_category.each do |test_type|
@@ -64,7 +63,7 @@ class Visualization
     end
   end
 
-  def self.calculatePercentageAndDuration(no_of_test_in_test_category,duration_of_test_in_test_category,total_no_of_tests,failure_count)
+  def calculatePercentageAndDuration(no_of_test_in_test_category,duration_of_test_in_test_category,total_no_of_tests,failure_count)
     percent = []
     duration = []
     percent_passing = []

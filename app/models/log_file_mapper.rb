@@ -1,0 +1,3 @@
+class LogFileMapper
+
+end
