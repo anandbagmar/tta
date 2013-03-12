@@ -6,39 +6,64 @@ class CompareRuns
     date_one = form_data["date_one"]["analysis"]
     date_two = form_data["date_two"]["analysis"]
     metadata = []
-    metadata << TestMetadatum.get_latest_record_for_specific_date(sub_project_id,test_category,date_one)
-    metadata << TestMetadatum.get_latest_record_for_specific_date(sub_project_id,test_category,date_two)
-    class_names=TestSuiteRecord.get_uniq_class_names_between_two_runs(metadata[0].id,metadata[1].id)
-    test_case_record_1=[]
-    test_case_record_2=[]
+    metadata << TestMetadatum.get_latest_record_for_specific_date(sub_project_id, test_category, date_one)
+    metadata << TestMetadatum.get_latest_record_for_specific_date(sub_project_id, test_category, date_two)
+    result_hash=TestSuiteRecord.get_class_name_suite_id_hash(metadata[0].id, metadata[1].id)
+    binding.pry
+    test_case_ids=[]
+    binding.pry
+    result_hash.values.each do |suite_id_arr|
 
-    class_names.each do |class_name|
-      test_case_record_1,test_case_record_2=get_test_cases(metadata,class_name)
-      compare_test_cases(test_case_record_1,test_case_record_2)
-    end
-  end
-
-  def self.compare_test_cases(case_record_1, case_record_2)
-  end
+        test_case_ids<<TestCaseRecord.select("id").where("test_suite_record_id IN "+case_id.to_s+" AND error_msg!='' ")
+                                                                                                                              #NEEDS REFACTORING
 
 
-  def self.get_test_cases(metadata_record,class_name)
-    test_case_records_1 = []
-    test_case_records_2 = []
 
-      metadata_record[0].test_suite_records.each do |suite_record|
-          suite_record.test_case_records.each do |case_records|
-            test_case_records_1 << case_records
-          end
-      end
-    metadata_record[1].test_suite_records.each do |suite_record|
-      suite_record.test_case_records.each do |case_records|
-        test_case_records_2 << case_records
+
+        if test_case_ids.last.empty?
+          test_case_ids.pop
+        end
       end
     end
-    return test_case_records_1,test_case_records_2
-  end
 
+
+
+
+    # test_case_record_1=[]
+    # test_case_record_2=[]
+
+
+    #  class_names.each do |class_name|
+    #   test_case_record_1,test_case_record_2=get_test_cases(metadata,class_name)
+
+    #   compare_test_cases(test_case_record_1,test_case_record_2)
+  end
+end
+
+def self.compare_test_cases(case_record_1, case_record_2)
+  test_case_record1=TestCaseRecord.find_all_by_test_suite_record_id(result_hash["Project"][0])
+  test_case_record2= TestCaseRecord.find_all_by_test_suite_record_id(result_hash["Project"][1])
+
+  TestCaseRecord.select("id").where("test_suite_record_id = 51 AND error_msg!='' ")
+end
+
+
+def self.get_test_cases(metadata_record, class_name)
+  test_case_records_1 = []
+  test_case_records_2 = []
+
+  metadata_record[0].test_suite_records.each do |suite_record|
+    suite_record.test_case_records.each do |case_records|
+
+      test_case_records_1 << case_records
+    end
+  end
+  metadata_record[1].test_suite_records.each do |suite_record|
+    suite_record.test_case_records.each do |case_records|
+      test_case_records_2 << case_records
+    end
+  end
+  return test_case_records_1, test_case_records_2
 end
 
 
