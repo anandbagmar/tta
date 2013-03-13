@@ -23,17 +23,10 @@ class CompareRunsController < ApplicationController
 
   respond_to :json, :html
   def getCompareJson
-
-   #respond_with(@resp.to_json)
-   # params["project_id"]=1
-   # params["sub_project_id"]=1
-   # params["test_category"]="UNIT TEST"
-
-    puts "**************************************"
-    puts params
-    puts "**************************************"
-    CompareRuns.getCompareResult(params)
-    render :index
+    compare_hash = CompareRuns.getCompareResult(params)
+    compare_hash["dates"]=[params["date_one"]["analysis"],params["date_two"]["analysis"]]
+    @compare_json =compare_hash.to_json
+    @compare_json
   end
 
 end

@@ -35,3 +35,24 @@
   border-radius: 5px;
   box-shadow: 1px 1px 2px #6D6868;
 }
+
+#result_table{
+  margin-left: 37%;
+  margin-top: 10px;
+  border-collapse: collapse;
+}
+#result_table th{
+background-color: rgb(241, 127, 122);
+}
+
+#result_table tr{
+  background: beige;
+}
+#result_table td{
+  text-align: left;
+}
+
+#result-title{
+  margin-top: 30px;
+  margin-bottom: 20px;
+}

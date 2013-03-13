@@ -48,17 +48,5 @@ class TestMetadatum < ActiveRecord::Base
     @meta_data = metadata_record.last
     end
   end
-  #
-  #def self.get_test_cases(metadata_record)
-  #  test_case_records = []
-  #  metadata_record.each do |metadata|
-  #      metadata.test_suite_records.each do |suite_record|
-  #      suite_record.test_case_records.each do |case_records|
-  #        test_case_records << case_records
-  #      end
-  #    end
-  #  end
-  #  test_case_records
-  #end
 end
 

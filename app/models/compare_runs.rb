@@ -8,98 +8,40 @@ class CompareRuns
     metadata = []
     metadata << TestMetadatum.get_latest_record_for_specific_date(sub_project_id, test_category, date_one)
     metadata << TestMetadatum.get_latest_record_for_specific_date(sub_project_id, test_category, date_two)
+
     result_hash=TestSuiteRecord.get_class_name_suite_id_hash(metadata[0].id, metadata[1].id)
-    binding.pry
-    test_case_ids=[]
-    binding.pry
-    result_hash.values.each do |suite_id_arr|
-
-        test_case_ids<<TestCaseRecord.select("id").where("test_suite_record_id IN "+case_id.to_s+" AND error_msg!='' ")
-                                                                                                                              #NEEDS REFACTORING
-
-
-
-
-        if test_case_ids.last.empty?
-          test_case_ids.pop
-        end
+    @test_case_id=[]
+    result_hash.values.each do |suite_id_arrs|
+      test_case_id1=[]
+      test_case_id2=[]
+      suite_id_arrs[0].zip(suite_id_arrs[1]).each do |id1, id2|
+        test_case_id1<<TestCaseRecord.select("id").where("test_suite_record_id="+id1.to_s+" AND error_msg!='' ")
+        test_case_id2<<TestCaseRecord.select("id").where("test_suite_record_id="+id2.to_s+" AND error_msg!='' ")
+        @test_case_id << get_both_test_cases_failing(test_case_id1, test_case_id2)
       end
     end
-
-
-
-
-    # test_case_record_1=[]
-    # test_case_record_2=[]
-
-
-    #  class_names.each do |class_name|
-    #   test_case_record_1,test_case_record_2=get_test_cases(metadata,class_name)
-
-    #   compare_test_cases(test_case_record_1,test_case_record_2)
-
-
-def self.compare_test_cases(case_record_1, case_record_2)
-  test_case_record1=TestCaseRecord.find_all_by_test_suite_record_id(result_hash["Project"][0])
-  test_case_record2= TestCaseRecord.find_all_by_test_suite_record_id(result_hash["Project"][1])
-
-  TestCaseRecord.select("id").where("test_suite_record_id = 51 AND error_msg!='' ")
-end
-
-
-def self.get_test_cases(metadata_record, class_name)
-  test_case_records_1 = []
-  test_case_records_2 = []
-
-  metadata_record[0].test_suite_records.each do |suite_record|
-    suite_record.test_case_records.each do |case_records|
-
-      test_case_records_1 << case_records
-    end
+    @test_case_id = @test_case_id.reject{|e| e.empty?}
+    class_names_of_test_cases_failing=get_class_names(@test_case_id)
+    class_name_hash = Hash.new()
+    class_name_hash["both_failing"] = class_names_of_test_cases_failing
+    class_name_hash
   end
-  metadata_record[1].test_suite_records.each do |suite_record|
-    suite_record.test_case_records.each do |case_records|
-      test_case_records_2 << case_records
+
+  def self.get_both_test_cases_failing(test_case_id1, test_case_id2)
+    test_case_id =[]
+    if (!(test_case_id1[0].empty?)&&(!(test_case_id2[0].empty?)))
+      if test_case_id1[0][0]["error_msg"]==test_case_id2[0][0]["error_msg"]
+        test_case_id.push([test_case_id1[0][0]["id"], test_case_id2[0][0]["id"]])
+      end
     end
+    test_case_id
   end
-  return test_case_records_1, test_case_records_2
-end
 
-
-#class_names.each do |class_name|
-#  test_suite_records=extract_test_suite_records(test_metadata_ids,class_names[0])
-#binding.pry
-#test_case_records=extract_test_case_records(test_suite_records)
-#binding.pry
-#compare_test_case_records(test_case_records)
-#end
-
-
-#def self.compare_test_case_records(test_case_records)
-#end
-#def self.extract_test_case_records(test_suite_records)
-#  test_case_records=[]
-#  #index=1;
-#  #key=""
-#  test_suite_records.each do|suite_record|
-#   #key="date_"+index.to_s
-#    suite_record.test_case_records.each do |case_record|
-#       test_case_records << case_record
-#    end
-#    #index+=1
-#  end
-#  binding.pry
-#  test_case_records
-#end
-
-
-#def self.extract_test_suite_records(test_metadata_ids,class_name)
-#   test_case=[]
-#   test_metadata_ids.each do |metadata_id|
-#     test_suites = TestSuiteRecord.where(:class_name => class_name,:test_metadatum_id => metadata_id)
-#     test_cases  =test_suites.test_case_records
-#     binding.pry
-#  end
-#
-#end
+  def self.get_class_names(test_case_id)
+    class_name=[]
+    test_case_id.each do |arr_test_case|
+      class_name<<TestCaseRecord.find_by_id(arr_test_case[0]).class_name
+    end
+    class_name
+  end
 end

@@ -5,7 +5,6 @@ $(document).ready(function () {
     $("#compare_runs_form").validate();
 
     var loadProjectData = function (Selector, project_json) {
-    console.log("LOAD PROJECT DATA :"+project_json);
     jQuery.each(project_json, function (key, projectData) {
     var project_id = projectData["id"];
     var projectName = projectData["name"];
@@ -23,7 +22,6 @@ $(document).ready(function () {
 var pageLoad = $(".serverData").html();
 projects = makeValidJSON.validate(pageLoad);
 projects = JSON.parse(projects);
-console.log(projects);
 loadProjectData("#project_select", projects);
 
 
