@@ -22,11 +22,21 @@ class CompareRunsController < ApplicationController
   end
 
   respond_to :json, :html
+  def getDateRuns
+    sub_project_id =params["subproject_id"]
+    test_category  =params["test_category"]
+    @compare_dates = TestMetadatum.where(:sub_project_id => sub_project_id, :test_category => test_category).select([:date_of_execution]).uniq
+    respond_with(@compare_dates.to_json)
+  end
+
+  respond_to :json, :html
   def getCompareJson
-    compare_hash = CompareRuns.getCompareResult(params)
-    compare_hash["dates"]=[params["date_one"]["analysis"],params["date_two"]["analysis"]]
-    @compare_json =compare_hash.to_json
-    @compare_json
+    binding.pry
+    puts params
+    #compare_hash = CompareRuns.getCompareResult(params)
+    #compare_hash["dates"]=[params["date_one"]["analysis"],params["date_two"]["analysis"]]
+    #@compare_json =compare_hash.to_json
+    #@compare_json
   end
 
 end

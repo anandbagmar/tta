@@ -23,6 +23,7 @@ Tta::Application.routes.draw do
   match '/get_sub_project_data' => 'compare_runs#getSubProjects'
   match '/get_test_types' => 'compare_runs#getTestTypes'
   match '/get_compare_json' => 'compare_runs#getCompareJson'
+  match '/get_compare_dates' => 'compare_runs#getDateRuns'
 
   resources :projects,:junit_xml_data,:j_unit_xmls,:unit_test_xml
   post '/comparative_analysis/result' => "comparative_analysis#date_filter"
