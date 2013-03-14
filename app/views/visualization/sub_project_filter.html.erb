@@ -49,6 +49,7 @@
                     height = 400;
             proj_title = "<h3>Test-Pyramid for: " + projectJson.sub_project_name.toUpperCase() + "</h3><br>";
             var pyramidItems = [];
+            var bottom=0;
             for (var index = 0, len = typeOfTests.length; index < len; index++) {
                 if (typeOfTests[index].percent == 0.0) {
                     continue;
@@ -67,10 +68,17 @@
                 currentItem.pass_percent = typeOfTests[index].percentage_passing;
                 table_content += "<tr> <td" + " style='background:" + currentItem.color + "'>" + currentItem.testName + "</td> <td>" + currentItem.no_of_test + "</td>";
                 table_content += "<td>" + currentItem.total_run_time + " secs</td><td>" + currentItem.percent + " %</td> <td>" + currentItem.pass_percent + " %</td> </tr>";
-                renderString += "<div class='pyramidItem'>";
-                renderString += "<div id=\'" + currentItem.testName + "_div\' class='trapezoid' style='width:" + currentItem.triangleWidth + "px; border-bottom-width:" + currentItem.triangleHeight + "px; border-bottom-color:" + currentItem.color + ";'></div>";
+                renderString += "<div class='pyramidItem' " +
+                                "style= 'left: -" + currentItem.triangleHeight/2 + "px; " +
+                                       "bottom:" +(bottom)+ "px;'>";
+                renderString += "<div id=\'" + currentItem.testName +"_div\' class='trapezoid' " +
+                        "style='width:" +currentItem.triangleWidth + "px; " +
+                        "border-bottom-width:" +currentItem.triangleWidth + "px; " +
+
+                        "border-bottom-color:" +currentItem.color + ";'></div>";
                 renderString += "</div>";
                 pyramidItems.push(currentItem);
+                bottom+=currentItem.triangleHeight-index-1;
             }
             renderString += "<div id='pyramid-overlay' style='display:block;'></div> ";
             console.log(renderString)
