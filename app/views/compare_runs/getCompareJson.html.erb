@@ -9,8 +9,8 @@
             var ResultType ="",
             templates = new Template(),
             CompareTable = templates.getCompareTableTemplate();
-            classNames ="<tr><th>CLASS-NAMES</th></tr>";
-            class_name_array = compareJson.both_failing
+            var classNames ="<tr><th>CLASS-NAMES</th></tr>",
+            class_name_array = compareJson.both_failing,
             resultType = "<h3><b>TEST-CASES FAILING ON BOTH \""+compareJson.dates[0]+"\" AND \""+compareJson.dates[1]+"\"<b></b></h3>";
 
          for(var index= 0;index<class_name_array.length;index++){
@@ -25,6 +25,7 @@
         var compareJson;
         compareJson="<%= @compare_json %>";
         compareJson=makeValidJSON.validate(compareJson);
+        debugger;
         compareJson=JSON.parse(compareJson);
         if(compareJson!=""){
             displayCompareResults(compareJson);
