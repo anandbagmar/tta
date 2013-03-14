@@ -1,0 +1,33 @@
+<%= render :file=> '/compare_runs/index.html.erb' %>
+<%= render 'layouts/compare_partial' %>
+<script type="text/javascript" src="../javascripts/util/templates.js"></script>
+<script type="text/javascript" src="../javascripts/util/utils.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var displayCompareResults = function(compareJson){
+            var ResultType ="",
+            templates = new Template(),
+            CompareTable = templates.getCompareTableTemplate();
+            classNames ="<tr><th>CLASS-NAMES</th></tr>";
+            class_name_array = compareJson.both_failing
+            resultType = "<h3><b>TEST-CASES FAILING ON BOTH \""+compareJson.dates[0]+"\" AND \""+compareJson.dates[1]+"\"<b></b></h3>";
+
+         for(var index= 0;index<class_name_array.length;index++){
+               classNames += templates.render(CompareTable,{
+                  "ClassName":class_name_array[index]
+               });
+            }
+            $("#result_type").html();
+            $("#result-title").html(resultType);
+             $("#result_table").html(classNames);
+        }
+        var compareJson;
+        compareJson="<%= @compare_json %>";
+        compareJson=makeValidJSON.validate(compareJson);
+        compareJson=JSON.parse(compareJson);
+        if(compareJson!=""){
+            displayCompareResults(compareJson);
+        }
+    });
+</script>
