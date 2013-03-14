@@ -27,7 +27,6 @@ class Visualization
       :unknown_test_types => (unknown_test_types if unknown_test_types!=[])
     }.to_json
     return @json
-
   end
 
 
