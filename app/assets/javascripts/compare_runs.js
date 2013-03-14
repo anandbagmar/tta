@@ -95,7 +95,6 @@ loadProjectData("#project_select", projects);
                     date=date.replace("T"," ");
                     date=date.replace("Z"," ");
                     //var d=new date(date);
-                    console.log(date);
                     $("#date_one_select").append(
                         $("<option></option>")
                             .attr("id","date_one_"+index.toString())
@@ -104,13 +103,6 @@ loadProjectData("#project_select", projects);
                             .attr("class", "compare_date_one")
                     );
 
-                    $("#date_two_select").append(
-                        $("<option></option>")
-                            .attr("id","date_two_"+index.toString())
-                            .attr("value", date)
-                            .text(date)
-                            .attr("class", "compare_date_two")
-                    );
                    index++;
                 });
             }
@@ -121,7 +113,21 @@ loadProjectData("#project_select", projects);
 
    $(document).delegate("#date_one_select","change",function(){
        var date1=  ($("#date_one_select option:selected").val());
-       var date2=$("#date_two_select");
+       var dates = $("#date_one_select>option").map(function() { return $(this).val(); });
+       $(".compare_date_two").remove();
+       for(i=1;i<dates.length; i++) {
+           $("#date_two_select").append(
+               $("<option></option>")
+                   .attr("id","date_two_"+i.toString())
+                   .attr("value", dates[i])
+                   .text(dates[i])
+                   .attr("class", "compare_date_two")
+           );
+       }
+//       var options = $("#date_one_select > option").clone();
+//       console.log(options);
+//       $('#date_two_select').append(options);
+       var date2 = $("#date_two_select");
        date2.find("option[value='"+date1+"']").remove();
        $("#date_two_select").removeAttr("disabled");
     });

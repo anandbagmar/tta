@@ -41,16 +41,6 @@
       <label for ="date2">Date 2</label>
         <%= select_tag "date_two","",:prompt => "----SELECT DATE----",:id => 'date_two_select',:class => 'required' ,'disabled' => true %>
       </div>
-      <!--<div class="fields-left">-->
-
-        <!--<label for="date1">Date 1</label>-->
-        <!--<%= datepicker_input 'date_one', 'analysis', :dateFormat => "yy-mm-dd", :maxDate => 0, :readonly => "readonly", :placeholder => 'YYYY-MM-DD', :class => 'required'%>-->
-      <!--</div>-->
-
-      <!--<div class="fields-left">-->
-        <!--<label for="date2">Date 2 </label>-->
-        <!--<%= datepicker_input 'date_two', 'analysis', :dateFormat => "yy-mm-dd", :maxDate => 0, :readonly => "readonly", :placeholder => 'YYYY-MM-DD', :class => 'required' %>-->
-      <!--</div>-->
 
       <div id="do-compare">
         <%= submit_tag nil, {:id => "compare_runs"} %>
