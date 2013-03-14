@@ -6,15 +6,12 @@
 }
 
 #menu-bar h1{
-  color: black;
+  color: #77B9FF;
   font-size: 18px;
   margin: 0;
   line-height: 20px;
 }
-#menu-bar .navbar .brand span{
-  font-size: 12px;
-  color: black;
-}
+
 #menu-bar .nav{
   position: absolute;
   margin-left: 50%;
@@ -22,9 +19,6 @@
   width: 800px;
   left: -400px;
   margin-top: 12px;
-}
-#menu-bar .navbar .navbar-inner{
-  padding-left: 10px;
 }
 
 #menu-bar .menu-options a:hover span{

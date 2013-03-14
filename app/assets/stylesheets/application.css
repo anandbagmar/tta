@@ -25,11 +25,17 @@
     z-index: 1;
 }
 
+#footer-bar #footer-email span{
+  color: #ffffff;
+  font-size: 15px;
+}
 #footer-bar #footer-email a{
-    display: inline-block;
-    line-height: 50px;
-    color: #F0F0F0;
-    text-decoration: underline;
+  display: inline-block;
+  line-height: 50px;
+  color: #B6D6F8;
+  text-decoration: underline;
+  font-size: 15px;
+  text-shadow: 1px 1px 1px #00090F;
 }
 .home_logo{
     display: block;
