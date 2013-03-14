@@ -12,7 +12,7 @@ var Utils={
             url:options.url,
             data:options.data||{},
             type:options.type || "GET",
-            dataType: options.type || 'json',
+            dataType: options.dataType || 'json',
             success: options.successCallback||function(){},
             failure: options.failureCallback||function(){}
         });
