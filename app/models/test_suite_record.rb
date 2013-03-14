@@ -9,6 +9,7 @@ class TestSuiteRecord < ActiveRecord::Base
     result_hash = Hash.new
     result_hash = get_test_suite_hash(test_suite_record1,result_hash,0)
     result_hash = get_test_suite_hash(test_suite_record2,result_hash,1)
+    result_hash
   end
 
   def self.get_test_suite_hash(test_suite_records,result_hash,arr_no)

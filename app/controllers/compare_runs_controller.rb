@@ -31,12 +31,10 @@ class CompareRunsController < ApplicationController
 
   respond_to :json, :html
   def getCompareJson
-    binding.pry
-    puts params
-    #compare_hash = CompareRuns.getCompareResult(params)
-    #compare_hash["dates"]=[params["date_one"]["analysis"],params["date_two"]["analysis"]]
-    #@compare_json =compare_hash.to_json
-    #@compare_json
+    @compare_hash = CompareRuns.getCompareResult(params)
+    @compare_hash["dates"]=[params["date_one"],params["date_two"]]
+    @compare_json =@compare_hash.to_json
+    @compare_json
   end
 
 end
