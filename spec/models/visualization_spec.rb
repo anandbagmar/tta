@@ -34,7 +34,7 @@ describe Visualization do
       FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_functional.id,:time_taken=>1,:class_name=>"class1.1.1",:error_msg=>"")
     json= Visualization.new.getResultJson(sub_project.id)
     parsed_json = ActiveSupport::JSON.decode(json)
-    parsed_json["test_types"][0]["seq_no"].should be > parsed_json["test_types"][1]["seq_no"]
+    parsed_json["test_types"][0]["seq_no"].should be < parsed_json["test_types"][1]["seq_no"]
   end
 
   it "should return json with proper sub_project_name" do
