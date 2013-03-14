@@ -124,9 +124,6 @@ loadProjectData("#project_select", projects);
                    .attr("class", "compare_date_two")
            );
        }
-//       var options = $("#date_one_select > option").clone();
-//       console.log(options);
-//       $('#date_two_select').append(options);
        var date2 = $("#date_two_select");
        date2.find("option[value='"+date1+"']").remove();
        $("#date_two_select").removeAttr("disabled");
