@@ -6,6 +6,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         var displayCompareResults = function(compareJson){
+            $("#project_select").attr("disabled","disabled");
             var ResultType ="",
             templates = new Template(),
             CompareTable = templates.getCompareTableTemplate();
@@ -25,7 +26,6 @@
         var compareJson;
         compareJson="<%= @compare_json %>";
         compareJson=makeValidJSON.validate(compareJson);
-        debugger;
         compareJson=JSON.parse(compareJson);
         if(compareJson!=""){
             displayCompareResults(compareJson);
