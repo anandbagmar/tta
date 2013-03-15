@@ -16,7 +16,23 @@ var Utils={
             success: options.successCallback||function(){},
             failure: options.failureCallback||function(){}
         });
+    },
+    loadDropDown : function(Selector,id,value,text,class_name)
+    {
+        $(Selector).append(
+            $("<option></option>")
+                .attr("id", id)
+                .attr("value",value)
+                .text(text)
+                .attr("class",class_name)
+        )
+    },
+
+    removeAttribute : function (Selector,attribute_name)
+    {
+       $(Selector).removeAttr(attribute_name);
     }
+
 };
 
 var makeValidJSON = {

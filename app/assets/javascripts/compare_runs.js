@@ -4,17 +4,6 @@ $(document).ready(function () {
 
     $("#compare_runs_form").validate();
 
-    var loadDropDown = function(Selector,id,value,text,class_name)
-    {
-      $(Selector).append(
-                         $("<option></option>")
-                             .attr("id", id)
-                             .attr("value",value)
-                             .text(text)
-                             .attr("class",class_name)
-                        )
-    };
-
     var loadProjectData = function (Selector, project_json)
     {
         jQuery.each(project_json, function (key, projectData) {
@@ -28,6 +17,8 @@ $(document).ready(function () {
                                 .attr("class", "proj-element")
         );
     });
+
+
 }
 
 //ON PAGE LOAD
@@ -39,34 +30,34 @@ loadProjectData("#project_select", projects);
         var projectResponse  = function(json_response){
             $('.sub-element').remove();
             $('.test-element').remove();
-            $("#sub_project_select").removeAttr("disabled");
+            Utils.removeAttribute("#sub_project_select","disabled");
             jQuery.each(json_response, function (key, projectData) {
                 var project_id = projectData["id"];
                 var projectName = projectData["name"];
-                loadDropDown("#sub_project_select",project_id,project_id,projectName,"sub-element");
+                Utils.loadDropDown("#sub_project_select",project_id,project_id,projectName,"sub-element");
             });
         };
 
         var subProjectResponse =function (json_response)
         {
             $('.test-element').remove();
-            $("#test_types_select").removeAttr("disabled");
+            Utils.removeAttribute("#test_types_select","disabled");
             jQuery.each(json_response, function (key, testTypes) {
                 var test_type = testTypes["test_category"];
-                loadDropDown("#test_types_select",test_type,test_type,test_type,"test-element");
+                Utils.loadDropDown("#test_types_select",test_type,test_type,test_type,"test-element");
             });
         }
 
         var testTypeResponse =function (json_response)
         {
             $(".compare_date_one").remove();
-            $("#date_one_select").removeAttr("disabled");
+            Utils.removeAttribute("#date_one_select","disabled");
             var index=1;
             jQuery.each(json_response, function (key, compare_date) {
                 var date = compare_date["date_of_execution"];
                 date=date.replace("T"," ");
                 date=date.replace("Z"," ");
-                loadDropDown("#date_one_select","date_one_"+index.toString(),date,date,"compare_date_one");
+                Utils.loadDropDown("#date_one_select","date_one_"+index.toString(),date,date,"compare_date_one");
                 index++;
             });
         }
@@ -100,11 +91,11 @@ loadProjectData("#project_select", projects);
        var dates = $("#date_one_select>option").map(function() { return $(this).val(); });
        $(".compare_date_two").remove();
        for(i=1;i<dates.length; i++) {
-           loadDropDown("#date_two_select","date_two_"+i.toString(),dates[i],dates[i],"compare_date_two");
+           Utils.loadDropDown("#date_two_select","date_two_"+i.toString(),dates[i],dates[i],"compare_date_two");
        }
        var date2 = $("#date_two_select");
        date2.find("option[value='"+date1+"']").remove();
-       $("#date_two_select").removeAttr("disabled");
+       Utils.removeAttribute("#date_two_select","disabled");
     });
 
 });
