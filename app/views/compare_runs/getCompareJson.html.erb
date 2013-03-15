@@ -5,6 +5,8 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
+
+
         var displayCompareResults = function(compareJson){
             $("#project_select").attr("disabled","disabled");
             var ResultType ="",
@@ -12,6 +14,7 @@
             CompareTable = templates.getCompareTableTemplate();
             var classNames ="<tr><th>CLASS-NAMES</th></tr>",
             class_name_array = compareJson.both_failing,
+
             resultType = "<h3><b>TEST-CASES FAILING ON BOTH \""+compareJson.dates[0]+"\" AND \""+compareJson.dates[1]+"\"<b></b></h3>";
 
          for(var index= 0;index<class_name_array.length;index++){
@@ -19,9 +22,19 @@
                   "ClassName":class_name_array[index]
                });
             }
+
+
+            if(class_name_array.length < 2)
+            {
+                $("#result_table").css("display","none");
+                resultType = "<h3><b>NO SAME TEST-CASES FAILING ON BOTH \""+compareJson.dates[0]+"\" AND \""+compareJson.dates[1]+"\"<b></b></h3>";
+            }
+           else{
             $("#result_type").html();
+            $("#result_table").html(classNames);
+            }
             $("#result-title").html(resultType);
-             $("#result_table").html(classNames);
+
         }
         var compareJson;
         compareJson="<%= @compare_json %>";
@@ -30,5 +43,7 @@
         if(compareJson!=""){
             displayCompareResults(compareJson);
         }
+
+
     });
 </script>
