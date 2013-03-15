@@ -4,7 +4,7 @@
 
 require File.expand_path('../config/application', __FILE__)
 require 'date'
-require 'cukeforker'
+require_relative 'features/support/monkey_patches/cukeforker.rb'
 require 'cukeforker-webdriver'
 require 'selenium-webdriver'
 
