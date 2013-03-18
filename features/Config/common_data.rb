@@ -49,7 +49,7 @@ DEFECT_FORM_DATE="defect_analysis_analysis_date"
 DEFECT_GRAPH_ID="#defect-analysis"
 
 #PYRAMID ELEMENT
-TEST_PYRAMID__PROJECT_DROPDOWN="sub_project_"
+TEST_PYRAMID__PROJECT_DROPDOWN="sub_project_id"
 PYRAMID_ID="#block_pyramid"
 PYRAMID_TABLE_ID="#pyramidTable"
 
