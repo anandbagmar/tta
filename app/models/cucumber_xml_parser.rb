@@ -1,7 +1,7 @@
 class CucumberXmlParser
   def self.parse(config_xml,test_suite,xml_data,test_case,test_report_type)
     if test_case.attr("classname") == test_suite.attr("name")
-      XmlParser.parse_test_case(test_case,xml_data,config_xml,test_report_type)
+      XmlParser.new.parse_test_case(test_case,xml_data,config_xml,test_report_type)
     end
   end
 

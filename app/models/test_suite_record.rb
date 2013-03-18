@@ -1,7 +1,7 @@
 class TestSuiteRecord < ActiveRecord::Base
   has_many :test_case_records
   belongs_to :test_metadatum
-  attr_accessible :class_name, :number_of_errors, :number_of_failures, :number_of_tests, :time_taken, :number_of_tests_not_run, :number_of_tests_ignored
+  attr_accessible :class_name, :number_of_errors, :number_of_failures, :number_of_tests, :time_taken,:number_of_tests_not_run,:number_of_tests_ignored,:test_metadatum_id
 
   def self.get_class_name_suite_id_hash (metadata_one_id, metadata_two_id)
     test_suite_record1= TestSuiteRecord.select("id,class_name").find_all_by_test_metadatum_id(metadata_one_id)
@@ -24,6 +24,29 @@ class TestSuiteRecord < ActiveRecord::Base
       end
     end
     result_hash
+  end
+
+
+  def after_initialize(hash)
+    @test_metadatum_id = hash[:test_metadatum_id]
+    @class_name =hash[:class_name]
+    @number_of_errors = initilize_to_zero_if_nil(hash[:number_of_errors])
+    @number_of_failure = initilize_to_zero_if_nil(hash[:number_of_failure])
+    @number_of_test = hash[:number_of_test]
+    @time_taken = hash[:time_taken]
+    @number_of_tests_not_run = initilize_to_zero_if_nil(hash[:number_of_tests_not_run])
+    @number_of_tests_ignored = initilize_to_zero_if_nil(hash[:number_of_tests_ignored])
+  end
+
+  def self.create_and_save(hash)
+    test_suite = TestSuiteRecord.new(hash)
+    test_suite.save
+    test_suite
+  end
+
+  def initilize_to_zero_if_nil(value)
+    value.nil? ? 0 : value
+
   end
 end
 

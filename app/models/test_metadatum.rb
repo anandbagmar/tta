@@ -15,12 +15,12 @@ class TestMetadatum < ActiveRecord::Base
 
 
 
-  def self.get_distinct_test_category sub_project_id
-   distinct_records = find_all_by_sub_project_id(sub_project_id, :select => "DISTINCT(test_category)")
+  def get_distinct_test_category sub_project_id
+   distinct_records = TestMetadatum.find_all_by_sub_project_id(sub_project_id, :select => "DISTINCT(test_category)")
    distinct_records
   end
 
-  def self.find_no_and_duration_of_test meta_data
+  def find_no_and_duration_of_test meta_data
      total_num_of_tests = 0
       total_run_time = 0
      total_num_of_failures=0
@@ -33,7 +33,7 @@ class TestMetadatum < ActiveRecord::Base
 
   end
 
-  def self.get_latest_record(sub_project_id,test_category)
+  def get_latest_record(sub_project_id,test_category)
     @test_metadata_for_specific_test_category = TestMetadatum.find_all_by_sub_project_id_and_test_category(sub_project_id,test_category)
     latest_test_metadata_record = @test_metadata_for_specific_test_category.sort_by &:date_of_execution
      latest_test_metadata_record.last

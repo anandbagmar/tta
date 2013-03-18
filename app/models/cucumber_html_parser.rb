@@ -5,20 +5,14 @@ class CucumberHtmlParser
     save_test_case_record(test_suite_id)
 end
 def self.save_test_suite(meta_id)
-  @html_test_suite=TestSuiteRecord.new()
   link= @doc_html.css('.feature .val')
-  puts link.children[0]
   test_suite_name=link.children[0].to_s.split('Feature:')
   script_div = @doc_html.xpath("//script")
   total_test,total_failure=find_count_summary(script_div)
   total_run_time=find_test_duration(script_div)
-  @html_test_suite.test_metadatum_id=meta_id
-  @html_test_suite.class_name=test_suite_name[1]
-  @html_test_suite.number_of_tests= total_test
-  @html_test_suite.number_of_failures= total_failure
-  @html_test_suite.time_taken=total_run_time.to_s
-  @html_test_suite.save
-  return @html_test_suite.id
+  hash = {:test_metadatum_id => meta_id,:class_name => test_suite_name[1],
+          :number_of_tests => total_test, :number_of_failures => total_failure,:time_taken => total_run_time.to_s}
+  return TestSuiteRecord.create_and_save(hash).id
 end
 
   def self.find_count_summary(script_div)
@@ -40,7 +34,7 @@ end
       starting_position = totals_contents.index("=")+3
       end_position = totals_contents.index("scenarios")-1
     end
-    total_tests_count = totals_contents[starting_position..end_position].strip
+    totals_contents[starting_position..end_position].strip
   end
 
   def self.find_failure_count(totals_contents)
@@ -71,6 +65,7 @@ end
       @html_test_case.test_suite_record_id=test_suite_id
       @html_test_case.class_name = link.css('.val').children[0].to_s
       @html_test_case.error_msg= link.css('.message').children.children.to_s + link.css('.backtrace').children.children.to_s
+      @html_test_case.error_msg= @html_test_case.error_msg.gsub("\"","'")
       @html_test_case.save
     end
   end

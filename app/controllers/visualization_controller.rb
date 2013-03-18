@@ -15,7 +15,7 @@ class VisualizationController < ApplicationController
       flash[:no_id_error] = "No Sub-Project Selected"
       flash[:no_test_error]=nil
     else
-      @json = Visualization.getResultJson(sub_project_id)
+      @json = Visualization.new.getResultJson(sub_project_id)
       flash[:no_id_error]=nil
       json_obj = JSON.parse!(@json)
       error_flag=0

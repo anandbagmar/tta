@@ -11,7 +11,7 @@
 }
 #graph{
   position:relative;
-  margin: 45px 0px;
+  margin: 45px 0px 90px 0px;
 
 }
 
@@ -20,9 +20,13 @@
   float: right;
   margin: 8% 8%;
   border-collapse: collapse;
-
+  clear:right;
 }
 
+#block_pyramid{
+  position:relative;
+  width:50%;
+}
 #pyramidTable tr,th,td{
 border: 1px solid;
   padding: 10px;
@@ -48,14 +52,13 @@ border: 1px solid;
 
 #display_message{
   position: absolute;
-  bottom: 20px;
+  bottom: 30px;
   width: 500px;
-  margin-left: 50%;
-  left: -250px;
+  margin: 0;
+  right: 8%;
   background-color: #DDD;
   padding: 10px;
   border-radius: 8px;
-  margin-bottom: 40px;
 }
 
 .trapezoid
@@ -77,17 +80,17 @@ border: 1px solid;
   border-right: 200px solid transparent;
   height: 0;
   width:0;
-  position: relative;
   margin: 0 auto;
-  margin-top:-400px;
+  bottom: 0;
 }
 
-#pyramid{
-  position: relative;
-  margin-bottom: 8%;
-  float: left;
-  padding-left: 8%;
-
+#ideal_pyramid{
+  //position: relative;
+  //margin-bottom: 8%;
+  //float: left;
+  padding-right: 20%;
+  width:1000px;
+  margin: 0 auto;
 }
 
 .pyramidDetail{
@@ -96,5 +99,18 @@ border: 1px solid;
   margin-left: 50%;
 }
 .pyramidItem{
-  position: relative;
+  position: absolute;
+  margin-left: 50%;
+}
+#ideal_pyramid .test-triangle{
+  margin: 0 auto;
+  border-style:solid;
+  height: 0px;
+  width: 0px;
+  margin: 0 auto;
+}
+#ideal_pyramid .test-region{
+  position: absolute;
+  width: 100%;
+  min-height: 300px;
 }

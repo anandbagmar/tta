@@ -28,6 +28,9 @@ var Template = function () {
         getPyramidDuration:function () {
             return templates.pyramidDuration;
         },
+        getPyramidItem: function(){
+            return templates.pyramidItem;
+        },
 
         getDefectErrorMessagesTemplate:function () {
             return templates.defectErrorMessagesTemplate;

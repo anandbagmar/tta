@@ -4,12 +4,10 @@
 
 require File.expand_path('../config/application', __FILE__)
 require 'date'
-require "cucumber/cli/main"
-require 'cukeforker'
+require_relative 'features/support/monkey_patches/cukeforker.rb'
 require 'cukeforker-webdriver'
 require 'selenium-webdriver'
 
-begin; require 'parallel_tests/tasks'; rescue LoadError; end
 Tta::Application.load_tasks
 namespace :db do
   namespace :test do
