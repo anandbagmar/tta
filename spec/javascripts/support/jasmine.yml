@@ -11,6 +11,7 @@
 #   - dist/**/*.js
 #
 src_files:
+  - app/assets/javascripts/jquery-latest.js
   - app/assets/javascripts/upload_controller.js
   - app/assets/javascripts/comparitive_analysis.js
   - app/assets/javascripts/compare_runs.js
