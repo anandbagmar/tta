@@ -34,12 +34,14 @@ class Parser
           time = XmlParser.new.get_time(test_case, test_suite, test_report_type)
         end
         hash[:time_taken] += time.to_f
+      end
+
         xml_data = TestSuiteRecord.create_and_save(hash)
+
         if test_report_type == "Rspec JUnit" || test_report_type == "Cucumber JUnit"
-          XmlParser.new.saving_junit_test_cases(config_xml, test_case, xml_data, test_report_type, test_suite)
+          XmlParser.new.saving_junit_test_cases(config_xml, xml_data, test_report_type, test_suite)
         elsif test_report_type == "Groovy NUnit"
-          GroovyNunitParser.parse(config_xml, xml_data,test_case)
-        end
+          GroovyNunitParser.parse(config_xml, xml_data,test_suite)
       end
     end
   end
