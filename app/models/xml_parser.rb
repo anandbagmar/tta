@@ -4,11 +4,11 @@ class XmlParser
     parse_test_record(config_xml, meta_id, params)
   end
 
-  def saving_junit_test_cases(config_xml, test_case, xml_data, test_report_type, test_suite)
+  def saving_junit_test_cases(config_xml, xml_data, test_report_type, test_suite)
     if test_report_type.eql?("Rspec JUnit")
-      RspecXmlParser.new.parse(config_xml, test_suite, xml_data, test_case, test_report_type)
+      RspecXmlParser.new.parse(config_xml, test_suite, xml_data, test_report_type)
     elsif test_report_type.eql?("Cucumber JUnit")
-      CucumberXmlParser.parse(config_xml, test_suite, xml_data, test_case, test_report_type)
+      CucumberXmlParser.parse(config_xml, test_suite, xml_data, test_report_type)
     end
   end
 
