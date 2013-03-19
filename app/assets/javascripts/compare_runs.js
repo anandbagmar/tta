@@ -22,6 +22,7 @@ $(document).ready(function () {
 }
 
 //ON PAGE LOAD
+$('.proj-element').remove();
 var pageLoad = $(".serverData").html();
 projects = makeValidJSON.validate(pageLoad);
 projects = JSON.parse(projects);
