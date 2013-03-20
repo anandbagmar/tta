@@ -2,9 +2,7 @@
 <% if @json and flash[:no_test_error]==nil %>
     <%= render 'layouts/pyramid_partial' %>
 <% end %>
-
-<script type="text/javascript" src="../javascripts/util/templates.js"></script>
-<script type="text/javascript" src="../javascripts/util/utils.js"></script>
+<%= javascript_include_tag 'util/templates','util/utils' %>
 
 <script type="text/javascript">
     $(document).ready(function () {
