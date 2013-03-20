@@ -18,7 +18,7 @@
 #pyramidTable{
   border: solid;
   float: right;
-  margin: 8% 8%;
+  margin: 5% 16%;
   border-collapse: collapse;
   clear:right;
 }
@@ -52,10 +52,10 @@ border: 1px solid;
 
 #display_message{
   position: absolute;
-  bottom: 30px;
+  bottom: 65px;
   width: 500px;
   margin: 0;
-  right: 8%;
+  right: 25%;
   background-color: #DDD;
   padding: 10px;
   border-radius: 8px;
@@ -82,6 +82,8 @@ border: 1px solid;
   width:0;
   margin: 0 auto;
   bottom: 0;
+  z-index: 1;
+  position: relative;
 }
 
 #ideal_pyramid{
