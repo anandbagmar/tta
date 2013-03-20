@@ -1,5 +1,5 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+
+
 $(document).ready(function () {
 
     $("#compare_runs_form").validate();
@@ -19,7 +19,7 @@ $(document).ready(function () {
     });
 
 
-}
+    }
 
 //ON PAGE LOAD
 $('.proj-element').remove();

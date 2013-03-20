@@ -1,6 +1,6 @@
 <html>
 <head xmlns="http://www.w3.org/1999/html">
-  <%= javascript_include_tag 'compare_runs','jquery.validate'%>
+  <%= javascript_include_tag 'util/utils','jquery.validate','compare_runs'%>
 </head>
 
 <%= render :file => '/home/header.html.erb' %>
@@ -48,9 +48,8 @@
       <div class="serverData" style="display: none;"><%= @projects %></div>
     </div>
 <% end %>
-
 </body>
-<%= render :file => '/home/footer.html.erb' %>
+<%= render :file => '/home/footer.html.erb'%>
 
 
 </html>

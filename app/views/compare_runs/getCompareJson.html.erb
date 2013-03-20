@@ -1,11 +1,9 @@
-<%= render :file=> '/compare_runs/index.html.erb' %>
+<%= javascript_include_tag 'util/templates' %>
+<%= javascript_include_tag 'util/utils' %>
 <%= render 'layouts/compare_partial' %>
-<script type="text/javascript" src="../javascripts/util/templates.js"></script>
-<script type="text/javascript" src="../javascripts/util/utils.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function(){
-
 
         var displayCompareResults = function(compareJson){
             $("#project_select").attr("disabled","disabled");
