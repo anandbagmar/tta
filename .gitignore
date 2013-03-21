@@ -20,3 +20,8 @@
 *.patch
 /coverage/
 
+#Ignore screenshots and generated report files
+/log/feature/screenshots/*
+/log/tta_cukes_result/html/*
+/log
+
