@@ -5,7 +5,7 @@
 On the consumer front, TTA consumes xUnit/* based results and other raw data from across your projects and test frameworks and archives it.
 On the view front, TTA provides some simple reports, and a way to create custom reports that displays Test Trends for you.
 
-To know more about TTA and how to use it <a href="https://github.com/anandbagmar/tta/wiki">click here</a>
+See the {TTA wiki page}[href="https://github.com/anandbagmar/tta/wiki"] for more information.
 
 == Copyright
 
@@ -13,7 +13,7 @@ To know more about TTA and how to use it <a href="https://github.com/anandbagmar
  * Created by: Anand Bagmar
  * Email: abagmar@gmail.com
  *
- * Copyright 2010 Anand Bagmar.  Distributed under the Apache 2.0 License
+ * Copyright 2013 ThoughtWorks, Inc.  Distributed under the Apache 2.0 License
  *
  * See LICENSE.txt for further details.
 **/
