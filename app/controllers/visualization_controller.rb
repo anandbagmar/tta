@@ -21,8 +21,8 @@ class VisualizationController < ApplicationController
       error_flag=0
       json_obj["test_types"].each do |test_type|
         if test_type["percent"]=="NaN"
-           error_flag =1
-         end
+          error_flag =1
+        end
       end
       if error_flag==1
         flash[:no_test_error]="No test in your project!!"
