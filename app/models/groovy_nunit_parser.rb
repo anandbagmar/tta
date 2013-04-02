@@ -1,5 +1,5 @@
 class GroovyNunitParser
-  def self.parse(config_xml,xml_data,test_case)
+  def self.parse(config_xml, xml_data, test_case)
     @doc = Nokogiri::XML config_xml
 
     @xml_test_case = TestCaseRecord.new()

@@ -46,6 +46,4 @@ class UnitNunitParser
       end
     end
   end
-
-
 end

@@ -1,6 +1,5 @@
 class DefectAnalysis
   def get_result_json(sub_project_id, analysis_date)
-
     test_case_hash, no_of_test = getMetadataIds(sub_project_id, analysis_date)
     if !(no_of_test.nil?)
       percentage = get_defect_percentage(no_of_test.flatten)
@@ -9,7 +8,6 @@ class DefectAnalysis
           :errors => test_case_hash,
           :percentage => percentage
       }.to_json
-
     else
       defect_analysis_json ={
           :errors => test_case_hash
@@ -33,14 +31,12 @@ class DefectAnalysis
     index=0
 
     test_category = get_record_with_distinct_test_category(sub_project_id)
-
     test_category.each do |test_type|
       no_of_test_for_particular_error=[]
       result_hash = {}
       meta_data = SubProject.find(sub_project_id).test_metadatum.find_all_by_date_of_execution(analysis_date.beginning_of_day..analysis_date.end_of_day, :conditions => ["test_category = ?", test_type])
       meta_data.sort_by &:date_of_execution
       @meta_data1 = meta_data.last
-      
 
       if !(@meta_data1.nil?)
         test_report_type = @meta_data1.test_report_type
@@ -89,8 +85,6 @@ class DefectAnalysis
     end
     return @test_category
   end
-
-
 end
 
 

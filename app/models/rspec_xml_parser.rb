@@ -4,10 +4,10 @@ class RspecXmlParser
     name=test_suite.attr("name")
     test_cases = @doc.xpath("//testsuite[@name='#{name}']/testcase")
     test_cases.each do |test_case|
-    if test_case.attr("name").start_with?(test_suite.attr("name")+" ")
-      XmlParser.new.parse_test_case(test_case, xml_data, config_xml, test_report_type)
-    end
+      if test_case.attr("name").start_with?(test_suite.attr("name")+" ")
+        XmlParser.new.parse_test_case(test_case, xml_data, config_xml, test_report_type)
       end
+    end
   end
 
   def get_error_message(config_xml, testcase_name)

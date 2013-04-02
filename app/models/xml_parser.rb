@@ -58,7 +58,6 @@ class XmlParser
     end
     return number_of_failures, total_num_of_tests
   end
-
 end
 
 
