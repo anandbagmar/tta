@@ -1,7 +1,7 @@
 require 'pry'
 module Seed
   module Helper
-    def self.create_seed_data(number_of_projects, number_of_subprojects_per_project, number_of_test_metadatum_per_subproject, number_of_test_suite_records_per_test_metadatum,number_of_test_case_records_per_test_suite_record)
+    def self.create_seed_data(number_of_projects, number_of_subprojects_per_project, number_of_test_metadatum_per_subproject, number_of_test_suite_records_per_test_metadatum, number_of_test_case_records_per_test_suite_record)
       puts "Seeding data in DB with:"
       puts "\tnumber_of_projects\t\t\t\t:#{number_of_projects}"
       puts "\tnumber_of_subprojects_per_project\t\t:#{number_of_subprojects_per_project}"
@@ -16,9 +16,9 @@ module Seed
           (1..number_of_test_metadatum_per_subproject).each do |test_meta_data_number|
             test_meta_data_id = create_test_meta_data(sub_project_id, test_meta_data_number)
             (1..number_of_test_suite_records_per_test_metadatum).each do |test_suite_record_number|
-              test_suite_record_id = create_test_suite_record(test_meta_data_id, project_id, sub_project_id,test_suite_record_number)
+              test_suite_record_id = create_test_suite_record(test_meta_data_id, project_id, sub_project_id, test_suite_record_number)
               (1..number_of_test_case_records_per_test_suite_record).each do |test_case_record_number|
-                create_test_case_record(test_suite_record_id, project_id, sub_project_id,test_case_record_number)
+                create_test_case_record(test_suite_record_id, project_id, sub_project_id, test_case_record_number)
               end
             end
           end
@@ -39,7 +39,7 @@ module Seed
           :test_report_type => SAMPLE_TEST_REPORT_TYPES[rand(SAMPLE_TEST_REPORT_TYPES.length)])
       test_meta_data.sub_project_id= sub_project_id
       test_meta_data.save
-      TestMetadatum.all(:select=>:id,:conditions=>{:sub_project_id=>sub_project_id}).last.id
+      TestMetadatum.all(:select => :id, :conditions => {:sub_project_id => sub_project_id}).last.id
     end
 
     def self.create_project(project_number)
@@ -60,14 +60,14 @@ module Seed
       SubProject.find_by_name(sub_project_name).id
     end
 
-    def self.create_test_suite_record(test_meta_data_id, project_id, sub_project_id,test_suite_record_number)
+    def self.create_test_suite_record(test_meta_data_id, project_id, sub_project_id, test_suite_record_number)
       test_suite_record_name = "Class #{project_id}.#{sub_project_id}.#{test_meta_data_id}.#{test_suite_record_number}"
 
-      test_suite_record = TestSuiteRecord.create_and_save(:test_metadatum_id=> test_meta_data_id,:class_name => test_suite_record_name, :number_of_tests => rand(25..50), :number_of_errors => rand(12), :number_of_failures => rand(12), :time_taken => rand(1..5).to_s)
+      test_suite_record = TestSuiteRecord.create_and_save(:test_metadatum_id => test_meta_data_id, :class_name => test_suite_record_name, :number_of_tests => rand(25..50), :number_of_errors => rand(12), :number_of_failures => rand(12), :time_taken => rand(1..5).to_s)
       test_suite_record.id
     end
 
-    def self.create_test_case_record(test_suite_record_id, project_id, sub_project_id,test_case_record_number)
+    def self.create_test_case_record(test_suite_record_id, project_id, sub_project_id, test_case_record_number)
       test_case_record = TestCaseRecord.create(:class_name => "Class #{project_id}.#{sub_project_id}.#{test_suite_record_id}.#{test_case_record_number}", :time_taken => rand(1..4).to_s)
       test_case_record.test_suite_record_id= test_suite_record_id
       test_case_record.save
