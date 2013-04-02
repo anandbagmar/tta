@@ -1,5 +1,5 @@
 module Page
-  module Upload_dataPage
+  module UploadData
     def navigate_to_upload_page
       go_to_url(UPLOAD_PAGE)
     end
@@ -10,4 +10,4 @@ module Page
   end
 end
 
-World(Page::Upload_dataPage)
+World(Page::UploadData)

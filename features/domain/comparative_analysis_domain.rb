@@ -1,5 +1,5 @@
 module Domain
-  module ComparativeDomain
+  module ComparativeAnalysis
     def view_comparative_graph(project, start_date, end_date)
       navigate_to_homepage()
       go_to_url(COMPARATIVE_PAGE)
@@ -18,4 +18,4 @@ module Domain
   end
 end
 
-World(Domain::ComparativeDomain)
+World(Domain::ComparativeAnalysis)

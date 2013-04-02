@@ -1,5 +1,5 @@
 module Page
-  module Test_pyramid_Page
+  module TestPyramid
     def fill_pyramid_data(sub_proj)
       select_the_option(sub_proj, TEST_PYRAMID__PROJECT_DROPDOWN)
       click_button(TEST_PYRAMID_PAGE_BUTTON)
@@ -14,7 +14,7 @@ module Page
   end
 end
 
-World(Page::Test_pyramid_Page)
+World(Page::TestPyramid)
 
 
 

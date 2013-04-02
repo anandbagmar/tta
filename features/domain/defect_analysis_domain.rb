@@ -1,5 +1,5 @@
 module Domain
-  module DefectDomain
+  module DefectAnalysis
     def view_defect_analysis_graph(subproject_name, date)
       navigate_to_homepage()
       go_to_url(DEFECT_PAGE)
@@ -15,4 +15,4 @@ module Domain
   end
 end
 
-World(Domain::DefectDomain)
+World(Domain::DefectAnalysis)

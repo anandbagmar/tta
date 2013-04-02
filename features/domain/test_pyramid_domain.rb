@@ -1,5 +1,5 @@
 module Domain
-  module Test_Pyramid_Domain
+  module TestPyramid
     def view_pyramid_view(sub_proj)
       navigate_to_homepage()
       go_to_url(TEST_PYRAMID_PAGE)
@@ -21,5 +21,5 @@ module Domain
   end
 end
 
-World(Domain::Test_Pyramid_Domain)
+World(Domain::TestPyramid)
 

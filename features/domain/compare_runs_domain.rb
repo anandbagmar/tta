@@ -1,5 +1,5 @@
 module Domain
-  module ComparerunDomain
+  module CompareRun
     def view_compare_run(project, sub_project, test_type, date1, date2)
       navigate_to_homepage()
       go_to_url(COMPARE_RUNS_PAGE)
@@ -19,4 +19,4 @@ module Domain
   end
 end
 
-World(Domain::ComparerunDomain)
+World(Domain::CompareRun)

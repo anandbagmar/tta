@@ -4,7 +4,7 @@ Feature: Test Trend Visualization Flow
   @javascript
 
   Scenario: Pyramid Flow
-    Given The User uploads data with following attributes
+    Given a User uploads data with following attributes
       | proj     | sub_proj | ci_job        | osName | hostName | browser | environment | date_year | date_month | date_day | date_hour | date_minute | logFile      | test_type        | test_report_type |
       | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | January    | 1        | 12        | 12          | Err_test.zip | Unit Test        | Rspec JUnit      |
       | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | February   | 20       | 12        | 12          | Err_test.zip | Integration Test | Rspec JUnit      |
@@ -14,7 +14,7 @@ Feature: Test Trend Visualization Flow
     Then the Pyramid table for "SERRORS1" is generated
 
   Scenario: Comparative analysis Flow
-    Given The User uploads data with following attributes
+    Given a User uploads data with following attributes
       | proj     | sub_proj | ci_job        | osName | hostName | browser | environment | date_year | date_month | date_day | date_hour | date_minute | logFile      | test_type        | test_report_type |
       | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | January    | 1        | 12        | 12          | Err_test.zip | Unit Test        | Rspec JUnit      |
       | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | February   | 20       | 12        | 12          | Err_test.zip | Integration Test | Rspec JUnit      |
@@ -25,7 +25,7 @@ Feature: Test Trend Visualization Flow
 
 
   Scenario:Defect analysis Flow
-    Given The User uploads data with following attributes
+    Given a User uploads data with following attributes
       | proj     | sub_proj | ci_job        | osName | hostName | browser | environment | date_year | date_month | date_day | date_hour | date_minute | logFile      | test_type        | test_report_type |
       | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | January    | 1        | 12        | 12          | Err_test.zip | Unit Test        | Rspec JUnit      |
       | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | February   | 20       | 12        | 12          | Err_test.zip | Integration Test | Rspec JUnit      |
@@ -34,7 +34,7 @@ Feature: Test Trend Visualization Flow
     Then the Defect Analysis table for "SERRORS1" is plotted
 
   Scenario:Compare runs Flow
-    Given The User uploads data with following attributes
+    Given a User uploads data with following attributes
       | proj     | sub_proj | ci_job        | osName | hostName | browser | environment | date_year | date_month | date_day | date_hour | date_minute | logFile      | test_type | test_report_type |
       | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2013      | March      | 3        | 12        | 12          | Err_test.zip | Unit Test | Rspec JUnit      |
       | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2013      | March      | 5        | 12        | 12          | Err_test.zip | Unit Test | Rspec JUnit      |

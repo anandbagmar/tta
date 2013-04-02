@@ -1,5 +1,5 @@
 module Domain
-  module Upload_dataDomain
+  module UploadData
     def upload_the_data(table)
       fill_the_form(table)
     end
@@ -26,4 +26,4 @@ module Domain
   end
 end
 
-World(Domain::Upload_dataDomain)
+World(Domain::UploadData)
