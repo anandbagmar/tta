@@ -1,4 +1,3 @@
-
 require 'cucumber/rails'
 
 Capybara.run_server = true
@@ -13,10 +12,10 @@ ActionController::Base.allow_rescue = false
 #  raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 #end
 
-if(ENV["HEADLESS"])
+if (ENV["HEADLESS"])
   puts "in headless"
   require 'headless'
-  @headless = Headless.new(display: 100, reuse: true,:destroy_at_exit=>false)
+  @headless = Headless.new(display: 100, reuse: true, :destroy_at_exit => false)
   @headless.start
 end
 
@@ -28,7 +27,7 @@ end
 
 After do |scenario|
   if scenario.failed?
-     file_name = SCREENSHOT_FILE_PATH+"screenshot_"+random_name+".png"
-     save_error_screenshot(file_name)
+    file_name = SCREENSHOT_FILE_PATH+"screenshot_"+random_name+".png"
+    save_error_screenshot(file_name)
   end
 end

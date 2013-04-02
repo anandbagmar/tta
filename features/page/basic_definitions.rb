@@ -1,6 +1,5 @@
 module Definitions
   module Basic_definitions
-
     def form_filling(proj_params)
       fill_in UPLOAD_PROJECT_NAME, :with => proj_params[:proj]
       fill_in UPLOAD_SUB_PROJECT_NAME, :with => proj_params[:sub_proj]
@@ -32,15 +31,9 @@ module Definitions
       fill_in fill_in_id ,:with => fill_in_value
     end
 
-
-
     def wait_until_for
       wait_until {yield}
     end
-
-
-
-
   end
 end
 World(Definitions::Basic_definitions)
