@@ -1,78 +1,83 @@
 <head xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-  <%= stylesheet_link_tag 'upload'  %>
+  <%= stylesheet_link_tag 'upload' %>
   <style type="text/css">
-      body{
-          position:relative;
+      body {
+          position: relative;
       }
   </style>
 </head>
 
-<%= render :file=> '/home/header.html.erb' %>
+<%= render :file => '/home/header.html.erb' %>
 
 <body>
 
 <div class="page_title">
-<h1 style="text-align: center; font-family: tahoma,serif;">Upload Test Data</h1>
+  <h1 style="text-align: center; font-family: tahoma,serif;">Upload Test Data</h1>
 
 </div>
 <div class="form">
-<%= form_tag({:action => 'create' },{ :multipart => true,:id => "uploadForm"}) do %>
+  <%= form_tag({:action => 'create'}, {:multipart => true, :id => "uploadForm"}) do %>
 
-       <span><em>Fields marked with (<span class="required-fields">*</span>) are compulsory</em></span>
-       <div class="fields" style="padding-top:20px ;">
+      <span><em>Fields marked with (<span class="required-fields">*</span>) are compulsory</em></span>
+
+      <div class="fields" style="padding-top:20px ;">
         <label for="name"> Project Name <span class="required-fields">*</span></label>
-        <%= text_field_tag (:project_name) ,nil, :class => 'required' ,:maxlength=>"100" , :style=> "text-transform: uppercase"%>
-         <br>
-       </div>
+        <%= text_field_tag (:project_name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase" %>
+        <br>
+      </div>
 
-      <div class="fields" >
+      <div class="fields">
         <label for="sub_project_name">Sub-Project name <span class="required-fields">*</span></label>
-        <%= text_field_tag (:sub_project_name),nil, :class => 'required',:maxlength=>"100", :style=> "text-transform: uppercase" %>
+        <%= text_field_tag (:sub_project_name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase" %>
         <br>
       </div>
 
       <div class="fields">
         <label for="ci_job_name"> CI Job Name</label>
-        <%= text_field_tag ( :ci_job_name) %><br>
+        <%= text_field_tag (:ci_job_name) %>
+        <br>
       </div>
 
       <div class="fields">
         <label for="test_category"> Test Category</label>
-        <%= text_field_tag ( :test_category) ,nil,:placeholder => '(eg.Unit Test)', :class => 'required'%><br>
+        <%= text_field_tag (:test_category), nil, :placeholder => '(eg.Unit Test)', :class => 'required' %>
+        <br>
       </div>
 
       <div class="fields">
         <label for="test_report_type"> Test Report Type</label>
-        <%= select_tag "test_report_type","<option>Rspec JUnit</option><option>Cucumber JUnit</option><option>Cucumber HTML</option><option>Unit NUnit</option><option>Groovy NUnit</option>".html_safe,:prompt => "--Select--",:class=> 'required'%> <br>
+        <%= select_tag "test_report_type", "<option>Rspec JUnit</option><option>Cucumber JUnit</option><option>Cucumber HTML</option><option>Unit NUnit</option><option>Groovy NUnit</option>".html_safe, :prompt => "--Select--", :class => 'required' %>
+        <br>
 
-      </div>
-
-      <div class="fields" >
-        <label for="os_name"> OS Tested On <span class="required-fields">*</span></label>
-        <%= text_field_tag ( :os_name) ,nil, :class => 'required'%>
-         <br>
       </div>
 
       <div class="fields">
-         <label for="host_name">Host-Machine Name <span class="required-fields">*</span></label>
-         <%= text_field_tag (:host_name),nil, :class => 'required' %>
+        <label for="os_name"> OS Tested On <span class="required-fields">*</span></label>
+        <%= text_field_tag (:os_name), nil, :class => 'required' %>
+        <br>
+      </div>
+
+      <div class="fields">
+        <label for="host_name">Host-Machine Name <span class="required-fields">*</span></label>
+        <%= text_field_tag (:host_name), nil, :class => 'required' %>
         <br>
       </div>
 
       <div class="fields">
         <label for="browser"> Browser Tested On <span class="required-fields">*</span></label>
-        <%= text_field_tag (:browser),nil, :class => 'required' %>
+        <%= text_field_tag (:browser), nil, :class => 'required' %>
         <br>
       </div>
 
       <div class="fields">
         <label for="type_of_environment"> Environment Run on <span class="required-fields">*</span></label>
-        <%= text_field_tag (:type_of_environment),nil, :class => 'required' %>
+        <%= text_field_tag (:type_of_environment), nil, :class => 'required' %>
         <br>
       </div>
 
       <div class="fields">
         <label for="date_of_execution"> Date Of Execution <span class="required-fields">*</span></label>
+
         <div class="required-field date-field">
           <%= select_datetime() %>
           <span class='error-msg'>Please enter a valid Date</span>
@@ -84,33 +89,33 @@
 
       <div class="fields">
         <label for="logDirectory">Directory name<span class="required-fields">*</span></label>
-        <%= file_field_tag :logDirectory, {:multiple=>true, :accept => 'application/zip',:class => 'required'}%>
-        <span class = "invalid-file-type">Invalid File Type Uploaded.Please upload a zip file </span><br>
+        <%= file_field_tag :logDirectory, {:multiple => true, :accept => 'application/zip', :class => 'required'} %>
+        <span class="invalid-file-type">Invalid File Type Uploaded.Please upload a zip file </span><br>
       </div>
-       <div class="button">
-         <%= submit_tag 'SUBMIT',:class=> 'submit' %>
-         <%= submit_tag("Clear All", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
+      <div class="button">
+        <%= submit_tag 'SUBMIT', :class => 'submit' %>
+        <%= submit_tag("Clear All", {:name => 'reset', :id => 'reset_button', :type => "reset"}) %>
       </div>
 
-<% end %>
+  <% end %>
 </div>
 
 </body>
-<%= render :file=> '/home/footer.html.erb' %>
+<%= render :file => '/home/footer.html.erb' %>
 
 <script>
-  $(document).ready(function(){
-      $("#uploadForm").validate();
-      $("#uploadForm").submit(function(){
-          return validateDate.checkForValidDate($("#uploadForm"));
-      });
-      $("#uploadForm").submit(function(){
-          return validateDate.checkForFutureDate($("#uploadForm"));
-      });
-      $("#uploadForm").submit(function(){
-         return validateFile.checkForValidFileType($("#uploadForm"));
-      });
-  });
+    $(document).ready(function () {
+        $("#uploadForm").validate();
+        $("#uploadForm").submit(function () {
+            return validateDate.checkForValidDate($("#uploadForm"));
+        });
+        $("#uploadForm").submit(function () {
+            return validateDate.checkForFutureDate($("#uploadForm"));
+        });
+        $("#uploadForm").submit(function () {
+            return validateFile.checkForValidFileType($("#uploadForm"));
+        });
+    });
 </script>
 
 

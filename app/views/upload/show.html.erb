@@ -1,60 +1,59 @@
-<%= render :file=> '/home/header.html.erb' %>
+<%= render :file => '/home/header.html.erb' %>
 <body>
 
 <h2 id="notice"><%= flash[:notice] %></h2>
+
 <p>
   <b>Name:</b>
   <%= @project.name %>
-
 </p>
+
 <p>
   <b>Sub Project name:</b>
   <%= @sub_project.name %>
-
 </p>
 
 <p>
   <b>CI Job name:</b>
   <%= @project_meta.ci_job_name %>
-
 </p>
 
 <p>
-<b>Test Category:</b>
-<%= @project_meta.test_category %>
-
+  <b>Test Category:</b>
+  <%= @project_meta.test_category %>
   <b>Test Report Type:</b>
-<%= @project_meta.test_report_type %>
+  <%= @project_meta.test_report_type %>
 
 <p>
   <b>OS Tested On:</b>
   <%= @project_meta.os_name %>
-
 </p>
+
 <p>
   <b>Host-Machine Name:</b>
   <%= @project_meta.host_name %>
-
 </p>
+
 <p>
   <b>Browser Tested On:</b>
   <%= @project_meta.browser %>
-
 </p>
+
 <p>
   <b>Environment Run on:</b>
   <%= @project_meta.type_of_environment %>
-
 </p>
+
 <p>
   <b>Date Of Execution:</b>
   <%= @project_meta.date_of_execution %>
-
 </p>
-<a href='/home'><button style="height: 30px; width: 100px; marin-left: 30px; margin-top: 60px;" type="button">HOME</button></a>
+<a href='/home'>
+  <button style="height: 30px; width: 100px; marin-left: 30px; margin-top: 60px;" type="button">HOME</button>
+</a>
 
 </body>
-<%= render :file=> '/home/footer.html.erb' %>
+<%= render :file => '/home/footer.html.erb' %>
 
 
 

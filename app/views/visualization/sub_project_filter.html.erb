@@ -2,7 +2,7 @@
 <% if @json and flash[:no_test_error]==nil %>
     <%= render 'layouts/pyramid_partial' %>
 <% end %>
-<%= javascript_include_tag 'util/templates','util/utils' %>
+<%= javascript_include_tag 'util/templates', 'util/utils' %>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -12,7 +12,7 @@
         var plotBlockPyramid = function (projectJson) {
             var unknownTestTypes = projectJson.unknown_test_types;
             var test_category = projectJson.test_types;
-            if ((unknownTestTypes!= null) && (test_category.length == 0)) {
+            if ((unknownTestTypes != null) && (test_category.length == 0)) {
                 plotPyramidWithUnknownTestCategory(unknownTestTypes);
             }
             else if ((unknownTestTypes == null) && (test_category.length != 0)) {
@@ -47,7 +47,7 @@
                     height = 400;
             proj_title = "<h3>Test-Pyramid for: " + projectJson.sub_project_name.toUpperCase() + "</h3><br>";
             var pyramidItems = [];
-            var bottom=0;
+            var bottom = 0;
             for (var index = 0, len = typeOfTests.length; index < len; index++) {
                 if (typeOfTests[index].percent == 0.0) {
                     continue;
@@ -67,16 +67,16 @@
                 table_content += "<tr> <td" + " style='background:" + currentItem.color + "'>" + currentItem.testName + "</td> <td>" + currentItem.no_of_test + "</td>";
                 table_content += "<td>" + currentItem.total_run_time + " secs</td><td>" + currentItem.percent + " %</td> <td>" + currentItem.pass_percent + " %</td> </tr>";
                 renderString += "<div class='pyramidItem' " +
-                                "style= 'left: -" + currentItem.triangleHeight/2 + "px; " +
-                                       "bottom:" +(bottom)+ "px;'>";
-                renderString += "<div id=\'" + currentItem.testName +"_div\' class='trapezoid' " +
-                        "style='width:" +currentItem.triangleWidth + "px; " +
-                        "border-bottom-width:" +currentItem.triangleWidth + "px; " +
+                        "style= 'left: -" + currentItem.triangleHeight / 2 + "px; " +
+                        "bottom:" + (bottom) + "px;'>";
+                renderString += "<div id=\'" + currentItem.testName + "_div\' class='trapezoid' " +
+                        "style='width:" + currentItem.triangleWidth + "px; " +
+                        "border-bottom-width:" + currentItem.triangleWidth + "px; " +
 
-                        "border-bottom-color:" +currentItem.color + ";'></div>";
+                        "border-bottom-color:" + currentItem.color + ";'></div>";
                 renderString += "</div>";
                 pyramidItems.push(currentItem);
-                bottom+=currentItem.triangleHeight-index-1;
+                bottom += currentItem.triangleHeight - index - 1;
             }
             renderString += "<div id='pyramid-overlay' style='display:block;'></div> ";
             console.log(renderString)
@@ -90,8 +90,6 @@
 
         }
 
-
-
         var plotIdealPyramid = function (jsonData) {
             var typeOfTests = jsonData.test_types,
                     templates = new Template(),
@@ -103,8 +101,8 @@
                     continue;
                 var testName = typeOfTests[index].test_name;
                 pyramidData += templates.render(pyramidItemTemplate, {
-                    "TestTypeRegion":testName.split(' ')[0].toLowerCase() + "_region",
-                    "TestTypeTest":testName.split(' ')[0].toLowerCase() + "_test"
+                    "TestTypeRegion": testName.split(' ')[0].toLowerCase() + "_region",
+                    "TestTypeTest": testName.split(' ')[0].toLowerCase() + "_test"
                 });
             }
 
@@ -116,7 +114,6 @@
                     triangleHeights = [],
                     zIndex = 100;
 
-
             var previousHeight = 0;
             for (index = 0, len = typeOfTests.length; index < len; index++) {
                 var percentBasedHeight = parseInt(baseTriangleHeight) * parseInt(typeOfTests[index].percent) / 100;
@@ -125,8 +122,8 @@
             }
 
             $("#ideal_pyramid").css({
-                "width":baseTriangleHeight,
-                "height":baseTriangleHeight
+                "width": baseTriangleHeight,
+                "height": baseTriangleHeight
             });
 
             previousHeight = 0;
@@ -141,24 +138,21 @@
 
 
                 $("#" + testName + "_test").css({
-                    "border-bottom-width":triangleHeights[index] + "px",
-                    "border-left-width":triangleHeights[index] + "px",
-                    "border-right-width":triangleHeights[index] + "px",
-                    "border-top-width":"0px",
-                    "border-color":"transparent transparent " + color,
-                    "border-style":"solid"
+                    "border-bottom-width": triangleHeights[index] + "px",
+                    "border-left-width": triangleHeights[index] + "px",
+                    "border-right-width": triangleHeights[index] + "px",
+                    "border-top-width": "0px",
+                    "border-color": "transparent transparent " + color,
+                    "border-style": "solid"
                 });
 
 
                 $("#" + testName + "_region").css({
-                    "z-index":zIndex.toString()
+                    "z-index": zIndex.toString()
                 });
                 zIndex--;
             }
-
-
         }
-
 
         var jsonR;
         var regExp = new RegExp("&quot;", 'g');
@@ -167,9 +161,9 @@
         jsonR = JSON.parse(jsonR);
         if (jsonR != "") {
             plotBlockPyramid(jsonR);
-           if (false){
-               plotIdealPyramid(jsonR);
-           }
+            if (false) {
+                plotIdealPyramid(jsonR);
+            }
         }
     });
 </script>

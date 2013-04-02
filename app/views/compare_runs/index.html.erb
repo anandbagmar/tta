@@ -1,6 +1,6 @@
 <html>
 <head xmlns="http://www.w3.org/1999/html">
-  <%= javascript_include_tag 'util/utils','jquery.validate','compare_runs'%>
+  <%= javascript_include_tag 'util/utils', 'jquery.validate', 'compare_runs' %>
 </head>
 
 <%= render :file => '/home/header.html.erb' %>
@@ -17,28 +17,28 @@
 
       <div class="fields-left">
         <label for="project">Project </label>
-        <%= select_tag 'project_id',"",:prompt => "---SELECT PROJECT-----" ,:id => 'project_select', :class =>'required'%>
+        <%= select_tag 'project_id', "", :prompt => "---SELECT PROJECT-----", :id => 'project_select', :class => 'required' %>
       </div>
 
       <div id="div_subproject" class="fields-left" disabled="disabled">
         <label for="sub-project">Sub Projects</label>
-        <%= select_tag 'sub_projects', "",:prompt => "---SELECT SUB PROJECT-----" , :id => 'sub_project_select',:class =>'required' ,:disabled => true%>
-        </div>
+        <%= select_tag 'sub_projects', "", :prompt => "---SELECT SUB PROJECT-----", :id => 'sub_project_select', :class => 'required', :disabled => true %>
+      </div>
 
       <div id="div_test_type" class="fields-left">
-      <label for="Test-Types">Test Types </label>
-        <%= select_tag 'test_types', "",:prompt => "---SELECT TEST CATEGORY-----" , :id => 'test_types_select', :class => 'required' ,:disabled => true %>
+        <label for="Test-Types">Test Types </label>
+        <%= select_tag 'test_types', "", :prompt => "---SELECT TEST CATEGORY-----", :id => 'test_types_select', :class => 'required', :disabled => true %>
       </div>
 
       <div class="fields-left">
-      <label for ="date1">Date 1</label>
-        <%= select_tag "date_one","",:prompt => "----SELECT DATE----",:id => 'date_one_select',:class => 'required' ,:disabled => true %>
+        <label for="date1">Date 1</label>
+        <%= select_tag "date_one", "", :prompt => "----SELECT DATE----", :id => 'date_one_select', :class => 'required', :disabled => true %>
       </div>
 
 
       <div class="fields-left">
-      <label for ="date2">Date 2</label>
-        <%= select_tag "date_two","",:prompt => "----SELECT DATE----",:id => 'date_two_select',:class => 'required' ,'disabled' => true %>
+        <label for="date2">Date 2</label>
+        <%= select_tag "date_two", "", :prompt => "----SELECT DATE----", :id => 'date_two_select', :class => 'required', 'disabled' => true %>
       </div>
 
       <div id="do-compare">
@@ -49,7 +49,6 @@
     </div>
 <% end %>
 </body>
-<%= render :file => '/home/footer.html.erb'%>
-
+<%= render :file => '/home/footer.html.erb' %>
 
 </html>

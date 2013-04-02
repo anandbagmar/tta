@@ -3,45 +3,41 @@
 <%= render 'layouts/compare_partial' %>
 
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
 
-        var displayCompareResults = function(compareJson){
-            $("#project_select").attr("disabled","disabled");
-            var ResultType ="",
-            templates = new Template(),
-            CompareTable = templates.getCompareTableTemplate();
-            var classNames ="<tr><th>CLASS-NAMES</th></tr>",
-            class_name_array = compareJson.both_failing,
+        var displayCompareResults = function (compareJson) {
+            $("#project_select").attr("disabled", "disabled");
+            var ResultType = "",
+                    templates = new Template(),
+                    CompareTable = templates.getCompareTableTemplate();
+            var classNames = "<tr><th>CLASS-NAMES</th></tr>",
+                    class_name_array = compareJson.both_failing,
 
-            resultType = "<h3><b>TEST-CASES FAILING ON BOTH \""+compareJson.dates[0]+"\" AND \""+compareJson.dates[1]+"\"<b></b></h3>";
+                    resultType = "<h3><b>TEST-CASES FAILING ON BOTH \"" + compareJson.dates[0] + "\" AND \"" + compareJson.dates[1] + "\"<b></b></h3>";
 
-         for(var index= 0;index<class_name_array.length;index++){
-               classNames += templates.render(CompareTable,{
-                  "ClassName":class_name_array[index]
-               });
+            for (var index = 0; index < class_name_array.length; index++) {
+                classNames += templates.render(CompareTable, {
+                    "ClassName": class_name_array[index]
+                });
             }
 
-
-            if(class_name_array.length < 2)
-            {
-                $("#result_table").css("display","none");
-                resultType = "<h3><b>NO SAME TEST-CASES FAILING ON BOTH \""+compareJson.dates[0]+"\" AND \""+compareJson.dates[1]+"\"<b></b></h3>";
+            if (class_name_array.length < 2) {
+                $("#result_table").css("display", "none");
+                resultType = "<h3><b>NO SAME TEST-CASES FAILING ON BOTH \"" + compareJson.dates[0] + "\" AND \"" + compareJson.dates[1] + "\"<b></b></h3>";
             }
-           else{
-            $("#result_type").html();
-            $("#result_table").html(classNames);
+            else {
+                $("#result_type").html();
+                $("#result_table").html(classNames);
             }
             $("#result-title").html(resultType);
 
         }
         var compareJson;
-        compareJson="<%= @compare_json %>";
-        compareJson=makeValidJSON.validate(compareJson);
-        compareJson=JSON.parse(compareJson);
-        if(compareJson!=""){
+        compareJson = "<%= @compare_json %>";
+        compareJson = makeValidJSON.validate(compareJson);
+        compareJson = JSON.parse(compareJson);
+        if (compareJson != "") {
             displayCompareResults(compareJson);
         }
-
-
     });
 </script>

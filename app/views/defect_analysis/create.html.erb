@@ -1,6 +1,6 @@
 <head xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
       xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-  <%= stylesheet_link_tag 'defect_analysis'%>
+  <%= stylesheet_link_tag 'defect_analysis' %>
   <%= javascript_include_tag 'defect_analysis' %>
 
   <style type="text/css">
@@ -27,7 +27,10 @@
   <% end %>
   <div id="defect-analysis">
     <table id="defect_analysis_table" class="table-bordered" style="display: none;">
-      <tr class='table-bordered'><th>FAILURE MESSAGE -> FAILING TESTS</th><th>PERCENTAGE</th></tr>
+      <tr class='table-bordered'>
+        <th>FAILURE MESSAGE -> FAILING TESTS</th>
+        <th>PERCENTAGE</th>
+      </tr>
     </table>
   </div>
 

@@ -1,7 +1,7 @@
 <head xmlns="http://www.w3.org/1999/html">
 </head>
 
-<%= render :file=> '/home/header.html.erb' %>
+<%= render :file => '/home/header.html.erb' %>
 <body>
 <div id="title">
   <div class="page_title">
@@ -11,25 +11,25 @@
 
   <div id="sub_project_picker">
     <h2>Select Sub-Project to get Test-Pyramid</h2>
-    <%= form_tag({:action => 'sub_project_filter' },{:id => "pyramid_form"}) do %>
-      <div class="fields" >
-        <label for="sub_project">Sub-Project:</label>
-        <%= select("sub_project", "id", SubProject.all.collect {|subproj| [ subproj.name, subproj.id ] },{:include_blank => '--Select--'},{:class => 'required'}) %>
-        <p class="error"><%= flash[:no_id_error] if flash[:no_id_error] %></p>
-        <br>
-      </div>
-      <div id="submit-project-button">
-        <%= submit_tag "Plot" ,:class=> 'submit' %>
-      </div>
+    <%= form_tag({:action => 'sub_project_filter'}, {:id => "pyramid_form"}) do %>
+        <div class="fields">
+          <label for="sub_project">Sub-Project:</label>
+          <%= select("sub_project", "id", SubProject.all.collect { |subproj| [subproj.name, subproj.id] }, {:include_blank => '--Select--'}, {:class => 'required'}) %>
+          <p class="error"><%= flash[:no_id_error] if flash[:no_id_error] %></p>
+          <br>
+        </div>
+        <div id="submit-project-button">
+          <%= submit_tag "Plot", :class => 'submit' %>
+        </div>
     <% end %>
   </div>
 
 </div>
 </body>
-<%= render :file=> '/home/footer.html.erb' %>
+<%= render :file => '/home/footer.html.erb' %>
 
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
         $("#pyramid_form").validate()
     });
 </script>

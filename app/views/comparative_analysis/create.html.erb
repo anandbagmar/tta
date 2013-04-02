@@ -2,7 +2,7 @@
 <head xmlns="http://www.w3.org/1999/html">
   <%= stylesheet_link_tag 'comparative_analysis' %>
 </head>
-<%= render :file=> '/home/header.html.erb' %>
+<%= render :file => '/home/header.html.erb' %>
 <body>
 
 <div class="page_title">
@@ -10,111 +10,114 @@
 </div>
 <div id="Date-Range-Input">
   <h2>Enter Date Range</h2>
-  <%= form_tag({:action => 'date_filter' },{:id => "comparative-analysis-form"}) do %>
+  <%= form_tag({:action => 'date_filter'}, {:id => "comparative-analysis-form"}) do %>
       <span class="errormsg">Select End Date Greater Than Start Date</span>
       <br>
-      <div class="required-field-date-field" >
+
+      <div class="required-field-date-field">
         <label for="start_date">Start Date:</label>
-          <%= datepicker_input 'comparative_analysis', 'start_date',:dateFormat => "yy-mm-dd", :readonly => "readonly", :maxDate => 0,:placeholder => 'YYYY-MM-DD',:class=> 'required' %>
+        <%= datepicker_input 'comparative_analysis', 'start_date', :dateFormat => "yy-mm-dd", :readonly => "readonly", :maxDate => 0, :placeholder => 'YYYY-MM-DD', :class => 'required' %>
       </div>
-      <div class="required-field-date-field" >
+      <div class="required-field-date-field">
         <label for="end_date">End Date:</label>
-          <%= datepicker_input 'comparative_analysis', 'end_date',:dateFormat => "yy-mm-dd", :readonly => "readonly",:maxDate => 0,:placeholder => 'YYYY-MM-DD',:class=> 'required' %>
+        <%= datepicker_input 'comparative_analysis', 'end_date', :dateFormat => "yy-mm-dd", :readonly => "readonly", :maxDate => 0, :placeholder => 'YYYY-MM-DD', :class => 'required' %>
       </div>
-      <div class="fields" >
+      <div class="fields">
         <label for="project">Project:</label>
-          <%= select("project", "id", Project.all.collect {|project| [ project.name, project.id ]},{:include_blank => '--Select--'}, :class => 'required') %><br>
+        <%= select("project", "id", Project.all.collect { |project| [project.name, project.id] }, {:include_blank => '--Select--'}, :class => 'required') %>
+        <br>
         <br>
       </div>
       <div id="submit-plot-button">
-        <%= submit_tag nil, { :id =>"form-submit"}%>
+        <%= submit_tag nil, {:id => "form-submit"} %>
       </div>
 
   <% end %>
 
-
-</div> <br><br>
+</div>
+<br><br>
 <% if flash[:no_data_error]!=nil %>
     <span class="display-message"><%= flash[:no_data_error] %><br></span>
 <% end %>
 
 
-<% if @result_set and flash[:no_data_error]==nil and flash[:date_error]==nil%>
- <div id="date-range-title">
-  <h3>Graph Plotted For <%= @project_name %></h3>
-  <h3>Date Range :From <%= @start_date.split(" ")[0] %> to <%= @end_date.split(" ")[0] %></h3>
-</div>
+<% if @result_set and flash[:no_data_error]==nil and flash[:date_error]==nil %>
+    <div id="date-range-title">
+      <h3>Graph Plotted For <%= @project_name %></h3>
 
-<div id="comparative_analysis" style="width:900px;height:600px">
+      <h3>Date Range :From <%= @start_date.split(" ")[0] %> to <%= @end_date.split(" ")[0] %></h3>
+    </div>
 
-  <script>
-      st_date = new Date('<%= @start_date %>');
-      start_time= st_date.getTime()
-      console.log("START TIME "+start_time);
-      ed_date = new Date('<%= @end_date %>');
-      end_time= ed_date.getTime()
-      console.log("END TIME "+end_time);
-      var data = [];
-      var milli_second_per_day = 86400000;
-      var multiple= ((end_time-start_time)/milli_second_per_day)/10;
-      if(multiple>1)
-        milli_second_per_day=milli_second_per_day*multiple;
-      for(var index=start_time;index<=end_time;index+=milli_second_per_day)
-          data.push(index);
-      var tick_set = [];
-      for (var i = 0; i < data.length; i++) {
-          tick_set.push(data[i]);
-      }
-      var getData = function(){
+    <div id="comparative_analysis" style="width:900px;height:600px">
+
+      <script>
+          st_date = new Date('<%= @start_date %>');
+          start_time = st_date.getTime()
+          console.log("START TIME " + start_time);
+          ed_date = new Date('<%= @end_date %>');
+          end_time = ed_date.getTime()
+          console.log("END TIME " + end_time);
           var data = [];
-          <%for sub_project in @result_set %>
-          data.push({
-              label: '<%= sub_project[0]%>',
-              data: <%= sub_project[1]%>,
-              lines: {show: true },
-              points: {show: true},
-              color: "#"+((1<<24)*Math.random()|0).toString(16)
-          });
-          <%end %>
+          var milli_second_per_day = 86400000;
+          var multiple = ((end_time - start_time) / milli_second_per_day) / 10;
+          if (multiple > 1)
+              milli_second_per_day = milli_second_per_day * multiple;
+          for (var index = start_time; index <= end_time; index += milli_second_per_day)
+              data.push(index);
+          var tick_set = [];
+          for (var i = 0; i < data.length; i++) {
+              tick_set.push(data[i]);
+          }
+          var getData = function () {
+              var data = [];
+              <%for sub_project in @result_set %>
+              data.push({
+                  label: '<%= sub_project[0]%>',
+                  data: <%= sub_project[1]%>,
+                  lines: {show: true },
+                  points: {show: true},
+                  color: "#" + ((1 << 24) * Math.random() | 0).toString(16)
+              });
+              <%end %>
 
-          return data;
-      };
+              return data;
+          };
 
-      $.plot($("#comparative_analysis"),
-             getData(),
-              {
-                  xaxis: {
-                      mode: "time",
-                      ticks: tick_set,
-                      timeformat: "%d-%b , %y",
-                      minTickSize: [1, "year"],
-                      min: start_time,
-                      max: end_time + milli_second_per_day,
-                      labelMargin: 50,
-                      timeZoneOffset: (new Date()).getTimezoneOffset()
-                  },
-                  yaxis: {
-                      min:0,
-                      max: 100,
-                      labelMargin: 30
-                  },
-                  grid:  {
-                      borderWidth: 0,
-                      hoverable: true,
-                      clickable: true,
-                      labelMargin: 1,
-                      backgroundColor: { colors: ["#fff", "#eee"] },
-                      minBorderMargin:40
-                  },
-                  legend: {
-                      position: "ne"
+          $.plot($("#comparative_analysis"),
+                  getData(),
+                  {
+                      xaxis: {
+                          mode: "time",
+                          ticks: tick_set,
+                          timeformat: "%d-%b , %y",
+                          minTickSize: [1, "year"],
+                          min: start_time,
+                          max: end_time + milli_second_per_day,
+                          labelMargin: 50,
+                          timeZoneOffset: (new Date()).getTimezoneOffset()
+                      },
+                      yaxis: {
+                          min: 0,
+                          max: 100,
+                          labelMargin: 30
+                      },
+                      grid: {
+                          borderWidth: 0,
+                          hoverable: true,
+                          clickable: true,
+                          labelMargin: 1,
+                          backgroundColor: { colors: ["#fff", "#eee"] },
+                          minBorderMargin: 40
+                      },
+                      legend: {
+                          position: "ne"
+                      }
+
                   }
+          );
 
-              }
-      );
-
-  </script>
-</div>
+      </script>
+    </div>
     <div id="y-axisLabel">
       <p>Percentage Of Test Passing</p>
     </div>
@@ -123,14 +126,14 @@
       <p> Date-Range</p>
     </div>
 
-<% end  %>
+<% end %>
 </body>
-<%= render :file=> '/home/footer.html.erb' %>
+<%= render :file => '/home/footer.html.erb' %>
 
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
         $("#comparative-analysis-form").validate();
-        $("#comparative-analysis-form").submit(function(){
+        $("#comparative-analysis-form").submit(function () {
             return ValidateStartDateIsLessThanEndDate.checkForDates($("#comparative-analysis-form"));
         });
     });

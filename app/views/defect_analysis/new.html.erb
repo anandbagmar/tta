@@ -1,13 +1,12 @@
 <head xmlns="http://www.w3.org/1999/html">
   <%= javascript_include_tag 'application' %>
 </head>
-<%= javascript_include_tag 'util/utils','util/templates','upload_controller' %>
-<%= render :file=> '/home/header.html.erb' %>
+<%= javascript_include_tag 'util/utils', 'util/templates', 'upload_controller' %>
+<%= render :file => '/home/header.html.erb' %>
 <body>
 
 <div id="page_title">
   <h1>Defect Analysis</h1>
-
 </div>
 <div id="sub_project_picker">
   <% if flash[:no_id_error]!=nil %>
@@ -17,16 +16,16 @@
       <p class="error"><%= flash[:no_date_error] %><br></p>
   <% end %>
   <h2>Select Sub-Project for defect analysis</h2>
-  <%= form_tag({:action => 'sub_project_filter' },{ :multipart => false,:id => "defect_analysis"}) do %>
-      <div class="fields" >
+  <%= form_tag({:action => 'sub_project_filter'}, {:multipart => false, :id => "defect_analysis"}) do %>
+      <div class="fields">
         <label for="sub_project">Sub-Project:</label>
-            <%= select("sub_project", "id", SubProject.all.collect {|p| [ p.name, p.id ] },{:include_blank => '--Select--'},:class=> 'required' ) %>
+        <%= select("sub_project", "id", SubProject.all.collect { |p| [p.name, p.id] }, {:include_blank => '--Select--'}, :class => 'required') %>
         <br>
       </div>
-      <div class="required-field-date-field" >
+      <div class="required-field-date-field">
         <label for="start_date">Analysis Date:</label>
-          <%= datepicker_input 'defect_analysis', 'analysis_date',:dateFormat => "yy-mm-dd" , :maxDate => 0, :readonly => "readonly",:placeholder => 'YYYY-MM-DD',:class=> 'required'%>
-          <span class='error-msg'>Please Enter Analysis date</span>
+        <%= datepicker_input 'defect_analysis', 'analysis_date', :dateFormat => "yy-mm-dd", :maxDate => 0, :readonly => "readonly", :placeholder => 'YYYY-MM-DD', :class => 'required' %>
+        <span class='error-msg'>Please Enter Analysis date</span>
       </div>
       <div id="submit-project-button">
         <%= submit_tag "Plot" %>
@@ -36,10 +35,9 @@
 
 </body>
 
-<%= render :file=> '/home/footer.html.erb' %>
+<%= render :file => '/home/footer.html.erb' %>
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
         $("#defect_analysis").validate()
     });
 </script>
-

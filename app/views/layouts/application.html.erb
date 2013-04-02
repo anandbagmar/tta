@@ -2,20 +2,16 @@
 <html>
 <head>
   <title>Tta</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
   <%= csrf_meta_tags %>
   <%= javascript_include_tag :jquery %>
   <%= javascript_include_tag :defaults %>
   <%= javascript_include_tag 'd3.v2' %>
   <%= javascript_include_tag 'jquery-ui' %>
-  <%= javascript_include_tag 'application','jquery-latest','jquery-ui','underscore' %>
-  <%= javascript_include_tag 'jquery.validate','flot','jquery.flot','jquery.flot.time','excanvas','excanvas.min'%>
- 
-
+  <%= javascript_include_tag 'application', 'jquery-latest', 'jquery-ui', 'underscore' %>
+  <%= javascript_include_tag 'jquery.validate', 'flot', 'jquery.flot', 'jquery.flot.time', 'excanvas', 'excanvas.min' %>
 </head>
 <body>
-
 <%= yield %>
-
 </body>
 </html>

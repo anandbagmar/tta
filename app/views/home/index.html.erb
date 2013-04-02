@@ -1,19 +1,27 @@
-<%= render :file=> '/home/header.html.erb' %>
+<%= render :file => '/home/header.html.erb' %>
 <%= stylesheet_link_tag 'home' %>
 <body>
 
+<div class="main-menu">
+  <a href='/pyramid'>
+    <button type="button">TEST PYRAMID VIEW</button>
+  </a>
+  <a href='/comparative_analysis'>
+    <button type="button">COMPARATIVE ANALYSIS</button>
+  </a>
+  <a href='/compare_runs'>
+    <button type="button">COMPARE RUNS</button>
+  </a>
+  <a href='/defect_analysis'>
+    <button type="button">DEFECT ANALYSIS</button>
+  </a>
+  <a href='/upload'>
+    <button type="button">UPLOAD TEST DATA</button>
+  </a>
 
-
-  <div class="main-menu">
-    <a href='/pyramid'><button type="button">TEST PYRAMID VIEW</button></a>
-    <a href='/comparative_analysis'><button type="button">COMPARATIVE ANALYSIS</button> </a>
-    <a href='/compare_runs'><button type="button">COMPARE RUNS</button></a>
-    <a href='/defect_analysis'><button type="button">DEFECT ANALYSIS</button> </a>
-    <a href='/upload'><button type="button">UPLOAD TEST DATA</button></a>
-
-  </div>
+</div>
 
 </div>
 
 </body>
-<%= render :file=> '/home/footer.html.erb' %>
+<%= render :file => '/home/footer.html.erb' %>
