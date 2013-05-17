@@ -1,6 +1,6 @@
 Feature: Input validation	
 	
-	@test1
+	
 	Scenario: User does not supply required fields on the defect analysis page		
 		Given a user is on the "DEFECT ANALYSIS" page
 		When the user clicks the "Plot" button 
@@ -9,7 +9,7 @@ Feature: Input validation
 		|This field is required. 	| Sub-Project 	|
 		|This field is required. 	| Analysis Date	|
 
-	@test2
+	
 	Scenario: User supplies Sub-Project but not Analysis Date on the defect analysis page		
 
 		Given a user is on the "DEFECT ANALYSIS" page		
@@ -23,7 +23,7 @@ Feature: Input validation
 		|message 					| field 		|
 		|This field is required. 	| Sub-Project	|
 
-	@test3
+	
 	Scenario: User supplies Analysis Date but not Sub-project on the defect analysis page
 		
 		Given a user is on the "DEFECT ANALYSIS" page		
@@ -38,7 +38,7 @@ Feature: Input validation
 		|message 					| field 		|
 		|This field is required. 	| Analysis Date	|
 	
-	@test4
+	
 	Scenario: User supplies Analysis Date and  Sub-project on the defect analysis page
 		
 		Given a user is on the "DEFECT ANALYSIS" page		
@@ -51,7 +51,7 @@ Feature: Input validation
 		|This field is required. 	| Sub-Project	|
 
 
-	@test5
+	
 	Scenario: User does not supply sub-project on the Pyramid view page
 		
 		Given a user is on the "PYRAMID VIEW" page
@@ -61,7 +61,7 @@ Feature: Input validation
 		|This field is required. 	| Sub-Project 	|
 
 	
-	@test6
+	
 	Scenario: User supplies sub-project on the Pyramid view page
 		
 		Given a user is on the "PYRAMID VIEW" page
@@ -72,7 +72,7 @@ Feature: Input validation
 		|This field is required. 	| Sub-Project 	|
 
 	
-	@test7
+	
 	Scenario: User does not supply dates and project on the Comparative Analysis Page	
 
 		Given a user is on the "COMPARATIVE ANALYSIS" page
@@ -83,7 +83,7 @@ Feature: Input validation
 		|This field is required. 	| End Date 		|
 		|This field is required. 	| Project 		|
 
-	@test8
+	
 	Scenario: User does not supply dates on the Comparative Analysis Page	
 		Given a user is on the "COMPARATIVE ANALYSIS" page
 		And the user specifies a Project
@@ -94,7 +94,7 @@ Feature: Input validation
 		|This field is required. 	| End Date 		|
 
 
-	@test9
+	
 	Scenario: User does not supply Project on the Comparative Analysis Page	
 		Given a user is on the "COMPARATIVE ANALYSIS" page
 		And the user specifies a Project
@@ -105,7 +105,7 @@ Feature: Input validation
 		|This field is required. 	| End Date 		|
 
 
-	@test10
+	
 	Scenario: Compare runs page scenario
 		
 		Given a user is on the "COMPARE RUNS" page
