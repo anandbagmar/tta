@@ -9,8 +9,8 @@ class Parser
         elsif contents.to_s.start_with? ("<!DOCTYPE html")
           parse_test_record_html(contents, meta_datum_id, params)
         end
-      elsif filename =~ /\.txt$/
-        JasmineParser.new.parse(contents, meta_datum_id, params)
+       #elsif filename =~ /\.txt$/
+       #JasmineParser.new.parse(contents, meta_datum_id, params)
       end
     end
   end
