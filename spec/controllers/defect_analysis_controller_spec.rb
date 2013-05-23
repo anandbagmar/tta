@@ -25,7 +25,7 @@ describe DefectAnalysisController do
     expect{DefectAnalysis.new.get_result_json(sub_project.id,null)}.to raise_error
   end
 
-  it "expects an appropriate flash message if no built run on that particular date" do
+  it "expects an appropriate flash message if no build run on that particular date" do
     sub_project = FactoryGirl.create(:sub_project)
     analysis_date = '2012-12-12'
     post :sub_project_filter , :sub_project => {:id => sub_project.id} , :defect_analysis=> {:analysis_date => analysis_date}
@@ -33,7 +33,7 @@ describe DefectAnalysisController do
     @controller.expects(:create)
     assert_not_nil assigns(@json)
     assert_not_nil flash[:no_errors]
-    assert_equal flash[:no_errors], "No built runs on #{analysis_date} for Sub Project TTA_subProject"
+    assert_equal flash[:no_errors], "No build runs on #{analysis_date} for Sub Project TTA_subProject"
   end
 
   it "expects an appropriate flash message if no failing tests" do

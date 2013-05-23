@@ -21,7 +21,7 @@ class DefectAnalysisController < ApplicationController
     parsed_json = ActiveSupport::JSON.decode(@defect_analysis_json)
 
     if parsed_json["errors"].blank?
-      flash[:no_errors]="No built runs on "+ analysis_date +" for Sub Project "+sub_project_name
+      flash[:no_errors]="No build runs on "+ analysis_date +" for Sub Project "+sub_project_name
     elsif !(parsed_json["errors"].nil?) then
       if parsed_json["errors"].values[0][0].blank?
         flash[:no_errors]="No failing tests for the latest build run on "+ analysis_date +" for Sub Project "+sub_project_name
