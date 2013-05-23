@@ -43,7 +43,7 @@ class UploadController < ApplicationController
     project = Project.find_or_create_by_name((params[:project_name].split.join(" ")).upcase)
     sub_project = project.add_sub_project(params)
     meta_data=sub_project.create_test_metadatum params
-    sub_project.save_log_files(meta_data, params)
+    sub_project.parse_and_save_log_files(meta_data, params)
     return project, sub_project, meta_data
   end
 end

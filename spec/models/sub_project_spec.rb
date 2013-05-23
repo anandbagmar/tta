@@ -15,10 +15,10 @@ describe SubProject do
     it "creates and saves test metadata" do
       project = FactoryGirl.create(:project)
       sub_project = FactoryGirl.create(:sub_project, :project_id => project.id)
-      Parser.any_instance.stub(:map_file_type_to_parser)
+      Parser.any_instance.stub(:parse_test_log_files)
       sub_project.test_metadatum.count.should == 0
       meta_data=sub_project.create_test_metadatum(@attr)
-      sub_project.save_log_files(meta_data, @attr)
+      sub_project.parse_and_save_log_files(meta_data, @attr)
       sub_project.test_metadatum.count.should == 1
       sub_project.test_metadatum.should include(meta_data)
     end

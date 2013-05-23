@@ -1,5 +1,5 @@
 class Unzip
-  def self.unzip_files (input_file_path, output_file_path)
+  def self.copy_and_extract_files (input_file_path, output_file_path)
     FileUtils.cp input_file_path, output_file_path
     file_hash = Hash.new()
     Zip::ZipFile.open(output_file_path) do |zipFile|

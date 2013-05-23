@@ -1,7 +1,7 @@
 class XmlParser
 
   def parse_xml_testsuite(config_xml, meta_id, params)
-    parse_test_record(config_xml, meta_id, params)
+    parse_test_run_record_xml(config_xml, meta_id, params)
   end
 
   def saving_junit_test_cases(config_xml, xml_data, test_report_type, test_suite)
@@ -37,6 +37,8 @@ class XmlParser
       time = RspecXmlParser.new.get_time(test_case, test_suite)
     elsif test_report_type == "Cucumber JUnit"
       time = CucumberXmlParser.get_time(test_case, test_suite)
+    else
+      time = test_suite.attr("time").to_f
     end
     time
   end
