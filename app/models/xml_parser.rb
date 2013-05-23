@@ -4,38 +4,52 @@ class XmlParser
     parse_test_run_record_xml(config_xml, meta_id, params)
   end
 
-  def saving_junit_test_cases(config_xml, xml_data, test_report_type, test_suite)
-    if test_report_type.eql?("Rspec JUnit")
-      RspecXmlParser.new.parse(config_xml, test_suite, xml_data, test_report_type)
-    elsif test_report_type.eql?("Cucumber JUnit")
-      CucumberXmlParser.parse(config_xml, test_suite, xml_data, test_report_type)
-    end
-  end
+  #def saving_junit_test_cases(extracted_xml, test_suite_xml, test_report_type, saved_test_suite_data)
+  #  if test_report_type.eql?("junit")
+  #    RspecXmlParser.new.parse(extracted_xml, test_suite_xml, test_report_type, saved_test_suite_data)
+  #  elsif test_report_type.eql?("Cucumber junit")
+  #    CucumberXmlParser.parse(extracted_xml, test_suite_xml, saved_test_suite_data, test_report_type)
+  #  end
+  #end
 
-  def parse_test_case(test_case, xml_data, config_xml, test_report_type)
-    @doc = Nokogiri::XML config_xml
+  #def parse_test_case(test_case_xml, saved_test_suite_data, extracted_xml, test_report_type)
+  #  @doc = Nokogiri::XML extracted_xml
+  #  @xml_test_case = TestCaseRecord.new()
+  #  @xml_test_case.test_suite_record_id= saved_test_suite_data.id
+  #  @xml_test_case.class_name = test_case_xml.attr("name")
+  #  testcase_name=test_case_xml.attr("name")
+  #  @xml_test_case.time_taken = test_case_xml.attr("time")
+  #  @doc.xpath("//testsuite/testcase/failure").each do |failure_xml|
+  #    if test_report_type.eql?("junit")
+  #      @error_msg = RspecXmlParser.new.get_error_message(failure_xml, testcase_name)
+  #    elsif test_report_type.eql?("Cucumber junit")
+  #      @error_msg = CucumberXmlParser.get_error_message(extracted_xml, testcase_name)
+  #    end
+  #    @xml_test_case.error_msg = @error_msg
+  #  end
+  #  @xml_test_case.save
+  #end
+
+  def create_test_case(test_case_xml, test_report_type)
     @xml_test_case = TestCaseRecord.new()
-    @xml_test_case.test_suite_record_id= xml_data.id
-    @xml_test_case.class_name = test_case.attr("name")
-    testcase_name=test_case.attr("name")
-    @xml_test_case.time_taken = test_case.attr("time")
-    if xml_data.number_of_failures.to_i > 0
-      @doc.xpath("//testsuite/testcase/failure").each do |failure|
-        if test_report_type.eql?("Rspec JUnit")
-          @error_msg = RspecXmlParser.new.get_error_message(config_xml, testcase_name)
-        elsif test_report_type.eql?("Cucumber JUnit")
-          @error_msg = CucumberXmlParser.get_error_message(config_xml, testcase_name)
-        end
-        @xml_test_case.error_msg = @error_msg
+    @xml_test_case.class_name = test_case_xml.attr("name")
+    testcase_name=test_case_xml.attr("name")
+    @xml_test_case.time_taken = test_case_xml.attr("time")
+    test_case_xml.xpath("//testcase/failure").each do |failure_xml|
+      if test_report_type.eql?("junit")
+        @error_msg = RspecXmlParser.new.get_error_message(failure_xml, testcase_name)
+      elsif test_report_type.eql?("Cucumber junit")
+        @error_msg = CucumberXmlParser.get_error_message(extracted_xml, testcase_name)
       end
+      @xml_test_case.error_msg = @error_msg
     end
-    @xml_test_case.save
+    @xml_test_case
   end
 
   def get_time(test_case, test_suite, test_report_type)
-    if test_report_type == "Rspec JUnit"
+    if test_report_type == "junit"
       time = RspecXmlParser.new.get_time(test_case, test_suite)
-    elsif test_report_type == "Cucumber JUnit"
+    elsif test_report_type == "Cucumber junit"
       time = CucumberXmlParser.get_time(test_case, test_suite)
     else
       time = test_suite.attr("time").to_f

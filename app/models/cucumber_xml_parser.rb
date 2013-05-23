@@ -1,14 +1,14 @@
 class CucumberXmlParser
-  def self.parse(config_xml, test_suite, xml_data, test_report_type)
-    @doc = Nokogiri::XML config_xml
-    name= test_suite.attr('name')
-    test_cases = @doc.xpath("//testsuite[@name='#{name}']/testcase")
-    test_cases.each do |test_case|
-      if test_case.attr("classname") == test_suite.attr("name")
-        XmlParser.new.parse_test_case(test_case, xml_data, config_xml, test_report_type)
-      end
-    end
-  end
+  #def self.parse(config_xml, test_suite, xml_data, test_report_type)
+  #  @doc = Nokogiri::XML config_xml
+  #  name= test_suite.attr('name')
+  #  test_cases = @doc.xpath("//testsuite[@name='#{name}']/testcase")
+  #  test_cases.each do |test_case|
+  #    if test_case.attr("classname") == test_suite.attr("name")
+  #      XmlParser.new.parse_test_case(test_case, xml_data, config_xml, test_report_type)
+  #    end
+  #  end
+  #end
 
   def self.get_error_message(config_xml, testcase_name)
     @error_msg=""
