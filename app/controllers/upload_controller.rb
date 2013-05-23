@@ -5,7 +5,7 @@ require 'fileutils'
 
 class UploadController < ApplicationController
   def create
-    project, sub_project, meta_data = create_project_with_dependency
+    project, sub_project, meta_data = parse_and_store_test_run_data
     redirect_to :action => :show, :project_id => project.id, :sub_project_id => sub_project.id, :project_meta_id => meta_data.id
   end
 
@@ -39,9 +39,11 @@ class UploadController < ApplicationController
   end
 
   private
-  def create_project_with_dependency
+  def parse_and_store_test_run_data
     project = Project.find_or_create_by_name((params[:project_name].split.join(" ")).upcase)
-    sub_project, meta_data = project.add_sub_project(params)
+    sub_project = project.add_sub_project(params)
+    meta_data=sub_project.create_test_metadatum params
+    sub_project.save_log_files(meta_data, params)
     return project, sub_project, meta_data
   end
 end

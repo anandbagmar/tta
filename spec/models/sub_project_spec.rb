@@ -17,7 +17,8 @@ describe SubProject do
       sub_project = FactoryGirl.create(:sub_project, :project_id => project.id)
       Parser.any_instance.stub(:map_file_type_to_parser)
       sub_project.test_metadatum.count.should == 0
-      meta_data  = sub_project.create_dependency(@attr)
+      meta_data=sub_project.create_test_metadatum(@attr)
+      sub_project.save_log_files(meta_data, @attr)
       sub_project.test_metadatum.count.should == 1
       sub_project.test_metadatum.should include(meta_data)
     end
