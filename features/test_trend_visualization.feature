@@ -20,8 +20,7 @@ Feature: Test Trend Visualization Flow
       | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | February   | 20       | 12        | 12          | Err_test.zip | Integration Test |  junit      |
       | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | March      | 15       | 12        | 12          | Err_test.zip | Functional Test  |  junit      |
 
-    # This test was failed purposely so as to check if defect analysis works fine in production (change PROJECT1 to PROJECT in the next line)
-    When a team member checks Comparative Analysis Graph of "PROJECT" with Date Range between "2011-12-12" and "2012-12-12"
+    When a team member checks Comparative Analysis Graph of "PROJECT1" with Date Range between "2011-12-12" and "2012-12-12"
     Then the comparative analysis graph for "PROJECT1" is generated with Date Range between "2011-12-12" and "2012-12-12"
 
 
