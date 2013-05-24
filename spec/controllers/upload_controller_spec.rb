@@ -18,7 +18,8 @@ describe UploadController do
 
     it "uploads data with failure messages" do
       post :create, @attr
-      create_or_load_project_if_not_present()
+      #The below line is purposely commented so as to check if defect analysis works fine in production server
+      #create_or_load_project_if_not_present()
       response.should redirect_to upload_show_path(:project_id => @project.id, :project_meta_id => @meta_data.id, :sub_project_id => @sub_project.id)
     end
 
