@@ -2,6 +2,8 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'capybara/rspec'
+require 'capybara/rails'
 require 'rspec/autorun'
 require "shoulda"
 require "shoulda-context"
@@ -65,4 +67,7 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+  config.include Rails.application.routes.url_helpers
+  config.include Capybara::DSL
+  Capybara.javascript_driver = :selenium
 end
