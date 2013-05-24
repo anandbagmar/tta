@@ -1,8 +1,4 @@
 test_report_type_mapping:
-    junit : xml
-    nunit : xml
-    groovy_nunit : xml
-    rspec : xml
-    cucumber_junit : xml
-    cucumber_html : html
-    jasmine_text : txt
+    JUnit : xml
+    NUnit : nunit_xml
+    Cucumber_HTML : html
