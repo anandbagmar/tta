@@ -1,4 +1,4 @@
 test_report_type_mapping:
-    JUnit : xml
-    NUnit : nunit_xml
-    Cucumber_HTML : html
+    junit : xml
+    nunit : nunit_xml
+    cucumber_html : html

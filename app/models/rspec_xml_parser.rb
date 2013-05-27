@@ -10,20 +10,12 @@ class RspecXmlParser
   #  end
   #end
 
-  def get_error_message(failure_xml, testcase_name)
-    @error_msg=failure_xml.to_s.scan(/\[CDATA\[((.|\s)*)\]\]/m).first
-    if !(@error_msg.nil?)
-      return @error_msg[0]
-    end
-    @error_msg
-  end
-
-  def get_time(test_case, test_suite)
-    time=0.0
-    if test_case.attr("name").start_with?(test_suite.attr("name")+" ")
-      time+= test_case.attr("time").to_f
-    end
-    time
-  end
+  #def get_error_message(failure_xml)
+  #  @error_msg=failure_xml.to_s.scan(/\[CDATA\[((.|\s)*)\]\]/m).first
+  #  if !(@error_msg.nil?)
+  #    return @error_msg[0]
+  #  end
+  #  @error_msg
+  #end
 end
 

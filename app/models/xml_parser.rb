@@ -35,22 +35,18 @@ class XmlParser
     @xml_test_case.class_name = test_case_xml.attr("name")
     testcase_name=test_case_xml.attr("name")
     @xml_test_case.time_taken = test_case_xml.attr("time")
-    test_case_xml.xpath("//testcase/failure").each do |failure_xml|
       if test_report_type.eql?("junit")
-        @error_msg = RspecXmlParser.new.get_error_message(failure_xml, testcase_name)
+        @error_msg = test_case_xml.search(".//failure").text
       elsif test_report_type.eql?("Cucumber junit")
-        @error_msg = CucumberXmlParser.get_error_message(extracted_xml, testcase_name)
+        @error_msg = CucumberXmlParser.get_error_message(test_case_xml, testcase_name)
       end
       @xml_test_case.error_msg = @error_msg
-    end
     @xml_test_case
   end
 
-  def get_time(test_case, test_suite, test_report_type)
-    if test_report_type == "junit"
-      time = RspecXmlParser.new.get_time(test_case, test_suite)
-    elsif test_report_type == "Cucumber junit"
-      time = CucumberXmlParser.get_time(test_case, test_suite)
+  def get_time(test_case,test_suite,test_report_type)
+    if test_report_type == "junit" || test_report_type == "Cucumber junit"
+      time = test_case.attr("time").to_f
     else
       time = test_suite.attr("time").to_f
     end
