@@ -1,0 +1,97 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!--
+  <groupId>com.tta</groupId>
+  <artifactId>hello</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>hello</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties> -->
+
+
+  <build>
+    <plugins>
+      <!-- snippet of code to zip log files. This code should come before upload logs -->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.2-beta-5</version>
+        <executions>
+          <execution>
+            <configuration>
+              <descriptors>
+                <descriptor>~/tta/build_tasks/maven/zip.xml</descriptor>  <!-- make sure to provide correct path of zip.xml here -->
+              </descriptors>
+            </configuration>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>   <!-- goals == mojos -->
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+
+      <!-- snippet of  code to upload logs in zip format to TTA server -->
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <exec executable="curl">
+                  <arg value="-F"/>
+                  <arg value="project_name=Suncorp Project"/>       <!-- Provide project name-->
+                  <arg value="-F"/>
+                  <arg value="sub_project_name=BPP1"/>
+                  <arg value="-F"/>
+                  <arg value="ci_job_name=sample"/>
+                  <arg value="-F"/>
+                  <arg value="test_category=unit test"/>
+                  <arg value="-F"/>
+                  <arg value="test_report_type=junit"/>
+                  <arg value="-F"/>
+                  <arg value="os_name=ghj"/>
+                  <arg value="-F"/>
+                  <arg value="host_name=dfd"/>
+                  <arg value="-F"/>
+                  <arg value="browser=ff"/>
+                  <arg value="-F"/>
+                  <arg value="type_of_environment=qa"/>
+                  <arg value="-F"/>
+                  <arg value="date="/>
+                  <arg value="-F"/>
+                  <arg value="logDirectory=@target/hello-1.0-SNAPSHOT.zip"/>         <!-- Provide path where .zip files are present-->
+                  <arg value="-F"/>
+                  <arg value="commit=SUBMIT"/>
+                  <arg value="http://localhost:3000/upload/automatic"/>               <!-- Provide TTA production URL-->
+                </exec>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
