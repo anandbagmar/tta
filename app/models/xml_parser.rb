@@ -56,7 +56,7 @@ class XmlParser
   def get_test_suite_records(meta_data)
     test_suite_ids=[]
     meta_data.test_suite_records.each do |test_suite_record|
-      test_suite_ids << test_suite_record.id unless test_suite_record.number_of_failures == 0
+      test_suite_ids << test_suite_record.id unless (test_suite_record.number_of_failures == 0 and test_suite_record.number_of_errors == 0)
     end
     test_suite_ids
   end
