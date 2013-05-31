@@ -34,7 +34,7 @@ module Seed
           :host_name => SAMPLE_HOST_NAMES[rand(SAMPLE_HOST_NAMES.length)],
           :browser => SAMPLE_BROWSER_TYPES[rand(SAMPLE_BROWSER_TYPES.length)],
           :type_of_environment => SAMPLE_TEST_ENVIRONMENTS[rand(SAMPLE_TEST_ENVIRONMENTS.length)],
-          :date_of_execution => Time.at(rand * Time.now.to_i),
+          :date_of_execution => Time.at(Time.now.to_i),
           :test_category => SAMPLE_TEST_CATEGORIES[rand(SAMPLE_TEST_CATEGORIES.length)],
           :test_report_type => SAMPLE_TEST_REPORT_TYPES[rand(SAMPLE_TEST_REPORT_TYPES.length)])
       test_meta_data.sub_project_id= sub_project_id
@@ -68,7 +68,7 @@ module Seed
     end
 
     def self.create_test_case_record(test_suite_record_id, project_id, sub_project_id, test_case_record_number)
-      test_case_record = TestCaseRecord.create(:class_name => "Class #{project_id}.#{sub_project_id}.#{test_suite_record_id}.#{test_case_record_number}", :time_taken => rand(1..4).to_s)
+      test_case_record = TestCaseRecord.create(:class_name => "Class #{project_id}.#{sub_project_id}.#{test_suite_record_id}.#{test_case_record_number}", :time_taken => rand(1..4).to_s, :error_msg =>"Error Message for Class - #{project_id}.#{sub_project_id}.#{test_suite_record_id}.#{test_case_record_number}")
       test_case_record.test_suite_record_id= test_suite_record_id
       test_case_record.save
     end
