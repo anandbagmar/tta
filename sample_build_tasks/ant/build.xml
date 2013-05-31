@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Run Test" default="run" basedir=".">
+
+  <target name="zip">
+    <zip destfile="/path/to/zip/file/a.zip" basedir="zip_folder_name" excludes="*.zip"/>
+  </target>
+
+  <target name="upload" depends="zip">
+    <exec executable="curl">
+      <arg value="-F"/>
+      <arg value="project_name=PROJECT_NAME"/>
+      <arg value="-F"/>
+      <arg value="sub_project_name=SUB_PROJECT"/>
+      <arg value="-F"/>
+      <arg value="ci_job_name=CI_JOB"/>
+      <arg value="-F"/>
+      <arg value="test_category=UNIT TEST"/>
+      <arg value="-F"/>
+      <arg value="test_report_type=JUNIT"/>
+      <arg value="-F"/>
+      <arg value="os_name=MAC OS X"/>
+      <arg value="-F"/>
+      <arg value="host_name=TW"/>
+      <arg value="-F"/>
+      <arg value="browser=SAFARI"/>
+      <arg value="-F"/>
+      <arg value="type_of_environment=QA"/>
+      <arg value="-F"/>
+      <arg value="date="/>              <!--If date is blank, it takes current date-->
+      <arg value="-F"/>
+      <arg value="logDirectory=@/path/to/actual/zip/file"/>  <!-- PLEASE ALWAYS KEEP '@' in the beginning of this path-->
+      <arg value="-F"/>
+      <arg value="commit=SUBMIT"/>
+      <arg value="http://tta_server_url:3000/upload/automatic"/>  <!--replace it with tta production url-->
+    </exec>
+  </target>
+</project>
+
