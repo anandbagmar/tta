@@ -39,14 +39,13 @@
       </div>
 
       <div class="fields">
-        <label for="test_category">Test Category</label>
+        <label for="test_category">Test Category <span class="required-fields">*</span></label>
         <%= select_tag "test_category", "<option>Unit Test</option><option>Integration Test</option><option>Functional Test</option>".html_safe, :prompt => "--Select--", :class => 'required' %>
-        <!--<%= text_field_tag (:test_category), nil, :placeholder => '(eg.Unit Test)', :class => 'required' %>-->
         <br>
       </div>
 
       <div class="fields">
-        <label for="test_report_type"> Test Report Type</label>
+        <label for="test_report_type"> Test Report Type <span class="required-fields">*</span></label>
         <%= select_tag "test_report_type", "<option>JUnit</option><option>Cucumber_HTML</option><option>NUnit</option>".html_safe, :prompt => "--Select--", :class => 'required' %>
         <br>
 
