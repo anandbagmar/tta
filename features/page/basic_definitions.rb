@@ -8,6 +8,7 @@ module Definitions
       fill_in UPLOAD_HOST_NAME, :with => proj_params[:hostName]
       fill_in UPLOAD_BROWSER, :with => proj_params[:browser]
       fill_in UPLOAD_ENV, :with => proj_params[:environment]
+      select proj_params[:test_type], :from => UPLOAD_TEST_TYPE
       select proj_params[:test_report_type],:from => UPLOAD_TEST_REPORT_TYPE
       select proj_params[:date_year],:from => UPLOAD_EXEC_YEAR
       select proj_params[:date_month],:from => UPLOAD_EXEC_MONTH
@@ -15,7 +16,7 @@ module Definitions
       select proj_params[:date_hour],:from => UPLOAD_EXEC_HOUR
       select proj_params[:date_minute],:from =>  UPLOAD_EXEC_MIN
       attach_file UPLOAD_FILENAME,proj_params[:logFile]
-      fill_in UPLOAD_TEST_TYPE, :with => proj_params[:test_type]
+      #fill_in UPLOAD_TEST_TYPE, :with => proj_params[:test_type]
     end
 
     def select_the_option(field, dropdown)

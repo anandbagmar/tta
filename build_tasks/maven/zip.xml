@@ -11,6 +11,11 @@
     <fileSet>
       <directory>/Users/anjali/Downloads/sample_suncorp/</directory> <!--path of log files-->
       <outputDirectory>/</outputDirectory>
+      <excludes>
+        <exclude>
+          *.zip
+        </exclude>
+      </excludes>
     </fileSet>
   </fileSets>
 
@@ -20,5 +25,6 @@
     </dependencySet>
   </dependencySets>
 </assembly>
+
 
 
