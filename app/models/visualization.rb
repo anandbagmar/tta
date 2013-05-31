@@ -67,11 +67,10 @@ class Visualization
     duration = []
     percent_passing = []
     no_of_test_in_test_category.zip(duration_of_test_in_test_category, failure_count).each do |no_of_test, duration_of_test, failure|
-      duration_of_tests="%0.3f" %((duration_of_test.to_f))
       percentOfTests = "%0.2f" %((no_of_test.to_f/total_no_of_tests)*100)
       passing_percent = "%0.2f" %(((no_of_test.to_f-failure.to_f)/no_of_test.to_f)*100)
       percent << percentOfTests
-      duration << duration_of_tests
+      duration << duration_of_test
       percent_passing << passing_percent
     end
     return percent, duration, percent_passing

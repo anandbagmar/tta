@@ -25,6 +25,7 @@ class TestMetadatum < ActiveRecord::Base
       total_run_time += test_suite_record.time_taken.to_f
       total_num_of_failures+= test_suite_record.number_of_failures.to_i
     end
+    total_run_time=Time.at(total_run_time).utc.strftime("%H:%M:%S:%L")
     return total_num_of_tests, total_run_time, total_num_of_failures
   end
 

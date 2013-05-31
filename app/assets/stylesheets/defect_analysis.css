@@ -14,6 +14,10 @@
   padding-bottom: 15px;
 }
 
+tbody{
+    float: left;
+    width: 628px;
+}
 #defect-analysis-table >.color_codes >.legend_item{
     display: inline-block;
     margin: 10px 0;
