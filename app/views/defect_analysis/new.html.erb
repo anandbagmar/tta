@@ -2,7 +2,7 @@
   <%= javascript_include_tag 'jquery.validate' %>
 </head>
 <%= javascript_include_tag 'util/utils', 'util/templates', 'upload_controller' %>
-<%= render :file => '/home/header',:handlers => [:erb] , :formats => [:html] %>
+<%= render :file => '/home/header.html.erb' %>
 <body>
 
 <div id="page_title">
@@ -35,7 +35,7 @@
 
 </body>
 
-<%= render :file => '/home/footer',:handlers => [:erb] , :formats => [:html] %>
+<%= render :file => '/home/footer.html.erb' %>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#defect_analysis").validate()
