@@ -1,8 +1,8 @@
 <head xmlns="http://www.w3.org/1999/html">
-  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'jquery.validate' %>
 </head>
 <%= javascript_include_tag 'util/utils', 'util/templates', 'upload_controller' %>
-<%= render :file => '/home/header.html.erb' %>
+<%= render :file => '/home/header',:handlers => [:erb] , :formats => [:html] %>
 <body>
 
 <div id="page_title">
@@ -35,7 +35,7 @@
 
 </body>
 
-<%= render :file => '/home/footer.html.erb' %>
+<%= render :file => '/home/footer',:handlers => [:erb] , :formats => [:html] %>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#defect_analysis").validate()

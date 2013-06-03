@@ -1,5 +1,4 @@
-<head xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
-      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head xmlns="http://www.w3.org/1999/html">
   <%= stylesheet_link_tag 'defect_analysis' %>
   <%= javascript_include_tag 'defect_analysis' %>
 
@@ -10,7 +9,7 @@
   </style>
 </head>
 
-<%= render :file => 'defect_analysis/new.html.erb' %>
+<%= render :file => 'defect_analysis/new' ,:handlers => [:erb] , :formats => [:html]%>
 <body>
 
 <div class="color_codes" style="display: none;">
