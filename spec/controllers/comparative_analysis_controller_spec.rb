@@ -18,7 +18,9 @@ describe ComparativeAnalysisController do
     FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id)
     result = ComparativeAnalysis.new.get_result_set(project.id,"2013-01-01".to_date,"2013-02-28".to_date)
     result.should_not be_empty
-    assert_equal result,{"TTA_subProject"=>[[1361318400000.0, 60.0]]}
+    #Line commented so as to check the result on prod
+    #assert_equal result,{"TTA_subProject"=>[[1361318400000.0, 60.0]]}
+    assert_equal result,{"TTA_subProject"=>[[2361318400000.0, 60.0]]}
   end
 
   it "should throw error if project id not given" do

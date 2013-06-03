@@ -6,12 +6,21 @@ Feature: Test Trend Visualization Flow
   Scenario: Pyramid Flow
     Given a User uploads data with following attributes
       | proj     | sub_proj | ci_job        | osName | hostName | browser | environment | date_year | date_month | date_day | date_hour | date_minute | logFile      | test_type        | test_report_type |
-      | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | January    | 1        | 12        | 12          | Err_test.zip | Unit Test        | JUnit      |
-      | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | February   | 20       | 12        | 12          | Err_test.zip | Integration Test | JUnit      |
-      | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | March      | 15       | 12        | 12          | Err_test.zip | Functional Test  | JUnit      |
-    When a team member checks Pyramid View of "SERRORS1"
-    Then the test Pyramid for "SERRORS1" is generated
-    Then the Pyramid table for "SERRORS1" is generated
+      | Project1 | ERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | January    | 1        | 12        | 12          | Err_test.zip | Unit Test        | JUnit      |
+      | Project1 | ERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | February   | 20       | 12        | 12          | Err_test.zip | Integration Test | JUnit      |
+      | Project1 | ERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | March      | 15       | 12        | 12          | Err_test.zip | Functional Test  | JUnit      |
+    When a team member checks Pyramid View of "PRO"
+    Then the test Pyramid for "PRO" is generated
+    Then the Pyramid table for "PRO" is generated
+#    Lines commented so check reuslt in prod
+#    Given a User uploads data with following attributes
+#      | proj     | sub_proj | ci_job        | osName | hostName | browser | environment | date_year | date_month | date_day | date_hour | date_minute | logFile      | test_type        | test_report_type |
+#      | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | January    | 1        | 12        | 12          | Err_test.zip | Unit Test        | JUnit      |
+#      | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | February   | 20       | 12        | 12          | Err_test.zip | Integration Test | JUnit      |
+#      | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | March      | 15       | 12        | 12          | Err_test.zip | Functional Test  | JUnit      |
+#    When a team member checks Pyramid View of "SERRORS1"
+#    Then the test Pyramid for "SERRORS1" is generated
+#    Then the Pyramid table for "SERRORS1" is generated
 
   Scenario: Comparative analysis Flow
     Given a User uploads data with following attributes

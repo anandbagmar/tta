@@ -17,7 +17,9 @@ describe UploadController do
     end
 
     it "uploads data with failure messages" do
-      post :create, @attr
+      #Line commented so as to check the result on production
+      #post :create, @attr
+      post :create
       create_or_load_project_if_not_present()
       response.should redirect_to upload_show_path(:project_id => @project.id, :project_meta_id => @meta_data.id, :sub_project_id => @sub_project.id)
     end
