@@ -9,7 +9,7 @@ class CucumberHtmlParser
     feature_name= @parsed_html.css('.feature .val')
     test_suite_name=feature_name.children[0].to_s.split('Feature:')
     html_handle = @parsed_html.xpath("//script")
-    total_test, total_failure=count_number_of_test_passed_and_failed(html_handle)
+    total_failure ,total_test=count_number_of_test_passed_and_failed(html_handle)
     total_run_time=find_test_duration(html_handle)
     test_suite_record_to_be_created = {:test_metadatum_id => meta_id, :class_name => test_suite_name[1],
                                        :number_of_tests => total_test, :number_of_failures => total_failure, :time_taken => total_run_time.to_s}
@@ -29,36 +29,27 @@ class CucumberHtmlParser
 
   def self.find_total_test_count(test_statistics)
     if test_statistics.to_s.include?("scenario")
-      starting_position = test_statistics.index("=")+3
-      end_position = test_statistics.index("scenario")-1
+      total_test_count = test_statistics.scan(/\"([^"]+)/).first.first.scan(/\d+/).first
     else
-      starting_position = test_statistics.index("=")+3
-      end_position = test_statistics.index("scenarios")-1
+      total_test_count = "0"
     end
-    test_statistics[starting_position..end_position].strip
+    total_test_count
   end
 
   def self.find_failure_count(test_statistics)
     number_of_failing_and_passing_tests = test_statistics.scan(/\(([^()]+)\)/).last.last
     if number_of_failing_and_passing_tests.include?("failed")
-      number_of_failing_tests=number_of_failing_and_passing_tests[0]
+      number_of_failing_tests=number_of_failing_and_passing_tests.scan(/\d+/).first
+    else
+      number_of_failing_tests="0"
     end
     number_of_failing_tests
-    #starting_position = test_statistics.index("(", test_statistics.rindex("=")+1)+1
-    #if test_statistics.to_s.include?("failed")
-    #  end_position = test_statistics.index("failed")-1
-    #  failed_tests_count = test_statistics[starting_position..end_position].strip
-    #end
-    #failed_tests_count
   end
 
   def self.find_test_duration(html_handle)
     html_handle.each do |node|
       if node.to_s.index("document.getElementById('duration')")
-        duration_contents = node.inner_html
-        starting_position = duration_contents.index("<strong>")+8
-        end_position = duration_contents.index("seconds")-1
-        test_run_time = duration_contents[starting_position..end_position].strip.split('m')
+        test_run_time = node.inner_html.scan(/<strong[^>]*>(.*?)<\/strong>/).first.first.scan(/[.\d]+/)
         test_run_time= test_run_time[1].to_f+((test_run_time[0].to_f)*60)
         return test_run_time
       end
