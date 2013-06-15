@@ -9,29 +9,37 @@
   <h1>Comparative Analysis View </h1>
 </div>
 <div id="Date-Range-Input">
-  <h2>Enter Date Range</h2>
+
   <%= form_tag({:action => 'date_filter'}, {:id => "comparative-analysis-form"}) do %>
-      <span class="errormsg">Select End Date Greater Than Start Date</span>
-      <br>
-
-      <div class="required-field-date-field">
-        <label for="start_date">Start Date:</label>
-        <%= datepicker_input 'comparative_analysis', 'start_date', :dateFormat => "yy-mm-dd", :readonly => "readonly", :maxDate => 0, :placeholder => 'YYYY-MM-DD', :class => 'required' %>
-      </div>
-      <div class="required-field-date-field">
-        <label for="end_date">End Date:</label>
-        <%= datepicker_input 'comparative_analysis', 'end_date', :dateFormat => "yy-mm-dd", :readonly => "readonly", :maxDate => 0, :placeholder => 'YYYY-MM-DD', :class => 'required' %>
-      </div>
-      <div class="fields">
-        <label for="project">Project:</label>
-        <%= select("project", "id", Project.all.collect { |project| [project.name, project.id] }, {:include_blank => '--Select--'}, :class => 'required') %>
-        <br>
-        <br>
-      </div>
-      <div id="submit-plot-button">
-        <%= submit_tag nil, {:id => "form-submit"} %>
-      </div>
-
+      <table border="1" style="text-align: left; width: 100%;">
+        <thead>
+        <tr>
+          <th></th>
+          <th><h2>Enter Date Range</h2></th>
+        </tr>
+        <span class="errormsg">Select End Date Greater Than Start Date</span>
+        </thead>
+        <tbody>
+        <tr class="required-field-date-field">
+          <td>
+            <label for="start_date">Start Date:</label>
+          </td>
+          <td><%= datepicker_input 'comparative_analysis', 'start_date', :dateFormat => "yy-mm-dd", :readonly => "readonly", :maxDate => 0, :placeholder => 'YYYY-MM-DD', :class => 'required' %></td>
+        </tr>
+        <tr class="required-field-date-field">
+          <td><label for="end_date">End Date:</label></td>
+          <td><%= datepicker_input 'comparative_analysis', 'end_date', :dateFormat => "yy-mm-dd", :readonly => "readonly", :maxDate => 0, :placeholder => 'YYYY-MM-DD', :class => 'required' %></td>
+        </tr>
+        <tr class="fields">
+          <td><label for="project">Project:</label></td>
+          <td><%= select("project", "id", Project.all.collect { |project| [project.name, project.id] }, {:include_blank => '--Select--'}, :class => 'required') %></td>
+        </tr>
+        <tr id="submit-plot-button">
+          <td></td>
+          <td><%= submit_tag nil, {:id => "form-submit"} %></td>
+        </tr>
+        </tbody>
+      </table>
   <% end %>
 
 </div>
