@@ -66,76 +66,75 @@
           <td>
             <%= select_tag "test_report_type", "<option>JUnit</option><option>Cucumber_HTML</option><option>NUnit</option>".html_safe, :prompt => "--Select--", :class => 'required' %>
           </td>
-      </div>
-      <tr>
-        <td class="fields">
-          <label for="os_name">OS Tested On<span class="required-fields">*</span></label>
-        </td>
-        <td>
-          <%= text_field_tag (:os_name), nil, :class => 'required' %>
-        </td>
-      </tr>
-      <tr>
-        <td class="fields">
-          <label for="host_name">Host-Machine Name<span class="required-fields">*</span></label>
-        </td>
-        <td>
-          <%= text_field_tag (:host_name), nil, :class => 'required' %>
-        </td>
-      </tr>
-      <tr>
-        <td class="fields">
-          <label for="browser">Browser Tested On<span class="required-fields">*</span></label>
-        </td>
-        <td>
-          <%= text_field_tag (:browser), nil, :class => 'required' %>
-        </td>
-      </tr>
-      <tr>
-        <td class="fields">
-          <label for="type_of_environment">Environment Run on<span class="required-fields">*</span></label>
-        </td>
-        <td>
-          <%= text_field_tag (:type_of_environment), nil, :class => 'required' %>
-        </td>
-      </tr>
-      <tr>
-        <td class="fields">
-          <label for="date_of_execution">Date Of Execution<span class="required-fields">*</span></label>
-        </td>
-        <td>
-          <div class="required-field date-field">
-            <%= select_datetime() %>
-            <span class='error-msg'>Please enter a valid Date</span>
-            <span class='future-date-error-msg'>Future Date and Time not allowed</span>
+        <tr>
+          <td class="fields">
+            <label for="os_name">OS Tested On<span class="required-fields">*</span></label>
+          </td>
+          <td>
+            <%= text_field_tag (:os_name), nil, :class => 'required' %>
+          </td>
+        </tr>
+        <tr>
+          <td class="fields">
+            <label for="host_name">Host-Machine Name<span class="required-fields">*</span></label>
+          </td>
+          <td>
+            <%= text_field_tag (:host_name), nil, :class => 'required' %>
+          </td>
+        </tr>
+        <tr>
+          <td class="fields">
+            <label for="browser">Browser Tested On<span class="required-fields">*</span></label>
+          </td>
+          <td>
+            <%= text_field_tag (:browser), nil, :class => 'required' %>
+          </td>
+        </tr>
+        <tr>
+          <td class="fields">
+            <label for="type_of_environment">Environment Run on<span class="required-fields">*</span></label>
+          </td>
+          <td>
+            <%= text_field_tag (:type_of_environment), nil, :class => 'required' %>
+          </td>
+        </tr>
+        <tr>
+          <td class="fields">
+            <label for="date_of_execution">Date Of Execution<span class="required-fields">*</span></label>
+          </td>
+          <td>
+            <div class="required-field date-field">
+              <%= select_datetime() %>
+              <span class='error-msg'>Please enter a valid Date</span>
+              <span class='future-date-error-msg'>Future Date and Time not allowed</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="fields">
+            <label for="logDirectory">Upload Logs<span class="required-fields">*</span></label>
+          </td>
+          <td>
+            <%= file_field_tag :logDirectory, {:multiple => true, :accept => 'application/zip', :class => 'required'} %>
+            <span class="invalid-file-type">Invalid File Type Uploaded.Please upload a zip file </span><br>
+          </td>
+        </tr>
+        <tr>
+          <div class="button">
+            <td>
+              <%= submit_tag 'SUBMIT', :class => 'submit' %>
+            </td>
+            <td>
+              <%= submit_tag("Clear All", {:name => 'reset', :id => 'reset_button', :type => "reset"}) %>
+            </td>
           </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="fields">
-          <label for="logDirectory">Upload Logs<span class="required-fields">*</span></label>
-        </td>
-        <td>
-          <%= file_field_tag :logDirectory, {:multiple => true, :accept => 'application/zip', :class => 'required'} %>
-          <span class="invalid-file-type">Invalid File Type Uploaded.Please upload a zip file </span><br>
-        </td>
-      </tr>
-      <tr>
-        <div class="button">
-          <td>
-            <%= submit_tag 'SUBMIT', :class => 'submit' %>
-          </td>
-          <td>
-            <%= submit_tag("Clear All", {:name => 'reset', :id => 'reset_button', :type => "reset"}) %>
-          </td>
-        </div>
-      </tr>
-      </tbody>
+        </tr>
+        </tbody>
       </table>
   <% end %>
-  </div>
+</div>
 
-  </body>
+</body>
 <%= render :file => '/home/footer.html.erb' %>
 
 <script>
