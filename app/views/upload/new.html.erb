@@ -14,9 +14,10 @@
 <div class="page_title">
   <h1 style="text-align: center; font-family: tahoma,serif;">Upload Test Data</h1>
 </div>
+<!--<div style="clear: both"><table style="clear: both"></table> </div>-->
 <div class="form">
   <%= form_tag({:action => 'create'}, {:multipart => true, :id => "uploadForm"}) do %>
-      <table border="1" style="text-align: left">
+      <table border="1" style="text-align: left; width: 100%">
         <thead>
         <tr>
           <th></th>
@@ -28,98 +29,79 @@
 
         <tbody>
         <tr>
-          <div class="fields">
-            <td>
+            <td class="fields">
               <label for="name">Project Name<span class="required-fields">*</span></label>
             </td>
             <td>
               <%= text_field_tag (:project_name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase" %>
             </td>
-          </div>
         </tr>
         <tr>
-          <div class="fields">
-            <td>
+            <td class="fields">
               <label for="sub_project_name">Sub-Project name<span class="required-fields">*</span></label>
             </td>
             <td>
               <%= text_field_tag (:sub_project_name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase" %>
             </td>
-          </div>
         </tr>
         <tr>
-          <div class="fields">
-            <td>
+            <td class="fields">
               <label for="ci_job_name">CI Job Name</label>
             </td>
             <td>
               <%= text_field_tag (:ci_job_name) %>
             </td>
-          </div>
         </tr>
         <tr>
-          <div class="fields">
-            <td>
+            <td class="fields">
               <label for="test_category">Test Category<span class="required-fields">*</span></label>
             </td>
             <td>
               <%= select_tag "test_category", "<option>Unit Test</option><option>Integration Test</option><option>Functional Test</option>".html_safe, :prompt => "--Select--", :class => 'required' %>
             </td>
-          </div>
         </tr>
         <tr>
-          <div class="fields">
-            <td>
+            <td class="fields">
               <label for="test_report_type">Test Report Type<span class="required-fields">*</span></label>
             </td>
             <td>
               <%= select_tag "test_report_type", "<option>JUnit</option><option>Cucumber_HTML</option><option>NUnit</option>".html_safe, :prompt => "--Select--", :class => 'required' %>
             </td>
           </div>
-        </tr>
         <tr>
-          <div class="fields">
-            <td>
+            <td class="fields">
               <label for="os_name">OS Tested On<span class="required-fields">*</span></label>
             </td>
             <td>
               <%= text_field_tag (:os_name), nil, :class => 'required' %>
             </td>
-          </div>
         </tr>
         <tr>
-          <div class="fields">
-            <td>
+            <td class="fields">
               <label for="host_name">Host-Machine Name<span class="required-fields">*</span></label>
             </td>
             <td>
               <%= text_field_tag (:host_name), nil, :class => 'required' %>
             </td>
-          </div>
         </tr>
         <tr>
-          <div class="fields">
-            <td>
+            <td class="fields">
               <label for="browser">Browser Tested On<span class="required-fields">*</span></label>
             </td>
             <td>
               <%= text_field_tag (:browser), nil, :class => 'required' %>
             </td>
-          </div>
         </tr>
         <tr>
-          <div class="fields">
-            <td>
+            <td class="fields">
               <label for="type_of_environment">Environment Run on<span class="required-fields">*</span></label>
             </td>
             <td>
               <%= text_field_tag (:type_of_environment), nil, :class => 'required' %>
             </td>
-          </div>
         </tr>
         <tr>
-          <div class="fields">
-            <td>
+            <td class="fields">
               <label for="date_of_execution">Date Of Execution<span class="required-fields">*</span></label>
             </td>
             <td>
@@ -129,18 +111,15 @@
                 <span class='future-date-error-msg'>Future Date and Time not allowed</span>
               </div>
             </td>
-          </div>
         </tr>
         <tr>
-          <div class="fields">
-            <td>
+            <td class="fields">
               <label for="logDirectory">Upload Logs<span class="required-fields">*</span></label>
             </td>
             <td>
               <%= file_field_tag :logDirectory, {:multiple => true, :accept => 'application/zip', :class => 'required'} %>
               <span class="invalid-file-type">Invalid File Type Uploaded.Please upload a zip file </span><br>
             </td>
-          </div>
         </tr>
         <tr>
           <div class="button">
