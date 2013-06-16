@@ -6,24 +6,31 @@
 <div id="title">
   <div class="page_title">
     <h1>Pyramid View</h1>
-
   </div>
 
   <div id="sub_project_picker">
-    <h2>Select Sub-Project to get Test-Pyramid</h2>
     <%= form_tag({:action => 'sub_project_filter'}, {:id => "pyramid_form"}) do %>
-        <div class="fields">
-          <label for="sub_project">Sub-Project:</label>
-          <%= select("sub_project", "id", SubProject.all.collect { |subproj| [subproj.name, subproj.id] }, {:include_blank => '--Select--'}, {:class => 'required'}) %>
-          <p class="error"><%= flash[:no_id_error] if flash[:no_id_error] %></p>
-          <br>
-        </div>
-        <div id="submit-project-button">
-          <%= submit_tag "Plot", :class => 'submit' %>
-        </div>
+        <table border="1" style="text-align: left; width: 100%;">
+          <tbody>
+          <tr>
+            <td class="fields">
+              <label for="sub_project">Select Sub-Project</label>
+            </td>
+            <td>
+              <%= select("sub_project", "id", SubProject.all.collect { |subproj| [subproj.name, subproj.id] }, {:include_blank => '--Select--'}, {:class => 'required'}) %>
+              <p class="error"><%= flash[:no_id_error] if flash[:no_id_error] %></p>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td id="submit-project-button">
+              <%= submit_tag "Plot", :class => 'submit' %>
+            </td>
+          </tr>
+          </tbody>
+        </table>
     <% end %>
   </div>
-
 </div>
 </body>
 <%= render :file => '/home/footer.html.erb' %>
@@ -33,4 +40,3 @@
         $("#pyramid_form").validate()
     });
 </script>
-
