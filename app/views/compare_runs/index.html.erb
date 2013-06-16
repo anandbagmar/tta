@@ -10,45 +10,63 @@
   <h1>Compare Runs </h1>
 </div>
 <%= form_tag({:action => 'getCompareJson'}, :id => "compare_runs_form") do %>
-
     <div id="compare_runs_model">
+      <table border="1" style="text-align: left; width: 100%;">
+        <tbody>
+        <tr>
+          <td class="fields-left" style="padding-bottom: 10px">
+            <label for="project">Project </label>
+          </td>
+          <td>
+            <%= select_tag 'project_id', "", :prompt => "---SELECT PROJECT-----", :id => 'project_select', :class => 'required' %>
+          </td>
+        </tr>
+        <tr>
+          <td id="div_subproject" class="fields-left" disabled="disabled" style="padding-bottom: 10px">
+            <label for="sub-project">Sub Projects</label>
+          </td>
+          <td>
+            <%= select_tag 'sub_projects', "", :prompt => "---SELECT SUB PROJECT-----", :id => 'sub_project_select', :class => 'required', :disabled => true %>
+          </td>
+        </tr>
+        <tr>
+          <td id="div_test_type" class="fields-left" style="padding-bottom: 10px">
+            <label for="Test-Types">Test Types </label>
+          </td>
+          <td>
+            <%= select_tag 'test_types', "", :prompt => "---SELECT TEST CATEGORY-----", :id => 'test_types_select', :class => 'required', :disabled => true %>
+          </td>
+        </tr>
+        <tr>
+          <td class="fields-left" style="padding-bottom: 10px">
+            <label for="date1">Date 1</label>
+          </td>
+          <td>
+            <%= select_tag "date_one", "", :prompt => "----SELECT DATE----", :id => 'date_one_select', :class => 'required', :disabled => true %>
+          </td>
+        </tr>
+        <tr>
 
-      <h2> Compare Runs</h2>
-
-      <div class="fields-left" style="padding-bottom: 10px">
-        <label for="project">Project </label>
-        <%= select_tag 'project_id', "", :prompt => "---SELECT PROJECT-----", :id => 'project_select', :class => 'required' %>
-      </div>
-
-      <div id="div_subproject" class="fields-left" disabled="disabled" style="padding-bottom: 10px">
-        <label for="sub-project">Sub Projects</label>
-        <%= select_tag 'sub_projects', "", :prompt => "---SELECT SUB PROJECT-----", :id => 'sub_project_select', :class => 'required', :disabled => true %>
-      </div>
-
-      <div id="div_test_type" class="fields-left" style="padding-bottom: 10px">
-        <label for="Test-Types">Test Types </label>
-        <%= select_tag 'test_types', "", :prompt => "---SELECT TEST CATEGORY-----", :id => 'test_types_select', :class => 'required', :disabled => true %>
-      </div>
-
-      <div class="fields-left" style="padding-bottom: 10px">
-        <label for="date1">Date 1</label>
-        <%= select_tag "date_one", "", :prompt => "----SELECT DATE----", :id => 'date_one_select', :class => 'required', :disabled => true %>
-      </div>
-
-
-      <div class="fields-left" style="padding-bottom: 10px">
-        <label for="date2">Date 2</label>
-        <%= select_tag "date_two", "", :prompt => "----SELECT DATE----", :id => 'date_two_select', :class => 'required', :disabled => true %>
-      </div>
-
-      <div id="do-compare">
-        <%= submit_tag nil, {:id => "compare_runs"} %>
-      </div>
-
-      <div class="serverData" style="display: none;"><%= @projects %></div>
+          <td class="fields-left" style="padding-bottom: 10px">
+            <label for="date2">Date 2</label>
+          </td>
+          <td>
+            <%= select_tag "date_two", "", :prompt => "----SELECT DATE----", :id => 'date_two_select', :class => 'required', :disabled => true %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td id="do-compare">
+            <%= submit_tag nil, {:id => "compare_runs"} %>
+          </td>
+        </tr>
+        <tr>
+          <td class="serverData" style="display: none;"><%= @projects %></td>
+        </tr>
+        </tbody>
+      </table>
     </div>
 <% end %>
 </body>
 <%= render :file => '/home/footer.html.erb' %>
-
 </html>
