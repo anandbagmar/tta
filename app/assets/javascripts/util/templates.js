@@ -7,7 +7,7 @@ var Template = function () {
         defectErrorMessagesTemplate:'<span>{{ErrorName}}</span><div class="error_messages"><ul>{{ErrorMessageList}}</ul></div>',
         adminTableProjectTemplate:'<tr class="tr_border"><td>{{Index}}</td><td>{{ProjectName}}</td><td>{{SubProjectName}}</td><td>{{TestCount}}</td></tr>',
         adminTableSubprojectTemplate:'<tr><td>{{Index}}</td><td>{{ProjectName}}</td><td>{{SubProjectName}}</td><td>{{TestCount}}</td></tr>',
-        compareTableTemplate:' <tr><td>{{ClassName}}</td></tr>'
+        compareTableTemplate:' <tr><td>{{ClassName}}</td><td>{{ErrorMessage}}</td></tr>'
     };
 
     return {

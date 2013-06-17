@@ -36,9 +36,7 @@ class TestMetadatum < ActiveRecord::Base
   end
 
   def self.get_record_for_specific_date(sub_project_id, test_category, date)
-    metadata_record = TestMetadatum.where(:sub_project_id => sub_project_id, :test_category => test_category, :date_of_execution => date)
-
-    @meta_data = metadata_record
+    @meta_data  = TestMetadatum.where(:sub_project_id => sub_project_id, :test_category => test_category, :date_of_execution => date)
   end
 end
 

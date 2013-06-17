@@ -5,51 +5,28 @@ class CompareRuns
     test_category=form_data["test_types"]
     date_one = form_data["date_one"]
     date_two = form_data["date_two"]
-    metadata = []
-    metadata << TestMetadatum.get_record_for_specific_date(sub_project_id, test_category, date_one)
-    metadata << TestMetadatum.get_record_for_specific_date(sub_project_id, test_category, date_two)
 
-    result_hash=TestSuiteRecord.get_class_name_suite_id_hash(metadata[0][0].id, metadata[1][0].id)
+    test_case_records_with_errors_for_date_one = get_test_suite_records_with_errors_for(date_one, sub_project_id, test_category)
+    test_case_records_with_errors_for_date_two = get_test_suite_records_with_errors_for(date_two, sub_project_id, test_category)
+    common_failures = test_case_records_with_errors_for_date_one & test_case_records_with_errors_for_date_two
+    combined_total_failures = test_case_records_with_errors_for_date_one | test_case_records_with_errors_for_date_two
 
-    @test_case_id=[]
-    result_hash.values.each do |suite_id_arrs|
-      test_case_id1=[]
-      test_case_id2=[]
-      suite_id_arrs[0].zip(suite_id_arrs[1]).each do |id1, id2|
-        test_case_id1<<TestCaseRecord.select("id").where("test_suite_record_id="+id1.to_s+" AND error_msg!='' ")
-        test_case_id2<<TestCaseRecord.select("id").where("test_suite_record_id="+id2.to_s+" AND error_msg!='' ")
-        @test_case_id << get_both_test_cases_failing(test_case_id1, test_case_id2)
-      end
-    end
-
-    @test_case_id = @test_case_id.reject { |e| e.empty? }
-    class_name_hash = Hash.new()
-
-    if @test_case_id.blank?
-      class_name_hash["both_failing"]=" "
-    else
-      class_names_of_test_cases_failing=get_class_names(@test_case_id)
-      class_name_hash["both_failing"] = class_names_of_test_cases_failing
-    end
-
-    class_name_hash
+    failure_comparison = {}
+    failure_comparison[:common_failures] = common_failures unless common_failures.size==0
+    failure_comparison[:combined_total_failures] = combined_total_failures unless combined_total_failures.size==0
+    failure_comparison[:test_case_records_for_date_one] = test_case_records_with_errors_for_date_one unless test_case_records_with_errors_for_date_one.size==0
+    failure_comparison[:test_case_records_for_date_two] = test_case_records_with_errors_for_date_two unless test_case_records_with_errors_for_date_two.size==0
+    failure_comparison
   end
 
-  def self.get_both_test_cases_failing(test_case_id1, test_case_id2)
-    test_case_id =[]
-    if (!(test_case_id1[0].empty?)&&(!(test_case_id2[0].empty?)))
-      if test_case_id1[0][0]["error_msg"]==test_case_id2[0][0]["error_msg"]
-        test_case_id.push([test_case_id1[0][0]["id"], test_case_id2[0][0]["id"]])
-      end
-    end
-    test_case_id
-  end
+  def self.get_test_suite_records_with_errors_for(date, sub_project_id, test_category)
+    test_metadata_for_date = TestMetadatum.get_record_for_specific_date(sub_project_id, test_category, date)
+    test_suite_records_for_date = TestSuiteRecord.get_test_suite_records(test_metadata_for_date)
+    test_case_records_for_date = []
 
-  def self.get_class_names(test_case_id)
-    class_name=[]
-    test_case_id.each do |arr_test_case|
-      class_name<<TestCaseRecord.find_by_id(arr_test_case[0]).class_name
+    test_suite_records_for_date.each do |test_suite_record|
+      test_case_records_for_date << TestCaseRecord.get_test_case_records_with_error(test_suite_record)
     end
-    class_name
+    test_case_records_for_date.flatten
   end
 end

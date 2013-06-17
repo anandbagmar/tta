@@ -4,20 +4,19 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-
         var displayCompareResults = function (compareJson) {
             $("#project_select").attr("disabled", "disabled");
             var ResultType = "",
                     templates = new Template(),
                     CompareTable = templates.getCompareTableTemplate();
-            var classNames = "<tr><th>CLASS-NAMES</th></tr>",
-                    class_name_array = compareJson.both_failing,
-
-                    resultType = "<h3><b>TEST-CASES FAILING ON BOTH \"" + compareJson.dates[0] + "\" AND \"" + compareJson.dates[1] + "\"<b></b></h3>";
+            var classNames = "<tr><th>CLASS-NAMES</th><th>Error message</th></tr>",
+                    class_name_array = compareJson.combined_total_failures,
+                    resultType = "<h3><b>TEST-CASES FAILING ON BOTH \"" + compareJson.dates[0] + "\" AND \"" + compareJson.dates[1] + "\"</h3>";
 
             for (var index = 0; index < class_name_array.length; index++) {
                 classNames += templates.render(CompareTable, {
-                    "ClassName": class_name_array[index]
+                    "ClassName": class_name_array[index].class_name,
+                    "ErrorMessage": class_name_array[index].error_msg
                 });
             }
 
@@ -35,7 +34,9 @@
         var compareJson;
         compareJson = "<%= @compare_json %>";
         compareJson = makeValidJSON.validate(compareJson);
+        window.alert("json: " + compareJson);
         compareJson = JSON.parse(compareJson);
+        window.alert(compareJson.combined_total_failures.length);
         if (compareJson != "") {
             displayCompareResults(compareJson);
         }
