@@ -4,12 +4,16 @@
     $(document).ready(function () {
         function displayTable(class_name_array) {
             var templates = new Template();
-            var classNames = "<tr><th>CLASS-NAMES</th></tr>";
+            var number_of_failing_tests = 0;
+            if (class_name_array) {
+                number_of_failing_tests = class_name_array.length;
+            }
+            var classNames = '<tr><th width="50%">CLASS-NAMES</th><th width="50%">Number of failing tests: " + number_of_failing_tests + "</th></tr>';
             var row = "";
             var CompareTableRowTemplate = templates.getCompareTableRowTemplate();
             var CompareTableColumnTemplate = templates.getCompareTableColumnTemplate();
-            for (var index = 0; index < class_name_array.length; index++) {
-                if (index % 3) {
+            for (var index = 0; index < number_of_failing_tests; index++) {
+                if (index%3) {
                     row += templates.render(CompareTableColumnTemplate, {
                         "ClassName": class_name_array[index].class_name
                     });
@@ -27,10 +31,8 @@
         function compareResultsFor(type, tableTitle, date1, date2, class_name_array) {
             tableTitle = "<h2><b>" + tableTitle + "</b>"
             $("#result_title_" + type).html(tableTitle);
-            if (class_name_array) {
-                var classNames = displayTable(class_name_array);
-                $("#result_table_" + type).html(classNames);
-            }
+            var classNames = displayTable(class_name_array);
+            $("#result_table_" + type).html(classNames);
         }
 
         var displayAllCompareResults = function (compareJson) {
@@ -44,11 +46,11 @@
             tableTitle = "TEST-CASES FAILING ON BOTH"
             compareResultsFor("common", tableTitle, date1, date2, class_name_array);
 
-            class_name_array = compareJson.combined_total_failures;
+            class_name_array = [] || compareJson.combined_total_failures;
             tableTitle = "ALL FAILING TEST-CASES (IN BOTH RUNS)"
             compareResultsFor("both", tableTitle, date1, date2, class_name_array);
 
-            class_name_array = compareJson.test_case_records_for_date_one;
+            class_name_array = [] || compareJson.test_case_records_for_date_one;
             tableTitle = "TEST-CASES FAILING ON DATE 1: " + date1
             compareResultsFor("date1", tableTitle, date1, ".", class_name_array);
 
