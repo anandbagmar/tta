@@ -1,44 +1,67 @@
-<%= javascript_include_tag 'util/templates' %>
-<%= javascript_include_tag 'util/utils' %>
 <%= render 'layouts/compare_partial' %>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        var displayCompareResults = function (compareJson) {
-            $("#project_select").attr("disabled", "disabled");
-            var ResultType = "",
-                    templates = new Template(),
-                    CompareTable = templates.getCompareTableTemplate();
-            var classNames = "<tr><th>CLASS-NAMES</th><th>Error message</th></tr>",
-                    class_name_array = compareJson.combined_total_failures,
-                    resultType = "<h3><b>TEST-CASES FAILING ON BOTH \"" + compareJson.dates[0] + "\" AND \"" + compareJson.dates[1] + "\"</h3>";
-
+        function displayTable(class_name_array) {
+            var templates = new Template();
+            var classNames = "<tr><th>CLASS-NAMES</th></tr>";
+            var row = "";
+            var CompareTableRowTemplate = templates.getCompareTableRowTemplate();
+            var CompareTableColumnTemplate = templates.getCompareTableColumnTemplate();
             for (var index = 0; index < class_name_array.length; index++) {
-                classNames += templates.render(CompareTable, {
-                    "ClassName": class_name_array[index].class_name,
-                    "ErrorMessage": class_name_array[index].error_msg
-                });
+                if (index % 3) {
+                    row += templates.render(CompareTableColumnTemplate, {
+                        "ClassName": class_name_array[index].class_name
+                    });
+                }
+                else {
+                    classNames += templates.render(CompareTableRowTemplate, {
+                        "ClassNameColumns": row
+                    });
+                    row = "";
+                }
             }
-
-            if (class_name_array.length < 2) {
-                $("#result_table").css("display", "none");
-                resultType = "<h3><b>NO SAME TEST-CASES FAILING ON BOTH \"" + compareJson.dates[0] + "\" AND \"" + compareJson.dates[1] + "\"<b></b></h3>";
-            }
-            else {
-                $("#result_type").html();
-                $("#result_table").html(classNames);
-            }
-            $("#result-title").html(resultType);
-
+            return classNames;
         }
-        var compareJson;
-        compareJson = "<%= @compare_json %>";
+
+        function compareResultsFor(type, tableTitle, date1, date2, class_name_array) {
+            tableTitle = "<h2><b>" + tableTitle + "</b>"
+            $("#result_title_" + type).html(tableTitle);
+            if (class_name_array) {
+                var classNames = displayTable(class_name_array);
+                $("#result_table_" + type).html(classNames);
+            }
+        }
+
+        var displayAllCompareResults = function (compareJson) {
+            var date1 = compareJson.dates[0];
+            var date2 = compareJson.dates[1];
+
+            var class_name_array;
+            var tableTitle;
+
+            class_name_array = compareJson.common_failures;
+            tableTitle = "TEST-CASES FAILING ON BOTH"
+            compareResultsFor("common", tableTitle, date1, date2, class_name_array);
+
+            class_name_array = compareJson.combined_total_failures;
+            tableTitle = "ALL FAILING TEST-CASES (IN BOTH RUNS)"
+            compareResultsFor("both", tableTitle, date1, date2, class_name_array);
+
+            class_name_array = compareJson.test_case_records_for_date_one;
+            tableTitle = "TEST-CASES FAILING ON DATE 1: " + date1
+            compareResultsFor("date1", tableTitle, date1, ".", class_name_array);
+
+            class_name_array = compareJson.test_case_records_for_date_two;
+            tableTitle = "TEST-CASES FAILING ON DATE 2: " + date2
+            compareResultsFor("date2", tableTitle, ".", date2, class_name_array);
+        }
+
+        var compareJson = "<%= @compare_json %>";
         compareJson = makeValidJSON.validate(compareJson);
-        window.alert("json: " + compareJson);
         compareJson = JSON.parse(compareJson);
-        window.alert(compareJson.combined_total_failures.length);
         if (compareJson != "") {
-            displayCompareResults(compareJson);
+            displayAllCompareResults(compareJson);
         }
     });
 </script>

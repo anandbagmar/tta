@@ -1,4 +1,53 @@
-<div id="result_type">
-  <div id="result-title"></div>
-  <table id="result_table"></table>
+<html>
+<head xmlns="http://www.w3.org/1999/html">
+  <%= javascript_include_tag 'util/utils' %>
+  <%= javascript_include_tag 'util/templates' %>
+  <%= render :file => '/home/header.html.erb' %>
+</head>
+
+<body>
+
+<div id="page_title">
+  <h1>Compare Runs</h1>
 </div>
+
+<table id="compare_results">
+  <tr id="result_type_common">
+    <td id="result_title_common"></td>
+  </tr>
+  <tr>
+    <td>
+      <table id="result_table_common"></table>
+    </td>
+  </tr>
+
+  <tr id="result_type_both">
+    <td id="result_title_both"></td>
+  </tr>
+  <tr>
+    <td>
+      <table id="result_table_both"></table>
+    </td>
+  </tr>
+
+  <tr id="result_type_date1">
+    <td id="result_title_date1"></td>
+  </tr>
+  <tr>
+    <td>
+      <table id="result_table_date1"></table>
+    </td>
+  </tr>
+
+  <tr id="result_type_date2">
+    <td id="result_title_date2"></td>
+  </tr>
+  <tr>
+    <td>
+      <table id="result_table_date2"></table>
+    </td>
+  </tr>
+</table>
+</body>
+<%= render :file => '/home/footer.html.erb' %>
+</html>
