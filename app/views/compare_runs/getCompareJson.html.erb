@@ -8,7 +8,7 @@
             if (class_name_array) {
                 number_of_failing_tests = class_name_array.length;
             }
-            var classNames = '<tr><th width="50%">CLASS-NAMES</th><th width="50%">Number of failing tests: " + number_of_failing_tests + "</th></tr>';
+            var classNames = '<tr><th width="50%">CLASS-NAMES</th><th width="50%">Number of failing tests: ' + number_of_failing_tests + '</th></tr>';
             var row = "";
             var CompareTableRowTemplate = templates.getCompareTableRowTemplate();
             var CompareTableColumnTemplate = templates.getCompareTableColumnTemplate();
@@ -43,19 +43,19 @@
             var tableTitle;
 
             class_name_array = compareJson.common_failures;
-            tableTitle = "TEST-CASES FAILING ON BOTH"
+            tableTitle = "TEST-CASES FAILING ON BOTH DATES";
             compareResultsFor("common", tableTitle, date1, date2, class_name_array);
 
-            class_name_array = [] || compareJson.combined_total_failures;
-            tableTitle = "ALL FAILING TEST-CASES (IN BOTH RUNS)"
+            class_name_array = compareJson.combined_total_failures;
+            tableTitle = "ALL FAILING TEST-CASES (IN BOTH RUNS)";
             compareResultsFor("both", tableTitle, date1, date2, class_name_array);
 
-            class_name_array = [] || compareJson.test_case_records_for_date_one;
-            tableTitle = "TEST-CASES FAILING ON DATE 1: " + date1
+            class_name_array = compareJson.test_case_records_for_date_one;
+            tableTitle = "TEST-CASES FAILING ON DATE 1: " + date1;
             compareResultsFor("date1", tableTitle, date1, ".", class_name_array);
 
             class_name_array = compareJson.test_case_records_for_date_two;
-            tableTitle = "TEST-CASES FAILING ON DATE 2: " + date2
+            tableTitle = "TEST-CASES FAILING ON DATE 2: " + date2;
             compareResultsFor("date2", tableTitle, ".", date2, class_name_array);
         }
 
