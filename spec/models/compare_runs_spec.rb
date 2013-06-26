@@ -30,7 +30,6 @@ describe CompareRuns do
     metadata=[]
     metadata << TestMetadatum.get_record_for_specific_date(sub_project.id,test_metadata1.test_category,test_metadata1.date_of_execution )
     metadata << TestMetadatum.get_record_for_specific_date(sub_project.id,test_metadata2.test_category,test_metadata2.date_of_execution )
-
     result_hash=TestSuiteRecord.get_class_name_suite_id_hash(metadata[0][0].id, metadata[1][0].id)
 
     result_hash.each do|classname|

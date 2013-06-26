@@ -5,7 +5,6 @@ class CompareRuns
     test_category=form_data["test_types"]
     date_one = form_data["date_one"]
     date_two = form_data["date_two"]
-
     test_case_records_with_errors_for_date_one = get_test_suite_records_with_errors_for(date_one, sub_project_id, test_category)
     test_case_records_with_errors_for_date_two = get_test_suite_records_with_errors_for(date_two, sub_project_id, test_category)
     common_failures = (test_case_records_with_errors_for_date_one & test_case_records_with_errors_for_date_two) || []
