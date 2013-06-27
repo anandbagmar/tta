@@ -33,13 +33,14 @@ Feature: Test Trend Visualization Flow
     When a team member checks Defect Analysis Graph of "SERRORS1" with Date as "2012-01-01"
     Then the Defect Analysis table for "SERRORS1" is plotted
 
-  Scenario:Compare runs Flow
-    Given a User uploads data with following attributes
-      | proj     | sub_proj | ci_job        | osName | hostName | browser | environment | date_year | date_month | date_day | date_hour | date_minute | logFile      | test_type | test_report_type |
-      | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2013      | March      | 3        | 12        | 12          | Err_test.zip | Unit Test |  JUnit      |
-      | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2013      | March      | 5        | 12        | 12          | Err_test.zip | Unit Test |  JUnit      |
-    When a team member checks compare runs of "PROJECT1" "SERRORS1" "UNIT TEST" with Date as "2013-03-03 12:12:00" and "2013-03-05 12:12:00"
-    Then the compare runs for "SERRORS1" is plotted for Date ""2013-03-03 12:12:00 "" and ""2013-03-05 12:12:00 ""
+#  Scenario:Compare runs Flow
+#    Given a User uploads data with following attributes
+#      | proj     | sub_proj | ci_job        | osName | hostName | browser | environment | date_year | date_month | date_day | date_hour | date_minute | logFile      | test_type | test_report_type |
+#      | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2013      | March      | 3        | 12        | 12          | Err_test.zip | Unit Test |  JUnit      |
+#      | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2013      | March      | 5        | 12        | 12          | Err_test.zip | Unit Test |  JUnit      |
+#    When a team member checks compare runs of "PROJECT1" "SERRORS1" "UNIT TEST" with Date as "2013-03-03 12:12:00" and "2013-03-05 12:12:00"
+#    Then the compare runs for "SERRORS1" is plotted for Date ""2013-03-03 12:12:00 "" and ""2013-03-05 12:12:00 ""
+
 
 
 
