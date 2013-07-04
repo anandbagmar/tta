@@ -12,18 +12,12 @@
       <directory>/Users/anjali/Downloads/sample_suncorp/</directory> <!--path of log files-->
       <outputDirectory>/</outputDirectory>
       <excludes>
-        <exclude>
-          *.zip
-        </exclude>
+        <exclude>*.zip</exclude>
+        <exclude>*.jar</exclude>
       </excludes>
     </fileSet>
   </fileSets>
 
-  <dependencySets>
-    <dependencySet>
-      <useProjectArtifact>false</useProjectArtifact>
-    </dependencySet>
-  </dependencySets>
 </assembly>
 
 
