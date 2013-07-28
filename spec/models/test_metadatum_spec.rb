@@ -35,8 +35,8 @@ describe TestMetadatum do
   describe "get_record_for_specific_date" do 
     include DataHelper
     
-    let(:cat_int_test) {"INTEGRATION TESTS"}
-    let(:cat_unit_test) {"UNIT TESTS"}
+    let(:integration_tests) {"INTEGRATION TESTS"}
+    let(:unit_tests) {"UNIT TESTS"}
     
     let(:project) {create_project}
     let(:sub_project) {create_subproject_for_project project}
@@ -56,17 +56,17 @@ describe TestMetadatum do
 
     it "distinguishes records by test category"  do    
 
-      inserted_int_test_metadatatum = create_metadatum sub_project , "2013-01-01" , cat_int_test    
-      inserted_unit_test_metadatatum = create_metadatum sub_project , "2013-01-01" , cat_unit_test
+      inserted_int_test_metadatatum = create_metadatum sub_project , "2013-01-01" , integration_tests    
+      inserted_unit_test_metadatatum = create_metadatum sub_project , "2013-01-01" , unit_tests
   
       retrieved_int_test_metadata = get_metadata(
         sub_project,
-        cat_int_test,
+        integration_tests,
         inserted_int_test_metadatatum.date_of_execution)  
 
       retrieved_unit_test_metadata = get_metadata(
         sub_project,
-        cat_unit_test,
+        unit_tests,
         inserted_unit_test_metadatatum.date_of_execution)
 
       length_of(retrieved_int_test_metadata).should be_equal_to_one
@@ -78,17 +78,17 @@ describe TestMetadatum do
     
     it "distinguishes records by test execution date" do 
 
-      inserted_int_test_metadatatum1 = create_metadatum sub_project , "2013-01-01" , cat_int_test     
-      inserted_int_test_metadatatum2 = create_metadatum sub_project , "2013-01-02" , cat_int_test     
+      inserted_int_test_metadatatum1 = create_metadatum sub_project , "2013-01-01" , integration_tests     
+      inserted_int_test_metadatatum2 = create_metadatum sub_project , "2013-01-02" , integration_tests     
   
       retrieved_int_test_metadata1 = get_metadata(
         sub_project,
-        cat_int_test,
+        integration_tests,
         inserted_int_test_metadatatum1.date_of_execution) 
 
       retrieved_int_test_metadata2 = get_metadata(
         sub_project,
-        cat_int_test,
+        integration_tests,
         inserted_int_test_metadatatum2.date_of_execution)
 
       length_of(retrieved_int_test_metadata1).should be_equal_to_one
@@ -101,19 +101,19 @@ describe TestMetadatum do
        
       sub_project_other = create_subproject_for_project project 
 
-      inserted_sub_project_metadatum = create_metadatum sub_project , "2013-01-01" , cat_int_test
-      inserted_sub_project_other_metadatum =  create_metadatum sub_project_other , "2013-01-01" , cat_int_test
+      inserted_sub_project_metadatum = create_metadatum sub_project , "2013-01-01" , integration_tests
+      inserted_sub_project_other_metadatum =  create_metadatum sub_project_other , "2013-01-01" , integration_tests
 
       date_of_execution = inserted_sub_project_metadatum.date_of_execution
 
       retrieved_sub_project_metadata = get_metadata(
         sub_project,
-        cat_int_test,
+        integration_tests,
         date_of_execution) 
 
       retrieved_sub_project_other_metadata = get_metadata(
         sub_project_other,
-        cat_int_test,
+        integration_tests,
         date_of_execution)
 
       length_of(retrieved_sub_project_metadata).should be_equal_to_one
