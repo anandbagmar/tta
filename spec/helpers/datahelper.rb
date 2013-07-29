@@ -56,12 +56,12 @@ module DataHelper
 			)
 	end	
 
-	def add_failed_tests_to_suite(arg_suite , arg_class_name="Class001_1")
+	def add_failed_tests_from_suite(arg_suite , arg_class_name="Class001_1")
 		create :test_case_record ,
 		with(
 				:test_suite_record_id.as(arg_suite.id) ,
 				:class_name.as(arg_class_name)
-			) 
+			)
 	end
 
 	def get_metadata(arg_sub_project , arg_test_category , arg_date)
