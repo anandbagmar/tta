@@ -68,6 +68,39 @@ module CompareRunsSpecHelper
     	"error for class_#{arg_prefix}"
     end
 
+    def form_data(arg_subproject,arg_test_category,arg_date1,arg_date2)
+        {"sub_projects" => arg_subproject.id,
+        "test_types" => arg_test_category,
+        "date_one" => arg_date1,
+        "date_two" => arg_date2}
+    end
+
+    def get_compare_result
+       @compare_result=
+       CompareRuns.getCompareResult form_data(@sub_project,@unit_tests,@jan_1_2013,@jan_2_2013)
+    end
+
+    def common_failures_class_names
+        extract_class_names_from @compare_result[:common_failures]
+    end
+
+    def combined_failures_class_names
+        extract_class_names_from @compare_result[:combined_total_failures]
+    end
+
+    def day_one_failures_class_names
+        extract_class_names_from @compare_result[:test_case_records_for_date_one]
+    end
+
+    def day_two_failures_class_names
+        extract_class_names_from @compare_result[:test_case_records_for_date_two]
+    end
+
+    def extract_class_names_from(arg_arr_test_case_records)
+        return [] unless arg_arr_test_case_records
+        arg_arr_test_case_records.map {|record| record.class_name}
+    end
+
 end
 
 
@@ -77,13 +110,17 @@ describe "CompareRuns" do
 	include CompareRunsCustomMatchers
 
 	before(:each) do		
-		common_setup
-		create_new_project_and_subproject
-		@metadata1 = create_metadatum(@sub_project,@jan_1_2013,@unit_tests)	
-		@test_suite1 = create_suite_with_metadata(@metadata1,"rest_unit_tests")		
+		common_setup()
+		create_new_project_and_subproject()
 	end
 
 	describe "#get_test_suite_records_with_errors_for" do 
+
+        before do
+            @metadata1 = create_metadatum(@sub_project,@jan_1_2013,@unit_tests) 
+            @test_suite1 = create_suite_with_metadata(@metadata1,"rest_unit_tests")     
+        end
+
 
 		context "when there are no failures for a subproject and test category on a given day" do
         	it "should return no records" do
@@ -158,9 +195,59 @@ describe "CompareRuns" do
 
 	describe "#getCompareResult" do 
 
-		
-		
+        before do 
+            @metadata1 = create_metadatum(@sub_project,@jan_1_2013,@unit_tests)
+            @metadata2 = create_metadatum(@sub_project,@jan_2_2013,@unit_tests)
+            
+            @test_suite1 = create_suite_with_metadata(@metadata1,"rest_unit_tests")
+            @test_suite2 = create_suite_with_metadata(@metadata2,"rest_unit_tests")
+        end
 
+        context "when there are no failures on the test runs being compared" do
+          it "returns no records for combined , common , day1 and day2 failures" do 
+                get_compare_result()
+                common_failures_class_names.should be_empty
+                combined_failures_class_names.should be_empty 
+                day_one_failures_class_names.should be_empty
+                day_two_failures_class_names.should be_empty                
+            end
+        end
+
+        context "when the test runs being compared have mutual exclusive failures" do 
+            before do
+                create_class_errors(@test_suite1,class_error_hash_from("001","002","003"))
+                create_class_errors(@test_suite2,class_error_hash_from("004","005","006"))
+                @expected_combined_failures = class_name_arr_from("001","002","003","004","005","006")
+                @expected_day_1_failures = class_name_arr_from("001","002","003")
+                @expected_day_2_failures = class_name_arr_from("004","005","006")
+                get_compare_result()
+            end
+
+            it "returns no tests as common failures" do 
+                common_failures_class_names.should be_empty
+            end
+
+            it "returns all failed tests as combined test failures" do
+                
+                combined_failures_class_names.should contain_all(@expected_combined_failures)
+            end
+
+            it "returns only failures from day 1 as tests failed for day 1" do
+                day_one_failures_class_names.should contain_all(@expected_day_1_failures)
+                day_one_failures_class_names.should contain_none_of(@expected_day_2_failures)
+            end
+
+            it "returns only failures from day 2 as tests failed for day 2" do
+                day_two_failures_class_names.should contain_all(@expected_day_2_failures)
+                day_two_failures_class_names.should contain_none_of(@expected_day_1_failures)
+            end
+        end
+
+        context "when only day 1 has failures" do 
+
+
+
+        end
 
 	end
 
