@@ -20,7 +20,7 @@ module CompareRunsSpecHelper
     
     include DataHelper
     
-    def common_setup
+    def perform_common_setup
     	@jan_1_2013 ="2013-01-01 00:00:00 UTC"
     	@jan_2_2013 ="2013-01-02 00:00:00 UTC"
     	@unit_tests = "UNIT TESTS"        
@@ -32,12 +32,11 @@ module CompareRunsSpecHelper
     end
 
     def records_with_error_for(arg_sub_project,arg_test_category,arg_date)
-    	records = CompareRuns.get_test_suite_records_with_errors_for(arg_date,
-    												arg_sub_project.id,
-    												arg_test_category)
-    	result = []
-    	records.each {|record| result << record.class_name}
-    	result
+    	extract_class_names_from(
+            CompareRuns.get_test_suite_records_with_errors_for(arg_date,
+										                        arg_sub_project.id,
+										                        arg_test_category)
+            )        
     end
 
     def create_class_errors(arg_suite,arg_hash_class_error)
@@ -55,9 +54,7 @@ module CompareRunsSpecHelper
     end
 
     def class_name_arr_from(*arg_prefixes)
-    	result_arr=[]
-    	arg_prefixes.each {|prefix| result_arr << create_class_name(prefix)}
-    	result_arr
+        arg_prefixes.map{|prefix| create_class_name prefix}
     end
 
     def create_class_name(arg_prefix)
@@ -80,19 +77,19 @@ module CompareRunsSpecHelper
        CompareRuns.getCompareResult form_data(@sub_project,@unit_tests,@jan_1_2013,@jan_2_2013)
     end
 
-    def common_failures_class_names
+    def common_test_failures
         extract_class_names_from @compare_result[:common_failures]
     end
 
-    def combined_failures_class_names
+    def combined_test_failures
         extract_class_names_from @compare_result[:combined_total_failures]
     end
 
-    def day_one_failures_class_names
+    def day_one_test_failures
         extract_class_names_from @compare_result[:test_case_records_for_date_one]
     end
 
-    def day_two_failures_class_names
+    def day_two_test_failures
         extract_class_names_from @compare_result[:test_case_records_for_date_two]
     end
 
@@ -110,7 +107,7 @@ describe "CompareRuns" do
 	include CompareRunsCustomMatchers
 
 	before(:each) do		
-		common_setup()
+		perform_common_setup()
 		create_new_project_and_subproject()
 	end
 
@@ -206,10 +203,10 @@ describe "CompareRuns" do
         context "when there are no failures on the test runs being compared" do
           it "returns no records for combined , common , day1 and day2 failures" do 
                 get_compare_result()
-                common_failures_class_names.should be_empty
-                combined_failures_class_names.should be_empty 
-                day_one_failures_class_names.should be_empty
-                day_two_failures_class_names.should be_empty                
+                common_test_failures.should be_empty
+                combined_test_failures.should be_empty 
+                day_one_test_failures.should be_empty
+                day_two_test_failures.should be_empty                
             end
         end
 
@@ -225,21 +222,21 @@ describe "CompareRuns" do
             end
 
             it "returns no tests as common failures" do 
-                common_failures_class_names.should be_empty
+                common_test_failures.should be_empty
             end
 
             it "returns all failed tests as combined test failures" do                
-                combined_failures_class_names.should contain_all @expected_combined_failures 
+                combined_test_failures.should contain_all @expected_combined_failures 
             end
 
             it "returns only failures from day 1 as tests failed for day 1" do
-                day_one_failures_class_names.should contain_all @expected_day_1_failures 
-                day_one_failures_class_names.should contain_none_of @expected_day_2_failures 
+                day_one_test_failures.should contain_all @expected_day_1_failures 
+                day_one_test_failures.should contain_none_of @expected_day_2_failures 
             end
 
             it "returns only failures from day 2 as tests failed for day 2" do
-                day_two_failures_class_names.should contain_all @expected_day_2_failures 
-                day_two_failures_class_names.should contain_none_of @expected_day_1_failures 
+                day_two_test_failures.should contain_all @expected_day_2_failures 
+                day_two_test_failures.should contain_none_of @expected_day_1_failures 
             end
         
         end
@@ -253,19 +250,19 @@ describe "CompareRuns" do
             end
 
             it "returns no tests as common failures" do 
-                common_failures_class_names.should be_empty
+                common_test_failures.should be_empty
             end
 
             it "returns failures from day 1 as combined test failures" do
-                combined_failures_class_names.should contain_all @expected_day_1_failures 
+                combined_test_failures.should contain_all @expected_day_1_failures 
             end
 
             it "returns failures from day 1 as tests failed for day 1" do
-                day_one_failures_class_names.should contain_all @expected_day_1_failures 
+                day_one_test_failures.should contain_all @expected_day_1_failures 
             end
 
             it "returns no records as tests failed for day 2" do
-               day_two_failures_class_names.should be_empty
+               day_two_test_failures.should be_empty
             end
 
         end
@@ -279,19 +276,19 @@ describe "CompareRuns" do
             end
 
             it "returns no tests as common failures" do 
-                common_failures_class_names.should be_empty
+                common_test_failures.should be_empty
             end
 
             it "returns failures from day 2 as combined test failures" do
-                combined_failures_class_names.should contain_all @expected_day_2_failures 
+                combined_test_failures.should contain_all @expected_day_2_failures 
             end
 
             it "returns failures from day 2 as tests failed for day 2" do
-                day_two_failures_class_names.should contain_all @expected_day_2_failures 
+                day_two_test_failures.should contain_all @expected_day_2_failures 
             end
 
             it "returns no records as tests failed for day 1" do
-               day_one_failures_class_names.should be_empty
+               day_one_test_failures.should be_empty
             end
         end
 
@@ -305,10 +302,10 @@ describe "CompareRuns" do
             end
 
             it "should return all test failures as common failures , combined_failures , day1 failures and day 2 failures" do 
-                common_failures_class_names.should contain_all @expected_failures
-                combined_failures_class_names.should contain_all @expected_failures
-                day_one_failures_class_names.should contain_all @expected_failures
-                day_two_failures_class_names.should contain_all @expected_failures
+                common_test_failures.should contain_all @expected_failures
+                combined_test_failures.should contain_all @expected_failures
+                day_one_test_failures.should contain_all @expected_failures
+                day_two_test_failures.should contain_all @expected_failures
             end
         end
 
@@ -325,19 +322,19 @@ describe "CompareRuns" do
             end
 
             it "should return all test failures as combined failures" do 
-               combined_failures_class_names.should contain_all @expected_combined_failures
+               combined_test_failures.should contain_all @expected_combined_failures
             end
 
             it "should return test failed in both runs as common failures" do 
-               common_failures_class_names.should contain_all  @expected_common_failures
+               common_test_failures.should contain_all  @expected_common_failures
             end
 
             it "returns failures from day 2 as tests failed for day 2" do
-                day_two_failures_class_names.should contain_all @expected_day_2_failures 
+                day_two_test_failures.should contain_all @expected_day_2_failures 
             end
 
             it "returns failures from day 1 as tests failed for day 1" do
-                day_one_failures_class_names.should contain_all @expected_day_1_failures 
+                day_one_test_failures.should contain_all @expected_day_1_failures 
             end
         end
 
@@ -352,19 +349,19 @@ describe "CompareRuns" do
             end
 
             it "should return all failures from day 1 as common test failures" do 
-                day_one_failures_class_names.should contain_all @expected_day_1_failures
-                common_failures_class_names.should contain_all day_one_failures_class_names                
+                day_one_test_failures.should contain_all @expected_day_1_failures
+                common_test_failures.should contain_all day_one_test_failures                
 
             end
 
             it "should return all failures from day 2 as combined test failures" do 
-                day_two_failures_class_names.should contain_all @expected_day_2_failures
-                combined_failures_class_names.should contain_all day_two_failures_class_names
+                day_two_test_failures.should contain_all @expected_day_2_failures
+                combined_test_failures.should contain_all day_two_test_failures
             end            
         end
 
         context "when failures from day 2 are a subset of failures from day 1" do 
-            
+                    
             before do 
                 create_class_errors @test_suite1, class_error_hash_from("001","004","002","003","005")
                 create_class_errors @test_suite2, class_error_hash_from("001","002","003")
@@ -374,14 +371,14 @@ describe "CompareRuns" do
             end
 
             it "should return all failures from day 2 as common test failures" do 
-                day_two_failures_class_names.should contain_all @expected_day_2_failures
-                common_failures_class_names.should contain_all day_two_failures_class_names                
+                day_two_test_failures.should contain_all @expected_day_2_failures
+                common_test_failures.should contain_all day_two_test_failures                
 
             end
 
             it "should return all failures from day 1 as combined test failures" do 
-                day_one_failures_class_names.should contain_all @expected_day_1_failures
-                combined_failures_class_names.should contain_all day_one_failures_class_names
+                day_one_test_failures.should contain_all @expected_day_1_failures
+                combined_test_failures.should contain_all day_one_test_failures
             end
 
         end
