@@ -5,4 +5,8 @@ class TestCaseRecord < ActiveRecord::Base
   def self.get_test_case_records_with_error(test_suite_record)
     TestCaseRecord.select("class_name, error_msg").find(:all, :conditions => ["test_suite_record_id = #{test_suite_record.id}", "error_msg != ''"], :order => "class_name ASC")
   end
+
+  def eql?(other)
+  	self.class_name == other.class_name
+  end
 end
