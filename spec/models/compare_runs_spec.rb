@@ -1,10 +1,20 @@
 require "rspec"
 
-RSpec::Matchers.define :contain_all do |expected|
-	match do |actual|
-		(actual.length == expected.length ) and (actual.to_set == expected.to_set)
-	end
+
+module CompareRunsCustomMatchers
+    RSpec::Matchers.define :contain_all do |expected|
+    	match do |actual|
+    		(actual.length == expected.length ) and (actual.to_set == expected.to_set)
+    	end
+    end
+
+    RSpec::Matchers.define :contain_none_of do |expected|
+        match do |actual|
+            expected & actual == []
+        end
+    end
 end
+
 
 module CompareRunsSpecHelper
     
@@ -13,7 +23,7 @@ module CompareRunsSpecHelper
     def common_setup
     	@jan_1_2013 ="2013-01-01 00:00:00 UTC"
     	@jan_2_2013 ="2013-01-02 00:00:00 UTC"
-    	@unit_tests = "UNIT TESTS"
+    	@unit_tests = "UNIT TESTS"        
     end
 
     def create_new_project_and_subproject
@@ -64,7 +74,8 @@ end
 describe "CompareRuns" do 
 
 	include CompareRunsSpecHelper
-	
+	include CompareRunsCustomMatchers
+
 	before(:each) do		
 		common_setup
 		create_new_project_and_subproject
@@ -102,6 +113,46 @@ describe "CompareRuns" do
 			end
 		end
 
+        context "when there are failures for multiple test suites for different test category on a given day" do 
+            before do
+                @integration_tests = "INTEGRATION TESTS"
+                @metadata2 = create_metadatum(@sub_project,@jan_1_2013,@integration_tests)
+                @test_suite2 = create_suite_with_metadata(@metadata2,"rest_integration_tests")
+                create_class_errors(@test_suite1,class_error_hash_from("UT001","UT002","UT003"))     
+                create_class_errors(@test_suite2,class_error_hash_from("IT001","IT002","IT003"))
+            end
+            it "should return only the records for the requested test category and exclude others on the same day" do 
+                expected_ut_errors = class_name_arr_from("UT001","UT002","UT003")
+                expected_it_errors = class_name_arr_from("IT001","IT002","IT003")
+                
+                records_with_error_for(@sub_project,@unit_tests,@jan_1_2013).should contain_all(expected_ut_errors)
+                records_with_error_for(@sub_project,@unit_tests,@jan_1_2013).should contain_none_of(expected_it_errors)
+                
+                records_with_error_for(@sub_project,@integration_tests,@jan_1_2013).should contain_all(expected_it_errors)
+                records_with_error_for(@sub_project,@integration_tests,@jan_1_2013).should contain_none_of(expected_ut_errors)
+            end
+        end
+
+        context "when there are failures for multiple test suites for the same category on different days" do 
+            
+            before do
+                @metadata2 = create_metadatum(@sub_project,@jan_2_2013,@unit_tests)
+                @test_suite2 = create_suite_with_metadata(@metadata2,"rest_integration_tests")
+                create_class_errors(@test_suite1,class_error_hash_from("DAY1_1","DAY1_2","DAY1_3"))
+                create_class_errors(@test_suite2,class_error_hash_from("DAY2_1","DAY2_2","DAY2_3"))
+            end
+
+            it "should return only the records for the requested day and exclude failures on other days" do
+                expected_day_1_errors = class_name_arr_from("DAY1_1","DAY1_2","DAY1_3")
+                expected_day_2_errors = class_name_arr_from("DAY2_1","DAY2_2","DAY2_3")
+
+                records_with_error_for(@sub_project,@unit_tests,@jan_1_2013).should contain_all(expected_day_1_errors)
+                records_with_error_for(@sub_project,@unit_tests,@jan_1_2013).should contain_none_of(expected_day_2_errors)
+
+                records_with_error_for(@sub_project,@unit_tests,@jan_2_2013).should contain_all(expected_day_2_errors)
+                records_with_error_for(@sub_project,@unit_tests,@jan_2_2013).should contain_none_of(expected_day_1_errors)
+            end
+        end
 	end
 
 
