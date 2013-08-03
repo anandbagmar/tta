@@ -1,106 +1,105 @@
 require "rspec"
 
-describe CompareRuns do
+RSpec::Matchers.define :contain_all do |expected|
+	match do |actual|
+		(actual.length == expected.length ) and (actual.to_set == expected.to_set)
+	end
+end
 
-  it "should return metadata record_for_specific_date" do
-    project = FactoryGirl.create(:project)
-    sub_project = FactoryGirl.create(:sub_project, :project_id => project.id)
-    test_metadata = FactoryGirl.create(:test_metadatum,:sub_project_id => sub_project.id,:date_of_execution => "2013-03-03",:test_category => "unit test")
-    test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id)
-    FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id)
-    metadata=[]
-    metadata << TestMetadatum.get_record_for_specific_date(sub_project.id,test_metadata.test_category,test_metadata.date_of_execution )
-    metadata[0][0].date_of_execution.should eq(test_metadata.date_of_execution)
-  end
-
-
-  it "should return classnames suite" do
-    project = FactoryGirl.create(:project)
-    sub_project = FactoryGirl.create(:sub_project, :project_id => project.id)
-
-    test_metadata1 = FactoryGirl.create(:test_metadatum,:sub_project_id => sub_project.id,:date_of_execution => "2013-03-03",:test_category => "unit test")
-    test_metadata2 = FactoryGirl.create(:test_metadatum,:sub_project_id => sub_project.id,:date_of_execution => "2013-03-05",:test_category => "unit test")
-
-    test_suite_record1 = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata1.id,:class_name => "visualization_controller")
-    test_suite_record2 = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata2.id,:class_name => "visualization_controller")
-
-    test_case_record1=FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record1.id)
-    test_case_record2=FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record2.id)
-
-    metadata=[]
-    metadata << TestMetadatum.get_record_for_specific_date(sub_project.id,test_metadata1.test_category,test_metadata1.date_of_execution )
-    metadata << TestMetadatum.get_record_for_specific_date(sub_project.id,test_metadata2.test_category,test_metadata2.date_of_execution )
-    result_hash=TestSuiteRecord.get_class_name_suite_id_hash(metadata[0][0].id, metadata[1][0].id)
-
-    result_hash.each do|classname|
-      classname[0].should eq( test_suite_record1.class_name) or classname[0].should eq( test_suite_record2.class_name)
+module CompareRunsSpecHelper
+    
+    include DataHelper
+    
+    def common_setup
+    	@jan_1_2013 ="2013-01-01 00:00:00 UTC"
+    	@jan_2_2013 ="2013-01-02 00:00:00 UTC"
+    	@unit_tests = "UNIT TESTS"
     end
-  end
 
-
-  it "should return both test cases failing" do
-    project = FactoryGirl.create(:project)
-    sub_project = FactoryGirl.create(:sub_project, :project_id => project.id)
-
-    test_metadata1 = FactoryGirl.create(:test_metadatum,:sub_project_id => sub_project.id,:date_of_execution => "2013-03-03",:test_category => "unit test")
-    test_metadata2 = FactoryGirl.create(:test_metadatum,:sub_project_id => sub_project.id,:date_of_execution => "2013-03-05",:test_category => "unit test")
-
-    test_suite_record1 = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata1.id,:class_name => "visualization_controller")
-    test_suite_record2 = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata2.id,:class_name => "visualization_controller")
-
-    test_case_record1=FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record1.id,:error_msg =>"legends improper",:class_name => "visualization_controller")
-    test_case_record2=FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record2.id,:error_msg =>"legends improper",:class_name => "visualization_controller")
-
-    metadata=[]
-    metadata << TestMetadatum.get_record_for_specific_date(sub_project.id,test_metadata1.test_category,test_metadata1.date_of_execution )
-    metadata << TestMetadatum.get_record_for_specific_date(sub_project.id,test_metadata2.test_category,test_metadata2.date_of_execution )
-
-    result_hash=TestSuiteRecord.get_class_name_suite_id_hash(metadata[0][0].id, metadata[1][0].id)
-    @test_case_id=[]
-    test_case_id1=[]
-    test_case_id2=[]
-
-    result_hash.values.each do |suite_id_arrs|
-      suite_id_arrs[0].zip(suite_id_arrs[1]).each do |id1, id2|
-        test_case_id1 << TestCaseRecord.select("id,error_msg").where("test_suite_record_id="+id1.to_s+" AND error_msg!='' ")
-        test_case_id2 << TestCaseRecord.select("id,error_msg").where("test_suite_record_id="+id2.to_s+" AND error_msg!='' ")
-      end
+    def create_new_project_and_subproject
+        @project = create_project("COMPARE_RUNS")
+        @sub_project = create_subproject_for_project(@project,"COMPARE_RUNS_SUBPROJECT")
     end
-    a = test_case_id1[0][0].error_msg.nil?
-    b=  test_case_id2[0][0].error_msg.nil?
-    a.should be_false and  b.should be_false
-  end
 
-  it "should return no same test cases failing" do
-    project = FactoryGirl.create(:project)
-    sub_project = FactoryGirl.create(:sub_project, :project_id => project.id)
-
-    test_metadata1 = FactoryGirl.create(:test_metadatum,:sub_project_id => sub_project.id,:date_of_execution => "2013-03-03",:test_category => "unit test")
-    test_metadata2 = FactoryGirl.create(:test_metadatum,:sub_project_id => sub_project.id,:date_of_execution => "2013-03-05",:test_category => "unit test")
-
-    test_suite_record1 = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata1.id,:class_name => "visualization_controller")
-    test_suite_record2 = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata2.id,:class_name => "visualization_controller")
-
-    test_case_record1=FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record1.id,:error_msg =>"legends improper",:class_name => "visualization_controller")
-    test_case_record2=FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record2.id,:error_msg =>"wrong data",:class_name => "visualization_controller")
-
-    metadata=[]
-    metadata << TestMetadatum.get_record_for_specific_date(sub_project.id,test_metadata1.test_category,test_metadata1.date_of_execution )
-    metadata << TestMetadatum.get_record_for_specific_date(sub_project.id,test_metadata2.test_category,test_metadata2.date_of_execution )
-
-    result_hash=TestSuiteRecord.get_class_name_suite_id_hash(metadata[0][0].id, metadata[1][0].id)
-    @test_case_id=[]
-    test_case_id1=[]
-    test_case_id2=[]
-
-    result_hash.values.each do |suite_id_arrs|
-      suite_id_arrs[0].zip(suite_id_arrs[1]).each do |id1, id2|
-        test_case_id1 << TestCaseRecord.select("id,error_msg").where("test_suite_record_id="+id1.to_s+" AND error_msg!='' ")
-        test_case_id2 << TestCaseRecord.select("id,error_msg").where("test_suite_record_id="+id2.to_s+" AND error_msg!='' ")
-      end
+    def records_with_error_for(arg_sub_project,arg_test_category,arg_date)
+    	records = CompareRuns.get_test_suite_records_with_errors_for(arg_date,
+    												arg_sub_project.id,
+    												arg_test_category)
+    	result = []
+    	records.each {|record| result << record.class_name}
+    	result
     end
-    a = test_case_id1[0][0].error_msg
-    b=  test_case_id2[0][0].error_msg
-    a.should_not eq(b)
-  end
+
+    def create_class_errors(arg_suite,arg_hash_class_error)
+		arg_hash_class_error.each_pair do |key , value|		  
+			add_failed_tests_from_suite(arg_suite , key , value)
+		end
+    end
+    
+    def class_error_hash_from(*arg_prefixes)
+    	result_hash = {}
+    	arg_prefixes.each do |arg_prefix|
+    		result_hash[create_class_name(arg_prefix)] = create_err_msg(arg_prefix) 
+    	end
+    	result_hash
+    end
+
+    def class_name_arr_from(*arg_prefixes)
+    	result_arr=[]
+    	arg_prefixes.each {|prefix| result_arr << create_class_name(prefix)}
+    	result_arr
+    end
+
+    def create_class_name(arg_prefix)
+    	"class_#{arg_prefix}"
+    end
+
+    def create_err_msg(arg_prefix)
+    	"error for class_#{arg_prefix}"
+    end
+
+end
+
+
+describe "CompareRuns" do 
+
+	include CompareRunsSpecHelper
+	before(:each) do		
+		common_setup
+		create_new_project_and_subproject
+		@metadata1 = create_metadatum(@sub_project,@jan_1_2013,@unit_tests)		
+		@test_suite1 = create_suite_with_metadata(@metadata1,"rest_unit_tests")
+		@test_suite2 = create_suite_with_metadata(@metadata1,"rest_unit_tests")
+	end
+
+	describe "get_test_suite_records_with_errors_for" do 
+			
+		 context "when there are no failures for a subproject and test category on a given day" do
+        	it "should return no records" do
+        		records_with_error_for(@sub_project,@unit_tests,@jan_1_2013).should be_empty					
+        	end
+        end
+
+		context "when there are failures for one test suite and test category on a given day" do			
+			before(:each) do				
+				create_class_errors(@test_suite1,class_error_hash_from("001","002","003"))
+				@expected_errors = class_name_arr_from("001","002","003")
+			end
+			it "should return records from the test suite " do				
+				records_with_error_for(@sub_project,@unit_tests,@jan_1_2013).should contain_all(@expected_errors)				
+			end
+		end
+
+		context "when there are failures for multiple test suites for a test category on a given day" do 
+			before(:each) do				
+				create_class_errors(@test_suite1,class_error_hash_from("001","002","003"))
+				create_class_errors(@test_suite2,class_error_hash_from("004","005","006"))
+				@expected_errors = class_name_arr_from("001","002","003","004","005","006")
+			end
+			it "should return records from all test suites" do 
+				records_with_error_for(@sub_project,@unit_tests,@jan_1_2013).should contain_all(@expected_errors)
+			end
+		end
+
+	end
 end

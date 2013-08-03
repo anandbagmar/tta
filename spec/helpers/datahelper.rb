@@ -24,14 +24,14 @@ module DataHelper
  		result_hash 
 	end
  	
-	def create_project(arg_name="TEST PROJECT") 		
+	def create_project(arg_name="TEST_PROJECT") 		
 		create :project ,
 		with(
 				:name.as(arg_name)
 			) 		
 	end
 
-	def create_subproject_for_project(arg_project,arg_name="COMPARE_TESTS_SUBPROJECT") 		
+	def create_subproject_for_project(arg_project,arg_name="TESTS_SUBPROJECT") 		
  		create :sub_project , 
  		with(
  				:name.as(arg_name) , 
@@ -56,11 +56,12 @@ module DataHelper
 			)
 	end	
 
-	def add_failed_tests_from_suite(arg_suite , arg_class_name="Class001_1")
+	def add_failed_tests_from_suite(arg_suite , arg_class_name="Class001_1" , arg_err_msg="error001_1")
 		create :test_case_record ,
 		with(
 				:test_suite_record_id.as(arg_suite.id) ,
-				:class_name.as(arg_class_name)
+				:class_name.as(arg_class_name),
+				:error_msg.as(arg_err_msg)
 			)
 	end
 
