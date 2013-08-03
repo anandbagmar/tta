@@ -123,9 +123,9 @@ describe "CompareRuns" do
 
 
 		context "when there are no failures for a subproject and test category on a given day" do
-        	it "should return no records" do
-        		records_with_error_for(@sub_project,@unit_tests,@jan_1_2013).should be_empty					
-        	end
+          it "should return no records" do
+              records_with_error_for(@sub_project,@unit_tests,@jan_1_2013).should be_empty                    
+          end
         end
 
 		context "when there are failures for one test suite and test category on a given day" do			
@@ -292,6 +292,96 @@ describe "CompareRuns" do
 
             it "returns no records as tests failed for day 1" do
                day_one_failures_class_names.should be_empty
+            end
+        end
+
+        context "when the test runs have exact same failures" do 
+            
+            before do
+                create_class_errors @test_suite1, class_error_hash_from("001","002","003") 
+                create_class_errors @test_suite2, class_error_hash_from("001","002","003") 
+                get_compare_result()
+                @expected_failures = class_name_arr_from "001", "002", "003"
+            end
+
+            it "should return all test failures as common failures , combined_failures , day1 failures and day 2 failures" do 
+                common_failures_class_names.should contain_all @expected_failures
+                combined_failures_class_names.should contain_all @expected_failures
+                day_one_failures_class_names.should contain_all @expected_failures
+                day_two_failures_class_names.should contain_all @expected_failures
+            end
+        end
+
+        context "when the test runs have some common failures" do
+            
+            before do
+                create_class_errors @test_suite1, class_error_hash_from("001","002","003") 
+                create_class_errors @test_suite2, class_error_hash_from("004","002","003") 
+                get_compare_result()
+                @expected_combined_failures = class_name_arr_from "001", "002", "003" ,"004"
+                @expected_common_failures = class_name_arr_from "002", "003"
+                @expected_day_1_failures = class_name_arr_from "001","002","003" 
+                @expected_day_2_failures = class_name_arr_from "004","002","003" 
+            end
+
+            it "should return all test failures as combined failures" do 
+               combined_failures_class_names.should contain_all @expected_combined_failures
+            end
+
+            it "should return test failed in both runs as common failures" do 
+               common_failures_class_names.should contain_all  @expected_common_failures
+            end
+
+            it "returns failures from day 2 as tests failed for day 2" do
+                day_two_failures_class_names.should contain_all @expected_day_2_failures 
+            end
+
+            it "returns failures from day 1 as tests failed for day 1" do
+                day_one_failures_class_names.should contain_all @expected_day_1_failures 
+            end
+        end
+
+        context "when failures from day 1 are a subset of failures from day 2" do 
+            
+            before do 
+                create_class_errors @test_suite1, class_error_hash_from("001","002","003")
+                create_class_errors @test_suite2, class_error_hash_from("001","004","002","003","005")
+                get_compare_result()
+                @expected_day_1_failures = class_name_arr_from "001","002","003" 
+                @expected_day_2_failures = class_name_arr_from "001","004","002","003","005"
+            end
+
+            it "should return all failures from day 1 as common test failures" do 
+                day_one_failures_class_names.should contain_all @expected_day_1_failures
+                common_failures_class_names.should contain_all day_one_failures_class_names                
+
+            end
+
+            it "should return all failures from day 2 as combined test failures" do 
+                day_two_failures_class_names.should contain_all @expected_day_2_failures
+                combined_failures_class_names.should contain_all day_two_failures_class_names
+            end            
+        end
+
+        context "when failures from day 2 are a subset of failures from day 1" do 
+            
+            before do 
+                create_class_errors @test_suite1, class_error_hash_from("001","004","002","003","005")
+                create_class_errors @test_suite2, class_error_hash_from("001","002","003")
+                get_compare_result()
+                @expected_day_1_failures = class_name_arr_from "001","004","002","003","005"
+                @expected_day_2_failures = class_name_arr_from "001","002","003" 
+            end
+
+            it "should return all failures from day 2 as common test failures" do 
+                day_two_failures_class_names.should contain_all @expected_day_2_failures
+                common_failures_class_names.should contain_all day_two_failures_class_names                
+
+            end
+
+            it "should return all failures from day 1 as combined test failures" do 
+                day_one_failures_class_names.should contain_all @expected_day_1_failures
+                combined_failures_class_names.should contain_all day_one_failures_class_names
             end
 
         end
