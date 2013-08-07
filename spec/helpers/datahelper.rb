@@ -72,4 +72,42 @@ module DataHelper
 			arg_date)
 	end
 
+	def delete_project_and_associated_records(project_name)
+		projects = Project.find_all_by_name(PROJECT)
+		projects.each do |project|
+			subprojects = SubProject.find_all_by_project_id project.id 
+			delete_sub_projects_and_associated_records subprojects 
+			project.delete
+		end
+	end
+
+		def delete_sub_projects_and_associated_records(subprojects)
+		subprojects.each do |subproject|
+			metadata = TestMetadatum.find_all_by_sub_project_id subproject.id 
+			delete_metadata_and_associated_records	metadata
+			subproject.delete		
+		end
+	end
+
+	def delete_metadata_and_associated_records(test_metadata)
+		test_metadata.each do |test_metadatum|
+			test_suites = TestSuiteRecord.find_all_by_test_metadatum_id test_metadatum.id
+			delete_test_suites_and_associated_records test_suites
+			test_metadatum.delete
+		end		
+	end
+
+	def delete_test_suites_and_associated_records(test_suites)
+		test_suites.each do |test_suite|
+			test_case_records = TestCaseRecord.find_all_by_test_suite_record_id test_suite.id
+			delete_test_case_records test_case_records
+			test_suite.delete
+		end
+	end
+
+	def delete_test_case_records(test_case_records)
+		test_case_records.each do |test_case_record|
+			test_case_record.delete
+		end
+	end
 end
