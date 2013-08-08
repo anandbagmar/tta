@@ -19,6 +19,7 @@ module CompareRunsHelper
 	end
 
 	def create_test_data		
+		clean_up_data
 		@project = create_project(PROJECT)
 		@subproject = create_subproject_for_project(@project , SUBPROJECT)
 		@metadata1 = create_metadatum(@subproject,JAN_1_2013,"UNIT TESTS") 
@@ -26,13 +27,9 @@ module CompareRunsHelper
 		add_failed_tests_from_suite @test_suite1 , "class_001" , "error_001"
 	end
 
-	def delete_project_and_associated_records(project_name)
-		projects = Project.find_all_by_name(PROJECT)
-		projects.each do |project|
-			subprojects = SubProject.find_all_by_project_id project.id 
-			delete_sub_projects subprojects 
-			project.delete
-		end
+
+	def clean_up_data 
+		delete_project_and_associated_records PROJECT 
 	end
 	
 end
@@ -42,11 +39,15 @@ end
 describe "Compare Runs " , js:true do 
 	
 	self.use_transactional_fixtures = false
-
+	
 	include CompareRunsHelper
 	
-
 	before(:each) do
 		create_test_data
 	end	
+
+	after(:each) do 
+		clean_up_data
+	end
+
 end
