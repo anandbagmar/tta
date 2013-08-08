@@ -1,4 +1,5 @@
 
+
 module CompareRunsSpecHelper
     
     include DataHelper
@@ -81,4 +82,7 @@ module CompareRunsSpecHelper
         arg_arr_test_case_records.map {|record| record.class_name}
     end
 
+    def clean_up_data        
+        delete_project_and_associated_records "COMPARE_RUNS_PROJECT"
+    end
 end

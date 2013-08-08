@@ -73,7 +73,7 @@ module DataHelper
 	end
 
 	def delete_project_and_associated_records(project_name)
-		projects = Project.find_all_by_name(PROJECT)
+		projects = Project.find_all_by_name(project_name)
 		projects.each do |project|
 			subprojects = SubProject.find_all_by_project_id project.id 
 			delete_sub_projects_and_associated_records subprojects 
