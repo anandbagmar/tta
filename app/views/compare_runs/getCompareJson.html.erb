@@ -12,18 +12,19 @@
             var row = "";
             var CompareTableRowTemplate = templates.getCompareTableRowTemplate();
             var CompareTableColumnTemplate = templates.getCompareTableColumnTemplate();
-            for (var index = 0; index < number_of_failing_tests; index++) {
-                if (index%3) {
+            var MAXIMUM_COLUMNS = 2;
+
+            for(var index=0;index<number_of_failing_tests;){
+                for(var colIndex=0;colIndex<MAXIMUM_COLUMNS;colIndex++){
                     row += templates.render(CompareTableColumnTemplate, {
-                        "ClassName": class_name_array[index].class_name
+                        "ClassName": (index<number_of_failing_tests)?class_name_array[index].class_name : ""
                     });
-                }
-                else {
-                    classNames += templates.render(CompareTableRowTemplate, {
+                    index++;                    
+                }                
+                classNames += templates.render(CompareTableRowTemplate, {
                         "ClassNameColumns": row
-                    });
-                    row = "";
-                }
+                });
+                row = "";                
             }
             return classNames;
         }
