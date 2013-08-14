@@ -1,19 +1,6 @@
 require 'rspec'
 require File.expand_path("spec/helpers/comparesunsspechelper.rb")
-
-module CompareRunsCustomMatchers
-    RSpec::Matchers.define :contain_all do |expected|
-    	match do |actual|
-    		(actual.length == expected.length ) and (actual.to_set == expected.to_set)
-    	end
-    end
-
-    RSpec::Matchers.define :contain_none_of do |expected|
-        match do |actual|
-            expected & actual == []
-        end
-    end
-end
+require File.expand_path("spec/helpers/comparerunscustommatchers.rb")
 
 describe "CompareRuns" do 
 
@@ -69,6 +56,7 @@ describe "CompareRuns" do
                 create_class_errors(@test_suite1,class_error_hash_from("UT001","UT002","UT003"))     
                 create_class_errors(@test_suite2,class_error_hash_from("IT001","IT002","IT003"))
             end
+            
             it "should return only the records for the requested test category and exclude others on the same day" do 
                 expected_ut_errors = class_name_arr_from("UT001","UT002","UT003")
                 expected_it_errors = class_name_arr_from("IT001","IT002","IT003")

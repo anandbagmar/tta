@@ -1,20 +1,7 @@
 require 'spec_helper'
 require 'rspec'
 require File.expand_path("spec/helpers/comparesunsspechelper.rb")
-
-module CompareRunsCustomMatchers
-    RSpec::Matchers.define :contain_all do |expected|
-    	match do |actual|
-    		(actual.length == expected.length ) and (actual.to_set == expected.to_set)
-    	end
-    end
-
-    RSpec::Matchers.define :contain_none_of do |expected|
-        match do |actual|
-            expected & actual == []
-        end
-    end
-end
+require File.expand_path("spec/helpers/comparerunscustommatchers.rb")
 
 class Fixnum
 	def tests_failing
@@ -60,9 +47,6 @@ end
 
 #open CompareRunsSpecHelper and add some common methods
 module CompareRunsSpecHelper
-	
-	# include DataHelper	
-
 	def create_test_suites
 		@metadata1 = create_metadatum(@sub_project , @jan_1_2013 , @unit_tests)
 		@metadata2 = create_metadatum(@sub_project , @jan_2_2013 , @unit_tests)
@@ -86,8 +70,7 @@ describe "Compare Runs " , js:true do
 		create_test_suites
 	end
 
-	after(:each){clean_up_data} 
-	
+	after(:each){clean_up_data}
 
 	context "when there are no failures"  do 
 		
