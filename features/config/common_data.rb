@@ -1,5 +1,6 @@
 #Site Url
 HOMEPAGE="http://localhost:3000"
+ADMIN_PAGE="http://localhost:3000/admin"
 
 #Button_name for different pages
 UPLOAD_PAGE_BUTTON="SUBMIT"
