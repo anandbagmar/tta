@@ -7,8 +7,8 @@ module Domain
     end
 
     def verify_defect_graph_plotted(subproject_name)
-      wait_until_for { page.has_content?("Sub Project:"+subproject_name) }
-      assert page.has_content?("Sub Project:"+subproject_name)
+      wait_until_for { page.has_content?("Sub Project : "+subproject_name) }
+      assert page.has_content?("Sub Project : "+subproject_name)
       wait_until_for { page.has_css?(DEFECT_GRAPH_ID) }
       assert page.has_css?(DEFECT_GRAPH_ID)
     end
