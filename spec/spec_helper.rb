@@ -9,7 +9,7 @@ require "shoulda"
 require "shoulda-context"
 require 'yarjuf'
 require 'simplecov'
-
+require 'helpers/datahelper'
 
 
 SimpleCov.start
