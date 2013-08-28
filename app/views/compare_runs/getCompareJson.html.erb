@@ -8,28 +8,29 @@
             if (class_name_array) {
                 number_of_failing_tests = class_name_array.length;
             }
-            var classNames = '<tr><th width="50%">CLASS-NAMES</th><th width="50%">Number of failing tests: ' + number_of_failing_tests + '</th></tr>';
+            var classNames = '<trxmlns="http://www.w3.org/1999/html"><th width="100%" colspan="2" style=" text-align: center;">CLASS-NAMES</th></tr>';
             var row = "";
             var CompareTableRowTemplate = templates.getCompareTableRowTemplate();
             var CompareTableColumnTemplate = templates.getCompareTableColumnTemplate();
-            for (var index = 0; index < number_of_failing_tests; index++) {
-                if (index%3) {
+            var MAXIMUM_COLUMNS = 2;
+
+            for(var index=0;index<number_of_failing_tests;){
+                for(var colIndex=0;colIndex<MAXIMUM_COLUMNS;colIndex++){
                     row += templates.render(CompareTableColumnTemplate, {
-                        "ClassName": class_name_array[index].class_name
+                        "ClassName": (index<number_of_failing_tests)?class_name_array[index].class_name : ""
                     });
+                    index++;
                 }
-                else {
-                    classNames += templates.render(CompareTableRowTemplate, {
-                        "ClassNameColumns": row
-                    });
-                    row = "";
-                }
+                classNames += templates.render(CompareTableRowTemplate, {
+                    "ClassNameColumns": row
+                });
+                row = "";
             }
             return classNames;
         }
 
         function compareResultsFor(type, tableTitle, date1, date2, class_name_array) {
-            tableTitle = "<h2><b>" + tableTitle + "</b>"
+            tableTitle = "<h2><b>" + tableTitle + "</b></h2>" + "<h3><b>Number of failing tests: "+ class_name_array.length +"</b></h3>"
             $("#result_title_" + type).html(tableTitle);
             var classNames = displayTable(class_name_array);
             $("#result_table_" + type).html(classNames);

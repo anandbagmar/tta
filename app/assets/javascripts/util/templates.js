@@ -8,7 +8,7 @@ var Template = function () {
         adminTableProjectTemplate:'<tr class="tr_border"><td>{{Index}}</td><td>{{ProjectName}}</td><td>{{SubProjectName}}</td><td>{{TestCount}}</td></tr>',
         adminTableSubprojectTemplate:'<tr><td>{{Index}}</td><td>{{ProjectName}}</td><td>{{SubProjectName}}</td><td>{{TestCount}}</td></tr>',
         compareTableRowTemplate:' <tr>{{ClassNameColumns}}</tr>',
-        compareTableColumnTemplate:' <td>{{ClassName}}</td>'
+        compareTableColumnTemplate:' <td width="50%">{{ClassName}}</td>'
     };
 
     return {
