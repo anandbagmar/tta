@@ -4,32 +4,6 @@ class XmlParser
     parse_test_run_record_xml(config_xml, meta_id, params)
   end
 
-  #def saving_junit_test_cases(extracted_xml, test_suite_xml, test_report_type, saved_test_suite_data)
-  #  if test_report_type.eql?("junit")
-  #    RspecXmlParser.new.parse(extracted_xml, test_suite_xml, test_report_type, saved_test_suite_data)
-  #  elsif test_report_type.eql?("Cucumber junit")
-  #    CucumberXmlParser.parse(extracted_xml, test_suite_xml, saved_test_suite_data, test_report_type)
-  #  end
-  #end
-
-  #def parse_test_case(test_case_xml, saved_test_suite_data, extracted_xml, test_report_type)
-  #  @doc = Nokogiri::XML extracted_xml
-  #  @xml_test_case = TestCaseRecord.new()
-  #  @xml_test_case.test_suite_record_id= saved_test_suite_data.id
-  #  @xml_test_case.class_name = test_case_xml.attr("name")
-  #  testcase_name=test_case_xml.attr("name")
-  #  @xml_test_case.time_taken = test_case_xml.attr("time")
-  #  @doc.xpath("//testsuite/testcase/failure").each do |failure_xml|
-  #    if test_report_type.eql?("junit")
-  #      @error_msg = RspecXmlParser.new.get_error_message(failure_xml, testcase_name)
-  #    elsif test_report_type.eql?("Cucumber junit")
-  #      @error_msg = CucumberXmlParser.get_error_message(extracted_xml, testcase_name)
-  #    end
-  #    @xml_test_case.error_msg = @error_msg
-  #  end
-  #  @xml_test_case.save
-  #end
-
   def create_test_case(test_case_xml, test_report_type)
     @xml_test_case = TestCaseRecord.new()
     @xml_test_case.class_name = test_case_xml.attr("name")
@@ -40,7 +14,7 @@ class XmlParser
       elsif test_report_type.eql?("Cucumber junit")
         @error_msg = CucumberXmlParser.get_error_message(test_case_xml, testcase_name)
       end
-      @xml_test_case.error_msg = @error_msg
+      @xml_test_case.error_msg = @error_msg.gsub("\"","'")
     @xml_test_case
   end
 

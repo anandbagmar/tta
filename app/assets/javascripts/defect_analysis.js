@@ -9,7 +9,7 @@ var renderDefectTable = {
             jsonData = makeValidJSON.validate(jsonData);
             jsonData = JSON.parse(jsonData);
 
-            subProjectName = "<h1>" + "Sub Project:" + jsonData.sub_project_name.toUpperCase() + "</h1>";
+            subProjectName = "<h1>" + "Sub Project : " + jsonData.sub_project_name.toUpperCase() + "</h1>";
             percentage = jsonData.percentage;
             var tableResponse = jsonData.errors;
             var test_category = "";
