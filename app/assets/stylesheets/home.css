@@ -4,11 +4,15 @@
 }
 
 #external-dashboard-url{
-    width: 86%;
-    margin-left: 5%;
-    padding: 2%;
+    float:left;
+    width: 15%;
 }
 
+#external-dashboard-frame{
+    float: right;
+    width: 84%;
+    margin-right: 1%;
+}
 #external-dashboard-url button{
     width: 200px;
     text-decoration: none;
