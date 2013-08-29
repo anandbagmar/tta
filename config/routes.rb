@@ -29,7 +29,7 @@ Tta::Application.routes.draw do
   post '/pyramid/result' => "visualization#sub_project_filter"
   post '/defect_analysis/result' => "defect_analysis#sub_project_filter"
   post '/admin/add' => "admin#add"
-  post '/admin/delete' => "admin#delete"
+  #get '/admin/delete' => "admin#delete"
 
   get '*path' => 'error#handle404'
   # The priority is based upon order of creation:

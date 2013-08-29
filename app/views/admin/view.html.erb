@@ -43,7 +43,7 @@
               <label for="name">Website Name<span class="required-fields">*</span></label>
             </td>
             <td>
-              <%= text_field_tag (:website_name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase" %>
+              <%= text_field_tag (:name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase" %>
             </td>
           </tr>
 
@@ -52,7 +52,7 @@
               <label for="url-value">Website Link<span class="required-fields">*</span></label>
             </td>
             <td>
-              <%= text_field_tag (:website_link), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase" %>
+              <%= text_field_tag (:link), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase" %>
             </td>
           </tr>
 
@@ -73,22 +73,14 @@
   </div>
 
   <div id="added-urls">
-    <%= form_tag({:action => 'delete'}, {:id => "admin-url-delete"}) do %>
-        <table border="2" style="text-align: left; width: 100%">
-          <thead>
-          <tr>
-            <th>Added URLS</th>
-            <th> X
-            </th>
-          </tr>
-          <tr>
-            <td><a href="http://www.w3schools.com"> W3 Schools </a></td>
-            <td>X</td>
-          </tr>
+    <table id="url-table" border="2" style="text-align: left; width: 100%">
+      <thead>
+      <tr>
+        <th>Added URLS</th>
+      </tr>
 
-          </thead>
-        </table>
-    <% end %>
+      </thead>
+    </table>
   </div>
 
 </div>
@@ -130,6 +122,8 @@
             $('#project_data').html(renderTableData);
         }
 
+        $("#admin-customization").validate();
+
         var jsonR;
         jsonR = "<%= @json %>";
         jsonR = makeValidJSON.validate(jsonR);
@@ -143,6 +137,24 @@
             else {
                 $("#project_data_table").show();
                 renderTable(jsonR);
+            }
+        }
+
+        var added_urls;
+        added_urls = "<%= @all_external_urls %>";
+        added_urls = makeValidJSON.validate(added_urls);
+        added_urls = JSON.parse(added_urls);
+
+        var tableElement = document.getElementById("url-table");
+
+        if (added_urls.length==0) {
+            tableElement.innerHTML+= "<tr><td>No URLS added</td></tr>"
+
+        }
+        else {
+            for (index = 0; index < added_urls.length; index++) {
+                tableElement.innerHTML += "<tr><td>" + added_urls[index]["name"] + "</td></tr>";
+//            "<td>" +"<a href='/admin/delete'>Delete</a>"+ "</td>
             }
         }
     });

@@ -22,7 +22,7 @@
     <button type="button">UPLOAD TEST DATA</button>
   </a>
 
-  <% if @project %>
+  <% if !(@all_external_urls == "[]") %>
       <%= render 'layouts/home_partial' %>
   <% end %>
 
