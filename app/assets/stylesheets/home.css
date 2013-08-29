@@ -3,3 +3,19 @@
     padding-bottom: 20px;
 }
 
+#external-dashboard-url{
+    width: 86%;
+    margin-left: 5%;
+    padding: 2%;
+}
+
+#external-dashboard-url button{
+    width: 200px;
+    text-decoration: none;
+    text-shadow: none;
+    font-size: 14px;
+    border-radius: 5px;
+    margin: 6px 4px;
+
+}
+

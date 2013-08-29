@@ -3,6 +3,7 @@
   <%= javascript_include_tag 'admin' %>
   <%= javascript_include_tag 'util/utils' %>
   <%= javascript_include_tag 'util/templates' %>
+  <%= stylesheet_link_tag 'admin' %>
 
   <title>Admin
     <Data></Data>
@@ -17,9 +18,83 @@
 <% if @json and flash[:no_test_error]==nil %>
     <%= render 'layouts/admin_partial' %>
 <% end %>
+
+<div class="page_title">
+  <h1>Add Customized Url </h1>
+</div>
+
+<div name="external-dashboard" style=" width: 74%; display: inline-block; ">
+
+  <div id="embedded-urls">
+    <%= form_tag({:action => 'add'}, {:id => "admin-customization"}) do %>
+        <table border="2" style="text-align: left; width: 100%">
+          <thead>
+          <tr>
+            <th></th>
+            <th>
+              <span><em>Fields marked with (<span class="required-fields">*</span>) are compulsory</em></span>
+            </th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr>
+            <td class="fields">
+              <label for="name">Website Name<span class="required-fields">*</span></label>
+            </td>
+            <td>
+              <%= text_field_tag (:website_name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase" %>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="fields">
+              <label for="url-value">Website Link<span class="required-fields">*</span></label>
+            </td>
+            <td>
+              <%= text_field_tag (:website_link), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase" %>
+            </td>
+          </tr>
+
+          <tr>
+            <div class="button">
+              <td>
+                <%= submit_tag("Clear All", {:name => 'reset', :id => 'reset_button', :type => "reset"}) %>
+              </td>
+              <td>
+                <%= submit_tag 'ADD', :class => 'submit' %>
+              </td>
+            </div>
+          </tr>
+
+          </tbody>
+        </table>
+    <% end %>
+  </div>
+
+  <div id="added-urls">
+    <%= form_tag({:action => 'delete'}, {:id => "admin-url-delete"}) do %>
+        <table border="2" style="text-align: left; width: 100%">
+          <thead>
+          <tr>
+            <th>Added URLS</th>
+            <th> X
+            </th>
+          </tr>
+          <tr>
+            <td><a href="http://www.w3schools.com"> W3 Schools </a></td>
+            <td>X</td>
+          </tr>
+
+          </thead>
+        </table>
+    <% end %>
+  </div>
+
+</div>
+
 </body>
 <%= render :file => '/home/footer.html.erb' %>
-
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -36,18 +111,18 @@
                 count = projectData[2]['test_count'];
 
                 renderTableData += templates.render(projectTemplate, {
-                    "Index": index,
-                    "ProjectName": project_name,
-                    "SubProjectName": "",
-                    "TestCount": ""
+                    "Index":index,
+                    "ProjectName":project_name,
+                    "SubProjectName":"",
+                    "TestCount":""
                 });
 
                 for (var i = 0; i < sub_projects.length; i++) {
                     renderTableData += templates.render(subProjectTemplate, {
-                        "Index": "",
-                        "ProjectName": "",
-                        "SubProjectName": sub_projects[i],
-                        "TestCount": count[i]
+                        "Index":"",
+                        "ProjectName":"",
+                        "SubProjectName":sub_projects[i],
+                        "TestCount":count[i]
                     });
                 }
                 index++;
@@ -57,7 +132,7 @@
 
         var jsonR;
         jsonR = "<%= @json %>";
-        jsonR= makeValidJSON.validate(jsonR);
+        jsonR = makeValidJSON.validate(jsonR);
         jsonR = JSON.parse(jsonR);
         if (jsonR != "") {
             if ('message' in jsonR) {

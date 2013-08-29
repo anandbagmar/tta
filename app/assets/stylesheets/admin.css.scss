@@ -2,7 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
 .table-bordered {
   border: 1px solid #dddddd;
   border-collapse: collapse;
@@ -17,8 +16,7 @@ td {
   padding-bottom: .5em;
 }
 
-
-.table-bordered th,.table-bordered td {
+.table-bordered th, .table-bordered td {
   border-left: 1px solid #dddddd;
 }
 
@@ -29,6 +27,32 @@ td {
 .tr_border {
   border-top: 1px solid #dddddd;
 }
+
+#embedded-urls {
+  text-align: center;
+  display: inline-block;
+  margin: 0 auto;
+  float: left;
+  width: 49%;
+  padding: 1px;
+}
+
+#added-urls{
+  text-align: center;
+  display: inline-block;
+  float: right;
+  width: 49%;
+}
+
+#added-urls td,th,tr{
+  text-align: center;
+}
+
+#added-urls a{
+  color: black;
+}
+
+
 
 
 

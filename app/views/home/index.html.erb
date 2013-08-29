@@ -1,4 +1,6 @@
 <%= render :file => '/home/header.html.erb' %>
+<%= javascript_include_tag 'util/utils' %>
+<%= javascript_include_tag 'util/templates' %>
 <%= stylesheet_link_tag 'home' %>
 <body>
 
@@ -19,6 +21,10 @@
   <a href='/upload'>
     <button type="button">UPLOAD TEST DATA</button>
   </a>
+
+  <% if @project %>
+      <%= render 'layouts/home_partial' %>
+  <% end %>
 
 </div>
 

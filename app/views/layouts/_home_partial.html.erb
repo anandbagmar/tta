@@ -1,0 +1,40 @@
+<div id="external-dashboard-url">
+  <h2 style="padding: 2%;">External Dashboard</h2>
+  <div id="external-dashboard-frame">
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var renderButtons = function (externalDashboardURLs) {
+            var divElement = document.getElementById("external-dashboard-url");
+            var divIFrame = document.getElementById("external-dashboard-frame");
+            var numberOfButtonsToBeAdded = Object.keys(externalDashboardURLs).length;
+
+            for (i = 0; i < numberOfButtonsToBeAdded; i++) {
+                var newButton = document.createElement('button');
+                var buttonName = Object.keys(externalDashboardURLs)[i];
+                var buttonValue = externalDashboardURLs[buttonName];
+                newButton.setAttribute("type", "button");
+                newButton.setAttribute("value", buttonName);
+                newButton.setAttribute("id", buttonName);
+                newButton.innerHTML = buttonName.toUpperCase();
+                newButton.onclick = function () {
+                    var iframe = document.createElement("iframe");
+                    iframe.setAttribute("src", buttonValue);
+                    iframe.style.width = 640 + "px";
+                    iframe.style.height = 480 + "px";
+                    divElement.appendChild(iframe);
+                };
+                divIFrame.appendChild(newButton);
+            }
+        }
+
+        var externalDashboard;
+        externalDashboard = "<%= @project %>";
+        externalDashboard = makeValidJSON.validate(externalDashboard);
+        externalDashboard = JSON.parse(externalDashboard);
+        renderButtons(externalDashboard);
+
+    });
+</script>

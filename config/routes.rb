@@ -19,7 +19,6 @@ Tta::Application.routes.draw do
 
   match '/compare_runs/' => 'compare_runs#index'
 
-
   match '/get_sub_project_data' => 'compare_runs#getSubProjects'
   match '/get_test_types' => 'compare_runs#getTestTypes'
   match '/get_compare_json' => 'compare_runs#getCompareJson'
@@ -29,6 +28,9 @@ Tta::Application.routes.draw do
   post '/comparative_analysis/result' => "comparative_analysis#date_filter"
   post '/pyramid/result' => "visualization#sub_project_filter"
   post '/defect_analysis/result' => "defect_analysis#sub_project_filter"
+  post '/admin/add' => "admin#add"
+  post '/admin/delete' => "admin#delete"
+
   get '*path' => 'error#handle404'
   # The priority is based upon order of creation:
   # first created -> highest priority.
