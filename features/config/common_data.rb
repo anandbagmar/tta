@@ -1,6 +1,6 @@
 #Site Url
 HOMEPAGE="http://localhost:3000"
-ADMIN_STATS_PAGE="http://localhost:3000/admin/statistics"
+ADMIN_STATS_PAGE="http://localhost:3000/stats"
 
 #Button_name for different pages
 UPLOAD_PAGE_BUTTON="SUBMIT"
@@ -38,8 +38,8 @@ UPLOAD_SUCCESS="Project Successfully Saved!!"
 #comparative Page ELEMENT
 
 COMPARATIVE_PROJECT_DROPDOWN = "project_id"
-COMPARATIVE_START_DATE =  "comparative_analysis_start_date"
-COMPARATIVE_END_DATE =  "comparative_analysis_end_date"
+COMPARATIVE_START_DATE = "comparative_analysis_start_date"
+COMPARATIVE_END_DATE = "comparative_analysis_end_date"
 COMPARATIVE_PLOT_BUTTON = "form-submit"
 
 COMPARATIVE_GRAPH_ID = "#comparative_analysis"

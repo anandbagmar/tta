@@ -32,15 +32,16 @@ td {
   text-align: center;
   display: inline-block;
   margin: 0 auto;
-  width: 70%;
+  width: 49%;
+  float: left;
   padding: 1px;
 }
 
 #added-urls {
-  padding-top: 4%;
   text-align: center;
   display: inline-block;
-  width: 70%;
+  width: 49%;
+  float:right;
 }
 
 #added-urls td, th, tr {

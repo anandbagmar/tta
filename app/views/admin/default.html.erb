@@ -15,16 +15,10 @@
 <div class="page_title">
 </div>
 
-<div id="tta-stats" style=" float: left; width: 28%; ">
-  <h1 style=" line-height: 35px; ">Statistics Report for Projects</h1>
-  <a href="/admin/statistics">
-    <button type="button" style=" margin-top: 30%; ">TTA Statistics</button>
-  </a>
-</div>
 
+<div name="external-dashboard" style=" width: 96%; display: inline-block; ">
+  <h1 style=" padding-bottom: 3%;">Add External Dashboard </h1>
 
-<div name="external-dashboard" style=" width: 70%; display: inline-block; ">
-  <h1 style=" padding-bottom: 3%; margin-top: 3.1%;">Add External Dashboard </h1>
   <div id="embedded-urls">
     <%= form_tag({:action => 'add'}, {:id => "admin-customization"}) do %>
         <table border="2" style="text-align: left; width: 100%">
@@ -76,7 +70,7 @@
     <table id="url-table" border="2" style="text-align: left; width: 100%">
       <thead>
       <tr>
-        <th><h2>External Dashboard List</h2> </th>
+        <th colspan="2"><h2>Currently Configured External Dashboard </h2></th>
       </tr>
 
       </thead>
@@ -100,12 +94,11 @@
 
         if (added_urls.length == 0) {
             tableElement.innerHTML += "<tr><td>No URLS added</td></tr>"
-
         }
         else {
             for (index = 0; index < added_urls.length; index++) {
-                tableElement.innerHTML += "<tr><td>" + added_urls[index]["name"] + "</td></tr>";
-//            "<td>" +"<a href='/admin/delete'>Delete</a>"+ "</td>
+                tableElement.innerHTML += "<tr><td style=' width: 24%; '>" + added_urls[index]["name"] +
+                        "<td>" + added_urls[index]["link"] + "</td>" + "</td></tr>";
             }
         }
     });

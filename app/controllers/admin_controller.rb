@@ -10,15 +10,13 @@ class AdminController < ApplicationController
   end
 
   def add
-    ExternalDashboard.find_or_create_by_name_and_link((params[:name]), params[:link])
+    if (ExternalDashboard.find_by_name(params[:name]))
+      ExternalDashboard.find_by_name(params[:name]).update_column("link", params[:link])
+    else
+      ExternalDashboard.find_or_create_by_name_and_link((params[:name]), params[:link])
+    end
     @all_external_urls = ExternalDashboard.select("name,link").to_json
     render :default
   end
-
-  #def delete
-  #  projects=Project.all
-  #  @json = Admin.get_result_json(projects)
-  #  @all_external_urls = ExternalDashboard.select("name,link").to_json
-  #end
 
 end
