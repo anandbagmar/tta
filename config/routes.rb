@@ -15,7 +15,8 @@ Tta::Application.routes.draw do
 
   get '/upload/show'
 
-  get '/admin/' => 'admin#view'
+  get '/admin/' => 'admin#default'
+  get '/admin/statistics' => 'admin#view'
 
   match '/compare_runs/' => 'compare_runs#index'
 

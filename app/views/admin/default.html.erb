@@ -1,0 +1,114 @@
+<html>
+<head xmlns="http://www.w3.org/1999/html">
+  <%= javascript_include_tag 'admin' %>
+  <%= javascript_include_tag 'util/utils' %>
+  <%= javascript_include_tag 'util/templates' %>
+  <%= stylesheet_link_tag 'admin' %>
+
+  <title>Admin
+    <Data></Data>
+  </title>
+</head>
+<%= render :file => '/home/header.html.erb' %>
+<body>
+
+<div class="page_title">
+</div>
+
+<div id="tta-stats" style=" float: left; width: 28%; ">
+  <h1 style=" line-height: 35px; ">Statistics Report for Projects</h1>
+  <a href="/admin/statistics">
+    <button type="button" style=" margin-top: 30%; ">TTA Statistics</button>
+  </a>
+</div>
+
+
+<div name="external-dashboard" style=" width: 70%; display: inline-block; ">
+  <h1 style=" padding-bottom: 3%; margin-top: 3.1%;">Add External Dashboard </h1>
+  <div id="embedded-urls">
+    <%= form_tag({:action => 'add'}, {:id => "admin-customization"}) do %>
+        <table border="2" style="text-align: left; width: 100%">
+          <thead>
+          <tr>
+            <th></th>
+            <th>
+              <span><em>Fields marked with (<span class="required-fields">*</span>) are compulsory</em></span>
+            </th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr>
+            <td class="fields">
+              <label for="name">Website Name<span class="required-fields">*</span></label>
+            </td>
+            <td>
+              <%= text_field_tag (:name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase" %>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="fields">
+              <label for="url-value">Website Link<span class="required-fields">*</span></label>
+            </td>
+            <td>
+              <%= text_field_tag (:link), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase" %>
+            </td>
+          </tr>
+
+          <tr>
+            <div class="button">
+              <td>
+                <%= submit_tag("Clear All", {:name => 'reset', :id => 'reset_button', :type => "reset"}) %>
+              </td>
+              <td>
+                <%= submit_tag 'ADD', :class => 'submit' %>
+              </td>
+            </div>
+          </tr>
+
+          </tbody>
+        </table>
+    <% end %>
+  </div>
+
+  <div id="added-urls">
+    <table id="url-table" border="2" style="text-align: left; width: 100%">
+      <thead>
+      <tr>
+        <th><h2>External Dashboard List</h2> </th>
+      </tr>
+
+      </thead>
+    </table>
+  </div>
+
+</div>
+
+</body>
+<%= render :file => '/home/footer.html.erb' %>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#admin-customization").validate();
+        var added_urls;
+        added_urls = "<%= @all_external_urls %>";
+        added_urls = makeValidJSON.validate(added_urls);
+        added_urls = JSON.parse(added_urls);
+
+        var tableElement = document.getElementById("url-table");
+
+        if (added_urls.length == 0) {
+            tableElement.innerHTML += "<tr><td>No URLS added</td></tr>"
+
+        }
+        else {
+            for (index = 0; index < added_urls.length; index++) {
+                tableElement.innerHTML += "<tr><td>" + added_urls[index]["name"] + "</td></tr>";
+//            "<td>" +"<a href='/admin/delete'>Delete</a>"+ "</td>
+            }
+        }
+    });
+</script>
+
+</html>
