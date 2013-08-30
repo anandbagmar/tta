@@ -11,7 +11,6 @@
   border-radius: 4px;
 }
 
-
 td {
   padding-top: .5em;
   padding-bottom: .5em;
@@ -33,27 +32,26 @@ td {
   text-align: center;
   display: inline-block;
   margin: 0 auto;
-  float: left;
-  width: 49%;
+  width: 70%;
   padding: 1px;
 }
 
-#added-urls{
+#added-urls {
+  padding-top: 4%;
   text-align: center;
   display: inline-block;
-  float: right;
-  width: 49%;
+  width: 70%;
 }
 
-#added-urls td,th,tr{
+#added-urls td, th, tr {
   text-align: center;
 }
 
-#added-urls a{
+#added-urls a {
   color: black;
 }
 
-.form .required-fields{
+.form .required-fields {
   color: #ff0000;
 
 }

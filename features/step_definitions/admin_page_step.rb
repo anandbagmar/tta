@@ -1,5 +1,5 @@
-When /^a team member visits Admin Page$/ do
-  navigate_to_admin_page()
+When /^a team member visits Admin Statistics Page$/ do
+  navigate_to_admin_statistics_page()
 end
 
 Then /^all project's information is generated in tabular format$/ do

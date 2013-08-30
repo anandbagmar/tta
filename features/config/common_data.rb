@@ -1,6 +1,6 @@
 #Site Url
 HOMEPAGE="http://localhost:3000"
-ADMIN_PAGE="http://localhost:3000/admin"
+ADMIN_STATS_PAGE="http://localhost:3000/admin/statistics"
 
 #Button_name for different pages
 UPLOAD_PAGE_BUTTON="SUBMIT"

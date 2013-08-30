@@ -39,7 +39,7 @@ Feature: Test Trend Visualization Flow
       | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | January    | 1        | 12        | 12          | Err_test.zip | Unit Test        | JUnit            |
       | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | February   | 20       | 12        | 12          | Err_test.zip | Integration Test | JUnit            |
       | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | March      | 15       | 12        | 12          | Err_test.zip | Functional Test  | JUnit            |
-    When a team member visits Admin Page
+    When a team member visits Admin Statistics Page
     Then all project's information is generated in tabular format
 
 #  Scenario:Compare runs Flow

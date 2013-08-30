@@ -19,72 +19,6 @@
     <%= render 'layouts/admin_partial' %>
 <% end %>
 
-<div class="page_title">
-  <h1>Add Customized Url </h1>
-</div>
-
-<div name="external-dashboard" style=" width: 74%; display: inline-block; ">
-
-  <div id="embedded-urls">
-    <%= form_tag({:action => 'add'}, {:id => "admin-customization"}) do %>
-        <table border="2" style="text-align: left; width: 100%">
-          <thead>
-          <tr>
-            <th></th>
-            <th>
-              <span><em>Fields marked with (<span class="required-fields">*</span>) are compulsory</em></span>
-            </th>
-          </tr>
-          </thead>
-
-          <tbody>
-          <tr>
-            <td class="fields">
-              <label for="name">Website Name<span class="required-fields">*</span></label>
-            </td>
-            <td>
-              <%= text_field_tag (:name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase" %>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="fields">
-              <label for="url-value">Website Link<span class="required-fields">*</span></label>
-            </td>
-            <td>
-              <%= text_field_tag (:link), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase" %>
-            </td>
-          </tr>
-
-          <tr>
-            <div class="button">
-              <td>
-                <%= submit_tag("Clear All", {:name => 'reset', :id => 'reset_button', :type => "reset"}) %>
-              </td>
-              <td>
-                <%= submit_tag 'ADD', :class => 'submit' %>
-              </td>
-            </div>
-          </tr>
-
-          </tbody>
-        </table>
-    <% end %>
-  </div>
-
-  <div id="added-urls">
-    <table id="url-table" border="2" style="text-align: left; width: 100%">
-      <thead>
-      <tr>
-        <th>Added URLS</th>
-      </tr>
-
-      </thead>
-    </table>
-  </div>
-
-</div>
-
 </body>
 <%= render :file => '/home/footer.html.erb' %>
 
@@ -121,9 +55,6 @@
             })
             $('#project_data').html(renderTableData);
         }
-
-        $("#admin-customization").validate();
-
         var jsonR;
         jsonR = "<%= @json %>";
         jsonR = makeValidJSON.validate(jsonR);
@@ -137,24 +68,6 @@
             else {
                 $("#project_data_table").show();
                 renderTable(jsonR);
-            }
-        }
-
-        var added_urls;
-        added_urls = "<%= @all_external_urls %>";
-        added_urls = makeValidJSON.validate(added_urls);
-        added_urls = JSON.parse(added_urls);
-
-        var tableElement = document.getElementById("url-table");
-
-        if (added_urls.length==0) {
-            tableElement.innerHTML+= "<tr><td>No URLS added</td></tr>"
-
-        }
-        else {
-            for (index = 0; index < added_urls.length; index++) {
-                tableElement.innerHTML += "<tr><td>" + added_urls[index]["name"] + "</td></tr>";
-//            "<td>" +"<a href='/admin/delete'>Delete</a>"+ "</td>
             }
         }
     });
