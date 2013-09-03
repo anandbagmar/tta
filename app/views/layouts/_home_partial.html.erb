@@ -28,8 +28,7 @@
 
         var externalDashboard;
         externalDashboard = "<%= @all_external_urls %>";
-        externalDashboard = makeValidJSON.validate(externalDashboard);
-        externalDashboard = JSON.parse(externalDashboard);
+        externalDashboard = jsonData.parse(externalDashboard);
         renderButtons(externalDashboard);
 
     });

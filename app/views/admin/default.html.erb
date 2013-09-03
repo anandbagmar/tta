@@ -85,22 +85,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#admin-customization").validate();
-        var added_urls;
-        added_urls = "<%= @all_external_urls %>";
-        added_urls = makeValidJSON.validate(added_urls);
-        added_urls = JSON.parse(added_urls);
-
-        var tableElement = document.getElementById("url-table");
-
-        if (added_urls.length == 0) {
-            tableElement.innerHTML += "<tr><td>No URLS added</td></tr>"
-        }
-        else {
-            for (index = 0; index < added_urls.length; index++) {
-                tableElement.innerHTML += "<tr><td style=' width: 24%; '>" + added_urls[index]["name"] +
-                        "<td>" + added_urls[index]["link"] + "</td>" + "</td></tr>";
-            }
-        }
+        ExternalDashboard.renderTable("<%= @all_external_urls %>");
     });
 </script>
 

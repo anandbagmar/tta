@@ -61,8 +61,7 @@
         }
 
         var compareJson = "<%= @compare_json %>";
-        compareJson = makeValidJSON.validate(compareJson);
-        compareJson = JSON.parse(compareJson);
+        compareJson = jsonData.parse(compareJson);
         if (compareJson != "") {
             displayAllCompareResults(compareJson);
         }

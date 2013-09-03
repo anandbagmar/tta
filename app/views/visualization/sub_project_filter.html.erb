@@ -79,7 +79,6 @@
                 bottom += currentItem.triangleHeight - index - 1;
             }
             renderString += "<div id='pyramid-overlay' style='display:block;'></div> ";
-            console.log(renderString)
             $('#proj_title').append(proj_title);
             $('#block_pyramid').append(renderString);
             $('#pyramidTable').append(table_header);
@@ -133,10 +132,6 @@
                 var color = ["", "#DB7093", "#008080", "#DAA520", "#CD853F", "#808000", "#191970", "#4B0082", "#A0522D"];
 
                 color = color[parseInt(seq_no / 100)];
-                console.log(seq_no);
-                console.log(color);
-
-
                 $("#" + testName + "_test").css({
                     "border-bottom-width": triangleHeights[index] + "px",
                     "border-left-width": triangleHeights[index] + "px",

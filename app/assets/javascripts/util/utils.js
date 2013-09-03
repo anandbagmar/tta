@@ -35,13 +35,18 @@ var Utils={
 
 };
 
-var makeValidJSON = {
-    validate : function(jsonData){
+var jsonData = {
+    parse : function(jsonData){
         var regExpQuote = new RegExp("&quot;", 'g'),
+            regExpGreaterThan= new RegExp("=&gt;", 'g'),
+            regExpLessThan = new RegExp("=&lt;", 'g'),
             regExpBackSlash = new RegExp("[\\\\]", 'g');
         jsonData = jsonData.replace(regExpQuote, "\"");
         jsonData = jsonData.replace(regExpBackSlash, "\\\\");
+        jsonData = jsonData.replace(regExpGreaterThan, ":");
+        jsonData = jsonData.replace(regExpLessThan, ":");
         jsonData = jsonData.replace(/[\n \t\r]+/g, ' ');
+        jsonData = JSON.parse(jsonData);
       return jsonData;
     }
 

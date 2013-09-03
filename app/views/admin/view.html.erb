@@ -24,52 +24,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        var renderTable = function (tableData) {
-            var templates = new Template();
-            var projectTemplate = templates.getAdminTableProjectTemplate();
-            var subProjectTemplate = templates.getAdminTableSubProjectTemplate();
-            var renderTableData = "<tr><th>No</th><th>PROJECT NAME </th><th>SUB PROJECT NAME </th> <th> TEST UPLOAD COUNT</th></tr>";
-            var index = 1;
-
-            jQuery.each(tableData, function (key, projectData) {
-                project_name = projectData[0]['project_name'];
-                sub_projects = projectData[1]['sub_projects']
-                count = projectData[2]['test_count'];
-
-                renderTableData += templates.render(projectTemplate, {
-                    "Index":index,
-                    "ProjectName":project_name,
-                    "SubProjectName":"",
-                    "TestCount":""
-                });
-
-                for (var i = 0; i < sub_projects.length; i++) {
-                    renderTableData += templates.render(subProjectTemplate, {
-                        "Index":"",
-                        "ProjectName":"",
-                        "SubProjectName":sub_projects[i],
-                        "TestCount":count[i]
-                    });
-                }
-                index++;
-            })
-            $('#project_data').html(renderTableData);
-        }
-        var jsonR;
-        jsonR = "<%= @json %>";
-        jsonR = makeValidJSON.validate(jsonR);
-        jsonR = JSON.parse(jsonR);
-        if (jsonR != "") {
-            if ('message' in jsonR) {
-                var message = "<h3>" + jsonR["message"] + "</h3>";
-                $("#display_message").html(message);
-                $("#display_message").show();
-            }
-            else {
-                $("#project_data_table").show();
-                renderTable(jsonR);
-            }
-        }
+        ProjectStatistics.renderTable("<%= @json %>");
     });
 </script>
 

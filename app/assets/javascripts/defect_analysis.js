@@ -1,17 +1,16 @@
 var renderDefectTable = {
 
-    renderTable:function (jsonData) {
+    renderTable:function (jsonDataSet) {
         $("#defect-analysis").css("display", "none");
         var subProjectName = "";
         var percentage = "";
-        if (jsonData != "") {
+        if (jsonDataSet != "") {
             $("#defect_analysis_table").css("display","block");
-            jsonData = makeValidJSON.validate(jsonData);
-            jsonData = JSON.parse(jsonData);
+            jsonDataSet = jsonData.parse(jsonDataSet);
 
-            subProjectName = "<h1>" + "Sub Project : " + jsonData.sub_project_name.toUpperCase() + "</h1>";
-            percentage = jsonData.percentage;
-            var tableResponse = jsonData.errors;
+            subProjectName = "<h1>" + "Sub Project : " + jsonDataSet.sub_project_name.toUpperCase() + "</h1>";
+            percentage = jsonDataSet.percentage;
+            var tableResponse = jsonDataSet.errors;
             var test_category = "";
             var errorListData = "";
             var errorMessageData = "";
