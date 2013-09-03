@@ -1,15 +1,7 @@
 class ComparativeAnalysisController < ApplicationController
-  # To change this template use File | Settings | File Templates.
-  def new
-  end
 
   def create
-  end
 
-  def show
-  end
-
-  def index
   end
 
   def date_filter
