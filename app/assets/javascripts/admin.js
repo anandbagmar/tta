@@ -13,6 +13,25 @@ var ExternalDashboard = {
                     "<td>" + added_urls[index]["link"] + "</td>" + "</td></tr>";
             }
         }
+    },
+    renderButtons:function (externalDashboardURLs) {
+        var divElement = document.getElementById("external-dashboard-url");
+        var divIFrame = document.getElementById("external-dashboard-frame");
+
+        for (i = 0; i < externalDashboardURLs.length; i++) {
+            var newButton = document.createElement('button');
+            var buttonName = externalDashboardURLs[i]["name"]
+            var buttonValue = externalDashboardURLs[i]["link"];
+            newButton.setAttribute("type", "button");
+            newButton.setAttribute("value", buttonValue);
+            newButton.setAttribute("id", buttonName);
+            newButton.innerHTML = buttonName.toUpperCase();
+            newButton.onclick = function () {
+                divIFrame.innerHTML = "<iframe src=" + this.value +
+                    " style='width: 100%; height: 430px;'></iframe>"
+            };
+            divElement.appendChild(newButton);
+        }
     }
 };
 

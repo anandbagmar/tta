@@ -1,35 +1,10 @@
 <h2 style="padding: 2%;">External Dashboard</h2>
 <div id="external-dashboard-url"></div>
-
 <div id="external-dashboard-frame"></div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        var renderButtons = function (externalDashboardURLs) {
-            var divElement = document.getElementById("external-dashboard-url");
-            var divIFrame = document.getElementById("external-dashboard-frame");
-
-            for (i = 0; i < externalDashboardURLs.length; i++) {
-                var newButton = document.createElement('button');
-                var buttonName = externalDashboardURLs[i]["name"]
-                var buttonValue = externalDashboardURLs[i]["link"];
-                newButton.setAttribute("type", "button");
-                newButton.setAttribute("value", buttonValue);
-                newButton.setAttribute("id", buttonName);
-                newButton.innerHTML = buttonName.toUpperCase();
-                newButton.onclick = function () {
-                    divIFrame.innerHTML = "<iframe src=" + this.value +
-                            " style='width: 100%; height: 430px;'></iframe>"
-                };
-                divElement.appendChild(newButton);
-            }
-        }
-
-
-        var externalDashboard;
-        externalDashboard = "<%= @all_external_urls %>";
-        externalDashboard = jsonData.parse(externalDashboard);
-        renderButtons(externalDashboard);
-
-    });
+    var data;
+    data = "<%= @all_external_urls %>";
+    data = jsonData.parse(data);
+    ExternalDashboard.renderButtons(data);
 </script>

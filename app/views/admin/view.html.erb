@@ -1,13 +1,8 @@
 <html>
 <head xmlns="http://www.w3.org/1999/html">
-  <%= javascript_include_tag 'admin' %>
-  <%= javascript_include_tag 'util/utils' %>
-  <%= javascript_include_tag 'util/templates' %>
+  <%= javascript_include_tag 'admin', 'util/utils', 'util/templates' %>
   <%= stylesheet_link_tag 'admin' %>
-
-  <title>Admin
-    <Data></Data>
-  </title>
+  <title>Admin<Data></Data></title>
 </head>
 <%= render :file => '/home/header.html.erb' %>
 <body>
