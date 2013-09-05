@@ -10,11 +10,19 @@ class AdminController < ApplicationController
   end
 
   def add
-    if (ExternalDashboard.find_by_name(params[:name]))
-      ExternalDashboard.find_by_name(params[:name]).update_column("link", params[:link])
-    else
-      ExternalDashboard.find_or_create_by_name_and_link((params[:name]), params[:link])
+    external_dashboard_name = params[:name]
+    external_dashboard_link = params[:link]
+
+    if !(external_dashboard_link.include?("http"))
+      external_dashboard_link = "http://" + external_dashboard_link
     end
+
+    if (ExternalDashboard.find_by_name(external_dashboard_name))
+      Admin.update_external_dashboard_link(external_dashboard_name,external_dashboard_link)
+    else
+      Admin.add_external_dashboard(external_dashboard_name, external_dashboard_link)
+    end
+
     @all_external_urls = ExternalDashboard.select("name,link").to_json
     render :default
   end

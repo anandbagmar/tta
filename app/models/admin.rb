@@ -30,4 +30,13 @@ class Admin < ActiveRecord::Base
     @json = @json.to_json
     @json
   end
+
+  def self.add_external_dashboard(external_dashboard_name,external_dashboard_link)
+    ExternalDashboard.find_or_create_by_name_and_link(external_dashboard_name,external_dashboard_link)
+
+  end
+
+  def self.update_external_dashboard_link(external_dashboard_name,external_dashboard_link)
+    ExternalDashboard.find_by_name(external_dashboard_name).update_column("link", external_dashboard_link)
+  end
 end
