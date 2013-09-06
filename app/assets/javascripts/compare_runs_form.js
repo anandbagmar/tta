@@ -43,6 +43,7 @@ $(document).ready(function () {
         $(".compare_date_one").remove();
         Utils.removeAttribute("#date_one_select", "disabled");
         var index = 1;
+        json_response.sort(function(a,b){return a["date_of_execution"] < b["date_of_execution"]});
         jQuery.each(json_response, function (key, compare_date) {
             var date = compare_date["date_of_execution"];
             date = date.replace("T", " ");
