@@ -89,6 +89,7 @@ plotPyramidWithKnownTestCategory = function (projectJson) {
     var renderString = "";
     var table_header = "";
     var table_content = "";
+    var final_content = "";
     var proj_title = "";
 
     table_header = "<tr class='table_header'> <th>TEST TYPES</th> <th>NUMBER OF TESTS</th> <th style='width: 10%;'>TOTAL RUN TIME (HH:MM:SS:MS)</th> <th>TEST TYPE %</th> <th>PASSING %</th> </tr>";
@@ -114,7 +115,7 @@ plotPyramidWithKnownTestCategory = function (projectJson) {
         currentItem.no_of_test = typeOfTests[index].no_of_test;
         currentItem.total_run_time = typeOfTests[index].duration;
         currentItem.pass_percent = typeOfTests[index].percentage_passing;
-        table_content += "<tr> <td" + " style='background:" + currentItem.color + "'>" + currentItem.testName + "</td> <td>" + currentItem.no_of_test + "</td>";
+        table_content = "<tr> <td" + " style='background:" + currentItem.color + "'>" + currentItem.testName + "</td> <td>" + currentItem.no_of_test + "</td>";
         table_content += "<td>" + currentItem.total_run_time + "</td><td>" + currentItem.percent + " %</td> <td>" + currentItem.pass_percent + " %</td> </tr>";
         renderString += "<div class='pyramidItem' " +
             "style= 'left: -" + currentItem.triangleHeight / 2 + "px; " +
@@ -127,12 +128,13 @@ plotPyramidWithKnownTestCategory = function (projectJson) {
         renderString += "</div>";
         pyramidItems.push(currentItem);
         bottom += currentItem.triangleHeight - index - 1;
+        final_content = table_content + final_content;
     }
     renderString += "<div id='pyramid-overlay' style='display:block;'></div> ";
     $('#proj_title').append(proj_title);
     $('#block_pyramid').append(renderString);
     $('#pyramidTable').append(table_header);
-    $('#pyramidTable').append(table_content);
+    $('#pyramidTable').append(final_content);
 
     var bodyHeight = $('body').css('height'),
         baseTriangleHeight = parseInt(bodyHeight) / 2;
