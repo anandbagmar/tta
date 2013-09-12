@@ -5,7 +5,7 @@ ADMIN_STATS_PAGE="http://localhost:3000/stats"
 #Button_name for different pages
 UPLOAD_PAGE_BUTTON="SUBMIT"
 COMPARATIVE_PAGE_BUTTON="Plot"
-DEFECT_PAGE_BUTTON="Plot"
+DEFECT_PAGE_BUTTON="Submit"
 TEST_PYRAMID_PAGE_BUTTON="Plot"
 COMPARE_PAGE_BUTTON="compare_runs"
 #page names
@@ -45,8 +45,9 @@ COMPARATIVE_PLOT_BUTTON = "form-submit"
 COMPARATIVE_GRAPH_ID = "#comparative_analysis"
 
 #Defect Analysis Graph ELEMENTS
-DEFECT_SUBPROJECT_DROPDOWN="sub_project_id"
-DEFECT_FORM_DATE="defect_analysis_analysis_date"
+DEFECT_PROJECT_DROPDOWN="project_select"
+DEFECT_SUBPROJECT_DROPDOWN="sub_project_select"
+DEFECT_TEST_CATEGORY_DROPDOWN="test_category_select"
 DEFECT_GRAPH_ID="#defect-analysis"
 
 #PYRAMID ELEMENT
@@ -61,7 +62,7 @@ SCREENSHOT_FILE_PATH=$PROJECT_ROOT +"/log/feature/screenshots/"
 
 COMPARE_RUN_PROJECT_DROPDOWN="project_select"
 COMPARE_RUN_SUB_PROJECT_DROPDOWN="sub_project_select"
-COMPARE_RUN_TEST_TYPE_DROPDOWN="test_types_select"
+COMPARE_RUN_TEST_TYPE_DROPDOWN="test_category_select"
 COMPARE_RUN_TEST_DATE1="date_one_select"
 COMPARE_RUN_TEST_DATE2="date_two_select"
 COMPARE_RUN_TABLE_ID="#result_table"

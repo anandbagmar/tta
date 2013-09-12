@@ -2,7 +2,7 @@ class CompareRuns
 
   def self.getCompareResult(form_data)
     sub_project_id=form_data["sub_projects"]
-    test_category=form_data["test_types"]
+    test_category=form_data["test_category"]
     date_one = form_data["date_one"]
     date_two = form_data["date_two"]
     test_case_records_with_errors_for_date_one = get_test_suite_records_with_errors_for(date_one, sub_project_id, test_category) || []

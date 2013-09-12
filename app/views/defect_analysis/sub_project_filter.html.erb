@@ -1,0 +1,43 @@
+<head xmlns="http://www.w3.org/1999/html">
+  <%= stylesheet_link_tag 'defect_analysis' %>
+  <%= javascript_include_tag 'defect_analysis', 'util/utils' %>
+
+  <style type="text/css">
+      body {
+          position: relative;
+      }
+  </style>
+</head>
+
+<%= render :file => '/home/header.html.erb' %>
+
+<body>
+
+<div class="color_codes" style="display: none;">
+  <h3 class="legend_header">Legend:</h3>
+
+  <div class="legend_item" id="type3"><span class="rect"></span><span class="legend_text">Test Category</span></div>
+  <div class="legend_item" id="type1"><span class="rect"></span><span class="legend_text">Failure Message</span></div>
+  <div class="legend_item" id="type2"><span class="rect"></span><span class="legend_text">Failing Tests</span></div>
+</div>
+<div id="container">
+  <div id="defect-analysis">
+    <table id="defect_analysis_table" class="table-bordered" style="display: none; float: left; margin-bottom: 10%;">
+      <tr class='table-bordered'>
+        <th style=" text-align: center; width: 37%; ">FAILURE MESSAGE -> FAILING TESTS</th>
+        <th style=" width: 1%; text-align: center; ">PERCENTAGE</th>
+      </tr>
+    </table>
+  </div>
+
+  <div id="defect-analysis-data" style="display:none;">
+  </div>
+
+  <script type="text/javascript">
+      var json = "<%=  @defect_analysis_json%>";
+      renderDefectTable.renderTable(json);
+  </script>
+</div>
+<%= render :file => '/home/footer.html.erb' %>
+
+</body>

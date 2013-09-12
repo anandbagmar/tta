@@ -20,11 +20,15 @@ Tta::Application.routes.draw do
 
   get '/stats' => 'admin#view'
 
+  match '/get_run_dates' => 'defect_analysis#getRunDates'
+  match '/get_specific_run' => 'defect_analysis#getSpecificRun'
+
   match '/compare_runs/' => 'compare_runs#index'
   match '/get_sub_project_data' => 'compare_runs#getSubProjects'
   match '/get_test_types' => 'compare_runs#getTestTypes'
   match '/get_compare_json' => 'compare_runs#getCompareJson'
   match '/get_compare_dates' => 'compare_runs#getDateRuns'
+
 
   get '*path' => 'error#handle404'
 

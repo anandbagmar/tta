@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#compare_runs_form").validate();
+    $("#defect_analysis_form").validate();
     var loadProjectData = function (Selector, project_json) {
         jQuery.each(project_json, function (key, projectData) {
             var project_id = projectData["id"];
@@ -13,8 +13,8 @@ $(document).ready(function () {
             );
         });
     }
-    //ON PAGE LOAD
     $('.proj-element').remove();
+    $("#date").val("");
     var pageLoad = $(".serverData").html();
     projects = jsonData.parse(pageLoad);
     loadProjectData("#project_select", projects);
@@ -22,6 +22,7 @@ $(document).ready(function () {
     var projectResponse = function (json_response) {
         $('.sub-element').remove();
         $('.test-element').remove();
+        $('.specific-run').remove();
         Utils.removeAttribute("#sub_project_select", "disabled");
         jQuery.each(json_response, function (key, projectData) {
             var project_id = projectData["id"];
@@ -32,23 +33,56 @@ $(document).ready(function () {
 
     var subProjectResponse = function (json_response) {
         $('.test-element').remove();
+        $('.specific-run').remove();
+        $("#date").datepicker('setDate', null);
         Utils.removeAttribute("#test_category_select", "disabled");
         jQuery.each(json_response, function (key, testTypes) {
             var test_type = testTypes["test_category"];
             Utils.loadDropDown("#test_category_select", test_type, test_type, test_type, "test-element");
         });
+        Utils.loadDropDown("#test_category_select", "ALL", "ALL", "ALL", "test-element");
     }
 
-    var testTypeResponse = function (json_response) {
-        $(".compare_date_one").remove();
-        Utils.removeAttribute("#date_one_select", "disabled");
+    var getFormattedDate = function (unformatteddate) {
+        var dmy = unformatteddate.getDate() + "-" + (unformatteddate.getMonth() + 1) + "-" + unformatteddate.getFullYear();
+        return dmy;
+    }
+
+    var testCategoryResponse = function (json_response) {
+        json_response = json_response.sort();
+        var temp = [];
+        for (i = 0; i < json_response.length; i++)  {
+            temp.push(getFormattedDate(new Date(json_response[i].substring(0,10))));
+        }
+        $('.specific-run').remove();
+        if ($("#test_category_select option:selected").val() == 'ALL') {
+            $("#test_run_select").attr("disabled", "true");
+        }
+        else {
+            Utils.removeAttribute("#test_run_select", "disabled");
+        }
+        Utils.removeAttribute("#date", "disabled");
+        $("#date").datepicker({
+            dateFormat: "yy-mm-dd",
+            defaultDate: " ",
+            beforeShowDay:function (date) {
+                for (i = 0; i < temp.length; i++) {
+                    return [($.inArray(getFormattedDate(date), temp) > -1), ''];
+                }
+            }
+        });
+    }
+
+
+    var runDateResponse = function (json_response) {
+        $('.specific-run').remove();
         var index = 1;
-        json_response.sort(function(a,b){return a["date_of_execution"] < b["date_of_execution"]});
-        jQuery.each(json_response, function (key, compare_date) {
-            var date = compare_date["date_of_execution"];
-            date = date.replace("T", " ");
-            date = date.replace("Z", " ");
-            Utils.loadDropDown("#date_one_select", "date_one_" + index.toString(), date, date, "compare_date_one");
+        json_response.sort(function (a, b) {
+            return a["date_of_execution"] < b["date_of_execution"]
+        });
+        jQuery.each(json_response, function (key, metadata) {
+            var date = metadata["date_of_execution"].substring(11, 19);
+            Utils.loadDropDown("#test_run_select", "date_" + index.toString(), date, date, "specific-run");
             index++;
         });
     }
@@ -57,7 +91,6 @@ $(document).ready(function () {
         var project_id = ($("#project_select option:selected").val());
         var params = {url:"/get_sub_project_data", data:{project_id:project_id}, successCallback:projectResponse};
         Utils.ajaxRequest(params);
-
     });
 
     $(document).delegate("#sub_project_select", "change", function () {
@@ -69,23 +102,20 @@ $(document).ready(function () {
     $(document).delegate("#test_category_select", "change", function () {
         var sub_project_id = ($("#sub_project_select option:selected").val());
         var test_category = ($("#test_category_select option:selected").val());
-        var params = {url:"/get_compare_dates", data:{subproject_id:sub_project_id, test_category:test_category}, successCallback:testTypeResponse};
+        var params = {url:"/get_run_dates", data:{subproject_id:sub_project_id, test_category:test_category}, successCallback:testCategoryResponse};
         Utils.ajaxRequest(params);
     });
 
-    $(document).delegate("#date_one_select", "change", function () {
-        var date1 = ($("#date_one_select option:selected").val());
-        var dates = $("#date_one_select>option").map(function () {
-            return $(this).val();
-        });
-        $(".compare_date_two").remove();
-        for (i = 1; i < dates.length; i++) {
-            Utils.loadDropDown("#date_two_select", "date_two_" + i.toString(), dates[i], dates[i], "compare_date_two");
+    $(document).delegate("#date", "change", function () {
+        var selected_date = ($("#date").datepicker('getDate'));
+        var sub_project_id = ($("#sub_project_select option:selected").val());
+        var test_category = ($("#test_category_select option:selected").val());
+        if (test_category != "ALL") {
+            var params = {url:"/get_specific_run", data:{subproject_id:sub_project_id, test_category:test_category, run_date:selected_date}, successCallback:runDateResponse};
+            Utils.ajaxRequest(params);
         }
-        var date2 = $("#date_two_select");
-        date2.find("option[value='" + date1 + "']").remove();
-        Utils.removeAttribute("#date_two_select", "disabled");
     });
 
-});
+})
+;
 

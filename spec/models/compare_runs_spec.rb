@@ -67,7 +67,7 @@ module CompareRunsSpecHelper
 
     def form_data(arg_subproject,arg_test_category,arg_date1,arg_date2)
         {"sub_projects" => arg_subproject.id,
-        "test_types" => arg_test_category,
+        "test_category" => arg_test_category,
         "date_one" => arg_date1,
         "date_two" => arg_date2}
     end

@@ -1,9 +1,9 @@
 module Domain
   module DefectAnalysis
-    def view_defect_analysis_graph(subproject_name, date)
+    def view_defect_analysis_graph(project, subproject, testcategory)
       navigate_to_homepage()
       go_to_url(DEFECT_PAGE)
-      view_defect_graph(subproject_name, date)
+      view_defect_graph(project, subproject, testcategory)
     end
 
     def verify_defect_graph_plotted(subproject_name)

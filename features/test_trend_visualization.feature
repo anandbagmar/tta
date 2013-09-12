@@ -27,10 +27,10 @@ Feature: Test Trend Visualization Flow
   Scenario:Defect analysis Flow
     Given a User uploads data with following attributes
       | proj     | sub_proj | ci_job        | osName | hostName | browser | environment | date_year | date_month | date_day | date_hour | date_minute | logFile      | test_type        | test_report_type |
-      | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | January    | 1        | 12        | 12          | Err_test.zip | Unit Test        | JUnit            |
-      | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | February   | 20       | 12        | 12          | Err_test.zip | Integration Test | JUnit            |
-      | Project1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | March      | 15       | 12        | 12          | Err_test.zip | Functional Test  | JUnit            |
-    When a team member checks Defect Analysis Graph of "SERRORS1" with Date as "2012-01-01"
+      | PROJECT1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | January    | 1        | 12        | 12          | Err_test.zip | Unit Test        | JUnit            |
+      | PROJECT1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | February   | 20       | 12        | 12          | Err_test.zip | Integration Test | JUnit            |
+      | PROJECT1 | SERRORS1 | Run unit test | Mac    | Sailee   | IE      | DEV         | 2012      | March      | 15       | 12        | 12          | Err_test.zip | Functional Test  | JUnit            |
+    When a team member checks Defect Analysis Graph of Project "PROJECT1" and Sub-Project "SERRORS1" with test category as "ALL" and Date as "2012-01-01"
     Then the Defect Analysis table for "SERRORS1" is plotted
 
   Scenario:Admin Page Details

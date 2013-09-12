@@ -1,6 +1,6 @@
 class DefectAnalysis
-  def get_result_json(sub_project_id, analysis_date)
-    test_case_hash, no_of_test = getMetadataIds(sub_project_id, analysis_date)
+  def get_result_json(sub_project_id, analysis_date, test_category)
+    test_case_hash, no_of_test = getMetadataIds(sub_project_id, analysis_date, test_category)
     if !(no_of_test.nil?)
       percentage = get_defect_percentage(no_of_test.flatten)
       defect_analysis_json = {
@@ -25,34 +25,41 @@ class DefectAnalysis
     percentage
   end
 
-  def getMetadataIds(sub_project_id, analysis_date)
-    final_result_hash = {}
-    final_test_for_particular_error=[]
-    index=0
-
-    test_category = get_record_with_distinct_test_category(sub_project_id)
-    test_category.each do |test_type|
-      no_of_test_for_particular_error=[]
-      result_hash = {}
-      meta_data = SubProject.find(sub_project_id).test_metadatum.find_all_by_date_of_execution(analysis_date.beginning_of_day..analysis_date.end_of_day, :conditions => ["test_category = ?", test_type])
-      meta_data.sort_by &:date_of_execution
-      @meta_data1 = meta_data.last
-
-      if !(@meta_data1.nil?)
-        test_report_type = @meta_data1.test_report_type
-        nunit_flag = (test_report_type=="Unit NUnit"||test_report_type =="Groovy NUnit") ? 1 : 0
-        test_suite_ids=(nunit_flag == 1 ? NunitParser.get_test_suite_records(@meta_data1) : XmlParser.new.get_test_suite_records(@meta_data1))
+  def getMetadataIds(sub_project_id, analysis_date, test_category)
+    @final_result_hash = {}
+    @final_test_for_particular_error=[]
+    @index=0
+    if (test_category=="ALL")
+      analysis_date=analysis_date.to_date
+      test_category = get_record_with_distinct_test_category(sub_project_id)
+      test_category.each do |test_type|
+        meta_data = SubProject.find(sub_project_id).test_metadatum.find_all_by_date_of_execution(analysis_date.beginning_of_day..analysis_date.end_of_day, :conditions => ["test_category = ?", test_type])
+        getResultHash(test_type, meta_data)
       end
-      if !(test_suite_ids.nil?)
-        result_hash, no_of_test_for_particular_error = get_test_cases(test_suite_ids)
-        final_result_hash[test_type] = [] unless result_hash.keys.include?(test_type)
-        final_result_hash[test_type] << result_hash unless result_hash.nil?
-        final_test_for_particular_error[index]=no_of_test_for_particular_error
-        index+=1
-      end
+    else
+      meta_data= SubProject.find(sub_project_id).test_metadatum.find_all_by_date_of_execution(analysis_date, :conditions => ["test_category = ?", test_category])
+      getResultHash(test_category, meta_data)
     end
+    return @final_result_hash, @final_test_for_particular_error
+  end
 
-    return final_result_hash, final_test_for_particular_error
+  def getResultHash(test_type, meta_data)
+    no_of_test_for_particular_error=[]
+    result_hash = {}
+    meta_data.sort_by &:date_of_execution
+    meta_data = meta_data.last
+    if !(meta_data.nil?)
+      test_report_type = meta_data.test_report_type
+      nunit_flag = (test_report_type=="Unit NUnit"||test_report_type =="Groovy NUnit") ? 1 : 0
+      test_suite_ids=(nunit_flag == 1 ? NunitParser.get_test_suite_records(meta_data) : XmlParser.new.get_test_suite_records(meta_data))
+    end
+    if !(test_suite_ids.nil?)
+      result_hash, no_of_test_for_particular_error = get_test_cases(test_suite_ids)
+      @final_result_hash[test_type] = [] unless result_hash.keys.include?(test_type)
+      @final_result_hash[test_type] << result_hash unless result_hash.nil?
+      @final_test_for_particular_error[@index]=no_of_test_for_particular_error
+      @index+=1
+    end
   end
 
   def get_test_cases(result)
@@ -85,6 +92,7 @@ class DefectAnalysis
     end
     return @test_category
   end
+
 end
 
 
