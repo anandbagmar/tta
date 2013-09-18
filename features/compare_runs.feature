@@ -16,7 +16,7 @@ Scenario: Failures only on day 1
 	
 	Given the following failure pattern
 	|day1		|day2	|
-	|class_001	|		|
+	|class_001	|none	|
 	|class_002	|		|
 	|class_003	|		|
 	|class_004	|		|
@@ -26,9 +26,9 @@ Scenario: Failures only on day 1
 	Then I see the following failures listed
 	|day1		| day2	| combined	| common	|
 	|class_001	| none	| class_001	| none		|
-	|class_002	|		| class_001	|			|
-	|class_003	|		| class_001	|			|
-	|class_004	|		| class_001	|			|
+	|class_002	|		| class_002	|			|
+	|class_003	|		| class_003	|			|
+	|class_004	|		| class_004	|			|
 
 
 Scenario: Failures only on day 2
@@ -45,9 +45,9 @@ Scenario: Failures only on day 2
 	Then I see the following failures listed
 	|day1		| day2		| combined	| common	|
 	|none		| class_001	| class_001	| none		|
-	|			| class_002	| class_001	|			|
-	|			| class_003	| class_001	|			|
-	|			| class_004	| class_001	|			|
+	|			| class_002	| class_002	|			|
+	|			| class_003	| class_003	|			|
+	|			| class_004	| class_004	|			|
 
 	
 Scenario: Same failures on both days
@@ -99,8 +99,8 @@ Scenario: Some common failures
 	
 	Then I see the following failures listed
 	|day1		| day2		| combined	| common	|
-	|class_001	| class_003	| class_001	| none		|
-	|class_002	| class_004	| class_002	| 			|
+	|class_001	| class_003	| class_001	| class_003	|
+	|class_002	| class_004	| class_002	| class_004	|
 	|class_003	| class_005	| class_003	| 			|
 	|class_004	| class_006	| class_004	| 			|
 	|			|			| class_005	|			|

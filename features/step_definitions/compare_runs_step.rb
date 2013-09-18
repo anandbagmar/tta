@@ -18,7 +18,6 @@ end
 When(/^I compare the runs$/) do 
   navigate_to_homepage()
   go_to_url(COMPARE_RUNS_PAGE)  
-  page.driver.browser.manage.window.maximize
   view_compare_run_data(
     "COMPARE_RUNS_PROJECT",
     "COMPARE_RUNS_SUBPROJECT",
@@ -29,4 +28,6 @@ end
 
 Then(/^I see the following failures listed$/) do |table|
   verify_error_classes(table)
+  clean_up_data
+  puts 
 end

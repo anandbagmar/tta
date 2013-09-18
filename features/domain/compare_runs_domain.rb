@@ -77,6 +77,11 @@ module Domain
         common << hash["common"] unless  hash["common"] == "" or hash["common"] == "none"
       end
 
+      verify_error_count_is_correct("result_title_date1",day1.count)
+      verify_error_count_is_correct("result_title_date2",day2.count)      
+      verify_error_count_is_correct("result_title_common",common.count)
+      verify_error_count_is_correct("result_title_both",combined.count)  
+      
       verify_table_contains_error_classes("result_table_date1",day1)
       verify_table_contains_error_classes("result_table_date2",day2)
       verify_table_contains_error_classes("result_table_common",common)
@@ -86,11 +91,15 @@ module Domain
 
     def verify_table_contains_error_classes(table_name , arr_error_classes)
       actual_classes = get_classnames_listed_for_table(table_name)
-             
-      arr_error_classes.each do |error_class|
-        assert_includes actual_classes , error_class
-      end
+      assert_equal actual_classes.to_set , arr_error_classes.to_set
     end
+    
+    def verify_error_count_is_correct(table_row_id , count)
+      expected_msg = "Number of failing tests: #{count}"
+      error_status_content = get_error_status_content(table_row_id)
+      assert_match expected_msg , error_status_content
+    end
+    
     
   end
 end
