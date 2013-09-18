@@ -31,8 +31,13 @@ class TestMetadatum < ActiveRecord::Base
 
   def get_latest_record(sub_project_id, test_category)
     @test_metadata_for_specific_test_category = TestMetadatum.find_all_by_sub_project_id_and_test_category(sub_project_id, test_category)
-    latest_test_metadata_record = @test_metadata_for_specific_test_category.sort_by &:date_of_execution
-    latest_test_metadata_record.last
+    metadata_records = (@test_metadata_for_specific_test_category.sort_by &:date_of_execution).reverse
+    metadata_records.each do |metadata|
+      if(TestSuiteRecord.find_all_by_test_metadatum_id(metadata)!=[])
+        return metadata
+      end
+    end
+    metadata_records.last
   end
 
   def self.get_record_for_specific_date(sub_project_id, test_category, date)

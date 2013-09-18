@@ -9,26 +9,18 @@ class VisualizationController < ApplicationController
   end
 
   def sub_project_filter
+    error=""
+    flash[:no_test_error]=nil
     sub_project_id=params[:sub_project][:id]
-    sub_project = SubProject.find_by_id(sub_project_id)
-    if sub_project_id.blank? || sub_project.nil?
-      flash[:no_id_error] = "No Sub-Project Selected"
-      flash[:no_test_error]=nil
-    else
-      @json = Visualization.new.getResultJson(sub_project_id)
-      flash[:no_id_error]=nil
-      json_obj = JSON.parse!(@json)
-      error_flag=0
-      json_obj["test_types"].each do |test_type|
-        if test_type["percent"]=="NaN"
-          error_flag =1
-        end
+    @json = Visualization.new.getResultJson(sub_project_id)
+    json_obj = JSON.parse(@json)
+    json_obj["test_types"].each do |test_type|
+      if test_type["no_of_test"]==0
+        error = error + " | "+test_type["test_name"] + " | "
       end
-      if error_flag==1
-        flash[:no_test_error]="No test in your project!!"
-      else
-        flash[:no_test_error]=nil
-      end
+    end
+    if (error!="")
+      flash[:no_test_error]= "No Test in your project for test category => " + error
     end
   end
 end
