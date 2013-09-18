@@ -9,18 +9,14 @@ class DefectAnalysisController < ApplicationController
   respond_to :json, :html
 
   def getRunDates
-
-    @runDates=[]
     sub_project_id =params["subproject_id"]
     test_category =params["test_category"]
-    if (test_category == "ALL")
-      metadataForSelectedFilters = TestMetadatum.where(:sub_project_id => sub_project_id).select([:date_of_execution]).uniq
-    else
-      metadataForSelectedFilters = TestMetadatum.where(:sub_project_id => sub_project_id, :test_category => test_category).select([:date_of_execution]).uniq
+    metadataForSelectedFilters = TestMetadatum.where(:sub_project_id => sub_project_id).select([:date_of_execution]).uniq
+
+    if (test_category != "ALL")
+      metadataForSelectedFilters = metadataForSelectedFilters.where(:test_category => test_category)
     end
-    metadataForSelectedFilters.each do |metadata|
-      @runDates.append(metadata.date_of_execution)
-    end
+    @runDates= getValidMetadataRecords(metadataForSelectedFilters)
     respond_with(@runDates.to_json)
   end
 
@@ -30,7 +26,8 @@ class DefectAnalysisController < ApplicationController
     sub_project_id =params["subproject_id"]
     test_category =params["test_category"]
     runDate =params["run_date"].to_date.to_s
-    @specificRun = TestMetadatum.where("sub_project_id = ? AND test_category = ? AND date_of_execution LIKE ?", sub_project_id, test_category, "#{runDate}%")
+    metadataForSelectedFilters = TestMetadatum.where("sub_project_id = ? AND test_category = ? AND date_of_execution LIKE ?", sub_project_id, test_category, "#{runDate}%")
+    @specificRun=getValidMetadataRecords(metadataForSelectedFilters)
     respond_with(@specificRun.to_json)
   end
 
@@ -44,6 +41,16 @@ class DefectAnalysisController < ApplicationController
     end
     test_category =params["test_category"]
     @defect_analysis_json = DefectAnalysis.new.get_result_json(sub_project_id, analysis_date, test_category)
+  end
+
+  def getValidMetadataRecords(metadataRecords)
+    runs = []
+    metadataRecords.each do |metadata|
+      if (TestSuiteRecord.find_all_by_test_metadatum_id(TestMetadatum.where(:date_of_execution => metadata.date_of_execution))!=[])
+        runs.append(metadata.date_of_execution)
+      end
+    end
+    runs
   end
 
 end

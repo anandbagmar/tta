@@ -28,8 +28,10 @@ displayTable = function (class_name_array) {
 compareResultsFor = function (type, tableTitle, date1, date2, class_name_array) {
     tableTitle = "<h2><b>" + tableTitle + "</b></h2>" + "<h3><b>Number of failing tests: " + class_name_array.length + "</b></h3>"
     $("#result_title_" + type).html(tableTitle);
-    var classNames = displayTable(class_name_array);
-    $("#result_table_" + type).html(classNames);
+    if (class_name_array.length != 0) {
+        var classNames = displayTable(class_name_array);
+        $("#result_table_" + type).html(classNames);
+    }
 }
 
 var compareRuns = {

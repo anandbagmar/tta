@@ -73,15 +73,14 @@ $(document).ready(function () {
         });
     }
 
-
     var runDateResponse = function (json_response) {
         $('.specific-run').remove();
         var index = 1;
         json_response.sort(function (a, b) {
-            return a["date_of_execution"] < b["date_of_execution"]
+            return a < b
         });
         jQuery.each(json_response, function (key, metadata) {
-            var date = metadata["date_of_execution"].substring(11, 19);
+            var date = metadata.substring(11, 19);
             Utils.loadDropDown("#test_run_select", "date_" + index.toString(), date, date, "specific-run");
             index++;
         });
