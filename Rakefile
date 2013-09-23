@@ -9,13 +9,6 @@ require 'cukeforker-webdriver'
 require 'selenium-webdriver'
 
 Tta::Application.load_tasks
-namespace :db do
-  namespace :test do
-    task :load => :environment do
-      Rake::Task["db:seed"].invoke
-    end
-  end
-end
 
 task :parallel_run_ttv do
   CukeForker::WebDriver::Runner.run(

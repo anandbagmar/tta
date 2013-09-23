@@ -1,0 +1,58 @@
+#class_test_picker {
+    background-color: #DDD;
+    padding: 10px;
+    width: 780px;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+.errormsg {
+    display: inline-block;
+    color: #DB1818;
+}
+
+#date-range-title h3 {
+    color: #339999;
+}
+
+#x-axisLabel p {
+    position: relative;
+    padding-bottom: 2%;
+}
+
+#y-axisLabel p {
+    position: relative;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    text-align: left;
+    left: -37%;
+    top: -900px;
+}
+
+.legendColorBox {
+    border: 0px;
+    padding: 0px;
+}
+
+.legendLabel {
+    border: 0px;
+    padding: 0px;
+}
+
+#execution_trend_result {
+    margin: 0 auto;
+    width: 900px;
+    height: 600px;
+}
+
+#execution_trend_result div.xAxis div.tickLabel {
+    transform: rotate(-40deg);
+    -ms-transform: rotate(-40deg); /* IE 9 */
+    -moz-transform: rotate(-40deg); /* Firefox */
+    -webkit-transform: rotate(-40deg); /* Safari and Chrome */
+    -o-transform: rotate(-40deg); /* Opera */
+    /*rotation-point:50% 50%;*/
+    /* CSS3 */
+    /*rotation:270deg;*/
+    /* CSS3 */
+}

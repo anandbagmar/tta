@@ -1,7 +1,7 @@
 <html>
 <head xmlns="http://www.w3.org/1999/html">
   <%= stylesheet_link_tag 'comparative_analysis' %>
-  <%= javascript_include_tag 'comparitive_analysis', 'util/utils' %>
+  <%= javascript_include_tag 'util/trend_analysis', 'util/utils' %>
 </head>
 <%= render :file => '/home/header.html.erb' %>
 <body>
@@ -18,7 +18,7 @@
           <th></th>
           <th><h2>Enter Date Range</h2></th>
         </tr>
-        <span class="errormsg">Select End Date Greater Than Start Date</span>
+        <span class="errormsg" style="display: none;">Select End Date Greater Than Start Date</span>
         </thead>
         <tbody>
         <tr class="required-field-date-field">
@@ -59,7 +59,7 @@
 
     <div id="comparative_analysis" style="width:900px;height:600px">
       <script>
-          Graph.plot('<%= @start_date %>', '<%= @end_date %>', '<%= @result_set %>');
+          Graph.plot('<%= @start_date %>', '<%= @end_date %>', '<%= @result_set %>',"#comparative_analysis");
       </script>
     </div>
     <div id="y-axisLabel">

@@ -1,4 +1,5 @@
 Tta::Application.routes.draw do
+
   get '/home' => "home#index"
 
   get '/upload' => "upload#new"
@@ -15,6 +16,9 @@ Tta::Application.routes.draw do
   get '/comparative_analysis' => "comparative_analysis#create"
   post '/comparative_analysis/result' => "comparative_analysis#date_filter"
 
+  get '/execution_trends' => "execution_trends#new"
+  post '/execution_trends/result' => "execution_trends#show"
+
   get '/admin/' => 'admin#default'
   post '/admin/add' => "admin#add"
 
@@ -28,6 +32,7 @@ Tta::Application.routes.draw do
   match '/get_test_types' => 'compare_runs#getTestTypes'
   match '/get_compare_json' => 'compare_runs#getCompareJson'
   match '/get_compare_dates' => 'compare_runs#getDateRuns'
+  match '/get_class_names' => 'execution_trends#class_names'
 
 
   get '*path' => 'error#handle404'

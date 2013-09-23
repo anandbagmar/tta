@@ -3,8 +3,8 @@ var ValidateStartDateIsLessThanEndDate = {
     checkForDates:function ($form) {
 
         var valid = true;
-        var start_date = $form.find(".required-field-date-field").find('#comparative_analysis_start_date').val();
-        var end_date = $form.find(".required-field-date-field").find('#comparative_analysis_end_date').val();
+        var start_date = $form.find(".required-field-date-field").find('input[id$="start_date"]').val();
+        var end_date = $form.find(".required-field-date-field").find('input[id$="end_date"]').val();
 
         if (start_date >= end_date && start_date != "" && end_date != "")
             valid = false;
@@ -21,7 +21,7 @@ var ValidateStartDateIsLessThanEndDate = {
 };
 
 var Graph = {
-    plot:function (start_date, end_date, result_set) {
+    plot:function (start_date, end_date, result_set,placeholder) {
         st_date = new Date(start_date);
         start_time = st_date.getTime()
         ed_date = new Date(end_date);
@@ -39,6 +39,7 @@ var Graph = {
         }
         var data = [];
         resultData = jsonData.parse(result_set);
+        console.log(resultData);
         for (sub_project in resultData) {
             data.push({
                 label:sub_project,
@@ -48,8 +49,7 @@ var Graph = {
                 color:"#" + ((1 << 24) * Math.random() | 0).toString(16)
             });
         }
-
-        $.plot($("#comparative_analysis"),
+        $.plot($(placeholder),
             data,
             {
                 xaxis:{
