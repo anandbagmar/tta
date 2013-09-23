@@ -61,7 +61,7 @@ end
 
 namespace :tta do
   desc "Run unit_tests"
-  task :unit_tests =>['db:recreate','spec']
+  task :unit_tests =>['db:drop','db:create','db:migrate','spec']
 
   desc "Upload all artifacts"
   task :upload_artifacts,[:test_type,:file_path,:test_report_type] do |t,args|
