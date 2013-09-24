@@ -1,6 +1,6 @@
 class ExecutionTrendsController < ApplicationController
   def new
-    @projects=Project.select("id,name").to_json
+    @projects=Project.get_all_projects.to_json
   end
 
   respond_to :json, :html
