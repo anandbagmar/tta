@@ -1,6 +1,6 @@
 <head xmlns="http://www.w3.org/1999/html">
   <%= stylesheet_link_tag 'execution_trends' %>
-  <%= javascript_include_tag 'util/utils', 'util/templates', 'jquery.validate', 'execution_trends' %>
+  <%= javascript_include_tag 'util/utils', 'util/trend_analysis' ,'execution_trends','jquery.validate'%>
 </head>
 
 <%= render :file => '/home/header.html.erb' %>
@@ -52,7 +52,7 @@
             <input type="text" id="end_date" name="end_date" readonly="readonly" placeholder="YYYY-MM-DD" class="required" disabled="true"/>
           </td>
         </tr>
-        <span class="errormsg" style="display: none;margin-top: 21.7%;">Select End Date Greater Than Start Date</span>
+        <span class="errormsg" style="margin-top: 19.3%;display:none;margin-left: 9%;">Select End Date Greater Than Start Date</span>
 
         <tr>
           <td id="div_class_name" class="fields-left" style="padding-bottom: 10px">

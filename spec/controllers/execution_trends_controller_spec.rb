@@ -33,7 +33,7 @@ describe ExecutionTrendsController do
   context 'show' do
     it 'should return result data set for selected filters' do
       time_taken = [[1234567890.000, 0.01234]]
-      ExecutionTrends.any_instance.should_receive(:get_time_taken).and_return(time_taken)
+      ExecutionTrends.any_instance.should_receive(:get_time_taken).and_return([time_taken,1.01234])
       class_name = 'UNIT TEST'
       post :show, {
           start_date: Date.yesterday.to_s,
@@ -43,6 +43,7 @@ describe ExecutionTrendsController do
       controller.instance_variable_get(:@result_set).should == {"UNIT TEST" => time_taken}
       controller.instance_variable_get(:@start_date).should == Date.yesterday.to_s
       controller.instance_variable_get(:@end_date).should == Date.today.to_s
+      controller.instance_variable_get(:@max_value).should == 1.01234
     end
 
     it 'should return empty data set for empty filters' do

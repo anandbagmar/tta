@@ -21,9 +21,9 @@ describe "Execution Trends" do
     it "should return a list of class names for selected filters " do
       time_taken = [[1234567890.000, 0.01234]]
       class_name = "UNIT TEST"
-      ExecutionTrends.any_instance.should_receive(:get_time_taken).and_return(time_taken)
+      ExecutionTrends.any_instance.should_receive(:get_time_taken).and_return([time_taken,1.01234])
       result = ExecutionTrends.new.get_result_set(class_name)
-      result.should == {class_name => time_taken}
+      result.should == [{class_name => time_taken}, 1.01234]
     end
   end
 
@@ -37,9 +37,10 @@ describe "Execution Trends" do
       TestCaseRecord.should_receive(:where).and_call_original
       TestSuiteRecord.should_receive(:where).and_call_original
       TestMetadatum.should_receive(:where).and_call_original
-      result = ExecutionTrends.new.get_time_taken(case_record.class_name)
+      result,max_val = ExecutionTrends.new.get_time_taken(case_record.class_name)
       result.count == 1
-      result.should ==[[1379961000000.0, 5.0]]
+      result.should ==[[Date.today.to_time.to_f * 1000, 5.0]]
+      max_val.should == 6.0
     end
   end
 end

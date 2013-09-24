@@ -30,10 +30,10 @@ Tta::Application.routes.draw do
   get '/compare_runs/' => 'compare_runs#index'
   get '/get_sub_project_data' => 'compare_runs#getSubProjects'
   get '/get_test_types' => 'compare_runs#getTestTypes'
-  get '/get_compare_json' => 'compare_runs#getCompareJson'
   get '/get_compare_dates' => 'compare_runs#getDateRuns'
-  get '/get_class_names' => 'execution_trends#class_names'
+  post '/get_compare_json' => 'compare_runs#getCompareJson'
 
+  get '/get_class_names' => 'execution_trends#class_names'
 
   get '*path' => 'application#handle404'
 

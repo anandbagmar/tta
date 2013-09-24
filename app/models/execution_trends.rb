@@ -1,8 +1,8 @@
 class ExecutionTrends
   def get_result_set(class_name)
     result_set = {}
-    result_set[class_name] = get_time_taken(class_name) if class_name && class_name.length > 0
-    result_set
+    result_set[class_name],max_val = get_time_taken(class_name) if class_name && class_name.length > 0
+    return result_set,max_val
   end
 
   def get_time_taken(class_name)
@@ -12,7 +12,7 @@ class ExecutionTrends
       metadataDateEntry = TestMetadatum.where(:id => suite_record).select("date_of_execution")
       result << [metadataDateEntry[0].date_of_execution.to_time.to_f * 1000, test_case_record.time_taken.to_f]
     }
-    final_result
+    return final_result, final_result.map {|value| value[1]}.max + 1
   end
 
   def get_class_names(sub_project_id, test_category, start_date, end_date)
