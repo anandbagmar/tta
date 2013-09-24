@@ -24,20 +24,18 @@ Tta::Application.routes.draw do
 
   get '/stats' => 'admin#view'
 
-  match '/get_run_dates' => 'defect_analysis#getRunDates'
-  match '/get_specific_run' => 'defect_analysis#getSpecificRun'
+  get '/get_run_dates' => 'defect_analysis#getRunDates'
+  get '/get_specific_run' => 'defect_analysis#getSpecificRun'
 
-  match '/compare_runs/' => 'compare_runs#index'
-  match '/get_sub_project_data' => 'compare_runs#getSubProjects'
-  match '/get_test_types' => 'compare_runs#getTestTypes'
-  match '/get_compare_json' => 'compare_runs#getCompareJson'
-  match '/get_compare_dates' => 'compare_runs#getDateRuns'
-  match '/get_class_names' => 'execution_trends#class_names'
+  get '/compare_runs/' => 'compare_runs#index'
+  get '/get_sub_project_data' => 'compare_runs#getSubProjects'
+  get '/get_test_types' => 'compare_runs#getTestTypes'
+  get '/get_compare_json' => 'compare_runs#getCompareJson'
+  get '/get_compare_dates' => 'compare_runs#getDateRuns'
+  get '/get_class_names' => 'execution_trends#class_names'
 
 
-  get '*path' => 'error#handle404'
-
-  resources :projects, :junit_xml_data, :j_unit_xmls, :unit_test_xml
+  get '*path' => 'application#handle404'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
