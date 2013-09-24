@@ -29,4 +29,36 @@ describe ExecutionTrendsController do
       (get :class_names).should be_bad_request
     end
   end
+
+  context 'show' do
+    it 'should return result data set for selected filters' do
+      time_taken = [[1234567890.000, 0.01234]]
+      ExecutionTrends.any_instance.should_receive(:get_time_taken).and_return(time_taken)
+      class_name = 'UNIT TEST'
+      post :show, {
+          start_date: Date.yesterday.to_s,
+          end_date: Date.today.to_s,
+          test_class_name: class_name
+      }
+      controller.instance_variable_get(:@result_set).should == {"UNIT TEST" => time_taken}
+      controller.instance_variable_get(:@start_date).should == Date.yesterday.to_s
+      controller.instance_variable_get(:@end_date).should == Date.today.to_s
+    end
+
+    it 'should return empty data set for empty filters' do
+      ExecutionTrends.any_instance.should_not_receive(:get_time_taken).and_return()
+      post :show, {
+          test_class_name: ""
+      }
+      controller.instance_variable_get(:@result_set).should == {}
+    end
+
+    it 'should return empty data set for empty filters' do
+      ExecutionTrends.any_instance.should_not_receive(:get_time_taken)
+      post :show, {
+          test_class_name: nil
+      }
+      controller.instance_variable_get(:@result_set).should == {}
+    end
+  end
 end

@@ -1,20 +1,18 @@
 class ExecutionTrends
   def get_result_set(class_name)
     result_set = {}
-    aggregate_value = get_time_taken(class_name)
-    result_set[class_name] = aggregate_value
-    return result_set
+    result_set[class_name] = get_time_taken(class_name) if class_name && class_name.length > 0
+    result_set
   end
 
-  def get_time_taken( class_name)
+  def get_time_taken(class_name)
     case_record = TestCaseRecord.where(:class_name => class_name).select("test_suite_record_id,time_taken")
     final_result=case_record.inject([]) { |result, test_case_record|
       suite_record = TestSuiteRecord.where(:id => test_case_record.test_suite_record_id).select("test_metadatum_id")
       metadataDateEntry = TestMetadatum.where(:id => suite_record).select("date_of_execution")
-      result << [metadataDateEntry[0].date_of_execution.to_time.to_f * 1000,test_case_record.time_taken.to_f]
+      result << [metadataDateEntry[0].date_of_execution.to_time.to_f * 1000, test_case_record.time_taken.to_f]
     }
-    return final_result
-
+    final_result
   end
 
   def get_class_names(sub_project_id, test_category, start_date, end_date)
