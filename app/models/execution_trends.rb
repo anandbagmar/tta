@@ -12,7 +12,7 @@ class ExecutionTrends
       metadataDateEntry = TestMetadatum.where(:id => suite_record).select("date_of_execution")
       result << [metadataDateEntry[0].date_of_execution.to_time.to_f * 1000, test_case_record.time_taken.to_f]
     }
-    return final_result, final_result.map {|value| value[1]}.max + 1
+    return final_result.sort, final_result.map {|value| value[1]}.max + 1
   end
 
   def get_class_names(sub_project_id, test_category, start_date, end_date)
