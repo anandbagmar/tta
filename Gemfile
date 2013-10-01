@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '~> 3.2.12'
 gem 'mysql2'
 
 # Gems used only for assets and not required
@@ -18,13 +18,14 @@ gem 'xml-simple'
 gem 'yarjuf'
 gem 'net-scp'
 #gem 'paperclip'
-gem 'mocha'
+gem 'mocha', require: false
 gem 'jquery-ui-rails'
 gem 'jquery-rails'
 gem 'jquery_datepicker'
 #gem 'flot-rails'
 #gem 'ftools'
-gem 'rubyzip'
+#gem 'rubyzip', '< 1.0.0'
+gem 'rubyzip','~> 0.9.9'
 #gem 'globalize3', '~> 0.2.0'
 #gem 'batch_translations', '~> 0.1.2'
 gem 'simple_form'
