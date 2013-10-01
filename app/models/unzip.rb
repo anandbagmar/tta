@@ -4,7 +4,8 @@ class Unzip
     file_hash = Hash.new()
     Zip::ZipFile.open(output_file_path) do |zipFile|
       zipFile.each do |entry|
-        file_hash[entry.to_s]=zipFile.read(entry)
+        next if entry.name =~ /__MACOSX/ or entry.name =~ /\.DS_Store/ or !entry.file?
+        file_hash[entry.to_s]= zipFile.read entry
       end
       return file_hash
     end
