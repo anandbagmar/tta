@@ -1,17 +1,13 @@
-<head xmlns="http://www.w3.org/1999/html">
-  <%= stylesheet_link_tag 'defect_analysis' %>
-  <%= javascript_include_tag 'defect_analysis', 'util/utils' %>
+<%= stylesheet_link_tag 'defect_analysis' %>
+<%= javascript_include_tag 'defect_analysis'%>
 
-  <style type="text/css">
-      body {
-          position: relative;
-      }
-  </style>
-</head>
+<style type="text/css">
+    body {
+        position: relative;
+    }
+</style>
 
-<%= render :file => '/home/header.html.erb' %>
-
-<body>
+<%= render :partial => '/home/header.html.erb' %>
 
 <div class="color_codes" style="display: none;">
   <h3 class="legend_header">Legend:</h3>
@@ -38,6 +34,4 @@
       renderDefectTable.renderTable(json);
   </script>
 </div>
-<%= render :file => '/home/footer.html.erb' %>
-
-</body>
+<%= render partial: '/home/footer' %>

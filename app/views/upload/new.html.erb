@@ -1,16 +1,12 @@
-<head xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-  <%= stylesheet_link_tag 'upload' %>
-  <%= javascript_include_tag 'upload_controller' %>
-  <style type="text/css">
-      body {
-          position: relative;
-      }
-  </style>
-</head>
+<%= stylesheet_link_tag 'upload' %>
+<%= javascript_include_tag 'upload_controller' %>
+<style type="text/css">
+  body {
+      position: relative;
+  }
+</style>
 
-<%= render :file => '/home/header.html.erb' %>
-
-<body>
+<%= render :partial => '/home/header.html.erb' %>
 
 <div class="page_title">
   <h1 style="text-align: center; font-family: tahoma,serif;">Upload Test Data</h1>
@@ -135,8 +131,7 @@
   <% end %>
 </div>
 
-</body>
-<%= render :file => '/home/footer.html.erb' %>
+<%= render partial: '/home/footer' %>
 
 <script>
     $(document).ready(function () {

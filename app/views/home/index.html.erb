@@ -1,7 +1,6 @@
-<%= render :file => '/home/header.html.erb' %>
-<%= javascript_include_tag 'util/utils', 'admin', 'util/templates' %>
+<%= render :partial => '/home/header.html.erb' %>
+<%= javascript_include_tag 'admin' %>
 <%= stylesheet_link_tag 'home' %>
-<body>
 
 <div class="main-menu">
   <a href='/pyramid'>
@@ -25,12 +24,11 @@
   </a>
 
   <% if !(@all_external_urls == "[]") %>
-      <%= render 'layouts/home_partial' %>
+      <%= render partial: 'layouts/home_partial' %>
   <% end %>
 
 </div>
 
 </div>
 
-</body>
-<%= render :file => '/home/footer.html.erb' %>
+<%= render partial: '/home/footer' %>

@@ -1,18 +1,7 @@
-<html>
-<head xmlns="http://www.w3.org/1999/html">
-  <%= javascript_include_tag 'admin', 'util/utils', 'util/templates' %>
-  <%= stylesheet_link_tag 'admin' %>
-
-  <title>Admin
-    <Data></Data>
-  </title>
-</head>
-<%= render :file => '/home/header.html.erb' %>
-<body>
-
+<%= javascript_include_tag 'admin'%>
+<%= render :partial => '/home/header.html.erb' %>
 <div class="page_title">
 </div>
-
 
 <div name="external-dashboard" style=" width: 96%; display: inline-block; ">
   <h1 style=" padding-bottom: 3%;">Add External Dashboard </h1>
@@ -76,9 +65,7 @@
   </div>
 
 </div>
-
-</body>
-<%= render :file => '/home/footer.html.erb' %>
+<%= render partial: '/home/footer' %>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -87,4 +74,3 @@
     });
 </script>
 
-</html>

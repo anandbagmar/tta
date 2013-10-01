@@ -1,8 +1,4 @@
-<head xmlns="http://www.w3.org/1999/html">
-</head>
-
-<%= render :file => '/home/header.html.erb' %>
-<body>
+<%= render :partial => '/home/header.html.erb' %>
 <div id="title">
   <div class="page_title">
     <h1>Pyramid View</h1>
@@ -32,8 +28,7 @@
     <% end %>
   </div>
 </div>
-</body>
-<%= render :file => '/home/footer.html.erb' %>
+<%= render partial: '/home/footer' %>
 
 <script type="text/javascript">
     $(document).ready(function () {

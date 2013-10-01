@@ -1,10 +1,6 @@
-<head xmlns="http://www.w3.org/1999/html">
-  <%= stylesheet_link_tag 'execution_trends' %>
-  <%= javascript_include_tag 'util/trend_analysis', 'util/utils' %>
-</head>
-<%= render :file => '/home/header.html.erb' %>
+<%= stylesheet_link_tag 'execution_trends' %>
+<%= render :partial => '/home/header.html.erb' %>
 
-<body>
 <div id="date-range-title">
   <h2>Test Execution Trend</h2>
   <h3>Graph Plotted For</h3>
@@ -24,6 +20,5 @@
 <div id="x-axisLabel">
   <p> Date-Range</p>
 </div>
-</body>
 
-<%= render :file => '/home/footer.html.erb' %>
+<%= render partial: '/home/footer' %>

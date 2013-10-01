@@ -1,10 +1,7 @@
-<head xmlns="http://www.w3.org/1999/html">
-  <%= stylesheet_link_tag 'execution_trends' %>
-  <%= javascript_include_tag 'util/utils', 'util/trend_analysis' ,'execution_trends','jquery.validate'%>
-</head>
+<%= stylesheet_link_tag 'execution_trends' %>
+<%= javascript_include_tag 'execution_trends'%>
 
-<%= render :file => '/home/header.html.erb' %>
-<body>
+<%= render :partial => '/home/header.html.erb' %>
 
 <div id="page_title">
   <h1 style=" padding: 20px; ">Test Execution Trends</h1>
@@ -75,8 +72,7 @@
       </table>
   <% end %>
 </div>
-</body>
 
-<%= render :file => '/home/footer.html.erb' %>
+<%= render partial: '/home/footer' %>
 
 

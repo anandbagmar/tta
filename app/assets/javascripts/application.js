@@ -10,24 +10,17 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+//= require jquery-1.9.0.min
+//= require jquery-migrate-1.2.1.min
+//= require jquery-ui
+//= require d3.v2
+//= require underscore
+//= require jquery.validate
 //= require flot
-//= require jquery_ujs
-//= require jquery
-//= require jquery.ui.all
-
-
-
-
-
-/*var _gaq = _gaq || [];
-//_gaq.push(['_setAccount', 'UA-38578491-1']);
-//_gaq.push(['_trackPageview']);
-//_gaq.push(['_setDomainName', 'none']);
-
-//(function() {
- //   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  //  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   // var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-   // })();
-
-*/
+//= require jquery.flot
+//= require jquery.flot.time
+//= require jquery.flot.pie
+//= require excanvas.min
+//= require util/utils.js
+//= require util/templates.js
+//= require util/trend_analysis.js
