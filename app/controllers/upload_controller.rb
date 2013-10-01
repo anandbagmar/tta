@@ -1,5 +1,4 @@
-#require 'ftools'
-require 'zip/zipfilesystem'
+require "zip/zip"
 require 'nokogiri'
 require 'fileutils'
 
