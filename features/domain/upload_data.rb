@@ -20,7 +20,6 @@ module Domain
     end
 
     def verify_data_uploaded(proj_succ)
-      wait_until_for { page.has_content?(proj_succ) }
       assert page.has_content?(proj_succ), "No Project uploaded"
     end
   end

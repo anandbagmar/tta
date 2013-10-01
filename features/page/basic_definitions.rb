@@ -31,10 +31,6 @@ module Definitions
     def fill_in_data(fill_in_id,fill_in_value)
       fill_in fill_in_id ,:with => fill_in_value
     end
-
-    def wait_until_for
-      wait_until {yield}
-    end
   end
 end
 World(Definitions::Basic_definitions)

@@ -1,3 +1,4 @@
+require 'rspec/expectations'
 require 'cucumber/rails'
 
 Capybara.run_server = true

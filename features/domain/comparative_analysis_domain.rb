@@ -7,12 +7,10 @@ module Domain
     end
 
     def verify_if_date_range_is_displayed(sdate, edate)
-      wait_until_for { page.has_content?('From '+sdate+' to '+edate) }
-      assert page.has_content?('From '+sdate+' to '+edate)
+      page.should have_content('From '+sdate+' to '+edate)
     end
 
     def verify_if_visualization_is_displayed(element)
-      wait_until_for { page.has_css?(element) }
       assert page.has_css?(element), "Nil"
     end
   end

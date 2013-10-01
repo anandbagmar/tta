@@ -7,12 +7,10 @@ module Domain
     end
 
     def verify_if_compare_run_table_is_plotted(sub_project, date1, date2)
-      wait_until_for { page.has_css?(COMPARE_RUN_TABLE_ID) }
       assert page.has_css?(COMPARE_RUN_TABLE_ID), "Compare run table is displayed"
     end
 
     def verify_if_message_is_displayed(date1, date2)
-      wait_until_for { page.has_content?('TEST-CASES FAILING ON BOTH '+date1+' AND '+date2) }
       assert page.has_content?('TEST-CASES FAILING ON BOTH '+date1+' AND '+date2), "nil"
     end
 
