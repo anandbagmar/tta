@@ -20,7 +20,7 @@ class ExecutionTrends
       execution_date =TestMetadatum.where("id = ? AND date_of_execution BETWEEN ? AND ?", metadata_id[0].test_metadatum_id, "#{start_date}", "#{end_date}").select("date_of_execution")
       test_case_execution_date_time << [execution_date[0].date_of_execution.to_time.to_f * 1000, test_case_record.time_taken.to_f] unless execution_date==[]
     end
-    return test_case_execution_date_time.sort, test_case_execution_date_time.map { |value| value[1] }.max + 1
+    return test_case_execution_date_time.sort, ((test_case_execution_date_time.map { |value| value[1] }.max || 0) + 1)
   end
 
 end
