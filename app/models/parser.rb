@@ -14,13 +14,7 @@ class Parser
     parse_test_run_record_xml(meta_datum_id, test_report_type, extracted_file_content)
     parse_test_run_record_nunit_xml(meta_datum_id, test_report_type, extracted_file_content)
     parse_test_run_record_html(meta_datum_id, test_report_type, extracted_file_content)
-    #parse_test_run_record_jasmine(meta_datum_id, test_report_type, extracted_file_content)
   end
-
-  #def parse_test_run_record_jasmine(meta_datum_id, test_report_type, extracted_file_content)
-  #  return if (REPORTTYPE["test_report_type_mapping"][test_report_type] != "xml")
-  #  #JasmineParser.new.parse(extracted_file_content, meta_datum_id, test_report_type)
-  #end
 
   def parse_test_run_record_nunit_xml(meta_id, test_report_type, extracted_xml)
     return if (REPORTTYPE["test_report_type_mapping"][test_report_type] != "nunit_xml")
@@ -58,12 +52,5 @@ class Parser
     end
   end
 
-  #def save_test_case(test_suite_xml, saved_test_suite_data, test_report_type, extracted_xml)
-  #  if test_report_type == "junit" || test_report_type == "cucumber junit"
-  #    XmlParser.new.saving_junit_test_cases(extracted_xml, test_suite_xml,test_report_type,saved_test_suite_data)
-  #  elsif test_report_type == "groovy nunit"
-  #    GroovyNunitParser.parse(extracted_xml, saved_test_suite_data, test_suite_xml)
-  #  end
-  #end
 end
 
