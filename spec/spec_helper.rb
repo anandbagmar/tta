@@ -10,6 +10,7 @@ require "shoulda-context"
 require 'yarjuf'
 require 'simplecov'
 require 'helpers/datahelper'
+require "mocha/setup"
 
 
 SimpleCov.start
