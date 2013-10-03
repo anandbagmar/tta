@@ -1,0 +1,39 @@
+= stylesheet_link_tag 'defect_analysis'
+= javascript_include_tag 'defect_analysis_form'
+#page_title
+  %h1{:style => " padding: 20px; "} Failure Analysis
+#sub_project_picker
+  = form_tag({:action => 'sub_project_filter'}, {:id => "defect_analysis_form"}) do
+    %table{:border => "1", :style => "text-align: left; width: 100%;"}
+      %tbody
+        %tr
+          %td.fields-left{:style => "padding-bottom: 10px"}
+            %label{:for => "project"} Project
+          %td
+            = select_tag 'project_id', '', :prompt => "---SELECT PROJECT-----", :id => 'project_select', :class => 'required'
+        %tr
+          %td#div_subproject.fields-left{:disabled => "disabled", :style => "padding-bottom: 10px"}
+            %label{:for => "sub-project"} Sub Project
+          %td
+            = select_tag 'sub_projects', '', :prompt => "---SELECT SUB PROJECT-----", :id => 'sub_project_select', :class => 'required', :disabled => true
+        %tr
+          %td#div_category_type.fields-left{:style => "padding-bottom: 10px"}
+            %label{:for => "Test-Category"} Test Category
+          %td
+            = select_tag 'test_category', '', :prompt => "---SELECT TEST CATEGORY-----", :id => 'test_category_select', :class => 'required', :disabled => true
+        %tr
+          %td.div_run_date{:style => "padding: 25px"}
+            %label{:for => "date"} Run Date
+          %td
+            %input#date.required{:disabled => "true", :name => "dates", :placeholder => "YYYY-MM-DD", :readonly => "readonly", :type => "text"}/
+        %tr
+          %td.div_specific_run{:style => "padding: 25px"}
+            %label{:for => "specificRun"} Run
+          %td
+            = select_tag 'test_runs', '', :prompt => "---SELECT SPECIFIC RUN-----", :id => 'test_run_select', :class => 'required', :disabled => true
+        %tr
+          %td
+          %td#show-failures
+            = submit_tag "Submit", {:id => "failure_analysis"}
+        %tr
+          %td.serverData{:style => "display: none;"}= @projects
