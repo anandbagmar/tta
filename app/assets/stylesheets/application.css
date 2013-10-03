@@ -11,5 +11,13 @@
  *= require_self
  *= require jquery.ui.all
  *= require common
- *= require_tree .
+ *= require admin
+ *= require comparative_analysis
+ *= require compare_runs
+ *= require defect_analysis
+ *= require execution_trends
+ *= require home
+ *= require scaffolds
+ *= require upload
+ *= require visualization
  */
