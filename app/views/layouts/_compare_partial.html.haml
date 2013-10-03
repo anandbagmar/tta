@@ -1,0 +1,24 @@
+= javascript_include_tag 'compare_runs_table'
+#page_title
+  %h1 Compare Runs
+%table#compare_results{:style => " display: inline-block;"}
+  %tr#result_type_common
+    %td#result_title_common
+  %tr
+    %td
+      %table#result_table_common{:border => "1", :style => "text-align: left; width: 100%;"}
+  %tr#result_type_both
+    %td#result_title_both
+  %tr
+    %td
+      %table#result_table_both{:border => "1", :style => "text-align: left; width: 100%;"}
+  %tr#result_type_date1
+    %td#result_title_date1
+  %tr
+    %td
+      %table#result_table_date1{:border => "1", :style => "text-align: left; width: 100%;"}
+  %tr#result_type_date2
+    %td#result_title_date2
+  %tr
+    %td
+      %table#result_table_date2{:border => "1", :style => "text-align: left; width: 100%;"}

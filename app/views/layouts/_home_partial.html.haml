@@ -1,0 +1,8 @@
+%h2{:style => "padding: 2%;"} External Dashboard
+#external-dashboard-url
+#external-dashboard-frame
+:javascript
+  var data;
+  data = "#{@all_external_urls}";
+  data = jsonData.parse(data);
+  ExternalDashboard.renderButtons(data);
