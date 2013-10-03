@@ -13,5 +13,5 @@
     %button{:type => "button"} UPLOAD TEST DATA
   %a{:href => "/execution_trends"}
     %button{:type => "button"} TEST EXECUTION TRENDS
-  - if !(@all_external_urls == "[]")
-    = render partial: 'layouts/home_partial'
+- if !(@all_external_urls == "[]")
+  = render partial: 'layouts/home_partial'

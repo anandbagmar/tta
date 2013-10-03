@@ -99,11 +99,10 @@
             %span.invalid-file-type Invalid File Type Uploaded.Please upload a zip file
             %br/
         %tr
-    .button
-    %td
-      = submit_tag 'SUBMIT', :class => 'submit'
-    %td
-      = submit_tag("Clear All", {:name => 'reset', :id => 'reset_button', :type => "reset"})
+          %td
+          %td
+            = submit_tag 'SUBMIT', :class => 'submit'
+            = submit_tag("Clear All", {:name => 'reset', :id => 'reset_button', :type => "reset"})
 :javascript
   $(document).ready(function () {
       $("#uploadForm").validate();

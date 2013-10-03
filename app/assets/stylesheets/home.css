@@ -5,13 +5,14 @@
 
 #external-dashboard-url{
     float:left;
-    width: 15%;
+    width: 250px;
 }
 
 #external-dashboard-frame{
     float: right;
-    width: 84%;
-    margin-right: 1%;
+    width: 75%;
+    margin-right: 20px;
+    min-width: 820px;
 }
 #external-dashboard-url button{
     width: 200px;

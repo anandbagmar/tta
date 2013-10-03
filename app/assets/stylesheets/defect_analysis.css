@@ -121,16 +121,6 @@
     display: none;
 }
 
-#submit-project-button input{
-    font-size: 14px;
-    height: 25px;
-    width: 60px;
-    background: white;
-    border: 0;
-    border-radius: 5px;
-    box-shadow: 1px 1px 2px #6D6868;
-}
-
 .display-message{
     font-size: 20px;
     color: green;

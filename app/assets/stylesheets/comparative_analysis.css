@@ -4,13 +4,6 @@
   font-size: 12px;
 }
 
-
-#submit-plot-button input{
-    height: 25px;
-    width: 55px;
-    margin: 0 auto;
-}
-
 #Date-Range-Input{
     box-shadow: 2px 2px 3px grey;
     width: 50%;
