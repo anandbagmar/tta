@@ -1,0 +1,46 @@
+= stylesheet_link_tag 'execution_trends'
+= javascript_include_tag 'execution_trends'
+#page_title
+  %h1{:style => " padding: 20px; "} Test Execution Trends
+#class_test_picker
+  = form_tag({:action => 'show'}, {:id => "execution_trends_form"}) do
+    %table{:border => "1", :style => "text-align: left; width: 100%;"}
+      %tbody
+        %tr
+          %td.fields-left{:style => "padding-bottom: 10px"}
+            %label{:for => "project"} Project
+          %td
+            = select_tag 'project_id', "", :prompt => "---SELECT PROJECT-----", :id => 'project_select', :class => 'required'
+        %tr
+          %td#div_subproject.fields-left{:disabled => "disabled", :style => "padding-bottom: 10px"}
+            %label{:for => "sub-project"} Sub Project
+          %td
+            = select_tag 'sub_projects', "", :prompt => "---SELECT SUB PROJECT-----", :id => 'sub_project_select', :class => 'required', :disabled => true
+        %tr
+          %td#div_category_type.fields-left{:style => "padding-bottom: 10px"}
+            %label{:for => "Test-Category"} Test Category
+          %td
+            = select_tag 'test_category', "", :prompt => "---SELECT TEST CATEGORY-----", :id => 'test_category_select', :class => 'required', :disabled => true
+        %tr.required-field-date-field
+          %td
+            %label{:for => "start_date"} Start Date:
+          %td
+            %input#start_date.required{:disabled => "true", :name => "start_date", :placeholder => "YYYY-MM-DD", :readonly => "readonly", :type => "text"}
+        %tr.required-field-date-field
+          %td
+            %label{:for => "end_date"} End Date:
+          %td
+            %div
+              %input#end_date.required{:disabled => "true", :name => "end_date", :placeholder => "YYYY-MM-DD", :readonly => "readonly", :type => "text"}
+            %div.errormsg Select End Date Greater Than Start Date
+        %tr
+          %td#div_class_name.fields-left{:style => "padding-bottom: 10px"}
+            %label{:for => "Test-Class-Name"} Test Class Name
+          %td
+            = select_tag 'test_class_name', "", :prompt => "---SELECT CLASS NAME-----", :id => 'test_class_name_select', :class => 'required', :disabled => true
+        %tr
+          %td
+          %td#show-execution_trends
+            = submit_tag "Submit", {:id => "execution_trends"}
+        %tr
+          %td.serverData{:style => "display: none;"}= @projects

@@ -1,0 +1,13 @@
+= stylesheet_link_tag 'execution_trends'
+#date-range-title
+  %h2 Test Execution Trend
+  %h3 Graph Plotted For
+  %h3
+    Date Range :From #{@start_date.split(" ")[0]} to #{@end_date.split(" ")[0]}
+#execution_trend_result
+  :javascript
+    Graph.plot('#{@start_date}', '#{@end_date}', '#{@result_set}','#{@max_value}',"#execution_trend_result");
+#y-axisLabel
+  %p Test execution time (seconds)
+#x-axisLabel
+  %p Date-Range
