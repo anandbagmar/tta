@@ -1,0 +1,9 @@
+= render partial: 'layouts/compare_partial'
+:javascript
+  $(document).ready(function () {
+      var jsonDataSet = "#{@compare_json}";
+      jsonDataSet = jsonData.parse(jsonDataSet);
+      if (jsonDataSet != "") {
+          compareRuns.renderView(jsonDataSet);
+      }
+  });
