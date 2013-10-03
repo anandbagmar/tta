@@ -17,30 +17,26 @@ gem 'thin'
 gem 'xml-simple'
 gem 'yarjuf'
 gem 'net-scp'
-#gem 'paperclip'
 gem 'mocha', require: false
 gem 'jquery-ui-rails'
 gem 'jquery-rails'
 gem 'jquery_datepicker'
-#gem 'flot-rails'
-#gem 'ftools'
-#gem 'rubyzip', '< 1.0.0'
 gem 'rubyzip','~> 0.9.9'
-#gem 'globalize3', '~> 0.2.0'
-#gem 'batch_translations', '~> 0.1.2'
 gem 'simple_form'
-#gem 'net-sftp', '~> 2.0.5'
+gem "haml", "~> 4.0.3"
+gem 'html2haml'
+gem "haml-rails"
+gem "ruby_parser","~> 3.1.1"
+gem "hpricot"
 
 group :development, :test do
   gem 'factory_girl_rails' # use factories instead of fixtures
-  #gem 'faker' # easily create fake data for tests
   gem 'rspec-rails' # test framework
   gem 'rspec'
   gem 'rspec-core'
   gem 'rspec-expectations'
   gem 'rspec-mocks'
   gem "cucumber-rails", :require => false # integration test framework
-  #gem 'webrat'
   gem 'simplecov' # test coverage report
   gem 'json_spec' # easier testing of JSON
   gem 'database_cleaner' # manage DB between tests
@@ -49,7 +45,6 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'capybara'
-  #gem 'mechanize'
   gem 'fabrication'
   gem 'jasmine'
   gem 'jasmine-headless-webkit'
