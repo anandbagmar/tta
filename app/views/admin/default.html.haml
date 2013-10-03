@@ -1,0 +1,49 @@
+= javascript_include_tag 'admin'
+.page_title
+%div{:name => "external-dashboard", :style => " width: 96%; display: inline-block; "}
+  %h1{:style => " padding-bottom: 3%;"} Add External Dashboard
+  #embedded-urls
+    = form_tag({:action => 'add'}, {:id => "admin-customization"}) do
+      %table{:border => "2", :style => "text-align: left; width: 100%"}
+        %thead
+          %tr
+            %th
+            %th
+              %span
+                %em
+                  Fields marked with (
+                  %span.required-fields> *
+                  ) are compulsory
+        %tbody
+          %tr
+            %td.fields
+              %label{:for => "name"}
+                Website Name
+                %span.required-fields *
+            %td
+              = text_field_tag (:name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase"
+          %tr
+            %td.fields
+              %label{:for => "url-value"}
+                Website Link
+                %span.required-fields *
+            %td
+              = text_field_tag (:link), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase"
+          %tr
+      .button
+      %td
+        = submit_tag("Clear All", {:name => 'reset', :id => 'reset_button', :type => "reset"})
+      %td
+        = submit_tag 'ADD', :class => 'submit'
+#added-urls
+  %table#url-table{:border => "2", :style => "text-align: left; width: 100%"}
+    %thead
+      %tr
+        %th{:colspan => "2"}
+          %h2 Currently Configured External Dashboard
+
+:javascript
+  $(document).ready(function () {
+      $("#admin-customization").validate();
+      ExternalDashboard.renderTable("#{@all_external_urls}");
+  });

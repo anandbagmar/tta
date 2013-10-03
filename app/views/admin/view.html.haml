@@ -1,0 +1,11 @@
+= javascript_include_tag 'admin'
+
+#title.page_title
+  %h1 TTA's PROJECT INFORMATION
+- if @json
+  = render partial: '/admin/admin_partial'
+
+:javascript
+  $(document).ready(function () {
+      ProjectStatistics.renderTable("#{@json}");
+  });
