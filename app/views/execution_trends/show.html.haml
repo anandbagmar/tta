@@ -6,7 +6,7 @@
     Date Range :From #{@start_date.split(" ")[0]} to #{@end_date.split(" ")[0]}
 #execution_trend_result
   :javascript
-    Graph.plot('#{@start_date}', '#{@end_date}', '#{@result_set}','#{@max_value}',"#execution_trend_result");
+    Graph.plot('#{@start_date}', '#{@end_date}', '#{@result_set.to_json}','#{@max_value}',"#execution_trend_result");
 #y-axisLabel
   %p Test execution time (seconds)
 #x-axisLabel

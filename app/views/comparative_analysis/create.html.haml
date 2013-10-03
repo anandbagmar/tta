@@ -41,7 +41,7 @@
       Date Range :From #{@start_date.split(" ")[0]} to #{@end_date.split(" ")[0]}
   #comparative_analysis{:style => "width:900px;height:600px"}
     :javascript
-      Graph.plot('#{@start_date}', '#{@end_date}', '#{@result_set}',100,"#comparative_analysis");
+      Graph.plot('#{@start_date}', '#{@end_date}', '#{@result_set.to_json}',100,"#comparative_analysis");
   #y-axisLabel
     %p Percentage Of Test Passing
   #x-axisLabel
