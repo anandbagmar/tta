@@ -7,5 +7,5 @@
 
 :javascript
   $(document).ready(function () {
-      ProjectStatistics.renderTable("#{@json}");
+      ProjectStatistics.renderTable("#{@json.gsub!('"','\"')}");
   });

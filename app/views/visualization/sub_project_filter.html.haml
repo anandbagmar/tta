@@ -1,14 +1,13 @@
-= render :file => '/visualization/pyramid.html.erb'
+= render :file => '/visualization/pyramid'
 - if @json
-  = render :file => '/layouts/pyramid_partial.html.erb'
+  = render :partial => '/layouts/pyramid_partial'
   = flash[:no_test_error]
 = javascript_include_tag 'pyramid_visualization'
 :javascript
   $("#display_message").css("display", "none");
   var jsonR;
-  var regExp = new RegExp(""", 'g');
-  jsonR = "#{@json}";
-  jsonR = jsonR.replace(regExp, "\"");
+  var regExp = new RegExp('"', 'g');
+  jsonR = "#{@json.gsub!('"','\"')}";
   jsonR = JSON.parse(jsonR);
   if (jsonR != "") {
       Pyramid.plotBlockPyramid(jsonR);

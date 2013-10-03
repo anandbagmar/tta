@@ -45,5 +45,5 @@
 :javascript
   $(document).ready(function () {
       $("#admin-customization").validate();
-      ExternalDashboard.renderTable("#{@all_external_urls}");
+      ExternalDashboard.renderTable("#{@all_external_urls.gsub!('"','\"')}");
   });
