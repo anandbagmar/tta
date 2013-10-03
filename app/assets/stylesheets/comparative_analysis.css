@@ -1,8 +1,6 @@
 .errormsg{
   display: none;
   color: #DB1818;
-  position: absolute;
-  left: 42%;
   font-size: 12px;
 }
 

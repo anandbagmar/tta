@@ -9,8 +9,7 @@ var ValidateStartDateIsLessThanEndDate = {
         if (start_date >= end_date && start_date != "" && end_date != "")
             valid = false;
 
-        var errMsg = form.children('span');
-
+        var errMsg = form.find('.errormsg');
         if (valid == false)
             $(errMsg).show();
         else
