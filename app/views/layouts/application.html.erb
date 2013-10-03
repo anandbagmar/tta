@@ -8,6 +8,10 @@
   <%= javascript_include_tag "application" %>
 </head>
 <body>
-  <%= yield %>
+  <div id="appContainer">
+    <%= render :partial => '/home/header.html.erb' %>
+    <%= yield %>
+    <%= render partial: '/home/footer' %>
+  </div>
 </body>
 </html>
