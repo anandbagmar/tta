@@ -35,12 +35,12 @@
         = submit_tag("Clear All", {:name => 'reset', :id => 'reset_button', :type => "reset"})
       %td
         = submit_tag 'ADD', :class => 'submit'
-#added-urls
-  %table#url-table{:border => "2", :style => "text-align: left; width: 100%"}
-    %thead
-      %tr
-        %th{:colspan => "2"}
-          %h2 Currently Configured External Dashboard
+  #added-urls
+    %table#url-table{:border => "2", :style => "text-align: left; width: 100%"}
+      %thead
+        %tr
+          %th{:colspan => "2"}
+            %h2 Currently Configured External Dashboard
 
 :javascript
   $(document).ready(function () {
