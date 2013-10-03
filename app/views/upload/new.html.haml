@@ -1,0 +1,120 @@
+= stylesheet_link_tag 'upload'
+= javascript_include_tag 'upload_controller'
+:css
+  body {
+      position: relative;
+  }
+.page_title
+  %h1{:style => "text-align: center; font-family: tahoma,serif;"} Upload Test Data
+.form
+  = form_tag({:action => 'create'}, {:multipart => true, :id => "uploadForm"}) do
+    %table{:border => "2", :style => "text-align: left; width: 100%"}
+      %thead
+        %tr
+          %th
+          %th
+            %span
+              %em
+                Fields marked with (
+                %span.required-fields> *
+                ) are compulsory
+      %tbody
+        %tr
+          %td.fields
+            %label{:for => "name"}
+              Project Name
+              %span.required-fields *
+          %td
+            = text_field_tag (:project_name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase"
+        %tr
+          %td.fields
+            %label{:for => "sub_project_name"}
+              Sub-Project name
+              %span.required-fields *
+          %td
+            = text_field_tag (:sub_project_name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase"
+        %tr
+          %td.fields
+            %label{:for => "ci_job_name"} CI Job Name
+          %td
+            = text_field_tag (:ci_job_name)
+        %tr
+          %td.fields
+            %label{:for => "test_category"}
+              Test Category
+              %span.required-fields *
+          %td
+            = select_tag "test_category", "<option>Unit Test</option><option>Integration Test</option><option>Functional Test</option>".html_safe, :prompt => "--Select--", :class => 'required'
+        %tr
+          %td.fields
+            %label{:for => "test_report_type"}
+              Test Report Type
+              %span.required-fields *
+          %td
+            = select_tag "test_report_type", "<option>JUnit</option><option>Cucumber_HTML</option><option>NUnit</option>".html_safe, :prompt => "--Select--", :class => 'required'
+        %tr
+          %td.fields
+            %label{:for => "os_name"}
+              OS Tested On
+              %span.required-fields *
+          %td
+            = text_field_tag (:os_name), nil, :class => 'required'
+        %tr
+          %td.fields
+            %label{:for => "host_name"}
+              Host-Machine Name
+              %span.required-fields *
+          %td
+            = text_field_tag (:host_name), nil, :class => 'required'
+        %tr
+          %td.fields
+            %label{:for => "browser"}
+              Browser Tested On
+              %span.required-fields *
+          %td
+            = text_field_tag (:browser), nil, :class => 'required'
+        %tr
+          %td.fields
+            %label{:for => "type_of_environment"}
+              Environment Run on
+              %span.required-fields *
+          %td
+            = text_field_tag (:type_of_environment), nil, :class => 'required'
+        %tr
+          %td.fields
+            %label{:for => "date_of_execution"}
+              Date Of Execution
+              %span.required-fields *
+          %td
+            .required-field.date-field
+              = select_datetime()
+              %span.error-msg Please enter a valid Date
+              %span.future-date-error-msg Future Date and Time not allowed
+        %tr
+          %td.fields
+            %label{:for => "logDirectory"}
+              Upload Logs
+              %span.required-fields *
+          %td
+            = file_field_tag :logDirectory, {:multiple => true, :accept => 'application/zip', :class => 'required'}
+            %span.invalid-file-type Invalid File Type Uploaded.Please upload a zip file
+            %br/
+        %tr
+    .button
+    %td
+      = submit_tag 'SUBMIT', :class => 'submit'
+    %td
+      = submit_tag("Clear All", {:name => 'reset', :id => 'reset_button', :type => "reset"})
+:javascript
+  $(document).ready(function () {
+      $("#uploadForm").validate();
+      $("#uploadForm").submit(function () {
+          return validateDate.checkForValidDate($("#uploadForm"));
+      });
+      $("#uploadForm").submit(function () {
+          return validateDate.checkForFutureDate($("#uploadForm"));
+      });
+      $("#uploadForm").submit(function () {
+          return validateFile.checkForValidFileType($("#uploadForm"));
+      });
+  });

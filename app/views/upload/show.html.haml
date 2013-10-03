@@ -1,0 +1,52 @@
+%table{:border => "1", :style => "text-align: left; width: 100%; padding-left: 20%; padding-right: 20%"}
+  %thead
+    %tr
+      %th
+      %th
+        %h2#notice= flash[:notice]
+  %tbody
+    %tr
+      %td
+        %b Name:
+      %td= @project.name
+    %tr
+      %td
+        %b Sub Project name:
+      %td= @sub_project.name
+    %tr
+      %td
+        %b CI Job name:
+      %td= @project_meta.ci_job_name
+    %tr
+      %td
+        %b Test Category:
+      %td= @project_meta.test_category
+    %tr
+      %td
+        %b Test Report Type:
+      %td= @project_meta.test_report_type
+    %tr
+      %td
+        %b OS Tested On:
+      %td= @project_meta.os_name
+    %tr
+      %td
+        %b Host-Machine Name:
+      %td= @project_meta.host_name
+    %tr
+      %td
+        %b Browser Tested On:
+      %td= @project_meta.browser
+    %tr
+      %td
+        %b Environment Run on:
+      %td= @project_meta.type_of_environment
+    %tr
+      %td
+        %b Date Of Execution:
+      %td= @project_meta.date_of_execution
+    %tr
+      %td
+      %td
+        %a{:href => "/home"}
+          %button{:type => "button"} HOME
