@@ -49,10 +49,11 @@ $(document).ready(function () {
     }
 
     var testCategoryResponse = function (json_response) {
+        $("#date").datepicker('setDate', null);
         json_response = json_response.sort();
-        var temp = [];
+        executionDates = [];
         for (i = 0; i < json_response.length; i++)  {
-            temp.push(getFormattedDate(new Date(json_response[i].substring(0,10))));
+            executionDates.push(getFormattedDate(new Date(json_response[i].substring(0,10))));
         }
         $('.specific-run').remove();
         if ($("#test_category_select option:selected").val() == 'ALL') {
@@ -65,10 +66,8 @@ $(document).ready(function () {
         $("#date").datepicker({
             dateFormat: "yy-mm-dd",
             defaultDate: " ",
-            beforeShowDay:function (date) {
-                for (i = 0; i < temp.length; i++) {
-                    return [($.inArray(getFormattedDate(date), temp) > -1), ''];
-                }
+            beforeShowDay: function (date) {
+                return [($.inArray(getFormattedDate(date), executionDates) > -1)];
             }
         });
     }
