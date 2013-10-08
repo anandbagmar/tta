@@ -10,6 +10,10 @@ require 'selenium-webdriver'
 
 Tta::Application.load_tasks
 
+Rake::Task['db:create'].enhance do
+  Rake::Task['db:after_create'].invoke
+end
+
 task :parallel_run_ttv do
   CukeForker::WebDriver::Runner.run(
       CukeForker::Scenarios.tagged(%W[@ttv]),
@@ -57,6 +61,11 @@ namespace :db do
     Rake::Task['db:migrate'].execute
     Rake::Task['db:seed'].execute
   end
+
+  task :after_create do
+    #load("db/seed_test_category.rb")
+  end
+
 end
 
 namespace :tta do

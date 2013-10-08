@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130829090943) do
+ActiveRecord::Schema.define(:version => 20131008174552) do
 
   create_table "external_dashboards", :force => true do |t|
     t.string   "name"
@@ -44,6 +44,13 @@ ActiveRecord::Schema.define(:version => 20130829090943) do
   end
 
   add_index "test_case_records", ["test_suite_record_id"], :name => "index_test_case_records_on_test_suite_record_id"
+
+  create_table "test_category_mappings", :force => true do |t|
+    t.string   "test_category"
+    t.string   "test_sub_category"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "test_metadata", :force => true do |t|
     t.integer  "sub_project_id"
