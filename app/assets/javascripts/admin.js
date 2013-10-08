@@ -28,7 +28,7 @@ var ExternalDashboard = {
             newButton.innerHTML = buttonName.toUpperCase();
             newButton.onclick = function () {
                 divIFrame.innerHTML = "<iframe src=" + this.value +
-                    " style='width: 100%; height: 430px;'></iframe>"
+                    " style='width: 100%; height: 470px;'></iframe>"
             };
             divElement.appendChild(newButton);
         }
