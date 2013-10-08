@@ -37,6 +37,11 @@ class UploadController < ApplicationController
   def new
   end
 
+  def get_test_sub_category
+    @sub_category = TestCategoryMapping.new.get_sub_category(params["test_category"])
+    render json: @sub_category
+  end
+
   private
   def parse_and_store_test_run_data
     project = Project.find_or_create_by_name((params[:project_name].split.join(" ")).upcase)

@@ -12,8 +12,8 @@ describe UploadController do
 
     before(:each) do
       @file = fixture_file_upload('/proj1.zip', 'application/zip')
-      @attr = {:project_name => "tta", :sub_project_name => "tta_sub", :ci_job_name => "build", :test_category => "Unit test", :test_report_type => "JUnit", :date => {"year"=>"2012", "month"=>"5", "day"=>"26", "hour"=>"07", "minute"=>"46"},
-              :browser => "firefox", :host_name => "host_pc", :os_name => "mac-osx", :type_of_environment => "dev", :logDirectory => @file}
+      @attr = {:project_name => "tta", :sub_project_name => "tta_sub", :ci_job_name => "build", :test_category => "Unit test",:test_sub_category => "UNIT TEST", :test_report_type => "JUnit", :date => {"year" => "2012", "month" => "5", "day" => "26", "hour" => "07", "minute" => "46"},
+               :browser => "firefox", :host_name => "host_pc", :os_name => "mac-osx", :type_of_environment => "dev", :logDirectory => @file}
     end
 
     it "uploads data with failure messages" do
@@ -28,7 +28,7 @@ describe UploadController do
 
     before(:each) do
       @file = fixture_file_upload('/proj5.zip', 'application/zip')
-      @attr = {:project_name => "tta", :sub_project_name => "tta_sub", :ci_job_name => "build", :test_category => "Unit test", :test_report_type => "JUnit", :date => {"year"=>"2012", "month"=>"5", "day"=>"26", "hour"=>"07", "minute"=>"46"},
+      @attr = {:project_name => "tta", :sub_project_name => "tta_sub", :ci_job_name => "build", :test_category => "Unit test",:test_sub_category => "UNIT TEST", :test_report_type => "JUnit", :date => {"year" => "2012", "month" => "5", "day" => "26", "hour" => "07", "minute" => "46"},
                :browser => "firefox", :host_name => "host_pc", :os_name => "mac-osx", :type_of_environment => "dev", :logDirectory => @file}
     end
 
@@ -50,6 +50,14 @@ describe UploadController do
       flash[:notice].should == "Project Successfully Saved!!"
     end
 
+  end
+
+  context "Upload data" do
+    it "should return relevant list of test sub category for selected test category" do
+      test_category_mapping = FactoryGirl.create(:test_category_mapping)
+      get :get_test_sub_category, {test_category: "UNIT TEST"}
+      response.body.should == "[{\"test_sub_category\":\"UNIT TEST\"}]"
+    end
   end
 end
 

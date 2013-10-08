@@ -34,7 +34,8 @@
             = text_field_tag (:sub_project_name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase"
         %tr
           %td.fields
-            %label{:for => "ci_job_name"} CI Job Name
+            %label{:for => "ci_job_name"}
+              CI Job Name
           %td
             = text_field_tag (:ci_job_name)
         %tr
@@ -43,7 +44,14 @@
               Test Category
               %span.required-fields *
           %td
-            = select_tag "test_category", "<option>Unit Test</option><option>Integration Test</option><option>Functional Test</option>".html_safe, :prompt => "--Select--", :class => 'required'
+            = select_tag "test_category", "<option>Unit Test</option><option>Integration Test</option><option>Functional Test</option>".html_safe, :prompt => "--Select--", :id => 'test_category_select',:class => 'required'
+        %tr
+          %td.fields
+            %label{:for => "test_sub_category"}
+              Test Sub Category
+              %span.required-fields *
+          %td
+            = select_tag 'test_sub_category','', :prompt => "--Select--", :class => 'required', :id => 'test_sub_category_select' ,:disabled => true
         %tr
           %td.fields
             %label{:for => "test_report_type"}

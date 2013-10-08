@@ -1,15 +1,34 @@
-var validateDate={
+$(document).ready(function () {
+    $('.test-element').remove();
 
-    checkForValidDate : function($form){
+    var testCategoryResponse = function (json_response) {
+        Utils.removeAttribute("#test_sub_category_select", "disabled");
+        $('.test-element').remove();
+        jQuery.each(json_response, function (key, testTypes) {
+            var test_type = testTypes["test_sub_category"];
+            Utils.loadDropDown("#test_sub_category_select", test_type, test_type, test_type, "test-element");
+        });
+    }
 
-        var valid =true;
+    $(document).delegate("#test_category_select", "change", function () {
+        var test_category = ($("#test_category_select option:selected").val());
+        var params = {url:"/get_test_sub_category", data:{test_category:test_category}, successCallback:testCategoryResponse};
+        Utils.ajaxRequest(params);
+    });
+});
+
+var validateDate = {
+
+    checkForValidDate:function ($form) {
+
+        var valid = true;
         var dateTime = $form.find(".date-field").find('option:selected');
         var errMsg = $form.find(".date-field").children('span')[0];
         var year = dateTime[0].value;
         var month = dateTime[1].value;
         var day = dateTime[2].value;
 
-        if(month < 1 || month > 12)
+        if (month < 1 || month > 12)
             valid = false;
         else {
             if (day < 1 || day > 31)
@@ -24,16 +43,16 @@ var validateDate={
             }
         }
 
-        if(valid==false)
+        if (valid == false)
             $(errMsg).show();
         else
             $(errMsg).hide();
 
         return valid;
     },
-    checkForFutureDate : function($form){
+    checkForFutureDate:function ($form) {
 
-        var validFlag =true;
+        var validFlag = true;
 
         var dateTime = $form.find(".date-field").find('option:selected');
         var errMsg = $form.find(".date-field").children('span')[1];
@@ -44,7 +63,7 @@ var validateDate={
         var minutes = dateTime[4].value;
         var currentDateTime = new Date();
         var currentYear = currentDateTime.getFullYear();
-        var currentMonth = currentDateTime.getMonth()+1;
+        var currentMonth = currentDateTime.getMonth() + 1;
         var currentDay = currentDateTime.getDate();
         var currentHour = currentDateTime.getUTCHours();
         var currentMinutes = currentDateTime.getUTCMinutes();
@@ -52,23 +71,19 @@ var validateDate={
 
         if (year > currentYear)
             validFlag = false;
-        else if (year == currentYear)
-        {
+        else if (year == currentYear) {
             if (month > currentMonth)
                 validFlag = false;
-            else if (month == currentMonth)
-            {
+            else if (month == currentMonth) {
                 if (day > currentDay)
                     validFlag = false;
-                else if (day == currentDay)
-                {
-                   if(hour>currentHour)
+                else if (day == currentDay) {
+                    if (hour > currentHour)
                         validFlag = false;
-                    else if(hour == currentHour)
-                   {
+                    else if (hour == currentHour) {
                         if (minutes > currentMinutes)
                             validFlag = false;
-                   }
+                    }
 
                 }
 
@@ -76,7 +91,7 @@ var validateDate={
 
         }
 
-        if(validFlag==false)
+        if (validFlag == false)
             $(errMsg).show();
         else
             $(errMsg).hide();
@@ -85,21 +100,20 @@ var validateDate={
 };
 
 var validateFile = {
-    checkForValidFileType:function($form){
-     var valid = true;
+    checkForValidFileType:function ($form) {
+        var valid = true;
         var err_file = $form.find(".invalid-file-type");
         var file_path = $form.find("#logDirectory").val();
-        if (file_path!="")
-        {
+        if (file_path != "") {
             var extension = file_path.split(".").pop();
-            if(extension!="zip")
+            if (extension != "zip")
                 valid = false;
         }
 
-            if(valid == false)
-                $(err_file).show();
-            else
-                $(err_file).hide();
+        if (valid == false)
+            $(err_file).show();
+        else
+            $(err_file).hide();
         return valid;
     }
 };

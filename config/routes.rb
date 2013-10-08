@@ -6,6 +6,7 @@ Tta::Application.routes.draw do
   get '/upload/show'
   post '/upload/create'
   post '/upload/automatic' => "upload#automatic"
+  get '/get_test_sub_category' => "upload#get_test_sub_category"
 
   get '/pyramid' => "visualization#pyramid"
   post '/pyramid/result' => "visualization#sub_project_filter"

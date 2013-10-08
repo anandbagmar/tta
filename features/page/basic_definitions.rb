@@ -9,6 +9,7 @@ module Definitions
       fill_in UPLOAD_BROWSER, :with => proj_params[:browser]
       fill_in UPLOAD_ENV, :with => proj_params[:environment]
       select proj_params[:test_type], :from => UPLOAD_TEST_TYPE
+      select proj_params[:test_sub_type], :from => UPLOAD_TEST_SUB_TYPE
       select proj_params[:test_report_type],:from => UPLOAD_TEST_REPORT_TYPE
       select proj_params[:date_year],:from => UPLOAD_EXEC_YEAR
       select proj_params[:date_month],:from => UPLOAD_EXEC_MONTH
