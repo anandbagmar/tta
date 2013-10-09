@@ -27,7 +27,8 @@ module Seed
     end
 
     def self.create_test_meta_data(sub_project_id, test_meta_data_number)
-      #puts "\t\tcreating test_metadatum #{test_meta_data_number}"
+      test_category = SAMPLE_TEST_CATEGORIES[rand(SAMPLE_TEST_CATEGORIES.length)]
+      test_sub_category = get_respective_test_sub_category(test_category)
       test_meta_data = TestMetadatum.create(
           :ci_job_name => SAMPLE_CI_JOB_NAMES[rand(SAMPLE_CI_JOB_NAMES.length)],
           :os_name => SAMPLE_OS_TYPES[rand(SAMPLE_OS_TYPES.length)],
@@ -35,11 +36,21 @@ module Seed
           :browser => SAMPLE_BROWSER_TYPES[rand(SAMPLE_BROWSER_TYPES.length)],
           :type_of_environment => SAMPLE_TEST_ENVIRONMENTS[rand(SAMPLE_TEST_ENVIRONMENTS.length)],
           :date_of_execution => Time.at(Time.now.to_i),
-          :test_category => SAMPLE_TEST_CATEGORIES[rand(SAMPLE_TEST_CATEGORIES.length)],
+          :test_category => test_category,
+          :test_sub_category => test_sub_category,
           :test_report_type => SAMPLE_TEST_REPORT_TYPES[rand(SAMPLE_TEST_REPORT_TYPES.length)])
       test_meta_data.sub_project_id= sub_project_id
       test_meta_data.save
       TestMetadatum.all(:select => :id, :conditions => {:sub_project_id => sub_project_id}).last.id
+    end
+
+    def self.get_respective_test_sub_category(test_category)
+      if test_category=="FUNCTIONAL TEST"
+        test_sub_category = SAMPLE_TEST_SUB_CATEGORY[test_category][rand(SAMPLE_TEST_SUB_CATEGORY[test_category].length)]
+      else
+        test_sub_category= SAMPLE_TEST_SUB_CATEGORY[test_category]
+      end
+      test_sub_category
     end
 
     def self.create_project(project_number)
@@ -68,7 +79,7 @@ module Seed
     end
 
     def self.create_test_case_record(test_suite_record_id, project_id, sub_project_id, test_case_record_number)
-      test_case_record = TestCaseRecord.create(:class_name => "Class #{project_id}.#{sub_project_id}.#{test_suite_record_id}.#{test_case_record_number}", :time_taken => rand(1..4).to_s, :error_msg =>"Error Message for Class - #{project_id}.#{sub_project_id}.#{test_suite_record_id}.#{test_case_record_number}")
+      test_case_record = TestCaseRecord.create(:class_name => "Class #{project_id}.#{sub_project_id}.#{test_suite_record_id}.#{test_case_record_number}", :time_taken => rand(1..4).to_s, :error_msg => "Error Message for Class - #{project_id}.#{sub_project_id}.#{test_suite_record_id}.#{test_case_record_number}")
       test_case_record.test_suite_record_id= test_suite_record_id
       test_case_record.save
     end

@@ -13,7 +13,7 @@ class SubProject < ActiveRecord::Base
 
   def create_test_metadatum params
     date_of_execution = get_date_and_timestamp(params[:date])
-    meta_datum = test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type_and_date_of_execution((params[:ci_job_name]).split.join(" ").upcase, (params[:browser]).split.join(" ").upcase, (params[:type_of_environment]).split.join(" ").upcase, (params[:host_name]).split.join(" ").upcase, (params[:os_name]).split.join(" ").upcase, params[:test_category].upcase, params[:test_report_type].upcase,date_of_execution)
+    meta_datum = test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type_and_test_sub_category_and_date_of_execution((params[:ci_job_name]).split.join(" ").upcase, (params[:browser]).split.join(" ").upcase, (params[:type_of_environment]).split.join(" ").upcase, (params[:host_name]).split.join(" ").upcase, (params[:os_name]).split.join(" ").upcase, params[:test_category].upcase, params[:test_report_type].upcase,params[:test_sub_category],date_of_execution)
     meta_datum.save
     return meta_datum
   end

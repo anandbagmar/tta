@@ -11,5 +11,6 @@ FactoryGirl.define do
     date_of_execution "2013-02-20 00:00:00"
     test_category "UNIT TEST"
     test_report_type "JUnit"
+    test_sub_category "UNIT TEST"
   end
 end

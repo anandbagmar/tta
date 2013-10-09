@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131008174552) do
+ActiveRecord::Schema.define(:version => 20131009155050) do
 
   create_table "external_dashboards", :force => true do |t|
     t.string   "name"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20131008174552) do
     t.datetime "updated_at",          :null => false
     t.string   "test_category"
     t.string   "test_report_type"
+    t.string   "test_sub_category"
   end
 
   create_table "test_suite_records", :force => true do |t|
