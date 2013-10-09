@@ -17,7 +17,7 @@ end
 task :parallel_run_ttv do
   CukeForker::WebDriver::Runner.run(
       CukeForker::Scenarios.tagged(%W[@ttv]),
-      :max=>4,
+      :max => 4,
       :out => "log/tta_cukes_result/html",
       :extra_args => %w[--format CukeForker::Formatters::JunitScenarioFormatter --out  log/tta_cukes_result]
 
@@ -28,6 +28,7 @@ $project_name=""
 $sub_project_name=""
 $ci_job_name=""
 $test_category=""
+$test_sub_category=""
 $test_report_type=""
 $os_name=""
 $host_name=""
@@ -70,11 +71,11 @@ end
 
 namespace :tta do
   desc "Run unit_tests"
-  task :unit_tests =>['db:drop','db:create','db:migrate','spec']
+  task :unit_tests => ['db:drop', 'db:create', 'db:migrate', 'spec']
 
   desc "Upload all artifacts"
-  task :upload_artifacts,[:test_type,:file_path,:test_report_type] do |t,args|
-    Rake::Task['tta:upload_to_tta'].invoke("TTA", "TTA_sub", "Build", args.test_type, args.test_report_type, "Ubuntu", "host-pc", "none", "Dev", "", args.file_path, "*.xml")
+  task :upload_artifacts, [:test_type,:test_sub_category, :file_path, :test_report_type] do |t, args|
+    Rake::Task['tta:upload_to_tta'].invoke("TTA", "TTA_sub", "Build", args.test_type, args.test_sub_category ,args.test_report_type, "Ubuntu", "host-pc", "none", "Dev", "", args.file_path, "*.xml")
   end
   task :create_cucumber_zip do
     `zip cucumber_results.zip log/tta_cukes_result/*.xml`
@@ -83,12 +84,13 @@ namespace :tta do
     `zip tta_spec_results.zip log/tta_spec_results.xml`
   end
 
-  task :upload_to_tta, [:project_name, :sub_project_name, :ci_job_name, :test_category, :test_report_type, :os_name, :host_name, :browser, :type_of_environment, :date_of_execution, :logDirectory, :filePattern, :commit] do |t, args|
-    args.with_defaults(:project_name => "demoProject", :sub_project_name => "demoSubProject", :ci_job_name => "demoCIJob", :test_category => "Unit Test", :test_report_type => "Junit", :os_name => "MAc", :host_name => "xyz", :browser => "Chrome", :type_of_environment => "Dev", :date_of_execution => "1900-12-12", :logDirectory => "asdw", :filePattern => "*.xml", :commit => "SUBMIT")
+  task :upload_to_tta, [:project_name, :sub_project_name, :ci_job_name, :test_category, :test_sub_category, :test_report_type, :os_name, :host_name, :browser, :type_of_environment, :date_of_execution, :logDirectory, :filePattern, :commit] do |t, args|
+    args.with_defaults(:project_name => "demoProject", :sub_project_name => "demoSubProject", :ci_job_name => "demoCIJob", :test_category => "Unit Test",:test_sub_category => "UNIT TEST", :test_report_type => "Junit", :os_name => "MAc", :host_name => "xyz", :browser => "Chrome", :type_of_environment => "Dev", :date_of_execution => "1900-12-12", :logDirectory => "asd", :filePattern => "*.xml", :commit => "SUBMIT")
     $project_name = args.project_name
     $sub_project_name = args.sub_project_name
-    $ci_job_name = ENV['GO_JOB_NAME']
+    $ci_job_name = args.ci_job_name
     $test_category=args.test_category
+    $test_sub_category=args.test_sub_category
     $test_report_type=args.test_report_type
     $os_name=RUBY_PLATFORM
     $host_name=`hostname`.strip
@@ -97,7 +99,7 @@ namespace :tta do
     $log_directory=args.logDirectory
     $file_pattern=args.filePattern
     $commit=args.commit
-    `curl -F 'authenticity_token=KBc5IruWAILeOOIVKoqozwSYx3eSatES/fklIGf/Cn4=' -F 'project_name=#{$project_name}' -F 'sub_project_name=#{$sub_project_name}' -F 'ci_job_name=#{$ci_job_name}' -F 'test_category=#{$test_category}' -F 'test_report_type=#{$test_report_type}' -F 'os_name=#{$os_name}' -F 'host_name=#{$host_name}' -F 'browser=#{$browser}' -F 'type_of_environment=#{$type_of_environment}' -F 'date="" ' -F 'logDirectory=@#{$log_directory}' -F 'commit=SUBMIT' 'tta.thoughtworks.com:3000/upload/automatic'`
+    `curl -F 'authenticity_token=KBc5IruWAILeOOIVKoqozwSYx3eSatES/fklIGf/Cn4=' -F 'project_name=#{$project_name}' -F 'sub_project_name=#{$sub_project_name}' -F 'ci_job_name=#{$ci_job_name}' -F 'test_category=#{$test_category}' -F 'test_sub_category=#{$test_sub_category}' -F 'test_report_type=#{$test_report_type}' -F 'os_name=#{$os_name}' -F 'host_name=#{$host_name}' -F 'browser=#{$browser}' -F 'type_of_environment=#{$type_of_environment}' -F 'date="" ' -F 'logDirectory=@#{$log_directory}' -F 'commit=SUBMIT' 'tta.thoughtworks.com:3000/upload/automatic'`
   end
 end
 
