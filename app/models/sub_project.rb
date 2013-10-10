@@ -13,16 +13,8 @@ class SubProject < ActiveRecord::Base
 
   def create_test_metadatum params
     date_of_execution = get_date_and_timestamp(params[:date])
-    test_sub_category = params[:test_sub_category]
-    if (test_sub_category=="")
-      case params[:test_category].upcase
-        when "UNIT TEST"
-          params[:test_sub_category]="UNIT TEST"
-        when "INTEGRATION TEST"
-          params[:test_sub_category]="INTEGRATION TEST"
-        when "FUNCTIONAL TEST"
-          params[:test_sub_category]="REGRESSION TEST"
-      end
+    if (params[:test_sub_category]=="")
+      params[:test_sub_category]= TestCategoryMapping.where(:test_category => params["test_category"]).select("test_sub_category").first[:test_sub_category]
     end
     meta_datum = test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type_and_test_sub_category_and_date_of_execution((params[:ci_job_name]).split.join(" ").upcase, (params[:browser]).split.join(" ").upcase, (params[:type_of_environment]).split.join(" ").upcase, (params[:host_name]).split.join(" ").upcase, (params[:os_name]).split.join(" ").upcase, params[:test_category].upcase, params[:test_report_type].upcase, params[:test_sub_category], date_of_execution)
     meta_datum.save
