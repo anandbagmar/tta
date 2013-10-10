@@ -45,12 +45,7 @@ module Seed
     end
 
     def self.get_respective_test_sub_category(test_category)
-      if test_category=="FUNCTIONAL TEST"
-        test_sub_category = SAMPLE_TEST_SUB_CATEGORY[test_category][rand(SAMPLE_TEST_SUB_CATEGORY[test_category].length)]
-      else
-        test_sub_category= SAMPLE_TEST_SUB_CATEGORY[test_category]
-      end
-      test_sub_category
+      SAMPLE_TEST_SUB_CATEGORY[test_category][rand(SAMPLE_TEST_SUB_CATEGORY[test_category].length)]
     end
 
     def self.create_project(project_number)

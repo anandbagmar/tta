@@ -1,7 +1,11 @@
 $(document).ready(function () {
     $('.test-element').remove();
 
-    var testCategoryResponse = function (json_response) {
+    var setDefaultTestSubCategory = function (json_response) {
+        $("#test_sub_category_select").val(json_response["test_sub_category"]);
+    }
+
+    var load = function (json_response) {
         Utils.removeAttribute("#test_sub_category_select", "disabled");
         $('.test-element').remove();
         jQuery.each(json_response, function (key, testTypes) {
@@ -10,11 +14,23 @@ $(document).ready(function () {
         });
     }
 
-    $(document).delegate("#test_category_select", "change", function () {
+    var testCategoryChangeResponse = function () {
         var test_category = ($("#test_category_select option:selected").val());
-        var params = {url:"/get_test_sub_category", data:{test_category:test_category}, successCallback:testCategoryResponse};
+        var params = {url:"/get_test_sub_category", data:{test_category:test_category}, successCallback:load};
         Utils.ajaxRequest(params);
+        var sub = {url:"/get_default_test_sub_category", data:{test_category:test_category}, successCallback:setDefaultTestSubCategory};
+        Utils.ajaxRequest(sub);
+    }
+
+    if ($("#test_category_select").val() != "") {
+        testCategoryChangeResponse();
+    }
+
+    $(document).delegate("#test_category_select", "change", function () {
+        testCategoryChangeResponse();
     });
+
+
 });
 
 var validateDate = {

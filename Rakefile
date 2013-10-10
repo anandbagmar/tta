@@ -10,8 +10,8 @@ require 'selenium-webdriver'
 
 Tta::Application.load_tasks
 
-Rake::Task['db:create'].enhance do
-  Rake::Task['db:after_create'].invoke
+Rake::Task['db:migrate'].enhance do
+  Rake::Task['db:after_migrate'].invoke
 end
 
 task :parallel_run_ttv do
@@ -63,8 +63,8 @@ namespace :db do
     Rake::Task['db:seed'].execute
   end
 
-  task :after_create do
-    #load("db/seed_test_category.rb")
+  task :after_migrate do
+    load("db/seed_test_category.rb")
   end
 
 end

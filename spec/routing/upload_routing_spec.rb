@@ -19,5 +19,9 @@ describe UploadController do
       assert_generates '/get_test_sub_category', :controller => 'upload', :action => 'get_test_sub_category'
     end
 
+    it " routes to /get_default_test_sub_category" do
+      assert_generates '/get_default_test_sub_category', :controller => 'upload', :action => 'get_default_test_sub_category'
+    end
+
   end
 end
