@@ -54,7 +54,6 @@ describe UploadController do
 
   context "Upload data" do
     it "should return relevant list of test sub category for selected test category" do
-      test_category_mapping = FactoryGirl.create(:test_category_mapping)
       get :get_test_sub_category, {test_category: "UNIT TEST"}
       response.body.should == "[{\"test_sub_category\":\"UNIT TEST\"}]"
     end
