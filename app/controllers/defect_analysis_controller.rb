@@ -35,12 +35,12 @@ class DefectAnalysisController < ApplicationController
 
   def sub_project_filter
     sub_project_id=params["sub_projects"]
-    analysis_date = params["dates"]
+    @analysis_date = params["dates"]
     if (!(params["test_runs"].nil?))
-      analysis_date=params["dates"] + " " + params["test_runs"]
+      @analysis_date=params["dates"] + " " + params["test_runs"]
     end
     test_category =params["test_category"]
-    @defect_analysis_json = DefectAnalysis.new.get_result_json(sub_project_id, analysis_date, test_category)
+    @defect_analysis_json = DefectAnalysis.new.get_result_json(sub_project_id, @analysis_date, test_category)
   end
 
   def getValidMetadataRecords(metadataRecords)

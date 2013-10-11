@@ -23,4 +23,5 @@
   #defect-analysis-data{:style => "display:none;"}
   :javascript
     var json = "#{@defect_analysis_json.gsub!('"','\"')}";
-    renderDefectTable.renderTable(json);
+    var analysis_date = "#{@analysis_date}";
+    renderDefectTable.renderTable(json,analysis_date);
