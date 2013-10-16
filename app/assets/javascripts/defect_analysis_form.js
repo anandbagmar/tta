@@ -1,23 +1,6 @@
 $(document).ready(function () {
     $("#defect_analysis_form").validate();
-    var loadProjectData = function (Selector, project_json) {
-        jQuery.each(project_json, function (key, projectData) {
-            var project_id = projectData["id"];
-            var projectName = projectData["name"];
-            $(Selector).append(
-                $("<option></option>")
-                    .attr("id", project_id)
-                    .attr("value", project_id)
-                    .text(projectName)
-                    .attr("class", "proj-element")
-            );
-        });
-    }
-    $('.proj-element').remove();
     $("#date").val("");
-    var pageLoad = $(".serverData").html();
-    projects = jsonData.parse(pageLoad);
-    loadProjectData("#project_select", projects);
 
     var projectResponse = function (json_response) {
         $('.sub-element').remove();
@@ -30,6 +13,12 @@ $(document).ready(function () {
             Utils.loadDropDown("#sub_project_select", project_id, project_id, projectName, "sub-element");
         });
     };
+
+    var projectChange = function(){
+        var project_id = ($("#project_select option:selected").val());
+        var params = {url:"/get_sub_project_data", data:{project_id:project_id}, successCallback:projectResponse};
+        Utils.ajaxRequest(params);
+    }
 
     var subProjectResponse = function (json_response) {
         $('.test-element').remove();
@@ -52,8 +41,8 @@ $(document).ready(function () {
         $("#date").datepicker('setDate', null);
         json_response = json_response.sort();
         executionDates = [];
-        for (i = 0; i < json_response.length; i++)  {
-            executionDates.push(getFormattedDate(new Date(json_response[i].substring(0,10))));
+        for (i = 0; i < json_response.length; i++) {
+            executionDates.push(getFormattedDate(new Date(json_response[i].substring(0, 10))));
         }
         $('.specific-run').remove();
         if ($("#test_category_select option:selected").val() == 'ALL') {
@@ -64,9 +53,9 @@ $(document).ready(function () {
         }
         Utils.removeAttribute("#date", "disabled");
         $("#date").datepicker({
-            dateFormat: "yy-mm-dd",
-            defaultDate: " ",
-            beforeShowDay: function (date) {
+            dateFormat:"yy-mm-dd",
+            defaultDate:" ",
+            beforeShowDay:function (date) {
                 return [($.inArray(getFormattedDate(date), executionDates) > -1)];
             }
         });
@@ -85,10 +74,12 @@ $(document).ready(function () {
         });
     }
 
+    if ($("#project_select option:selected").val()) {
+        projectChange();
+    }
+
     $(document).delegate("#project_select", "change", function () {
-        var project_id = ($("#project_select option:selected").val());
-        var params = {url:"/get_sub_project_data", data:{project_id:project_id}, successCallback:projectResponse};
-        Utils.ajaxRequest(params);
+        projectChange();
     });
 
     $(document).delegate("#sub_project_select", "change", function () {

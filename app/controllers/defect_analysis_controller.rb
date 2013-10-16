@@ -1,12 +1,8 @@
 class DefectAnalysisController < ApplicationController
 
   def new
-    @projects=Project.select("id,name")
-    @projects=@projects.to_json
-    @projects
   end
 
-  respond_to :json, :html
 
   def getRunDates
     sub_project_id =params["subproject_id"]

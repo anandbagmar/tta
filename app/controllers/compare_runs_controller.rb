@@ -1,12 +1,8 @@
 class CompareRunsController < ApplicationController
 
   def index
-    @projects=Project.select("id,name")
-    @projects=@projects.to_json
-    @projects
   end
 
-  respond_to :json, :html
   def getSubProjects
     project_id=params["project_id"]
     @sub_projects = SubProject.where(:project_id => project_id).select([:id, :name])

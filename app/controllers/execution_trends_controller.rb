@@ -1,6 +1,5 @@
 class ExecutionTrendsController < ApplicationController
   def new
-    @projects=Project.get_all_projects.to_json
   end
 
   def class_names

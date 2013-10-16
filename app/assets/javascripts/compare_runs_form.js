@@ -1,23 +1,5 @@
 $(document).ready(function () {
     $("#compare_runs_form").validate();
-    var loadProjectData = function (Selector, project_json) {
-        jQuery.each(project_json, function (key, projectData) {
-            var project_id = projectData["id"];
-            var projectName = projectData["name"];
-            $(Selector).append(
-                $("<option></option>")
-                    .attr("id", project_id)
-                    .attr("value", project_id)
-                    .text(projectName)
-                    .attr("class", "proj-element")
-            );
-        });
-    }
-    //ON PAGE LOAD
-    $('.proj-element').remove();
-    var pageLoad = $(".serverData").html();
-    projects = jsonData.parse(pageLoad);
-    loadProjectData("#project_select", projects);
 
     var projectResponse = function (json_response) {
         $('.sub-element').remove();
@@ -29,6 +11,12 @@ $(document).ready(function () {
             Utils.loadDropDown("#sub_project_select", project_id, project_id, projectName, "sub-element");
         });
     };
+
+    var projectChange = function () {
+        var project_id = ($("#project_select option:selected").val());
+        var params = {url:"/get_sub_project_data", data:{project_id:project_id}, successCallback:projectResponse};
+        Utils.ajaxRequest(params);
+    }
 
     var subProjectResponse = function (json_response) {
         $('.test-element').remove();
@@ -43,7 +31,9 @@ $(document).ready(function () {
         $(".compare_date_one").remove();
         Utils.removeAttribute("#date_one_select", "disabled");
         var index = 1;
-        json_response.sort(function(a,b){return a["date_of_execution"] < b["date_of_execution"]});
+        json_response.sort(function (a, b) {
+            return a["date_of_execution"] < b["date_of_execution"]
+        });
         jQuery.each(json_response, function (key, compare_date) {
             var date = compare_date["date_of_execution"];
             date = date.replace("T", " ");
@@ -53,11 +43,12 @@ $(document).ready(function () {
         });
     }
 
-    $(document).delegate("#project_select", "change", function () {
-        var project_id = ($("#project_select option:selected").val());
-        var params = {url:"/get_sub_project_data", data:{project_id:project_id}, successCallback:projectResponse};
-        Utils.ajaxRequest(params);
+    if ($("#project_select option:selected").val()) {
+        projectChange();
+    }
 
+    $(document).delegate("#project_select", "change", function () {
+        projectChange();
     });
 
     $(document).delegate("#sub_project_select", "change", function () {

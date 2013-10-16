@@ -39,6 +39,7 @@ UPLOAD_SUCCESS="Project Successfully Saved!!"
 #comparative Page ELEMENT
 
 COMPARATIVE_PROJECT_DROPDOWN = "project_id"
+COMPARATIVE_SUB_PROJECT_DROPDOWN = "sub_project_select"
 COMPARATIVE_START_DATE = "comparative_analysis_start_date"
 COMPARATIVE_END_DATE = "comparative_analysis_end_date"
 COMPARATIVE_PLOT_BUTTON = "form-submit"

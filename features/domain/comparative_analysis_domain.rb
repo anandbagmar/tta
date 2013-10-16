@@ -1,9 +1,9 @@
 module Domain
   module ComparativeAnalysis
-    def view_comparative_graph(project, start_date, end_date)
+    def view_comparative_graph(project,sub_project, start_date, end_date)
       navigate_to_homepage()
       go_to_url(COMPARATIVE_PAGE)
-      view_graph(project, start_date, end_date)
+      view_graph(project,sub_project, start_date, end_date)
     end
 
     def verify_if_date_range_is_displayed(sdate, edate)

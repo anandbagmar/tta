@@ -9,7 +9,7 @@
           %td.fields-left{:style => "padding-bottom: 10px"}
             %label{:for => "project"} Project
           %td
-            = select_tag 'project_id', "", :prompt => "---SELECT PROJECT-----", :id => 'project_select', :class => 'required'
+            = select_tag 'project_id',  options_from_collection_for_select(Project.get_all_projects,'id','name'), :prompt => "---SELECT PROJECT-----", :id => 'project_select', :class => 'required'
         %tr
           %td#div_subproject.fields-left{:disabled => "disabled", :style => "padding-bottom: 10px"}
             %label{:for => "sub-project"} Sub Project
@@ -41,5 +41,3 @@
           %td
           %td#show-execution_trends
             = submit_tag "Submit", {:id => "execution_trends"}
-        %tr
-          %td.serverData{:style => "display: none;"}= @projects
