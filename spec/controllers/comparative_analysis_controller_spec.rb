@@ -16,9 +16,9 @@ describe ComparativeAnalysisController do
     sub_project = FactoryGirl.create(:sub_project, :project_id => project.id)
     test_metadata = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project.id)
     FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata.id)
-    result = ComparativeAnalysis.new.get_result_set(project.id, "2013-01-01".to_date, "2013-02-28".to_date)
+    result = ComparativeAnalysis.new.get_result_set(sub_project.id, "2013-01-01".to_date, "2013-02-28".to_date)
     result.should_not be_empty
-    assert_equal result, {"TTA_subProject" => [[1361318400000.0, 60.0]]}
+    assert_equal result, {"UNIT TEST : UNIT TEST"=>[[1361318400000.0, 60.0]]}
   end
 
   it "should throw error if project id not given" do
@@ -39,7 +39,7 @@ describe ComparativeAnalysisController do
     start_date = '2013-01-01'
     end_date = '2013-01-31'
 
-    post :date_filter, :project_id => project.id, :comparative_analysis => {:start_date => start_date, :end_date => end_date}, :sub_project => sub_project.name
+    post :date_filter, :project_id => project.id, :comparative_analysis => {:start_date => start_date, :end_date => end_date}, :sub_project => sub_project.id
     assert_response :success
     @controller.expects(:create)
     assert_not_nil assigns(@json)
