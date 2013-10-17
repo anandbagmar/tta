@@ -9,7 +9,9 @@ class ComparativeAnalysis
       metadata_records_for_selected_date_range = metadata_records.find_all_by_date_of_execution(start_date.beginning_of_day..end_date.end_of_day)
       aggregate_value = get_percentage_of_passing_tests(metadata_records_for_selected_date_range)
       test_category_and_sub_category = test_category_mapping.test_category + " : " +test_category_mapping.test_sub_category
-      result_set[test_category_and_sub_category] = aggregate_value
+      if aggregate_value != []
+        result_set[test_category_and_sub_category] = aggregate_value
+      end
     }
     return result_set
   end

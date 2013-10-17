@@ -47,6 +47,16 @@ puts "RAILS_ENV: #{$RAILS_ENV}"
 task(:default).clear
 task :default => 'tta:unit_tests'
 
+namespace :demo do
+  desc "Demo Seed Data"
+  task :seed do
+    Rake::Task['db:drop'].invoke
+    Rake::Task['db:create'].execute
+    Rake::Task['db:migrate'].execute
+    load("db/demo_seed.rb")
+  end
+end
+
 namespace :db do
   desc "Seed large data in DB"
   task :large_data => ['db:recreate'] do
