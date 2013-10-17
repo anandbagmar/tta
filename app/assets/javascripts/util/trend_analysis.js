@@ -74,7 +74,9 @@ var Graph = {
                     minBorderMargin:40
                 },
                 legend:{
-                    position:"ne"
+                    position:"ne",
+                    show:true,
+                    container: '#legendlabel'
                 }
 
             }
