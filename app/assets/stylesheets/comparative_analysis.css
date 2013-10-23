@@ -1,10 +1,10 @@
-.errormsg{
-  display: none;
-  color: #DB1818;
-  font-size: 12px;
+.errormsg {
+    display: none;
+    color: #DB1818;
+    font-size: 12px;
 }
 
-#Date-Range-Input{
+#Date-Range-Input {
     box-shadow: 2px 2px 3px grey;
     width: 50%;
     margin: 0 auto;
@@ -13,29 +13,30 @@
     background-color: #DDD;
     border-radius: 15px;
 }
-#Date-Range-Input label{
+
+#Date-Range-Input label {
     min-width: 85px;
 }
-#Date-Range-Input h1{
+
+#Date-Range-Input h1 {
     padding-bottom: 15px;
 }
 
-
-#date-range-title h3{
+#date-range-title h3 {
     color: #339999;
 }
 
-#comparative_analysis{
+#comparative_analysis {
     margin: 0 auto;
 
 }
 
-#x-axisLabel p{
+#x-axisLabel p {
     position: relative;
     padding-bottom: 2%;
 }
 
-#y-axisLabel p{
+#y-axisLabel p {
     position: relative;
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
@@ -43,27 +44,40 @@
     left: -34%;
     top: -1000px;
 }
-#comparative_analysis div.xAxis div.tickLabel{
+
+#comparative_analysis div.xAxis div.tickLabel {
     transform: rotate(-40deg);
-    -ms-transform:rotate(-40deg); /* IE 9 */
-    -moz-transform:rotate(-40deg); /* Firefox */
-    -webkit-transform:rotate(-40deg); /* Safari and Chrome */
-    -o-transform:rotate(-40deg); /* Opera */
-    /*rotation-point:50% 50%;*/ /* CSS3 */
-    /*rotation:270deg;*/ /* CSS3 */
+    -ms-transform: rotate(-40deg); /* IE 9 */
+    -moz-transform: rotate(-40deg); /* Firefox */
+    -webkit-transform: rotate(-40deg); /* Safari and Chrome */
+    -o-transform: rotate(-40deg); /* Opera */
+    /*rotation-point:50% 50%;*/
+    /* CSS3 */
+    /*rotation:270deg;*/
+    /* CSS3 */
 }
 
-#project_id{
+#project_id {
     display: inline-block;
 }
 
-.legendColorBox{
-border: 0px;
-padding: 0px;
-}
-
-
-.legendLabel{
+.legendColorBox {
     border: 0px;
     padding: 0px;
+}
+
+.legendLabel {
+    border: 0px;
+    padding: 0px;
+}
+
+#categories{
+    padding: 1.5%;
+}
+#categories tr {
+    color: #ff0000;
+}
+
+#categories td {
+    color: blue;
 }

@@ -16,6 +16,7 @@ Tta::Application.routes.draw do
   post '/defect_analysis/result' => "defect_analysis#sub_project_filter"
 
   get '/comparative_analysis' => "comparative_analysis#create"
+  get '/test_category_mapping_list' => "comparative_analysis#test_category_mapping_list"
   post '/comparative_analysis/result' => "comparative_analysis#date_filter"
 
   get '/execution_trends' => "execution_trends#new"

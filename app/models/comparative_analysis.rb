@@ -1,8 +1,11 @@
 class ComparativeAnalysis
-  def get_result_set(sub_project_id, start_date, end_date)
+  def get_result_set(sub_project_id, sub_category, start_date, end_date)
     sub_project=SubProject.find(sub_project_id)
     metadata_list = sub_project.test_metadatum
     test_category_mapping_list = metadata_list.select("distinct test_category,test_sub_category")
+    if (!sub_category.nil?)
+      test_category_mapping_list=test_category_mapping_list.where("test_sub_category IN (?)", sub_category)
+    end
     result_set = Hash.new
     test_category_mapping_list.each { |test_category_mapping|
       metadata_records = metadata_list.where(:test_category => test_category_mapping.test_category, :test_sub_category => test_category_mapping.test_sub_category)
