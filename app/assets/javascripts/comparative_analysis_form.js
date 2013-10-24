@@ -1,7 +1,26 @@
 $(document).ready(function () {
-    var disableAllTestCategoryFilters = function(){
-        jQuery.each(document.getElementsByName("testSubCategory[]"),function(index,v){
-            $("#"+v.id).attr("disabled","true");
+    var checkBoxResponse = function (id, ifchecked, ifunchecked) {
+        $(id).change(function () {
+            if ($(this).prop('checked')) {
+                $('input[type="checkbox"]').each(function () {
+                    $(this).prop('checked', ifchecked);
+                });
+                $(this).prop('checked', true);
+                if (id == "#selectALL") {
+                    $('#deselectALL').prop('checked', false);
+                }
+            } else {
+                $('input[type="checkbox"]').each(function () {
+                    $(this).prop('checked', ifunchecked);
+                });
+                $(this).prop('checked', false);
+            }
+        });
+    };
+
+    var disableAllTestCategoryFilters = function () {
+        jQuery.each(document.getElementsByName("testSubCategory[]"), function (index, v) {
+            $("#" + v.id).attr("disabled", "true");
         });
     };
     var projectResponse = function (json_response) {
@@ -18,10 +37,16 @@ $(document).ready(function () {
     var subProjectResponse = function (json_response) {
         disableAllTestCategoryFilters();
         jQuery.each(json_response, function (index, value) {
-            Utils.removeAttribute("#"+value.split(" ").join("_"), "disabled");
+            name = "#" + value.split(" ").join("_");
+            Utils.removeAttribute(name, "disabled");
+            $(name).attr("checked", "true");
+
         });
     };
 
+    checkBoxResponse('#deselectALL', false, true);
+    checkBoxResponse('#selectALL', true, false);
+    
     $(document).delegate("#project_select", "change", function () {
         var project_id = ($("#project_select option:selected").val());
         var params = {url:"/get_sub_project_data", data:{project_id:project_id}, successCallback:projectResponse};
