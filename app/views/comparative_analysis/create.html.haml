@@ -29,10 +29,24 @@
           %td
             %label{:for => "sub_project"} Sub Project:
           %td= select_tag 'sub_project_id', '', :prompt => '--Select--', :id => 'sub_project_select', :class => 'required', :disabled => true
-        %tr#category_filters
-          %td{:colspan=>2}
-            Test Category filters
-            %div#categories
+        %tr.fields
+          %td
+            %label{:for => "test_categories_and_sub_categories"} Test Category Filters:
+          %td
+            %table{:style => "text-align: left; width: 100%;"}
+              %tbody
+                -(TestCategoryMapping.get_all_test_category_mapping.group_by {|t| t["test_category"]}).each do |categories,sub_categories|
+                  %tr.fields
+                    %td
+                      %label.checkbox{:for => categories}
+                      =categories
+                    %td.subCategories
+                      -sub_categories.sort.each do |sub_category|
+                        -id_value = sub_category["test_sub_category"].gsub(" ","_")
+                        =check_box_tag('testSubCategory[]',sub_category["test_sub_category"],true,:id=>id_value,:disabled=>true)
+                        %label.checkbox{:for => sub_category["test_sub_category"]}
+                        =sub_category["test_sub_category"]
+                        %br
         %tr#submit-plot-button
           %td
           %td= submit_tag "Plot", {:id => "form-submit"}

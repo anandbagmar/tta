@@ -70,14 +70,3 @@
     border: 0px;
     padding: 0px;
 }
-
-#categories{
-    padding: 1.5%;
-}
-#categories tr {
-    color: #ff0000;
-}
-
-#categories td {
-    color: blue;
-}

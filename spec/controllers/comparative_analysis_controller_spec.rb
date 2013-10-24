@@ -51,7 +51,7 @@ describe ComparativeAnalysisController do
       test_metadata3 = FactoryGirl.create(:test_metadatum, sub_project_id: sub_project.id, date_of_execution: Date.today.to_time_in_current_zone, test_category: "FUNCTIONAL TEST", test_sub_category: "SMOKE TEST")
       get :test_category_mapping_list, {sub_project_id: sub_project.id, comparative_analysis_start_date: Date.yesterday, comparative_analysis_end_date: Date.today}
       response.should be_success
-      response.body.should == "{\"UNIT TEST\":[\"UNIT TEST\"],\"FUNCTIONAL TEST\":[\"REGRESSION TEST\",\"SMOKE TEST\"]}"
+      response.body.should == "[\"UNIT TEST\",\"REGRESSION TEST\",\"SMOKE TEST\"]"
     end
   end
 

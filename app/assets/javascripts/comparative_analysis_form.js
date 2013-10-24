@@ -1,5 +1,9 @@
 $(document).ready(function () {
-    $("#category_filters").hide();
+    var disableAllTestCategoryFilters = function(){
+        jQuery.each(document.getElementsByName("testSubCategory[]"),function(index,v){
+            $("#"+v.id).attr("disabled","true");
+        });
+    };
     var projectResponse = function (json_response) {
         $('.sub-element').remove();
         Utils.removeAttribute("#sub_project_select", "disabled");
@@ -8,41 +12,13 @@ $(document).ready(function () {
             var projectName = projectData["name"];
             Utils.loadDropDown("#sub_project_select", project_id, project_id, projectName, "sub-element");
         });
+        disableAllTestCategoryFilters();
     };
-
-    var createLabel = function (labelElement) {
-        var label = document.createElement('label');
-        label.appendChild(document.createTextNode(labelElement));
-        return label;
-    };
-
-    var createCheckBox = function (checkboxElement) {
-        var newCheckbox = document.createElement("input");
-        newCheckbox.type = "checkbox";
-        newCheckbox.value = checkboxElement;
-        newCheckbox.name = "testSubCategory[]";
-        return newCheckbox;
-    };
-
-    var createSubCategoryCheckbox = function (value){
-        sub_category_label=createLabel(value);
-        data = document.createElement("td");
-        sub_category_label.appendChild(createCheckBox(value));
-        data.appendChild(sub_category_label);
-        return data;
-    }
 
     var subProjectResponse = function (json_response) {
-        $("#category_filters").show();
-        $('#categories').empty();
-        jQuery.each(json_response, function (key, projectData) {
-            category_label=createLabel(key);
-            row=document.createElement("tr");
-            row.appendChild(category_label);
-            $("#categories").append(row);
-            jQuery.each(projectData, function (index, value) {
-                row.appendChild(createSubCategoryCheckbox(value));
-            });
+        disableAllTestCategoryFilters();
+        jQuery.each(json_response, function (index, value) {
+            Utils.removeAttribute("#"+value.split(" ").join("_"), "disabled");
         });
     };
 

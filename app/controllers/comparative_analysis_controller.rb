@@ -9,10 +9,7 @@ class ComparativeAnalysisController < ApplicationController
     end_date= params["comparative_analysis_end_date"].to_date
     category_list = sub_project.test_metadatum.select("distinct test_category,test_sub_category")
     category_list=category_list.where("date_of_execution BETWEEN ? AND ?", start_date.beginning_of_day, end_date.end_of_day)
-    @test_category_mapping_list_sorted = category_list.group_by { |list| list["test_category"] }
-    @test_category_mapping_list_sorted.each do |test_category|
-      @test_category_mapping_list_sorted[test_category[0]] = test_category[1].map { |e| e["test_sub_category"] }
-    end
+    @test_category_mapping_list_sorted= category_list.map {|category| category["test_sub_category"]}
     render json: @test_category_mapping_list_sorted
   end
 
