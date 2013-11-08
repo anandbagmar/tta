@@ -105,7 +105,7 @@ var Graph = {
                     var x = new Date(item.datapoint[0]).toGMTString();
                     var y = item.datapoint[1].toPrecision(4);
                     var label = item.series.label;
-                    showTooltip(item.pageX, item.pageY,label + " [ " + x + " , " + y + " % ]");
+                    showTooltip(item.pageX, item.pageY,label + " [ " + x + " , " + y + " ]");
                 }
             }
             else {
