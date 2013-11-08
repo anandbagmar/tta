@@ -20,7 +20,7 @@ var ValidateStartDateIsLessThanEndDate = {
 };
 
 var Graph = {
-    plot:function (start_date, end_date, result_set,y_axis_max_value,placeholder) {
+    plot:function (start_date, end_date, result_set, y_axis_max_value, placeholder) {
         st_date = new Date(start_date);
         start_time = st_date.getTime()
         ed_date = new Date(end_date);
@@ -70,17 +70,49 @@ var Graph = {
                     hoverable:true,
                     clickable:true,
                     labelMargin:1,
+                    mouseActiveRadius:8,
                     backgroundColor:{ colors:["#fff", "#eee"] },
                     minBorderMargin:40
                 },
                 legend:{
                     position:"ne",
                     show:true,
-                    container: '#legendlabel'
+                    container:'#legendlabel'
                 }
 
             }
         );
+
+        function showTooltip(x, y, contents) {
+            $('<div id="tooltip">' + contents + '</div>').css({
+                position:'absolute',
+                display:'none',
+                top:y + 5,
+                left:x + 5,
+                border:'1px solid #fdd',
+                padding:'2px',
+                'background-color':'#fee',
+                opacity:0.80
+            }).appendTo("body").fadeIn(200);
+        }
+
+        var previousPoint = null;
+        $(placeholder).bind("plothover", function (event, pos, item) {
+            if (item) {
+                if (previousPoint != item.dataIndex) {
+                    previousPoint = item.dataIndex;
+                    $("#tooltip").remove();
+                    var x = new Date(item.datapoint[0]).toGMTString();
+                    var y = item.datapoint[1].toPrecision(4);
+                    var label = item.series.label;
+                    showTooltip(item.pageX, item.pageY,label + " [ " + x + " , " + y + " % ]");
+                }
+            }
+            else {
+                $("#tooltip").remove();
+                previousPoint = null;
+            }
+        });
 
     }
 
