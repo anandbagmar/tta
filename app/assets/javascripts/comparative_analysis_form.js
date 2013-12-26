@@ -31,10 +31,13 @@ $(document).ready(function () {
             var projectName = projectData["name"];
             Utils.loadDropDown("#sub_project_select", project_id, project_id, projectName, "sub-element");
         });
-        disableAllTestCategoryFilters();
+        Utils.loadDropDown("#sub_project_select", "ALL", "ALL", "ALL", "sub-element");
+        //set default value "ALL" for sub project
+        $("#sub_project_select").val("ALL");
+        subProjectChange();
     };
 
-    var subProjectResponse = function (json_response) {
+    var subProjectChangeResponse = function (json_response) {
         disableAllTestCategoryFilters();
         jQuery.each(json_response, function (index, value) {
             name = "#" + value.split(" ").join("_");
@@ -44,9 +47,18 @@ $(document).ready(function () {
         });
     };
 
+    var subProjectChange = function () {
+        var project_id = ($("#project_select option:selected").val());
+        var sub_project_id = ($("#sub_project_select option:selected").val());
+        var start_date = ($("#comparative_analysis_start_date").datepicker('getDate'));
+        var end_date = ($("#comparative_analysis_end_date").datepicker('getDate'));
+        var params = {url:"/test_category_mapping_list", data:{project_id:project_id, sub_project_id:sub_project_id,
+            comparative_analysis_start_date:start_date, comparative_analysis_end_date:end_date}, successCallback:subProjectChangeResponse};
+        Utils.ajaxRequest(params);
+    };
     checkBoxResponse('#deselectALL', false, true);
     checkBoxResponse('#selectALL', true, false);
-    
+
     $(document).delegate("#project_select", "change", function () {
         var project_id = ($("#project_select option:selected").val());
         var params = {url:"/get_sub_project_data", data:{project_id:project_id}, successCallback:projectResponse};
@@ -54,10 +66,6 @@ $(document).ready(function () {
     });
 
     $(document).delegate("#sub_project_select", "change", function () {
-        var sub_project_id = ($("#sub_project_select option:selected").val());
-        var start_date = ($("#comparative_analysis_start_date").datepicker('getDate'));
-        var end_date = ($("#comparative_analysis_end_date").datepicker('getDate'));
-        var params = {url:"/test_category_mapping_list", data:{sub_project_id:sub_project_id, comparative_analysis_start_date:start_date, comparative_analysis_end_date:end_date}, successCallback:subProjectResponse};
-        Utils.ajaxRequest(params);
+        subProjectChange();
     });
 });

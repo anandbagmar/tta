@@ -5,12 +5,12 @@ describe ComparativeAnalysis do
   it "should return result set" do
     project = FactoryGirl.create(:project)
     sub_project = FactoryGirl.create(:sub_project)
-    result = ComparativeAnalysis.new.get_result_set(sub_project.id, nil, "1990-1-1", "2012-12-12")
+    result = ComparativeAnalysis.new.get_result_set(project.id,sub_project.id, nil, "1990-1-1", "2012-12-12")
     result.should_not be_nil
   end
 
   it "should throw error if sub_project id not given" do
-    expect { ComparativeAnalysis.new.get_result_set(nil, nil, nil, nil) }.to raise_error
+    expect { ComparativeAnalysis.new.get_result_set(nil,nil, nil, nil, nil) }.to raise_error
   end
 
   it "should return result set with a single point if project has only one build between the date range" do
@@ -20,16 +20,16 @@ describe ComparativeAnalysis do
     test_suite_record = FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata.id)
     FactoryGirl.create(:test_case_record, :test_suite_record_id => test_suite_record.id)
 
-    result = ComparativeAnalysis.new.get_result_set(sub_project.id, nil, "2013-01-01".to_date, "2013-03-30".to_date)
-    result["UNIT TEST : UNIT TEST"].count.should eq(1)
+    result = ComparativeAnalysis.new.get_result_set(project.id,sub_project.id, nil, "2013-01-01".to_date, "2013-03-30".to_date)
+    result["TTA_subProject"]["UNIT TEST : UNIT TEST"].count.should eq(1)
   end
 
   it "should return the result set with points in increasing order of the date of execution" do
     project = FactoryGirl.create(:project)
     sub_project = FactoryGirl.create(:sub_project, :project_id => project.id)
-    test_metadata_1 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project.id)
-    test_metadata_2 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project.id, :date_of_execution => "2013-01-16")
     test_metadata_3 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project.id, :date_of_execution => "2013-01-10")
+    test_metadata_2 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project.id, :date_of_execution => "2013-01-16")
+    test_metadata_1 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project.id)
 
     test_suite_record_1 = FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata_1.id)
     test_suite_record_2 = FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata_2.id)
@@ -49,8 +49,8 @@ describe ComparativeAnalysis do
       end
       result1 << [(metadata_record.date_of_execution.to_time.to_f * 1000), (total_num_of_tests.to_f - number_of_failures.to_f) / total_num_of_tests.to_f * 100]
     }
-    result = ComparativeAnalysis.new.get_result_set(sub_project.id, nil, "2013-01-01".to_date, "2013-03-30".to_date)
-    final_result.reverse.should eq(result["UNIT TEST : UNIT TEST"])
+    result = ComparativeAnalysis.new.get_result_set(project.id,sub_project.id, nil, "2013-01-01".to_date, "2013-03-30".to_date)
+    final_result.reverse.should eq(result["TTA_subProject"]["UNIT TEST : UNIT TEST"])
   end
 
   it "should return result set with different points if tests with different pass % present for same day" do
@@ -63,9 +63,9 @@ describe ComparativeAnalysis do
     FactoryGirl.create(:test_case_record, :test_suite_record_id => test_suite_record.id)
     FactoryGirl.create(:test_case_record, :test_suite_record_id => test_suite_record_1.id)
 
-    result = ComparativeAnalysis.new.get_result_set(sub_project.id, nil, "2013-01-01".to_date, "2013-03-30".to_date)
-    result["UNIT TEST : UNIT TEST"].count.should eq(1)
-    result["FUNCTIONAL TEST : UNIT TEST"].count.should eq(1)
+    result = ComparativeAnalysis.new.get_result_set(project.id,sub_project.id, nil, "2013-01-01".to_date, "2013-03-30".to_date)
+    result["TTA_subProject"]["UNIT TEST : UNIT TEST"].count.should eq(1)
+    result["TTA_subProject"]["FUNCTIONAL TEST : UNIT TEST"].count.should eq(1)
   end
 
   it "should return proper result set for valid data" do
@@ -81,8 +81,8 @@ describe ComparativeAnalysis do
     FactoryGirl.create(:test_case_record, :test_suite_record_id => test_suite_record_1.id)
     FactoryGirl.create(:test_case_record, :test_suite_record_id => test_suite_record_2.id)
 
-    result = ComparativeAnalysis.new.get_result_set(sub_project.id, nil, "2013-01-01".to_date, "2013-03-30".to_date)
-    result["UNIT TEST : UNIT TEST"].count.should eq(3)
+    result = ComparativeAnalysis.new.get_result_set(project.id,sub_project.id, nil, "2013-01-01".to_date, "2013-03-30".to_date)
+    result["TTA_subProject"]["UNIT TEST : UNIT TEST"].count.should eq(3)
   end
 
 end

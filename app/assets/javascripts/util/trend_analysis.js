@@ -41,12 +41,22 @@ var Graph = {
         for (sub_project in resultData) {
             data.push({
                 label:sub_project,
-                data:resultData[sub_project],
-                lines:{show:true },
-                points:{show:true},
-                color:"#" + ((1 << 24) * Math.random() | 0).toString(16)
+                data:"",
+                lines:{show:false},
+                points:{show:false},
+                color:"#d812d"
             });
+            for (sub_project_data in resultData[sub_project]) {
+                data.push({
+                    label:sub_project_data,
+                    data:resultData[sub_project][sub_project_data],
+                    lines:{show:true },
+                    points:{show:true},
+                    color:"#" + ((1 << 24) * Math.random() | 0).toString(16)
+                });
+            }
         }
+
         $.plot($(placeholder),
             data,
             {
@@ -105,7 +115,7 @@ var Graph = {
                     var x = new Date(item.datapoint[0]).toGMTString();
                     var y = item.datapoint[1].toPrecision(4);
                     var label = item.series.label;
-                    showTooltip(item.pageX, item.pageY,label + " [ " + x + " , " + y + " ]");
+                    showTooltip(item.pageX, item.pageY, label + " [ " + x + " , " + y + " ]");
                 }
             }
             else {

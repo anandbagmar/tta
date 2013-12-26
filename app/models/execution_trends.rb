@@ -1,8 +1,10 @@
 class ExecutionTrends
-  def get_result_set(class_name, start_date, end_date)
+  def get_result_set(sub_project, class_name, start_date, end_date)
     result_set = {}
+    sub_project_result_set={}
     result_set[class_name], max_val = get_time_taken(class_name, start_date, end_date) if class_name && class_name.length > 0
-    return result_set, max_val
+    sub_project_result_set[SubProject.get_sub_project_name(sub_project)]=result_set
+    return sub_project_result_set, max_val
   end
 
   def get_class_names(sub_project_id, test_category, start_date, end_date)

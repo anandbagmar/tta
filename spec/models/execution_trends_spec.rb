@@ -22,8 +22,9 @@ describe "Execution Trends" do
       time_taken = [[1234567890.000, 0.01234]]
       class_name = "UNIT TEST"
       ExecutionTrends.any_instance.should_receive(:get_time_taken).and_return([time_taken,1.01234])
-      result = ExecutionTrends.new.get_result_set(class_name,Date.yesterday.to_s,Date.today.to_s)
-      result.should == [{class_name => time_taken}, 1.01234]
+      SubProject.should_receive(:get_sub_project_name).and_return("TTA Project")
+      result = ExecutionTrends.new.get_result_set("1",class_name,Date.yesterday.to_s,Date.today.to_s)
+      result.should == [{"TTA Project"=>{class_name => time_taken}}, 1.01234]
     end
   end
 

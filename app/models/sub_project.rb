@@ -4,6 +4,9 @@ class SubProject < ActiveRecord::Base
   belongs_to :project
   validates :name, :presence => {:message => 'cannot be blank, Task not saved'}
 
+  def self.get_sub_project_name(sub_project_id)
+    SubProject.find_by_id(sub_project_id).name
+  end
 
   def self.get_data_for_test_category(sub_project_id, test_type)
     meta_data = find(sub_project_id).test_metadatum.find_all_by_test_category(test_type)

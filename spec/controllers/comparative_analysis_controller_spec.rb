@@ -22,9 +22,9 @@ describe ComparativeAnalysisController do
     FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata1.id)
     FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata2.id)
     FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata3.id)
-    result = ComparativeAnalysis.new.get_result_set(sub_project.id, nil, Date.yesterday.to_date, Date.today.to_date)
+    result = ComparativeAnalysis.new.get_result_set(project.id,sub_project.id, nil, Date.yesterday.to_date, Date.today.to_date)
     result.should_not be_empty
-    assert_equal result, {"UNIT TEST : UNIT TEST" => [[yesterday.to_time.to_f*1000, 60.0]], "FUNCTIONAL TEST : REGRESSION TEST" => [[today.to_time.to_f*1000, 60.0]], "FUNCTIONAL TEST : SMOKE TEST" => [[today.to_time.to_f*1000, 60.0]]}
+    assert_equal result, {"TTA_subProject"=>{"UNIT TEST : UNIT TEST" => [[yesterday.to_time.to_f*1000, 60.0]], "FUNCTIONAL TEST : REGRESSION TEST" => [[today.to_time.to_f*1000, 60.0]], "FUNCTIONAL TEST : SMOKE TEST" => [[today.to_time.to_f*1000, 60.0]]}}
   end
 
   it "should return result set for selected test sub category" do
@@ -38,9 +38,9 @@ describe ComparativeAnalysisController do
     FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata1.id)
     FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata2.id)
     FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata3.id)
-    result = ComparativeAnalysis.new.get_result_set(sub_project.id, ["REGRESSION TEST","SMOKE TEST"], Date.yesterday.to_date, Date.today.to_date)
+    result = ComparativeAnalysis.new.get_result_set(project.id,sub_project.id, ["REGRESSION TEST","SMOKE TEST"], Date.yesterday.to_date, Date.today.to_date)
     result.should_not be_empty
-    assert_equal result, {"FUNCTIONAL TEST : REGRESSION TEST" => [[today.to_time.to_f*1000, 60.0]], "FUNCTIONAL TEST : SMOKE TEST" => [[today.to_time.to_f*1000, 60.0]]}
+    assert_equal result, {"TTA_subProject"=>{"FUNCTIONAL TEST : REGRESSION TEST" => [[today.to_time.to_f*1000, 60.0]], "FUNCTIONAL TEST : SMOKE TEST" => [[today.to_time.to_f*1000, 60.0]]}}
   end
 
   describe "Get 'test_category_mapping_list'" do
@@ -56,11 +56,11 @@ describe ComparativeAnalysisController do
   end
 
   it "should throw error if project id not given" do
-    expect { ComparativeAnalysis.new.get_result_set(nil, nil, "2012-1-1".to_date, "2012-12-12".to_date) }.to raise_error
+    expect { ComparativeAnalysis.new.get_result_set(nil,nil, nil, "2012-1-1".to_date, "2012-12-12".to_date) }.to raise_error
   end
 
   it "should throw error if start_date not given" do
-    expect { ComparativeAnalysis.new.get_result_set(1, nil, nil, "2012-12-12".to_date) }.to raise_error
+    expect { ComparativeAnalysis.new.get_result_set(1,1, nil, nil, "2012-12-12".to_date) }.to raise_error
   end
 
   it "should throw error if there is no data within the date range " do

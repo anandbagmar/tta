@@ -1,22 +1,28 @@
 class ComparativeAnalysis
-  def get_result_set(sub_project_id, sub_category, start_date, end_date)
-    sub_project=SubProject.find(sub_project_id)
-    metadata_list = sub_project.test_metadatum
-    test_category_mapping_list = metadata_list.select("distinct test_category,test_sub_category")
-    if (!sub_category.nil?)
-      test_category_mapping_list=test_category_mapping_list.where("test_sub_category IN (?)", sub_category)
-    end
-    result_set = Hash.new
-    test_category_mapping_list.each { |test_category_mapping|
-      metadata_records = metadata_list.where(:test_category => test_category_mapping.test_category, :test_sub_category => test_category_mapping.test_sub_category)
-      metadata_records_for_selected_date_range = metadata_records.find_all_by_date_of_execution(start_date.beginning_of_day..end_date.end_of_day)
-      aggregate_value = get_percentage_of_passing_tests(metadata_records_for_selected_date_range)
-      test_category_and_sub_category = test_category_mapping.test_category + " : " +test_category_mapping.test_sub_category
-      if aggregate_value != []
-        result_set[test_category_and_sub_category] = aggregate_value
+  def get_result_set(project_id, sub_project_id, sub_category, start_date, end_date)
+    sub_project_ids=get_sub_project_ids(project_id, sub_project_id)
+    result_set = {}
+    sub_project_ids.each do |id|
+      metadata_list = TestMetadatum.where(:sub_project_id => id)
+      test_category_mapping_list = metadata_list.select("distinct test_category,test_sub_category")
+      test_category_mapping_list=test_category_mapping_list.where("test_sub_category IN (?)", sub_category) if !sub_category.nil?
+      sub_project_result_set = {}
+      test_category_mapping_list.each do |test_category_mapping|
+        metadata_records = metadata_list.where(:test_category => test_category_mapping.test_category, :test_sub_category => test_category_mapping.test_sub_category)
+        metadata_records_for_selected_date_range = metadata_records.find_all_by_date_of_execution(start_date.beginning_of_day..end_date.end_of_day)
+        aggregate_value = get_percentage_of_passing_tests(metadata_records_for_selected_date_range)
+        test_category_and_sub_category = test_category_mapping.test_category + " : " +test_category_mapping.test_sub_category
+        if aggregate_value != []
+          sub_project_result_set[test_category_and_sub_category] = aggregate_value
+        end
       end
-    }
+      result_set[SubProject.get_sub_project_name(id)] = sub_project_result_set
+    end
     return result_set
+  end
+
+  def get_sub_project_ids(project_id, sub_project_id)
+    sub_project_id == "ALL" ? (SubProject.find_all_by_project_id(project_id)).map { |sub_project| sub_project.id } : [SubProject.find(sub_project_id).id]
   end
 
   private
