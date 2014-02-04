@@ -8,6 +8,15 @@ module Page
       select_the_option(date2, COMPARE_RUN_TEST_DATE2)
       click_button(COMPARE_PAGE_BUTTON)
     end
+    
+    def get_classnames_listed_for_table(tablename)
+      all(:xpath , "//table[@id='#{tablename}']/tbody/tr/td").map{|t| t.native.text} - [""]            
+    end   
+    
+    def get_error_status_content(table_row_id)
+        find_by_id(table_row_id).native.text    
+    end 
+    
   end
 end
 

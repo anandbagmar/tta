@@ -1,5 +1,9 @@
 require 'rspec/expectations'
 require 'cucumber/rails'
+require 'database_cleaner'
+require 'database_cleaner/cucumber'
+require 'rspec/rails'
+DatabaseCleaner.strategy = nil
 
 Capybara.run_server = true
 Capybara.default_selector = :css
