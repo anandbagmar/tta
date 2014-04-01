@@ -7,6 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 ## Delete data from all tables
+puts "Seeding data for #{ENV['RAILS_ENV']} environment"
+
 Project.destroy_all
 Project.reset_primary_key
 SubProject.destroy_all

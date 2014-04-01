@@ -14,9 +14,16 @@ module Domain
     end
 
     def upload_data_and_submit(proj_params)
-      proj_params[:logFile]=$PROJECT_ROOT+"/"+proj_params[:logFile]
-      form_filling(proj_params)
-      click_button(UPLOAD_PAGE_BUTTON)
+      begin
+          proj_params[:logFile]=$PROJECT_ROOT+"/"+proj_params[:logFile]
+          form_filling(proj_params)
+          click_button(UPLOAD_PAGE_BUTTON)
+      rescue Exception => ex
+        puts "Exception in uploading data. \n\t" + ex.inspect
+        file_name = SCREENSHOT_FILE_PATH+"screenshot_"+random_name+".png"
+        save_error_screenshot(file_name)
+        throw ex
+      end
     end
 
     def verify_data_uploaded(proj_succ)
