@@ -15,7 +15,7 @@ test: &test
 production:
   adapter: mysql2
   encoding: utf8
-  database: tta
+  database: tta_prod
   pool: 5
   username: <%= ENV["PROD_USER"] %>
   password: <%= ENV["PROD_PWD"] %>
