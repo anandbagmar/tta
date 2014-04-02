@@ -37,7 +37,7 @@ describe DefectAnalysis do
      FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id,:time_taken=>1,:class_name=>"class1.1.3")
      json= DefectAnalysis.new.get_result_json(sub_project.id,"2013-02-20".to_date,"ALL")
      parsed_json = ActiveSupport::JSON.decode(json)
-     parsed_json["errors"]["UNIT TEST"].should eq([{"ERROR_MSG"=>["class1.1.1", "class1.1.2", "class1.1.3"]}])
+     parsed_json["errors"]["UNIT TEST"].first["ERROR_MSG"].should =~ ["class1.1.1", "class1.1.2", "class1.1.3"]
    end
 
   it "should give appropriate percentages for the tests uploaded" do
@@ -53,7 +53,7 @@ describe DefectAnalysis do
     FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id,:class_name=>"class1.2.2",:error_msg=>"ERROR_MSG1")
     json= DefectAnalysis.new.get_result_json(sub_project.id,"2013-02-20".to_date,"ALL")
     parsed_json = ActiveSupport::JSON.decode(json)
-    parsed_json["percentage"].should eq(["66.67","33.33"])
+    parsed_json["percentage"].should =~ ["66.67","33.33"]
   end
 
   it "should categorize the error messages w.r.t their test categories" do
