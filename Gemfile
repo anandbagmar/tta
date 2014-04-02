@@ -38,9 +38,6 @@ group :development, :test do
   gem 'rspec-mocks'
   gem "cucumber-rails", :require => false # integration test framework
   gem 'simplecov' # test coverage report
-  gem 'json_spec' # easier testing of JSON
-  gem 'database_cleaner' # manage DB between tests
-  gem 'autotest-rails'
   gem 'shoulda'
   gem 'pry'
   gem 'pry-nav'
@@ -48,8 +45,6 @@ group :development, :test do
   gem 'fabrication'
   gem 'jasmine'
   gem 'jasmine-headless-webkit'
-  gem 'cukeforker'
-  gem 'cukeforker-webdriver'
 end
 
 group :cucumber do
