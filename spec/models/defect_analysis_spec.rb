@@ -24,7 +24,7 @@ describe DefectAnalysis do
     test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id)
      FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id)
     json= DefectAnalysis.new.get_result_json(sub_project.id,"2013-02-20".to_date,"ALL")
-    json.should eq("{\"sub_project_name\":\"TTA_subProject\",\"errors\":{\"UNIT TEST\":[{\"ERROR_MSG\":[\"Class_01\"]}]},\"percentage\":[\"100.00\"]}")
+    json.should eq("{\"sub_project_name\":\"TTA_SUBPROJECT\",\"errors\":{\"UNIT TEST\":[{\"ERROR_MSG\":[\"Class_01\"]}]},\"percentage\":[\"100.00\"]}")
   end
 
    it "should not repeat the error message on uploading test cases with same error message" do

@@ -11,7 +11,8 @@ class Project < ActiveRecord::Base
     sub_projects.find_or_create_by_name((params[:sub_project_name]).split.join(" "))
   end
 
-  def uppercase_name
-      self.name.upcase! if !self.name.nil?
-  end
+  private
+    def uppercase_name
+        self.name.upcase! if !self.name.nil?
+    end
 end

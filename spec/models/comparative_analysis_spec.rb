@@ -21,7 +21,7 @@ describe ComparativeAnalysis do
     FactoryGirl.create(:test_case_record, :test_suite_record_id => test_suite_record.id)
 
     result = ComparativeAnalysis.new.get_result_set(project.id,sub_project.id, nil, "2013-01-01".to_date, "2013-03-30".to_date)
-    result["TTA_subProject"]["UNIT TEST : UNIT TEST"].count.should eq(1)
+    result["TTA_SUBPROJECT"]["UNIT TEST : UNIT TEST"].count.should eq(1)
   end
 
   it "should return the result set with points in increasing order of the date of execution" do
@@ -50,7 +50,7 @@ describe ComparativeAnalysis do
       result1 << [(metadata_record.date_of_execution.to_time.to_f * 1000), (total_num_of_tests.to_f - number_of_failures.to_f) / total_num_of_tests.to_f * 100]
     }
     result = ComparativeAnalysis.new.get_result_set(project.id,sub_project.id, nil, "2013-01-01".to_date, "2013-03-30".to_date)
-    final_result.reverse.should eq(result["TTA_subProject"]["UNIT TEST : UNIT TEST"])
+    final_result.reverse.should eq(result["TTA_SUBPROJECT"]["UNIT TEST : UNIT TEST"])
   end
 
   it "should return result set with different points if tests with different pass % present for same day" do
@@ -64,8 +64,8 @@ describe ComparativeAnalysis do
     FactoryGirl.create(:test_case_record, :test_suite_record_id => test_suite_record_1.id)
 
     result = ComparativeAnalysis.new.get_result_set(project.id,sub_project.id, nil, "2013-01-01".to_date, "2013-03-30".to_date)
-    result["TTA_subProject"]["UNIT TEST : UNIT TEST"].count.should eq(1)
-    result["TTA_subProject"]["FUNCTIONAL TEST : UNIT TEST"].count.should eq(1)
+    result["TTA_SUBPROJECT"]["UNIT TEST : UNIT TEST"].count.should eq(1)
+    result["TTA_SUBPROJECT"]["FUNCTIONAL TEST : UNIT TEST"].count.should eq(1)
   end
 
   it "should return proper result set for valid data" do
@@ -82,7 +82,7 @@ describe ComparativeAnalysis do
     FactoryGirl.create(:test_case_record, :test_suite_record_id => test_suite_record_2.id)
 
     result = ComparativeAnalysis.new.get_result_set(project.id,sub_project.id, nil, "2013-01-01".to_date, "2013-03-30".to_date)
-    result["TTA_subProject"]["UNIT TEST : UNIT TEST"].count.should eq(3)
+    result["TTA_SUBPROJECT"]["UNIT TEST : UNIT TEST"].count.should eq(3)
   end
 
 end

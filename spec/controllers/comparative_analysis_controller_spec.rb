@@ -24,7 +24,7 @@ describe ComparativeAnalysisController do
     FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata3.id)
     result = ComparativeAnalysis.new.get_result_set(project.id,sub_project.id, nil, Date.yesterday.to_date, Date.today.to_date)
     result.should_not be_empty
-    assert_equal result, {"TTA_subProject"=>{"UNIT TEST : UNIT TEST" => [[yesterday.to_time.to_f*1000, 60.0]], "FUNCTIONAL TEST : REGRESSION TEST" => [[today.to_time.to_f*1000, 60.0]], "FUNCTIONAL TEST : SMOKE TEST" => [[today.to_time.to_f*1000, 60.0]]}}
+    assert_equal result, {"TTA_SUBPROJECT"=>{"UNIT TEST : UNIT TEST" => [[yesterday.to_time.to_f*1000, 60.0]], "FUNCTIONAL TEST : REGRESSION TEST" => [[today.to_time.to_f*1000, 60.0]], "FUNCTIONAL TEST : SMOKE TEST" => [[today.to_time.to_f*1000, 60.0]]}}
   end
 
   it "should return result set for selected test sub category" do
@@ -40,7 +40,7 @@ describe ComparativeAnalysisController do
     FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata3.id)
     result = ComparativeAnalysis.new.get_result_set(project.id,sub_project.id, ["REGRESSION TEST","SMOKE TEST"], Date.yesterday.to_date, Date.today.to_date)
     result.should_not be_empty
-    assert_equal result, {"TTA_subProject"=>{"FUNCTIONAL TEST : REGRESSION TEST" => [[today.to_time.to_f*1000, 60.0]], "FUNCTIONAL TEST : SMOKE TEST" => [[today.to_time.to_f*1000, 60.0]]}}
+    assert_equal result, {"TTA_SUBPROJECT"=>{"FUNCTIONAL TEST : REGRESSION TEST" => [[today.to_time.to_f*1000, 60.0]], "FUNCTIONAL TEST : SMOKE TEST" => [[today.to_time.to_f*1000, 60.0]]}}
   end
 
   describe "Get 'test_category_mapping_list'" do

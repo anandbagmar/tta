@@ -2,6 +2,7 @@ class SubProject < ActiveRecord::Base
   has_many :test_metadatum
   attr_accessible :name
   belongs_to :project
+  before_validation :uppercase_name
   validates :name, :presence => {:message => 'cannot be blank, Task not saved'}
 
   def self.get_sub_project_name(sub_project_id)
@@ -48,6 +49,10 @@ class SubProject < ActiveRecord::Base
 
   def log_dir
     FileUtils.mkdir_p($PROJECT_ROOT+"/../PROJECT_LOGS/"+project.name+ "/"+ name + "/" +Time.now.strftime("%d-%m-%y-%H:%M:%S"))
+  end
+
+  def uppercase_name
+    self.name.upcase! if !self.name.nil?
   end
 
 end
