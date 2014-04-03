@@ -14,7 +14,7 @@ describe UploadController do
     before(:each) do
       create_or_load_project_if_not_present
       @file_with_errors = fixture_file_upload('/proj1.zip', 'application/zip')
-      @upload1 = {:project_name => @project.name, :sub_project_name => @sub_project.name, :ci_job_name => "build",
+      @upload_with_errors = {:project_name => @project.name, :sub_project_name => @sub_project.name, :ci_job_name => "build",
                :test_category => @meta_data.test_category, :test_sub_category => @meta_data.test_sub_category,
                :test_report_type => @meta_data.test_report_type,
                :date => {"year" => "2013", "month" => "2", "day" => "20", "hour" => "00", "minute" => "00"},
@@ -23,7 +23,7 @@ describe UploadController do
     end
 
     it "uploads data with failure messages" do
-      post :create, @upload1
+      post :create, @upload_with_errors
       response.should redirect_to upload_show_path(:project_id => @project.id, :project_meta_id => @meta_data.id, :sub_project_id => @sub_project.id)
     end
 
@@ -33,22 +33,22 @@ describe UploadController do
 
     before(:each) do
       create_or_load_project_if_not_present
-      @file2 = fixture_file_upload('/proj5.zip', 'application/zip')
-      @upload2 = {:project_name => @project.name, :sub_project_name => @sub_project.name, :ci_job_name => "build",
+      @file_without_errors = fixture_file_upload('/proj5.zip', 'application/zip')
+      @upload_without_errors = {:project_name => @project.name, :sub_project_name => @sub_project.name, :ci_job_name => "build",
                :test_category => @meta_data.test_category, :test_sub_category => @meta_data.test_sub_category,
                :test_report_type => @meta_data.test_report_type,
                :date => {"year" => "2013", "month" => "2", "day" => "20", "hour" => "00", "minute" => "00"},
                :browser => "firefox", :host_name => "host_pc", :os_name => "mac-osx", :type_of_environment => "dev",
-               :logDirectory => @file2}
+               :logDirectory => @file_without_errors}
     end
 
     it "uploads data and redirect to success page" do
-      post :create, @upload2
+      post :create, @upload_without_errors
       response.should redirect_to upload_show_path(:project_id => @project.id, :project_meta_id => @meta_data.id, :sub_project_id => @sub_project.id)
     end
 
     it "check success page shows the project details" do
-      post :create, @upload2
+      post :create, @upload_without_errors
       get :show, {:project_id => @project.id, :project_meta_id => @meta_data.id, :sub_project_id => @sub_project.id}
       response.should render_template :show
       response.code.should eq("200")
