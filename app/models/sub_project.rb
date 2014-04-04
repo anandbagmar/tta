@@ -3,7 +3,8 @@ class SubProject < ActiveRecord::Base
   attr_accessible :name
   belongs_to :project
   before_validation :uppercase_name
-  validates :name, :presence => {:message => 'cannot be blank, Task not saved'}
+  validates :name, :project_id, :presence => {:message => 'cannot be blank, Task not saved'}
+  validates_uniqueness_of :name, scope: [:project_id], :case_sensitive => false
 
   def self.get_sub_project_name(sub_project_id)
     SubProject.find_by_id(sub_project_id).name

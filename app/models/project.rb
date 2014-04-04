@@ -8,7 +8,7 @@ class Project < ActiveRecord::Base
   scope :get_all_projects, select("id, name");
 
   def add_sub_project(params)
-    sub_projects.find_or_create_by_name((params[:sub_project_name]).split.join(" "))
+    sub_projects.find_or_create_by_name((params[:sub_project_name]).split.join(" ").upcase)
   end
 
   private

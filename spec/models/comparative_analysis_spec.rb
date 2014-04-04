@@ -4,7 +4,7 @@ describe ComparativeAnalysis do
 
   it "should return result set" do
     project = FactoryGirl.create(:project)
-    sub_project = FactoryGirl.create(:sub_project)
+    sub_project = FactoryGirl.create(:sub_project, :project_id => project.id)
     result = ComparativeAnalysis.new.get_result_set(project.id,sub_project.id, nil, "1990-1-1", "2012-12-12")
     result.should_not be_nil
   end

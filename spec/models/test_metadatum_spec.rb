@@ -99,7 +99,7 @@ describe TestMetadatum do
 
     it "distinguishes records by sub projects" do 
        
-      sub_project_other = create_subproject_for_project project 
+      sub_project_other = create_other_subproject_for_project project
 
       inserted_sub_project_metadatum = create_metadatum sub_project , "2013-01-01" , integration_tests
       inserted_sub_project_other_metadatum =  create_metadatum sub_project_other , "2013-01-01" , integration_tests

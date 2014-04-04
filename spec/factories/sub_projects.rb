@@ -12,7 +12,7 @@ FactoryGirl.define do
   factory :sub_project , :class => SubProject   do
 
     name 'TTA_subProject'
-    association :project_id , :factory => :project , :strategy => :build
+    project
   end
 
 end

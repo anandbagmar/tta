@@ -31,13 +31,21 @@ module DataHelper
 			) 		
 	end
 
-	def create_subproject_for_project(arg_project,arg_name="TESTS_SUBPROJECT") 		
- 		create :sub_project , 
+	def create_subproject_for_project(arg_project,arg_name="TESTS_SUBPROJECT")
+ 		create :sub_project ,
  		with(
  				:name.as(arg_name) , 
  				:project_id.as(arg_project.id)
  			) 
-	end
+  end
+
+  def create_other_subproject_for_project(arg_project,arg_name="TESTS_SUBPROJECT_OTHER")
+    create :sub_project ,
+           with(
+               :name.as(arg_name) ,
+               :project_id.as(arg_project.id)
+           )
+  end
 
 	def create_metadatum(arg_sub_project, arg_date , arg_test_category="INTEGRATION TESTS")   
 		create :test_metadatum , 

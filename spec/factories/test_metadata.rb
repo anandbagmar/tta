@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :test_metadatum, :class => TestMetadatum do
-    association :sub_project_id, :factory => :sub_project, :strategy => :build
+    sub_project
     ci_job_name "Build"
     os_name "MacOSX"
     host_name "host_pc"
