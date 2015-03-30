@@ -1,4 +1,5 @@
 require 'pry'
+require_relative 'common_seed_data'
 module Seed
   module Helper
     def self.create_seed_data(number_of_projects, number_of_subprojects_per_project, number_of_test_metadatum_per_subproject, number_of_test_suite_records_per_test_metadatum, number_of_test_case_records_per_test_suite_record)

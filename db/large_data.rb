@@ -1,3 +1,4 @@
+require_relative  'seed_helper'
 number_of_projects=5
 number_of_subprojects_per_project=4
 number_of_test_metadatum_per_subproject=100
