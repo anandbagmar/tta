@@ -9,12 +9,11 @@ class CompareRuns
     test_case_records_with_errors_for_date_two = get_test_suite_records_with_errors_for(date_two, sub_project_id, test_category) || []
     common_failures = (test_case_records_with_errors_for_date_one & test_case_records_with_errors_for_date_two) || []
     combined_total_failures = (test_case_records_with_errors_for_date_one | test_case_records_with_errors_for_date_two) || []
-
     failure_comparison = {}
     failure_comparison[:common_failures] = common_failures
     failure_comparison[:combined_total_failures] = combined_total_failures
-    failure_comparison[:test_case_records_for_date_one] = test_case_records_with_errors_for_date_one & test_case_records_with_errors_for_date_one
-    failure_comparison[:test_case_records_for_date_two] = test_case_records_with_errors_for_date_two & test_case_records_with_errors_for_date_two
+    failure_comparison[:test_case_records_for_date_one] = test_case_records_with_errors_for_date_one
+    failure_comparison[:test_case_records_for_date_two] = test_case_records_with_errors_for_date_two
     failure_comparison
   end
 
