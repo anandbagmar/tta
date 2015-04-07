@@ -30,13 +30,14 @@ module Seed
     def self.create_test_meta_data(sub_project_id, test_meta_data_number)
       test_category = SAMPLE_TEST_CATEGORIES[rand(SAMPLE_TEST_CATEGORIES.length)]
       test_sub_category = get_respective_test_sub_category(test_category)
+      random_time = (DateTime.now - (test_meta_data_number + test_meta_data_number%10.to_f)).to_time
       test_meta_data = TestMetadatum.create(
           :ci_job_name => SAMPLE_CI_JOB_NAMES[rand(SAMPLE_CI_JOB_NAMES.length)],
           :os_name => SAMPLE_OS_TYPES[rand(SAMPLE_OS_TYPES.length)],
           :host_name => SAMPLE_HOST_NAMES[rand(SAMPLE_HOST_NAMES.length)],
           :browser => SAMPLE_BROWSER_TYPES[rand(SAMPLE_BROWSER_TYPES.length)],
           :type_of_environment => SAMPLE_TEST_ENVIRONMENTS[rand(SAMPLE_TEST_ENVIRONMENTS.length)],
-          :date_of_execution => Time.at(Time.now.to_i),
+          :date_of_execution => random_time,
           :test_category => test_category,
           :test_sub_category => test_sub_category,
           :test_report_type => SAMPLE_TEST_REPORT_TYPES[rand(SAMPLE_TEST_REPORT_TYPES.length)])
