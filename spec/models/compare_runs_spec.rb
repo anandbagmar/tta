@@ -33,7 +33,7 @@ module CompareRunsSpecHelper
 
     def records_with_error_for(arg_sub_project,arg_test_category,arg_date)
     	extract_class_names_from(
-            CompareRuns.get_test_suite_records_with_errors_for(arg_date,
+            CompareRuns.get_test_case_records_with_errors_for(arg_date,
 										                        arg_sub_project.id,
 										                        arg_test_category)
             )        
