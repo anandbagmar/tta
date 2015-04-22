@@ -8,6 +8,8 @@
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
 
+  config.vm.network "forwarded_port", guest: 3000, host: 8080
+
   config.vm.provider "virtualbox" do |v|
     v.memory = 4096
     v.cpus = 4
@@ -15,7 +17,10 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
     sudo apt-get update
-    sudo apt-get install -y ruby rails3 bundler mysql-server-5.5 git libmysqlclient-dev
+    sudo apt-get install -qy ruby bundler
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -qy mysql-server libmysqlclient-dev
+    sudo apt-get install -qy git
+    sudo apt-get install -qy libxslt-dev libxml2-dev
     if [ ! -d "tta" ]; then
         git clone https://github.com/anandbagmar/tta.git
         sudo chown vagrant:vagrant -R tta
@@ -23,6 +28,12 @@ Vagrant.configure(2) do |config|
     cd tta
     git pull
     bundle install
-    echo "You'll find TTA in $HOME/tta"
+    echo
+    echo "You can now do a 'vagrant ssh'."
+    echo "Then:"
+    echo "$ cd tta"
+    echo "$ rake db:create db:setup db:migrate"
+    echo "$ rails s"
+    echo "Then point your host system's browser to http://localhost:8080/"
   SHELL
 end
