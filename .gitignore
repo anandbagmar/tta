@@ -27,3 +27,5 @@
 
 .rvmrc
 .rbenv-version
+
+/.vagrant/
