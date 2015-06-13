@@ -7,4 +7,4 @@ Tta::Application.initialize!
 # ROOT FOLDER
 $PROJECT_ROOT = File.expand_path(File.join(File.dirname(__FILE__), ".."))
 puts "$PROJECT_ROOT = #{$PROJECT_ROOT}"
-
+puts "Starting in environment: #{ENV["RAILS_ENV"]}"
