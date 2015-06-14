@@ -29,3 +29,5 @@
 .rbenv-version
 
 /.vagrant/
+.gems_tta
+.rbenv-gemsets
