@@ -3,13 +3,15 @@ require_relative 'create_demo_seed_data'
 
 DEMODATA = YAML.load(File.open("#{Rails.root}/config/demo.yml", "r"))
 
+randomizer = (Time.now.hash%3600).to_s
+
 DEMODATA.each do |project|
-  project_name = project[0]
+  project_name = project[0] + randomizer
   puts project_name
   project_id=create_demo_project(project_name)
   project[1].each do |sub_project_data|
     sub_project_data.each do |metadata|
-      sub_project_name = metadata[0]
+      sub_project_name = metadata[0] + randomizer
       sub_project_tag_name=sub_project_name.match(/\d+[,.]\d+/)[0]
       sub_project_id=create_demo_sub_project(project_id, sub_project_name)
       (1..metadata[1][0]["MAX_METADATA_ROWS"]).each do |meta_record|
