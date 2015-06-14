@@ -43,19 +43,19 @@ var compareRuns = {
         var tableTitle;
 
         class_name_array = compareJson.common_failures;
-        tableTitle = "UNIQUE TEST-CASES FAILING ON BOTH DATES";
+        tableTitle = "TEST-CASES FAILING IN BOTH RUNS (COMMON FAILURES)";
         compareResultsFor("common", tableTitle, date1, date2, class_name_array);
 
         class_name_array = compareJson.combined_total_failures;
-        tableTitle = "ALL UNIQUE FAILING TEST-CASES (IN BOTH RUNS)";
+        tableTitle = "ALL FAILING TEST-CASES (IN BOTH RUNS)";
         compareResultsFor("both", tableTitle, date1, date2, class_name_array);
 
         class_name_array = compareJson.test_case_records_for_date_one;
-        tableTitle = "UNIQUE TEST-CASES FAILING ON DATE 1: " + date1;
+        tableTitle = "TEST-CASES FAILING ONLY ON DATE 1: " + date1;
         compareResultsFor("date1", tableTitle, date1, ".", class_name_array);
 
         class_name_array = compareJson.test_case_records_for_date_two;
-        tableTitle = "UNIQUE TEST-CASES FAILING ON DATE 2: " + date2;
+        tableTitle = "TEST-CASES FAILING ONLY ON DATE 2: " + date2;
         compareResultsFor("date2", tableTitle, ".", date2, class_name_array);
     }
 };
