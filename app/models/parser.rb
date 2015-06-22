@@ -38,14 +38,19 @@ class Parser
   end
 
   def save_test_suite(meta_id, test_report_type, test_suite_xml)
-    test_record_to_be_created = {:time_taken => 0.0, :test_metadatum_id => meta_id, :class_name => test_suite_xml.attr("name"), :number_of_tests => test_suite_xml.attr("tests"),
-                                 :number_of_errors => test_suite_xml.attr("errors"), :number_of_failures => test_suite_xml.attr("failures")}
+    test_suite_record_to_be_created = {:time_taken => 0.0,
+                                 :test_metadatum_id => meta_id,
+                                 :class_name => test_suite_xml.attr("name"),
+                                 :number_of_tests => test_suite_xml.attr("tests"),
+                                 :number_of_errors => test_suite_xml.attr("errors"),
+                                 :number_of_failures => test_suite_xml.attr("failures")
+    }
     test_cases_to_be_created = []
     test_suite_xml.search(".//testcase").each do |test_case_xml|
-      test_record_to_be_created[:time_taken] +=  XmlParser.new.get_time(test_case_xml, test_suite_xml, test_report_type)
+      test_suite_record_to_be_created[:time_taken] +=  XmlParser.new.get_time(test_case_xml, test_suite_xml, test_report_type)
       test_cases_to_be_created << XmlParser.new.create_test_case(test_case_xml, test_report_type)
     end
-    saved_test_suite_data = TestSuiteRecord.create_and_save(test_record_to_be_created)
+    saved_test_suite_data = TestSuiteRecord.create_and_save(test_suite_record_to_be_created)
     test_cases_to_be_created.each do |each_test_case|
       each_test_case.test_suite_record_id= saved_test_suite_data.id
       each_test_case.save
