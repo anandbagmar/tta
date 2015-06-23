@@ -18,7 +18,12 @@ Capybara.register_driver :firefox do |app|
   Capybara::Selenium::Driver.new(app, :browser => :firefox)
 end
 
-Capybara.javascript_driver = :firefox
+Capybara.register_driver :chrome do |app|
+  puts "Using ChromeDriver"
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+end
+
+Capybara.javascript_driver = :chrome
 Cucumber::Rails::Database.autorun_database_cleaner = false
 Cucumber::Rails::Database.javascript_strategy = :transaction
 
@@ -44,7 +49,7 @@ end
 After do |scenario|
   #puts "**** Scenario: #{scenario.scenario}"
   if scenario.failed?
-    file_name = SCREENSHOT_FILE_PATH+"screenshot_"+random_name+".png"
+    file_name = "screenshot_"+random_name+".png"
     save_error_screenshot(file_name)
   end
 end

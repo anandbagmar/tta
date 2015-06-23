@@ -17,10 +17,10 @@ module Domain
       begin
           proj_params[:logFile]=$PROJECT_ROOT+"/"+proj_params[:logFile]
           form_filling(proj_params)
-          click_button(UPLOAD_PAGE_BUTTON)
+          scroll_to_view_and_click_on UPLOAD_PAGE_BUTTON
       rescue Exception => ex
         puts "Exception in uploading data. \n\t" + ex.inspect
-        file_name = SCREENSHOT_FILE_PATH+"screenshot_"+random_name+".png"
+        file_name = "screenshot_"+random_name+".png"
         save_error_screenshot(file_name)
         throw ex
       end
