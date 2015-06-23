@@ -10,7 +10,7 @@ module Support
       if !Dir.exist?(SCREENSHOT_FILE_PATH)
         FileUtils::mkdir_p SCREENSHOT_FILE_PATH
       end
-      File.open(file_name, 'wb') do |f|
+      File.open((SCREENSHOT_FILE_PATH+file_name), 'wb') do |f|
         f.write(Base64.decode64(page.driver.browser.screenshot_as(:base64)))
       end
     end

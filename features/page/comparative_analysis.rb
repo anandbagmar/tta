@@ -6,7 +6,7 @@ module Page
 
       select_the_option(project, COMPARATIVE_PROJECT_DROPDOWN)
       select_the_option(sub_project, COMPARATIVE_SUB_PROJECT_DROPDOWN)
-      click_button(COMPARATIVE_PLOT_BUTTON)
+      scroll_to_view_and_click_on(COMPARATIVE_PLOT_BUTTON)
     end
   end
 end
