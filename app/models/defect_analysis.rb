@@ -1,6 +1,13 @@
 class DefectAnalysis
   def get_result_json(sub_project_id, analysis_date, test_category)
     test_case_hash, no_of_test = getMetadataIds(sub_project_id, analysis_date, test_category)
+    # test_case_hash = test_case_hash[test_category][0].sort_by do |k,v| v.size end
+    # failures = {:sub_project_name => SubProject.find(sub_project_id, :select => "name").name,
+    #             :errors => {}
+    # }
+    # test_case_hash.each do |k,v|
+    #   failures[:errors] = v
+    # end
     if !(no_of_test.nil?)
       percentage = get_defect_percentage(no_of_test.flatten)
       defect_analysis_json = {

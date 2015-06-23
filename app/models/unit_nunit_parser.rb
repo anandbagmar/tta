@@ -23,16 +23,16 @@ class UnitNunitParser
   end
 
   def self.save_test_case_records(suite_name, test_case)
-    @xml_test_case = TestCaseRecord.new()
-    class_name = test_case.attr("name")
-    @xml_test_case.class_name = test_case.attr("name")
-    @xml_test_case.time_taken = test_case.attr("time")
-    calculate_tests_count_summary(class_name, suite_name, test_case)
-    @xml_test_case.test_suite_record_id = TestSuiteRecord.create_and_save(@hash).id
-    @xml_test_case.save
+    xml_test_case = TestCaseRecord.new()
+    xml_test_case.class_name = test_case.attr("name")
+    xml_test_case.time_taken = test_case.attr("time")
+    xml_test_case.error_msg = calculate_tests_count_summary(xml_test_case.class_name, suite_name, test_case)
+    xml_test_case.test_suite_record_id = TestSuiteRecord.create_and_save(@hash).id
+    xml_test_case.save
   end
 
   def self.calculate_tests_count_summary(class_name, suite_name, test_case)
+    error_msg = ""
     @hash[:number_of_tests]+= 1
     if test_case.attr("results")=="ignored"
       @hash[:number_of_tests_ignored] += 1
@@ -42,8 +42,9 @@ class UnitNunitParser
     else
       if test_case.attr("success") == "False"
         @hash[:number_of_errors] +=1
-        @xml_test_case.error_msg = @doc.xpath("//test-suite[@name='#{suite_name}']/results/test-case[@name='#{class_name}']/failure").text
+        error_msg = @doc.xpath("//test-suite[@name='#{suite_name}']/results/test-case[@name='#{class_name}']/failure").text
       end
     end
+    error_msg
   end
 end

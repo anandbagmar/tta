@@ -6,11 +6,11 @@ class Parser
     test_report_file_type = REPORTTYPE["test_report_type_mapping"][test_report_type.downcase]
     extracted_files.keys.each do |extracted_filename|
       extracted_file_content = extracted_files[extracted_filename]
-      parse_file(meta_datum_id, test_report_file_type, test_report_type.downcase, extracted_file_content)
+      parse_results_and_update_in_db(meta_datum_id, test_report_file_type, test_report_type.downcase, extracted_file_content)
     end
   end
 
-  def parse_file(meta_datum_id, test_report_file_type, test_report_type, extracted_file_content)
+  def parse_results_and_update_in_db(meta_datum_id, test_report_file_type, test_report_type, extracted_file_content)
     parse_test_run_record_xml(meta_datum_id, test_report_type, extracted_file_content)
     parse_test_run_record_nunit_xml(meta_datum_id, test_report_type, extracted_file_content)
     parse_test_run_record_html(meta_datum_id, test_report_type, extracted_file_content)
@@ -29,7 +29,6 @@ class Parser
   end
 
   def parse_test_run_record_xml(meta_id, test_report_type, extracted_xml)
-    return if (REPORTTYPE["test_report_type_mapping"][test_report_type] != "xml")
     @doc = Nokogiri::XML extracted_xml
     test_suites_xml = @doc.xpath("//testsuite")
     test_suites_xml.each do |test_suite_xml|

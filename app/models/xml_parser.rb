@@ -5,17 +5,16 @@ class XmlParser
   end
 
   def create_test_case(test_case_xml, test_report_type)
-    @xml_test_case = TestCaseRecord.new()
-    @xml_test_case.class_name = test_case_xml.attr("name")
-    testcase_name=test_case_xml.attr("name")
-    @xml_test_case.time_taken = test_case_xml.attr("time")
-      if test_report_type.eql?("junit")
-        @error_msg = test_case_xml.search(".//failure").text
-      elsif test_report_type.eql?("Cucumber junit")
-        @error_msg = CucumberXmlParser.get_error_message(test_case_xml, testcase_name)
-      end
-      @xml_test_case.error_msg = @error_msg.gsub("\"","'")
-    @xml_test_case
+    xml_test_case = TestCaseRecord.new()
+    xml_test_case.class_name = test_case_xml.attr("name")
+    xml_test_case.time_taken = test_case_xml.attr("time")
+    if test_report_type.eql?("junit")
+      @error_msg = test_case_xml.search(".//failure").text
+    elsif test_report_type.eql?("Cucumber junit")
+      @error_msg = CucumberXmlParser.get_error_message(test_case_xml, xml_test_case.class_name)
+    end
+    xml_test_case.error_msg = @error_msg.gsub("\"","'")
+    xml_test_case
   end
 
   def get_time(test_case,test_suite,test_report_type)

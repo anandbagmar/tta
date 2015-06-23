@@ -14,17 +14,24 @@ describe UploadController do
     before(:each) do
       create_or_load_project_if_not_present
       @file_with_errors = fixture_file_upload('/proj1.zip', 'application/zip')
-      @upload_with_errors = {:project_name => @project.name, :sub_project_name => @sub_project.name, :ci_job_name => "build",
-               :test_category => @meta_data.test_category, :test_sub_category => @meta_data.test_sub_category,
-               :test_report_type => @meta_data.test_report_type,
-               :date => {"year" => "2013", "month" => "2", "day" => "20", "hour" => "00", "minute" => "00"},
-               :browser => "firefox", :host_name => "host_pc", :os_name => "mac-osx", :type_of_environment => "dev",
-               :logDirectory => @file_with_errors}
+      @upload_with_errors = {:project_name => @project.name,
+                             :sub_project_name => @sub_project.name,
+                             :ci_job_name => @meta_data[:ci_job_name],
+                             :test_category => @meta_data[:test_category],
+                             :test_sub_category => @meta_data[:test_sub_category],
+                             :test_report_type => @meta_data[:test_report_type],
+                             :date => {"year" => "2013", "month" => "2", "day" => "20", "hour" => "00", "minute" => "00"},
+                             :browser => @meta_data[:browser],
+                             :host_name => @meta_data[:host_name],
+                             :os_name => @meta_data[:os_name],
+                             :type_of_environment => @meta_data[:type_of_environment],
+                             :logDirectory => @file_with_errors}
     end
 
     it "uploads data with failure messages" do
       post :create, @upload_with_errors
-      response.should redirect_to upload_show_path(:project_id => @project.id, :project_meta_id => @meta_data.id, :sub_project_id => @sub_project.id)
+      redirect_params = Rack::Utils.parse_query(URI.parse(response.location).query)
+      response.should redirect_to upload_show_path(:project_id => @project.id, :project_meta_id => redirect_params["project_meta_id"], :sub_project_id => @sub_project.id)
     end
 
   end
@@ -34,27 +41,42 @@ describe UploadController do
     before(:each) do
       create_or_load_project_if_not_present
       @file_without_errors = fixture_file_upload('/proj5.zip', 'application/zip')
-      @upload_without_errors = {:project_name => @project.name, :sub_project_name => @sub_project.name, :ci_job_name => "build",
-               :test_category => @meta_data.test_category, :test_sub_category => @meta_data.test_sub_category,
-               :test_report_type => @meta_data.test_report_type,
-               :date => {"year" => "2013", "month" => "2", "day" => "20", "hour" => "00", "minute" => "00"},
-               :browser => "firefox", :host_name => "host_pc", :os_name => "mac-osx", :type_of_environment => "dev",
-               :logDirectory => @file_without_errors}
+      @upload_without_errors = {:project_name => @project.name,
+                                :sub_project_name => @sub_project.name,
+                                :ci_job_name => @meta_data[:ci_job_name],
+                                :test_category => @meta_data[:test_category],
+                                :test_sub_category => @meta_data[:test_sub_category],
+                                :test_report_type => @meta_data[:test_report_type],
+                                :date => {"year" => "2013", "month" => "2", "day" => "20", "hour" => "00", "minute" => "00"},
+                                :browser => @meta_data[:browser],
+                                :host_name => @meta_data[:host_name],
+                                :os_name => @meta_data[:os_name],
+                                :type_of_environment => @meta_data[:type_of_environment],
+                                :logDirectory => @file_without_errors}
     end
 
     it "uploads data and redirect to success page" do
       post :create, @upload_without_errors
-      response.should redirect_to upload_show_path(:project_id => @project.id, :project_meta_id => @meta_data.id, :sub_project_id => @sub_project.id)
+      redirect_params = Rack::Utils.parse_query(URI.parse(response.location).query)
+      response.should redirect_to upload_show_path(:project_id => @project.id, :project_meta_id => redirect_params["project_meta_id"], :sub_project_id => @sub_project.id)
     end
 
     it "check success page shows the project details" do
       post :create, @upload_without_errors
-      get :show, {:project_id => @project.id, :project_meta_id => @meta_data.id, :sub_project_id => @sub_project.id}
+      redirect_params = Rack::Utils.parse_query(URI.parse(response.location).query)
+      get :show, {:project_id => @project.id, :project_meta_id => redirect_params["project_meta_id"], :sub_project_id => @sub_project.id}
       response.should render_template :show
       response.code.should eq("200")
       assigns[:project].should == @project
       assigns[:sub_project].should == @sub_project
-      assigns[:project_meta].should == @meta_data
+      assigns[:project_meta][:ci_job_name].should match (/#{@meta_data[:ci_job_name]}/i)
+      assigns[:project_meta][:os_name].should match (/#{@meta_data[:os_name]}/i)
+      assigns[:project_meta][:host_name].should match (/#{@meta_data[:host_name]}/i)
+      assigns[:project_meta][:browser].should match (/#{@meta_data[:browser]}/i)
+      assigns[:project_meta][:type_of_environment].should match (/#{@meta_data[:type_of_environment]}/i)
+      assigns[:project_meta][:test_category].should match (/#{@meta_data[:test_category]}/i)
+      assigns[:project_meta][:test_report_type].should match (/#{@meta_data[:test_report_type]}/i)
+      assigns[:project_meta][:test_sub_category].should match (/#{@meta_data[:test_sub_category]}/i)
       flash[:notice].should == "Project Successfully Saved!!"
     end
 
@@ -74,5 +96,5 @@ end
 def create_or_load_project_if_not_present
   @project ||= FactoryGirl.create(:project)
   @sub_project ||= FactoryGirl.create(:sub_project, :project_id => @project.id)
-  @meta_data ||= FactoryGirl.create(:test_metadatum, :sub_project_id => @sub_project.id)
+  @meta_data ||= FactoryGirl.build(:test_metadatum_hash, :sub_project_id => @sub_project.id)
 end
