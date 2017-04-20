@@ -4,7 +4,7 @@
 
 require File.expand_path('../config/application', __FILE__)
 require 'date'
-require 'selenium-webdriver'
+# require 'selenium-webdriver'
 
 Tta::Application.load_tasks
 

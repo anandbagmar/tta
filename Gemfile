@@ -27,23 +27,26 @@ gem 'html2haml'
 gem "haml-rails"
 gem "ruby_parser","~> 3.1.1"
 gem "hpricot"
+gem "activerecord-mysql2-adapter"
+
 
 group :development, :test do
-  gem 'factory_girl_rails' # use factories instead of fixtures
-  gem 'rspec-rails' # test framework
-  gem 'rspec'
-  gem 'rspec-core'
-  gem 'rspec-expectations'
-  gem 'rspec-mocks'
-  gem "cucumber-rails", :require => false # integration test framework
-  gem 'simplecov' # test coverage report
-  gem 'shoulda'
+  # gem 'factory_girl_rails' # use factories instead of fixtures
+  # gem 'rspec-rails' # test framework
+  # gem 'rspec'
+  # gem 'rspec-core'
+  # gem 'rspec-expectations'
+  # gem 'rspec-mocks'
+  # gem "cucumber-rails", :require => false # integration test framework
+  # gem 'simplecov' # test coverage report
+  # gem 'shoulda'
   gem 'pry'
   gem 'pry-nav'
-  gem 'capybara'
-  gem 'fabrication'
+  # gem 'capybara'
+  # gem 'fabrication'
   gem 'jasmine'
-  gem 'jasmine-headless-webkit'
+  # gem 'jasmine-headless-webkit'
+  gem 'test-unit', '~> 3.0'
 end
 
 group :cucumber do

@@ -18,3 +18,36 @@ See the {TTA wiki page}[https://github.com/anandbagmar/tta/wiki] for more inform
  *
  * See LICENSE.txt for further details.
 **/
+
+
+== Installation steps
+* Install ruby 2.4.1
+    brew install rbenv ruby-build
+
+    # Add rbenv to bash so that it loads every time you open a terminal
+    echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.bash_profile
+    source ~/.bash_profile
+
+    rbenv rehash
+    rbenv install 2.4.1
+    rbenv rehash
+    rbenv global 2.4.1
+    rbenv local 2.4.1
+
+* Install Rails
+    gem install rails -v 5.0.1
+    rbenv rehash
+    rails -v
+
+    bundle install
+
+* Install MySQL 5.7.18 and start the server.
+
+Get the TTA code from Github by executing the following command from the folder of your choice. 'git clone https://github.com/anandbagmar/tta.git'
+Install Bundler and Run the bundle of commands in the same folder using command 'bundle install'
+Specify destination path for storing logs in server.
+To see the available commands use: 'rake -T'
+To setup the database,for test environment use: 'RAILS_ENV=test rake db:create db:setup db:migrate'
+To start TTA in test mode use: 'RAILS_ENV=test rails s'
+To run the specs use: 'rake spec'
+Write rake task to upload logs and hit the server with the given static IP.
