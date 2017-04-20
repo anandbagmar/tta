@@ -14,7 +14,7 @@ See the {TTA wiki page}[https://github.com/anandbagmar/tta/wiki] for more inform
  * Created by: Anand Bagmar
  * Email: abagmar@gmail.com
  *
- * Copyright 2013 ThoughtWorks, Inc.  Distributed under the Apache 2.0 License
+ * Distributed under the Apache 2.0 License
  *
  * See LICENSE.txt for further details.
 **/
