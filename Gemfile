@@ -1,36 +1,37 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.12'
-gem 'mysql2'
+gem 'rails', '~> 4.2', '>= 4.2.8'
 
 # Gems used only for assets and not required
 # in production environments by default.
 
 group :assets do
-  gem 'sass-rails', '~> 3.2.3'
-  gem 'therubyracer', :require => 'v8'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'sass-rails', '~> 5.0', '>= 5.0.6'
+  gem 'therubyracer', '~> 0.12.3'
+  gem 'uglifier', '~> 3.2'
 end
 
-gem 'thin'
-gem 'xml-simple'
-gem 'yarjuf'
-gem 'net-scp'
-gem 'mocha', require: false
-gem 'jquery-ui-rails'
-gem 'jquery-rails'
-gem 'jquery_datepicker'
-gem 'rubyzip','~> 0.9.9'
-gem 'simple_form'
-gem "haml", "~> 4.0.3"
-gem 'html2haml'
-gem "haml-rails"
-gem "ruby_parser","~> 3.1.1"
-gem "hpricot"
-gem "activerecord-mysql2-adapter"
-
+gem 'thin', '~> 1.7'
+gem 'xml-simple', '~> 1.1', '>= 1.1.5'
+gem 'yarjuf', '~> 2.0'
+gem 'net-scp', '~> 1.2', '>= 1.2.1'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
+gem 'responders', '~> 2.1'
+# gem 'jquery_datepicker', '~> 0.4'
+gem 'flot-rails', '~> 0.0.7'
+gem 'rubyzip', '~> 1.2', '>= 1.2.1'
+gem 'simple_form', '~> 3.4'
+gem 'haml', '~> 4.0', '>= 4.0.7'
+gem 'html2haml', '~> 2.1'
+gem 'haml-rails', '~> 0.9.0'
+gem 'ruby_parser', '~> 3.9'
+gem 'hpricot', '~> 0.8.6'
+gem 'protected_attributes', '~> 1.1', '>= 1.1.3'
 
 group :development, :test do
+  gem 'mysql2', '~> 0.4.5'
+  gem 'mocha', '~> 1.2', '>= 1.2.1'
   # gem 'factory_girl_rails' # use factories instead of fixtures
   # gem 'rspec-rails' # test framework
   # gem 'rspec'
@@ -40,15 +41,15 @@ group :development, :test do
   # gem "cucumber-rails", :require => false # integration test framework
   # gem 'simplecov' # test coverage report
   # gem 'shoulda'
-  gem 'pry'
-  gem 'pry-nav'
+  # gem 'pry'
+  # gem 'pry-nav'
   # gem 'capybara'
   # gem 'fabrication'
-  gem 'jasmine'
+  # gem 'jasmine'
   # gem 'jasmine-headless-webkit'
-  gem 'test-unit', '~> 3.0'
+  # gem 'test-unit', '~> 3.0'
 end
 
-group :cucumber do
-  gem 'headless'
-end
+# group :cucumber do
+#   gem 'headless'
+# end

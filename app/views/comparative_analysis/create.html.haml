@@ -9,7 +9,8 @@
         %tr.required-field-date-field
           %td
             %label{:for => "start_date"} Start Date:
-          %td= datepicker_input 'comparative_analysis', 'start_date', :dateFormat => "yy-mm-dd", :readonly => "readonly", :maxDate => 0, :placeholder => 'YYYY-MM-DD', :class => 'required'
+          %td
+            %div= datepicker_input 'comparative_analysis', 'start_date', :dateFormat => "yy-mm-dd", :readonly => "readonly", :maxDate => 0, :placeholder => 'YYYY-MM-DD', :class => 'required'
         %tr.required-field-date-field
           %td
             %label{:for => "end_date"} End Date:
