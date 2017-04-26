@@ -1,4 +1,3 @@
-require 'pry'
 require_relative 'common_seed_data'
 module Seed
   module Helper
@@ -43,7 +42,7 @@ module Seed
           :test_report_type => SAMPLE_TEST_REPORT_TYPES[rand(SAMPLE_TEST_REPORT_TYPES.length)])
       test_meta_data.sub_project_id= sub_project_id
       test_meta_data.save
-      TestMetadatum.all(:select => :id, :conditions => {:sub_project_id => sub_project_id}).last.id
+      TestMetadatum.where(:sub_project_id => sub_project_id).last.id
     end
 
     def self.get_respective_test_sub_category(test_category)

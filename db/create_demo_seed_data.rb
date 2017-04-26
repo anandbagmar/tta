@@ -33,7 +33,7 @@ def self.create_demo_test_meta_data(sub_project_id, date_of_execution)
       :test_report_type => SAMPLE_TEST_REPORT_TYPES[rand(SAMPLE_TEST_REPORT_TYPES.length)])
   test_meta_data.sub_project_id= sub_project_id
   test_meta_data.save
-  TestMetadatum.all(:select => :id, :conditions => {:sub_project_id => sub_project_id}).last.id
+  TestMetadatum.where(:sub_project_id => sub_project_id).last.id
 end
 
 def self.create_demo_test_suite_record(meta_data_record_id,test_suite_class_name,max_number_of_tests)
