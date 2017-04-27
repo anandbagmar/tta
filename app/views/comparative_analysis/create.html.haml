@@ -10,12 +10,12 @@
           %td
             %label{:for => "start_date"} Start Date:
           %td
-            %div= datepicker_input 'comparative_analysis', 'start_date', :dateFormat => "yy-mm-dd", :readonly => "readonly", :maxDate => 0, :placeholder => 'YYYY-MM-DD', :class => 'required'
+            %div= date_field 'comparative_analysis', 'start_date', :value => Time.now.strftime('%Y-%m-%d'), :class => 'required'
         %tr.required-field-date-field
           %td
             %label{:for => "end_date"} End Date:
           %td
-            %div= datepicker_input 'comparative_analysis', 'end_date', :dateFormat => "yy-mm-dd", :readonly => "readonly", :maxDate => 0, :placeholder => 'YYYY-MM-DD', :class => 'required'
+            %div= date_field 'comparative_analysis', 'end_date', :value => Time.now.strftime('%Y-%m-%d'), :class => 'required'
             %div.errormsg Select End Date Greater Than Start Date
         %tr.fields
           %td

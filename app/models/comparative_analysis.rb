@@ -9,7 +9,7 @@ class ComparativeAnalysis
       sub_project_result_set = {}
       test_category_mapping_list.each do |test_category_mapping|
         metadata_records = metadata_list.where(:test_category => test_category_mapping.test_category, :test_sub_category => test_category_mapping.test_sub_category)
-        metadata_records_for_selected_date_range = metadata_records.find_all_by_date_of_execution(start_date.beginning_of_day..end_date.end_of_day)
+        metadata_records_for_selected_date_range = metadata_records.where(:date_of_execution => start_date.beginning_of_day..end_date.end_of_day)
         aggregate_value = get_percentage_of_passing_tests(metadata_records_for_selected_date_range)
         test_category_and_sub_category = test_category_mapping.test_category + " : " +test_category_mapping.test_sub_category
         if aggregate_value != []
@@ -22,7 +22,7 @@ class ComparativeAnalysis
   end
 
   def get_sub_project_ids(project_id, sub_project_id)
-    sub_project_id == "ALL" ? (SubProject.find_all_by_project_id(project_id)).map { |sub_project| sub_project.id } : [SubProject.find(sub_project_id).id]
+    sub_project_id == 'ALL' ? (SubProject.where(:project_id => project_id)).map { |sub_project| sub_project.id } : [SubProject.find(sub_project_id).id]
   end
 
   private
