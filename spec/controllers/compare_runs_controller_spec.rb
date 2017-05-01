@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CompareRunsController do
+describe CompareRunsController, type: :controller do
   context "GET 'comapre_runs'" do
 
     it "returns http success" do

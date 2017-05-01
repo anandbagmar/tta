@@ -1,7 +1,6 @@
 require 'spec_helper'
 
-describe ExecutionTrendsController do
-
+describe ExecutionTrendsController, type: :controller do
   context 'class_names' do
     it 'should return class_names for selected filters if request is xhr' do
       project= FactoryGirl.create(:project)
@@ -11,7 +10,7 @@ describe ExecutionTrendsController do
       case_record= FactoryGirl.create(:test_case_record, test_suite_record: suite_record)
       xhr :get, :class_names, {subproject_id: sub_project.id, test_category: metadata.test_category, start_date: Date.yesterday.to_s, end_date: Date.today.to_s}
       response.should be_success
-      response.body.should == "[{\"class_name\":\"#{case_record.class_name}\"}]"
+      JSON.parse(response.body).should == [{'id' => nil, 'class_name' => case_record.class_name}]
     end
 
     it 'should render bad request if request is not xhr' do

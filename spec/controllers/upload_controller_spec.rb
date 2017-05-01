@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UploadController do
+describe UploadController, type: :controller do
 
   context "GET 'upload'" do
     it "returns http success" do
@@ -88,7 +88,7 @@ describe UploadController do
         FactoryGirl.create(:test_category_mapping)
       end
       get :get_test_sub_category, {test_category: "UNIT TEST"}
-      response.body.should == "[{\"test_sub_category\":\"UNIT TEST\"}]"
+      JSON.parse(response.body).should == [{'id' => nil, 'test_sub_category' => 'UNIT TEST'}]
     end
   end
 end

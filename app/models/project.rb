@@ -10,7 +10,7 @@ class Project < ActiveRecord::Base
   }
 
   def add_sub_project(params)
-    sub_projects.find_or_create_by_name((params[:sub_project_name]).split.join(" ").upcase)
+    sub_projects.where(name: (params[:sub_project_name]).split.join(" ").upcase).first_or_create
   end
 
   private

@@ -1,8 +1,6 @@
 require 'spec_helper'
 
-
-describe DefectAnalysisController do
-
+describe DefectAnalysisController, type: :controller do
   describe "GET 'new'" do
     it "returns http success" do
       get 'new'
@@ -10,7 +8,6 @@ describe DefectAnalysisController do
       expect(response.code).to eq("200")
     end
   end
-
 
   it"should throw error if sub_project id, date and test category not given" do
     expect{DefectAnalysis.new.get_result_json(nil,nil,"")}.to raise_error
@@ -24,5 +21,4 @@ describe DefectAnalysisController do
     sub_project = FactoryGirl.create(:sub_project)
     expect{DefectAnalysis.new.get_result_json(sub_project.id,null,"ALL")}.to raise_error
   end
-
 end

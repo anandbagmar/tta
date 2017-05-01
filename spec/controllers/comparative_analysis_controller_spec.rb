@@ -1,8 +1,6 @@
 require 'spec_helper'
 
-
-describe ComparativeAnalysisController do
-
+describe ComparativeAnalysisController, type: :controller do
   describe "GET 'create'" do
     it "returns http success" do
       get 'create'
@@ -14,8 +12,8 @@ describe ComparativeAnalysisController do
   it "should return result set for all test sub category" do
     project = FactoryGirl.create(:project)
     sub_project = FactoryGirl.create(:sub_project, :project_id => project.id)
-    today=Date.yesterday.to_time_in_current_zone
-    yesterday=Date.yesterday.to_time_in_current_zone
+    today= Time.zone.today.in_time_zone
+    yesterday=Time.zone.yesterday.in_time_zone
     test_metadata1 = FactoryGirl.create(:test_metadatum, sub_project_id: sub_project.id, date_of_execution: yesterday)
     test_metadata2 = FactoryGirl.create(:test_metadatum, sub_project_id: sub_project.id, date_of_execution: today, test_category: "FUNCTIONAL TEST", test_sub_category: "REGRESSION TEST")
     test_metadata3 = FactoryGirl.create(:test_metadatum, sub_project_id: sub_project.id, date_of_execution: today, test_category: "FUNCTIONAL TEST", test_sub_category: "SMOKE TEST")
@@ -30,8 +28,8 @@ describe ComparativeAnalysisController do
   it "should return result set for selected test sub category" do
     project = FactoryGirl.create(:project)
     sub_project = FactoryGirl.create(:sub_project, :project_id => project.id)
-    today=Date.yesterday.to_time_in_current_zone
-    yesterday=Date.yesterday.to_time_in_current_zone
+    today=Time.zone.today.in_time_zone
+    yesterday=Time.zone.yesterday.in_time_zone
     test_metadata1 = FactoryGirl.create(:test_metadatum, sub_project_id: sub_project.id, date_of_execution: yesterday)
     test_metadata2 = FactoryGirl.create(:test_metadatum, sub_project_id: sub_project.id, date_of_execution: today, test_category: "FUNCTIONAL TEST", test_sub_category: "REGRESSION TEST")
     test_metadata3 = FactoryGirl.create(:test_metadatum, sub_project_id: sub_project.id, date_of_execution: today, test_category: "FUNCTIONAL TEST", test_sub_category: "SMOKE TEST")
@@ -46,9 +44,9 @@ describe ComparativeAnalysisController do
   describe "Get 'test_category_mapping_list'" do
     it "should return a list of test category and test sub category" do
       sub_project = FactoryGirl.create(:sub_project)
-      test_metadata1 = FactoryGirl.create(:test_metadatum, sub_project_id: sub_project.id, date_of_execution: Date.yesterday.to_time_in_current_zone)
-      test_metadata2 = FactoryGirl.create(:test_metadatum, sub_project_id: sub_project.id, date_of_execution: Date.today.to_time_in_current_zone, test_category: "FUNCTIONAL TEST", test_sub_category: "REGRESSION TEST")
-      test_metadata3 = FactoryGirl.create(:test_metadatum, sub_project_id: sub_project.id, date_of_execution: Date.today.to_time_in_current_zone, test_category: "FUNCTIONAL TEST", test_sub_category: "SMOKE TEST")
+      test_metadata1 = FactoryGirl.create(:test_metadatum, sub_project_id: sub_project.id, date_of_execution: Time.zone.yesterday.in_time_zone)
+      test_metadata2 = FactoryGirl.create(:test_metadatum, sub_project_id: sub_project.id, date_of_execution: Time.zone.today.in_time_zone, test_category: "FUNCTIONAL TEST", test_sub_category: "REGRESSION TEST")
+      test_metadata3 = FactoryGirl.create(:test_metadatum, sub_project_id: sub_project.id, date_of_execution: Time.zone.today.in_time_zone, test_category: "FUNCTIONAL TEST", test_sub_category: "SMOKE TEST")
       get :test_category_mapping_list, {sub_project_id: sub_project.id, comparative_analysis_start_date: Date.yesterday, comparative_analysis_end_date: Date.today}
       response.should be_success
       response.body.should == "[\"UNIT TEST\",\"REGRESSION TEST\",\"SMOKE TEST\"]"
@@ -75,8 +73,8 @@ describe ComparativeAnalysisController do
     post :date_filter, :project_id => project.id, :comparative_analysis => {:start_date => start_date, :end_date => end_date}, :sub_project_id => sub_project.id
     assert_response :success
     @controller.expects(:create)
-    assert_not_nil assigns(@json)
-    assert_not_nil flash[:no_data_error]
+    assert assigns(@json) != nil
+    assert flash[:no_data_error] != nil
     assert_equal flash[:no_data_error], "No Data between the Date Range "+start_date+" To "+end_date
   end
 end

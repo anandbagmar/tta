@@ -32,15 +32,15 @@ gem 'protected_attributes', '~> 1.1', '>= 1.1.3'
 group :development, :test do
   gem 'mysql2', '~> 0.4.5'
   gem 'mocha', '~> 1.2', '>= 1.2.1'
-  # gem 'factory_girl_rails' # use factories instead of fixtures
-  # gem 'rspec-rails' # test framework
-  # gem 'rspec'
-  # gem 'rspec-core'
-  # gem 'rspec-expectations'
-  # gem 'rspec-mocks'
-  # gem "cucumber-rails", :require => false # integration test framework
-  # gem 'simplecov' # test coverage report
-  # gem 'shoulda'
+  gem 'factory_girl_rails' # use factories instead of fixtures
+  gem 'rspec-rails' # test framework
+  gem 'rspec'
+  gem 'rspec-core'
+  gem 'rspec-expectations'
+  gem 'rspec-mocks'
+  gem "cucumber-rails", :require => false # integration test framework
+  gem 'simplecov' # test coverage report
+  gem 'shoulda'
   # gem 'pry'
   # gem 'pry-nav'
   # gem 'capybara'

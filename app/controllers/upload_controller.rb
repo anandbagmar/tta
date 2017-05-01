@@ -49,7 +49,7 @@ class UploadController < ApplicationController
 
   private
   def parse_and_store_test_run_data
-    project = Project.find_or_create_by_name((params[:project_name].split.join(" ").upcase))
+    project = Project.where(name: (params[:project_name].split.join(' ').upcase)).first_or_create
     sub_project = project.add_sub_project(params)
     meta_data=sub_project.create_test_metadatum params
     sub_project.parse_and_save_log_files(meta_data, params)

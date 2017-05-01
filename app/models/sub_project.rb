@@ -22,7 +22,16 @@ class SubProject < ActiveRecord::Base
     if (params[:test_sub_category]=="")
       params[:test_sub_category]= test_category.select("test_sub_category").first[:test_sub_category]
     end
-    meta_datum = test_metadatum.find_or_create_by_ci_job_name_and_browser_and_type_of_environment_and_host_name_and_os_name_and_test_category_and_test_report_type_and_test_sub_category_and_date_of_execution((params[:ci_job_name]).split.join(" ").upcase, (params[:browser]).split.join(" ").upcase, (params[:type_of_environment]).split.join(" ").upcase, (params[:host_name]).split.join(" ").upcase, (params[:os_name]).split.join(" ").upcase, params[:test_category].upcase, params[:test_report_type].upcase, params[:test_sub_category].upcase, date_of_execution)
+    meta_datum = test_metadatum.where(ci_job_name: (params[:ci_job_name]).split.join(' ').upcase,
+                         browser: (params[:browser]).split.join(' ').upcase,
+                         type_of_environment: (params[:type_of_environment]).split.join(' ').upcase,
+                         host_name: (params[:host_name]).split.join(' ').upcase,
+                         os_name: (params[:os_name]).split.join(' ').upcase,
+                         test_category: params[:test_category].upcase,
+                         test_report_type: params[:test_report_type].upcase,
+                         test_sub_category: params[:test_sub_category].upcase,
+                         date_of_execution: date_of_execution).first_or_create
+
     meta_datum.save
     test_sub_category_list = test_category.select("test_sub_category")
     if (!(params[:test_sub_category].in? test_sub_category_list.map { |test_sub_category| test_sub_category["test_sub_category"] }))
