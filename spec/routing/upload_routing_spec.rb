@@ -1,7 +1,6 @@
 require "spec_helper"
 
-
-describe UploadController do
+describe UploadController, :type => :routing do
   describe "routing" do
     it " routes to upload/create" do
       assert_generates '/upload/create', :controller => 'upload', :action => 'create'
@@ -22,6 +21,5 @@ describe UploadController do
     it " routes to /get_default_test_sub_category" do
       assert_generates '/get_default_test_sub_category', :controller => 'upload', :action => 'get_default_test_sub_category'
     end
-
   end
 end

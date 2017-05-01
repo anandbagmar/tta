@@ -1,6 +1,6 @@
 require "rspec"
 
-describe "ExecutionTrends" do
+describe "ExecutionTrends", :type => :routing do
   context "routes" do
     it "should route to new action" do
       {get: '/execution_trends'}.should route_to('execution_trends#new')
