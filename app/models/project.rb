@@ -6,7 +6,7 @@ class Project < ActiveRecord::Base
   validates_presence_of :name
 
   scope :get_all_projects, -> {
-    select("id, name");
+    Project.all
   }
 
   def add_sub_project(params)

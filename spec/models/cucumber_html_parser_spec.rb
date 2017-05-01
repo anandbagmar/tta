@@ -1,5 +1,5 @@
 describe CucumberHtmlParser do
-  describe Visualization,ComparativeAnalysis,DefectAnalysis do
+  describe 'Visualization,ComparativeAnalysis,DefectAnalysis' do
 
     it "should return proper json on valid data entry for Cucumber HTML Parser" do
       project = FactoryGirl.create(:project)
@@ -19,9 +19,6 @@ describe CucumberHtmlParser do
 
       result_defect = DefectAnalysis.new.get_result_json(sub_project.id,"2013-02-20".to_date,"UNIT TEST")
       result_defect.should eq("{\"sub_project_name\":\"TTA_SUBPROJECT\",\"errors\":{\"UNIT TEST\":[{\"ERROR_MSG\":[\"Class_01\",\"Class_01\",\"Class_01\",\"Class_01\"]}]},\"percentage\":[\"100.00\"]}")
-
-
     end
   end
-
 end

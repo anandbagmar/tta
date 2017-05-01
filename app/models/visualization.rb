@@ -23,7 +23,7 @@ class Visualization
       end
     end
     @json = {
-        :sub_project_name => SubProject.find(sub_project_id, :select => "name").name,
+        :sub_project_name => SubProject.find(sub_project_id).name,
         :test_types => test_types.sort_by { |test_type| test_type[:seq_no] },
         :unknown_test_types => (unknown_test_types if unknown_test_types!=[])
     }.to_json

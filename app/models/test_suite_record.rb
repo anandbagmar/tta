@@ -4,7 +4,7 @@ class TestSuiteRecord < ActiveRecord::Base
   attr_accessible :class_name, :number_of_errors, :number_of_failures, :number_of_tests, :time_taken,:number_of_tests_not_run,:number_of_tests_ignored,:test_metadatum_id
 
   def self.get_test_suite_records(test_meta_data)
-    TestSuiteRecord.select("id").find_all_by_test_metadatum_id(test_meta_data)
+    TestSuiteRecord.where(test_metadatum_id: test_meta_data).select('id')
   end
 
   # This method is here to make specs for compare run to pass

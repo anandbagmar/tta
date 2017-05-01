@@ -12,7 +12,6 @@ describe DefectAnalysis do
     expect{DefectAnalysis.new.get_result_json(nil,"2013-02-19".to_date,"ALL")}.to raise_error
   end
 
-
   it "should throw error when analysis_date is nil" do
     expect{DefectAnalysis.new.get_result_json("1",nil,"ALL")}.to raise_error
   end
@@ -20,10 +19,10 @@ describe DefectAnalysis do
   it "should return json with proper data" do
     project = FactoryGirl.create(:project)
     sub_project = FactoryGirl.create(:sub_project, :project_id => project.id)
-    test_metadata = FactoryGirl.create(:test_metadatum,:sub_project_id => sub_project.id)
-    test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id)
-     FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id)
-    json= DefectAnalysis.new.get_result_json(sub_project.id,"2013-02-20".to_date,"ALL")
+    test_metadata = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project.id)
+    test_suite_record = FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata.id)
+    FactoryGirl.create(:test_case_record, :test_suite_record_id => test_suite_record.id)
+    json = DefectAnalysis.new.get_result_json(sub_project.id, "2013-02-20".to_date, "ALL")
     json.should eq("{\"sub_project_name\":\"TTA_SUBPROJECT\",\"errors\":{\"UNIT TEST\":[{\"ERROR_MSG\":[\"Class_01\"]}]},\"percentage\":[\"100.00\"]}")
   end
 
@@ -71,7 +70,7 @@ describe DefectAnalysis do
      FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_1.id)
     FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_2.id)
     FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record_3.id)
-    json= DefectAnalysis.new.get_result_json(sub_project.id,"2013-02-20".to_date,"ALL")
+    json = DefectAnalysis.new.get_result_json(sub_project.id,"2013-02-20".to_date,"ALL")
     parsed_json = ActiveSupport::JSON.decode(json)
     parsed_json["errors"].should eq({"UNIT TEST"=>[{"ERROR_MSG"=>["Class_01"]}], "FUNCTIONAL TEST"=>[{"ERROR_MSG"=>["Class_01"]}], "INTEGRATION TEST"=>[{"ERROR_MSG"=>["Class_01"]}]})
   end
@@ -80,8 +79,8 @@ describe DefectAnalysis do
     project = FactoryGirl.create(:project)
     sub_project = FactoryGirl.create(:sub_project, :project_id => project.id)
 
-    test_metadata_1 = FactoryGirl.create(:test_metadatum,:sub_project_id => sub_project.id)
-    test_metadata_2 = FactoryGirl.create(:test_metadatum,:sub_project_id => sub_project.id,:test_category=>"FUNCTIONAL TEST")
+    test_metadata_1 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project.id)
+    test_metadata_2 = FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project.id, :test_category => "FUNCTIONAL TEST")
 
     test_suite_record_1 = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata_1.id)
     test_suite_record_2 = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata_2.id)
@@ -93,5 +92,4 @@ describe DefectAnalysis do
     parsed_json = ActiveSupport::JSON.decode(json)
     parsed_json["errors"]["FUNCTIONAL TEST"].should_not eq [{"ERROR_MSG"=>["Class_01"]}]
   end
-
 end

@@ -44,7 +44,7 @@ group :development, :test do
   # gem 'pry'
   # gem 'pry-nav'
   # gem 'capybara'
-  # gem 'fabrication'
+  gem 'fabrication'
   # gem 'jasmine'
   # gem 'jasmine-headless-webkit'
   # gem 'test-unit', '~> 3.0'

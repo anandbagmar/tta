@@ -83,7 +83,5 @@ describe Visualization do
     json= Visualization.new.getResultJson(sub_project.id)
     parsed_json = ActiveSupport::JSON.decode(json)
     parsed_json["unknown_test_types"][0].should eq("UNKNOWN")
-
   end
-
 end

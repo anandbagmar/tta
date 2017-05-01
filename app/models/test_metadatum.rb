@@ -13,8 +13,7 @@ class TestMetadatum < ActiveRecord::Base
   validates :test_report_type, :presence => {:message => 'cannot be blank, Task not saved'}
 
   def get_distinct_test_category sub_project_id
-    distinct_records = TestMetadatum.find_all_by_sub_project_id(sub_project_id, :select => "DISTINCT(test_category)")
-    distinct_records
+    TestMetadatum.where(sub_project_id: sub_project_id).uniq(:test_category)
   end
 
   def find_no_and_duration_of_test meta_data
@@ -31,10 +30,10 @@ class TestMetadatum < ActiveRecord::Base
   end
 
   def get_latest_record(sub_project_id, test_category)
-    @test_metadata_for_specific_test_category = TestMetadatum.find_all_by_sub_project_id_and_test_category(sub_project_id, test_category)
+    @test_metadata_for_specific_test_category = TestMetadatum.where(sub_project_id: sub_project_id, test_category: test_category)
     metadata_records = (@test_metadata_for_specific_test_category.sort_by &:date_of_execution).reverse
     metadata_records.each do |metadata|
-      if(TestSuiteRecord.find_all_by_test_metadatum_id(metadata)!=[])
+      if TestSuiteRecord.where(test_metadatum_id: metadata) != []
         return metadata
       end
     end

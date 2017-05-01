@@ -2,7 +2,6 @@ require 'spec_helper'
 require 'rspec'
 
 describe Admin do
-
   it "should return message if no projects in database" do
     json= Admin.get_result_json
     parse_json = ActiveSupport::JSON.decode(json)
@@ -60,5 +59,3 @@ describe Admin do
   parse_json.should eq(expect_json)
   end
 end
-
-

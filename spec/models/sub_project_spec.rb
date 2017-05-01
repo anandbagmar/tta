@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe SubProject do
-
-
   context "validations" do
     it { should validate_presence_of(:name).with_message('cannot be blank, Task not saved') }
     it { should validate_presence_of(:project_id).with_message('cannot be blank, Task not saved') }
@@ -26,5 +24,4 @@ describe SubProject do
       sub_project.test_metadatum.should include(meta_data)
     end
   end
-
 end

@@ -32,19 +32,19 @@ describe TestMetadatum do
     end
   end
 
-  describe "get_record_for_specific_date" do 
+  describe "get_record_for_specific_date" do
     include DataHelper
-    
+
     let(:integration_tests) {"INTEGRATION TESTS"}
     let(:unit_tests) {"UNIT TESTS"}
-    
+
     let(:project) {create_project}
     let(:sub_project) {create_subproject_for_project project}
     let(:be_equal_to_one) {eq(1)}
 
     def id_of(metadata)
       metadata.id
-    end 
+    end
 
     def be_equal_to(other)
       eql(other)
@@ -54,15 +54,15 @@ describe TestMetadatum do
       metadata.length
     end
 
-    it "distinguishes records by test category"  do    
+    it "distinguishes records by test category"  do
 
-      inserted_int_test_metadatatum = create_metadatum sub_project , "2013-01-01" , integration_tests    
+      inserted_int_test_metadatatum = create_metadatum sub_project , "2013-01-01" , integration_tests
       inserted_unit_test_metadatatum = create_metadatum sub_project , "2013-01-01" , unit_tests
-  
+
       retrieved_int_test_metadata = get_metadata(
         sub_project,
         integration_tests,
-        inserted_int_test_metadatatum.date_of_execution)  
+        inserted_int_test_metadatatum.date_of_execution)
 
       retrieved_unit_test_metadata = get_metadata(
         sub_project,
@@ -70,21 +70,21 @@ describe TestMetadatum do
         inserted_unit_test_metadatatum.date_of_execution)
 
       length_of(retrieved_int_test_metadata).should be_equal_to_one
-      length_of(retrieved_unit_test_metadata).should be_equal_to_one      
+      length_of(retrieved_unit_test_metadata).should be_equal_to_one
       id_of(retrieved_int_test_metadata.first).should be_equal_to(id_of inserted_int_test_metadatatum)
       id_of(retrieved_unit_test_metadata.first).should be_equal_to(id_of inserted_unit_test_metadatatum)
 
     end
-    
-    it "distinguishes records by test execution date" do 
 
-      inserted_int_test_metadatatum1 = create_metadatum sub_project , "2013-01-01" , integration_tests     
-      inserted_int_test_metadatatum2 = create_metadatum sub_project , "2013-01-02" , integration_tests     
-  
+    it "distinguishes records by test execution date" do
+
+      inserted_int_test_metadatatum1 = create_metadatum sub_project , "2013-01-01" , integration_tests
+      inserted_int_test_metadatatum2 = create_metadatum sub_project , "2013-01-02" , integration_tests
+
       retrieved_int_test_metadata1 = get_metadata(
         sub_project,
         integration_tests,
-        inserted_int_test_metadatatum1.date_of_execution) 
+        inserted_int_test_metadatatum1.date_of_execution)
 
       retrieved_int_test_metadata2 = get_metadata(
         sub_project,
@@ -92,13 +92,13 @@ describe TestMetadatum do
         inserted_int_test_metadatatum2.date_of_execution)
 
       length_of(retrieved_int_test_metadata1).should be_equal_to_one
-      length_of(retrieved_int_test_metadata2).should be_equal_to_one 
+      length_of(retrieved_int_test_metadata2).should be_equal_to_one
       id_of(retrieved_int_test_metadata1.first).should be_equal_to(id_of inserted_int_test_metadatatum1)
-      id_of(retrieved_int_test_metadata2.first).should be_equal_to(id_of inserted_int_test_metadatatum2)    
+      id_of(retrieved_int_test_metadata2.first).should be_equal_to(id_of inserted_int_test_metadatatum2)
     end
 
-    it "distinguishes records by sub projects" do 
-       
+    it "distinguishes records by sub projects" do
+
       sub_project_other = create_other_subproject_for_project project
 
       inserted_sub_project_metadatum = create_metadatum sub_project , "2013-01-01" , integration_tests
@@ -109,7 +109,7 @@ describe TestMetadatum do
       retrieved_sub_project_metadata = get_metadata(
         sub_project,
         integration_tests,
-        date_of_execution) 
+        date_of_execution)
 
       retrieved_sub_project_other_metadata = get_metadata(
         sub_project_other,
