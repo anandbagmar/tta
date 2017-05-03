@@ -31,4 +31,4 @@
 /.vagrant/
 .gems_tta
 .rbenv-gemsets
-Gemfile.lock
+vendor
