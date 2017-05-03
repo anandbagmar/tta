@@ -7,7 +7,7 @@ class DefectAnalysisController < ApplicationController
   def getRunDates
     sub_project_id =params["subproject_id"]
     test_category =params["test_category"]
-    metadataForSelectedFilters = TestMetadatum.where(:sub_project_id => sub_project_id).select([:date_of_execution]).uniq
+    metadataForSelectedFilters = TestMetadatum.where(:sub_project_id => sub_project_id).select([:id, :date_of_execution]).uniq(:date_of_execution)
 
     if (test_category != "ALL")
       metadataForSelectedFilters = metadataForSelectedFilters.where(:test_category => test_category)
@@ -42,7 +42,7 @@ class DefectAnalysisController < ApplicationController
   def getValidMetadataRecords(metadataRecords)
     runs = []
     metadataRecords.each do |metadata|
-      if (TestSuiteRecord.find_all_by_test_metadatum_id(TestMetadatum.where(:date_of_execution => metadata.date_of_execution))!=[])
+      if (TestSuiteRecord.find_by_test_metadatum_id(TestMetadatum.where(:date_of_execution => metadata.date_of_execution))!=[])
         runs.append(metadata.date_of_execution)
       end
     end
