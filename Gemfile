@@ -41,8 +41,8 @@ group :development, :test do
   gem "cucumber-rails", :require => false # integration test framework
   gem 'simplecov' # test coverage report
   gem 'shoulda'
-  # gem 'pry'
-  # gem 'pry-nav'
+  gem 'pry', '~> 0.10.4'
+  gem 'pry-nav', '~> 0.2.4'
   # gem 'capybara'
   gem 'fabrication'
   # gem 'jasmine'
