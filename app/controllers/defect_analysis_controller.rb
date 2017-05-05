@@ -3,7 +3,6 @@ class DefectAnalysisController < ApplicationController
   def new
   end
 
-
   def getRunDates
     sub_project_id =params["subproject_id"]
     test_category =params["test_category"]

@@ -2,3 +2,4 @@ test_report_type_mapping:
     junit : xml
     nunit : nunit_xml
     cucumber_html : html
+    cucumber_json  : json
