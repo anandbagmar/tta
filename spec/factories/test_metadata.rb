@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :test_metadatum, :class => TestMetadatum do
-    sub_project
+    platform
     ci_job_name "Build"
     os_name "MacOSX"
     host_name "host_pc"
@@ -17,7 +17,7 @@ end
 
 FactoryGirl.define do
   factory :test_metadatum_hash, :class => Hash do
-    sub_project
+    platform
     ci_job_name "Build"
     os_name "MacOSX"
     host_name "host_pc"

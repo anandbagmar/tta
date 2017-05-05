@@ -58,19 +58,19 @@ var Pyramid = {
             zIndex--;
         }
     },
-    plotBlockPyramid:function (projectJson) {
-        var unknownTestTypes = projectJson.unknown_test_types;
-        var test_category = projectJson.test_types;
+    plotBlockPyramid:function (productJson) {
+        var unknownTestTypes = productJson.unknown_test_types;
+        var test_category = productJson.test_types;
         if ((unknownTestTypes != null) && (test_category.length == 0)) {
 
             plotPyramidWithUnknownTestCategory(unknownTestTypes);
         }
         else if ((unknownTestTypes == null) && (test_category.length != 0)) {
-            plotPyramidWithKnownTestCategory(projectJson);
+            plotPyramidWithKnownTestCategory(productJson);
         }
         else {
             plotPyramidWithUnknownTestCategory(unknownTestTypes);
-            plotPyramidWithKnownTestCategory(projectJson);
+            plotPyramidWithKnownTestCategory(productJson);
         }
     }
 };
@@ -85,7 +85,7 @@ plotPyramidWithUnknownTestCategory = function (unknownTestTypes) {
     $("#display_message").html(message);
 };
 
-plotPyramidWithKnownTestCategory = function (projectJson) {
+plotPyramidWithKnownTestCategory = function (productJson) {
     var renderString = "";
     var table_header = "";
     var table_content = "";
@@ -93,10 +93,10 @@ plotPyramidWithKnownTestCategory = function (projectJson) {
     var proj_title = "";
 
     table_header = "<tr class='table_header'> <th>TEST TYPES</th> <th>NUMBER OF TESTS</th> <th style='width: 10%;'>TOTAL RUN TIME (HH:MM:SS:MS)</th> <th>TEST TYPE %</th> <th>PASSING %</th> </tr>";
-    var typeOfTests = projectJson.test_types,
+    var typeOfTests = productJson.test_types,
         width = 400,
         height = 400;
-    proj_title = "<h3>Test-Pyramid for : " + projectJson.sub_project_name.toUpperCase() + "</h3><br>";
+    proj_title = "<h3>Test-Pyramid for : " + productJson.platform_name.toUpperCase() + "</h3><br>";
     var pyramidItems = [];
     var bottom = 0;
     for (var index = 0, len = typeOfTests.length; index < len; index++) {

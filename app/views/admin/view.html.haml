@@ -7,5 +7,9 @@
 
 :javascript
   $(document).ready(function () {
-      ProjectStatistics.renderTable("#{@json.gsub!('"','\"')}");
+      ProductStatistics.renderTable("#{@json.gsub!('"','\"')}");
+  });
+
+  $(document).ready(function () {
+      ProductStatistics.renderTable("#{@json.gsub!('"','\"')}");
   });

@@ -1,32 +1,32 @@
 class Admin < ActiveRecord::Base
 
-  def self.create_result_json(projects)
+  def self.create_result_json(products)
     json=Hash.new
-    if (projects.none?)
-      json["message"]="No Projects Using TTA"
+    if (products.none?)
+      json["message"]="No Products Using TTA"
     else
-      projects.each do |project|
-        key=project.id
+      products.each do |product|
+        key=product.id
         json[key]=[]
-        sub_project_data = project.sub_projects.select("name , project_id , id")
-        json[key].push("project_name" => project.name)
-        sub_project_name=[]
+        platform_data = product.platforms.select("name , product_id , id")
+        json[key].push("product_name" => product.name)
+        platform_name=[]
         test_count=[]
 
-        sub_project_data.each do |data|
-          sub_project_name.push(data.name)
+        platform_data.each do |data|
+          platform_name.push(data.name)
           test_count.push(data.test_metadatum.length)
         end
 
-        json[key].push("sub_projects" => sub_project_name)
+        json[key].push("platforms" => platform_name)
         json[key].push("test_count" => test_count)
       end
     end
     return json
   end
 
-  def self.get_result_json(projects= {})
-    @json=create_result_json(projects)
+  def self.get_result_json(products= {})
+    @json=create_result_json(products)
     @json = @json.to_json
     @json
   end

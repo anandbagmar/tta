@@ -39,9 +39,9 @@
               <target>
                 <exec executable="curl">
                   <arg value="-F"/>
-                  <arg value="project_name=PROJECT"/>       <!-- Provide project name-->
+                  <arg value="product_name=PRODUCT"/>       <!-- Provide project name-->
                   <arg value="-F"/>
-                  <arg value="sub_project_name=SUB_PROJECT"/>
+                  <arg value="platform_name=PLATFORM"/>
                   <arg value="-F"/>
                   <arg value="ci_job_name=CI_JOB"/>
                   <arg value="-F"/>

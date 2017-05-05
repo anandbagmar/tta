@@ -17,8 +17,8 @@ COMPARE_RUNS_PAGE="COMPARE RUNS"
 
 #Upload Page  element
 
-UPLOAD_PROJECT_NAME = 'project_name'
-UPLOAD_SUB_PROJECT_NAME='sub_project_name'
+UPLOAD_PRODUCT_NAME = 'product_name'
+UPLOAD_PLATFORM_NAME='platform_name'
 UPLOAD_CI_JOB_NAME='ci_job_name'
 UPLOAD_OS_NAME='os_name'
 UPLOAD_HOST_NAME='host_name'
@@ -34,12 +34,12 @@ UPLOAD_TEST_TYPE="test_category"
 UPLOAD_TEST_SUB_TYPE="test_sub_category"
 UPLOAD_TEST_REPORT_TYPE ="test_report_type"
 
-UPLOAD_SUCCESS="Project Successfully Saved!!"
+UPLOAD_SUCCESS="Product Successfully Saved!!"
 
 #comparative Page ELEMENT
 
-COMPARATIVE_PROJECT_DROPDOWN = "project_id"
-COMPARATIVE_SUB_PROJECT_DROPDOWN = "sub_project_select"
+COMPARATIVE_PRODUCT_DROPDOWN = "product_id"
+COMPARATIVE_PLATFORM_DROPDOWN = "platform_select"
 COMPARATIVE_START_DATE = "comparative_analysis_start_date"
 COMPARATIVE_END_DATE = "comparative_analysis_end_date"
 COMPARATIVE_PLOT_BUTTON = "form-submit"
@@ -47,13 +47,13 @@ COMPARATIVE_PLOT_BUTTON = "form-submit"
 COMPARATIVE_GRAPH_ID = "#comparative_analysis"
 
 #Defect Analysis Graph ELEMENTS
-DEFECT_PROJECT_DROPDOWN="project_select"
-DEFECT_SUBPROJECT_DROPDOWN="sub_project_select"
+DEFECT_PRODUCT_DROPDOWN="product_select"
+DEFECT_PLATFORM_DROPDOWN="platform_select"
 DEFECT_TEST_CATEGORY_DROPDOWN="test_category_select"
 DEFECT_GRAPH_ID="#defect-analysis"
 
 #PYRAMID ELEMENT
-TEST_PYRAMID__PROJECT_DROPDOWN="sub_project_id"
+TEST_PYRAMID_PLATFORM_DROPDOWN="platform_id"
 PYRAMID_ID="#block_pyramid"
 PYRAMID_TABLE_ID="#pyramidTable"
 
@@ -62,8 +62,8 @@ SCREENSHOT_FILE_PATH=$PROJECT_ROOT +"/log/feature/screenshots/"
 
 # COMPARE RUN ELEMENTS
 
-COMPARE_RUN_PROJECT_DROPDOWN="project_select"
-COMPARE_RUN_SUB_PROJECT_DROPDOWN="sub_project_select"
+COMPARE_RUN_PRODUCT_DROPDOWN="product_select"
+COMPARE_RUN_PLATFORM_DROPDOWN="platform_select"
 COMPARE_RUN_TEST_TYPE_DROPDOWN="test_category_select"
 COMPARE_RUN_TEST_DATE1="date_one_select"
 COMPARE_RUN_TEST_DATE2="date_two_select"

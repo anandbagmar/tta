@@ -5,8 +5,8 @@ class AdminController < ApplicationController
   end
 
   def view
-    projects=Project.all
-    @json = Admin.get_result_json(projects)
+    products=Product.all
+    @json = Admin.get_result_json(products)
   end
 
   def add

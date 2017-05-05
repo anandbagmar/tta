@@ -4,9 +4,9 @@ class DefectAnalysisController < ApplicationController
   end
 
   def getRunDates
-    sub_project_id =params["subproject_id"]
+    platform_id =params["platform_id"]
     test_category =params["test_category"]
-    metadataForSelectedFilters = TestMetadatum.where(:sub_project_id => sub_project_id).select([:id, :date_of_execution]).uniq(:date_of_execution)
+    metadataForSelectedFilters = TestMetadatum.where(:platform_id => platform_id).select([:id, :date_of_execution]).uniq(:date_of_execution)
 
     if (test_category != "ALL")
       metadataForSelectedFilters = metadataForSelectedFilters.where(:test_category => test_category)
@@ -18,24 +18,24 @@ class DefectAnalysisController < ApplicationController
   respond_to :json, :html
 
   def getSpecificRun
-    sub_project_id =params["subproject_id"]
+    platform_id =params["platform_id"]
     test_category =params["test_category"]
     runDate =params["run_date"].to_date.to_s
-    metadataForSelectedFilters = TestMetadatum.where("sub_project_id = ? AND test_category = ? AND date_of_execution LIKE ?", sub_project_id, test_category, "#{runDate}%")
+    metadataForSelectedFilters = TestMetadatum.where("platform_id = ? AND test_category = ? AND date_of_execution LIKE ?", platform_id, test_category, "#{runDate}%")
     @specificRun=getValidMetadataRecords(metadataForSelectedFilters)
     respond_with(@specificRun.to_json)
   end
 
   respond_to :json, :html
 
-  def sub_project_filter
-    sub_project_id=params["sub_projects"]
+  def platform_filter
+    platform_id=params["platforms"]
     @analysis_date = params["dates"]
     if (!(params["test_runs"].nil?))
       @analysis_date=params["dates"] + " " + params["test_runs"]
     end
     test_category =params["test_category"]
-    @defect_analysis_json = DefectAnalysis.new.get_result_json(sub_project_id, @analysis_date, test_category)
+    @defect_analysis_json = DefectAnalysis.new.get_result_json(platform_id, @analysis_date, test_category)
   end
 
   def getValidMetadataRecords(metadataRecords)

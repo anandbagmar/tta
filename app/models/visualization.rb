@@ -1,9 +1,9 @@
 class Visualization
   TESTTYPE = YAML.load(File.open("#{Rails.root}/config/test_types.yml", "r"))
 
-  def getResultJson(sub_project_id)
+  def getResultJson(platform_id)
     @HIGH_PRIORITY_SEQUENCE = 1000
-    get_latest_metadata_record(sub_project_id)
+    get_latest_metadata_record(platform_id)
     unknown_test_types=[]
     test_types=[]
     @test_category.zip(@percent_of_tests, @duration_of_tests, @no_of_test_in_test_category, @passing_test_percentage).each do |test_category, percent_of_test, duration_of_test, no_of_test, passing_percentage|
@@ -23,24 +23,24 @@ class Visualization
       end
     end
     @json = {
-        :sub_project_name => SubProject.find(sub_project_id).name,
+        :platform_name => Platform.find(platform_id).name,
         :test_types => test_types.sort_by { |test_type| test_type[:seq_no] },
         :unknown_test_types => (unknown_test_types if unknown_test_types!=[])
     }.to_json
     return @json
   end
 
-  def get_latest_metadata_record(sub_project_id)
+  def get_latest_metadata_record(platform_id)
     @test_metadata_records_for_latest_run = []
     @no_of_test_in_test_category =[]
     @no_of_failure_in_test_category=[]
     @duration_of_test_in_Test_category=[]
     @total=0
     failure_count=0
-    get_record_with_distinct_test_category(sub_project_id)
+    get_record_with_distinct_test_category(platform_id)
 
     @test_category.each do |test_category|
-      @test_metadata_records_for_latest_run << TestMetadatum.new.get_latest_record(sub_project_id, test_category)
+      @test_metadata_records_for_latest_run << TestMetadatum.new.get_latest_record(platform_id, test_category)
     end
 
     @test_metadata_records_for_latest_run.each do |record|
@@ -54,8 +54,8 @@ class Visualization
   end
 
 
-  def get_record_with_distinct_test_category(sub_project_id)
-    metadata_with_distinct_test_category = TestMetadatum.new.get_distinct_test_category(sub_project_id)
+  def get_record_with_distinct_test_category(platform_id)
+    metadata_with_distinct_test_category = TestMetadatum.new.get_distinct_test_category(platform_id)
     @test_category=[]
     metadata_with_distinct_test_category.each do |test_type|
       @test_category << test_type.test_category

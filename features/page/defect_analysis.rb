@@ -1,8 +1,8 @@
 module Page
   module DefectAnalysis
-    def view_defect_graph(project, subproject, testcategory)
-      select project, :from => DEFECT_PROJECT_DROPDOWN
-      select subproject, :from => DEFECT_SUBPROJECT_DROPDOWN
+    def view_defect_graph(product, platform, testcategory)
+      select product, :from => DEFECT_PRODUCT_DROPDOWN
+      select platform, :from => DEFECT_PLATFORM_DROPDOWN
       select testcategory, :from => DEFECT_TEST_CATEGORY_DROPDOWN
       page.execute_script %Q{ $("#date").val("2012-01-01");}
       sleep(10)

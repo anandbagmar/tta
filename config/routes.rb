@@ -14,10 +14,10 @@ Tta::Application.routes.draw do
   get '/get_default_test_sub_category' => "upload#get_default_test_sub_category"
 
   get '/pyramid' => "visualization#pyramid"
-  post '/pyramid/result' => "visualization#sub_project_filter"
+  post '/pyramid/result' => "visualization#platform_filter"
 
   get '/defect_analysis' => "defect_analysis#new"
-  post '/defect_analysis/result' => "defect_analysis#sub_project_filter"
+  post '/defect_analysis/result' => "defect_analysis#platform_filter"
 
   get '/comparative_analysis' => "comparative_analysis#create"
   get '/test_category_mapping_list' => "comparative_analysis#test_category_mapping_list"
@@ -35,7 +35,7 @@ Tta::Application.routes.draw do
   get '/get_specific_run' => 'defect_analysis#getSpecificRun'
 
   get '/compare_runs/' => 'compare_runs#index'
-  get '/get_sub_project_data' => 'compare_runs#getSubProjects'
+  get '/get_platform_data' => 'compare_runs#getPlatforms'
   get '/get_test_types' => 'compare_runs#getTestTypes'
   get '/get_compare_dates' => 'compare_runs#getDateRuns'
   post '/get_compare_json' => 'compare_runs#getCompareJson'

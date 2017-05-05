@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'rspec'
 
 describe Admin do
-  it "should return message if no projects in database" do
+  it "should return message if no products in database" do
     json= Admin.get_result_json
     parse_json = ActiveSupport::JSON.decode(json)
     parse_json.has_key?("message")
@@ -11,49 +11,49 @@ describe Admin do
   date_of_execution = "2013-02-02"
   it "should not return nil json when admin_url is hit" do
     date_of_execution = "2013-02-02"
-    project1 = FactoryGirl.create(:project,:name => "TTA1")
-    sub_project11 = FactoryGirl.create(:sub_project, :project_id => project1.id,:name => "TTA_subProject1")
-    FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project11.id, :date_of_execution => date_of_execution)
-    project2 = FactoryGirl.create(:project , :name => "TTA2")
-    sub_project21 = FactoryGirl.create(:sub_project, :project_id => project2.id,:name => "TTA_subProject2")
-     FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project21.id, :date_of_execution => date_of_execution)
-    project=Array.new
-    project.push(project1)
-    project.push(project2)
-    json = Admin.get_result_json(project)
+    product1 = FactoryGirl.create(:product, :name => "TTA1")
+    platform11 = FactoryGirl.create(:platform, :product_id => product1.id,:name => "TTA_pLATFORM1")
+    FactoryGirl.create(:test_metadatum, :platform_id => platform11.id, :date_of_execution => date_of_execution)
+    product2 = FactoryGirl.create(:product , :name => "TTA2")
+    platform21 = FactoryGirl.create(:platform, :product_id => product2.id,:name => "TTA_pLATFORM2")
+     FactoryGirl.create(:test_metadatum, :platform_id => platform21.id, :date_of_execution => date_of_execution)
+    product=Array.new
+    product.push(product1)
+    product.push(product2)
+    json = Admin.get_result_json(product)
     json.should_not be_nil
   end
 
   it "should return correct count in json" do
   date_of_execution = "2013-02-02"
-  project1 = FactoryGirl.create(:project, :name => "TTA11")
-  sub_project11 = FactoryGirl.create(:sub_project, :project_id => project1.id,:name => "TTA_subProject11")
-   FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project11.id, :date_of_execution => date_of_execution)
-  sub_project12 = FactoryGirl.create(:sub_project, :project_id => project1.id,:name => "TTA_subProject12")
-   FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project12.id, :date_of_execution => date_of_execution)
- FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project12.id, :date_of_execution => date_of_execution)
-   FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project12.id, :date_of_execution => date_of_execution)
+  product1 = FactoryGirl.create(:product, :name => "TTA11")
+  platform11 = FactoryGirl.create(:platform, :product_id => product1.id,:name => "TTA_pLATFORM11")
+   FactoryGirl.create(:test_metadatum, :platform_id => platform11.id, :date_of_execution => date_of_execution)
+  platform12 = FactoryGirl.create(:platform, :product_id => product1.id,:name => "TTA_pLATFORM12")
+   FactoryGirl.create(:test_metadatum, :platform_id => platform12.id, :date_of_execution => date_of_execution)
+ FactoryGirl.create(:test_metadatum, :platform_id => platform12.id, :date_of_execution => date_of_execution)
+   FactoryGirl.create(:test_metadatum, :platform_id => platform12.id, :date_of_execution => date_of_execution)
 
-  project2 = FactoryGirl.create(:project , :name => "TTA12")
-  sub_project21 = FactoryGirl.create(:sub_project, :project_id => project2.id,:name => "TTA_subProject21")
-    FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project21.id, :date_of_execution => date_of_execution)
-   FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project21.id, :date_of_execution => date_of_execution)
-  sub_project22 = FactoryGirl.create(:sub_project, :project_id => project2.id,:name => "TTA_subProject22")
-   FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project22.id, :date_of_execution => date_of_execution)
-   FactoryGirl.create(:test_metadatum, :sub_project_id => sub_project22.id, :date_of_execution => "2013-02-02")
+  product2 = FactoryGirl.create(:product , :name => "TTA12")
+  platform21 = FactoryGirl.create(:platform, :product_id => product2.id,:name => "TTA_pLATFORM21")
+    FactoryGirl.create(:test_metadatum, :platform_id => platform21.id, :date_of_execution => date_of_execution)
+   FactoryGirl.create(:test_metadatum, :platform_id => platform21.id, :date_of_execution => date_of_execution)
+  platform22 = FactoryGirl.create(:platform, :product_id => product2.id,:name => "TTA_pLATFORM22")
+   FactoryGirl.create(:test_metadatum, :platform_id => platform22.id, :date_of_execution => date_of_execution)
+   FactoryGirl.create(:test_metadatum, :platform_id => platform22.id, :date_of_execution => "2013-02-02")
 
-  expect_json= {"#{project1.id}" =>[{"project_name" => "#{project1.name}"},
-                                {"sub_projects" => ["#{sub_project11.name}","#{sub_project12.name}"]},
+  expect_json= {"#{product1.id}" =>[{"product_name" => "#{product1.name}"},
+                                {"platforms" => ["#{platform11.name}","#{platform12.name}"]},
                                 {"test_count"   => [1,3]}],
-                "#{project2.id}" =>[{"project_name" => "#{project2.name}"},
-                               {"sub_projects" => ["#{sub_project21.name}","#{sub_project22.name}"]},
+                "#{product2.id}" =>[{"product_name" => "#{product2.name}"},
+                               {"platforms" => ["#{platform21.name}","#{platform22.name}"]},
                                {"test_count"   => [2,2]}]
                }
 
-  project=Array.new
-  project.push(project1)
-  project.push(project2)
-  actual_json = Admin.get_result_json(project)
+  product=Array.new
+  product.push(product1)
+  product.push(product2)
+  actual_json = Admin.get_result_json(product)
   parse_json = ActiveSupport::JSON.decode(actual_json)
 
   parse_json.should eq(expect_json)

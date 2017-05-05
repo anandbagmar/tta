@@ -1,19 +1,19 @@
 #title
   .page_title
     %h1 Pyramid View
-  #sub_project_picker
-    = form_tag({:action => 'sub_project_filter'}, {:id => "pyramid_form"}) do
+  #platform_picker
+    = form_tag({:action => 'platform_filter'}, {:id => "pyramid_form"}) do
       %table{:border => "1", :style => "text-align: left; width: 100%;"}
         %tbody
           %tr
             %td.fields
-              %label{:for => "sub_project"} Select Sub-Project
+              %label{:for => "platform"} Select Platform
             %td
-              = select("sub_project", "id", SubProject.all.collect { |subproj| [subproj.name, subproj.id] }, {:include_blank => '--Select--'}, {:class => 'required'})
+              = select("platform", "id", Platform.all.collect { |subproj| [subproj.name, subproj.id] }, {:include_blank => '--Select--'}, {:class => 'required'})
               %p.error= flash[:no_id_error] if flash[:no_id_error]
           %tr
             %td
-            %td#submit-project-button
+            %td#submit-product-button
               = submit_tag "Plot", :class => 'submit'
 :javascript
   $(document).ready(function () {

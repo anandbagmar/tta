@@ -13,10 +13,10 @@ module Domain
       end
     end
 
-    def upload_data_and_submit(proj_params)
+    def upload_data_and_submit(params)
       begin
-          proj_params[:logFile]=$PROJECT_ROOT+"/"+proj_params[:logFile]
-          form_filling(proj_params)
+          params[:logFile]=$PROJECT_ROOT+"/"+params[:logFile]
+          form_filling(params)
           scroll_to_view_and_click_on UPLOAD_PAGE_BUTTON
       rescue Exception => ex
         puts "Exception in uploading data. \n\t" + ex.inspect
@@ -26,8 +26,8 @@ module Domain
       end
     end
 
-    def verify_data_uploaded(proj_succ)
-      assert page.has_content?(proj_succ), "No Project uploaded"
+    def verify_data_uploaded(upload_succeeded_message)
+      assert page.has_content?(upload_succeeded_message), "No Product uploaded"
     end
   end
 end

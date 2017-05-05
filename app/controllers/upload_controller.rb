@@ -4,8 +4,8 @@ require 'fileutils'
 
 class UploadController < ApplicationController
   def create
-    project, sub_project, meta_data = parse_and_store_test_run_data
-    redirect_to :action => :show, :project_id => project.id, :sub_project_id => sub_project.id, :project_meta_id => meta_data.id
+    product, platform, meta_data = parse_and_store_test_run_data
+    redirect_to :action => :show, :product_id => product.id, :platform_id => platform.id, :project_meta_id => meta_data.id
   end
 
   def automatic
@@ -22,14 +22,14 @@ class UploadController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:project_id])
-    @sub_project= @project.sub_projects.find(params[:sub_project_id])
-    @project_meta = @sub_project.test_metadatum.find(params[:project_meta_id])
+    @product = Product.find(params[:product_id])
+    @platform= @product.platforms.find(params[:platform_id])
+    @project_meta = @platform.test_metadatum.find(params[:project_meta_id])
     begin
       respond_to do |format|
-        flash[:notice] = "Project Successfully Saved!!"
+        flash[:notice] = "Product Successfully Saved!!"
         format.html
-        format.json { render :json => @project }
+        format.json { render :json => @product }
       end
     end
   end
@@ -49,11 +49,11 @@ class UploadController < ApplicationController
 
   private
   def parse_and_store_test_run_data
-    project = Project.where(name: (params[:project_name].split.join(' ').upcase)).first_or_create
-    sub_project = project.add_sub_project(params)
-    meta_data=sub_project.create_test_metadatum params
-    sub_project.parse_and_save_log_files(meta_data, params)
-    return project, sub_project, meta_data
+    product = Product.where(name: (params[:product_name].split.join(' ').upcase)).first_or_create
+    platform = product.add_platform(params)
+    meta_data=platform.create_test_metadatum params
+    platform.parse_and_save_log_files(meta_data, params)
+    return product, platform, meta_data
   end
 end
 

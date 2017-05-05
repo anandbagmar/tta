@@ -5,8 +5,8 @@ var Template = function () {
         pyramidDuration:'<span class="pyramidDetail" id={{TestTypeDuration}}>{{DurationValue}} Seconds</span>',
         errorListTemplate:'<ul class="error_list">{{ErrorList}}</ul>',
         defectErrorMessagesTemplate:'<span>{{ErrorName}}</span><div class="error_messages"><ul>{{ErrorMessageList}}</ul></div>',
-        adminTableProjectTemplate:'<tr class="tr_border"><td>{{Index}}</td><td>{{ProjectName}}</td><td>{{SubProjectName}}</td><td>{{TestCount}}</td></tr>',
-        adminTableSubprojectTemplate:'<tr><td>{{Index}}</td><td>{{ProjectName}}</td><td>{{SubProjectName}}</td><td>{{TestCount}}</td></tr>',
+        adminTableProductTemplate:'<tr class="tr_border"><td>{{Index}}</td><td>{{ProductName}}</td><td>{{PlatformName}}</td><td>{{TestCount}}</td></tr>',
+        adminTablePlatformTemplate:'<tr><td>{{Index}}</td><td>{{ProductName}}</td><td>{{PlatformName}}</td><td>{{TestCount}}</td></tr>',
         compareTableRowTemplate:' <tr>{{ClassNameColumns}}</tr>',
         compareTableColumnTemplate:' <td width="50%">{{ClassName}}</td>'
     };
@@ -39,11 +39,11 @@ var Template = function () {
         getErrorListTemplate:function () {
             return templates.errorListTemplate;
         },
-        getAdminTableProjectTemplate:function () {
-            return templates.adminTableProjectTemplate;
+        getAdminTableProductTemplate:function () {
+            return templates.adminTableProductTemplate;
         },
-        getAdminTableSubProjectTemplate:function () {
-            return templates.adminTableSubprojectTemplate;
+        getAdminTablePlatformTemplate:function () {
+            return templates.adminTablePlatformTemplate;
         },
         getCompareTableRowTemplate:function () {
             return templates.compareTableRowTemplate;

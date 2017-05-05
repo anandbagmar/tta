@@ -23,21 +23,21 @@ $(document).ready(function () {
             $("#" + v.id).attr("disabled", "true");
         });
     };
-    var projectResponse = function (json_response) {
+    var productResponse = function (json_response) {
         $('.sub-element').remove();
-        Utils.removeAttribute("#sub_project_select", "disabled");
-        jQuery.each(json_response, function (key, projectData) {
-            var project_id = projectData["id"];
-            var projectName = projectData["name"];
-            Utils.loadDropDown("#sub_project_select", project_id, project_id, projectName, "sub-element");
+        Utils.removeAttribute("#platform_select", "disabled");
+        jQuery.each(json_response, function (key, productData) {
+            var product_id = productData["id"];
+            var productName = productData["name"];
+            Utils.loadDropDown("#platform_select", product_id, product_id, productName, "sub-element");
         });
-        Utils.loadDropDown("#sub_project_select", "ALL", "ALL", "ALL", "sub-element");
-        //set default value "ALL" for sub project
-        $("#sub_project_select").val("ALL");
-        subProjectChange();
+        Utils.loadDropDown("#platform_select", "ALL", "ALL", "ALL", "sub-element");
+        //set default value "ALL" for platform
+        $("#platform_select").val("ALL");
+        pLATFORMChange();
     };
 
-    var subProjectChangeResponse = function (json_response) {
+    var pLATFORMChangeResponse = function (json_response) {
         disableAllTestCategoryFilters();
         jQuery.each(json_response, function (index, value) {
             name = "#" + value.split(" ").join("_");
@@ -47,25 +47,25 @@ $(document).ready(function () {
         });
     };
 
-    var subProjectChange = function () {
-        var project_id = ($("#project_select option:selected").val());
-        var sub_project_id = ($("#sub_project_select option:selected").val());
+    var pLATFORMChange = function () {
+        var product_id = ($("#product_select option:selected").val());
+        var platform_id = ($("#platform_select option:selected").val());
         var start_date = ($("#comparative_analysis_start_date").datepicker('getDate'));
         var end_date = ($("#comparative_analysis_end_date").datepicker('getDate'));
-        var params = {url:"/test_category_mapping_list", data:{project_id:project_id, sub_project_id:sub_project_id,
-            comparative_analysis_start_date:start_date, comparative_analysis_end_date:end_date}, successCallback:subProjectChangeResponse};
+        var params = {url:"/test_category_mapping_list", data:{product_id:product_id, platform_id:platform_id,
+            comparative_analysis_start_date:start_date, comparative_analysis_end_date:end_date}, successCallback:pLATFORMChangeResponse};
         Utils.ajaxRequest(params);
     };
     checkBoxResponse('#deselectALL', false, true);
     checkBoxResponse('#selectALL', true, false);
 
-    $(document).delegate("#project_select", "change", function () {
-        var project_id = ($("#project_select option:selected").val());
-        var params = {url:"/get_sub_project_data", data:{project_id:project_id}, successCallback:projectResponse};
+    $(document).delegate("#product_select", "change", function () {
+        var product_id = ($("#product_select option:selected").val());
+        var params = {url:"/get_platform_data", data:{product_id:product_id}, successCallback:productResponse};
         Utils.ajaxRequest(params);
     });
 
-    $(document).delegate("#sub_project_select", "change", function () {
-        subProjectChange();
+    $(document).delegate("#platform_select", "change", function () {
+        pLATFORMChange();
     });
 });

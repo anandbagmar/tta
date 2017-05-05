@@ -8,11 +8,11 @@ class VisualizationController < ApplicationController
     end
   end
 
-  def sub_project_filter
+  def platform_filter
     error=""
     flash[:no_test_error]=nil
-    sub_project_id=params[:sub_project][:id]
-    @json = Visualization.new.getResultJson(sub_project_id)
+    platform_id=params[:platform][:id]
+    @json = Visualization.new.getResultJson(platform_id)
     json_obj = JSON.parse(@json)
     json_obj["test_types"].each do |test_type|
       if test_type["no_of_test"]==0
@@ -20,7 +20,7 @@ class VisualizationController < ApplicationController
       end
     end
     if (error!="")
-      flash[:no_test_error]= "No Test in your project for test category => " + error
+      flash[:no_test_error]= "No Test data for your product for test category => " + error
     end
   end
 end

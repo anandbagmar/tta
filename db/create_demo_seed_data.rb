@@ -1,24 +1,24 @@
-def self.create_demo_project(project_name)
-  puts "\t creating project " + project_name
-  project = Project.create(:name => project_name, :authorization_level => "ALL")
-  project.save
-  Project.find_by_name(project_name).id
+def self.create_demo_product(product_name)
+  puts "\t creating product " + product_name
+  product = Product.create(:name => product_name)
+  product.save
+  Product.find_by_name(product_name).id
 end
 
 
-def self.create_demo_sub_project(project_id, sub_project_name)
-  puts "\t creating sub_project #{sub_project_name}"
-  sub_project= SubProject.create(:name => sub_project_name)
-  sub_project.project_id= project_id
-  sub_project.save
-  SubProject.find_by_name(sub_project_name).id
+def self.create_demo_platform(product_id, platform_name)
+  puts "\t creating platform #{platform_name}"
+  platform= Platform.create(:name => platform_name)
+  platform.product_id= product_id
+  platform.save
+  Platform.find_by_name(platform_name).id
 end
 
 def self.get_respective_demo_test_sub_category(test_category)
   SAMPLE_TEST_SUB_CATEGORY[test_category][rand(SAMPLE_TEST_SUB_CATEGORY[test_category].length)]
 end
 
-def self.create_demo_test_meta_data(sub_project_id, date_of_execution)
+def self.create_demo_test_meta_data(platform_id, date_of_execution)
   test_category = SAMPLE_TEST_CATEGORIES[rand(SAMPLE_TEST_CATEGORIES.length)]
   test_sub_category = get_respective_demo_test_sub_category(test_category)
   test_meta_data = TestMetadatum.create(
@@ -31,9 +31,9 @@ def self.create_demo_test_meta_data(sub_project_id, date_of_execution)
       :test_category => test_category,
       :test_sub_category => test_sub_category,
       :test_report_type => SAMPLE_TEST_REPORT_TYPES[rand(SAMPLE_TEST_REPORT_TYPES.length)])
-  test_meta_data.sub_project_id= sub_project_id
+  test_meta_data.platform_id= platform_id
   test_meta_data.save
-  TestMetadatum.where(:sub_project_id => sub_project_id).last.id
+  TestMetadatum.where(:platform_id => platform_id).last.id
 end
 
 def self.create_demo_test_suite_record(meta_data_record_id,test_suite_class_name,max_number_of_tests)

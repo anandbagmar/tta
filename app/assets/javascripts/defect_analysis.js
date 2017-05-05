@@ -2,13 +2,13 @@ var renderDefectTable = {
 
     renderTable:function (jsonDataSet, date) {
         $("#defect-analysis").css("display", "none");
-        var subProjectName = "";
+        var platformName = "";
         var percentage = "";
         if (jsonDataSet != "") {
             $("#defect_analysis_table").css("display", "block");
             jsonDataSet = jsonData.parse(jsonDataSet);
 
-            subProjectName = "<h1>" + "Sub Project : " + jsonDataSet.sub_project_name.toUpperCase() + "<br><br>Analysis Date : " + date + "</h1>";
+            platformName = "<h1>" + "Platform : " + jsonDataSet.platform_name.toUpperCase() + "<br><br>Analysis Date : " + date + "</h1>";
             percentage = jsonDataSet.percentage;
             var tableResponse = jsonDataSet.errors;
             var test_category = "";
@@ -48,7 +48,7 @@ var renderDefectTable = {
 
             $("#defect-analysis").css("display", "block");
             $(".color_codes").css("display", "block");
-            $("#defect-analysis").prepend(subProjectName);
+            $("#defect-analysis").prepend(platformName);
 
         }
         return false;

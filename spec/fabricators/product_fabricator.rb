@@ -1,7 +1,7 @@
-Fabricator(:project) do
+Fabricator(:product) do
   name {
     Fabricate.sequence(:name) do |i|
-      "Project #{i}"
+      "Product #{i}"
     end
   }
 end

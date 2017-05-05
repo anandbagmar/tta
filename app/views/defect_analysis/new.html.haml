@@ -1,20 +1,20 @@
 = javascript_include_tag 'defect_analysis_form'
 #page_title
   %h1{:style => " padding: 20px; "} Failure Analysis
-#sub_project_picker
-  = form_tag({:action => 'sub_project_filter'}, {:id => "defect_analysis_form"}) do
+#platform_picker
+  = form_tag({:action => 'platform_filter'}, {:id => "defect_analysis_form"}) do
     %table{:border => "1", :style => "text-align: left; width: 100%;"}
       %tbody
         %tr
           %td.fields-left{:style => "padding-bottom: 10px"}
-            %label{:for => "project"} Project
+            %label{:for => "product"} Product
           %td
-            = select_tag 'project_id',  options_from_collection_for_select(Project.get_all_projects,'id','name'), :prompt => "---SELECT PROJECT-----", :id => 'project_select', :class => 'required'
+            = select_tag 'product_id',  options_from_collection_for_select(Product.get_all_products,'id','name'), :prompt => "---SELECT PRODUCT-----", :id => 'product_select', :class => 'required'
         %tr
-          %td#div_subproject.fields-left{:disabled => "disabled", :style => "padding-bottom: 10px"}
-            %label{:for => "sub-project"} Sub Project
+          %td#div_platform.fields-left{:disabled => "disabled", :style => "padding-bottom: 10px"}
+            %label{:for => "platform"} Platform
           %td
-            = select_tag 'sub_projects', '', :prompt => "---SELECT SUB PROJECT-----", :id => 'sub_project_select', :class => 'required', :disabled => true
+            = select_tag 'platforms', '', :prompt => "---SELECT PLATFORM-----", :id => 'platform_select', :class => 'required', :disabled => true
         %tr
           %td#div_category_type.fields-left{:style => "padding-bottom: 10px"}
             %label{:for => "Test-Category"} Test Category

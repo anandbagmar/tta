@@ -1,7 +1,7 @@
 module Page
   module TestPyramid
-    def fill_pyramid_data(sub_proj)
-      select_the_option(sub_proj, TEST_PYRAMID__PROJECT_DROPDOWN)
+    def fill_pyramid_data(platform)
+      select_the_option(platform, TEST_PYRAMID_PLATFORM_DROPDOWN)
       click_button(TEST_PYRAMID_PAGE_BUTTON)
     end
 

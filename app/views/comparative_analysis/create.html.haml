@@ -19,12 +19,12 @@
             %div.errormsg Select End Date Greater Than Start Date
         %tr.fields
           %td
-            %label{:for => "project"} Project:
-          %td= select_tag 'project_id', options_from_collection_for_select(Project.get_all_projects,'id','name'), :prompt => '--Select--', :id => 'project_select', :class => 'required'
+            %label{:for => "product"} Product:
+          %td= select_tag 'product_id', options_from_collection_for_select(Product.get_all_products,'id','name'), :prompt => '--Select--', :id => 'product_select', :class => 'required'
         %tr.fields
           %td
-            %label{:for => "sub_project"} Sub Project:
-          %td= select_tag 'sub_project_id', '', :prompt => '--Select--', :id => 'sub_project_select', :class => 'required', :disabled => true
+            %label{:for => "platform"} Platform:
+          %td= select_tag 'platform_id', '', :prompt => '--Select--', :id => 'platform_select', :class => 'required', :disabled => true
         %tr.fields
           %td
             %label{:for => "test_categories_and_sub_categories"}
@@ -65,7 +65,7 @@
   #legendlabel{:style=>"float:right;width:18.7%;"}
   #date-range-title{:style => " margin-left: 22%; "}
     %h3
-      Graph Plotted For #{@project_name}
+      Graph Plotted For #{@product_name}
     %h3
       Date Range :From #{@start_date.split(" ")[0]} to #{@end_date.split(" ")[0]}
   #comparative_analysis{:style => "width:900px;height:600px;"}

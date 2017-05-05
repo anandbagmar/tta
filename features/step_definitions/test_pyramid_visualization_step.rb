@@ -1,11 +1,11 @@
-When /^a team member checks Pyramid View of "([^"]*)"$/ do |sub_proj|
-  view_pyramid_view(sub_proj)
+When /^a team member checks Pyramid View of "([^"]*)"$/ do |platform|
+  view_pyramid_view(platform)
 end
 
-Then /^the test Pyramid for "([^"]*)" is generated$/ do |sub_proj|
-  verify_pyramid_display(sub_proj)
+Then /^the test Pyramid for "([^"]*)" is generated$/ do |platform|
+  verify_pyramid_display(platform)
 end
 
-Then /^the Pyramid table for "([^"]*)" is generated$/ do |sub_proj|
-  verify_pyramid_table_display(sub_proj)
+Then /^the Pyramid table for "([^"]*)" is generated$/ do |platform|
+  verify_pyramid_table_display(platform)
 end

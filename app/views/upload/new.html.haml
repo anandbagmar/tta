@@ -21,17 +21,17 @@
         %tr
           %td.fields
             %label{:for => "name"}
-              Project Name
+              Product Name
               %span.required-fields *
           %td
-            = text_field_tag (:project_name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase"
+            = text_field_tag (:product_name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase"
         %tr
           %td.fields
-            %label{:for => "sub_project_name"}
-              Sub-Project name
+            %label{:for => "platform_name"}
+              Platform name
               %span.required-fields *
           %td
-            = text_field_tag (:sub_project_name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase"
+            = text_field_tag (:platform_name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase"
         %tr
           %td.fields
             %label{:for => "ci_job_name"}

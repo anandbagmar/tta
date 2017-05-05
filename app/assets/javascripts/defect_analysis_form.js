@@ -2,25 +2,25 @@ $(document).ready(function () {
     $("#defect_analysis_form").validate();
     $("#date").val("");
 
-    var projectResponse = function (json_response) {
+    var productResponse = function (json_response) {
         $('.sub-element').remove();
         $('.test-element').remove();
         $('.specific-run').remove();
-        Utils.removeAttribute("#sub_project_select", "disabled");
-        jQuery.each(json_response, function (key, projectData) {
-            var project_id = projectData["id"];
-            var projectName = projectData["name"];
-            Utils.loadDropDown("#sub_project_select", project_id, project_id, projectName, "sub-element");
+        Utils.removeAttribute("#platform_select", "disabled");
+        jQuery.each(json_response, function (key, productData) {
+            var product_id = productData["id"];
+            var productName = productData["name"];
+            Utils.loadDropDown("#platform_select", product_id, product_id, productName, "sub-element");
         });
     };
 
-    var projectChange = function(){
-        var project_id = ($("#project_select option:selected").val());
-        var params = {url:"/get_sub_project_data", data:{project_id:project_id}, successCallback:projectResponse};
+    var productChange = function(){
+        var product_id = ($("#product_select option:selected").val());
+        var params = {url:"/get_platform_data", data:{product_id:product_id}, successCallback:productResponse};
         Utils.ajaxRequest(params);
     }
 
-    var subProjectResponse = function (json_response) {
+    var pLATFORMResponse = function (json_response) {
         $('.test-element').remove();
         $('.specific-run').remove();
         $("#date").datepicker('setDate', null);
@@ -74,33 +74,33 @@ $(document).ready(function () {
         });
     }
 
-    if ($("#project_select option:selected").val()) {
-        projectChange();
+    if ($("#product_select option:selected").val()) {
+        productChange();
     }
 
-    $(document).delegate("#project_select", "change", function () {
-        projectChange();
+    $(document).delegate("#product_select", "change", function () {
+        productChange();
     });
 
-    $(document).delegate("#sub_project_select", "change", function () {
-        var sub_project_id = ($("#sub_project_select option:selected").val());
-        var params = {url:"/get_test_types", data:{subproject_id:sub_project_id}, successCallback:subProjectResponse};
+    $(document).delegate("#platform_select", "change", function () {
+        var platform_id = ($("#platform_select option:selected").val());
+        var params = {url:"/get_test_types", data:{platform_id:platform_id}, successCallback:pLATFORMResponse};
         Utils.ajaxRequest(params);
     });
 
     $(document).delegate("#test_category_select", "change", function () {
-        var sub_project_id = ($("#sub_project_select option:selected").val());
+        var platform_id = ($("#platform_select option:selected").val());
         var test_category = ($("#test_category_select option:selected").val());
-        var params = {url:"/get_run_dates", data:{subproject_id:sub_project_id, test_category:test_category}, successCallback:testCategoryResponse};
+        var params = {url:"/get_run_dates", data:{platform_id:platform_id, test_category:test_category}, successCallback:testCategoryResponse};
         Utils.ajaxRequest(params);
     });
 
     $(document).delegate("#date", "change", function () {
         var selected_date = ($("#date").datepicker('getDate'));
-        var sub_project_id = ($("#sub_project_select option:selected").val());
+        var platform_id = ($("#platform_select option:selected").val());
         var test_category = ($("#test_category_select option:selected").val());
         if (test_category != "ALL") {
-            var params = {url:"/get_specific_run", data:{subproject_id:sub_project_id, test_category:test_category, run_date:selected_date}, successCallback:runDateResponse};
+            var params = {url:"/get_specific_run", data:{platform_id:platform_id, test_category:test_category, run_date:selected_date}, successCallback:runDateResponse};
             Utils.ajaxRequest(params);
         }
     });

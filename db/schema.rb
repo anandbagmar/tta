@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131009155050) do
+ActiveRecord::Schema.define(version: 20170505083230) do
 
   create_table "external_dashboards", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -20,15 +20,14 @@ ActiveRecord::Schema.define(version: 20131009155050) do
     t.datetime "updated_at"
   end
 
-  create_table "projects", force: :cascade do |t|
-    t.string   "name",                limit: 255
-    t.string   "authorization_level", limit: 255
+  create_table "platforms", force: :cascade do |t|
+    t.integer  "product_id", limit: 4
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "sub_projects", force: :cascade do |t|
-    t.integer  "project_id", limit: 4
+  create_table "products", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -53,7 +52,7 @@ ActiveRecord::Schema.define(version: 20131009155050) do
   end
 
   create_table "test_metadata", force: :cascade do |t|
-    t.integer  "sub_project_id",      limit: 4
+    t.integer  "platform_id",         limit: 4
     t.string   "ci_job_name",         limit: 255
     t.string   "os_name",             limit: 255
     t.string   "host_name",           limit: 255

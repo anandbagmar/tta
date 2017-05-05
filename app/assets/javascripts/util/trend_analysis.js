@@ -38,18 +38,18 @@ var Graph = {
         }
         var data = [];
         resultData = jsonData.parse(result_set);
-        for (sub_project in resultData) {
+        for (platform in resultData) {
             data.push({
-                label:sub_project,
+                label:platform,
                 data:"",
                 lines:{show:false},
                 points:{show:false},
                 color:"#d812d"
             });
-            for (sub_project_data in resultData[sub_project]) {
+            for (platform_data in resultData[platform]) {
                 data.push({
-                    label:sub_project_data,
-                    data:resultData[sub_project][sub_project_data],
+                    label:platform_data,
+                    data:resultData[platform][platform_data],
                     lines:{show:true },
                     points:{show:true},
                     color:"#" + ((1 << 24) * Math.random() | 0).toString(16)

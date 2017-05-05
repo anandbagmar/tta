@@ -2,8 +2,8 @@ puts "Loaded tta.rake"
 
 namespace :tta do
 
-  $project_name=""
-  $sub_project_name=""
+  $product_name=""
+  $platform_name=""
   $ci_job_name=""
   $test_category=""
   $test_sub_category=""
@@ -32,10 +32,10 @@ namespace :tta do
     `zip tta_spec_results.zip log/tta_spec_results.xml`
   end
 
-  task :upload_to_tta, [:project_name, :sub_project_name, :ci_job_name, :test_category, :test_sub_category, :test_report_type, :os_name, :host_name, :browser, :type_of_environment, :date_of_execution, :logDirectory, :filePattern, :commit] do |t, args|
-    args.with_defaults(:project_name => "demoProject", :sub_project_name => "demoSubProject", :ci_job_name => "demoCIJob", :test_category => "Unit Test",:test_sub_category => "UNIT TEST", :test_report_type => "Junit", :os_name => "MAc", :host_name => "xyz", :browser => "Chrome", :type_of_environment => "Dev", :date_of_execution => "1900-12-12", :logDirectory => "asd", :filePattern => "*.xml", :commit => "SUBMIT")
-    $project_name = args.project_name
-    $sub_project_name = args.sub_project_name
+  task :upload_to_tta, [:product_name, :platform_name, :ci_job_name, :test_category, :test_sub_category, :test_report_type, :os_name, :host_name, :browser, :type_of_environment, :date_of_execution, :logDirectory, :filePattern, :commit] do |t, args|
+    args.with_defaults(:product_name => "demoProduct", :platform_name => "demoPlatform", :ci_job_name => "demoCIJob", :test_category => "Unit Test",:test_sub_category => "UNIT TEST", :test_report_type => "Junit", :os_name => "MAc", :host_name => "xyz", :browser => "Chrome", :type_of_environment => "Dev", :date_of_execution => "1900-12-12", :logDirectory => "asd", :filePattern => "*.xml", :commit => "SUBMIT")
+    $product_name = args.product_name
+    $platform_name = args.platform_name
     $ci_job_name = args.ci_job_name
     $test_category=args.test_category
     $test_sub_category=args.test_sub_category
@@ -47,6 +47,6 @@ namespace :tta do
     $log_directory=args.logDirectory
     $file_pattern=args.filePattern
     $commit=args.commit
-    `curl -F 'authenticity_token=KBc5IruWAILeOOIVKoqozwSYx3eSatES/fklIGf/Cn4=' -F 'project_name=#{$project_name}' -F 'sub_project_name=#{$sub_project_name}' -F 'ci_job_name=#{$ci_job_name}' -F 'test_category=#{$test_category}' -F 'test_sub_category=#{$test_sub_category}' -F 'test_report_type=#{$test_report_type}' -F 'os_name=#{$os_name}' -F 'host_name=#{$host_name}' -F 'browser=#{$browser}' -F 'type_of_environment=#{$type_of_environment}' -F 'date="" ' -F 'logDirectory=@#{$log_directory}' -F 'commit=SUBMIT' 'tta.thoughtworks.com:3000/upload/automatic'`
+    `curl -F 'authenticity_token=KBc5IruWAILeOOIVKoqozwSYx3eSatES/fklIGf/Cn4=' -F 'product_name=#{$product_name}' -F 'platform_name=#{$platform_name}' -F 'ci_job_name=#{$ci_job_name}' -F 'test_category=#{$test_category}' -F 'test_sub_category=#{$test_sub_category}' -F 'test_report_type=#{$test_report_type}' -F 'os_name=#{$os_name}' -F 'host_name=#{$host_name}' -F 'browser=#{$browser}' -F 'type_of_environment=#{$type_of_environment}' -F 'date="" ' -F 'logDirectory=@#{$log_directory}' -F 'commit=SUBMIT' 'tta.thoughtworks.com:3000/upload/automatic'`
   end
 end

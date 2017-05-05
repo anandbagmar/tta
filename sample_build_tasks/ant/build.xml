@@ -8,9 +8,9 @@
   <target name="upload" depends="zip">
     <exec executable="curl">
       <arg value="-F"/>
-      <arg value="project_name=PROJECT_NAME"/>
+      <arg value="product_name=PRODUCT_NAME"/>
       <arg value="-F"/>
-      <arg value="sub_project_name=SUB_PROJECT"/>
+      <arg value="platform_name=PLATFORM"/>
       <arg value="-F"/>
       <arg value="ci_job_name=CI_JOB"/>
       <arg value="-F"/>

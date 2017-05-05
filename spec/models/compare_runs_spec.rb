@@ -24,15 +24,15 @@ module CompareRunsSpecHelper
     @unit_tests = "UNIT TESTS"
   end
 
-  def create_new_project_and_subproject
-    @project = create_project("COMPARE_RUNS_PROJECT")
-    @sub_project = create_subproject_for_project(@project, "COMPARE_RUNS_SUBPROJECT")
+  def create_new_product_and_platform
+    @product = create_product("COMPARE_RUNS_PRODUCT")
+    @platform = create_platform_for_product(@product, "COMPARE_RUNS_PLATFORM")
   end
 
-  def records_with_error_for(arg_sub_project, arg_test_category, arg_date)
+  def records_with_error_for(arg_platform, arg_test_category, arg_date)
     extract_class_names_from(
         CompareRuns.get_test_case_records_with_errors_for(arg_date,
-                                                          arg_sub_project.id,
+                                                          arg_platform.id,
                                                           arg_test_category)
     )
   end
@@ -63,8 +63,8 @@ module CompareRunsSpecHelper
     "error for class_#{arg_prefix}"
   end
 
-  def form_data(arg_subproject, arg_test_category, arg_date1, arg_date2)
-    {"sub_projects" => arg_subproject.id,
+  def form_data(arg_platform, arg_test_category, arg_date1, arg_date2)
+    {"platforms" => arg_platform.id,
      "test_category" => arg_test_category,
      "date_one" => arg_date1,
      "date_two" => arg_date2}
@@ -72,7 +72,7 @@ module CompareRunsSpecHelper
 
   def get_compare_result
     @compare_result=
-        CompareRuns.getCompareResult form_data(@sub_project, @unit_tests, @jan_1_2013, @jan_2_2013)
+        CompareRuns.getCompareResult form_data(@platform, @unit_tests, @jan_1_2013, @jan_2_2013)
   end
 
   def common_test_failures
@@ -106,20 +106,20 @@ describe "CompareRuns" do
 
   before(:each) do
     perform_common_setup()
-    create_new_project_and_subproject()
+    create_new_product_and_platform()
   end
 
   describe "#get_test_suite_records_with_errors_for" do
 
     before do
-      @metadata1 = create_metadatum(@sub_project, @jan_1_2013, @unit_tests)
+      @metadata1 = create_metadatum(@platform, @jan_1_2013, @unit_tests)
       @test_suite1 = create_suite_with_metadata(@metadata1, "rest_unit_tests")
     end
 
 
-    context "when there are no failures for a subproject and test category on a given day" do
+    context "when there are no failures for a platform and test category on a given day" do
       it "should return no records" do
-        records_with_error_for(@sub_project, @unit_tests, @jan_1_2013).should be_empty
+        records_with_error_for(@platform, @unit_tests, @jan_1_2013).should be_empty
       end
     end
 
@@ -129,7 +129,7 @@ describe "CompareRuns" do
         @expected_errors = class_name_arr_from("001", "002", "003")
       end
       it "should return records from the test suite " do
-        records_with_error_for(@sub_project, @unit_tests, @jan_1_2013).should contain_all(@expected_errors)
+        records_with_error_for(@platform, @unit_tests, @jan_1_2013).should contain_all(@expected_errors)
       end
     end
 
@@ -141,14 +141,14 @@ describe "CompareRuns" do
         @expected_errors = class_name_arr_from("001", "002", "003", "004", "005", "006")
       end
       it "should return records from all test suites" do
-        records_with_error_for(@sub_project, @unit_tests, @jan_1_2013).should contain_all(@expected_errors)
+        records_with_error_for(@platform, @unit_tests, @jan_1_2013).should contain_all(@expected_errors)
       end
     end
 
     context "when there are failures for multiple test suites for different test category on a given day" do
       before do
         @integration_tests = "INTEGRATION TESTS"
-        @metadata2 = create_metadatum(@sub_project, @jan_1_2013, @integration_tests)
+        @metadata2 = create_metadatum(@platform, @jan_1_2013, @integration_tests)
         @test_suite2 = create_suite_with_metadata(@metadata2, "rest_integration_tests")
         create_class_errors(@test_suite1, class_error_hash_from("UT001", "UT002", "UT003"))
         create_class_errors(@test_suite2, class_error_hash_from("IT001", "IT002", "IT003"))
@@ -157,18 +157,18 @@ describe "CompareRuns" do
         expected_ut_errors = class_name_arr_from("UT001", "UT002", "UT003")
         expected_it_errors = class_name_arr_from("IT001", "IT002", "IT003")
 
-        records_with_error_for(@sub_project, @unit_tests, @jan_1_2013).should contain_all(expected_ut_errors)
-        records_with_error_for(@sub_project, @unit_tests, @jan_1_2013).should contain_none_of(expected_it_errors)
+        records_with_error_for(@platform, @unit_tests, @jan_1_2013).should contain_all(expected_ut_errors)
+        records_with_error_for(@platform, @unit_tests, @jan_1_2013).should contain_none_of(expected_it_errors)
 
-        records_with_error_for(@sub_project, @integration_tests, @jan_1_2013).should contain_all(expected_it_errors)
-        records_with_error_for(@sub_project, @integration_tests, @jan_1_2013).should contain_none_of(expected_ut_errors)
+        records_with_error_for(@platform, @integration_tests, @jan_1_2013).should contain_all(expected_it_errors)
+        records_with_error_for(@platform, @integration_tests, @jan_1_2013).should contain_none_of(expected_ut_errors)
       end
     end
 
     context "when there are failures for multiple test suites for the same category on different days" do
 
       before do
-        @metadata2 = create_metadatum(@sub_project, @jan_2_2013, @unit_tests)
+        @metadata2 = create_metadatum(@platform, @jan_2_2013, @unit_tests)
         @test_suite2 = create_suite_with_metadata(@metadata2, "rest_integration_tests")
         create_class_errors(@test_suite1, class_error_hash_from("DAY1_1", "DAY1_2", "DAY1_3"))
         create_class_errors(@test_suite2, class_error_hash_from("DAY2_1", "DAY2_2", "DAY2_3"))
@@ -178,11 +178,11 @@ describe "CompareRuns" do
         expected_day_1_errors = class_name_arr_from("DAY1_1", "DAY1_2", "DAY1_3")
         expected_day_2_errors = class_name_arr_from("DAY2_1", "DAY2_2", "DAY2_3")
 
-        records_with_error_for(@sub_project, @unit_tests, @jan_1_2013).should contain_all(expected_day_1_errors)
-        records_with_error_for(@sub_project, @unit_tests, @jan_1_2013).should contain_none_of(expected_day_2_errors)
+        records_with_error_for(@platform, @unit_tests, @jan_1_2013).should contain_all(expected_day_1_errors)
+        records_with_error_for(@platform, @unit_tests, @jan_1_2013).should contain_none_of(expected_day_2_errors)
 
-        records_with_error_for(@sub_project, @unit_tests, @jan_2_2013).should contain_all(expected_day_2_errors)
-        records_with_error_for(@sub_project, @unit_tests, @jan_2_2013).should contain_none_of(expected_day_1_errors)
+        records_with_error_for(@platform, @unit_tests, @jan_2_2013).should contain_all(expected_day_2_errors)
+        records_with_error_for(@platform, @unit_tests, @jan_2_2013).should contain_none_of(expected_day_1_errors)
       end
     end
   end
@@ -191,8 +191,8 @@ describe "CompareRuns" do
   describe "#getCompareResult" do
 
     before do
-      @metadata1 = create_metadatum(@sub_project, @jan_1_2013, @unit_tests)
-      @metadata2 = create_metadatum(@sub_project, @jan_2_2013, @unit_tests)
+      @metadata1 = create_metadatum(@platform, @jan_1_2013, @unit_tests)
+      @metadata2 = create_metadatum(@platform, @jan_2_2013, @unit_tests)
 
       @test_suite1 = create_suite_with_metadata(@metadata1, "rest_unit_tests")
       @test_suite2 = create_suite_with_metadata(@metadata2, "rest_unit_tests")

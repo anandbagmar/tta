@@ -1,14 +1,14 @@
 class ExecutionTrends
-  def get_result_set(sub_project, class_name, start_date, end_date)
+  def get_result_set(platform, class_name, start_date, end_date)
     result_set = {}
-    sub_project_result_set={}
+    platform_result_set={}
     result_set[class_name], max_val = get_time_taken(class_name, start_date, end_date) if class_name && class_name.length > 0
-    sub_project_result_set[SubProject.get_sub_project_name(sub_project)]=result_set
-    return sub_project_result_set, max_val
+    platform_result_set[Platform.get_platform_name(platform)]=result_set
+    return platform_result_set, max_val
   end
 
-  def get_class_names(sub_project_id, test_category, start_date, end_date)
-    metadataRecords = TestMetadatum.where("sub_project_id = ? AND test_category =? AND date_of_execution BETWEEN ? AND ?", "#{sub_project_id}", "#{test_category}", "#{start_date}", "#{end_date}").select("id").uniq
+  def get_class_names(platform_id, test_category, start_date, end_date)
+    metadataRecords = TestMetadatum.where("platform_id = ? AND test_category =? AND date_of_execution BETWEEN ? AND ?", "#{platform_id}", "#{test_category}", "#{start_date}", "#{end_date}").select("id").uniq
     testSuiteRecords = TestSuiteRecord.where("test_metadatum_id IN (?)", metadataRecords.map { |r| r.id }).select("id").uniq
     class_names = TestCaseRecord.where("test_suite_record_id IN (?)", testSuiteRecords.map { |r| r.id }).select("class_name").uniq
     class_names

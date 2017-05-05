@@ -1,8 +1,8 @@
 class DefectAnalysis
-  def get_result_json(sub_project_id, analysis_date, test_category)
-    test_case_hash, no_of_test = getMetadataIds(sub_project_id, analysis_date, test_category)
+  def get_result_json(platform_id, analysis_date, test_category)
+    test_case_hash, no_of_test = getMetadataIds(platform_id, analysis_date, test_category)
     # test_case_hash = test_case_hash[test_category][0].sort_by do |k,v| v.size end
-    # failures = {:sub_project_name => SubProject.find(sub_project_id, :select => "name").name,
+    # failures = {:platform_name => Platform.find(platform_id, :select => "name").name,
     #             :errors => {}
     # }
     # test_case_hash.each do |k,v|
@@ -11,7 +11,7 @@ class DefectAnalysis
     if !(no_of_test.nil?)
       percentage = get_defect_percentage(no_of_test.flatten)
       defect_analysis_json = {
-          :sub_project_name => SubProject.find(sub_project_id).name,
+          :platform_name => Platform.find(platform_id).name,
           :errors => test_case_hash,
           :percentage => percentage
       }.to_json
@@ -32,19 +32,19 @@ class DefectAnalysis
     percentage
   end
 
-  def getMetadataIds(sub_project_id, analysis_date, test_category)
+  def getMetadataIds(platform_id, analysis_date, test_category)
     @final_result_hash = {}
     @final_test_for_particular_error=[]
     @index=0
     if test_category=="ALL"
       analysis_date=analysis_date.to_date
-      test_category = get_record_with_distinct_test_category(sub_project_id)
+      test_category = get_record_with_distinct_test_category(platform_id)
       test_category.each do |test_type|
-        meta_data = SubProject.find(sub_project_id).test_metadatum.where(date_of_execution: analysis_date.beginning_of_day..analysis_date.end_of_day, test_category: test_type)
+        meta_data = Platform.find(platform_id).test_metadatum.where(date_of_execution: analysis_date.beginning_of_day..analysis_date.end_of_day, test_category: test_type)
         getResultHash(test_type, meta_data)
       end
     else
-      meta_data = SubProject.find(sub_project_id).test_metadatum.where(date_of_execution: analysis_date, test_category: test_category)
+      meta_data = Platform.find(platform_id).test_metadatum.where(date_of_execution: analysis_date, test_category: test_category)
       getResultHash(test_category, meta_data)
     end
     return @final_result_hash, @final_test_for_particular_error
@@ -91,8 +91,8 @@ class DefectAnalysis
     return error_hash, no_of_test_for_particular_error
   end
 
-  def get_record_with_distinct_test_category(sub_project_id)
-    metadata_with_distinct_test_category = TestMetadatum.new.get_distinct_test_category(sub_project_id)
+  def get_record_with_distinct_test_category(platform_id)
+    metadata_with_distinct_test_category = TestMetadatum.new.get_distinct_test_category(platform_id)
     @test_category=[]
     metadata_with_distinct_test_category.each do |test_type|
       @test_category << test_type.test_category

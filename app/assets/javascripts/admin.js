@@ -35,7 +35,7 @@ var ExternalDashboard = {
     }
 };
 
-var ProjectStatistics = {
+var ProductStatistics = {
     renderTable:function (jsonDataSet) {
         tableData = jsonData.parse(jsonDataSet);
         if (tableData != "") {
@@ -45,33 +45,33 @@ var ProjectStatistics = {
                 $("#display_message").show();
             }
             else {
-                $("#project_data_table").show();
+                $("#product_data_table").show();
                 var templates = new Template();
-                var projectTemplate = templates.getAdminTableProjectTemplate();
-                var subProjectTemplate = templates.getAdminTableSubProjectTemplate();
-                var renderTableData = "<tr><th>No</th><th>PROJECT NAME </th><th>SUB PROJECT NAME </th> <th> TEST UPLOAD COUNT</th></tr>";
+                var productTemplate = templates.getAdminTableProductTemplate();
+                var pLATFORMTemplate = templates.getAdminTablePlatformTemplate();
+                var renderTableData = "<tr><th>No</th><th>PRODUCT NAME </th><th>PLATFORM NAME </th> <th> TEST UPLOAD COUNT</th></tr>";
                 var index = 1;
-                jQuery.each(tableData, function (key, projectData) {
-                    project_name = projectData[0]['project_name'];
-                    sub_projects = projectData[1]['sub_projects']
-                    count = projectData[2]['test_count'];
-                    renderTableData += templates.render(projectTemplate, {
+                jQuery.each(tableData, function (key, productData) {
+                    product_name = productData[0]['product_name'];
+                    platforms = productData[1]['platforms']
+                    count = productData[2]['test_count'];
+                    renderTableData += templates.render(productTemplate, {
                         "Index":index,
-                        "ProjectName":project_name,
-                        "SubProjectName":"",
+                        "ProductName":product_name,
+                        "PlatformName":"",
                         "TestCount":""
                     });
-                    for (var i = 0; i < sub_projects.length; i++) {
-                        renderTableData += templates.render(subProjectTemplate, {
+                    for (var i = 0; i < platforms.length; i++) {
+                        renderTableData += templates.render(pLATFORMTemplate, {
                             "Index":"",
-                            "ProjectName":"",
-                            "SubProjectName":sub_projects[i],
+                            "ProductName":"",
+                            "PlatformName":platforms[i],
                             "TestCount":count[i]
                         });
                     }
                     index++;
                 })
-                $('#project_data').html(renderTableData);
+                $('#product_data').html(renderTableData);
             }
         }
     }
