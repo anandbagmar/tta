@@ -92,12 +92,7 @@ class DefectAnalysis
   end
 
   def get_record_with_distinct_test_category(platform_id)
-    metadata_with_distinct_test_category = TestMetadatum.new.get_distinct_test_category(platform_id)
-    @test_category=[]
-    metadata_with_distinct_test_category.each do |test_type|
-      @test_category << test_type.test_category
-    end
-    @test_category
+    TestMetadatum.new.get_distinct_test_category(platform_id)
   end
 end
 

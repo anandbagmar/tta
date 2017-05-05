@@ -13,7 +13,7 @@ class TestMetadatum < ActiveRecord::Base
   validates :test_report_type, :presence => {:message => 'cannot be blank, Task not saved'}
 
   def get_distinct_test_category platform_id
-    TestMetadatum.where(platform_id: platform_id).uniq(:test_category)
+    TestMetadatum.where(platform_id: platform_id).pluck(:test_category).uniq
   end
 
   def find_no_and_duration_of_test meta_data
