@@ -11,6 +11,6 @@
 FactoryGirl.define do
   factory :platform, :class => Platform do
     name 'TTA_PLATFORM'
-    platform
+    product
   end
 end
