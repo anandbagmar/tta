@@ -32,10 +32,10 @@ module Seed
       random_time = (DateTime.now - (test_meta_data_number + test_meta_data_number%10.to_f)).to_time
       test_meta_data = TestMetadatum.create(
           :ci_job_name => SAMPLE_CI_JOB_NAMES[rand(SAMPLE_CI_JOB_NAMES.length)],
-          :os_name => SAMPLE_OS_TYPES[rand(SAMPLE_OS_TYPES.length)],
-          :host_name => SAMPLE_HOST_NAMES[rand(SAMPLE_HOST_NAMES.length)],
-          :browser => SAMPLE_BROWSER_TYPES[rand(SAMPLE_BROWSER_TYPES.length)],
-          :type_of_environment => SAMPLE_TEST_ENVIRONMENTS[rand(SAMPLE_TEST_ENVIRONMENTS.length)],
+          :os => SAMPLE_OS_TYPES[rand(SAMPLE_OS_TYPES.length)],
+          :test_execution_machine_name => SAMPLE_TEST_EXECUTION_MACHINE_NAMES[rand(SAMPLE_TEST_EXECUTION_MACHINE_NAMES.length)],
+          :browser_or_device => SAMPLE_BROWSER_OR_DEVICE_TYPES[rand(SAMPLE_BROWSER_OR_DEVICE_TYPES.length)],
+          :environment => SAMPLE_TEST_ENVIRONMENTS[rand(SAMPLE_TEST_ENVIRONMENTS.length)],
           :date_of_execution => random_time,
           :test_category => test_category,
           :test_sub_category => test_sub_category,

@@ -18,13 +18,13 @@
       <arg value="-F"/>
       <arg value="test_report_type=JUNIT"/>
       <arg value="-F"/>
-      <arg value="os_name=MAC OS X"/>
+      <arg value="os=MAC OS X"/>
       <arg value="-F"/>
-      <arg value="host_name=TW"/>
+      <arg value="test_execution_machine_name=TW"/>
       <arg value="-F"/>
-      <arg value="browser=SAFARI"/>
+      <arg value="browser_or_device=SAFARI"/>
       <arg value="-F"/>
-      <arg value="type_of_environment=QA"/>
+      <arg value="environment=QA"/>
       <arg value="-F"/>
       <arg value="date="/>              <!--If date is blank, it takes current date-->
       <arg value="-F"/>

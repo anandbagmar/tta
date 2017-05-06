@@ -3,10 +3,10 @@ $platform_name=""
 $ci_job_name=""
 $test_category=""
 $test_report_type=""
-$os_name=""
-$host_name=""
-$browser=""
-$type_of_environment=""
+$os=""
+$test_execution_machine_name=""
+$browser_or_device=""
+$environment=""
 $date_of_execution=""
 $log_directory=""
 $file_pattern=""
@@ -31,13 +31,13 @@ namespace :tta do
     your_platform = "Platform" #add your platform name here
     your_ci_job_name =  "CI_JOB" #add ci job name here
     your_test_type = "TEST_TYPE(EG:JUNIT)" #add test_type here
-    your_os_name = "os name" #add os name here
-    your_host_name = "host name" #add host name here
-    your_browser = "browser"  #add browser here, could be blank
+    your_os = "os name" #add os name here
+    your_test_execution_machine_name = "host name" #add host name here
+    your_browser_or_device = "browser_or_device"  #add browser_or_device here, could be blank
     your_environment = "environment" #add environment here
 
     #we support only .xml files as of now. So the value of filePattern is hard-coded
-    Rake::Task['tta:upload_to_tta'].invoke(your_product, your_platform, your_ci_job_name, args.test_type,your_test_type, your_os_name, your_host_name, your_browser, your_environment, "", args.file_path, "*.xml")
+    Rake::Task['tta:upload_to_tta'].invoke(your_product, your_platform, your_ci_job_name, args.test_type,your_test_type, your_os, your_test_execution_machine_name, your_browser_or_device, your_environment, "", args.file_path, "*.xml")
 
   end
 
@@ -50,20 +50,20 @@ namespace :tta do
       `zip results.zip <path of your xml logs>`
     end
 
-    task :upload_to_tta, [:product_name, :platform_name, :ci_job_name, :test_category, :test_report_type, :os_name, :host_name, :browser, :type_of_environment, :date_of_execution, :logDirectory, :filePattern, :commit] do |t, args|
-      args.with_defaults(:product_name => "demoProduct", :platform_name => "demoPlatform", :ci_job_name => "demoCIJob", :test_category => "Unit Test", :test_report_type => "RSpec Junit", :os_name => "MAc", :host_name => "xyz", :browser => "Chrome", :type_of_environment => "Dev", :date_of_execution => "1900-12-12", :logDirectory => "asdw", :filePattern => "*.xml", :commit => "SUBMIT")
+    task :upload_to_tta, [:product_name, :platform_name, :ci_job_name, :test_category, :test_report_type, :os, :test_execution_machine_name, :browser_or_device, :environment, :date_of_execution, :logDirectory, :filePattern, :commit] do |t, args|
+      args.with_defaults(:product_name => "demoProduct", :platform_name => "demoPlatform", :ci_job_name => "demoCIJob", :test_category => "Unit Test", :test_report_type => "RSpec Junit", :os => "MAc", :test_execution_machine_name => "xyz", :browser_or_device => "Chrome", :environment => "Dev", :date_of_execution => "1900-12-12", :logDirectory => "asdw", :filePattern => "*.xml", :commit => "SUBMIT")
       $product_name = args.product_name
       $platform_name = args.platform_name
       $ci_job_name = ENV['GO_JOB_NAME']
       $test_category=args.test_category
       $test_report_type=args.test_report_type
-      $os_name=RUBY_PLATFORM
-      $host_name=`hostname`.strip
-      $browser=args.browser
-      $type_of_environment=args.type_of_environment
+      $os=RUBY_PLATFORM
+      $test_execution_machine_name=`hostname`.strip
+      $browser_or_device=args.browser_or_device
+      $environment=args.environment
       $log_directory=args.logDirectory
       $file_pattern=args.filePattern
       $commit=args.commit
-      `curl -F 'authenticity_token=KBc5IruWAILeOOIVKoqozwSYx3eSatES/fklIGf/Cn4=' -F 'product_name=#{$product_name}' -F 'platform_name=#{$platform_name}' -F 'ci_job_name=#{$ci_job_name}' -F 'test_category=#{$test_category}' -F 'test_report_type=#{$test_report_type}' -F 'os_name=#{$os_name}' -F 'host_name=#{$host_name}' -F 'browser=#{$browser}' -F 'type_of_environment=#{$type_of_environment}' -F 'date=""' -F 'logDirectory=@#{$log_directory}' -F 'commit=SUBMIT' 'tta.thoughtworks.com:3000/upload/automatic'`
+      `curl -F 'authenticity_token=KBc5IruWAILeOOIVKoqozwSYx3eSatES/fklIGf/Cn4=' -F 'product_name=#{$product_name}' -F 'platform_name=#{$platform_name}' -F 'ci_job_name=#{$ci_job_name}' -F 'test_category=#{$test_category}' -F 'test_report_type=#{$test_report_type}' -F 'os=#{$os}' -F 'test_execution_machine_name=#{$test_execution_machine_name}' -F 'browser_or_device=#{$browser_or_device}' -F 'environment=#{$environment}' -F 'date=""' -F 'logDirectory=@#{$log_directory}' -F 'commit=SUBMIT' 'tta.thoughtworks.com:3000/upload/automatic'`
     end
   end

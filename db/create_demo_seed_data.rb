@@ -23,10 +23,10 @@ def self.create_demo_test_meta_data(platform_id, date_of_execution)
   test_sub_category = get_respective_demo_test_sub_category(test_category)
   test_meta_data = TestMetadatum.create(
       :ci_job_name => SAMPLE_CI_JOB_NAMES[rand(SAMPLE_CI_JOB_NAMES.length)],
-      :os_name => SAMPLE_OS_TYPES[rand(SAMPLE_OS_TYPES.length)],
-      :host_name => SAMPLE_HOST_NAMES[rand(SAMPLE_HOST_NAMES.length)],
-      :browser => SAMPLE_BROWSER_TYPES[rand(SAMPLE_BROWSER_TYPES.length)],
-      :type_of_environment => SAMPLE_TEST_ENVIRONMENTS[rand(SAMPLE_TEST_ENVIRONMENTS.length)],
+      :os => SAMPLE_OS_TYPES[rand(SAMPLE_OS_TYPES.length)],
+      :test_execution_machine_name => SAMPLE_TEST_EXECUTION_MACHINE_NAMES[rand(SAMPLE_TEST_EXECUTION_MACHINE_NAMES.length)],
+      :browser_or_device => SAMPLE_BROWSER_OR_DEVICE_TYPES[rand(SAMPLE_BROWSER_OR_DEVICE_TYPES.length)],
+      :environment => SAMPLE_TEST_ENVIRONMENTS[rand(SAMPLE_TEST_ENVIRONMENTS.length)],
       :date_of_execution => date_of_execution,
       :test_category => test_category,
       :test_sub_category => test_sub_category,

@@ -61,32 +61,32 @@
             = select_tag "test_report_type", "<option>JUnit</option><option>Cucumber_HTML</option><option>NUnit</option><option>Cucumber_JSON</option>".html_safe, :prompt => "--Select--", :class => 'required'
         %tr
           %td.fields
-            %label{:for => "os_name"}
+            %label{:for => "os"}
               OS Tested On
               %span.required-fields *
           %td
-            = text_field_tag (:os_name), nil, :class => 'required'
+            = text_field_tag (:os), nil, :class => 'required'
         %tr
           %td.fields
-            %label{:for => "host_name"}
+            %label{:for => "test_execution_machine_name"}
               Host-Machine Name
               %span.required-fields *
           %td
-            = text_field_tag (:host_name), nil, :class => 'required'
+            = text_field_tag (:test_execution_machine_name), nil, :class => 'required'
         %tr
           %td.fields
-            %label{:for => "browser"}
+            %label{:for => "browser_or_device"}
               Browser Tested On
               %span.required-fields *
           %td
-            = text_field_tag (:browser), nil, :class => 'required'
+            = text_field_tag (:browser_or_device), nil, :class => 'required'
         %tr
           %td.fields
-            %label{:for => "type_of_environment"}
+            %label{:for => "environment"}
               Environment Run on
               %span.required-fields *
           %td
-            = text_field_tag (:type_of_environment), nil, :class => 'required'
+            = text_field_tag (:environment), nil, :class => 'required'
         %tr
           %td.fields
             %label{:for => "date_of_execution"}

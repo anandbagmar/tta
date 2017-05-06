@@ -22,15 +22,15 @@ class Platform < ActiveRecord::Base
     if (params[:test_sub_category]=="")
       params[:test_sub_category]= test_category.select("test_sub_category").first[:test_sub_category]
     end
-    meta_datum = test_metadatum.where(ci_job_name:         (params[:ci_job_name]).split.join(' ').upcase,
-                                      browser:             (params[:browser]).split.join(' ').upcase,
-                                      type_of_environment: (params[:type_of_environment]).split.join(' ').upcase,
-                                      host_name:           (params[:host_name]).split.join(' ').upcase,
-                                      os_name:             (params[:os_name]).split.join(' ').upcase,
-                                      test_category:       params[:test_category].upcase,
-                                      test_report_type:    params[:test_report_type].upcase,
-                                      test_sub_category:   params[:test_sub_category].upcase,
-                                      date_of_execution:   date_of_execution).first_or_create
+    meta_datum = test_metadatum.where(ci_job_name:                 (params[:ci_job_name]).split.join(' ').upcase,
+                                      browser_or_device:           (params[:browser_or_device]).split.join(' ').upcase,
+                                      environment:                 (params[:environment]).split.join(' ').upcase,
+                                      test_execution_machine_name: (params[:test_execution_machine_name]).split.join(' ').upcase,
+                                      os:                          (params[:os]).split.join(' ').upcase,
+                                      test_category:               params[:test_category].upcase,
+                                      test_report_type:            params[:test_report_type].upcase,
+                                      test_sub_category:           params[:test_sub_category].upcase,
+                                      date_of_execution:           date_of_execution).first_or_create
 
     meta_datum.save
     test_sub_category_list = test_category.select("test_sub_category")

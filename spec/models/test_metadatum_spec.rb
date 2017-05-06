@@ -3,20 +3,20 @@ require 'spec_helper'
 describe TestMetadatum do
   describe "create" do
 
-    it "validates presence of browser name" do
-      should validate_presence_of(:browser).with_message("cannot be blank, Task not saved")
+    it "validates presence of browser_or_device name" do
+      should validate_presence_of(:browser_or_device).with_message("cannot be blank, Task not saved")
     end
 
     it "validates presence of type of environment" do
-      should validate_presence_of(:type_of_environment).with_message("cannot be blank, Task not saved")
+      should validate_presence_of(:environment).with_message("cannot be blank, Task not saved")
     end
 
-    it "validates presence of host_name" do
-      should validate_presence_of(:host_name).with_message("cannot be blank, Task not saved")
+    it "validates presence of test_execution_machine_name" do
+      should validate_presence_of(:test_execution_machine_name).with_message("cannot be blank, Task not saved")
     end
 
-    it "validates presence of os_name" do
-      should validate_presence_of(:os_name).with_message("cannot be blank, Task not saved")
+    it "validates presence of os" do
+      should validate_presence_of(:os).with_message("cannot be blank, Task not saved")
     end
 
     it "validates presence of date_of_execution" do

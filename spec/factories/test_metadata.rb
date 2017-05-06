@@ -4,10 +4,10 @@ FactoryGirl.define do
   factory :test_metadatum, :class => TestMetadatum do
     platform
     ci_job_name "Build"
-    os_name "MacOSX"
-    host_name "host_pc"
-    browser "firefox"
-    type_of_environment "Dev"
+    os "MacOSX"
+    test_execution_machine_name "host_pc"
+    browser_or_device "firefox"
+    environment "Dev"
     date_of_execution "2013-02-20 00:00:00"
     test_category "UNIT TEST"
     test_report_type "JUnit"
@@ -19,10 +19,10 @@ FactoryGirl.define do
   factory :test_metadatum_hash, :class => Hash do
     platform
     ci_job_name "Build"
-    os_name "MacOSX"
-    host_name "host_pc"
-    browser "firefox"
-    type_of_environment "Dev"
+    os "MacOSX"
+    test_execution_machine_name "host_pc"
+    browser_or_device "firefox"
+    environment "Dev"
     # date_of_execution "2013-02-20 00:00:00"
     test_category "UNIT TEST"
     test_report_type "JUnit"
