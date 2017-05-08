@@ -33,6 +33,7 @@ module Seed
       test_meta_data            = TestMetadatum.create(
           :ci_job_name                 => SAMPLE_CI_JOB_NAMES[rand(SAMPLE_CI_JOB_NAMES.length)],
           :os                          => SAMPLE_OS_TYPES[rand(SAMPLE_OS_TYPES.length)],
+          :branch                      => SAMPLE_BRANCH_NAMES[rand(SAMPLE_BRANCH_NAMES.length)],
           :test_execution_machine_name => SAMPLE_TEST_EXECUTION_MACHINE_NAMES[rand(SAMPLE_TEST_EXECUTION_MACHINE_NAMES.length)],
           :browser_or_device           => SAMPLE_BROWSER_OR_DEVICE_TYPES[rand(SAMPLE_BROWSER_OR_DEVICE_TYPES.length)],
           :environment                 => SAMPLE_TEST_ENVIRONMENTS[rand(SAMPLE_TEST_ENVIRONMENTS.length)],
