@@ -9,9 +9,9 @@ class ExecutionTrendsController < ApplicationController
   end
 
   def show
-    @start_date = params["start_date"]
-    @end_date = params["end_date"]
-    @result_set,@max_value = ExecutionTrends.new.get_result_set(params["platforms"],params["test_class_name"],@start_date,@end_date)
+    @start_date             = params["start_date"]
+    @end_date               = params["end_date"]
+    @result_set, @max_value = ExecutionTrends.new.get_result_set(params["platforms"], params["test_class_name"], @start_date, @end_date)
   end
 
 end

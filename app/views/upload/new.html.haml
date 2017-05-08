@@ -34,24 +34,52 @@
             = text_field_tag (:platform_name), nil, :class => 'required', :maxlength => "100", :style => "text-transform: uppercase"
         %tr
           %td.fields
+            %label{:for => "branch"}
+              Branch
+          %td
+            = text_field_tag (:branch), nil, :class => 'required'
+        %tr
+          %td.fields
             %label{:for => "ci_job_name"}
               CI Job Name
           %td
-            = text_field_tag (:ci_job_name)
+            = text_field_tag (:ci_job_name), nil, :class => 'required'
+        %tr
+          %td.fields
+            %label{:for => "environment"}
+              Environment Run on
+          %td
+            = text_field_tag (:environment), nil, :class => 'required'
+        %tr
+          %td.fields
+            %label{:for => "browser_or_device"}
+              Browser / Device Tested On
+          %td
+            = text_field_tag (:browser_or_device), nil, :class => 'required'
+        %tr
+          %td.fields
+            %label{:for => "os"}
+              OS Tested On
+          %td
+            = text_field_tag (:os), nil, :class => 'required'
+        %tr
+          %td.fields
+            %label{:for => "test_execution_machine_name"}
+              Host-Machine Name
+          %td
+            = text_field_tag (:test_execution_machine_name), nil, :class => 'required'
         %tr
           %td.fields
             %label{:for => "test_category"}
               Test Category
-              %span.required-fields *
           %td
             = select_tag "test_category", "<option>UNIT TEST</option><option>INTEGRATION TEST</option><option>FUNCTIONAL TEST</option>".html_safe, :prompt => "--Select--", :id => 'test_category_select',:class => 'required'
         %tr
           %td.fields
             %label{:for => "test_sub_category"}
               Test Sub Category
-              %span.required-fields *
           %td
-            = select_tag "test_sub_category","", :prompt => "--Select--", :class => 'required', :id => 'test_sub_category_select' ,:disabled => true
+            = select_tag "test_sub_category","", :prompt => "--Select--", :class => 'required', :id => 'test_sub_category_select' ,:disabled => true, :class => 'required'
         %tr
           %td.fields
             %label{:for => "test_report_type"}
@@ -61,37 +89,8 @@
             = select_tag "test_report_type", "<option>JUnit</option><option>Cucumber_HTML</option><option>NUnit</option><option>Cucumber_JSON</option>".html_safe, :prompt => "--Select--", :class => 'required'
         %tr
           %td.fields
-            %label{:for => "os"}
-              OS Tested On
-              %span.required-fields *
-          %td
-            = text_field_tag (:os), nil, :class => 'required'
-        %tr
-          %td.fields
-            %label{:for => "test_execution_machine_name"}
-              Host-Machine Name
-              %span.required-fields *
-          %td
-            = text_field_tag (:test_execution_machine_name), nil, :class => 'required'
-        %tr
-          %td.fields
-            %label{:for => "browser_or_device"}
-              Browser Tested On
-              %span.required-fields *
-          %td
-            = text_field_tag (:browser_or_device), nil, :class => 'required'
-        %tr
-          %td.fields
-            %label{:for => "environment"}
-              Environment Run on
-              %span.required-fields *
-          %td
-            = text_field_tag (:environment), nil, :class => 'required'
-        %tr
-          %td.fields
             %label{:for => "date_of_execution"}
               Date Of Execution
-              %span.required-fields *
           %td
             .required-field.date-field
               = select_datetime()
@@ -101,7 +100,6 @@
           %td.fields
             %label{:for => "logDirectory"}
               Upload Logs
-              %span.required-fields *
           %td
             = file_field_tag :logDirectory, {:multiple => true, :accept => 'application/zip', :class => 'required'}
             %span.invalid-file-type Invalid File Type Uploaded.Please upload a zip file

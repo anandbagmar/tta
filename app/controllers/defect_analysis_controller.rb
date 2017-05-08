@@ -4,8 +4,8 @@ class DefectAnalysisController < ApplicationController
   end
 
   def getRunDates
-    platform_id =params["platform_id"]
-    test_category =params["test_category"]
+    platform_id                =params["platform_id"]
+    test_category              =params["test_category"]
     metadataForSelectedFilters = TestMetadatum.where(:platform_id => platform_id).select([:id, :date_of_execution]).uniq(:date_of_execution)
 
     if (test_category != "ALL")
@@ -18,23 +18,23 @@ class DefectAnalysisController < ApplicationController
   respond_to :json, :html
 
   def getSpecificRun
-    platform_id =params["platform_id"]
-    test_category =params["test_category"]
-    runDate =params["run_date"].to_date.to_s
+    platform_id                =params["platform_id"]
+    test_category              =params["test_category"]
+    runDate                    =params["run_date"].to_date.to_s
     metadataForSelectedFilters = TestMetadatum.where("platform_id = ? AND test_category = ? AND date_of_execution LIKE ?", platform_id, test_category, "#{runDate}%")
-    @specificRun=getValidMetadataRecords(metadataForSelectedFilters)
+    @specificRun               =getValidMetadataRecords(metadataForSelectedFilters)
     respond_with(@specificRun.to_json)
   end
 
   respond_to :json, :html
 
   def platform_filter
-    platform_id=params["platforms"]
+    platform_id    =params["platforms"]
     @analysis_date = params["dates"]
     if (!(params["test_runs"].nil?))
       @analysis_date=params["dates"] + " " + params["test_runs"]
     end
-    test_category =params["test_category"]
+    test_category         =params["test_category"]
     @defect_analysis_json = DefectAnalysis.new.get_result_json(platform_id, @analysis_date, test_category)
   end
 

@@ -1,6 +1,6 @@
 class Symbol
   def as value
-    hash = {}
+    hash       = {}
     hash[self] = value
     hash
   end

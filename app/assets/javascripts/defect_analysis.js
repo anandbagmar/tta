@@ -1,6 +1,6 @@
 var renderDefectTable = {
 
-    renderTable:function (jsonDataSet, date) {
+    renderTable: function (jsonDataSet, date) {
         $("#defect-analysis").css("display", "none");
         var platformName = "";
         var percentage = "";
@@ -17,7 +17,7 @@ var renderDefectTable = {
             var errorList;
             var errorPer = 0;
             for (var test_type in tableResponse) {
-                if ((Object.keys(tableResponse[test_type][0]).length==0)) {
+                if ((Object.keys(tableResponse[test_type][0]).length == 0)) {
                     $("#defect_analysis_table").append("<tr class='first'>" + "<td colspan='2'>" + test_type + "</td>" + "</tr>");
                     $("#defect_analysis_table").append("<tr class='table-list'><td> ----- NO FAILURES FOR THIS TEST CATEGORY ----- </td><td></td></tr>");
                 }

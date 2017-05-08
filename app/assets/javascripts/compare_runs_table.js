@@ -13,12 +13,12 @@ displayTable = function (class_name_array) {
     for (var index = 0; index < number_of_failing_tests;) {
         for (var colIndex = 0; colIndex < MAXIMUM_COLUMNS; colIndex++) {
             row += templates.render(CompareTableColumnTemplate, {
-                "ClassName":(index < number_of_failing_tests) ? class_name_array[index].class_name : ""
+                "ClassName": (index < number_of_failing_tests) ? class_name_array[index].class_name : ""
             });
             index++;
         }
         classNames += templates.render(CompareTableRowTemplate, {
-            "ClassNameColumns":row
+            "ClassNameColumns": row
         });
         row = "";
     }
@@ -35,7 +35,7 @@ compareResultsFor = function (type, tableTitle, date1, date2, class_name_array) 
 }
 
 var compareRuns = {
-    renderView:function (compareJson) {
+    renderView: function (compareJson) {
         var date1 = compareJson.dates[0];
         var date2 = compareJson.dates[1];
 

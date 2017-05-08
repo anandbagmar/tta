@@ -1,59 +1,61 @@
 
-#platform_picker{
+#platform_picker {
   background-color: #DDD;
   padding: 10px;
   width: 780px;
   margin: 0 auto;
   border-radius: 8px;
 }
-#platform_id{
+
+#platform_id {
   display: inline-block;
 }
-#graph{
-  position:relative;
+
+#graph {
+  position: relative;
   margin: 45px 0px 90px 0px;
 
 }
 
-#pyramidTable{
+#pyramidTable {
   border: solid;
   float: right;
   margin: 5% 16%;
   border-collapse: collapse;
-  clear:right;
+  clear: right;
   float: right;
   width: 629px;
   border: solid 4px;
 }
 
-#block_pyramid{
-  position:relative;
-  width:50%;
+#block_pyramid {
+  position: relative;
+  width: 50%;
 }
-#pyramidTable tr,th,td{
-border: 1px solid;
+
+#pyramidTable tr, th, td {
+  border: 1px solid;
   padding: 10px;
 }
 
-.table_header{
+.table_header {
   background: rgb(163, 172, 171);
   color: rgb(6, 7, 14);
 }
 
-.error{
+.error {
   color: #DB1818;
-  font-size:12px;
+  font-size: 12px;
   margin: 0;
 }
 
-.clearfix:after,.clearfix:before{
+.clearfix:after, .clearfix:before {
   content: " ";
   clear: both;
   display: block;
 }
 
-
-#display_message{
+#display_message {
   position: absolute;
   bottom: 65px;
   width: 500px;
@@ -64,57 +66,59 @@ border: 1px solid;
   border-radius: 8px;
 }
 
-.trapezoid
-{
+.trapezoid {
   color: #750D0D;
-  border-bottom-color : red;
+  border-bottom-color: red;
   border-bottom-width: 100px;
-  border-bottom-style : solid;
+  border-bottom-style: solid;
   height: 0;
   position: relative;
   margin: 0 auto;
 }
-#pyramid-overlay
-{
-  border-bottom-color : rgba(0,0,0,0.1);
+
+#pyramid-overlay {
+  border-bottom-color: rgba(0, 0, 0, 0.1);
   border-bottom-width: 400px;
-  border-bottom-style : solid;
+  border-bottom-style: solid;
   border-left: 200px solid transparent;
   border-right: 200px solid transparent;
   height: 0;
-  width:0;
+  width: 0;
   margin: 0 auto;
   bottom: 0;
   z-index: 1;
   position: relative;
 }
 
-#ideal_pyramid{
+#ideal_pyramid {
   //position: relative;
   //margin-bottom: 8%;
   //float: left;
   padding-right: 20%;
-  width:1000px;
+  width: 1000px;
   margin: 0 auto;
 }
 
-.pyramidDetail{
+.pyramidDetail {
   position: absolute;
   top: 50%;
   margin-left: 50%;
 }
-.pyramidItem{
+
+.pyramidItem {
   position: absolute;
   margin-left: 50%;
 }
-#ideal_pyramid .test-triangle{
+
+#ideal_pyramid .test-triangle {
   margin: 0 auto;
-  border-style:solid;
+  border-style: solid;
   height: 0px;
   width: 0px;
   margin: 0 auto;
 }
-#ideal_pyramid .test-region{
+
+#ideal_pyramid .test-region {
   position: absolute;
   width: 100%;
   min-height: 300px;

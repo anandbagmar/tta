@@ -39,12 +39,12 @@ describe TestMetadatum do
   describe "get_record_for_specific_date" do
     include DataHelper
 
-    let(:integration_tests) {"INTEGRATION TESTS"}
-    let(:unit_tests) {"UNIT TESTS"}
+    let(:integration_tests) { "INTEGRATION TESTS" }
+    let(:unit_tests) { "UNIT TESTS" }
 
-    let(:product) {create_product}
-    let(:platform) {create_platform_for_product product}
-    let(:be_equal_to_one) {eq(1)}
+    let(:product) { create_product }
+    let(:platform) { create_platform_for_product product }
+    let(:be_equal_to_one) { eq(1) }
 
     def id_of(metadata)
       metadata.id
@@ -58,20 +58,20 @@ describe TestMetadatum do
       metadata.length
     end
 
-    it "distinguishes records by test category"  do
+    it "distinguishes records by test category" do
 
-      inserted_int_test_metadatatum = create_metadatum platform , "2013-01-01" , integration_tests
-      inserted_unit_test_metadatatum = create_metadatum platform , "2013-01-01" , unit_tests
+      inserted_int_test_metadatatum  = create_metadatum platform, "2013-01-01", integration_tests
+      inserted_unit_test_metadatatum = create_metadatum platform, "2013-01-01", unit_tests
 
       retrieved_int_test_metadata = get_metadata(
-        platform,
-        integration_tests,
-        inserted_int_test_metadatatum.date_of_execution)
+          platform,
+          integration_tests,
+          inserted_int_test_metadatatum.date_of_execution)
 
       retrieved_unit_test_metadata = get_metadata(
-        platform,
-        unit_tests,
-        inserted_unit_test_metadatatum.date_of_execution)
+          platform,
+          unit_tests,
+          inserted_unit_test_metadatatum.date_of_execution)
 
       length_of(retrieved_int_test_metadata).should be_equal_to_one
       length_of(retrieved_unit_test_metadata).should be_equal_to_one
@@ -82,18 +82,18 @@ describe TestMetadatum do
 
     it "distinguishes records by test execution date" do
 
-      inserted_int_test_metadatatum1 = create_metadatum platform , "2013-01-01" , integration_tests
-      inserted_int_test_metadatatum2 = create_metadatum platform , "2013-01-02" , integration_tests
+      inserted_int_test_metadatatum1 = create_metadatum platform, "2013-01-01", integration_tests
+      inserted_int_test_metadatatum2 = create_metadatum platform, "2013-01-02", integration_tests
 
       retrieved_int_test_metadata1 = get_metadata(
-        platform,
-        integration_tests,
-        inserted_int_test_metadatatum1.date_of_execution)
+          platform,
+          integration_tests,
+          inserted_int_test_metadatatum1.date_of_execution)
 
       retrieved_int_test_metadata2 = get_metadata(
-        platform,
-        integration_tests,
-        inserted_int_test_metadatatum2.date_of_execution)
+          platform,
+          integration_tests,
+          inserted_int_test_metadatatum2.date_of_execution)
 
       length_of(retrieved_int_test_metadata1).should be_equal_to_one
       length_of(retrieved_int_test_metadata2).should be_equal_to_one
@@ -105,20 +105,20 @@ describe TestMetadatum do
 
       platform_other = create_other_platform_for_product product
 
-      inserted_platform_metadatum = create_metadatum platform , "2013-01-01" , integration_tests
-      inserted_platform_other_metadatum =  create_metadatum platform_other , "2013-01-01" , integration_tests
+      inserted_platform_metadatum       = create_metadatum platform, "2013-01-01", integration_tests
+      inserted_platform_other_metadatum = create_metadatum platform_other, "2013-01-01", integration_tests
 
       date_of_execution = inserted_platform_metadatum.date_of_execution
 
       retrieved_platform_metadata = get_metadata(
-        platform,
-        integration_tests,
-        date_of_execution)
+          platform,
+          integration_tests,
+          date_of_execution)
 
       retrieved_platform_other_metadata = get_metadata(
-        platform_other,
-        integration_tests,
-        date_of_execution)
+          platform_other,
+          integration_tests,
+          date_of_execution)
 
       length_of(retrieved_platform_metadata).should be_equal_to_one
       length_of(retrieved_platform_other_metadata).should be_equal_to_one

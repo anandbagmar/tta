@@ -14,9 +14,9 @@ $(document).ready(function () {
         });
     };
 
-    var productChange = function(){
+    var productChange = function () {
         var product_id = ($("#product_select option:selected").val());
-        var params = {url:"/get_platform_data", data:{product_id:product_id}, successCallback:productResponse};
+        var params = {url: "/get_platform_data", data: {product_id: product_id}, successCallback: productResponse};
         Utils.ajaxRequest(params);
     }
 
@@ -53,9 +53,9 @@ $(document).ready(function () {
         }
         Utils.removeAttribute("#date", "disabled");
         $("#date").datepicker({
-            dateFormat:"yy-mm-dd",
-            defaultDate:" ",
-            beforeShowDay:function (date) {
+            dateFormat: "yy-mm-dd",
+            defaultDate: " ",
+            beforeShowDay: function (date) {
                 return [($.inArray(getFormattedDate(date), executionDates) > -1)];
             }
         });
@@ -84,14 +84,18 @@ $(document).ready(function () {
 
     $(document).delegate("#platform_select", "change", function () {
         var platform_id = ($("#platform_select option:selected").val());
-        var params = {url:"/get_test_types", data:{platform_id:platform_id}, successCallback:pLATFORMResponse};
+        var params = {url: "/get_test_types", data: {platform_id: platform_id}, successCallback: pLATFORMResponse};
         Utils.ajaxRequest(params);
     });
 
     $(document).delegate("#test_category_select", "change", function () {
         var platform_id = ($("#platform_select option:selected").val());
         var test_category = ($("#test_category_select option:selected").val());
-        var params = {url:"/get_run_dates", data:{platform_id:platform_id, test_category:test_category}, successCallback:testCategoryResponse};
+        var params = {
+            url: "/get_run_dates",
+            data: {platform_id: platform_id, test_category: test_category},
+            successCallback: testCategoryResponse
+        };
         Utils.ajaxRequest(params);
     });
 
@@ -100,7 +104,11 @@ $(document).ready(function () {
         var platform_id = ($("#platform_select option:selected").val());
         var test_category = ($("#test_category_select option:selected").val());
         if (test_category != "ALL") {
-            var params = {url:"/get_specific_run", data:{platform_id:platform_id, test_category:test_category, run_date:selected_date}, successCallback:runDateResponse};
+            var params = {
+                url: "/get_specific_run",
+                data: {platform_id: platform_id, test_category: test_category, run_date: selected_date},
+                successCallback: runDateResponse
+            };
             Utils.ajaxRequest(params);
         }
     });

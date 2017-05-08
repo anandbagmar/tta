@@ -16,9 +16,13 @@ $(document).ready(function () {
 
     var testCategoryChangeResponse = function () {
         var test_category = ($("#test_category_select option:selected").val());
-        var params = {url:"/get_test_sub_category", data:{test_category:test_category}, successCallback:load};
+        var params = {url: "/get_test_sub_category", data: {test_category: test_category}, successCallback: load};
         Utils.ajaxRequest(params);
-        var sub = {url:"/get_default_test_sub_category", data:{test_category:test_category}, successCallback:setDefaultTestSubCategory};
+        var sub = {
+            url: "/get_default_test_sub_category",
+            data: {test_category: test_category},
+            successCallback: setDefaultTestSubCategory
+        };
         Utils.ajaxRequest(sub);
     }
 
@@ -35,7 +39,7 @@ $(document).ready(function () {
 
 var validateDate = {
 
-    checkForValidDate:function ($form) {
+    checkForValidDate: function ($form) {
 
         var valid = true;
         var dateTime = $form.find(".date-field").find('option:selected');
@@ -66,7 +70,7 @@ var validateDate = {
 
         return valid;
     },
-    checkForFutureDate:function ($form) {
+    checkForFutureDate: function ($form) {
 
         var validFlag = true;
 
@@ -116,7 +120,7 @@ var validateDate = {
 };
 
 var validateFile = {
-    checkForValidFileType:function ($form) {
+    checkForValidFileType: function ($form) {
         var valid = true;
         var err_file = $form.find(".invalid-file-type");
         var file_path = $form.find("#logDirectory").val();

@@ -5,7 +5,7 @@ class ChangeExternalDashboardColumnTypes < ActiveRecord::Migration
   end
 
   def down
-    change_column :external_dashboards , :name, :string
+    change_column :external_dashboards, :name, :string
   end
 end
 

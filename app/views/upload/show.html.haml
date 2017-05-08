@@ -15,36 +15,44 @@
       %td= @platform.name
     %tr
       %td
+        %b Branch:
+      %td= @product_meta.branch
+    %tr
+      %td
         %b CI Job name:
-      %td= @project_meta.ci_job_name
-    %tr
-      %td
-        %b Test Category:
-      %td= @project_meta.test_category
-    %tr
-      %td
-        %b Test Report Type:
-      %td= @project_meta.test_report_type
-    %tr
-      %td
-        %b OS Tested On:
-      %td= @project_meta.os
-    %tr
-      %td
-        %b Host-Machine Name:
-      %td= @project_meta.test_execution_machine_name
-    %tr
-      %td
-        %b Browser Tested On:
-      %td= @project_meta.browser_or_device
+      %td= @product_meta.ci_job_name
     %tr
       %td
         %b Environment Run on:
-      %td= @project_meta.environment
+      %td= @product_meta.environment
+    %tr
+      %td
+        %b Browser / Device Tested On:
+      %td= @product_meta.browser_or_device
+    %tr
+      %td
+        %b OS Tested On:
+      %td= @product_meta.os
+    %tr
+      %td
+        %b Host-Machine Name:
+      %td= @product_meta.test_execution_machine_name
+    %tr
+      %td
+        %b Test Category:
+      %td= @product_meta.test_category
+    %tr
+      %td
+        %b Test Sub Category:
+      %td= @product_meta.test_sub_category
+    %tr
+      %td
+        %b Test Report Type:
+      %td= @product_meta.test_report_type
     %tr
       %td
         %b Date Of Execution:
-      %td= @project_meta.date_of_execution
+      %td= @product_meta.date_of_execution
     %tr
       %td
       %td

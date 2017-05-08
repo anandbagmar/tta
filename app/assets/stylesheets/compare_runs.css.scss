@@ -1,4 +1,4 @@
-#compare_runs_model{
+#compare_runs_model {
   box-shadow: 2px 2px 3px grey;
   width: 50%;
   margin: 0 auto;
@@ -8,41 +8,42 @@
   border-radius: 15px;
 }
 
-#compare_runs_form label{
+#compare_runs_form label {
   min-width: 85px;
 }
 
-#compare_runs_form h1{
+#compare_runs_form h1 {
   padding-bottom: 15px;
 }
 
-
-#compare_runs_form-title h3{
+#compare_runs_form-title h3 {
   color: #339999;
 }
 
-.fields-left{
+.fields-left {
   margin: 0 auto;
   height: 50px;
 }
 
-#result_table{
+#result_table {
   margin-left: 37%;
   margin-top: 10px;
   border-collapse: collapse;
 }
-#result_table th{
-background-color: rgb(241, 127, 122);
+
+#result_table th {
+  background-color: rgb(241, 127, 122);
 }
 
-#result_table tr{
+#result_table tr {
   background: beige;
 }
-#result_table td{
+
+#result_table td {
   text-align: left;
 }
 
-#result-title{
+#result-title {
   margin-top: 30px;
   margin-bottom: 20px;
 }

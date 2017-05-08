@@ -6,7 +6,7 @@ class AdminController < ApplicationController
 
   def view
     products=Product.all
-    @json = Admin.get_result_json(products)
+    @json   = Admin.get_result_json(products)
   end
 
   def add
@@ -18,7 +18,7 @@ class AdminController < ApplicationController
     end
 
     if ExternalDashboard.find_by_name(external_dashboard_name)
-      Admin.update_external_dashboard_link(external_dashboard_name,external_dashboard_link)
+      Admin.update_external_dashboard_link(external_dashboard_name, external_dashboard_link)
     else
       Admin.add_external_dashboard(external_dashboard_name, external_dashboard_link)
     end

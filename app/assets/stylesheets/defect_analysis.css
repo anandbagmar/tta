@@ -1,21 +1,20 @@
 
-#container{
+#container {
     width: 100%;
     margin: 0 auto;
     padding-top: 20px;
 }
 
-#defect-analysis{
-  display: block;
-  padding: 25px 290px;
+#defect-analysis {
+    display: block;
+    padding: 25px 290px;
 }
 
-#defect-analysis h1{
-  padding-bottom: 6%;
+#defect-analysis h1 {
+    padding-bottom: 6%;
 }
 
-
-#defect-analysis-table >.color_codes >.legend_item{
+#defect-analysis-table > .color_codes > .legend_item {
     display: inline-block;
     margin: 10px 0;
 }
@@ -25,10 +24,12 @@
     float: right;
     padding-right: 8%;
 }
+
 .color_codes > .legend_item > .legend_text {
     height: 20px;
     line-height: 20px;
 }
+
 .table-bordered {
     border: 1px solid #000000;
     -webkit-border-radius: 1px;
@@ -37,6 +38,7 @@
     padding: 0px;
     background: #d3d3d3;
 }
+
 .table-bordered th {
     /*border: 1.5px solid rgb(3, 3, 3);*/
     padding-top: .5em;
@@ -54,14 +56,14 @@
 
 }
 
-.table-bordered td span{
-    border-bottom : 3px solid rgb(238, 172, 77)
+.table-bordered td span {
+    border-bottom: 3px solid rgb(238, 172, 77)
 
 }
-.table-bordered td span:last-child{
+
+.table-bordered td span:last-child {
     border: none;
 }
-
 
 .table-bordered td {
     padding-top: .5em;
@@ -72,7 +74,7 @@
     border: solid 1px #000000;
 }
 
-.table-message{
+.table-message {
     border-spacing: 10px;
     background: rgb(255, 250, 250);
     border: 1px solid #CD5C5C;
@@ -80,48 +82,51 @@
     color: rgb(206, 0, 0);
 }
 
-.table-list{
+.table-list {
     background: rgb(238, 172, 77);
     border: 1px solid rgb(238, 172, 77);
     padding-bottom: 1em;
 }
 
-.first{
+.first {
     background: rgb(177, 9, 9);
     color: white;
 }
 
-#type1 > .rect, .error_list li{
+#type1 > .rect, .error_list li {
     background: rgb(255, 250, 250);
     border: #000000 solid 1px;
 
 }
 
-#type2>.rect,.error_messages ul li{
+#type2 > .rect, .error_messages ul li {
     background: rgb(238, 172, 77);
     border: #000000 solid 1px;
 
 }
-#type3>.rect,.error_messages ul li{
+
+#type3 > .rect, .error_messages ul li {
     background: rgb(177, 9, 9);
     border: #000000 solid 1px;
 }
 
-.legend_text{
+.legend_text {
     text-align: left;
-    height:10%;
+    height: 10%;
 }
-.rect{
+
+.rect {
     display: inline-block;
     width: 20px;
     height: 20px;
     margin: 0 5px;
 }
-.hidden{
+
+.hidden {
     display: none;
 }
 
-.display-message{
+.display-message {
     font-size: 20px;
     color: green;
     margin: 0 auto;

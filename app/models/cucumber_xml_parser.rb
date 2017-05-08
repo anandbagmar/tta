@@ -11,11 +11,11 @@ class CucumberXmlParser
   #end
 
   def self.get_error_message(config_xml, testcase_name)
-    @error_msg=""
-    node = Nokogiri::XML config_xml
+    @error_msg =""
+    node       = Nokogiri::XML config_xml
     raw_string = node.search("//testsuite/testcase[@name='#{testcase_name}']/failure").children.text
     if !raw_string.empty?
-      val = raw_string.index("Message:") + ("Message:").length
+      val        = raw_string.index("Message:") + ("Message:").length
       @error_msg = raw_string[val+1..-1]
     end
     @error_msg

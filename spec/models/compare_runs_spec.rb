@@ -25,7 +25,7 @@ module CompareRunsSpecHelper
   end
 
   def create_new_product_and_platform
-    @product = create_product("COMPARE_RUNS_PRODUCT")
+    @product  = create_product("COMPARE_RUNS_PRODUCT")
     @platform = create_platform_for_product(@product, "COMPARE_RUNS_PLATFORM")
   end
 
@@ -52,7 +52,7 @@ module CompareRunsSpecHelper
   end
 
   def class_name_arr_from(*arg_prefixes)
-    arg_prefixes.map {|prefix| create_class_name prefix}
+    arg_prefixes.map { |prefix| create_class_name prefix }
   end
 
   def create_class_name(arg_prefix)
@@ -64,10 +64,10 @@ module CompareRunsSpecHelper
   end
 
   def form_data(arg_platform, arg_test_category, arg_date1, arg_date2)
-    {"platforms" => arg_platform.id,
-     "test_category" => arg_test_category,
-     "date_one" => arg_date1,
-     "date_two" => arg_date2}
+    { "platforms"     => arg_platform.id,
+      "test_category" => arg_test_category,
+      "date_one"      => arg_date1,
+      "date_two"      => arg_date2 }
   end
 
   def get_compare_result
@@ -93,7 +93,7 @@ module CompareRunsSpecHelper
 
   def extract_class_names_from(arg_arr_test_case_records)
     return [] unless arg_arr_test_case_records
-    arg_arr_test_case_records.map {|record| record.class_name}
+    arg_arr_test_case_records.map { |record| record.class_name }
   end
 
 end
@@ -112,7 +112,7 @@ describe "CompareRuns" do
   describe "#get_test_suite_records_with_errors_for" do
 
     before do
-      @metadata1 = create_metadatum(@platform, @jan_1_2013, @unit_tests)
+      @metadata1   = create_metadatum(@platform, @jan_1_2013, @unit_tests)
       @test_suite1 = create_suite_with_metadata(@metadata1, "rest_unit_tests")
     end
 
@@ -148,8 +148,8 @@ describe "CompareRuns" do
     context "when there are failures for multiple test suites for different test category on a given day" do
       before do
         @integration_tests = "INTEGRATION TESTS"
-        @metadata2 = create_metadatum(@platform, @jan_1_2013, @integration_tests)
-        @test_suite2 = create_suite_with_metadata(@metadata2, "rest_integration_tests")
+        @metadata2         = create_metadatum(@platform, @jan_1_2013, @integration_tests)
+        @test_suite2       = create_suite_with_metadata(@metadata2, "rest_integration_tests")
         create_class_errors(@test_suite1, class_error_hash_from("UT001", "UT002", "UT003"))
         create_class_errors(@test_suite2, class_error_hash_from("IT001", "IT002", "IT003"))
       end
@@ -168,7 +168,7 @@ describe "CompareRuns" do
     context "when there are failures for multiple test suites for the same category on different days" do
 
       before do
-        @metadata2 = create_metadatum(@platform, @jan_2_2013, @unit_tests)
+        @metadata2   = create_metadatum(@platform, @jan_2_2013, @unit_tests)
         @test_suite2 = create_suite_with_metadata(@metadata2, "rest_integration_tests")
         create_class_errors(@test_suite1, class_error_hash_from("DAY1_1", "DAY1_2", "DAY1_3"))
         create_class_errors(@test_suite2, class_error_hash_from("DAY2_1", "DAY2_2", "DAY2_3"))
@@ -214,8 +214,8 @@ describe "CompareRuns" do
         create_class_errors(@test_suite1, class_error_hash_from("001", "002", "003"))
         create_class_errors(@test_suite2, class_error_hash_from("004", "005", "006"))
         @expected_combined_failures = class_name_arr_from "001", "002", "003", "004", "005", "006"
-        @expected_day_1_failures = class_name_arr_from "001", "002", "003"
-        @expected_day_2_failures = class_name_arr_from "004", "005", "006"
+        @expected_day_1_failures    = class_name_arr_from "001", "002", "003"
+        @expected_day_2_failures    = class_name_arr_from "004", "005", "006"
         get_compare_result()
       end
 
@@ -314,9 +314,9 @@ describe "CompareRuns" do
         create_class_errors @test_suite2, class_error_hash_from("004", "002", "003")
         get_compare_result()
         @expected_combined_failures = class_name_arr_from "001", "002", "003", "004"
-        @expected_common_failures = class_name_arr_from "002", "003"
-        @expected_day_1_failures = class_name_arr_from "001", "002", "003"
-        @expected_day_2_failures = class_name_arr_from "004", "002", "003"
+        @expected_common_failures   = class_name_arr_from "002", "003"
+        @expected_day_1_failures    = class_name_arr_from "001", "002", "003"
+        @expected_day_2_failures    = class_name_arr_from "004", "002", "003"
       end
 
       it "should return all test failures as combined failures" do

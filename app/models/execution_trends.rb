@@ -1,24 +1,24 @@
 class ExecutionTrends
   def get_result_set(platform, class_name, start_date, end_date)
-    result_set = {}
-    platform_result_set={}
-    result_set[class_name], max_val = get_time_taken(class_name, start_date, end_date) if class_name && class_name.length > 0
+    result_set                                               = {}
+    platform_result_set                                      ={}
+    result_set[class_name], max_val                          = get_time_taken(class_name, start_date, end_date) if class_name && class_name.length > 0
     platform_result_set[Platform.get_platform_name(platform)]=result_set
     return platform_result_set, max_val
   end
 
   def get_class_names(platform_id, test_category, start_date, end_date)
-    metadataRecords = TestMetadatum.where("platform_id = ? AND test_category =? AND date_of_execution BETWEEN ? AND ?", "#{platform_id}", "#{test_category}", "#{start_date}", "#{end_date}").select("id").uniq
+    metadataRecords  = TestMetadatum.where("platform_id = ? AND test_category =? AND date_of_execution BETWEEN ? AND ?", "#{platform_id}", "#{test_category}", "#{start_date}", "#{end_date}").select("id").uniq
     testSuiteRecords = TestSuiteRecord.where("test_metadatum_id IN (?)", metadataRecords.map { |r| r.id }).select("id").uniq
-    class_names = TestCaseRecord.where("test_suite_record_id IN (?)", testSuiteRecords.map { |r| r.id }).select("class_name").uniq
+    class_names      = TestCaseRecord.where("test_suite_record_id IN (?)", testSuiteRecords.map { |r| r.id }).select("class_name").uniq
     class_names
   end
 
   def get_time_taken(class_name, start_date, end_date)
     test_case_records_by_class_name = TestCaseRecord.where(:class_name => class_name).select("test_suite_record_id, time_taken, id")
-    test_case_execution_date_time = []
+    test_case_execution_date_time   = []
     test_case_records_by_class_name.each do |test_case_record|
-      metadata_id = TestSuiteRecord.where(:id => test_case_record.test_suite_record_id).select("test_metadatum_id")
+      metadata_id    = TestSuiteRecord.where(:id => test_case_record.test_suite_record_id).select("test_metadatum_id")
       execution_date =TestMetadatum.where("id = ? AND CAST(date_of_execution AS DATE) BETWEEN ? AND ?", metadata_id[0].test_metadatum_id, "#{start_date}", "#{end_date}").select("date_of_execution")
       test_case_execution_date_time << [execution_date[0].date_of_execution.to_time.to_f * 1000, test_case_record.time_taken.to_f] unless execution_date==[]
     end

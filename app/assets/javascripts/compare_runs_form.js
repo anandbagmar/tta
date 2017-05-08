@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     var productChange = function () {
         var product_id = ($("#product_select option:selected").val());
-        var params = {url:"/get_platform_data", data:{product_id:product_id}, successCallback:productResponse};
+        var params = {url: "/get_platform_data", data: {product_id: product_id}, successCallback: productResponse};
         Utils.ajaxRequest(params);
     }
 
@@ -53,14 +53,18 @@ $(document).ready(function () {
 
     $(document).delegate("#platform_select", "change", function () {
         var platform_id = ($("#platform_select option:selected").val());
-        var params = {url:"/get_test_types", data:{platform_id:platform_id}, successCallback:pLATFORMResponse};
+        var params = {url: "/get_test_types", data: {platform_id: platform_id}, successCallback: pLATFORMResponse};
         Utils.ajaxRequest(params);
     });
 
     $(document).delegate("#test_category_select", "change", function () {
         var platform_id = ($("#platform_select option:selected").val());
         var test_category = ($("#test_category_select option:selected").val());
-        var params = {url:"/get_compare_dates", data:{platform_id:platform_id, test_category:test_category}, successCallback:testTypeResponse};
+        var params = {
+            url: "/get_compare_dates",
+            data: {platform_id: platform_id, test_category: test_category},
+            successCallback: testTypeResponse
+        };
         Utils.ajaxRequest(params);
     });
 

@@ -27,19 +27,19 @@ module Seed
     end
 
     def self.create_test_meta_data(platform_id, test_meta_data_number)
-      test_category = SAMPLE_TEST_CATEGORIES[rand(SAMPLE_TEST_CATEGORIES.length)]
-      test_sub_category = get_respective_test_sub_category(test_category)
-      random_time = (DateTime.now - (test_meta_data_number + test_meta_data_number%10.to_f)).to_time
-      test_meta_data = TestMetadatum.create(
-          :ci_job_name => SAMPLE_CI_JOB_NAMES[rand(SAMPLE_CI_JOB_NAMES.length)],
-          :os => SAMPLE_OS_TYPES[rand(SAMPLE_OS_TYPES.length)],
+      test_category             = SAMPLE_TEST_CATEGORIES[rand(SAMPLE_TEST_CATEGORIES.length)]
+      test_sub_category         = get_respective_test_sub_category(test_category)
+      random_time               = (DateTime.now - (test_meta_data_number + test_meta_data_number%10.to_f)).to_time
+      test_meta_data            = TestMetadatum.create(
+          :ci_job_name                 => SAMPLE_CI_JOB_NAMES[rand(SAMPLE_CI_JOB_NAMES.length)],
+          :os                          => SAMPLE_OS_TYPES[rand(SAMPLE_OS_TYPES.length)],
           :test_execution_machine_name => SAMPLE_TEST_EXECUTION_MACHINE_NAMES[rand(SAMPLE_TEST_EXECUTION_MACHINE_NAMES.length)],
-          :browser_or_device => SAMPLE_BROWSER_OR_DEVICE_TYPES[rand(SAMPLE_BROWSER_OR_DEVICE_TYPES.length)],
-          :environment => SAMPLE_TEST_ENVIRONMENTS[rand(SAMPLE_TEST_ENVIRONMENTS.length)],
-          :date_of_execution => random_time,
-          :test_category => test_category,
-          :test_sub_category => test_sub_category,
-          :test_report_type => SAMPLE_TEST_REPORT_TYPES[rand(SAMPLE_TEST_REPORT_TYPES.length)])
+          :browser_or_device           => SAMPLE_BROWSER_OR_DEVICE_TYPES[rand(SAMPLE_BROWSER_OR_DEVICE_TYPES.length)],
+          :environment                 => SAMPLE_TEST_ENVIRONMENTS[rand(SAMPLE_TEST_ENVIRONMENTS.length)],
+          :date_of_execution           => random_time,
+          :test_category               => test_category,
+          :test_sub_category           => test_sub_category,
+          :test_report_type            => SAMPLE_TEST_REPORT_TYPES[rand(SAMPLE_TEST_REPORT_TYPES.length)])
       test_meta_data.platform_id= platform_id
       test_meta_data.save
       TestMetadatum.where(:platform_id => platform_id).last.id
@@ -51,14 +51,14 @@ module Seed
 
     def self.create_product(product_number)
       product_name = "PRODUCT #{product_number}"
-      product = Product.create(:name => product_name)
+      product      = Product.create(:name => product_name)
       product.save
       Product.find_by_name(product_name).id
     end
 
     def self.create_platform(product_id, platform_number)
-      platform_name = "Platform #{product_id}.#{platform_number}"
-      platform= Platform.create(:name => platform_name)
+      platform_name      = "Platform #{product_id}.#{platform_number}"
+      platform           = Platform.create(:name => platform_name)
       platform.product_id= product_id
       platform.save
       Platform.find_by_name(platform_name).id
@@ -72,7 +72,7 @@ module Seed
     end
 
     def self.create_test_case_record(test_suite_record_id, product_id, platform_id, test_case_record_number)
-      test_case_record = TestCaseRecord.create(:class_name => "Class #{product_id}.#{platform_id}.#{test_suite_record_id}.#{test_case_record_number}", :time_taken => rand(1..4).to_s, :error_msg => "Error Message for Class - #{product_id}.#{platform_id}.#{test_suite_record_id}.#{test_case_record_number}")
+      test_case_record                     = TestCaseRecord.create(:class_name => "Class #{product_id}.#{platform_id}.#{test_suite_record_id}.#{test_case_record_number}", :time_taken => rand(1..4).to_s, :error_msg => "Error Message for Class - #{product_id}.#{platform_id}.#{test_suite_record_id}.#{test_case_record_number}")
       test_case_record.test_suite_record_id= test_suite_record_id
       test_case_record.save
     end

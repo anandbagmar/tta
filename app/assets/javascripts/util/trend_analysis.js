@@ -1,6 +1,6 @@
 var ValidateStartDateIsLessThanEndDate = {
 
-    checkForDates:function (form) {
+    checkForDates: function (form) {
 
         var valid = true;
         var start_date = form.find(".required-field-date-field").find('input[id$="start_date"]').val();
@@ -20,7 +20,7 @@ var ValidateStartDateIsLessThanEndDate = {
 };
 
 var Graph = {
-    plot:function (start_date, end_date, result_set, y_axis_max_value, placeholder) {
+    plot: function (start_date, end_date, result_set, y_axis_max_value, placeholder) {
         st_date = new Date(start_date);
         start_time = st_date.getTime()
         ed_date = new Date(end_date);
@@ -40,19 +40,19 @@ var Graph = {
         resultData = jsonData.parse(result_set);
         for (platform in resultData) {
             data.push({
-                label:platform,
-                data:"",
-                lines:{show:false},
-                points:{show:false},
-                color:"#d812d"
+                label: platform,
+                data: "",
+                lines: {show: false},
+                points: {show: false},
+                color: "#d812d"
             });
             for (platform_data in resultData[platform]) {
                 data.push({
-                    label:platform_data,
-                    data:resultData[platform][platform_data],
-                    lines:{show:true },
-                    points:{show:true},
-                    color:"#" + ((1 << 24) * Math.random() | 0).toString(16)
+                    label: platform_data,
+                    data: resultData[platform][platform_data],
+                    lines: {show: true},
+                    points: {show: true},
+                    color: "#" + ((1 << 24) * Math.random() | 0).toString(16)
                 });
             }
         }
@@ -60,34 +60,34 @@ var Graph = {
         $.plot($(placeholder),
             data,
             {
-                xaxis:{
-                    mode:"time",
-                    ticks:tick_set,
-                    timeformat:"%d-%b , %y",
-                    minTickSize:[1, "year"],
-                    min:start_time,
-                    max:end_time + milli_second_per_day,
-                    labelMargin:50,
-                    timeZoneOffset:(new Date()).getTimezoneOffset()
+                xaxis: {
+                    mode: "time",
+                    ticks: tick_set,
+                    timeformat: "%d-%b , %y",
+                    minTickSize: [1, "year"],
+                    min: start_time,
+                    max: end_time + milli_second_per_day,
+                    labelMargin: 50,
+                    timeZoneOffset: (new Date()).getTimezoneOffset()
                 },
-                yaxis:{
-                    min:0,
-                    max:y_axis_max_value,
-                    labelMargin:30
+                yaxis: {
+                    min: 0,
+                    max: y_axis_max_value,
+                    labelMargin: 30
                 },
-                grid:{
-                    borderWidth:0,
-                    hoverable:true,
-                    clickable:true,
-                    labelMargin:1,
-                    mouseActiveRadius:8,
-                    backgroundColor:{ colors:["#fff", "#eee"] },
-                    minBorderMargin:40
+                grid: {
+                    borderWidth: 0,
+                    hoverable: true,
+                    clickable: true,
+                    labelMargin: 1,
+                    mouseActiveRadius: 8,
+                    backgroundColor: {colors: ["#fff", "#eee"]},
+                    minBorderMargin: 40
                 },
-                legend:{
-                    position:"ne",
-                    show:true,
-                    container:'#legendlabel'
+                legend: {
+                    position: "ne",
+                    show: true,
+                    container: '#legendlabel'
                 }
 
             }
@@ -95,14 +95,14 @@ var Graph = {
 
         function showTooltip(x, y, contents) {
             $('<div id="tooltip">' + contents + '</div>').css({
-                position:'absolute',
-                display:'none',
-                top:y + 5,
-                left:x + 5,
-                border:'1px solid #fdd',
-                padding:'2px',
-                'background-color':'#fee',
-                opacity:0.80
+                position: 'absolute',
+                display: 'none',
+                top: y + 5,
+                left: x + 5,
+                border: '1px solid #fdd',
+                padding: '2px',
+                'background-color': '#fee',
+                opacity: 0.80
             }).appendTo("body").fadeIn(200);
         }
 

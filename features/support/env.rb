@@ -4,14 +4,14 @@ require 'selenium-webdriver'
 require_relative 'file_utils.rb'
 
 # Set the RAILS_ENV
-$RAILS_ENV = ENV['RAILS_ENV']  ||= "development"
+$RAILS_ENV = ENV['RAILS_ENV'] ||= "development"
 puts "RAILS_ENV: #{$RAILS_ENV}"
 
 # Add the drivers to the path
-ENV['PATH']+= File::PATH_SEPARATOR + absolute_path("#{$PROJECT_ROOT}","lib","drivers") + File::PATH_SEPARATOR
+ENV['PATH']+= File::PATH_SEPARATOR + absolute_path("#{$PROJECT_ROOT}", "lib", "drivers") + File::PATH_SEPARATOR
 puts "Updated PATH = #{ENV['PATH']}"
 
-Capybara.run_server = true
+Capybara.run_server       = true
 Capybara.default_selector = :css
 Capybara.register_driver :firefox do |app|
   puts "NOTE: Max Firefox version supported = 25.0 (on Mac)"
@@ -23,9 +23,9 @@ Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new(app, :browser => :chrome)
 end
 
-Capybara.javascript_driver = :chrome
+Capybara.javascript_driver                         = :chrome
 Cucumber::Rails::Database.autorun_database_cleaner = false
-Cucumber::Rails::Database.javascript_strategy = :transaction
+Cucumber::Rails::Database.javascript_strategy      = :transaction
 
 ActionController::Base.allow_rescue = true
 

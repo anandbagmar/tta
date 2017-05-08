@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe TestSuiteRecord do
   describe "belongs to" do
-   it "test_metadata" do
-        should belong_to :test_metadatum
-   end
+    it "test_metadata" do
+      should belong_to :test_metadatum
+    end
   end
 
   describe "initilize_to_zero_if_nil" do

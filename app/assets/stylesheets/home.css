@@ -1,20 +1,21 @@
-.main-menu{
+.main-menu {
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
-#external-dashboard-url{
-    float:left;
+#external-dashboard-url {
+    float: left;
     width: 250px;
 }
 
-#external-dashboard-frame{
+#external-dashboard-frame {
     float: right;
     width: 81%;
     margin-right: 20px;
     min-width: 820px;
 }
-#external-dashboard-url button{
+
+#external-dashboard-url button {
     width: 200px;
     text-decoration: none;
     text-shadow: none;

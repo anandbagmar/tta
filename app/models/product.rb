@@ -14,7 +14,7 @@ class Product < ActiveRecord::Base
   end
 
   private
-    def uppercase_name
-        self.name.upcase! if !self.name.nil?
-    end
+  def uppercase_name
+    self.name.upcase! if !self.name.nil?
+  end
 end

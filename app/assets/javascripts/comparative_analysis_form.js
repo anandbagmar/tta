@@ -52,8 +52,12 @@ $(document).ready(function () {
         var platform_id = ($("#platform_select option:selected").val());
         var start_date = ($("#comparative_analysis_start_date").datepicker('getDate'));
         var end_date = ($("#comparative_analysis_end_date").datepicker('getDate'));
-        var params = {url:"/test_category_mapping_list", data:{product_id:product_id, platform_id:platform_id,
-            comparative_analysis_start_date:start_date, comparative_analysis_end_date:end_date}, successCallback:pLATFORMChangeResponse};
+        var params = {
+            url: "/test_category_mapping_list", data: {
+                product_id: product_id, platform_id: platform_id,
+                comparative_analysis_start_date: start_date, comparative_analysis_end_date: end_date
+            }, successCallback: pLATFORMChangeResponse
+        };
         Utils.ajaxRequest(params);
     };
     checkBoxResponse('#deselectALL', false, true);
@@ -61,7 +65,7 @@ $(document).ready(function () {
 
     $(document).delegate("#product_select", "change", function () {
         var product_id = ($("#product_select option:selected").val());
-        var params = {url:"/get_platform_data", data:{product_id:product_id}, successCallback:productResponse};
+        var params = {url: "/get_platform_data", data: {product_id: product_id}, successCallback: productResponse};
         Utils.ajaxRequest(params);
     });
 

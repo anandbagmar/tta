@@ -8,7 +8,7 @@ class CreateTestMetadata < ActiveRecord::Migration
       t.string :browser
       t.string :type_of_test
       t.string :type_of_environment
-      t.date   :date_of_execution
+      t.date :date_of_execution
       t.string :user_timezone
 
       t.timestamps

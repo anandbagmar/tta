@@ -1,18 +1,18 @@
 var Template = function () {
     var templates = {
-        legendItem:'<div class="test-legend" id={{TestType}}><div class="rect" id={{TestTypeRect}}></div><span>{{TestTypeTitle}}</span></div>',
-        pyramidPercent:'<span class="pyramidDetail" id={{TestTypePercent}}>{{PercentValue}} %</span>',
-        pyramidDuration:'<span class="pyramidDetail" id={{TestTypeDuration}}>{{DurationValue}} Seconds</span>',
-        errorListTemplate:'<ul class="error_list">{{ErrorList}}</ul>',
-        defectErrorMessagesTemplate:'<span>{{ErrorName}}</span><div class="error_messages"><ul>{{ErrorMessageList}}</ul></div>',
-        adminTableProductTemplate:'<tr class="tr_border"><td>{{Index}}</td><td>{{ProductName}}</td><td>{{PlatformName}}</td><td>{{TestCount}}</td></tr>',
-        adminTablePlatformTemplate:'<tr><td>{{Index}}</td><td>{{ProductName}}</td><td>{{PlatformName}}</td><td>{{TestCount}}</td></tr>',
-        compareTableRowTemplate:' <tr>{{ClassNameColumns}}</tr>',
-        compareTableColumnTemplate:' <td width="50%">{{ClassName}}</td>'
+        legendItem: '<div class="test-legend" id={{TestType}}><div class="rect" id={{TestTypeRect}}></div><span>{{TestTypeTitle}}</span></div>',
+        pyramidPercent: '<span class="pyramidDetail" id={{TestTypePercent}}>{{PercentValue}} %</span>',
+        pyramidDuration: '<span class="pyramidDetail" id={{TestTypeDuration}}>{{DurationValue}} Seconds</span>',
+        errorListTemplate: '<ul class="error_list">{{ErrorList}}</ul>',
+        defectErrorMessagesTemplate: '<span>{{ErrorName}}</span><div class="error_messages"><ul>{{ErrorMessageList}}</ul></div>',
+        adminTableProductTemplate: '<tr class="tr_border"><td>{{Index}}</td><td>{{ProductName}}</td><td>{{PlatformName}}</td><td>{{TestCount}}</td></tr>',
+        adminTablePlatformTemplate: '<tr><td>{{Index}}</td><td>{{ProductName}}</td><td>{{PlatformName}}</td><td>{{TestCount}}</td></tr>',
+        compareTableRowTemplate: ' <tr>{{ClassNameColumns}}</tr>',
+        compareTableColumnTemplate: ' <td width="50%">{{ClassName}}</td>'
     };
 
     return {
-        render:function (template, data) {
+        render: function (template, data) {
             var regExp;
             for (var temp in data) {
                 regExp = new RegExp("[{][{]" + temp + "[}][}]", 'g');
@@ -20,35 +20,35 @@ var Template = function () {
             }
             return template;
         },
-        getLegendItem:function () {
+        getLegendItem: function () {
             return templates.legendItem;
         },
-        getPyramidPercent:function () {
+        getPyramidPercent: function () {
             return templates.pyramidPercent;
         },
-        getPyramidDuration:function () {
+        getPyramidDuration: function () {
             return templates.pyramidDuration;
         },
-        getPyramidItem: function(){
+        getPyramidItem: function () {
             return templates.pyramidItem;
         },
 
-        getDefectErrorMessagesTemplate:function () {
+        getDefectErrorMessagesTemplate: function () {
             return templates.defectErrorMessagesTemplate;
         },
-        getErrorListTemplate:function () {
+        getErrorListTemplate: function () {
             return templates.errorListTemplate;
         },
-        getAdminTableProductTemplate:function () {
+        getAdminTableProductTemplate: function () {
             return templates.adminTableProductTemplate;
         },
-        getAdminTablePlatformTemplate:function () {
+        getAdminTablePlatformTemplate: function () {
             return templates.adminTablePlatformTemplate;
         },
-        getCompareTableRowTemplate:function () {
+        getCompareTableRowTemplate: function () {
             return templates.compareTableRowTemplate;
         },
-        getCompareTableColumnTemplate:function () {
+        getCompareTableColumnTemplate: function () {
             return templates.compareTableColumnTemplate;
         }
 

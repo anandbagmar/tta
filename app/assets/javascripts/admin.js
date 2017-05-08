@@ -1,5 +1,5 @@
 var ExternalDashboard = {
-    renderTable:function (jsonDataSet) {
+    renderTable: function (jsonDataSet) {
         var added_urls;
         added_urls = jsonData.parse(jsonDataSet);
         var tableElement = document.getElementById("url-table");
@@ -14,7 +14,7 @@ var ExternalDashboard = {
             }
         }
     },
-    renderButtons:function (externalDashboardURLs) {
+    renderButtons: function (externalDashboardURLs) {
         var divElement = document.getElementById("external-dashboard-url");
         var divIFrame = document.getElementById("external-dashboard-frame");
 
@@ -36,7 +36,7 @@ var ExternalDashboard = {
 };
 
 var ProductStatistics = {
-    renderTable:function (jsonDataSet) {
+    renderTable: function (jsonDataSet) {
         tableData = jsonData.parse(jsonDataSet);
         if (tableData != "") {
             if ('message' in tableData) {
@@ -56,17 +56,17 @@ var ProductStatistics = {
                     platforms = productData[1]['platforms']
                     count = productData[2]['test_count'];
                     renderTableData += templates.render(productTemplate, {
-                        "Index":index,
-                        "ProductName":product_name,
-                        "PlatformName":"",
-                        "TestCount":""
+                        "Index": index,
+                        "ProductName": product_name,
+                        "PlatformName": "",
+                        "TestCount": ""
                     });
                     for (var i = 0; i < platforms.length; i++) {
                         renderTableData += templates.render(pLATFORMTemplate, {
-                            "Index":"",
-                            "ProductName":"",
-                            "PlatformName":platforms[i],
-                            "TestCount":count[i]
+                            "Index": "",
+                            "ProductName": "",
+                            "PlatformName": platforms[i],
+                            "TestCount": count[i]
                         });
                     }
                     index++;

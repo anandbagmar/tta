@@ -1,6 +1,6 @@
 module Page
   module ComparativeAnalysis
-    def view_graph(product, platform,start_date, end_date)
+    def view_graph(product, platform, start_date, end_date)
       page.execute_script %Q{ $("#comparative_analysis_start_date").val("2011-12-12");}
       page.execute_script %Q{ $("#comparative_analysis_end_date").val("2012-12-12");}
 

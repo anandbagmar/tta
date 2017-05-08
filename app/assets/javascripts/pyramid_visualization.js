@@ -1,5 +1,5 @@
 var Pyramid = {
-    plotIdealPyramid:function (jsonData) {
+    plotIdealPyramid: function (jsonData) {
         var typeOfTests = jsonData.test_types,
             templates = new Template(),
             pyramidItemTemplate = templates.getPyramidItem(),
@@ -10,8 +10,8 @@ var Pyramid = {
                 continue;
             var testName = typeOfTests[index].test_name;
             pyramidData += templates.render(pyramidItemTemplate, {
-                "TestTypeRegion":testName.split(' ')[0].toLowerCase() + "_region",
-                "TestTypeTest":testName.split(' ')[0].toLowerCase() + "_test"
+                "TestTypeRegion": testName.split(' ')[0].toLowerCase() + "_region",
+                "TestTypeTest": testName.split(' ')[0].toLowerCase() + "_test"
             });
         }
 
@@ -31,8 +31,8 @@ var Pyramid = {
         }
 
         $("#ideal_pyramid").css({
-            "width":baseTriangleHeight,
-            "height":baseTriangleHeight
+            "width": baseTriangleHeight,
+            "height": baseTriangleHeight
         });
 
         previousHeight = 0;
@@ -43,22 +43,22 @@ var Pyramid = {
 
             color = color[parseInt(seq_no / 100)];
             $("#" + testName + "_test").css({
-                "border-bottom-width":triangleHeights[index] + "px",
-                "border-left-width":triangleHeights[index] + "px",
-                "border-right-width":triangleHeights[index] + "px",
-                "border-top-width":"0px",
-                "border-color":"transparent transparent " + color,
-                "border-style":"solid"
+                "border-bottom-width": triangleHeights[index] + "px",
+                "border-left-width": triangleHeights[index] + "px",
+                "border-right-width": triangleHeights[index] + "px",
+                "border-top-width": "0px",
+                "border-color": "transparent transparent " + color,
+                "border-style": "solid"
             });
 
 
             $("#" + testName + "_region").css({
-                "z-index":zIndex.toString()
+                "z-index": zIndex.toString()
             });
             zIndex--;
         }
     },
-    plotBlockPyramid:function (productJson) {
+    plotBlockPyramid: function (productJson) {
         var unknownTestTypes = productJson.unknown_test_types;
         var test_category = productJson.test_types;
         if ((unknownTestTypes != null) && (test_category.length == 0)) {

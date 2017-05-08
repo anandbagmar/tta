@@ -9,12 +9,12 @@ class UploadController < ApplicationController
   end
 
   def automatic
-    time=Time.now.to_s
-    date ={
-        "year" => DateTime.parse(time).strftime("%Y"),
-        "month" => DateTime.parse(time).strftime("%m"),
-        "day" => DateTime.parse(time).strftime("%d"),
-        "hour" => DateTime.parse(time).strftime("%H"),
+    time          =Time.now.to_s
+    date          ={
+        "year"   => DateTime.parse(time).strftime("%Y"),
+        "month"  => DateTime.parse(time).strftime("%m"),
+        "day"    => DateTime.parse(time).strftime("%d"),
+        "hour"   => DateTime.parse(time).strftime("%H"),
         "minute" => DateTime.parse(time).strftime("%M")
     }
     params[:date] = date
@@ -22,8 +22,8 @@ class UploadController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:product_id])
-    @platform= @product.platforms.find(params[:platform_id])
+    @product      = Product.find(params[:product_id])
+    @platform     = @product.platforms.find(params[:platform_id])
     @product_meta = @platform.test_metadatum.find_by(params[:product_meta_id])
     begin
       respond_to do |format|
@@ -49,7 +49,7 @@ class UploadController < ApplicationController
 
   private
   def parse_and_store_test_run_data
-    product = Product.where(name: (params[:product_name].split.join(' ').upcase)).first_or_create
+    product  = Product.where(name: (params[:product_name].split.join(' ').upcase)).first_or_create
     platform = product.add_platform(params)
     meta_data=platform.create_test_metadatum params
     platform.parse_and_save_log_files(meta_data, params)

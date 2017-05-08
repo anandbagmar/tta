@@ -17,9 +17,9 @@ $(document).ready(function () {
         });
     };
 
-    var productChange = function(){
+    var productChange = function () {
         var product_id = ($("#product_select option:selected").val());
-        var params = {url:"/get_platform_data", data:{product_id:product_id}, successCallback:productResponse};
+        var params = {url: "/get_platform_data", data: {product_id: product_id}, successCallback: productResponse};
         Utils.ajaxRequest(params);
     }
 
@@ -49,15 +49,15 @@ $(document).ready(function () {
 
     $(document).delegate("#platform_select", "change", function () {
         var platform_id = ($("#platform_select option:selected").val());
-        var params = {url:"/get_test_types", data:{platform_id:platform_id}, successCallback:pLATFORMResponse};
+        var params = {url: "/get_test_types", data: {platform_id: platform_id}, successCallback: pLATFORMResponse};
         Utils.ajaxRequest(params);
     });
 
     $(document).delegate("#test_category_select", "change", function () {
         Utils.removeAttribute("#start_date", "disabled");
         $("#start_date").datepicker({
-            dateFormat:"yy-mm-dd",
-            maxDate:0
+            dateFormat: "yy-mm-dd",
+            maxDate: 0
         });
 
     });
@@ -66,8 +66,8 @@ $(document).ready(function () {
         Utils.removeAttribute("#end_date", "disabled");
         $('.class-name-element').remove();
         $("#end_date").datepicker({
-            dateFormat:"yy-mm-dd",
-            maxDate:0
+            dateFormat: "yy-mm-dd",
+            maxDate: 0
         });
     });
 
@@ -84,7 +84,16 @@ $(document).ready(function () {
         else {
             $(".errormsg").hide()
             Utils.removeAttribute("#test_class_name_select", "disabled");
-            var params = {url:"/get_class_names", data:{platform_id:platform_id, test_category:test_category, start_date:start_date, end_date:end_date}, successCallback:testClassNameResponse};
+            var params = {
+                url: "/get_class_names",
+                data: {
+                    platform_id: platform_id,
+                    test_category: test_category,
+                    start_date: start_date,
+                    end_date: end_date
+                },
+                successCallback: testClassNameResponse
+            };
             Utils.ajaxRequest(params);
         }
     });

@@ -9,11 +9,11 @@ class VisualizationController < ApplicationController
   end
 
   def platform_filter
-    error=""
+    error                =""
     flash[:no_test_error]=nil
-    platform_id=params[:platform][:id]
-    @json = Visualization.new.getResultJson(platform_id)
-    json_obj = JSON.parse(@json)
+    platform_id          =params[:platform][:id]
+    @json                = Visualization.new.getResultJson(platform_id)
+    json_obj             = JSON.parse(@json)
     json_obj["test_types"].each do |test_type|
       if test_type["no_of_test"]==0
         error = error + " | "+test_type["test_name"] + " | "

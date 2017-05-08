@@ -15,9 +15,9 @@ module Domain
 
     def upload_data_and_submit(params)
       begin
-          params[:logFile]=$PROJECT_ROOT+"/"+params[:logFile]
-          form_filling(params)
-          scroll_to_view_and_click_on UPLOAD_PAGE_BUTTON
+        params[:logFile]=$PROJECT_ROOT+"/"+params[:logFile]
+        form_filling(params)
+        scroll_to_view_and_click_on UPLOAD_PAGE_BUTTON
       rescue Exception => ex
         puts "Exception in uploading data. \n\t" + ex.inspect
         file_name = "screenshot_"+random_name+".png"
