@@ -5,7 +5,7 @@ describe "Execution Trends" do
     it "should return a list of class names for selected filters " do
       product= FactoryGirl.create(:product)
       platform= FactoryGirl.create(:platform, product: product)
-      metadata= FactoryGirl.create(:test_metadatum, platform_id: platform.id, date_of_execution: Date.today)
+      metadata= FactoryGirl.create(:test_metadatum, platform_id: platform.id, date_of_execution: Date.today, branch: "master")
       suite_record= FactoryGirl.create(:test_suite_records, test_metadatum: metadata)
       case_record= FactoryGirl.create(:test_case_record, test_suite_record: suite_record)
       TestMetadatum.should_receive(:where).and_call_original
@@ -32,7 +32,7 @@ describe "Execution Trends" do
     it "should return a list of class names for selected filters " do
       product= FactoryGirl.create(:product)
       platform= FactoryGirl.create(:platform, product: product)
-      metadata= FactoryGirl.create(:test_metadatum, platform_id: platform.id, date_of_execution: Date.today.to_time)
+      metadata= FactoryGirl.create(:test_metadatum, platform_id: platform.id, date_of_execution: Date.today.to_time, branch: "master")
       suite_record= FactoryGirl.create(:test_suite_records, test_metadatum: metadata)
       case_record= FactoryGirl.create(:test_case_record, test_suite_record: suite_record)
       TestCaseRecord.should_receive(:where).and_call_original

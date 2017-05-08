@@ -5,7 +5,7 @@ describe ExecutionTrendsController, type: :controller do
     it 'should return class_names for selected filters if request is xhr' do
       product = FactoryGirl.create(:product)
       platform = FactoryGirl.create(:platform, product: product)
-      metadata= FactoryGirl.create(:test_metadatum, platform_id: platform.id, date_of_execution: Date.today)
+      metadata= FactoryGirl.create(:test_metadatum, platform_id: platform.id, date_of_execution: Date.today, branch: "master")
       suite_record= FactoryGirl.create(:test_suite_records, test_metadatum: metadata)
       case_record= FactoryGirl.create(:test_case_record, test_suite_record: suite_record)
       xhr :get, :class_names, {platform_id: platform.id, test_category: metadata.test_category, start_date: Date.yesterday.to_s, end_date: Date.today.to_s}

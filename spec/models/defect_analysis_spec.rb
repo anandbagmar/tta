@@ -19,7 +19,7 @@ describe DefectAnalysis do
   it "should return json with proper data" do
     product = FactoryGirl.create(:product)
     platform = FactoryGirl.create(:platform, :product_id => product.id)
-    test_metadata = FactoryGirl.create(:test_metadatum, :platform_id => platform.id)
+    test_metadata = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :branch => "master")
     test_suite_record = FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata.id)
     FactoryGirl.create(:test_case_record, :test_suite_record_id => test_suite_record.id)
     json = DefectAnalysis.new.get_result_json(platform.id, "2013-02-20".to_date, "ALL")
@@ -29,7 +29,7 @@ describe DefectAnalysis do
    it "should not repeat the error message on uploading test cases with same error message" do
      product = FactoryGirl.create(:product)
      platform = FactoryGirl.create(:platform, :product_id => product.id)
-     test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id)
+     test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id, :branch => "master")
      test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id,:number_of_errors=>3 )
       FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id,:time_taken=>1,:class_name=>"class1.1.1")
       FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id,:time_taken=>1,:class_name=>"class1.1.2")
@@ -42,7 +42,7 @@ describe DefectAnalysis do
   it "should give appropriate percentages for the tests uploaded" do
     product = FactoryGirl.create(:product)
     platform = FactoryGirl.create(:platform, :product_id => product.id)
-    test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id)
+    test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id, :branch => "master")
     test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id,:number_of_errors=>6)
       FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id,:class_name=>"class1.1.1")
     FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id,:class_name=>"class1.1.2")
@@ -59,9 +59,9 @@ describe DefectAnalysis do
     product = FactoryGirl.create(:product)
     platform = FactoryGirl.create(:platform, :product_id => product.id)
 
-    test_metadata_1 = FactoryGirl.create(:test_metadatum,:platform_id => platform.id)
-    test_metadata_2 = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:test_category=>"FUNCTIONAL TEST")
-    test_metadata_3 = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:test_category=>"INTEGRATION TEST")
+    test_metadata_1 = FactoryGirl.create(:test_metadatum,:platform_id => platform.id, :branch => "master")
+    test_metadata_2 = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:test_category=>"FUNCTIONAL TEST", :branch => "master")
+    test_metadata_3 = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:test_category=>"INTEGRATION TEST", :branch => "master")
 
     test_suite_record_1 = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata_1.id)
     test_suite_record_2 = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata_2.id)
@@ -79,8 +79,8 @@ describe DefectAnalysis do
     product = FactoryGirl.create(:product)
     platform = FactoryGirl.create(:platform, :product_id => product.id)
 
-    test_metadata_1 = FactoryGirl.create(:test_metadatum, :platform_id => platform.id)
-    test_metadata_2 = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :test_category => "FUNCTIONAL TEST")
+    test_metadata_1 = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :branch => "master")
+    test_metadata_2 = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :test_category => "FUNCTIONAL TEST", :branch => "master")
 
     test_suite_record_1 = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata_1.id)
     test_suite_record_2 = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata_2.id)

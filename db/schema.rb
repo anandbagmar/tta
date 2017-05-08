@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170505134955) do
+ActiveRecord::Schema.define(version: 20170506045648) do
 
   create_table "external_dashboards", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -65,6 +65,16 @@ ActiveRecord::Schema.define(version: 20170505134955) do
     t.string   "test_report_type",            limit: 255
     t.string   "test_sub_category",           limit: 255
     t.string   "branch",                      limit: 255
+  end
+
+  create_table "test_steps_records", force: :cascade do |t|
+    t.integer  "test_case_records_id", limit: 4
+    t.string   "step_name",            limit: 255
+    t.string   "step_description",     limit: 255
+    t.string   "status",               limit: 255
+    t.string   "time_taken",           limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "test_suite_records", force: :cascade do |t|

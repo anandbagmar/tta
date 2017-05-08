@@ -4,7 +4,7 @@ describe CucumberHtmlParser do
     it "should return proper json on valid data entry for Cucumber HTML Parser" do
       product = FactoryGirl.create(:product)
       platform = FactoryGirl.create(:platform, :product_id => product.id)
-      test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:test_report_type =>"Cucumber HTML")
+      test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:test_report_type =>"Cucumber HTML", :branch => "master")
       test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id)
       FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id)
       FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id)

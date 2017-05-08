@@ -45,12 +45,13 @@ module DataHelper
            )
   end
 
-  def create_metadatum(arg_platform, arg_date, arg_test_category="INTEGRATION TESTS")
+  def create_metadatum(arg_platform, arg_date, arg_test_category="INTEGRATION TESTS", arg_branch="master")
     create :test_metadatum,
            with(
                :platform_id.as(arg_platform.id),
                :date_of_execution.as(arg_date),
-               :test_category.as(arg_test_category)
+               :test_category.as(arg_test_category),
+               :branch.as(arg_branch)
            )
   end
 

@@ -30,6 +30,10 @@ describe TestMetadatum do
     it "validates presence of test_report_type" do
       should validate_presence_of(:test_report_type).with_message("cannot be blank, Task not saved")
     end
+
+    it "validates presence of branch" do
+      should validate_presence_of(:branch).with_message("cannot be blank, Task not saved")
+    end
   end
 
   describe "get_record_for_specific_date" do

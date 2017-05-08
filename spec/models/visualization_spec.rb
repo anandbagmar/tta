@@ -16,7 +16,7 @@ describe Visualization do
   it "should return json with proper data" do
     product = FactoryGirl.create(:product, :name => "DummyProduct")
     platform = FactoryGirl.create(:platform, :product_id => product.id,:name => "PLATFORM1.1")
-    test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:ci_job_name => "build", :os=> "fedora" , :test_execution_machine_name => "pooja-pc" , :browser_or_device => "firefox" , :environment =>"Dev" ,:date_of_execution => "2012-12-12",:test_category=>"UNIT TEST" ,:test_report_type => "JUnit")
+    test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:ci_job_name => "build", :os=> "fedora" , :test_execution_machine_name => "pooja-pc" , :browser_or_device => "firefox" , :environment =>"Dev" ,:date_of_execution => "2012-12-12",:test_category=>"UNIT TEST" ,:test_report_type => "JUnit", :branch => "master")
     test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id, :class_name => "Class1.1",:number_of_tests => 30 , :number_of_errors=>2 ,:number_of_failures =>2,:time_taken=>5)
       FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id,:time_taken=>1,:class_name=>"class1.1.1",:error_msg=>"")
     json= Visualization.new.getResultJson(platform.id)
@@ -26,8 +26,8 @@ describe Visualization do
   it "should return json with test_types sorted by sequence number" do
     product = FactoryGirl.create(:product, :name => "DummyProduct")
     platform = FactoryGirl.create(:platform, :product_id => product.id,:name => "PLATFORM1.1")
-    test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:ci_job_name => "build", :os=> "fedora" , :test_execution_machine_name => "pooja-pc" , :browser_or_device => "firefox" , :environment =>"Dev" ,:date_of_execution => "2012-12-12",:test_category=>"UNIT TEST" ,:test_report_type => "JUnit")
-    test_metadata_functional = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:ci_job_name => "build", :os=> "fedora" , :test_execution_machine_name => "pooja-pc" , :browser_or_device => "firefox" , :environment =>"Dev" ,:date_of_execution => "2012-12-12",:test_category=>"FUNCTIONAL TEST" ,:test_report_type => "JUnit")
+    test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:ci_job_name => "build", :os=> "fedora" , :test_execution_machine_name => "pooja-pc" , :browser_or_device => "firefox" , :environment =>"Dev" ,:date_of_execution => "2012-12-12",:test_category=>"UNIT TEST" ,:test_report_type => "JUnit", :branch => "master")
+    test_metadata_functional = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:ci_job_name => "build", :os=> "fedora" , :test_execution_machine_name => "pooja-pc" , :browser_or_device => "firefox" , :environment =>"Dev" ,:date_of_execution => "2012-12-12",:test_category=>"FUNCTIONAL TEST" ,:test_report_type => "JUnit", :branch => "master")
     test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id, :class_name => "Class1.1",:number_of_tests => 800 , :number_of_errors=>2 ,:number_of_failures =>2,:time_taken=>5)
     test_suite_record_functional = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata_functional.id, :class_name => "Class1.1",:number_of_tests => 100 , :number_of_errors=>2 ,:number_of_failures =>2,:time_taken=>5)
      FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id,:time_taken=>1,:class_name=>"class1.1.1",:error_msg=>"")
@@ -40,7 +40,7 @@ describe Visualization do
   it "should return json with proper platform_name" do
     product = FactoryGirl.create(:product, :name => "DummyProduct")
     platform = FactoryGirl.create(:platform, :product_id => product.id,:name => "PLATFORM1.1")
-    test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:ci_job_name => "build", :os=> "fedora" , :test_execution_machine_name => "pooja-pc" , :browser_or_device => "firefox" , :environment =>"Dev" ,:date_of_execution => "2012-12-12",:test_category=>"UNIT TEST" ,:test_report_type => "JUnit")
+    test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:ci_job_name => "build", :os=> "fedora" , :test_execution_machine_name => "pooja-pc" , :browser_or_device => "firefox" , :environment =>"Dev" ,:date_of_execution => "2012-12-12",:test_category=>"UNIT TEST" ,:test_report_type => "JUnit", :branch => "master")
     test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id, :class_name => "Class1.1",:number_of_tests => 30 , :number_of_errors=>2 ,:number_of_failures =>2,:time_taken=>5)
      FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id,:time_taken=>1,:class_name=>"class1.1.1",:error_msg=>"")
     json= Visualization.new.getResultJson(platform.id)
@@ -51,8 +51,8 @@ describe Visualization do
   it "should  with test data having two test types ,return json with 50% unit test" do
     product = FactoryGirl.create(:product, :name => "DummyProduct")
     platform = FactoryGirl.create(:platform, :product_id => product.id,:name => "PLATFORM1.1")
-    test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:ci_job_name => "build", :os=> "fedora" , :test_execution_machine_name => "pooja-pc" , :browser_or_device => "firefox" , :environment =>"Dev" ,:date_of_execution => "2012-12-12",:test_category=>"UNIT TEST" ,:test_report_type => "JUnit")
-    test_metadata_functional = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:ci_job_name => "build", :os=> "fedora" , :test_execution_machine_name => "pooja-pc" , :browser_or_device => "firefox" , :environment =>"Dev" ,:date_of_execution => "2012-12-12",:test_category=>"FUNCTIONAL TEST" ,:test_report_type => "JUnit")
+    test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:ci_job_name => "build", :os=> "fedora" , :test_execution_machine_name => "pooja-pc" , :browser_or_device => "firefox" , :environment =>"Dev" ,:date_of_execution => "2012-12-12",:test_category=>"UNIT TEST" ,:test_report_type => "JUnit", :branch => "master")
+    test_metadata_functional = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:ci_job_name => "build", :os=> "fedora" , :test_execution_machine_name => "pooja-pc" , :browser_or_device => "firefox" , :environment =>"Dev" ,:date_of_execution => "2012-12-12",:test_category=>"FUNCTIONAL TEST" ,:test_report_type => "JUnit", :branch => "master")
     test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id, :class_name => "Class1.1",:number_of_tests => 30 , :number_of_errors=>2 ,:number_of_failures =>2,:time_taken=>5)
     test_suite_record_functional = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata_functional.id, :class_name => "Class1.1",:number_of_tests => 30 , :number_of_errors=>2 ,:number_of_failures =>2,:time_taken=>5)
      FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id,:time_taken=>1,:class_name=>"class1.1.1",:error_msg=>"")
@@ -66,7 +66,7 @@ describe Visualization do
   it "should return json with proper duration" do
     product = FactoryGirl.create(:product, :name => "DummyProduct")
     platform = FactoryGirl.create(:platform, :product_id => product.id,:name => "PLATFORM1.1")
-    test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:ci_job_name => "build", :os=> "fedora" , :test_execution_machine_name => "pooja-pc" , :browser_or_device => "firefox" , :environment =>"Dev" ,:date_of_execution => "2012-12-12",:test_category=>"UNIT TEST" ,:test_report_type => "JUnit")
+    test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id,:ci_job_name => "build", :os=> "fedora" , :test_execution_machine_name => "pooja-pc" , :browser_or_device => "firefox" , :environment =>"Dev" ,:date_of_execution => "2012-12-12",:test_category=>"UNIT TEST" ,:test_report_type => "JUnit", :branch => "master")
     test_suite_record = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id, :class_name => "Class1.1",:number_of_tests => 30 , :number_of_errors=>2 ,:number_of_failures =>2,:time_taken=>5)
      FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_record.id,:time_taken=>1,:class_name=>"class1.1.1",:error_msg=>"")
     json= Visualization.new.getResultJson(platform.id)
@@ -77,7 +77,7 @@ describe Visualization do
   it "should add unknown test type to the json" do
     product = FactoryGirl.create(:product)
     platform = FactoryGirl.create(:platform,:product_id => product.id)
-    test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id, :test_category => "UNKNOWN")
+    test_metadata = FactoryGirl.create(:test_metadatum,:platform_id => platform.id, :test_category => "UNKNOWN", :branch => "master")
     test_suite_records = FactoryGirl.create(:test_suite_records,:test_metadatum_id => test_metadata.id)
      FactoryGirl.create(:test_case_record,:test_suite_record_id => test_suite_records.id)
     json= Visualization.new.getResultJson(platform.id)

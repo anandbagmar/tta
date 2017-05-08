@@ -16,7 +16,7 @@ describe ComparativeAnalysis do
   it "should return result set with a single point if product has only one build between the date range" do
     product = FactoryGirl.create(:product)
     platform = FactoryGirl.create(:platform, :product_id => product.id)
-    test_metadata = FactoryGirl.create(:test_metadatum, :platform_id => platform.id)
+    test_metadata = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :branch => "master")
     test_suite_record = FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata.id)
     FactoryGirl.create(:test_case_record, :test_suite_record_id => test_suite_record.id)
 
@@ -27,9 +27,9 @@ describe ComparativeAnalysis do
   it "should return the result set with points in increasing order of the date of execution" do
     product = FactoryGirl.create(:product)
     platform = FactoryGirl.create(:platform, :product_id => product.id)
-    test_metadata_3 = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :date_of_execution => "2013-01-10")
-    test_metadata_2 = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :date_of_execution => "2013-01-16")
-    test_metadata_1 = FactoryGirl.create(:test_metadatum, :platform_id => platform.id)
+    test_metadata_3 = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :date_of_execution => "2013-01-10", :branch => "master")
+    test_metadata_2 = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :date_of_execution => "2013-01-16", :branch => "master")
+    test_metadata_1 = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :branch => "master")
 
     test_suite_record_1 = FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata_1.id)
     test_suite_record_2 = FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata_2.id)
@@ -56,8 +56,8 @@ describe ComparativeAnalysis do
   it "should return result set with different points if tests with different pass % present for same day" do
     product = FactoryGirl.create(:product)
     platform = FactoryGirl.create(:platform, :product_id => product.id)
-    test_metadata = FactoryGirl.create(:test_metadatum, :platform_id => platform.id)
-    test_metadata_1 = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :test_category => "FUNCTIONAL TEST")
+    test_metadata = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :branch => "master")
+    test_metadata_1 = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :test_category => "FUNCTIONAL TEST", :branch => "master")
     test_suite_record = FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata.id, :number_of_tests => "20", :number_of_errors => "10")
     test_suite_record_1 = FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata_1.id)
     FactoryGirl.create(:test_case_record, :test_suite_record_id => test_suite_record.id)
@@ -71,9 +71,9 @@ describe ComparativeAnalysis do
   it "should return proper result set for valid data" do
     product = FactoryGirl.create(:product)
     platform = FactoryGirl.create(:platform, :product_id => product.id)
-    test_metadata = FactoryGirl.create(:test_metadatum, :platform_id => platform.id)
-    test_metadata_1 = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :date_of_execution => "2013-01-01")
-    test_metadata_2 = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :date_of_execution => "2013-01-09")
+    test_metadata = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :branch => "master")
+    test_metadata_1 = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :date_of_execution => "2013-01-01", :branch => "master")
+    test_metadata_2 = FactoryGirl.create(:test_metadatum, :platform_id => platform.id, :date_of_execution => "2013-01-09", :branch => "master")
     test_suite_record = FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata.id)
     test_suite_record_1 = FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata_1.id)
     test_suite_record_2 = FactoryGirl.create(:test_suite_records, :test_metadatum_id => test_metadata_2.id)

@@ -31,7 +31,7 @@ describe UploadController, type: :controller do
     it "uploads data with failure messages" do
       post :create, @upload_with_errors
       redirect_params = Rack::Utils.parse_query(URI.parse(response.location).query)
-      response.should redirect_to upload_show_path(:product_id => @product.id, :project_meta_id => redirect_params["project_meta_id"], :platform_id => @platform.id)
+      response.should redirect_to upload_show_path(:product_id => @product.id, :product_meta_id => redirect_params["product_meta_id"], :platform_id => @platform.id)
     end
 
   end
@@ -44,6 +44,7 @@ describe UploadController, type: :controller do
       @upload_without_errors = { :product_name                => @product.name,
                                  :platform_name               => @platform.name,
                                  :ci_job_name                 => @meta_data[:ci_job_name],
+                                 :branch                      => @meta_data[:branch],
                                  :test_category               => @meta_data[:test_category],
                                  :test_sub_category           => @meta_data[:test_sub_category],
                                  :test_report_type            => @meta_data[:test_report_type],
@@ -58,25 +59,26 @@ describe UploadController, type: :controller do
     it "uploads data and redirect to success page" do
       post :create, @upload_without_errors
       redirect_params = Rack::Utils.parse_query(URI.parse(response.location).query)
-      response.should redirect_to upload_show_path(:product_id => @product.id, :project_meta_id => redirect_params["project_meta_id"], :platform_id => @platform.id)
+      response.should redirect_to upload_show_path(:product_id => @product.id, :product_meta_id => redirect_params["product_meta_id"], :platform_id => @platform.id)
     end
 
     it "check success page shows the product details" do
       post :create, @upload_without_errors
       redirect_params = Rack::Utils.parse_query(URI.parse(response.location).query)
-      get :show, { :product_id => @product.id, :project_meta_id => redirect_params["project_meta_id"], :platform_id => @platform.id }
+      get :show, { :product_id => @product.id, :product_meta_id => redirect_params["product_meta_id"], :platform_id => @platform.id }
       response.should render_template :show
       response.code.should eq("200")
       assigns[:product].should == @product
       assigns[:platform].should == @platform
-      assigns[:project_meta][:ci_job_name].should match (/#{@meta_data[:ci_job_name]}/i)
-      assigns[:project_meta][:os].should match (/#{@meta_data[:os]}/i)
-      assigns[:project_meta][:test_execution_machine_name].should match (/#{@meta_data[:test_execution_machine_name]}/i)
-      assigns[:project_meta][:browser_or_device].should match (/#{@meta_data[:browser_or_device]}/i)
-      assigns[:project_meta][:environment].should match (/#{@meta_data[:environment]}/i)
-      assigns[:project_meta][:test_category].should match (/#{@meta_data[:test_category]}/i)
-      assigns[:project_meta][:test_report_type].should match (/#{@meta_data[:test_report_type]}/i)
-      assigns[:project_meta][:test_sub_category].should match (/#{@meta_data[:test_sub_category]}/i)
+      assigns[:product_meta][:ci_job_name].should match (/#{@meta_data[:ci_job_name]}/i)
+      assigns[:product_meta][:branch].should match (/#{@meta_data[:branch]}/i)
+      assigns[:product_meta][:os].should match (/#{@meta_data[:os]}/i)
+      assigns[:product_meta][:test_execution_machine_name].should match (/#{@meta_data[:test_execution_machine_name]}/i)
+      assigns[:product_meta][:browser_or_device].should match (/#{@meta_data[:browser_or_device]}/i)
+      assigns[:product_meta][:environment].should match (/#{@meta_data[:environment]}/i)
+      assigns[:product_meta][:test_category].should match (/#{@meta_data[:test_category]}/i)
+      assigns[:product_meta][:test_report_type].should match (/#{@meta_data[:test_report_type]}/i)
+      assigns[:product_meta][:test_sub_category].should match (/#{@meta_data[:test_sub_category]}/i)
       flash[:notice].should == "Product Successfully Saved!!"
     end
 
@@ -96,5 +98,5 @@ end
 def create_or_load_product_if_not_present
   @product   ||= FactoryGirl.create(:product)
   @platform  ||= FactoryGirl.create(:platform, :product_id => @product.id)
-  @meta_data ||= FactoryGirl.build(:test_metadatum_hash, :platform_id => @platform.id)
+  @meta_data ||= FactoryGirl.build(:test_metadatum, :platform_id => @platform.id)
 end

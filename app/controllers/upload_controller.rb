@@ -5,7 +5,7 @@ require 'fileutils'
 class UploadController < ApplicationController
   def create
     product, platform, meta_data = parse_and_store_test_run_data
-    redirect_to :action => :show, :product_id => product.id, :platform_id => platform.id, :project_meta_id => meta_data.id
+    redirect_to :action => :show, :product_id => product.id, :platform_id => platform.id, :product_meta_id => meta_data.id
   end
 
   def automatic
@@ -24,7 +24,7 @@ class UploadController < ApplicationController
   def show
     @product = Product.find(params[:product_id])
     @platform= @product.platforms.find(params[:platform_id])
-    @project_meta = @platform.test_metadatum.find(params[:project_meta_id])
+    @product_meta = @platform.test_metadatum.find_by(params[:product_meta_id])
     begin
       respond_to do |format|
         flash[:notice] = "Product Successfully Saved!!"

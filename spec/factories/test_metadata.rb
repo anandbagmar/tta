@@ -12,22 +12,6 @@ FactoryGirl.define do
     test_category "UNIT TEST"
     test_report_type "JUnit"
     test_sub_category "UNIT TEST"
-  end
-end
-
-FactoryGirl.define do
-  factory :test_metadatum_hash, :class => Hash do
-    platform
-    ci_job_name "Build"
-    os "MacOSX"
-    test_execution_machine_name "host_pc"
-    browser_or_device "firefox"
-    environment "Dev"
-    # date_of_execution "2013-02-20 00:00:00"
-    test_category "UNIT TEST"
-    test_report_type "JUnit"
-    test_sub_category "UNIT TEST"
-
-    initialize_with {attributes}
+    branch "master"
   end
 end

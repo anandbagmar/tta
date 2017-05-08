@@ -13,10 +13,10 @@ describe Admin do
     date_of_execution = "2013-02-02"
     product1 = FactoryGirl.create(:product, :name => "TTA1")
     platform11 = FactoryGirl.create(:platform, :product_id => product1.id,:name => "TTA_pLATFORM1")
-    FactoryGirl.create(:test_metadatum, :platform_id => platform11.id, :date_of_execution => date_of_execution)
+    FactoryGirl.create(:test_metadatum, :platform_id => platform11.id, :date_of_execution => date_of_execution, :branch => "master")
     product2 = FactoryGirl.create(:product , :name => "TTA2")
     platform21 = FactoryGirl.create(:platform, :product_id => product2.id,:name => "TTA_pLATFORM2")
-     FactoryGirl.create(:test_metadatum, :platform_id => platform21.id, :date_of_execution => date_of_execution)
+    FactoryGirl.create(:test_metadatum, :platform_id => platform21.id, :date_of_execution => date_of_execution, :branch => "master")
     product=Array.new
     product.push(product1)
     product.push(product2)
@@ -28,19 +28,19 @@ describe Admin do
   date_of_execution = "2013-02-02"
   product1 = FactoryGirl.create(:product, :name => "TTA11")
   platform11 = FactoryGirl.create(:platform, :product_id => product1.id,:name => "TTA_pLATFORM11")
-   FactoryGirl.create(:test_metadatum, :platform_id => platform11.id, :date_of_execution => date_of_execution)
+   FactoryGirl.create(:test_metadatum, :platform_id => platform11.id, :date_of_execution => date_of_execution, :branch => "master")
   platform12 = FactoryGirl.create(:platform, :product_id => product1.id,:name => "TTA_pLATFORM12")
-   FactoryGirl.create(:test_metadatum, :platform_id => platform12.id, :date_of_execution => date_of_execution)
- FactoryGirl.create(:test_metadatum, :platform_id => platform12.id, :date_of_execution => date_of_execution)
-   FactoryGirl.create(:test_metadatum, :platform_id => platform12.id, :date_of_execution => date_of_execution)
+   FactoryGirl.create(:test_metadatum, :platform_id => platform12.id, :date_of_execution => date_of_execution, :branch => "master")
+ FactoryGirl.create(:test_metadatum, :platform_id => platform12.id, :date_of_execution => date_of_execution, :branch => "master")
+   FactoryGirl.create(:test_metadatum, :platform_id => platform12.id, :date_of_execution => date_of_execution, :branch => "master")
 
   product2 = FactoryGirl.create(:product , :name => "TTA12")
   platform21 = FactoryGirl.create(:platform, :product_id => product2.id,:name => "TTA_pLATFORM21")
-    FactoryGirl.create(:test_metadatum, :platform_id => platform21.id, :date_of_execution => date_of_execution)
-   FactoryGirl.create(:test_metadatum, :platform_id => platform21.id, :date_of_execution => date_of_execution)
+    FactoryGirl.create(:test_metadatum, :platform_id => platform21.id, :date_of_execution => date_of_execution, :branch => "master")
+   FactoryGirl.create(:test_metadatum, :platform_id => platform21.id, :date_of_execution => date_of_execution, :branch => "master")
   platform22 = FactoryGirl.create(:platform, :product_id => product2.id,:name => "TTA_pLATFORM22")
-   FactoryGirl.create(:test_metadatum, :platform_id => platform22.id, :date_of_execution => date_of_execution)
-   FactoryGirl.create(:test_metadatum, :platform_id => platform22.id, :date_of_execution => "2013-02-02")
+   FactoryGirl.create(:test_metadatum, :platform_id => platform22.id, :date_of_execution => date_of_execution, :branch => "master")
+   FactoryGirl.create(:test_metadatum, :platform_id => platform22.id, :date_of_execution => "2013-02-02", :branch => "master")
 
   expect_json= {"#{product1.id}" =>[{"product_name" => "#{product1.name}"},
                                 {"platforms" => ["#{platform11.name}","#{platform12.name}"]},
