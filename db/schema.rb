@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170506045648) do
+ActiveRecord::Schema.define(version: 20170509051739) do
 
   create_table "external_dashboards", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20170506045648) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "error_msg",            limit: 65535
+    t.string   "status",               limit: 255,   default: "n/a", null: false
   end
 
   add_index "test_case_records", ["test_suite_record_id"], name: "index_test_case_records_on_test_suite_record_id", using: :btree
@@ -67,14 +68,14 @@ ActiveRecord::Schema.define(version: 20170506045648) do
     t.string   "branch",                      limit: 255
   end
 
-  create_table "test_steps_records", force: :cascade do |t|
-    t.integer  "test_case_records_id", limit: 4
-    t.string   "step_name",            limit: 255
-    t.string   "step_description",     limit: 255
-    t.string   "status",               limit: 255
-    t.string   "time_taken",           limit: 255
+  create_table "test_step_records", force: :cascade do |t|
+    t.integer  "test_case_record_id", limit: 4
+    t.string   "step_name",           limit: 255
+    t.string   "status",              limit: 255
+    t.string   "time_taken",          limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "error_msg",           limit: 65535
   end
 
   create_table "test_suite_records", force: :cascade do |t|

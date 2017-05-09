@@ -1,6 +1,6 @@
 class TestCaseRecord < ActiveRecord::Base
   belongs_to :test_suite_record
-  attr_accessible :class_name, :time_taken, :error_msg
+  attr_accessible :test_suite_record_id, :class_name, :time_taken, :error_msg, :status
 
   def self.get_test_case_records_with_error(test_suite_records)
     test_suite_records_ids = get_record_ids_for(test_suite_records)
@@ -38,4 +38,11 @@ class TestCaseRecord < ActiveRecord::Base
   def self.get_record_ids_for(records)
     records.map { |record| record.id }.join(',')
   end
+
+  def self.create_and_save(hash)
+    test_case = TestCaseRecord.new(hash)
+    test_case.save
+    test_case
+  end
+
 end

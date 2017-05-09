@@ -4,8 +4,9 @@ class Parser
   def parse_test_log_files (input_file_path, output_file_path, meta_datum_id, test_report_type)
     test_report_file_type = REPORTTYPE["test_report_type_mapping"][test_report_type.downcase]
     extracted_files       = Unzip.copy_and_extract_files(input_file_path, output_file_path, test_report_file_type)
-    puts "parse_test_log_files: test_report_type: #{test_report_type}, test_report_file_type: #{test_report_file_type}"
+    puts "************************* parse_test_log_files: test_report_type: #{test_report_type}, test_report_file_type: #{test_report_file_type}"
     extracted_files.keys.each do |extracted_filename|
+      puts "************************* parsing file: #{extracted_filename} *******************"
       extracted_file_content = extracted_files[extracted_filename]
       parse_results_and_update_in_db(meta_datum_id, test_report_file_type, test_report_type.downcase, extracted_file_content)
     end
