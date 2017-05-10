@@ -32,7 +32,7 @@ class Admin < ActiveRecord::Base
   end
 
   def self.add_external_dashboard(external_dashboard_name, external_dashboard_link)
-    ExternalDashboard.find_or_create_by_name_and_link(external_dashboard_name, external_dashboard_link)
+    ExternalDashboard.find_or_create_by(name: external_dashboard_name, link: external_dashboard_link)
 
   end
 
