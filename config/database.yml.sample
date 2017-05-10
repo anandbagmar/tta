@@ -1,31 +1,26 @@
-development:
+default: &default
   adapter: mysql2
   encoding: utf8
-  reconnect: false
-  database: tta
-  pool: 5
-  username: root
-  password:
   host: localhost
+  port: 3306
+  reconnect: false
+  pool: 5
+
+development:
+  <<: *default
+  database: tta_dev
+  username: <%= ENV["TTA_DEV_USER"] %>
+  password: <%= ENV["TTA_DEV_PASSWORD"] %>
 
 test:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
+  <<: *default
   database: tta_test
-  pool: 5
-  username: root
-  password:
-  host: localhost
+  username: <%= ENV["TTA_TEST_USER"] %>
+  password: <%= ENV["TTA_TEST_PASSWORD"] %>
 
 production:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
+  <<: *default
   database: tta_prod
-  pool: 5
-  username: root
-  password:
-  host: localhost
-
+  username: <%= ENV["TTA_PROD_USER"] %>
+  password: <%= ENV["TTA_PROD_PASSWORD"] %>
 
