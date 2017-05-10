@@ -39,7 +39,7 @@ See the {TTA wiki page}[https://github.com/anandbagmar/tta/wiki] for more inform
     bundle install --path vendor/bundle
 
 * Install Rails
-    gem install rails -v 5.0.1
+    gem install rails -v 4.2.8
     rbenv rehash
     rails -v
 
@@ -74,3 +74,12 @@ To setup the database,for test environment use: 'RAILS_ENV=test rake db:create d
 To start TTA in test mode use: 'RAILS_ENV=test rails s'
 To run the specs use: 'rake spec'
 Write rake task to upload logs and hit the server with the given static IP.
+
+* Starting TTA in production mode
+    Ensure TTA_PROD_USER and TTA_PROD_PASSWORD environment variables are set
+    pre-compile assets
+        RAILS_ENV=production bundle exec rake assets:clean assets:clobber assets:precompile
+    setup tta_prod database
+        RAILS_ENV=production bundle exec rake db:recreate
+    start TTA in production mode
+        RAILS_ENV=production bundle exec rails s -b <server_ip or hostname>
