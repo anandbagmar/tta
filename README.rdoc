@@ -51,6 +51,19 @@ See the {TTA wiki page}[https://github.com/anandbagmar/tta/wiki] for more inform
 * Create users in mysql
     TTA_USER, TTA_PASSWORD, RAILS_ENV=prod
 
+    mysql -uroot
+    CREATE USER '<TTA_USER>'@'%' IDENTIFIED BY '<TTA_PASSWORD>';
+    GRANT ALL PRIVILEGES ON * . * TO '<TTA_USER>'@'%';
+    FLUSH PRIVILEGES
+
+    Create .my.cnf file in ~ directory with contents
+    {code}
+    [mysqld]
+    bind-address = 0.0.0.0
+    {code}
+
+    Restart mysql server
+
 * Using TTA
 
 Get the TTA code from Github by executing the following command from the folder of your choice. 'git clone https://github.com/anandbagmar/tta.git'
