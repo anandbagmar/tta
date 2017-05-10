@@ -34,6 +34,10 @@ See the {TTA wiki page}[https://github.com/anandbagmar/tta/wiki] for more inform
     rbenv global 2.4.1
     rbenv local 2.4.1
 
+* Install Gems
+    gem install bundler
+    bundle install --path vendor/bundle
+
 * Install Rails
     gem install rails -v 5.0.1
     rbenv rehash
@@ -42,6 +46,12 @@ See the {TTA wiki page}[https://github.com/anandbagmar/tta/wiki] for more inform
     bundle install
 
 * Install MySQL 5.7.18 and start the server.
+    brew install mysql
+
+* Create users in mysql
+    TTA_USER, TTA_PASSWORD, RAILS_ENV=prod
+
+* Using TTA
 
 Get the TTA code from Github by executing the following command from the folder of your choice. 'git clone https://github.com/anandbagmar/tta.git'
 Install Bundler and Run the bundle of commands in the same folder using command 'bundle install'
