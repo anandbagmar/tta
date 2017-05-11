@@ -3,6 +3,7 @@
 FactoryGirl.define do
   factory :test_metadatum, :class => TestMetadatum do
     platform
+    platform_version "1.0.199"
     ci_job_name "Build"
     os "MacOSX"
     test_execution_machine_name "host_pc"

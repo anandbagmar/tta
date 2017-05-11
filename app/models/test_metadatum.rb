@@ -1,8 +1,9 @@
 class TestMetadatum < ActiveRecord::Base
 
   has_many :test_suite_records
-  attr_accessible :ci_job_name, :browser_or_device, :environment, :date_of_execution, :test_execution_machine_name, :os, :user_timezone, :test_category, :test_report_type, :test_sub_category, :branch
+  attr_accessible :ci_job_name, :browser_or_device, :environment, :date_of_execution, :test_execution_machine_name, :os, :user_timezone, :test_category, :test_report_type, :test_sub_category, :branch, :platform_version
 
+  validates :platform_version, :presence => { :message => 'cannot be blank, Task not saved' }
   validates :browser_or_device, :presence => { :message => 'cannot be blank, Task not saved' }
   validates :environment, :presence => { :message => 'cannot be blank, Task not saved' }
   validates :test_execution_machine_name, :presence => { :message => 'cannot be blank, Task not saved' }

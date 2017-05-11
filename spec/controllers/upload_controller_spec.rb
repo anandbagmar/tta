@@ -16,6 +16,7 @@ describe UploadController, type: :controller do
       @file_with_errors   = fixture_file_upload('/proj1.zip', 'application/zip')
       @upload_with_errors = { :product_name                => @product.name,
                               :platform_name               => @platform.name,
+                              :platform_version            => @meta_data[:platform_version],
                               :ci_job_name                 => @meta_data[:ci_job_name],
                               :test_category               => @meta_data[:test_category],
                               :test_sub_category           => @meta_data[:test_sub_category],
@@ -43,6 +44,7 @@ describe UploadController, type: :controller do
       @file_without_errors   = fixture_file_upload('/proj5.zip', 'application/zip')
       @upload_without_errors = { :product_name                => @product.name,
                                  :platform_name               => @platform.name,
+                                 :platform_version            => @meta_data[:platform_version],
                                  :ci_job_name                 => @meta_data[:ci_job_name],
                                  :branch                      => @meta_data[:branch],
                                  :test_category               => @meta_data[:test_category],
@@ -71,6 +73,7 @@ describe UploadController, type: :controller do
       assigns[:product].should == @product
       assigns[:platform].should == @platform
       assigns[:product_meta][:ci_job_name].should match (/#{@meta_data[:ci_job_name]}/i)
+      assigns[:product_meta][:platform_version].should match (/#{@meta_data[:platform_version]}/i)
       assigns[:product_meta][:branch].should match (/#{@meta_data[:branch]}/i)
       assigns[:product_meta][:os].should match (/#{@meta_data[:os]}/i)
       assigns[:product_meta][:test_execution_machine_name].should match (/#{@meta_data[:test_execution_machine_name]}/i)

@@ -50,10 +50,11 @@ namespace :tta do
       `zip results.zip <path of your xml logs>`
     end
 
-    task :upload_to_tta, [:product_name, :platform_name, :ci_job_name, :test_category, :test_report_type, :os, :test_execution_machine_name, :browser_or_device, :environment, :date_of_execution, :logDirectory, :filePattern, :commit] do |t, args|
-      args.with_defaults(:product_name => "demoProduct", :platform_name => "demoPlatform", :ci_job_name => "demoCIJob", :test_category => "Unit Test", :test_report_type => "RSpec Junit", :os => "MAc", :test_execution_machine_name => "xyz", :browser_or_device => "Chrome", :environment => "Dev", :date_of_execution => "1900-12-12", :logDirectory => "asdw", :filePattern => "*.xml", :commit => "SUBMIT")
+    task :upload_to_tta, [:product_name, :platform_name, :platform_version, :ci_job_name, :test_category, :test_report_type, :os, :test_execution_machine_name, :browser_or_device, :environment, :date_of_execution, :logDirectory, :filePattern, :commit] do |t, args|
+      args.with_defaults(:product_name => "demoProduct", :platform_name => "demoPlatform", :platform_version => "1.0.101", :ci_job_name => "demoCIJob", :test_category => "Unit Test", :test_report_type => "RSpec Junit", :os => "MAc", :test_execution_machine_name => "xyz", :browser_or_device => "Chrome", :environment => "Dev", :date_of_execution => "1900-12-12", :logDirectory => "asdw", :filePattern => "*.xml", :commit => "SUBMIT")
       $product_name = args.product_name
       $platform_name = args.platform_name
+      $platform_version = args.platform_version
       $ci_job_name = ENV['GO_JOB_NAME']
       $test_category=args.test_category
       $test_report_type=args.test_report_type

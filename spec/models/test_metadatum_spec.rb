@@ -3,6 +3,10 @@ require 'spec_helper'
 describe TestMetadatum do
   describe "create" do
 
+    it "validates presence of platform_version" do
+      should validate_presence_of(:platform_version).with_message("cannot be blank, Task not saved")
+    end
+
     it "validates presence of browser_or_device name" do
       should validate_presence_of(:browser_or_device).with_message("cannot be blank, Task not saved")
     end
