@@ -29,13 +29,18 @@ class CucumberJSONParser
   end
 
   def self.save_test_case_records(each_suite, saved_test_suite_data, test_suite_record_to_be_created)
+    backgroundSteps = []
     each_suite["elements"].each_with_index { |each_test_case, testCaseIndex|
-      test_suite_record_to_be_created = save_test_case_record(each_test_case, saved_test_suite_data, test_suite_record_to_be_created)
-      saved_test_suite_data.update! test_suite_record_to_be_created
+      if each_test_case["type"] == "background"
+        backgroundSteps = each_test_case["steps"]
+      else
+        test_suite_record_to_be_created = save_test_case_record(each_test_case, backgroundSteps, saved_test_suite_data, test_suite_record_to_be_created)
+        saved_test_suite_data.update! test_suite_record_to_be_created
+      end
     }
   end
 
-  def self.save_test_case_record(each_test_case, saved_test_suite_data, test_suite_record_to_be_created)
+  def self.save_test_case_record(each_test_case, backgroundSteps, saved_test_suite_data, test_suite_record_to_be_created)
     test_case_record_to_be_created = { :test_suite_record_id => saved_test_suite_data.id,
                                        :class_name           => each_test_case["name"],
                                        :time_taken           => 0,
@@ -45,23 +50,25 @@ class CucumberJSONParser
     saved_test_case_record_data    = TestCaseRecord.create_and_save(test_case_record_to_be_created)
 
     if each_test_case["type"] == "scenario"
-      step_name         = "Before - " + each_test_case["before"][0]["match"]["location"]
+      step_name                                                       = "Before - " + each_test_case["before"][0]["match"]["location"]
       test_suite_record_to_be_created, test_case_record_to_be_created = save_test_step_record(test_suite_record_to_be_created, test_case_record_to_be_created, saved_test_case_record_data, each_test_case["before"][0], step_name)
 
       saved_test_case_record_data.update! test_case_record_to_be_created
-    end
 
-    each_test_case["steps"].each_with_index { |eachStep, stepIndex|
-      stepName = eachStep["name"]
-      if test_case_record_to_be_created[:class_name] && each_test_case["type"] == "background"
-        test_case_record_to_be_created[:class_name] = stepName
-      end
-      test_suite_record_to_be_created, test_case_record_to_be_created = save_test_step_record(test_suite_record_to_be_created, test_case_record_to_be_created, saved_test_case_record_data, eachStep, stepName)
-      saved_test_case_record_data.update! test_case_record_to_be_created
-    }
+      backgroundSteps.each_with_index { |eachStep, stepIndex|
+        stepName                                                        = eachStep["name"]
+        # test_case_record_to_be_created[:class_name] = stepName
+        test_suite_record_to_be_created, test_case_record_to_be_created = save_test_step_record(test_suite_record_to_be_created, test_case_record_to_be_created, saved_test_case_record_data, eachStep, stepName)
+        saved_test_case_record_data.update! test_case_record_to_be_created
+      }
 
-    if each_test_case["type"] == "scenario"
-      step_name         = "After - " + each_test_case["after"][0]["match"]["location"]
+      each_test_case["steps"].each_with_index { |eachStep, stepIndex|
+        stepName                                                        = eachStep["name"]
+        test_suite_record_to_be_created, test_case_record_to_be_created = save_test_step_record(test_suite_record_to_be_created, test_case_record_to_be_created, saved_test_case_record_data, eachStep, stepName)
+        saved_test_case_record_data.update! test_case_record_to_be_created
+      }
+
+      step_name                                                       = "After - " + each_test_case["after"][0]["match"]["location"]
       test_suite_record_to_be_created, test_case_record_to_be_created = save_test_step_record(test_suite_record_to_be_created, test_case_record_to_be_created, saved_test_case_record_data, each_test_case["after"][0], step_name)
       saved_test_case_record_data.update! test_case_record_to_be_created
     end
@@ -79,12 +86,12 @@ class CucumberJSONParser
   end
 
   def self.save_test_step_record(test_suite_record_to_be_created, test_case_record_to_be_created, saved_test_case_record_data, eachStep, step_name)
-    test_step_record_to_be_created               = { :test_case_record_id => saved_test_case_record_data.id,
-                                                     :step_name           => step_name,
-                                                     :status              => eachStep["result"]["status"]
+    test_step_record_to_be_created              = { :test_case_record_id => saved_test_case_record_data.id,
+                                                    :step_name           => step_name,
+                                                    :status              => eachStep["result"]["status"]
     }
-    test_step_record_to_be_created[:time_taken]  = eachStep["result"]["duration"].nil? ? 0 : eachStep["result"]["duration"]
-    test_case_record_to_be_created[:time_taken]  += test_step_record_to_be_created[:time_taken]
+    test_step_record_to_be_created[:time_taken] = eachStep["result"]["duration"].nil? ? 0 : eachStep["result"]["duration"]
+    test_case_record_to_be_created[:time_taken] += test_step_record_to_be_created[:time_taken]
 
     if !eachStep["result"]["error_message"].nil?
       test_step_record_to_be_created[:error_msg] = eachStep["result"]["error_message"]
