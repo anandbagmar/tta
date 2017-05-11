@@ -79,7 +79,10 @@ Write rake task to upload logs and hit the server with the given static IP.
     Ensure TTA_PROD_USER and TTA_PROD_PASSWORD environment variables are set
     pre-compile assets
         RAILS_ENV=production bundle exec rake assets:clean assets:clobber assets:precompile
-    setup tta_prod database
+    FIRST TIME DB setup - tta_prod database
         RAILS_ENV=production bundle exec rake db:recreate
+
+    run migration
+        RAILS_ENV=production bundle exec rake assets:clean assets:clobber assets:precompile db:migrate
     start TTA in production mode
         RAILS_ENV=production bundle exec rails s -b <server_ip or hostname>
