@@ -12,3 +12,4 @@ SAMPLE_TEST_EXECUTION_MACHINE_NAMES= %w(garima pooja ashwin nikita nikitha tusha
 SAMPLE_CI_JOB_NAMES                = %w(smoke master regression runtest testomania enternet titanic kanha kaziranga stress opensaysme gir test4treasure quovadis nihao)
 SAMPLE_TEST_ENVIRONMENTS           = %w(dev qa production uat)
 SAMPLE_TEST_REPORT_TYPES           = ["JUnit", "Cucumber_HTML", "NUnit"]
+SAMPLE_TEST_STATUS                 = ["skipped", "passed", "failed"]
