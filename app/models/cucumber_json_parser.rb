@@ -90,7 +90,7 @@ class CucumberJSONParser
                                                     :step_name           => step_name,
                                                     :status              => eachStep["result"]["status"]
     }
-    test_step_record_to_be_created[:time_taken] = eachStep["result"]["duration"].nil? ? 0 : eachStep["result"]["duration"]
+    test_step_record_to_be_created[:time_taken] = eachStep["result"]["duration"].nil? ? 0 : eachStep["result"]["duration"]/1000000000
     test_case_record_to_be_created[:time_taken] += test_step_record_to_be_created[:time_taken]
 
     if !eachStep["result"]["error_message"].nil?
