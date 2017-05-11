@@ -7,6 +7,7 @@ class AdminController < ApplicationController
   def view
     products=Product.all
     @json   = Admin.get_result_json(products)
+    @json.gsub!('"','\"')
   end
 
   def add
