@@ -94,8 +94,8 @@ class CucumberJSONParser
     test_case_record_to_be_created[:time_taken] += test_step_record_to_be_created[:time_taken]
 
     if !eachStep["result"]["error_message"].nil?
-      test_step_record_to_be_created[:error_msg] = eachStep["result"]["error_message"]
-      test_case_record_to_be_created[:error_msg] = eachStep["result"]["error_message"]
+      test_step_record_to_be_created[:error_msg] = eachStep["result"]["error_message"].gsub("\"", "'")
+      test_case_record_to_be_created[:error_msg] = eachStep["result"]["error_message"].gsub("\"", "'")
     end
 
     if test_case_record_to_be_created[:status] != "failed"

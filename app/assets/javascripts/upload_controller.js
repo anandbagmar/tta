@@ -85,8 +85,8 @@ var validateDate = {
         var currentYear = currentDateTime.getFullYear();
         var currentMonth = currentDateTime.getMonth() + 1;
         var currentDay = currentDateTime.getDate();
-        var currentHour = currentDateTime.getUTCHours();
-        var currentMinutes = currentDateTime.getUTCMinutes();
+        var currentHour = currentDateTime.getHours();
+        var currentMinutes = currentDateTime.getMinutes();
 
 
         if (year > currentYear)

@@ -14,13 +14,13 @@ class DefectAnalysis
           :platform_name => Platform.find(platform_id).name,
           :errors        => test_case_hash,
           :percentage    => percentage
-      }.to_json
+      }
     else
-      defect_analysis_json ={
+      defect_analysis_json = {
           :errors => test_case_hash
       }
     end
-    return defect_analysis_json
+    return defect_analysis_json.to_json
   end
 
   def get_defect_percentage(no_of_test)
