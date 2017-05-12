@@ -36,6 +36,7 @@ class DefectAnalysisController < ApplicationController
     end
     test_category         =params["test_category"]
     @defect_analysis_json = DefectAnalysis.new.get_result_json(platform_id, @analysis_date, test_category)
+    @defect_analysis_json.gsub!('"','\"')
   end
 
   def getValidMetadataRecords(metadataRecords)

@@ -22,6 +22,6 @@
         %th{:style => " width: 1%; text-align: center; "} PERCENTAGE
   #defect-analysis-data{:style => "display:none;"}
   :javascript
-    var json = "#{@defect_analysis_json.gsub!('"','\"')}";
+    var json = "#{@defect_analysis_json}";
     var analysis_date = "#{@analysis_date}";
     renderDefectTable.renderTable(json,analysis_date);

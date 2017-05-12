@@ -32,6 +32,6 @@ class CompareRunsController < ApplicationController
     @compare_hash         = CompareRuns.getCompareResult(params)
     @compare_hash["dates"]=[params["date_one"], params["date_two"]]
     @compare_json         =@compare_hash.to_json
-    @compare_json
+    @compare_json.gsub!('"', '\"')
   end
 end

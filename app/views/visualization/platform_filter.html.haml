@@ -7,7 +7,7 @@
   $("#display_message").css("display", "none");
   var jsonR;
   var regExp = new RegExp('"', 'g');
-  jsonR = "#{@json.gsub!('"','\"')}";
+  jsonR = "#{@json}";
   jsonR = JSON.parse(jsonR);
   if (jsonR != "") {
       Pyramid.plotBlockPyramid(jsonR);

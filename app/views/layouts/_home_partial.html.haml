@@ -3,6 +3,6 @@
 #external-dashboard-frame
 :javascript
   var data;
-  data = "#{@all_external_urls.gsub!('"','\"')}";
+  data = "#{@all_external_urls}";
   data = jsonData.parse(data);
   ExternalDashboard.renderButtons(data);
