@@ -2,7 +2,7 @@ require 'json'
 
 class CucumberJSONParser
   def self.parse(meta_id, extracted_json)
-    puts "CucumberJSONParser: parse: meta_id: #{meta_id}"
+    # puts "CucumberJSONParser: parse: meta_id: #{meta_id}"
     @parsed_json = JSON.parse(extracted_json)
     save_test_suites(meta_id, @parsed_json)
   end
