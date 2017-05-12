@@ -19,7 +19,7 @@ module Domain
         form_filling(params)
         scroll_to_view_and_click_on UPLOAD_PAGE_BUTTON
       rescue Exception => ex
-        puts "Exception in uploading data. \n\t" + ex.inspect
+        # puts "Exception in uploading data. \n\t" + ex.inspect
         file_name = "screenshot_"+random_name+".png"
         save_error_screenshot(file_name)
         throw ex
