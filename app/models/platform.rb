@@ -54,7 +54,7 @@ class Platform < ActiveRecord::Base
 
   def get_date_and_timestamp(date_input)
     date_object       = DateTime.strptime(date_input[:day]+' '+date_input[:month]+' '+date_input[:year]+' '+date_input[:hour]+' '+date_input[:minute], '%d %m %Y %H %M ')
-    date_of_execution = date_object.to_time.strftime("%Y-%m-%d %H:%M:%S")
+    date_of_execution = date_object.strftime("%Y-%m-%d %H:%M:%S")
     date_of_execution
   end
 
