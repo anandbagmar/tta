@@ -27,7 +27,7 @@ class Visualization
         :test_types         => test_types.sort_by { |test_type| test_type[:seq_no] },
         :unknown_test_types => (unknown_test_types if unknown_test_types!=[])
     }.to_json
-    return @json.gsub!('"','\"')
+    return @json
   end
 
   def get_latest_metadata_record(platform_id)

@@ -5,6 +5,7 @@ FactoryGirl.define do
     platform
     platform_version "1.0.199"
     ci_job_name "Build"
+    ci_build_number "77"
     os "MacOSX"
     test_execution_machine_name "host_pc"
     browser_or_device "firefox"

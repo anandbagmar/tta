@@ -37,6 +37,7 @@ module Seed
       random_time               = (DateTime.now - (test_meta_data_number + test_meta_data_number%10.to_f)).to_time
       test_meta_data            = TestMetadatum.create(
           :ci_job_name                 => SAMPLE_CI_JOB_NAMES[rand(SAMPLE_CI_JOB_NAMES.length)],
+          :ci_build_number             => "#{test_meta_data_number}",
           :platform_version            => "v1.0.399",
           :os                          => SAMPLE_OS_TYPES[rand(SAMPLE_OS_TYPES.length)],
           :branch                      => SAMPLE_BRANCH_NAMES[rand(SAMPLE_BRANCH_NAMES.length)],

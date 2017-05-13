@@ -55,6 +55,13 @@
             = text_field_tag (:ci_job_name), nil, :class => 'required'
         %tr
           %td.fields
+            %label{:for => "ci_build_number"}
+              CI Build Number
+              %span.required-fields *
+          %td
+            = text_field_tag (:ci_build_number), nil, :class => 'required'
+        %tr
+          %td.fields
             %label{:for => "environment"}
               Environment Run on
               %span.required-fields *

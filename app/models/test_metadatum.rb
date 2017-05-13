@@ -1,7 +1,7 @@
 class TestMetadatum < ActiveRecord::Base
 
   has_many :test_suite_records
-  attr_accessible :ci_job_name, :browser_or_device, :environment, :date_of_execution, :test_execution_machine_name, :os, :user_timezone, :test_category, :test_report_type, :test_sub_category, :branch, :platform_version
+  attr_accessible :ci_job_name, :ci_build_number, :browser_or_device, :environment, :date_of_execution, :test_execution_machine_name, :os, :user_timezone, :test_category, :test_report_type, :test_sub_category, :branch, :platform_version
 
   validates :platform_version, :presence => { :message => 'cannot be blank, Task not saved' }
   validates :browser_or_device, :presence => { :message => 'cannot be blank, Task not saved' }
@@ -13,6 +13,7 @@ class TestMetadatum < ActiveRecord::Base
   validates :test_sub_category, :presence => { :message => 'cannot be blank, Task not saved' }
   validates :test_report_type, :presence => { :message => 'cannot be blank, Task not saved' }
   validates :branch, :presence => { :message => 'cannot be blank, Task not saved' }
+  validates :platform_version, :presence => { :message => 'cannot be blank, Task not saved' }
 
   def get_distinct_test_category platform_id
     TestMetadatum.where(platform_id: platform_id).pluck(:test_category).uniq

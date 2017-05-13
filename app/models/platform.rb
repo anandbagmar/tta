@@ -10,12 +10,6 @@ class Platform < ActiveRecord::Base
     Platform.find_by_id(platform_id).name
   end
 
-  def self.get_data_for_test_category(platform_id, test_type)
-    meta_data = find(platform_id).test_metadatum.find_all_by_test_category(test_type)
-    result    = TestMetadatum.new.find_no_and_duration_of_test(meta_data)
-    result
-  end
-
   def create_test_metadatum params
     date_of_execution = get_date_and_timestamp(params[:date])
     test_category     = TestCategoryMapping.where(:test_category => params["test_category"])
@@ -23,6 +17,7 @@ class Platform < ActiveRecord::Base
       params[:test_sub_category]= test_category.select("test_sub_category").first[:test_sub_category]
     end
     meta_datum = test_metadatum.where(ci_job_name:                 (params[:ci_job_name]),
+                                      ci_build_number:             (params[:ci_build_number]),
                                       platform_version:            (params[:platform_version]),
                                       os:                          (params[:os]),
                                       test_execution_machine_name: (params[:test_execution_machine_name]),

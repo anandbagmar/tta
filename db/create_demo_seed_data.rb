@@ -23,6 +23,7 @@ def self.create_demo_test_meta_data(platform_id, date_of_execution)
   test_sub_category         = get_respective_demo_test_sub_category(test_category)
   test_meta_data            = TestMetadatum.create(
       :ci_job_name                 => SAMPLE_CI_JOB_NAMES[rand(SAMPLE_CI_JOB_NAMES.length)],
+      :ci_build_number             => "66",
       :platform_version            => "v1.0.499",
       :os                          => SAMPLE_OS_TYPES[rand(SAMPLE_OS_TYPES.length)],
       :branch                      => SAMPLE_BRANCH_NAMES[rand(SAMPLE_BRANCH_NAMES.length)],

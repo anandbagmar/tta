@@ -30,6 +30,7 @@ namespace :tta do
     your_project = "Product" #add your product name here
     your_platform = "Platform" #add your platform name here
     your_ci_job_name =  "CI_JOB" #add ci job name here
+    your_ci_build_number =  "CI_BUILD_NUMBER" #add ci build number here
     your_test_type = "TEST_TYPE(EG:JUNIT)" #add test_type here
     your_os = "os name" #add os name here
     your_test_execution_machine_name = "host name" #add host name here
