@@ -1,7 +1,31 @@
-class XmlParser
+class JunitXmlParser
 
-  def parse_xml_testsuite(config_xml, meta_id, params)
-    parse_test_run_record_xml(config_xml, meta_id, params)
+  def self.parse(extracted_xml, meta_id, test_report_type)
+    @doc            = Nokogiri::XML extracted_xml
+    test_suites_xml = @doc.xpath("//testsuite")
+    test_suites_xml.each do |test_suite_xml|
+      save_test_suite(meta_id, test_report_type, test_suite_xml)
+    end
+  end
+
+  def self.save_test_suite(meta_id, test_report_type, test_suite_xml)
+    test_suite_record_to_be_created = { :time_taken         => 0.0,
+                                        :test_metadatum_id  => meta_id,
+                                        :class_name         => test_suite_xml.attr("name"),
+                                        :number_of_tests    => test_suite_xml.attr("tests"),
+                                        :number_of_errors   => test_suite_xml.attr("errors"),
+                                        :number_of_failures => test_suite_xml.attr("failures")
+    }
+    test_cases_to_be_created        = []
+    test_suite_xml.search(".//testcase").each do |test_case_xml|
+      test_suite_record_to_be_created[:time_taken] += JunitXmlParser.new.get_time(test_case_xml, test_suite_xml, test_report_type)
+      test_cases_to_be_created << JunitXmlParser.new.create_test_case(test_case_xml, test_report_type)
+    end
+    saved_test_suite_data = TestSuiteRecord.create_and_save(test_suite_record_to_be_created)
+    test_cases_to_be_created.each do |each_test_case|
+      each_test_case.test_suite_record_id= saved_test_suite_data.id
+      each_test_case.save
+    end
   end
 
   def create_test_case(test_case_xml, test_report_type)

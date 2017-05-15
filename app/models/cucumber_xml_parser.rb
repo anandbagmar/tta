@@ -5,7 +5,7 @@ class CucumberXmlParser
   #  test_cases = @doc.xpath("//testsuite[@name='#{name}']/testcase")
   #  test_cases.each do |test_case|
   #    if test_case.attr("classname") == test_suite.attr("name")
-  #      XmlParser.new.parse_test_case(test_case, xml_data, config_xml, test_report_type)
+  #      JunitXmlParser.new.parse_test_case(test_case, xml_data, config_xml, test_report_type)
   #    end
   #  end
   #end

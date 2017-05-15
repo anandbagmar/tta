@@ -11,86 +11,86 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170512100750) do
+ActiveRecord::Schema.define(version: 20170513065610) do
 
   create_table "external_dashboards", force: :cascade do |t|
-    t.string "name", limit: 255
-    t.text "link", limit: 65535
+    t.string   "name",       limit: 255
+    t.text     "link",       limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "platforms", force: :cascade do |t|
-    t.integer "product_id", limit: 4
-    t.string "name", limit: 255
+    t.integer  "product_id", limit: 4
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "products", force: :cascade do |t|
-    t.string "name", limit: 255
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "test_case_records", force: :cascade do |t|
-    t.string "class_name", limit: 255
-    t.string "time_taken", limit: 255
-    t.integer "test_suite_record_id", limit: 4
+    t.string   "class_name",           limit: 255
+    t.string   "time_taken",           limit: 255
+    t.integer  "test_suite_record_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text "error_msg", limit: 65535
-    t.string "status", limit: 255, default: "n/a", null: false
+    t.text     "error_msg",            limit: 65535
+    t.string   "status",               limit: 255,   default: "n/a", null: false
   end
 
   add_index "test_case_records", ["test_suite_record_id"], name: "index_test_case_records_on_test_suite_record_id", using: :btree
 
   create_table "test_category_mappings", force: :cascade do |t|
-    t.string "test_category", limit: 255
-    t.string "test_sub_category", limit: 255
+    t.string   "test_category",     limit: 255
+    t.string   "test_sub_category", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "test_metadata", force: :cascade do |t|
-    t.integer "platform_id", limit: 4
-    t.string "ci_job_name", limit: 255
-    t.string "os", limit: 255
-    t.string "test_execution_machine_name", limit: 255
-    t.string "browser_or_device", limit: 255
-    t.string "environment", limit: 255
-    t.datetime "date_of_execution"
+    t.integer  "platform_id",                 limit: 4,   null: false
+    t.string   "ci_job_name",                 limit: 255
+    t.string   "os",                          limit: 255, null: false
+    t.string   "test_execution_machine_name", limit: 255, null: false
+    t.string   "browser_or_device",           limit: 255, null: false
+    t.string   "environment",                 limit: 255, null: false
+    t.date     "date_of_execution",                       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "test_category", limit: 255
-    t.string "test_report_type", limit: 255
-    t.string "test_sub_category", limit: 255
-    t.string "branch", limit: 255
-    t.string "platform_version", limit: 255, null: false
-    t.string "ci_build_number", limit: 255, default: ""
+    t.string   "test_category",               limit: 255, null: false
+    t.string   "test_report_type",            limit: 255, null: false
+    t.string   "test_sub_category",           limit: 255
+    t.string   "branch",                      limit: 255, null: false
+    t.string   "platform_version",            limit: 255, null: false
+    t.string   "ci_build_number",             limit: 255
   end
 
   create_table "test_step_records", force: :cascade do |t|
-    t.integer "test_case_record_id", limit: 4
-    t.string "step_name", limit: 255
-    t.string "status", limit: 255
-    t.string "time_taken", limit: 255
+    t.integer  "test_case_record_id", limit: 4
+    t.string   "step_name",           limit: 255
+    t.string   "status",              limit: 255
+    t.string   "time_taken",          limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text "error_msg", limit: 65535
+    t.text     "error_msg",           limit: 65535
   end
 
   create_table "test_suite_records", force: :cascade do |t|
-    t.integer "test_metadatum_id", limit: 4
-    t.string "class_name", limit: 255
-    t.integer "number_of_tests", limit: 4
-    t.integer "number_of_errors", limit: 4
-    t.integer "number_of_failures", limit: 4
-    t.string "time_taken", limit: 255
+    t.integer  "test_metadatum_id",       limit: 4
+    t.string   "class_name",              limit: 255
+    t.integer  "number_of_tests",         limit: 4
+    t.integer  "number_of_errors",        limit: 4
+    t.integer  "number_of_failures",      limit: 4
+    t.string   "time_taken",              limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "number_of_tests_not_run", limit: 4
-    t.integer "number_of_tests_ignored", limit: 4
+    t.integer  "number_of_tests_not_run", limit: 4
+    t.integer  "number_of_tests_ignored", limit: 4
   end
 
 end

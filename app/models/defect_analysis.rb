@@ -58,7 +58,7 @@ class DefectAnalysis
     unless meta_data.nil?
       test_report_type = meta_data.test_report_type
       nunit_flag       = (test_report_type=="Unit NUnit"||test_report_type =="Groovy NUnit") ? 1 : 0
-      test_suite_ids   =(nunit_flag == 1 ? NunitParser.get_test_suite_records(meta_data) : XmlParser.new.get_test_suite_records(meta_data))
+      test_suite_ids   =(nunit_flag == 1 ? NunitParser.get_test_suite_records(meta_data) : JunitXmlParser.new.get_test_suite_records(meta_data))
     end
     unless test_suite_ids.nil?
       result_hash, no_of_test_for_particular_error = get_test_cases(test_suite_ids)

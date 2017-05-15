@@ -14,7 +14,7 @@ class Parser
   end
 
   def parse_results_and_update_in_db(meta_datum_id, test_report_file_type, test_report_type, extracted_file_content)
-    parse_test_run_record_xml(meta_datum_id, test_report_type, extracted_file_content)
+    parse_test_run_record_junit_xml(meta_datum_id, test_report_type, extracted_file_content)
     parse_test_run_record_nunit_xml(meta_datum_id, test_report_type, extracted_file_content)
     parse_test_run_record_html(meta_datum_id, test_report_type, extracted_file_content)
     parse_test_run_record_cucumber_json(meta_datum_id, test_report_type, extracted_file_content)
@@ -32,38 +32,12 @@ class Parser
 
   def parse_test_run_record_html(meta_id, test_report_type, extracted_html)
     return if (REPORTTYPE["test_report_type_mapping"][test_report_type] != "html")
-    if test_report_type == "cucumber_html"
-      CucumberHtmlParser.parse(meta_id, extracted_html)
-    end
+    CucumberHtmlParser.parse(meta_id, extracted_html)
   end
 
-  def parse_test_run_record_xml(meta_id, test_report_type, extracted_xml)
+  def parse_test_run_record_junit_xml(meta_id, test_report_type, extracted_xml)
     return if (REPORTTYPE["test_report_type_mapping"][test_report_type] != "xml")
-    @doc            = Nokogiri::XML extracted_xml
-    test_suites_xml = @doc.xpath("//testsuite")
-    test_suites_xml.each do |test_suite_xml|
-      save_test_suite(meta_id, test_report_type, test_suite_xml)
-    end
-  end
-
-  def save_test_suite(meta_id, test_report_type, test_suite_xml)
-    test_suite_record_to_be_created = { :time_taken         => 0.0,
-                                        :test_metadatum_id  => meta_id,
-                                        :class_name         => test_suite_xml.attr("name"),
-                                        :number_of_tests    => test_suite_xml.attr("tests"),
-                                        :number_of_errors   => test_suite_xml.attr("errors"),
-                                        :number_of_failures => test_suite_xml.attr("failures")
-    }
-    test_cases_to_be_created        = []
-    test_suite_xml.search(".//testcase").each do |test_case_xml|
-      test_suite_record_to_be_created[:time_taken] += XmlParser.new.get_time(test_case_xml, test_suite_xml, test_report_type)
-      test_cases_to_be_created << XmlParser.new.create_test_case(test_case_xml, test_report_type)
-    end
-    saved_test_suite_data = TestSuiteRecord.create_and_save(test_suite_record_to_be_created)
-    test_cases_to_be_created.each do |each_test_case|
-      each_test_case.test_suite_record_id= saved_test_suite_data.id
-      each_test_case.save
-    end
+    JunitXmlParser.parse(extracted_xml, meta_id, test_report_type)
   end
 
 end
