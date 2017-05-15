@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513065610) do
+ActiveRecord::Schema.define(version: 20170515102854) do
 
   create_table "external_dashboards", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20170513065610) do
     t.string   "test_execution_machine_name", limit: 255, null: false
     t.string   "browser_or_device",           limit: 255, null: false
     t.string   "environment",                 limit: 255, null: false
-    t.date     "date_of_execution",                       null: false
+    t.datetime "date_of_execution",                       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "test_category",               limit: 255, null: false
