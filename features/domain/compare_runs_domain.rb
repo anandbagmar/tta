@@ -11,7 +11,9 @@ module Domain
     end
 
     def verify_if_message_is_displayed(date1, date2)
-      assert page.has_content?('TEST-CASES FAILING ON BOTH '+date1+' AND '+date2), "nil"
+      assert page.has_content?('TEST-CASES FAILING IN BOTH RUNS (COMMON FAILURES)')
+      assert page.has_content?('TEST-CASES FAILING ONLY ON DATE 1: ' + date1)
+      assert page.has_content?('TEST-CASES FAILING ONLY ON DATE 2: ' + date2)
     end
 
   end

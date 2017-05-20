@@ -18,9 +18,9 @@ $(document).ready(function () {
         var product_id = ($("#product_select option:selected").val());
         var params = {url: "/get_platform_data", data: {product_id: product_id}, successCallback: productResponse};
         Utils.ajaxRequest(params);
-    }
+    };
 
-    var pLATFORMResponse = function (json_response) {
+    var platformResponse = function (json_response) {
         $('.test-element').remove();
         $('.specific-run').remove();
         $("#date").datepicker('setDate', null);
@@ -30,12 +30,12 @@ $(document).ready(function () {
             Utils.loadDropDown("#test_category_select", test_type, test_type, test_type, "test-element");
         });
         Utils.loadDropDown("#test_category_select", "ALL", "ALL", "ALL", "test-element");
-    }
+    };
 
     var getFormattedDate = function (unformatteddate) {
         var dmy = unformatteddate.getDate() + "-" + (unformatteddate.getMonth() + 1) + "-" + unformatteddate.getFullYear();
         return dmy;
-    }
+    };
 
     var testCategoryResponse = function (json_response) {
         $("#date").datepicker('setDate', null);
@@ -45,6 +45,7 @@ $(document).ready(function () {
             executionDates.push(getFormattedDate(new Date(json_response[i].substring(0, 10))));
         }
         $('.specific-run').remove();
+        Utils.removeAttribute("#date", "readonly");
         if ($("#test_category_select option:selected").val() == 'ALL') {
             $("#test_run_select").attr("disabled", "true");
         }
@@ -59,7 +60,7 @@ $(document).ready(function () {
                 return [($.inArray(getFormattedDate(date), executionDates) > -1)];
             }
         });
-    }
+    };
 
     var runDateResponse = function (json_response) {
         $('.specific-run').remove();
@@ -72,7 +73,7 @@ $(document).ready(function () {
             Utils.loadDropDown("#test_run_select", "date_" + index.toString(), date, date, "specific-run");
             index++;
         });
-    }
+    };
 
     if ($("#product_select option:selected").val()) {
         productChange();
@@ -84,7 +85,7 @@ $(document).ready(function () {
 
     $(document).delegate("#platform_select", "change", function () {
         var platform_id = ($("#platform_select option:selected").val());
-        var params = {url: "/get_test_types", data: {platform_id: platform_id}, successCallback: pLATFORMResponse};
+        var params = {url: "/get_test_types", data: {platform_id: platform_id}, successCallback: platformResponse};
         Utils.ajaxRequest(params);
     });
 

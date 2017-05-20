@@ -43,13 +43,14 @@ group :development, :test do
   gem 'shoulda'
   gem 'pry', '~> 0.10.4'
   gem 'pry-nav', '~> 0.2.4'
-  # gem 'capybara'
+  gem 'capybara'
   gem 'fabrication'
+  gem 'selenium-webdriver'
   # gem 'jasmine'
   # gem 'jasmine-headless-webkit'
-  # gem 'test-unit', '~> 3.0'
+  gem 'test-unit'
 end
 
-# group :cucumber do
-#   gem 'headless'
-# end
+group :cucumber do
+  gem 'headless'
+end

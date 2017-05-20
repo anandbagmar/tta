@@ -19,7 +19,10 @@ COMPARE_RUNS_PAGE                 ="COMPARE RUNS"
 
 UPLOAD_PRODUCT_NAME               = 'product_name'
 UPLOAD_PLATFORM_NAME              ='platform_name'
+PLATFORM_VERSION                  ='platform_version'
+BRANCH                            ='branch'
 UPLOAD_CI_JOB_NAME                ='ci_job_name'
+CI_BUILD_NUMBER                   ='ci_build_number'
 UPLOAD_OS                         ='os'
 UPLOAD_TEST_EXECUTION_MACHINE_NAME='test_execution_machine_name'
 UPLOAD_BROWSER_OR_DEVICE          ='browser_or_device'
@@ -38,6 +41,8 @@ UPLOAD_SUCCESS                ="Product Successfully Saved!!"
 
 #comparative Page ELEMENT
 
+COMPARATIVE_START_DATE        = 'comparative_analysis_start_date'
+COMPARATIVE_END_DATE          = 'comparative_analysis_end_date'
 COMPARATIVE_PRODUCT_DROPDOWN  = "product_id"
 COMPARATIVE_PLATFORM_DROPDOWN = "platform_select"
 COMPARATIVE_START_DATE        = "comparative_analysis_start_date"
@@ -50,6 +55,8 @@ COMPARATIVE_GRAPH_ID          = "#comparative_analysis"
 DEFECT_PRODUCT_DROPDOWN       ="product_select"
 DEFECT_PLATFORM_DROPDOWN      ="platform_select"
 DEFECT_TEST_CATEGORY_DROPDOWN ="test_category_select"
+DEFECT_DATE                   ='date'
+DEFECT_FORM                   ='#defect_analysis_form'
 DEFECT_GRAPH_ID               ="#defect-analysis"
 
 #PYRAMID ELEMENT
@@ -67,4 +74,4 @@ COMPARE_RUN_PLATFORM_DROPDOWN ="platform_select"
 COMPARE_RUN_TEST_TYPE_DROPDOWN="test_category_select"
 COMPARE_RUN_TEST_DATE1        ="date_one_select"
 COMPARE_RUN_TEST_DATE2        ="date_two_select"
-COMPARE_RUN_TABLE_ID          ="#result_table"
+COMPARE_RUN_TABLE_ID          ="#result_table_common"

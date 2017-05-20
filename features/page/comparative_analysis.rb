@@ -1,8 +1,8 @@
 module Page
   module ComparativeAnalysis
     def view_graph(product, platform, start_date, end_date)
-      page.execute_script %Q{ $("#comparative_analysis_start_date").val("2011-12-12");}
-      page.execute_script %Q{ $("#comparative_analysis_end_date").val("2012-12-12");}
+      fill_in COMPARATIVE_START_DATE, :with => start_date
+      fill_in COMPARATIVE_END_DATE, :with => end_date
 
       select_the_option(product, COMPARATIVE_PRODUCT_DROPDOWN)
       select_the_option(platform, COMPARATIVE_PLATFORM_DROPDOWN)

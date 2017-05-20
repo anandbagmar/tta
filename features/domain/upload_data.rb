@@ -15,7 +15,7 @@ module Domain
 
     def upload_data_and_submit(params)
       begin
-        params[:logFile]=$PROJECT_ROOT+"/"+params[:logFile]
+        params[:log_file] = $PROJECT_ROOT + "/" + params[:log_file]
         form_filling(params)
         scroll_to_view_and_click_on UPLOAD_PAGE_BUTTON
       rescue Exception => ex

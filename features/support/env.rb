@@ -1,7 +1,9 @@
 require 'rspec/expectations'
 require 'cucumber/rails'
 require 'selenium-webdriver'
+require 'test/unit'
 require_relative 'file_utils.rb'
+World Test::Unit::Assertions
 
 # Set the RAILS_ENV
 $RAILS_ENV = ENV['RAILS_ENV'] ||= "development"
