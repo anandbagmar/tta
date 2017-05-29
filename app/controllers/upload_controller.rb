@@ -3,6 +3,9 @@ require 'nokogiri'
 require 'fileutils'
 
 class UploadController < ApplicationController
+
+  protect_from_forgery with: :null_session, :if => Proc.new { |c| c.request.format == 'application/json' }
+
   def create
     product, platform, meta_data = parse_and_store_test_run_data
     redirect_to :action => :show, :product_id => product.id, :platform_id => platform.id, :product_meta_id => meta_data.id
