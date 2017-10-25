@@ -36,6 +36,7 @@ module Seed
       test_sub_category         = get_respective_test_sub_category(test_category)
       random_time               = (DateTime.now - (test_meta_data_number + test_meta_data_number%10.to_f)).to_time
       test_meta_data            = TestMetadatum.create(
+          :platform_id                 => platform_id,
           :ci_job_name                 => SAMPLE_CI_JOB_NAMES[rand(SAMPLE_CI_JOB_NAMES.length)],
           :ci_build_number             => "#{test_meta_data_number}",
           :platform_version            => "v1.0.399",
