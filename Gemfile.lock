@@ -128,7 +128,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
-    nokogiri (1.8.1)
+    nokogiri (1.8.2)
       mini_portile2 (~> 2.1.0)
     power_assert (0.4.1)
     protected_attributes (1.1.3)
